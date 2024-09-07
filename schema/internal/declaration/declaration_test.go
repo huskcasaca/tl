@@ -50,11 +50,11 @@ func TestParseIt(t *testing.T) {
 			name: "args",
 			in:   "user_id:long",
 			want: Argument{
-				Ident: VarIdentOpt{
-					Ident: &VarIdent{Value: "user_id"},
+				Ident: ArgumentName{
+					Ident: &FieldName{Value: "user_id"},
 				},
-				Term: Ident{
-					Simple: SimpleIdent{Var: &VarIdent{Value: "long"}},
+				Term: ArgumentType{
+					Simple: Field{Var: &FieldName{Value: "long"}},
 				},
 			},
 		},
@@ -65,41 +65,41 @@ func TestParseIt(t *testing.T) {
 				ID: "a#00000000",
 				Args: []Argument{
 					{
-						Ident: VarIdentOpt{
-							Ident: &VarIdent{Value: "flags"},
+						Ident: ArgumentName{
+							Ident: &FieldName{Value: "flags"},
 						},
-						Term: Ident{
-							Simple: SimpleIdent{Type: &TypeIdent{Empty: true}},
-						},
-					},
-					{
-						Ident: VarIdentOpt{
-							Ident: &VarIdent{Value: "b_x"},
-						},
-						Term: Ident{
-							Simple: SimpleIdent{Var: &VarIdent{Value: "c_x"}},
+						Term: ArgumentType{
+							Simple: Field{Type: &FieldType{Empty: true}},
 						},
 					},
 					{
-						Ident: VarIdentOpt{
-							Ident: &VarIdent{Value: "d"},
+						Ident: ArgumentName{
+							Ident: &FieldName{Value: "b_x"},
 						},
-						Term: Ident{
-							Simple: SimpleIdent{Var: &VarIdent{Value: "e"}},
+						Term: ArgumentType{
+							Simple: Field{Var: &FieldName{Value: "c_x"}},
 						},
 					},
 					{
-						Ident: VarIdentOpt{
-							Ident: &VarIdent{Value: "pipka"},
+						Ident: ArgumentName{
+							Ident: &FieldName{Value: "d"},
 						},
-						Conditional: &ConditionalDef{
-							Ident: VarIdent{Value: "flags"},
+						Term: ArgumentType{
+							Simple: Field{Var: &FieldName{Value: "e"}},
+						},
+					},
+					{
+						Ident: ArgumentName{
+							Ident: &FieldName{Value: "pipka"},
+						},
+						Conditional: &ArgumentFlag{
+							Ident: FieldName{Value: "flags"},
 							Index: 2,
 						},
-						Term: Ident{
-							Simple: SimpleIdent{Var: &VarIdent{Value: "Vector"}},
-							Extension: &IdentExtension{
-								Inner: []SimpleIdent{{Var: &VarIdent{Value: "popka"}}},
+						Term: ArgumentType{
+							Simple: Field{Var: &FieldName{Value: "Vector"}},
+							Extension: &Extension{
+								Inner: []Field{{Var: &FieldName{Value: "popka"}}},
 							},
 						},
 					},

@@ -21,28 +21,33 @@ type ProgramEntry struct {
 }
 
 type CombinatorDecl struct {
-	ID     string     `parser:"@lc_ident_full ws"`
-	Args   []Argument `parser:"(@@ (ws @@)* ws)? equals ws?"`
-	Result ResultType `parser:"@@"`
+	ID       string     `parser:"@lc_ident_full ws"`
+	PolyType *PolyType  `parser:"(@@ ws)?"` // generic parameter, e.g., {X:Type}
+	Args     []Argument `parser:"(@@ (ws @@)* ws)? equals ws?"`
+	Result   ResultType `parser:"@@"`
+}
+
+type PolyType struct {
+	Name FieldName `parser:"'{' @@ colon 'Type' '}'"` // captures X:Type
 }
 
 type ResultType struct {
-	Simple *string         `parser:"( @uc_ident_ns | @uc_ident )"`
-	Expr   *IdentExtension `parser:"@@?"`
+	Simple *string    `parser:"( @uc_ident_ns | @uc_ident )"`
+	Expr   *Extension `parser:"@@?"`
 }
 
 type Argument struct {
-	Ident       VarIdentOpt     `parser:"@@ colon"`
-	Conditional *ConditionalDef `parser:"@@?"`
-	Term        Ident           `parser:"@@"`
+	Ident       ArgumentName  `parser:"@@ colon"` // var_name:
+	Conditional *ArgumentFlag `parser:"@@?"`      // flags.1?
+	Term        ArgumentType  `parser:"@@"`       // type
 }
 
-type Ident struct {
-	Simple    SimpleIdent     `parser:"@@"`
-	Extension *IdentExtension `parser:"@@?"`
+type ArgumentType struct {
+	Simple    Field      `parser:"@@"`
+	Extension *Extension `parser:"@@?"`
 }
 
-func (i *Ident) String() string {
+func (i *ArgumentType) String() string {
 	res := i.Simple.String()
 	if i.Extension != nil {
 		res += i.Extension.String()
@@ -50,12 +55,12 @@ func (i *Ident) String() string {
 	return res
 }
 
-type SimpleIdent struct {
-	Var  *VarIdent  `parser:"@@ |"`
-	Type *TypeIdent `parser:"@@"`
+type Field struct {
+	Var  *FieldName `parser:"@@ |"`
+	Type *FieldType `parser:"@@"`
 }
 
-func (s *SimpleIdent) String() string {
+func (s *Field) String() string {
 	switch {
 	case s.Var != nil:
 		return s.Var.Value
@@ -66,16 +71,16 @@ func (s *SimpleIdent) String() string {
 	}
 }
 
-type VarIdent struct {
+type FieldName struct {
 	Value string `parser:"@lc_ident | @uc_ident"`
 }
 
-type TypeIdent struct {
+type FieldType struct {
 	Ident *string `parser:"@uc_ident_ns | @lc_ident_ns |"`
 	Empty bool    `parser:"@hash"`
 }
 
-func (t *TypeIdent) String() string {
+func (t *FieldType) String() string {
 	if t.Empty {
 		return "#"
 	}
@@ -83,11 +88,11 @@ func (t *TypeIdent) String() string {
 	return *t.Ident
 }
 
-type IdentExtension struct {
-	Inner []SimpleIdent `parser:"langle @@ (ws @@)* rangle"`
+type Extension struct {
+	Inner []Field `parser:"langle @@ (ws @@)* rangle"`
 }
 
-func (i *IdentExtension) String() string {
+func (i *Extension) String() string {
 	items := make([]string, len(i.Inner))
 	for i, item := range i.Inner {
 		items[i] = item.String()
@@ -96,12 +101,12 @@ func (i *IdentExtension) String() string {
 	return "<" + strings.Join(items, " ") + ">"
 }
 
-type VarIdentOpt struct {
-	Ident *VarIdent `parser:"@@ |"`
-	Empty bool      `parser:"@underscore"`
+type ArgumentName struct {
+	Ident *FieldName `parser:"@@ |"`
+	Empty bool       `parser:"@underscore"`
 }
 
-func (i *VarIdentOpt) String() string {
+func (i *ArgumentName) String() string {
 	if i.Empty {
 		return "_"
 	}
@@ -109,7 +114,7 @@ func (i *VarIdentOpt) String() string {
 	return i.Ident.Value
 }
 
-type ConditionalDef struct {
-	Ident VarIdent `parser:"@@"`
-	Index int      `parser:"dot @nat_const question_mark"`
+type ArgumentFlag struct {
+	Ident FieldName `parser:"@@"`
+	Index int       `parser:"dot @nat_const question_mark"`
 }

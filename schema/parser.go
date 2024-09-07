@@ -65,7 +65,7 @@ func Parse(filename string, content io.Reader) (*Schema, error) {
 	return normalized, nil
 }
 
-func normalizeIdent(i *declaration.Ident) (Type, error) {
+func normalizeIdent(i *declaration.ArgumentType) (Type, error) {
 	if i.Extension != nil {
 		if len(i.Extension.Inner) > 1 {
 			return nil, errors.New(i.String() + ": too many modificators")
@@ -152,8 +152,8 @@ func normalizeCombinator(
 		}
 	}
 
-	typ, err := normalizeIdent(&declaration.Ident{
-		Simple:    declaration.SimpleIdent{Type: &declaration.TypeIdent{Ident: decl.Result.Simple}},
+	typ, err := normalizeIdent(&declaration.ArgumentType{
+		Simple:    declaration.Field{Type: &declaration.FieldType{Ident: decl.Result.Simple}},
 		Extension: decl.Result.Expr,
 	})
 	if err != nil {

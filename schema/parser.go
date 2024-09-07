@@ -65,7 +65,7 @@ func Parse(filename string, content io.Reader) (*Schema, error) {
 	return normalized, nil
 }
 
-func normalizeIdent(i *declaration.ArgumentType) (Type, error) {
+func normalizeIdent(i *declaration.ArgType) (Type, error) {
 	if i.Extension != nil {
 		if len(i.Extension.Inner) > 1 {
 			return nil, errors.New(i.String() + ": too many modificators")
@@ -86,7 +86,7 @@ func normalizeArgument(arg *declaration.Argument, comment string) (Parameter, er
 		return nil, fmt.Errorf("%v: %w", arg.Ident.String(), err)
 	}
 
-	if arg.Conditional == nil {
+	if arg.Flag == nil {
 		if typ, ok := typ.(TypeCommon); ok && typ.Name == "#" {
 			return BitflagParameter{
 				Comment: comment,
@@ -105,8 +105,8 @@ func normalizeArgument(arg *declaration.Argument, comment string) (Parameter, er
 		return TriggerParameter{
 			Comment:     comment,
 			Name:        arg.Ident.String(),
-			FlagTrigger: arg.Conditional.Ident.Value,
-			BitTrigger:  arg.Conditional.Index,
+			FlagTrigger: arg.Flag.Ident,
+			BitTrigger:  arg.Flag.Index,
 		}, nil
 	}
 
@@ -114,18 +114,18 @@ func normalizeArgument(arg *declaration.Argument, comment string) (Parameter, er
 		Comment:     comment,
 		Name:        arg.Ident.String(),
 		Type:        typ,
-		FlagTrigger: arg.Conditional.Ident.Value,
-		BitTrigger:  arg.Conditional.Index,
+		FlagTrigger: arg.Flag.Ident,
+		BitTrigger:  arg.Flag.Index,
 	}, nil
 }
 
 func normalizeCombinator(
-	decl *declaration.CombinatorDecl,
+	decl *declaration.Declaration,
 	constructorComment string,
 	argsComments map[string]string,
 	functionsMode bool,
 ) (*Object, error) {
-	parts := strings.Split(decl.ID, "#") // guaranteed to split by two parts, lexer handles it
+	parts := strings.Split(decl.Combinator, "#") // guaranteed to split by two parts, lexer handles it
 	name := objNameFromString(parts[0])
 	crcStr := parts[1]
 
@@ -140,7 +140,7 @@ func normalizeCombinator(
 		arg := arg
 
 		var comment string
-		if !arg.Ident.Empty {
+		if !arg.Ident.Empty() {
 			comment = argsComments[arg.Ident.String()]
 			delete(argsComments, arg.Ident.String())
 		}
@@ -148,16 +148,16 @@ func normalizeCombinator(
 		var argErr error
 		params[i], argErr = normalizeArgument(&arg, comment)
 		if argErr != nil {
-			return nil, fmt.Errorf("%v: %w", decl.ID, argErr)
+			return nil, fmt.Errorf("%v: %w", decl.Combinator, argErr)
 		}
 	}
 
-	typ, err := normalizeIdent(&declaration.ArgumentType{
-		Simple:    declaration.Field{Type: &declaration.FieldType{Ident: decl.Result.Simple}},
-		Extension: decl.Result.Expr,
+	typ, err := normalizeIdent(&declaration.ArgType{
+		Simple:    decl.Result.Simple,
+		Extension: decl.Result.Extension,
 	})
 	if err != nil {
-		return nil, fmt.Errorf(decl.ID+": parsing return type: %w", err)
+		return nil, fmt.Errorf(decl.Combinator+": parsing return type: %w", err)
 	}
 
 	if len(argsComments) != 0 {
@@ -166,7 +166,7 @@ func normalizeCombinator(
 			keys = append(keys, k)
 		}
 		keysStr := strings.Join(keys, ", ")
-		return nil, fmt.Errorf("%v: unknown params in comment tags: %v", decl.ID, keysStr)
+		return nil, fmt.Errorf("%v: unknown params in comment tags: %v", decl.Combinator, keysStr)
 	}
 
 	return &Object{
@@ -274,8 +274,8 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 				return nil, nil, errors.New("@" + commentTag + ": invalid comment tag")
 			}
 
-		case item.Decl != nil:
-			obj, err := normalizeCombinator(item.Decl, constructorComment, argumentComments, functionsMode)
+		case item.Declaration != nil:
+			obj, err := normalizeCombinator(item.Declaration, constructorComment, argumentComments, functionsMode)
 			if err != nil {
 				return nil, nil, err
 			}

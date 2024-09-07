@@ -50,62 +50,62 @@ func TestParseIt(t *testing.T) {
 			name: "args",
 			in:   "user_id:long",
 			want: Argument{
-				Ident: ArgumentName{
-					Ident: &FieldName{Value: "user_id"},
+				Ident: ArgIdent{
+					Ident: "user_id",
 				},
-				Term: ArgumentType{
-					Simple: Field{Var: &FieldName{Value: "long"}},
+				Term: ArgType{
+					Simple: TypeIdent{Ident: "long"},
 				},
 			},
 		},
-		TcaseParseIt[CombinatorDecl]{
+		TcaseParseIt[Declaration]{
 			name: "declaration",
 			in:   "a#00000000 flags:# b_x:c_x d:e pipka:flags.2?Vector<popka> = F",
-			want: CombinatorDecl{
-				ID: "a#00000000",
+			want: Declaration{
+				Combinator: "a#00000000",
 				Args: []Argument{
 					{
-						Ident: ArgumentName{
-							Ident: &FieldName{Value: "flags"},
+						Ident: ArgIdent{
+							Ident: "flags",
 						},
-						Term: ArgumentType{
-							Simple: Field{Type: &FieldType{Empty: true}},
-						},
-					},
-					{
-						Ident: ArgumentName{
-							Ident: &FieldName{Value: "b_x"},
-						},
-						Term: ArgumentType{
-							Simple: Field{Var: &FieldName{Value: "c_x"}},
+						Term: ArgType{
+							Simple: TypeIdent{Ident: "#"},
 						},
 					},
 					{
-						Ident: ArgumentName{
-							Ident: &FieldName{Value: "d"},
+						Ident: ArgIdent{
+							Ident: "b_x",
 						},
-						Term: ArgumentType{
-							Simple: Field{Var: &FieldName{Value: "e"}},
+						Term: ArgType{
+							Simple: TypeIdent{Ident: "c_x"},
 						},
 					},
 					{
-						Ident: ArgumentName{
-							Ident: &FieldName{Value: "pipka"},
+						Ident: ArgIdent{
+							Ident: "d",
 						},
-						Conditional: &ArgumentFlag{
-							Ident: FieldName{Value: "flags"},
+						Term: ArgType{
+							Simple: TypeIdent{Ident: "e"},
+						},
+					},
+					{
+						Ident: ArgIdent{
+							Ident: "pipka",
+						},
+						Flag: &Flag{
+							Ident: "flags",
 							Index: 2,
 						},
-						Term: ArgumentType{
-							Simple: Field{Var: &FieldName{Value: "Vector"}},
+						Term: ArgType{
+							Simple: TypeIdent{Ident: "Vector"},
 							Extension: &Extension{
-								Inner: []Field{{Var: &FieldName{Value: "popka"}}},
+								Inner: []TypeIdent{{Ident: "popka"}},
 							},
 						},
 					},
 				},
-				Result: ResultType{
-					Simple: stringPtr("F"),
+				Result: RetType{
+					Simple: TypeIdent{Ident: "F"},
 				},
 			},
 		},
@@ -125,13 +125,17 @@ g#012 = H;
 			want: Program{
 				Constraints: []ProgramEntry{
 					{Newline: true},
-					{Decl: &CombinatorDecl{
-						ID:     "a#123",
-						Result: ResultType{Simple: stringPtr("B")},
+					{Declaration: &Declaration{
+						Combinator: "a#123",
+						Result: RetType{
+							Simple: TypeIdent{Ident: "B"},
+						},
 					}},
-					{Decl: &CombinatorDecl{
-						ID:     "c#456",
-						Result: ResultType{Simple: stringPtr("D")},
+					{Declaration: &Declaration{
+						Combinator: "c#456",
+						Result: RetType{
+							Simple: TypeIdent{Ident: "D"},
+						},
 					}},
 				},
 				Methods: []ProgramEntry{
@@ -139,13 +143,17 @@ g#012 = H;
 					{Comment: stringPtr("// another comment")},
 					{Newline: true},
 					{Comment: stringPtr("// comment")},
-					{Decl: &CombinatorDecl{
-						ID:     "e#789",
-						Result: ResultType{Simple: stringPtr("F")},
+					{Declaration: &Declaration{
+						Combinator: "e#789",
+						Result: RetType{
+							Simple: TypeIdent{Ident: "F"},
+						},
 					}},
-					{Decl: &CombinatorDecl{
-						ID:     "g#012",
-						Result: ResultType{Simple: stringPtr("H")},
+					{Declaration: &Declaration{
+						Combinator: "g#012",
+						Result: RetType{
+							Simple: TypeIdent{Ident: "H"},
+						},
 					}},
 				},
 			},

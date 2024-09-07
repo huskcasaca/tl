@@ -1,54 +1,99 @@
-// Copyright (c) 2022 Xelaj Software
-//
-// This file is a part of tl package.
-// See https://github.com/xelaj/tl/blob/master/LICENSE_README.md for details.
-
 package declaration
 
 import (
 	"strings"
 )
 
+// Program represents TL formal described in https://core.telegram.org/mtproto/TL-formal#syntax
+// Syntactically, a TL program consists of a stream of tokens (separated by spaces, which are ignored at this stage). General program structure:
+//
+// TL-program ::= constr-declarations { --- functions --- fun-declarations | --- types --- constr-declarations }
 type Program struct {
 	Constraints []ProgramEntry `parser:"@@*"`
 	Methods     []ProgramEntry `parser:"(functions_decl newline @@*)?"`
 }
 
+// ProgramEntry represents TL formal described in https://core.telegram.org/mtproto/TL-formal#syntax
+//
+// # Newline is used to represent if the line is empty
+//
+// Declaration is used to represent functions and types
+// declaration ::= combinator-decl | partial-app-decl | final-decl
+// constr-declarations ::= { declaration }
+// fun-declarations ::= { declaration }
+//
+// Comment is used to represent comments with `//`
 type ProgramEntry struct {
-	Newline bool            `parser:"@newline |"`
-	Decl    *CombinatorDecl `parser:"@@ ws? semicolon ( newline | EOF ) |"`
-	Comment *string         `parser:"@comment ( newline | EOF ) "`
+	Newline     bool         `parser:"@newline |"`
+	Declaration *Declaration `parser:"@@ ws? semicolon ( newline | EOF ) |"`
+	Comment     *string      `parser:"@comment ( newline | EOF ) "`
 }
 
-type CombinatorDecl struct {
-	ID       string     `parser:"@lc_ident_full ws"`
-	PolyType *PolyType  `parser:"(@@ ws)?"` // generic parameter, e.g., {X:Type}
-	Args     []Argument `parser:"(@@ (ws @@)* ws)? equals ws?"`
-	Result   ResultType `parser:"@@"`
+// Declaration represents TL formal described in https://core.telegram.org/mtproto/TL-formal#combinator-declarations
+//
+// Combinator is combination of identifiers separated by `#`
+// combinator-decl ::= full-combinator-id { opt-args } { args } = result-type ;
+// full-combinator-id ::= lc-ident-full | _
+// combinator-id ::= lc-ident-ns | _
+//
+// OptArgs are optional arguments (e.g., {X:Type})
+// opt-args ::= { var-ident { var-ident } : [excl-mark] type-expr }
+//
+// Args are required arguments (e.g., var:string)
+// args ::= var-ident-opt : [ conditional-def ] [ ! ] type-term
+// args ::= [ var-ident-opt : ] [ multiplicity *] [ { args } ]
+// args ::= ( var-ident-opt { var-ident-opt } : [!] type-term )
+// args ::= [ ! ] type-term
+// multiplicity ::= nat-term
+// var-ident-opt ::= var-ident | _
+// conditional-def ::= var-ident [ . nat-const ] ?
+//
+// Result is return type
+// result-type ::= boxed-type-ident { subexpr }
+// result-type ::= boxed-type-ident < subexpr { , subexpr } >
+type Declaration struct {
+	Combinator string     `parser:"@lc_ident_full ws"`
+	OptArgs    []Argument `parser:"(open_brace @@ close_brace ws)*"`
+	Args       []Argument `parser:"(@@ (ws @@)* ws)? equals ws?"`
+	Result     RetType    `parser:"@@"`
 }
 
-type PolyType struct {
-	Name FieldName `parser:"'{' @@ colon 'Type' '}'"` // captures X:Type
-}
-
-type ResultType struct {
-	Simple *string    `parser:"( @uc_ident_ns | @uc_ident )"`
-	Expr   *Extension `parser:"@@?"`
-}
-
+// Argument represents TL formal described in https://core.telegram.org/mtproto/TL-formal#combinator-declarations
 type Argument struct {
-	Ident       ArgumentName  `parser:"@@ colon"` // var_name:
-	Conditional *ArgumentFlag `parser:"@@?"`      // flags.1?
-	Term        ArgumentType  `parser:"@@"`       // type
+	Ident ArgIdent `parser:"@@ colon"` // var:
+	Flag  *Flag    `parser:"@@?"`      // flags.1?
+	Term  ArgType  `parser:"@@"`       // type
 }
 
-type ArgumentType struct {
+// ArgIdent is identifier of argument name
+// var-ident ::= lc-ident | uc-ident
+// var-ident-opt ::= var-ident | _
+type ArgIdent struct {
+	Ident string `parser:"@lc_ident | @uc_ident | @underscore"`
+}
+
+func (f *ArgIdent) String() string {
+	return f.Ident
+}
+
+func (f *ArgIdent) Empty() bool {
+	return f.Ident == "_"
+}
+
+// Flag is flag of type
+type Flag struct {
+	Ident string `parser:"@lc_ident"`
+	Index int    `parser:"dot @nat_const question_mark"`
+}
+
+// ArgType is type of argument
+type ArgType struct {
 	Modifier  bool       `parser:"@excl_mark?"`
-	Simple    Field      `parser:"@@"`
+	Simple    TypeIdent  `parser:"@@"`
 	Extension *Extension `parser:"@@?"`
 }
 
-func (i *ArgumentType) String() string {
+func (i *ArgType) String() string {
 	res := i.Simple.String()
 	if i.Extension != nil {
 		res += i.Extension.String()
@@ -56,41 +101,24 @@ func (i *ArgumentType) String() string {
 	return res
 }
 
-type Field struct {
-	Var  *FieldName `parser:"@@ |"`
-	Type *FieldType `parser:"@@"`
+// RetType is type of return
+type RetType struct {
+	Simple    TypeIdent  `parser:"@@"`
+	Extension *Extension `parser:"@@?"`
 }
 
-func (s *Field) String() string {
-	switch {
-	case s.Var != nil:
-		return s.Var.Value
-	case s.Type != nil:
-		return s.Type.String()
-	default:
-		panic("impossible situation")
-	}
+// TypeIdent is identifier of argument type
+type TypeIdent struct {
+	Ident string `parser:"@uc_ident_ns | @lc_ident_ns | @lc_ident | @uc_ident | @hash"`
 }
 
-type FieldName struct {
-	Value string `parser:"@lc_ident | @uc_ident"`
+func (s *TypeIdent) String() string {
+	return s.Ident
 }
 
-type FieldType struct {
-	Ident *string `parser:"@uc_ident_ns | @lc_ident_ns |"`
-	Empty bool    `parser:"@hash"`
-}
-
-func (t *FieldType) String() string {
-	if t.Empty {
-		return "#"
-	}
-
-	return *t.Ident
-}
-
+// Extension is subtype of type
 type Extension struct {
-	Inner []Field `parser:"langle @@ (ws @@)* rangle"`
+	Inner []TypeIdent `parser:"langle @@ (ws @@)* rangle"`
 }
 
 func (i *Extension) String() string {
@@ -100,22 +128,4 @@ func (i *Extension) String() string {
 	}
 
 	return "<" + strings.Join(items, " ") + ">"
-}
-
-type ArgumentName struct {
-	Ident *FieldName `parser:"@@ |"`
-	Empty bool       `parser:"@underscore"`
-}
-
-func (i *ArgumentName) String() string {
-	if i.Empty {
-		return "_"
-	}
-
-	return i.Ident.Value
-}
-
-type ArgumentFlag struct {
-	Ident FieldName `parser:"@@"`
-	Index int       `parser:"dot @nat_const question_mark"`
 }

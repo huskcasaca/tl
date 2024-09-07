@@ -43,6 +43,7 @@ type Argument struct {
 }
 
 type ArgumentType struct {
+	Modifier  bool       `parser:"@excl_mark?"`
 	Simple    Field      `parser:"@@"`
 	Extension *Extension `parser:"@@?"`
 }

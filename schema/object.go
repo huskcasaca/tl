@@ -12,20 +12,20 @@ import (
 	"strings"
 )
 
-type Object struct {
+type TLObject struct {
 	Comment string
-	Name    ObjName
+	Name    TLName
 	CRC     uint32
-	Fields  Parameters
-	Type    Type
+	Params  TLParams
+	Type    TLType
 }
 
-type ObjName struct {
-	Group string
-	Name  string
+type TLName struct {
+	Namespace string
+	Key       string
 }
 
-func objNameFromString(s string) ObjName {
+func objNameFromString(s string) TLName {
 	groupname := strings.Split(s, ".")
 	var group string
 	name := groupname[0]
@@ -34,49 +34,49 @@ func objNameFromString(s string) ObjName {
 		name = groupname[1]
 	}
 
-	return ObjName{Group: group, Name: name}
+	return TLName{Namespace: group, Key: name}
 }
 
-func (o ObjName) String() string {
-	if o.Group != "" {
-		return o.Group + "." + o.Name
+func (o TLName) String() string {
+	if o.Namespace != "" {
+		return o.Namespace + "." + o.Key
 	}
 
-	return o.Name
+	return o.Key
 }
 
-func (o ObjName) IsInterface() bool { return isFirstRuneUpper(o.Name) }
+func (o TLName) IsInterface() bool { return isFirstRuneUpper(o.Key) }
 
-func (o ObjName) Cmp(b ObjName) int { return cmpObjName(o, b) }
+func (o TLName) Cmp(b TLName) int { return cmpObjName(o, b) }
 
-func cmpObjName(a, b ObjName) int {
-	if c := cmp.Compare(a.Group, b.Group); c != 0 {
+func cmpObjName(a, b TLName) int {
+	if c := cmp.Compare(a.Namespace, b.Namespace); c != 0 {
 		return c
-	} else if c := cmp.Compare(a.Name, b.Name); c != 0 {
+	} else if c := cmp.Compare(a.Key, b.Key); c != 0 {
 		return c
 	} else {
 		return 0
 	}
 }
 
-func sortObject(a, b Object) int { return cmpObjName(a.Name, b.Name) }
+func sortObject(a, b TLObject) int { return cmpObjName(a.Name, b.Name) }
 
-type ObjectType uint8
+type TLObjectType uint8
 
 const (
-	ObjectTypeUnknown ObjectType = iota
-	ObjectTypeConstructor
-	ObjectTypeEnum
-	ObjectTypeMethod
+	TLObjectTypeUnknown TLObjectType = iota
+	TLObjectTypeConstructor
+	TLObjectTypeEnum
+	TLObjectTypeMethod
 )
 
-func (o ObjectType) String() string {
+func (o TLObjectType) String() string {
 	switch o {
-	case ObjectTypeConstructor:
+	case TLObjectTypeConstructor:
 		return "constructor"
-	case ObjectTypeEnum:
+	case TLObjectTypeEnum:
 		return "enum"
-	case ObjectTypeMethod:
+	case TLObjectTypeMethod:
 		return "method"
 	default:
 		return "<UNKNOWN>"
@@ -96,14 +96,14 @@ func (o ObjectType) String() string {
 //
 // For vectors like `getSmthn items:Vector<int> = Bool` i still don't understand
 // how to generate, cause it fails in real mtproto schema.
-func (o *Object) getCRC() uint32 {
+func (o *TLObject) getCRC() uint32 {
 	if o.CRC != 0 {
 		return o.CRC
 	}
 
-	filtered := make(Parameters, 0, len(o.Fields))
-	for _, item := range o.Fields {
-		if _, ok := item.(TriggerParameter); !ok {
+	filtered := make(TLParams, 0, len(o.Params))
+	for _, item := range o.Params {
+		if _, ok := item.(TLTriggerParam); !ok {
 			filtered = append(filtered, item)
 		}
 	}
@@ -116,20 +116,20 @@ func (o *Object) getCRC() uint32 {
 	return crc32.ChecksumIEEE([]byte(fmt.Sprintf("%v%v = %v;", o.Name.String(), fieldsStr, o.Type)))
 }
 
-func (o *Object) String() string {
+func (o *TLObject) String() string {
 	fields := ""
-	if len(o.Fields) > 0 {
-		fields = " " + o.Fields.String()
+	if len(o.Params) > 0 {
+		fields = " " + o.Params.String()
 	}
 
 	return fmt.Sprintf("%v#%08x%v = %v;", o.Name.String(), o.getCRC(), fields, o.Type)
 }
 
-func (o *Object) Comments(typ ObjectType) []string {
+func (o *TLObject) Comments(typ TLObjectType) []string {
 	var res []string
 	if o.Comment != "" {
 		res = append(res, "// @"+typ.String()+" "+o.Comment)
 	}
 
-	return append(res, o.Fields.Comments()...)
+	return append(res, o.Params.Comments()...)
 }

@@ -65,7 +65,7 @@ func Parse(filename string, content io.Reader) (*Schema, error) {
 	return normalized, nil
 }
 
-func normalizeIdent(i *declaration.ArgType) (Type, error) {
+func normalizeIdent(i *declaration.ArgType) (TLType, error) {
 	if i.Extension != nil {
 		if len(i.Extension.Inner) > 1 {
 			return nil, errors.New(i.String() + ": too many modificators")
@@ -74,35 +74,35 @@ func normalizeIdent(i *declaration.ArgType) (Type, error) {
 			return nil, errors.New(i.String() + ": only Vector is allowed to modify")
 		}
 
-		return TypeVector(objNameFromString(i.Extension.Inner[0].String())), nil
+		return TLTypeVector(objNameFromString(i.Extension.Inner[0].String())), nil
 	}
 
-	return TypeCommon(objNameFromString(i.Simple.String())), nil
+	return TLTypeCommon(objNameFromString(i.Simple.String())), nil
 }
 
-func normalizeArgument(arg *declaration.Argument, comment string) (Parameter, error) {
+func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, error) {
 	typ, err := normalizeIdent(&arg.Term)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", arg.Ident.String(), err)
 	}
 
 	if arg.Flag == nil {
-		if typ, ok := typ.(TypeCommon); ok && typ.Name == "#" {
-			return BitflagParameter{
+		if typ, ok := typ.(TLTypeCommon); ok && typ.Key == "#" {
+			return TLBitflagParam{
 				Comment: comment,
 				Name:    arg.Ident.String(),
 			}, nil
 		}
 
-		return RequiredParameter{
+		return TLRequiredParam{
 			Comment: comment,
 			Name:    arg.Ident.String(),
 			Type:    typ,
 		}, nil
 	}
 
-	if v, ok := typ.(TypeCommon); ok && v.Name == "true" {
-		return TriggerParameter{
+	if v, ok := typ.(TLTypeCommon); ok && v.Key == "true" {
+		return TLTriggerParam{
 			Comment:     comment,
 			Name:        arg.Ident.String(),
 			FlagTrigger: arg.Flag.Ident,
@@ -110,7 +110,7 @@ func normalizeArgument(arg *declaration.Argument, comment string) (Parameter, er
 		}, nil
 	}
 
-	return OptionalParameter{
+	return TLOptionalParam{
 		Comment:     comment,
 		Name:        arg.Ident.String(),
 		Type:        typ,
@@ -124,7 +124,7 @@ func normalizeCombinator(
 	constructorComment string,
 	argsComments map[string]string,
 	functionsMode bool,
-) (*Object, error) {
+) (*TLObject, error) {
 	parts := strings.Split(decl.Combinator, "#") // guaranteed to split by two parts, lexer handles it
 	name := objNameFromString(parts[0])
 	crcStr := parts[1]
@@ -135,7 +135,9 @@ func normalizeCombinator(
 		panic(err)
 	}
 
-	params := make([]Parameter, len(decl.Args))
+	// todo: Matches(Name, CRC)
+
+	params := make([]TLParam, len(decl.Args))
 	for i, arg := range decl.Args {
 		arg := arg
 
@@ -169,11 +171,11 @@ func normalizeCombinator(
 		return nil, fmt.Errorf("%v: unknown params in comment tags: %v", decl.Combinator, keysStr)
 	}
 
-	return &Object{
+	return &TLObject{
 		Comment: constructorComment,
 		Name:    name,
 		CRC:     uint32(crc),
-		Fields:  params,
+		Params:  params,
 		Type:    typ,
 	}, nil
 }
@@ -186,10 +188,10 @@ const (
 	tagParam       = "param"
 )
 
-func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*Object, map[ObjName]string, error) {
+func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*TLObject, map[TLName]string, error) {
 	var (
-		objects      = []*Object{}
-		typeComments = map[ObjName]string{}
+		objects      = []*TLObject{}
+		typeComments = map[TLName]string{}
 
 		currentTypeComment     string
 		constructorComment     string
@@ -282,19 +284,19 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 			objects = append(objects, obj)
 
 			if currentTypeComment != "" {
-				v, ok := obj.Type.(TypeCommon)
+				v, ok := obj.Type.(TLTypeCommon)
 				if !ok {
 					typStr := obj.Type.String()
 					err := errors.New("@type: comment set to " + typStr + ", which is impossible")
 					return nil, nil, err
 				}
 
-				if _, ok := typeComments[ObjName(v)]; ok {
-					err := errors.New("@type: for " + ObjName(v).String() + ", type comment defined twice")
+				if _, ok := typeComments[TLName(v)]; ok {
+					err := errors.New("@type: for " + TLName(v).String() + ", type comment defined twice")
 					return nil, nil, err
 				}
 
-				typeComments[ObjName(v)] = currentTypeComment
+				typeComments[TLName(v)] = currentTypeComment
 				currentTypeComment = ""
 			}
 
@@ -313,28 +315,28 @@ func normalizeProgram(program *declaration.Program) (*Schema, error) {
 		return nil, err
 	}
 
-	typeOrder := []ObjName{}
-	typeSortedOjbects := map[ObjName][]Object{}
-	anyTypeHasField := set.New[ObjName]()
+	typeOrder := []TLName{}
+	typeSortedOjbects := map[TLName][]TLObject{}
+	anyTypeHasField := set.New[TLName]()
 	for _, obj := range typesRaw {
-		objTypeRaw, ok := obj.Type.(TypeCommon)
+		objTypeRaw, ok := obj.Type.(TLTypeCommon)
 		if !ok {
 			return nil, fmt.Errorf("object %#v: type is not interface", obj.Name)
 		}
-		objType := ObjName(objTypeRaw)
+		objType := TLName(objTypeRaw)
 
 		if !slices.Contains(typeOrder, objType) {
 			typeOrder = append(typeOrder, objType)
 		}
 
 		typeSortedOjbects[objType] = append(typeSortedOjbects[objType], *obj)
-		if len(obj.Fields) > 0 {
+		if len(obj.Params) > 0 {
 			anyTypeHasField = anyTypeHasField.Add(objType)
 		}
 	}
 
-	types := map[ObjName]TypeObjects{}
-	enums := map[ObjName]EnumObjects{}
+	types := map[TLName]TypeTLObjects{}
+	enums := map[TLName]EnumTLObjects{}
 	for typ, objs := range typeSortedOjbects {
 		var comment string
 		if v, ok := comments[typ]; ok {
@@ -342,12 +344,12 @@ func normalizeProgram(program *declaration.Program) (*Schema, error) {
 		}
 
 		if anyTypeHasField.Has(typ) {
-			types[typ] = TypeObjects{
+			types[typ] = TypeTLObjects{
 				Comment: comment,
 				Objects: objs,
 			}
 		} else {
-			enums[typ] = EnumObjects{
+			enums[typ] = EnumTLObjects{
 				Comment: comment,
 				Objects: objs,
 			}
@@ -360,20 +362,20 @@ func normalizeProgram(program *declaration.Program) (*Schema, error) {
 	}
 
 	methodGroupOrder := []string{}
-	methodGroupSortedOjbects := map[string][]Object{}
+	methodGroupSortedOjbects := map[string][]TLObject{}
 	for _, obj := range methods {
-		if !slices.Contains(methodGroupOrder, obj.Name.Group) {
-			methodGroupOrder = append(methodGroupOrder, obj.Name.Group)
+		if !slices.Contains(methodGroupOrder, obj.Name.Namespace) {
+			methodGroupOrder = append(methodGroupOrder, obj.Name.Namespace)
 		}
 
-		methodGroupSortedOjbects[obj.Name.Group] = append(methodGroupSortedOjbects[obj.Name.Group], *obj)
+		methodGroupSortedOjbects[obj.Name.Namespace] = append(methodGroupSortedOjbects[obj.Name.Namespace], *obj)
 	}
 
 	return &Schema{
-		TypeOrder:        typeOrder,
-		Objects:          types,
-		Enums:            enums,
-		MethodGroupOrder: methodGroupOrder,
-		MethodsGroups:    methodGroupSortedOjbects,
+		ObjSeq:      typeOrder,
+		TypeObjMap:  types,
+		EnumObjMap:  enums,
+		FunctionSeq: methodGroupOrder,
+		FunctionMap: methodGroupSortedOjbects,
 	}, nil
 }

@@ -14,22 +14,22 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-type Parameters []Parameter
+type TLParams []TLParam
 
-func (p Parameters) String() string {
-	return strings.Join(slices.Remap(p, func(p Parameter) string { return p.String() }), " ")
+func (p TLParams) String() string {
+	return strings.Join(slices.Remap(p, func(p TLParam) string { return p.String() }), " ")
 }
 
-func (p Parameters) Comments() []string {
-	params := slices.Filter(p, func(p Parameter) bool { return p.GetComment() != "" })
-	paramMaxLen := slicesMaxFunc(params, func(p Parameter) int { return len([]rune(p.GetName())) })
+func (p TLParams) Comments() []string {
+	params := slices.Filter(p, func(p TLParam) bool { return p.GetComment() != "" })
+	paramMaxLen := slicesMaxFunc(params, func(p TLParam) int { return len([]rune(p.GetName())) })
 
-	return slices.Remap(params, func(p Parameter) string {
+	return slices.Remap(params, func(p TLParam) string {
 		return fmt.Sprintf("// @param %-*v %v", paramMaxLen, p.GetName(), p.GetComment())
 	})
 }
 
-type Parameter interface {
+type TLParam interface {
 	_Parameter()
 
 	GetName() string
@@ -38,59 +38,59 @@ type Parameter interface {
 }
 
 var (
-	_ Parameter = BitflagParameter{}
-	_ Parameter = RequiredParameter{}
-	_ Parameter = OptionalParameter{}
-	_ Parameter = TriggerParameter{}
+	_ TLParam = TLBitflagParam{}
+	_ TLParam = TLRequiredParam{}
+	_ TLParam = TLOptionalParam{}
+	_ TLParam = TLTriggerParam{}
 )
 
-type BitflagParameter struct {
+type TLBitflagParam struct {
 	Comment string
 	Name    string
 }
 
-func (_ BitflagParameter) _Parameter()        {}
-func (t BitflagParameter) GetName() string    { return t.Name }
-func (t BitflagParameter) GetComment() string { return t.Comment }
-func (t BitflagParameter) String() string     { return t.Name + ":#" }
+func (_ TLBitflagParam) _Parameter()        {}
+func (t TLBitflagParam) GetName() string    { return t.Name }
+func (t TLBitflagParam) GetComment() string { return t.Comment }
+func (t TLBitflagParam) String() string     { return t.Name + ":#" }
 
-type RequiredParameter struct {
+type TLRequiredParam struct {
 	Comment string
 	Name    string
-	Type    Type
+	Type    TLType
 }
 
-func (_ RequiredParameter) _Parameter()        {}
-func (t RequiredParameter) GetName() string    { return t.Name }
-func (t RequiredParameter) GetComment() string { return t.Comment }
-func (t RequiredParameter) String() string     { return t.Name + ":" + t.Type.String() }
+func (_ TLRequiredParam) _Parameter()        {}
+func (t TLRequiredParam) GetName() string    { return t.Name }
+func (t TLRequiredParam) GetComment() string { return t.Comment }
+func (t TLRequiredParam) String() string     { return t.Name + ":" + t.Type.String() }
 
-type OptionalParameter struct {
+type TLOptionalParam struct {
 	Comment     string
 	Name        string
-	Type        Type
+	Type        TLType
 	FlagTrigger string
 	BitTrigger  int
 }
 
-func (_ OptionalParameter) _Parameter()        {}
-func (t OptionalParameter) GetName() string    { return t.Name }
-func (t OptionalParameter) GetComment() string { return t.Comment }
-func (t OptionalParameter) String() string {
+func (_ TLOptionalParam) _Parameter()        {}
+func (t TLOptionalParam) GetName() string    { return t.Name }
+func (t TLOptionalParam) GetComment() string { return t.Comment }
+func (t TLOptionalParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?%v", t.Name, t.FlagTrigger, t.BitTrigger, t.Type.String())
 }
 
-type TriggerParameter struct {
+type TLTriggerParam struct {
 	Comment     string
 	Name        string
 	FlagTrigger string
 	BitTrigger  int
 }
 
-func (_ TriggerParameter) _Parameter()        {}
-func (t TriggerParameter) GetName() string    { return t.Name }
-func (t TriggerParameter) GetComment() string { return t.Comment }
-func (t TriggerParameter) String() string {
+func (_ TLTriggerParam) _Parameter()        {}
+func (t TLTriggerParam) GetName() string    { return t.Name }
+func (t TLTriggerParam) GetComment() string { return t.Comment }
+func (t TLTriggerParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?true", t.Name, t.FlagTrigger, t.BitTrigger)
 }
 

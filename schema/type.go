@@ -11,26 +11,26 @@ import (
 	"unicode/utf8"
 )
 
-type Type interface {
+type TLType interface {
 	_type()
 
 	fmt.Stringer
 }
 
 var (
-	_ Type = TypeCommon(ObjName{})
-	_ Type = TypeVector(ObjName{})
+	_ TLType = TLTypeCommon(TLName{})
+	_ TLType = TLTypeVector(TLName{})
 )
 
-type TypeCommon ObjName
+type TLTypeCommon TLName
 
-func (_ TypeCommon) _type()         {}
-func (t TypeCommon) String() string { return ObjName(t).String() }
+func (_ TLTypeCommon) _type()         {}
+func (t TLTypeCommon) String() string { return TLName(t).String() }
 
-type TypeVector ObjName
+type TLTypeVector TLName
 
-func (_ TypeVector) _type()         {}
-func (t TypeVector) String() string { return "Vector<" + ObjName(t).String() + ">" }
+func (_ TLTypeVector) _type()         {}
+func (t TLTypeVector) String() string { return "Vector<" + TLName(t).String() + ">" }
 
 func isFirstRuneUpper(s string) bool {
 	r, _ := utf8.DecodeRuneInString(s)

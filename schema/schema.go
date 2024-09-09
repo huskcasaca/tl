@@ -13,36 +13,34 @@ import (
 )
 
 type Schema struct {
-	TypeOrder []ObjName
-	// key is type name
-	Objects map[ObjName]TypeObjects
-	// key is enum name
-	Enums map[ObjName]EnumObjects
+	ObjSeq     []TLName
+	TypeObjMap map[TLName]TypeTLObjects // key is type name
+	EnumObjMap map[TLName]EnumTLObjects // key is enum name
 
-	MethodGroupOrder []string
-	MethodsGroups    map[string][]Object // methods must be sorted by name
+	FunctionSeq []string
+	FunctionMap map[string][]TLObject // methods must be sorted by name
 }
 
 func (s *Schema) String() string {
 	var parts []string
-	for _, typ := range s.TypeOrder {
-		if obj, ok := s.Objects[typ]; ok {
+	for _, typ := range s.ObjSeq {
+		if obj, ok := s.TypeObjMap[typ]; ok {
 			parts = append(parts, obj.String())
-		} else if enum, ok := s.Enums[typ]; ok {
+		} else if enum, ok := s.EnumObjMap[typ]; ok {
 			parts = append(parts, enum.String())
 		} else {
 			panic(fmt.Sprintf("missed type %#v", typ))
 		}
 	}
 
-	if len(s.MethodGroupOrder) == 0 {
+	if len(s.FunctionSeq) == 0 {
 		return strings.Join(parts, "\n\n") + "\n"
 	}
 
 	parts = append(parts, "---functions---")
 
-	for _, group := range s.MethodGroupOrder {
-		obj, ok := s.MethodsGroups[group]
+	for _, group := range s.FunctionSeq {
+		obj, ok := s.FunctionMap[group]
 		if !ok {
 			panic(fmt.Sprintf("missed group %#v", group))
 		}
@@ -54,13 +52,13 @@ func (s *Schema) String() string {
 }
 
 type CRCIndex struct {
-	Type        ObjName
+	Type        TLName
 	ObjectIndex int
 }
 
 func (s *Schema) MakeCRCIndex() map[uint32]CRCIndex {
-	res := make(map[uint32]CRCIndex, len(s.Objects))
-	for typ, obj := range s.Objects {
+	res := make(map[uint32]CRCIndex, len(s.TypeObjMap))
+	for typ, obj := range s.TypeObjMap {
 		for i, o := range obj.Objects {
 			res[o.CRC] = CRCIndex{
 				Type:        typ,
@@ -72,45 +70,45 @@ func (s *Schema) MakeCRCIndex() map[uint32]CRCIndex {
 	return res
 }
 
-type TypeObjects struct {
+type TypeTLObjects struct {
 	Comment string
-	Objects []Object // must be sorted by name
+	Objects []TLObject // must be sorted by name
 }
 
-func (s TypeObjects) String() string {
+func (s TypeTLObjects) String() string {
 	var parts []string
 	if s.Comment != "" {
 		parts = append(parts, "// @type "+s.Comment)
 	}
 
 	for _, obj := range slices.SortFunc(s.Objects, sortObject) {
-		parts = append(parts, obj.Comments(ObjectTypeConstructor)...)
+		parts = append(parts, obj.Comments(TLObjectTypeConstructor)...)
 		parts = append(parts, obj.String())
 	}
 
 	return strings.Join(parts, "\n")
 }
 
-type EnumObjects struct {
+type EnumTLObjects struct {
 	Comment string
-	Objects []Object // must be sorted by name
+	Objects []TLObject // must be sorted by name
 }
 
-func (s EnumObjects) String() (res string) {
+func (s EnumTLObjects) String() (res string) {
 	var parts []string
 	if s.Comment != "" {
 		parts = append(parts, "// @type "+s.Comment)
 	}
 
 	for _, obj := range slices.SortFunc(s.Objects, sortObject) {
-		parts = append(parts, obj.Comments(ObjectTypeEnum)...)
+		parts = append(parts, obj.Comments(TLObjectTypeEnum)...)
 		parts = append(parts, obj.String())
 	}
 
 	return strings.Join(parts, "\n")
 }
 
-func methodsString(methods []Object, group string) (res string) {
+func methodsString(methods []TLObject, group string) (res string) {
 	var parts []string
 
 	if group != "" {
@@ -118,7 +116,7 @@ func methodsString(methods []Object, group string) (res string) {
 	}
 
 	for _, obj := range slices.SortFunc(methods, sortObject) {
-		parts = append(parts, obj.Comments(ObjectTypeMethod)...)
+		parts = append(parts, obj.Comments(TLObjectTypeMethod)...)
 		parts = append(parts, obj.String())
 	}
 

@@ -27,67 +27,67 @@ func TestParseFile(t *testing.T) {
 	}{{
 		file: "internal/testdata/simplest.tl",
 		expected: &Schema{
-			TypeOrder: []ObjName{{Name: "CoolEnumerate"}},
-			Objects:   map[ObjName]TypeObjects{},
-			Enums: map[ObjName]EnumObjects{
-				{Name: "CoolEnumerate"}: {
-					Objects: []Object{{
-						Name:   ObjName{Name: "someEnum"},
+			ObjSeq:     []TLName{{Key: "CoolEnumerate"}},
+			TypeObjMap: map[TLName]TypeTLObjects{},
+			EnumObjMap: map[TLName]EnumTLObjects{
+				{Key: "CoolEnumerate"}: {
+					Objects: []TLObject{{
+						Name:   TLName{Key: "someEnum"},
 						CRC:    0x5508ec75,
-						Fields: []Parameter{},
-						Type:   TypeCommon(ObjName{Name: "CoolEnumerate"}),
+						Params: []TLParam{},
+						Type:   TLTypeCommon(TLName{Key: "CoolEnumerate"}),
 					}},
 				},
 			},
-			MethodGroupOrder: []string{"", "auth"},
-			MethodsGroups: map[string][]Object{
+			FunctionSeq: []string{"", "auth"},
+			FunctionMap: map[string][]TLObject{
 				"": {{
-					Name:   ObjName{Name: "someFunc"},
+					Name:   TLName{Key: "someFunc"},
 					CRC:    0x7da07ec9,
-					Fields: []Parameter{},
-					Type:   TypeCommon(ObjName{Name: "CoolEnumerate"}),
+					Params: []TLParam{},
+					Type:   TLTypeCommon(TLName{Key: "CoolEnumerate"}),
 				}},
 				"auth": {{
-					Name:   ObjName{Group: "auth", Name: "someFunc"},
+					Name:   TLName{Namespace: "auth", Key: "someFunc"},
 					CRC:    0x7da07ec9,
-					Fields: []Parameter{},
-					Type:   TypeCommon(ObjName{Name: "CoolEnumerate"}),
+					Params: []TLParam{},
+					Type:   TLTypeCommon(TLName{Key: "CoolEnumerate"}),
 				}},
 			},
 		},
 	}, {
 		file: "internal/testdata/many_flags.tl",
 		expected: &Schema{
-			TypeOrder: []ObjName{{Name: "ChatFull"}},
-			Objects: map[ObjName]TypeObjects{
-				{Name: "ChatFull"}: {
-					Objects: []Object{{
-						Name: ObjName{Name: "a"},
+			ObjSeq: []TLName{{Key: "ChatFull"}},
+			TypeObjMap: map[TLName]TypeTLObjects{
+				{Key: "ChatFull"}: {
+					Objects: []TLObject{{
+						Name: TLName{Key: "a"},
 						CRC:  0xf2355507,
-						Fields: []Parameter{BitflagParameter{
+						Params: []TLParam{TLBitflagParam{
 							Name: "flags",
-						}, TriggerParameter{
+						}, TLTriggerParam{
 							Name:        "opt_prop",
 							FlagTrigger: "flags",
 							BitTrigger:  3,
-						}, BitflagParameter{
+						}, TLBitflagParam{
 							Name: "flags2",
-						}, OptionalParameter{
+						}, TLOptionalParam{
 							Name:        "opt2_prop",
-							Type:        TypeCommon(ObjName{Name: "double"}),
+							Type:        TLTypeCommon(TLName{Key: "double"}),
 							FlagTrigger: "flags2",
 							BitTrigger:  9,
-						}, RequiredParameter{
+						}, TLRequiredParam{
 							Name: "id",
-							Type: TypeCommon(ObjName{Name: "long"}),
+							Type: TLTypeCommon(TLName{Key: "long"}),
 						}},
-						Type: TypeCommon(ObjName{Name: "ChatFull"}),
+						Type: TLTypeCommon(TLName{Key: "ChatFull"}),
 					}},
 				},
 			},
-			Enums:            map[ObjName]EnumObjects{},
-			MethodGroupOrder: []string{},
-			MethodsGroups:    map[string][]Object{},
+			EnumObjMap:  map[TLName]EnumTLObjects{},
+			FunctionSeq: []string{},
+			FunctionMap: map[string][]TLObject{},
 		},
 	}} {
 		tt := tt // for parallel tests

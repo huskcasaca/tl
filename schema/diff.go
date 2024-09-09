@@ -7,12 +7,12 @@ package schema
 
 import "github.com/quenbyako/ext/slices"
 
-type DiffObjects struct {
-	Added   []Object
-	Removed []ObjName
+type TLObjectsDiff struct {
+	Added   []TLObject
+	Removed []TLName
 }
 
-func (d DiffObjects) Patch(a []Object) []Object {
+func (d TLObjectsDiff) Patch(a []TLObject) []TLObject {
 	for _, add := range d.Added {
 		a = append(a, add)
 	}
@@ -31,10 +31,10 @@ func (d DiffObjects) Patch(a []Object) []Object {
 
 type DiffEnum struct {
 	Comment string
-	Changes DiffObjects
+	Changes TLObjectsDiff
 }
 
-func (a EnumObjects) Diff(b EnumObjects) (res DiffEnum) {
+func (a EnumTLObjects) Diff(b EnumTLObjects) (res DiffEnum) {
 	if a.Comment != b.Comment {
 		res.Comment = b.Comment
 	}
@@ -42,7 +42,7 @@ func (a EnumObjects) Diff(b EnumObjects) (res DiffEnum) {
 	panic("unimplemented")
 }
 
-func (d DiffEnum) Patch(a EnumObjects) EnumObjects {
+func (d DiffEnum) Patch(a EnumTLObjects) EnumTLObjects {
 	if d.Comment != "" {
 		a.Comment = d.Comment
 	}

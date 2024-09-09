@@ -18,23 +18,23 @@ import (
 func Generate(s *schema.Schema) (string, error) {
 	f := jen.NewFile("main")
 
-	isInterface := func(name schema.ObjName) bool {
-		_, ok := s.Objects[name]
+	isInterface := func(name schema.TLName) bool {
+		_, ok := s.TypeObjMap[name]
 		return ok
 	}
 
-	for _, name := range slices.SortFunc(maps.Keys(s.Objects), func(a, b schema.ObjName) int { return a.Cmp(b) }) {
-		f.Add(generateObjects(name, s.Objects[name], isInterface))
+	for _, name := range slices.SortFunc(maps.Keys(s.TypeObjMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
+		f.Add(generateObjects(name, s.TypeObjMap[name], isInterface))
 	}
 
-	for _, name := range slices.SortFunc(maps.Keys(s.Enums), func(a, b schema.ObjName) int { return a.Cmp(b) }) {
-		f.Add(generateEnum(name, s.Enums[name]))
+	for _, name := range slices.SortFunc(maps.Keys(s.EnumObjMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
+		f.Add(generateEnum(name, s.EnumObjMap[name]))
 	}
 
 	f.Add(generateRequestBareFunction())
 
-	for _, methodGroup := range slices.Sort(maps.Keys(s.MethodsGroups)) {
-		methods := s.MethodsGroups[methodGroup]
+	for _, methodGroup := range slices.Sort(maps.Keys(s.FunctionMap)) {
+		methods := s.FunctionMap[methodGroup]
 		for _, method := range methods {
 			obj := generateRequestType(methodGroup, method, isInterface)
 			f.Add(obj, jen.Line())

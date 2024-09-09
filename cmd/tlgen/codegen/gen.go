@@ -53,25 +53,25 @@ func goify(name string, public bool) (res string) {
 	return res
 }
 
-func goifyObject(name schema.ObjName) (res string) {
-	if name.Group != "" {
-		res += goify(name.Group, true)
+func goifyObject(name schema.TLName) (res string) {
+	if name.Namespace != "" {
+		res += goify(name.Namespace, true)
 	}
-	return res + goify(name.Name, true)
+	return res + goify(name.Key, true)
 }
 
-func goifyInterface(name schema.ObjName) (res string) {
-	if name.Group != "" {
-		res += goify(name.Group, true)
+func goifyInterface(name schema.TLName) (res string) {
+	if name.Namespace != "" {
+		res += goify(name.Namespace, true)
 	}
-	return "I" + res + goify(name.Name, true)
+	return "I" + res + goify(name.Key, true)
 }
 
-func goifyEnum(name schema.ObjName) (res string) {
-	if name.Group != "" {
-		res += goify(name.Group, true)
+func goifyEnum(name schema.TLName) (res string) {
+	if name.Namespace != "" {
+		res += goify(name.Namespace, true)
 	}
-	return "Enum" + res + goify(name.Name, true)
+	return "Enum" + res + goify(name.Key, true)
 }
 
 func createTypeCrcFunc(typ string, crc uint32) *jen.Statement {
@@ -94,7 +94,7 @@ func createIfaceFunc(typ string, ifaceMethod string) *jen.Statement {
 		Block()
 }
 
-func generateObject(ifaceMethod string, m schema.Object, isParamIface func(schema.ObjName) bool) (stmt *jen.Statement, objName string) {
+func generateObject(ifaceMethod string, m schema.TLObject, isParamIface func(schema.TLName) bool) (stmt *jen.Statement, objName string) {
 	stmt = &jen.Statement{}
 	if m.Comment != "" {
 		stmt = stmt.Comment(m.Comment).Line()
@@ -105,7 +105,7 @@ func generateObject(ifaceMethod string, m schema.Object, isParamIface func(schem
 	typ := stmt.Type().
 		Id(typName).
 		Struct(
-			slices.Remap(m.Fields, func(p schema.Parameter) jen.Code {
+			slices.Remap(m.Params, func(p schema.TLParam) jen.Code {
 				return generateField(p, isParamIface)
 			})...,
 		)
@@ -119,23 +119,23 @@ func generateObject(ifaceMethod string, m schema.Object, isParamIface func(schem
 	return res, typName
 }
 
-func generateField(p schema.Parameter, isParamIface func(schema.ObjName) bool) *jen.Statement {
+func generateField(p schema.TLParam, isParamIface func(schema.TLName) bool) *jen.Statement {
 	var stmt *jen.Statement
 	switch p := p.(type) {
-	case schema.BitflagParameter:
+	case schema.TLBitflagParam:
 		tag := fmt.Sprintf("%v,bitflag", p.Name)
 		stmt = jen.Id("_").Struct().Tag(map[string]string{"tl": tag})
 
-	case schema.RequiredParameter:
-		stmt = jen.Id(goifyObject(schema.ObjName{Name: p.Name})).Add(generateFieldType(p.Type, false, isParamIface))
+	case schema.TLRequiredParam:
+		stmt = jen.Id(goifyObject(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false, isParamIface))
 
-	case schema.OptionalParameter:
+	case schema.TLOptionalParam:
 		tag := fmt.Sprintf(",omitempty:%v:%v", p.FlagTrigger, p.BitTrigger)
-		stmt = jen.Id(goifyObject(schema.ObjName{Name: p.Name})).Add(generateFieldType(p.Type, true, isParamIface)).Tag(map[string]string{"tl": tag})
+		stmt = jen.Id(goifyObject(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true, isParamIface)).Tag(map[string]string{"tl": tag})
 
-	case schema.TriggerParameter:
+	case schema.TLTriggerParam:
 		tag := fmt.Sprintf(",omitempty:%v:%v,implicit", p.FlagTrigger, p.BitTrigger)
-		stmt = jen.Id(goifyObject(schema.ObjName{Name: p.Name})).Bool().Tag(map[string]string{"tl": tag})
+		stmt = jen.Id(goifyObject(schema.TLName{Key: p.Name})).Bool().Tag(map[string]string{"tl": tag})
 
 	default:
 		panic("unknown parameter type")
@@ -148,21 +148,21 @@ func generateField(p schema.Parameter, isParamIface func(schema.ObjName) bool) *
 	return stmt
 }
 
-func generateFieldType(t schema.Type, isOptional bool, isParamIface func(schema.ObjName) bool) *jen.Statement {
+func generateFieldType(t schema.TLType, isOptional bool, isParamIface func(schema.TLName) bool) *jen.Statement {
 	switch t := t.(type) {
-	case schema.TypeCommon:
-		if isDefaultType(schema.ObjName(t)) && isOptional {
-			return jen.Op("*").Add(generateFieldTypeCommon(schema.ObjName(t), isParamIface))
+	case schema.TLTypeCommon:
+		if isDefaultType(schema.TLName(t)) && isOptional {
+			return jen.Op("*").Add(generateFieldTypeCommon(schema.TLName(t), isParamIface))
 		}
-		return generateFieldTypeCommon(schema.ObjName(t), isParamIface)
-	case schema.TypeVector:
-		return jen.Index().Add(generateFieldTypeCommon(schema.ObjName(t), isParamIface))
+		return generateFieldTypeCommon(schema.TLName(t), isParamIface)
+	case schema.TLTypeVector:
+		return jen.Index().Add(generateFieldTypeCommon(schema.TLName(t), isParamIface))
 	default:
 		panic("unknown type")
 	}
 }
 
-func generateFieldTypeCommon(name schema.ObjName, isParamIface func(schema.ObjName) bool) *jen.Statement {
+func generateFieldTypeCommon(name schema.TLName, isParamIface func(schema.TLName) bool) *jen.Statement {
 	switch name {
 	case typeBytes:
 		return jen.Index().Byte()
@@ -190,15 +190,15 @@ func generateFieldTypeCommon(name schema.ObjName, isParamIface func(schema.ObjNa
 }
 
 var (
-	typeBytes  = schema.ObjName{Name: "bytes"}
-	typeDouble = schema.ObjName{Name: "double"}
-	typeInt    = schema.ObjName{Name: "int"}
-	typeLong   = schema.ObjName{Name: "long"}
-	typeString = schema.ObjName{Name: "string"}
-	typeBool   = schema.ObjName{Name: "Bool"}
+	typeBytes  = schema.TLName{Key: "bytes"}
+	typeDouble = schema.TLName{Key: "double"}
+	typeInt    = schema.TLName{Key: "int"}
+	typeLong   = schema.TLName{Key: "long"}
+	typeString = schema.TLName{Key: "string"}
+	typeBool   = schema.TLName{Key: "Bool"}
 )
 
-func isDefaultType(typeName schema.ObjName) bool {
+func isDefaultType(typeName schema.TLName) bool {
 	switch typeName {
 	case typeBytes, typeDouble, typeInt, typeLong, typeString, typeBool:
 		return true
@@ -207,7 +207,7 @@ func isDefaultType(typeName schema.ObjName) bool {
 	}
 }
 
-func generateObjects(name schema.ObjName, objects schema.TypeObjects, isParamIface func(schema.ObjName) bool) *jen.Statement {
+func generateObjects(name schema.TLName, objects schema.TypeTLObjects, isParamIface func(schema.TLName) bool) *jen.Statement {
 	ifaceName := goifyInterface(name)
 	ifaceMethod := "_" + ifaceName
 
@@ -238,7 +238,7 @@ func generateObjects(name schema.ObjName, objects schema.TypeObjects, isParamIfa
 	return res.Line()
 }
 
-func generateEnum(name schema.ObjName, objects schema.EnumObjects) *jen.Statement {
+func generateEnum(name schema.TLName, objects schema.EnumTLObjects) *jen.Statement {
 	defName := goifyEnum(name)
 	def := &jen.Statement{}
 	if objects.Comment != "" {
@@ -260,9 +260,9 @@ func generateEnum(name schema.ObjName, objects schema.EnumObjects) *jen.Statemen
 	return jen.Add(def, jen.Line(), jen.Const().Defs(constants...).Line(), jen.Line())
 }
 
-func generateRequestType(group string, obj schema.Object, isParamIface func(schema.ObjName) bool) *jen.Statement {
-	funcName := schema.ObjName{Group: group, Name: obj.Name.Name}
-	obj.Name = schema.ObjName{Group: group, Name: obj.Name.Name + "Request"}
+func generateRequestType(group string, obj schema.TLObject, isParamIface func(schema.TLName) bool) *jen.Statement {
+	funcName := schema.TLName{Namespace: group, Key: obj.Name.Key}
+	obj.Name = schema.TLName{Namespace: group, Key: obj.Name.Key + "Request"}
 
 	reqObj, reqName := generateObject("", obj, isParamIface)
 	methodFunc := genFunction(funcName, reqName, obj.Type, isParamIface)
@@ -309,7 +309,7 @@ func generateRequestBareFunction() *jen.Statement {
 //		var res Response
 //		return res, request(ctx, m, &i, &res)
 //	}
-func genFunction(funcName schema.ObjName, requestType string, returns schema.Type, isParamIface func(schema.ObjName) bool) *jen.Statement {
+func genFunction(funcName schema.TLName, requestType string, returns schema.TLType, isParamIface func(schema.TLName) bool) *jen.Statement {
 	returnType := generateFieldType(returns, false, isParamIface)
 
 	return jen.Func().

@@ -22,11 +22,11 @@ func TestParseFile(t *testing.T) {
 	for _, tt := range []struct {
 		name     string
 		file     string
-		expected *Schema
+		expected *TLSchema
 		wantErr  assert.ErrorAssertionFunc
 	}{{
 		file: "internal/testdata/simplest.tl",
-		expected: &Schema{
+		expected: &TLSchema{
 			ObjSeq:     []TLName{{Key: "CoolEnumerate"}},
 			TypeObjMap: map[TLName]TypeTLObjects{},
 			EnumObjMap: map[TLName]EnumTLObjects{
@@ -57,7 +57,7 @@ func TestParseFile(t *testing.T) {
 		},
 	}, {
 		file: "internal/testdata/many_flags.tl",
-		expected: &Schema{
+		expected: &TLSchema{
 			ObjSeq: []TLName{{Key: "ChatFull"}},
 			TypeObjMap: map[TLName]TypeTLObjects{
 				{Key: "ChatFull"}: {

@@ -15,7 +15,7 @@ import (
 	"github.com/xelaj/tl/schema"
 )
 
-func Generate(s *schema.Schema) (string, error) {
+func Generate(s *schema.TLSchema) (string, error) {
 	f := jen.NewFile("main")
 
 	isInterface := func(name schema.TLName) bool {

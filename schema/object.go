@@ -13,12 +13,12 @@ import (
 )
 
 type TLObject struct {
-	Comment   string
-	Name      TLName
-	CRC       uint32
-	Params    TLParams
-	PolyTypes TLTypes
-	Type      TLType
+	Comment    string
+	Name       TLName
+	CRC        uint32
+	Params     TLParams
+	PolyParams TLParams
+	Type       TLType
 }
 
 type TLName struct {

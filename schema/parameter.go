@@ -42,6 +42,7 @@ var (
 	_ TLParam = TLRequiredParam{}
 	_ TLParam = TLOptionalParam{}
 	_ TLParam = TLTriggerParam{}
+	_ TLParam = TLPolyParam{}
 )
 
 type TLBitflagParam struct {
@@ -134,4 +135,17 @@ func slicesSumFunc[S ~[]T, T any, C constraints.Ordered](s S, f func(T) C) (sum 
 	}
 
 	return sum
+}
+
+type TLPolyParam struct {
+	Comment string
+	Name    string
+	Type    TLType
+}
+
+func (_ TLPolyParam) _Parameter()        {}
+func (t TLPolyParam) GetName() string    { return t.Name }
+func (t TLPolyParam) GetComment() string { return t.Comment }
+func (t TLPolyParam) String() string {
+	return fmt.Sprintf("%v:%v", t.Name, t.Type.String())
 }

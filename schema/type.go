@@ -16,30 +16,37 @@ type TLTypes []TLType
 type TLType interface {
 	_type()
 
+	Name() TLName
+	IsInList() bool
 	fmt.Stringer
 }
 
 var (
-	_ TLType = TLTypeCommon(TLName{})
-	_ TLType = TLTypeVector(TLName{})
+	_ TLType = TLTypeCommon{TLName{}, false}
+	_ TLType = TLTypeVector{TLName{}, false}
 )
 
-type TLTypeCommon TLName
+type TLTypeCommon struct {
+	TLName
+	IsInterface bool
+}
 
 func (_ TLTypeCommon) _type()         {}
-func (t TLTypeCommon) String() string { return TLName(t).String() }
+func (t TLTypeCommon) String() string { return t.TLName.String() }
+func (t TLTypeCommon) Name() TLName   { return t.TLName }
+func (t TLTypeCommon) IsInList() bool { return t.IsInterface }
 
-type TLTypeVector TLName
+type TLTypeVector struct {
+	TLName
+	IsInterface bool
+}
 
 func (_ TLTypeVector) _type()         {}
-func (t TLTypeVector) String() string { return "Vector<" + TLName(t).String() + ">" }
+func (t TLTypeVector) String() string { return "Vector<" + t.TLName.String() + ">" }
+func (t TLTypeVector) Name() TLName   { return t.TLName }
+func (t TLTypeVector) IsInList() bool { return t.IsInterface }
 
 func isFirstRuneUpper(s string) bool {
 	r, _ := utf8.DecodeRuneInString(s)
 	return unicode.IsUpper(r)
 }
-
-type TLTypeGeneric TLName
-
-func (_ TLTypeGeneric) _type()         {}
-func (t TLTypeGeneric) String() string { return TLName(t).String() }

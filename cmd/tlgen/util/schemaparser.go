@@ -17,7 +17,7 @@ import (
 	"github.com/xelaj/tl/schema/proto"
 )
 
-func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*schema.Schema, error) {
+func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*schema.TLSchema, error) {
 	if predictedMime == "" {
 		buf := bufio.NewReader(r)
 		r = buf

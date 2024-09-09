@@ -12,7 +12,7 @@ import (
 	"github.com/quenbyako/ext/slices"
 )
 
-type Schema struct {
+type TLSchema struct {
 	ObjSeq     []TLName
 	TypeObjMap map[TLName]TypeTLObjects // key is type name
 	EnumObjMap map[TLName]EnumTLObjects // key is enum name
@@ -21,7 +21,7 @@ type Schema struct {
 	FunctionMap map[string][]TLObject // methods must be sorted by name
 }
 
-func (s *Schema) String() string {
+func (s *TLSchema) String() string {
 	var parts []string
 	for _, typ := range s.ObjSeq {
 		if obj, ok := s.TypeObjMap[typ]; ok {
@@ -56,7 +56,7 @@ type CRCIndex struct {
 	ObjectIndex int
 }
 
-func (s *Schema) MakeCRCIndex() map[uint32]CRCIndex {
+func (s *TLSchema) MakeCRCIndex() map[uint32]CRCIndex {
 	res := make(map[uint32]CRCIndex, len(s.TypeObjMap))
 	for typ, obj := range s.TypeObjMap {
 		for i, o := range obj.Objects {

@@ -23,7 +23,7 @@ func TestParseFile(t *testing.T) {
 	for _, tt := range []struct {
 		name     string
 		file     string
-		expected *schema.Schema
+		expected *schema.TLSchema
 		wantErr  assert.ErrorAssertionFunc
 	}{
 		// {

@@ -27,7 +27,7 @@ var parser = participle.MustBuild[declaration.Program](
 	participle.Lexer(lexer.NewDefinition()),
 )
 
-func ParseFile(filename string) (*Schema, error) {
+func ParseFile(filename string) (*TLSchema, error) {
 	f, err := os.Open(filename)
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func ParseFile(filename string) (*Schema, error) {
 	return Parse(filename, f)
 }
 
-func ParseFS(fsys fs.FS, filename string) (*Schema, error) {
+func ParseFS(fsys fs.FS, filename string) (*TLSchema, error) {
 	f, err := fsys.Open(filename)
 	if err != nil {
 		return nil, err
@@ -47,11 +47,11 @@ func ParseFS(fsys fs.FS, filename string) (*Schema, error) {
 	return Parse(filename, f)
 }
 
-func ParseString(filename string, content string) (*Schema, error) {
+func ParseString(filename string, content string) (*TLSchema, error) {
 	return Parse(filename, strings.NewReader(content))
 }
 
-func Parse(filename string, content io.Reader) (*Schema, error) {
+func Parse(filename string, content io.Reader) (*TLSchema, error) {
 	res, err := parser.Parse(filename, content)
 	if err != nil {
 		return nil, err //nolint:wrapcheck // it's important to keep error
@@ -74,10 +74,10 @@ func normalizeIdent(i *declaration.ArgType) (TLType, error) {
 			return nil, errors.New(i.String() + ": only Vector is allowed to modify")
 		}
 
-		return TLTypeVector(GetTLNameFromString(i.Extension.Inner[0].String())), nil
+		return TLTypeVector{TLName: GetTLNameFromString(i.Extension.Inner[0].String())}, nil
 	}
 
-	return TLTypeCommon(GetTLNameFromString(i.Simple.String())), nil
+	return TLTypeCommon{TLName: GetTLNameFromString(i.Simple.String())}, nil
 }
 
 func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, error) {
@@ -154,13 +154,22 @@ func normalizeCombinator(
 		}
 	}
 
-	polytypes := make(TLTypes, len(decl.OptArgs))
+	polytypes := make(TLParams, len(decl.OptArgs))
 
 	for i, arg := range decl.OptArgs {
 		arg := arg
+		var comment string
 		if !arg.Ident.Empty() {
+			if !arg.Ident.Empty() {
+				comment = argsComments[arg.Ident.String()]
+				delete(argsComments, arg.Ident.String())
+			}
+		}
 
-			polytypes[i] = TLTypeCommon(GetTLNameFromString(arg.Ident.String()))
+		var argErr error
+		polytypes[i], argErr = normalizeArgument(&arg, comment)
+		if argErr != nil {
+			return nil, fmt.Errorf("%v: %w", decl.Combinator, argErr)
 		}
 	}
 
@@ -182,12 +191,12 @@ func normalizeCombinator(
 	}
 
 	return &TLObject{
-		Comment:   constructorComment,
-		Name:      name,
-		CRC:       uint32(crc),
-		Params:    params,
-		PolyTypes: polytypes,
-		Type:      typ,
+		Comment:    constructorComment,
+		Name:       name,
+		CRC:        uint32(crc),
+		Params:     params,
+		PolyParams: polytypes,
+		Type:       typ,
 	}, nil
 }
 
@@ -302,12 +311,12 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 					return nil, nil, err
 				}
 
-				if _, ok := typeComments[TLName(v)]; ok {
-					err := errors.New("@type: for " + TLName(v).String() + ", type comment defined twice")
+				if _, ok := typeComments[TLName(v.TLName)]; ok {
+					err := errors.New("@type: for " + TLName(v.TLName).String() + ", type comment defined twice")
 					return nil, nil, err
 				}
 
-				typeComments[TLName(v)] = currentTypeComment
+				typeComments[TLName(v.TLName)] = currentTypeComment
 				currentTypeComment = ""
 			}
 
@@ -320,7 +329,7 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 	return objects, typeComments, nil
 }
 
-func normalizeProgram(program *declaration.Program) (*Schema, error) {
+func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 	typesRaw, comments, err := normalizeEntries(program.Constraints, false)
 	if err != nil {
 		return nil, err
@@ -334,7 +343,7 @@ func normalizeProgram(program *declaration.Program) (*Schema, error) {
 		if !ok {
 			return nil, fmt.Errorf("object %#v: type is not interface", obj.Name)
 		}
-		objType := TLName(objTypeRaw)
+		objType := TLName(objTypeRaw.TLName)
 
 		if !slices.Contains(typeOrder, objType) {
 			typeOrder = append(typeOrder, objType)
@@ -382,7 +391,7 @@ func normalizeProgram(program *declaration.Program) (*Schema, error) {
 		methodGroupSortedOjbects[obj.Name.Namespace] = append(methodGroupSortedOjbects[obj.Name.Namespace], *obj)
 	}
 
-	return &Schema{
+	return &TLSchema{
 		ObjSeq:      typeOrder,
 		TypeObjMap:  types,
 		EnumObjMap:  enums,

@@ -11,6 +11,8 @@ import (
 	"unicode/utf8"
 )
 
+type TLTypes []TLType
+
 type TLType interface {
 	_type()
 
@@ -36,3 +38,8 @@ func isFirstRuneUpper(s string) bool {
 	r, _ := utf8.DecodeRuneInString(s)
 	return unicode.IsUpper(r)
 }
+
+type TLTypeGeneric TLName
+
+func (_ TLTypeGeneric) _type()         {}
+func (t TLTypeGeneric) String() string { return TLName(t).String() }

@@ -13,11 +13,12 @@ import (
 )
 
 type TLObject struct {
-	Comment string
-	Name    TLName
-	CRC     uint32
-	Params  TLParams
-	Type    TLType
+	Comment   string
+	Name      TLName
+	CRC       uint32
+	Params    TLParams
+	PolyTypes TLTypes
+	Type      TLType
 }
 
 type TLName struct {
@@ -25,16 +26,16 @@ type TLName struct {
 	Key       string
 }
 
-func objNameFromString(s string) TLName {
-	groupname := strings.Split(s, ".")
-	var group string
-	name := groupname[0]
-	if len(groupname) > 1 {
-		group = groupname[0]
-		name = groupname[1]
+func GetTLNameFromString(s string) TLName {
+	groups := strings.Split(s, ".")
+	var namespace string
+	key := groups[0]
+	if len(groups) > 1 {
+		namespace = groups[0]
+		key = groups[1]
 	}
 
-	return TLName{Namespace: group, Key: name}
+	return TLName{Namespace: namespace, Key: key}
 }
 
 func (o TLName) String() string {

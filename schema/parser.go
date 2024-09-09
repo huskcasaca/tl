@@ -74,10 +74,10 @@ func normalizeIdent(i *declaration.ArgType) (TLType, error) {
 			return nil, errors.New(i.String() + ": only Vector is allowed to modify")
 		}
 
-		return TLTypeVector(objNameFromString(i.Extension.Inner[0].String())), nil
+		return TLTypeVector(GetTLNameFromString(i.Extension.Inner[0].String())), nil
 	}
 
-	return TLTypeCommon(objNameFromString(i.Simple.String())), nil
+	return TLTypeCommon(GetTLNameFromString(i.Simple.String())), nil
 }
 
 func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, error) {
@@ -126,7 +126,7 @@ func normalizeCombinator(
 	functionsMode bool,
 ) (*TLObject, error) {
 	parts := strings.Split(decl.Combinator, "#") // guaranteed to split by two parts, lexer handles it
-	name := objNameFromString(parts[0])
+	name := GetTLNameFromString(parts[0])
 	crcStr := parts[1]
 
 	// same: lexer handles everything already
@@ -154,6 +154,16 @@ func normalizeCombinator(
 		}
 	}
 
+	polytypes := make(TLTypes, len(decl.OptArgs))
+
+	for i, arg := range decl.OptArgs {
+		arg := arg
+		if !arg.Ident.Empty() {
+
+			polytypes[i] = TLTypeCommon(GetTLNameFromString(arg.Ident.String()))
+		}
+	}
+
 	typ, err := normalizeIdent(&declaration.ArgType{
 		Simple:    decl.Result.Simple,
 		Extension: decl.Result.Extension,
@@ -172,11 +182,12 @@ func normalizeCombinator(
 	}
 
 	return &TLObject{
-		Comment: constructorComment,
-		Name:    name,
-		CRC:     uint32(crc),
-		Params:  params,
-		Type:    typ,
+		Comment:   constructorComment,
+		Name:      name,
+		CRC:       uint32(crc),
+		Params:    params,
+		PolyTypes: polytypes,
+		Type:      typ,
 	}, nil
 }
 

@@ -21,6 +21,10 @@ var (
 	_ TLType = TLTypeVector{TLName{}, false}
 )
 
+var (
+	TLAnyType TLType = TLTypeCommon{TLName{Key: "Type"}, false}
+)
+
 type TLTypeCommon struct {
 	TLName
 	IsInterface bool

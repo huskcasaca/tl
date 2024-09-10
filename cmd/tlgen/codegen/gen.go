@@ -115,7 +115,7 @@ func generatePredicts(method string, m schema.TLObject) (ret *jen.Statement, obj
 func generateGenericTypes(name string, polys schema.TLParams) *jen.Statement {
 	genericsTypes := make([]jen.Code, len(polys))
 	for i, t := range polys {
-		genericsTypes[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()})).Any()
+		genericsTypes[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()})).Id(getTypeName(t.GetType().Name()))
 	}
 	return jen.Id(name).Types(genericsTypes...)
 }

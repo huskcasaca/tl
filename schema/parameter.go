@@ -28,6 +28,7 @@ type TLParam interface {
 	_Parameter()
 
 	GetName() string
+	GetType() TLType
 	GetComment() string
 	fmt.Stringer
 }
@@ -47,6 +48,7 @@ type TLBitflagParam struct {
 
 func (_ TLBitflagParam) _Parameter()        {}
 func (t TLBitflagParam) GetName() string    { return t.Name }
+func (t TLBitflagParam) GetType() TLType    { return nil }
 func (t TLBitflagParam) GetComment() string { return t.Comment }
 func (t TLBitflagParam) String() string     { return t.Name + ":#" }
 
@@ -58,6 +60,7 @@ type TLRequiredParam struct {
 
 func (_ TLRequiredParam) _Parameter()        {}
 func (t TLRequiredParam) GetName() string    { return t.Name }
+func (t TLRequiredParam) GetType() TLType    { return t.Type }
 func (t TLRequiredParam) GetComment() string { return t.Comment }
 func (t TLRequiredParam) String() string     { return t.Name + ":" + t.Type.String() }
 
@@ -71,6 +74,7 @@ type TLOptionalParam struct {
 
 func (_ TLOptionalParam) _Parameter()        {}
 func (t TLOptionalParam) GetName() string    { return t.Name }
+func (t TLOptionalParam) GetType() TLType    { return t.Type }
 func (t TLOptionalParam) GetComment() string { return t.Comment }
 func (t TLOptionalParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?%v", t.Name, t.FlagTrigger, t.BitTrigger, t.Type.String())
@@ -85,6 +89,7 @@ type TLTriggerParam struct {
 
 func (_ TLTriggerParam) _Parameter()        {}
 func (t TLTriggerParam) GetName() string    { return t.Name }
+func (t TLTriggerParam) GetType() TLType    { return nil }
 func (t TLTriggerParam) GetComment() string { return t.Comment }
 func (t TLTriggerParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?true", t.Name, t.FlagTrigger, t.BitTrigger)
@@ -140,6 +145,7 @@ type TLPolyParam struct {
 
 func (_ TLPolyParam) _Parameter()        {}
 func (t TLPolyParam) GetName() string    { return t.Name }
+func (t TLPolyParam) GetType() TLType    { return t.Type }
 func (t TLPolyParam) GetComment() string { return t.Comment }
 func (t TLPolyParam) String() string {
 	return fmt.Sprintf("%v:%v", t.Name, t.Type.String())

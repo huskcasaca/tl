@@ -87,7 +87,7 @@ func generateInterfaceFunctions(typ jen.Code, method string) *jen.Statement {
 		Block()
 }
 
-func generatePredicts(method string, m schema.TLObject) (ret *jen.Statement, objName string) {
+func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement, objName string) {
 	ret = &jen.Statement{}
 	if m.Comment != "" {
 		ret = ret.Comment(m.Comment).Line()
@@ -224,7 +224,7 @@ func isDefaultType(typeName schema.TLName) bool {
 	}
 }
 
-func generateObjects(name schema.TLName, objects schema.TypeTLObjects) *jen.Statement {
+func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.Statement {
 	typeName := getTypeName(name)
 	typeMethod := "_" + typeName
 
@@ -240,7 +240,7 @@ func generateObjects(name schema.TLName, objects schema.TypeTLObjects) *jen.Stat
 	checkJens := []jen.Code{}
 	objectJens := []*jen.Statement{}
 
-	for _, obj := range objects.Objects {
+	for _, obj := range objects.Declarations {
 		predictJens, predictTypeName := generatePredicts(typeMethod, obj)
 		objectJens = append(objectJens, predictJens)
 		checkJens = append(checkJens, jen.Id("_").Id(typeName).Op("=").Call(jen.Op("*").Id(predictTypeName)).Call(jen.Nil()))
@@ -255,7 +255,7 @@ func generateObjects(name schema.TLName, objects schema.TypeTLObjects) *jen.Stat
 	return ret.Line()
 }
 
-func generateEnums(name schema.TLName, objects schema.EnumTLObjects) *jen.Statement {
+func generateEnums(name schema.TLName, objects schema.TLEnumDeclaration) *jen.Statement {
 	enumName := getEnumName(name)
 	ret := &jen.Statement{}
 	if objects.Comment != "" {
@@ -263,8 +263,8 @@ func generateEnums(name schema.TLName, objects schema.EnumTLObjects) *jen.Statem
 	}
 	ret = jen.Type().Id(enumName).Uint32().Line()
 
-	constantJens := make([]jen.Code, len(objects.Objects))
-	for i, obj := range objects.Objects {
+	constantJens := make([]jen.Code, len(objects.Declarations))
+	for i, obj := range objects.Declarations {
 		hex := fmt.Sprintf("0x%x", obj.CRC)
 
 		c := jen.Id(getPredictName(obj.Name)).Id(enumName).Op("=").Id(hex)
@@ -277,7 +277,7 @@ func generateEnums(name schema.TLName, objects schema.EnumTLObjects) *jen.Statem
 	return jen.Add(ret, jen.Line(), jen.Const().Defs(constantJens...).Line(), jen.Line())
 }
 
-func generateRequestType(namespace string, obj schema.TLObject) *jen.Statement {
+func generateRequestType(namespace string, obj schema.TLDeclaration) *jen.Statement {
 	funcName := schema.TLName{Namespace: namespace, Key: obj.Name.Key}
 	obj.Name = schema.TLName{Namespace: namespace, Key: obj.Name.Key + "Request"}
 

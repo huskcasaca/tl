@@ -8,56 +8,56 @@ import (
 )
 
 type TLSchema struct {
-	ObjSeq     []TLName
-	TypeObjMap map[TLName]TypeTLObjects // key is type name
-	EnumObjMap map[TLName]EnumTLObjects // key is enum name
+	TypeSeq     []TLName
+	TypeDeclMap map[TLName]TLTypeDeclaration // key is type name
+	EnumDeclMap map[TLName]TLEnumDeclaration // key is enum name
 
-	FunctionSeq []string
-	FunctionMap map[string][]TLObject // methods must be sorted by name
+	FuncSeq     []string
+	FuncDeclMap map[string][]TLDeclaration // methods must be sorted by name
 }
 
 func (s *TLSchema) String() string {
 	var parts []string
-	for _, typ := range s.ObjSeq {
-		if obj, ok := s.TypeObjMap[typ]; ok {
-			parts = append(parts, obj.String())
-		} else if enum, ok := s.EnumObjMap[typ]; ok {
+	for _, typ := range s.TypeSeq {
+		if decl, ok := s.TypeDeclMap[typ]; ok {
+			parts = append(parts, decl.String())
+		} else if enum, ok := s.EnumDeclMap[typ]; ok {
 			parts = append(parts, enum.String())
 		} else {
 			panic(fmt.Sprintf("missed type %#v", typ))
 		}
 	}
 
-	if len(s.FunctionSeq) == 0 {
+	if len(s.FuncSeq) == 0 {
 		return strings.Join(parts, "\n\n") + "\n"
 	}
 
 	parts = append(parts, "---functions---")
 
-	for _, group := range s.FunctionSeq {
-		obj, ok := s.FunctionMap[group]
+	for _, group := range s.FuncSeq {
+		decl, ok := s.FuncDeclMap[group]
 		if !ok {
 			panic(fmt.Sprintf("missed group %#v", group))
 		}
 
-		parts = append(parts, methodsString(obj, group))
+		parts = append(parts, methodsString(decl, group))
 	}
 
 	return strings.Join(parts, "\n\n") + "\n"
 }
 
 type CRCIndex struct {
-	Type        TLName
-	ObjectIndex int
+	Type  TLName
+	Index int
 }
 
 func (s *TLSchema) MakeCRCIndex() map[uint32]CRCIndex {
-	res := make(map[uint32]CRCIndex, len(s.TypeObjMap))
-	for typ, obj := range s.TypeObjMap {
-		for i, o := range obj.Objects {
+	res := make(map[uint32]CRCIndex, len(s.TypeDeclMap))
+	for typ, decl := range s.TypeDeclMap {
+		for i, o := range decl.Declarations {
 			res[o.CRC] = CRCIndex{
-				Type:        typ,
-				ObjectIndex: i,
+				Type:  typ,
+				Index: i,
 			}
 		}
 	}
@@ -65,54 +65,54 @@ func (s *TLSchema) MakeCRCIndex() map[uint32]CRCIndex {
 	return res
 }
 
-type TypeTLObjects struct {
-	Comment string
-	Objects []TLObject // must be sorted by name
+type TLTypeDeclaration struct {
+	Comment      string
+	Declarations []TLDeclaration // must be sorted by name
 }
 
-func (s TypeTLObjects) String() string {
+func (s TLTypeDeclaration) String() string {
 	var parts []string
 	if s.Comment != "" {
 		parts = append(parts, "// @type "+s.Comment)
 	}
 
-	for _, obj := range slices.SortFunc(s.Objects, sortObject) {
-		parts = append(parts, obj.Comments(TLObjectTypeConstructor)...)
-		parts = append(parts, obj.String())
+	for _, decl := range slices.SortFunc(s.Declarations, sortDeclarations) {
+		parts = append(parts, decl.Comments(TLDeclarationTypeConstructor)...)
+		parts = append(parts, decl.String())
 	}
 
 	return strings.Join(parts, "\n")
 }
 
-type EnumTLObjects struct {
-	Comment string
-	Objects []TLObject // must be sorted by name
+type TLEnumDeclaration struct {
+	Comment      string
+	Declarations []TLDeclaration // must be sorted by name
 }
 
-func (s EnumTLObjects) String() (res string) {
+func (s TLEnumDeclaration) String() (res string) {
 	var parts []string
 	if s.Comment != "" {
 		parts = append(parts, "// @type "+s.Comment)
 	}
 
-	for _, obj := range slices.SortFunc(s.Objects, sortObject) {
-		parts = append(parts, obj.Comments(TLObjectTypeEnum)...)
-		parts = append(parts, obj.String())
+	for _, decl := range slices.SortFunc(s.Declarations, sortDeclarations) {
+		parts = append(parts, decl.Comments(TLDeclarationTypeEnum)...)
+		parts = append(parts, decl.String())
 	}
 
 	return strings.Join(parts, "\n")
 }
 
-func methodsString(methods []TLObject, group string) (res string) {
+func methodsString(methods []TLDeclaration, group string) (res string) {
 	var parts []string
 
 	if group != "" {
 		group += "."
 	}
 
-	for _, obj := range slices.SortFunc(methods, sortObject) {
-		parts = append(parts, obj.Comments(TLObjectTypeMethod)...)
-		parts = append(parts, obj.String())
+	for _, decl := range slices.SortFunc(methods, sortDeclarations) {
+		parts = append(parts, decl.Comments(TLDeclarationTypeMethod)...)
+		parts = append(parts, decl.String())
 	}
 
 	return strings.Join(parts, "\n")

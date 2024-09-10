@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type TLObject struct {
+type TLDeclaration struct {
 	Comment    string
 	Name       TLName
 	CRC        uint32
@@ -43,9 +43,9 @@ func (o TLName) String() string {
 
 func (o TLName) IsInterface() bool { return isFirstRuneUpper(o.Key) }
 
-func (o TLName) Cmp(b TLName) int { return cmpObjName(o, b) }
+func (o TLName) Cmp(b TLName) int { return cmpDeclName(o, b) }
 
-func cmpObjName(a, b TLName) int {
+func cmpDeclName(a, b TLName) int {
 	if c := cmp.Compare(a.Namespace, b.Namespace); c != 0 {
 		return c
 	} else if c := cmp.Compare(a.Key, b.Key); c != 0 {
@@ -55,24 +55,24 @@ func cmpObjName(a, b TLName) int {
 	}
 }
 
-func sortObject(a, b TLObject) int { return cmpObjName(a.Name, b.Name) }
+func sortDeclarations(a, b TLDeclaration) int { return cmpDeclName(a.Name, b.Name) }
 
-type TLObjectType uint8
+type TLDeclarationType uint8
 
 const (
-	TLObjectTypeUnknown TLObjectType = iota
-	TLObjectTypeConstructor
-	TLObjectTypeEnum
-	TLObjectTypeMethod
+	TLDeclarationTypeUnknown TLDeclarationType = iota
+	TLDeclarationTypeConstructor
+	TLDeclarationTypeEnum
+	TLDeclarationTypeMethod
 )
 
-func (o TLObjectType) String() string {
+func (o TLDeclarationType) String() string {
 	switch o {
-	case TLObjectTypeConstructor:
+	case TLDeclarationTypeConstructor:
 		return "constructor"
-	case TLObjectTypeEnum:
+	case TLDeclarationTypeEnum:
 		return "enum"
-	case TLObjectTypeMethod:
+	case TLDeclarationTypeMethod:
 		return "method"
 	default:
 		return "<UNKNOWN>"
@@ -92,7 +92,7 @@ func (o TLObjectType) String() string {
 //
 // For vectors like `getSmthn items:Vector<int> = Bool` i still don't understand
 // how to generate, cause it fails in real mtproto schema.
-func (o *TLObject) getCRC() uint32 {
+func (o *TLDeclaration) getCRC() uint32 {
 	if o.CRC != 0 {
 		return o.CRC
 	}
@@ -112,7 +112,7 @@ func (o *TLObject) getCRC() uint32 {
 	return crc32.ChecksumIEEE([]byte(fmt.Sprintf("%v%v = %v;", o.Name.String(), fieldsStr, o.Type)))
 }
 
-func (o *TLObject) String() string {
+func (o *TLDeclaration) String() string {
 	fields := ""
 	if len(o.Params) > 0 {
 		fields = " " + o.Params.String()
@@ -121,7 +121,7 @@ func (o *TLObject) String() string {
 	return fmt.Sprintf("%v#%08x%v = %v;", o.Name.String(), o.getCRC(), fields, o.Type)
 }
 
-func (o *TLObject) Comments(typ TLObjectType) []string {
+func (o *TLDeclaration) Comments(typ TLDeclarationType) []string {
 	var res []string
 	if o.Comment != "" {
 		res = append(res, "// @"+typ.String()+" "+o.Comment)

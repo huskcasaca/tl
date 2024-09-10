@@ -13,12 +13,12 @@ import (
 func Generate(s *schema.TLSchema) (string, error) {
 	f := jen.NewFile("main")
 
-	for _, name := range slices.SortFunc(maps.Keys(s.TypeObjMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
-		f.Add(generateObjects(name, s.TypeObjMap[name]))
+	for _, name := range slices.SortFunc(maps.Keys(s.TypeDeclMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
+		f.Add(generateObjects(name, s.TypeDeclMap[name]))
 	}
 
-	for _, name := range slices.SortFunc(maps.Keys(s.EnumObjMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
-		f.Add(generateEnums(name, s.EnumObjMap[name]))
+	for _, name := range slices.SortFunc(maps.Keys(s.EnumDeclMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
+		f.Add(generateEnums(name, s.EnumDeclMap[name]))
 	}
 
 	f.Add(generateRequestFunc())

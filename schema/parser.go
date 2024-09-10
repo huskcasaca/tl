@@ -119,7 +119,7 @@ func normalizeCombinator(
 	constructorComment string,
 	argsComments map[string]string,
 	functionsMode bool,
-) (*TLObject, error) {
+) (*TLDeclaration, error) {
 	parts := strings.Split(decl.Combinator, "#") // guaranteed to split by two parts, lexer handles it
 	name := GetTLNameFromString(parts[0])
 	crcStr := parts[1]
@@ -149,7 +149,7 @@ func normalizeCombinator(
 		}
 	}
 
-	polytypes := make(TLParams, len(decl.OptArgs))
+	polyParams := make(TLParams, len(decl.OptArgs))
 
 	for i, arg := range decl.OptArgs {
 		arg := arg
@@ -162,7 +162,7 @@ func normalizeCombinator(
 		}
 
 		var argErr error
-		polytypes[i], argErr = normalizeArgument(&arg, comment)
+		polyParams[i], argErr = normalizeArgument(&arg, comment)
 		if argErr != nil {
 			return nil, fmt.Errorf("%v: %w", decl.Combinator, argErr)
 		}
@@ -185,12 +185,12 @@ func normalizeCombinator(
 		return nil, fmt.Errorf("%v: unknown params in comment tags: %v", decl.Combinator, keysStr)
 	}
 
-	return &TLObject{
+	return &TLDeclaration{
 		Comment:    constructorComment,
 		Name:       name,
 		CRC:        uint32(crc),
 		Params:     params,
-		PolyParams: polytypes,
+		PolyParams: polyParams,
 		Type:       typ,
 	}, nil
 }
@@ -203,9 +203,9 @@ const (
 	tagParam       = "param"
 )
 
-func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*TLObject, map[TLName]string, error) {
+func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*TLDeclaration, map[TLName]string, error) {
 	var (
-		objects      = []*TLObject{}
+		decls        = []*TLDeclaration{}
 		typeComments = map[TLName]string{}
 
 		currentTypeComment     string
@@ -292,16 +292,16 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 			}
 
 		case item.Declaration != nil:
-			obj, err := normalizeCombinator(item.Declaration, constructorComment, argumentComments, functionsMode)
+			decl, err := normalizeCombinator(item.Declaration, constructorComment, argumentComments, functionsMode)
 			if err != nil {
 				return nil, nil, err
 			}
-			objects = append(objects, obj)
+			decls = append(decls, decl)
 
 			if currentTypeComment != "" {
-				v, ok := obj.Type.(TLTypeCommon)
+				v, ok := decl.Type.(TLTypeCommon)
 				if !ok {
-					typStr := obj.Type.String()
+					typStr := decl.Type.String()
 					err := errors.New("@type: comment set to " + typStr + ", which is impossible")
 					return nil, nil, err
 				}
@@ -321,76 +321,76 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 		}
 	}
 
-	return objects, typeComments, nil
+	return decls, typeComments, nil
 }
 
 func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
-	typesRaw, comments, err := normalizeEntries(program.Constraints, false)
+	typeDeclsRaw, comments, err := normalizeEntries(program.Constraints, false)
 	if err != nil {
 		return nil, err
 	}
 
-	typeOrder := []TLName{}
-	typeSortedOjbects := map[TLName][]TLObject{}
+	typeSeq := []TLName{}
+	sortedTypeDecls := map[TLName][]TLDeclaration{}
 	anyTypeHasField := set.New[TLName]()
-	for _, obj := range typesRaw {
-		objTypeRaw, ok := obj.Type.(TLTypeCommon)
+	for _, decl := range typeDeclsRaw {
+		typeDeclRaw, ok := decl.Type.(TLTypeCommon)
 		if !ok {
-			return nil, fmt.Errorf("object %#v: type is not interface", obj.Name)
+			return nil, fmt.Errorf("object %#v: type is not interface", decl.Name)
 		}
-		objType := TLName(objTypeRaw.TLName)
+		declType := TLName(typeDeclRaw.TLName)
 
-		if !slices.Contains(typeOrder, objType) {
-			typeOrder = append(typeOrder, objType)
+		if !slices.Contains(typeSeq, declType) {
+			typeSeq = append(typeSeq, declType)
 		}
 
-		typeSortedOjbects[objType] = append(typeSortedOjbects[objType], *obj)
-		if len(obj.Params) > 0 {
-			anyTypeHasField = anyTypeHasField.Add(objType)
+		sortedTypeDecls[declType] = append(sortedTypeDecls[declType], *decl)
+		if len(decl.Params) > 0 {
+			anyTypeHasField = anyTypeHasField.Add(declType)
 		}
 	}
 
-	types := map[TLName]TypeTLObjects{}
-	enums := map[TLName]EnumTLObjects{}
-	for typ, objs := range typeSortedOjbects {
+	typeDeclMap := map[TLName]TLTypeDeclaration{}
+	enumDeclMap := map[TLName]TLEnumDeclaration{}
+	for typ, decl := range sortedTypeDecls {
 		var comment string
 		if v, ok := comments[typ]; ok {
 			comment = v
 		}
 
 		if anyTypeHasField.Has(typ) {
-			types[typ] = TypeTLObjects{
-				Comment: comment,
-				Objects: objs,
+			typeDeclMap[typ] = TLTypeDeclaration{
+				Comment:      comment,
+				Declarations: decl,
 			}
 		} else {
-			enums[typ] = EnumTLObjects{
-				Comment: comment,
-				Objects: objs,
+			enumDeclMap[typ] = TLEnumDeclaration{
+				Comment:      comment,
+				Declarations: decl,
 			}
 		}
 	}
 
-	methods, _, err := normalizeEntries(program.Methods, true)
+	functions, _, err := normalizeEntries(program.Methods, true)
 	if err != nil {
 		return nil, err
 	}
 
-	methodGroupOrder := []string{}
-	methodGroupSortedOjbects := map[string][]TLObject{}
-	for _, obj := range methods {
-		if !slices.Contains(methodGroupOrder, obj.Name.Namespace) {
-			methodGroupOrder = append(methodGroupOrder, obj.Name.Namespace)
+	funcSeq := []string{}
+	funcDeclMap := map[string][]TLDeclaration{}
+	for _, decl := range functions {
+		if !slices.Contains(funcSeq, decl.Name.Namespace) {
+			funcSeq = append(funcSeq, decl.Name.Namespace)
 		}
 
-		methodGroupSortedOjbects[obj.Name.Namespace] = append(methodGroupSortedOjbects[obj.Name.Namespace], *obj)
+		funcDeclMap[decl.Name.Namespace] = append(funcDeclMap[decl.Name.Namespace], *decl)
 	}
 
 	return &TLSchema{
-		ObjSeq:      typeOrder,
-		TypeObjMap:  types,
-		EnumObjMap:  enums,
-		FunctionSeq: methodGroupOrder,
-		FunctionMap: methodGroupSortedOjbects,
+		TypeSeq:     typeSeq,
+		TypeDeclMap: typeDeclMap,
+		EnumDeclMap: enumDeclMap,
+		FuncSeq:     funcSeq,
+		FuncDeclMap: funcDeclMap,
 	}, nil
 }

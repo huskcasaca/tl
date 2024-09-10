@@ -22,11 +22,11 @@ func TestParseFile(t *testing.T) {
 	}{{
 		file: "internal/testdata/simplest.tl",
 		expected: &TLSchema{
-			ObjSeq:     []TLName{{Key: "CoolEnumerate"}},
-			TypeObjMap: map[TLName]TypeTLObjects{},
-			EnumObjMap: map[TLName]EnumTLObjects{
+			TypeSeq:     []TLName{{Key: "CoolEnumerate"}},
+			TypeDeclMap: map[TLName]TLTypeDeclaration{},
+			EnumDeclMap: map[TLName]TLEnumDeclaration{
 				{Key: "CoolEnumerate"}: {
-					Objects: []TLObject{{
+					Declarations: []TLDeclaration{{
 						Name:       TLName{Key: "someEnum"},
 						CRC:        0x5508ec75,
 						Params:     []TLParam{},
@@ -35,8 +35,8 @@ func TestParseFile(t *testing.T) {
 					}},
 				},
 			},
-			FunctionSeq: []string{"", "auth"},
-			FunctionMap: map[string][]TLObject{
+			FuncSeq: []string{"", "auth"},
+			FuncDeclMap: map[string][]TLDeclaration{
 				"": {{
 					Name:       TLName{Key: "someFunc"},
 					CRC:        0x7da07ec9,
@@ -56,10 +56,10 @@ func TestParseFile(t *testing.T) {
 	}, {
 		file: "internal/testdata/many_flags.tl",
 		expected: &TLSchema{
-			ObjSeq: []TLName{{Key: "ChatFull"}},
-			TypeObjMap: map[TLName]TypeTLObjects{
+			TypeSeq: []TLName{{Key: "ChatFull"}},
+			TypeDeclMap: map[TLName]TLTypeDeclaration{
 				{Key: "ChatFull"}: {
-					Objects: []TLObject{{
+					Declarations: []TLDeclaration{{
 						Name: TLName{Key: "a"},
 						CRC:  0xf2355507,
 						Params: []TLParam{TLBitflagParam{
@@ -84,9 +84,9 @@ func TestParseFile(t *testing.T) {
 					}},
 				},
 			},
-			EnumObjMap:  map[TLName]EnumTLObjects{},
-			FunctionSeq: []string{},
-			FunctionMap: map[string][]TLObject{},
+			EnumDeclMap: map[TLName]TLEnumDeclaration{},
+			FuncSeq:     []string{},
+			FuncDeclMap: map[string][]TLDeclaration{},
 		},
 	}} {
 		tt := tt // for parallel tests

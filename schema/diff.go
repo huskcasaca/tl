@@ -3,25 +3,25 @@ package schema
 import "github.com/quenbyako/ext/slices"
 
 type TLObjectsDiff struct {
-	Added   []TLObject
+	Added   []TLDeclaration
 	Removed []TLName
 }
 
-func (d TLObjectsDiff) Patch(a []TLObject) []TLObject {
+func (d TLObjectsDiff) Patch(a []TLDeclaration) []TLDeclaration {
 	for _, add := range d.Added {
 		a = append(a, add)
 	}
 
 	for _, rem := range d.Removed {
 		for i, obj := range a {
-			if cmpObjName(obj.Name, rem) == 0 {
+			if cmpDeclName(obj.Name, rem) == 0 {
 				a = append(a[:i], a[i+1:]...)
 				break
 			}
 		}
 	}
 
-	return slices.SortFunc(a, sortObject)
+	return slices.SortFunc(a, sortDeclarations)
 }
 
 type DiffEnum struct {
@@ -29,7 +29,7 @@ type DiffEnum struct {
 	Changes TLObjectsDiff
 }
 
-func (a EnumTLObjects) Diff(b EnumTLObjects) (res DiffEnum) {
+func (a TLEnumDeclaration) Diff(b TLEnumDeclaration) (res DiffEnum) {
 	if a.Comment != b.Comment {
 		res.Comment = b.Comment
 	}
@@ -37,12 +37,12 @@ func (a EnumTLObjects) Diff(b EnumTLObjects) (res DiffEnum) {
 	panic("unimplemented")
 }
 
-func (d DiffEnum) Patch(a EnumTLObjects) EnumTLObjects {
+func (d DiffEnum) Patch(a TLEnumDeclaration) TLEnumDeclaration {
 	if d.Comment != "" {
 		a.Comment = d.Comment
 	}
 
-	a.Objects = d.Changes.Patch(a.Objects)
+	a.Declarations = d.Changes.Patch(a.Declarations)
 
 	return a
 }

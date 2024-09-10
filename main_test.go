@@ -1,8 +1,3 @@
-// Copyright (c) 2022-2024 Xelaj Software
-//
-// This file is a part of tl package.
-// See https://github.com/xelaj/tl/blob/master/LICENSE_README.md for details.
-
 //revive:disable:function-length // who cares for test files
 
 package tl_test

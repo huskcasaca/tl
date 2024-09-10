@@ -1,8 +1,3 @@
-// Copyright (c) 2022-2024 Xelaj Software
-//
-// This file is a part of tl package.
-// See https://github.com/xelaj/tl/blob/master/LICENSE_README.md for details.
-
 //revive:disable:add-constant    // It's a test file, we can't avoid magic constants
 //revive:disable:function-length // who cares for test files
 

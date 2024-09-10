@@ -101,7 +101,7 @@ func createIfaceFunc(typ string, ifaceMethod string) *jen.Statement {
 		Block()
 }
 
-func generateObject(ifaceMethod string, m schema.TLObject, isParamIface func(schema.TLName) bool) (stmt *jen.Statement, objName string) {
+func generateObject(ifaceMethod string, m schema.TLObject) (stmt *jen.Statement, objName string) {
 	stmt = &jen.Statement{}
 	if m.Comment != "" {
 		stmt = stmt.Comment(m.Comment).Line()
@@ -113,7 +113,7 @@ func generateObject(ifaceMethod string, m schema.TLObject, isParamIface func(sch
 		Id(typName).
 		Struct(
 			slices.Remap(m.Params, func(p schema.TLParam) jen.Code {
-				return generateField(p, isParamIface)
+				return generateField(p)
 			})...,
 		)
 
@@ -126,7 +126,7 @@ func generateObject(ifaceMethod string, m schema.TLObject, isParamIface func(sch
 	return res, typName
 }
 
-func generateField(p schema.TLParam, isParamIface func(schema.TLName) bool) *jen.Statement {
+func generateField(p schema.TLParam) *jen.Statement {
 	var stmt *jen.Statement
 	switch p := p.(type) {
 	case schema.TLBitflagParam:
@@ -134,11 +134,11 @@ func generateField(p schema.TLParam, isParamIface func(schema.TLName) bool) *jen
 		stmt = jen.Id("_").Struct().Tag(map[string]string{"tl": tag})
 
 	case schema.TLRequiredParam:
-		stmt = jen.Id(GetFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false, isParamIface))
+		stmt = jen.Id(GetFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false))
 
 	case schema.TLOptionalParam:
 		tag := fmt.Sprintf(",omitempty:%v:%v", p.FlagTrigger, p.BitTrigger)
-		stmt = jen.Id(GetFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true, isParamIface)).Tag(map[string]string{"tl": tag})
+		stmt = jen.Id(GetFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{"tl": tag})
 
 	case schema.TLTriggerParam:
 		tag := fmt.Sprintf(",omitempty:%v:%v,implicit", p.FlagTrigger, p.BitTrigger)
@@ -155,21 +155,21 @@ func generateField(p schema.TLParam, isParamIface func(schema.TLName) bool) *jen
 	return stmt
 }
 
-func generateFieldType(t schema.TLType, isOptional bool, isParamIface func(schema.TLName) bool) *jen.Statement {
+func generateFieldType(t schema.TLType, isOptional bool) *jen.Statement {
 	switch t := t.(type) {
 	case schema.TLTypeCommon:
 		if isDefaultType(schema.TLName(t.TLName)) && isOptional {
-			return jen.Op("*").Add(generateFieldTypeCommon(t, isParamIface))
+			return jen.Op("*").Add(generateFieldTypeCommon(t))
 		}
-		return generateFieldTypeCommon(t, isParamIface)
+		return generateFieldTypeCommon(t)
 	case schema.TLTypeVector:
-		return jen.Index().Add(generateFieldTypeCommon(t, isParamIface))
+		return jen.Index().Add(generateFieldTypeCommon(t))
 	default:
 		panic("unknown type")
 	}
 }
 
-func generateFieldTypeCommon(typ schema.TLType, isParamIface func(schema.TLName) bool) *jen.Statement {
+func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 	switch typ.Name() {
 	case typeBytes:
 		return jen.Index().Byte()
@@ -209,7 +209,7 @@ func isDefaultType(typeName schema.TLName) bool {
 	}
 }
 
-func generateObjects(name schema.TLName, objects schema.TypeTLObjects, isParamIface func(schema.TLName) bool) *jen.Statement {
+func generateObjects(name schema.TLName, objects schema.TypeTLObjects) *jen.Statement {
 	ifaceName := GetTypeName(name)
 	ifaceMethod := "_" + ifaceName
 
@@ -226,7 +226,7 @@ func generateObjects(name schema.TLName, objects schema.TypeTLObjects, isParamIf
 	implementations := []*jen.Statement{}
 
 	for _, v := range objects.Objects {
-		impl, typeName := generateObject(ifaceMethod, v, isParamIface)
+		impl, typeName := generateObject(ifaceMethod, v)
 		implementations = append(implementations, impl)
 		checks = append(checks, jen.Id("_").Id(ifaceName).Op("=").Call(jen.Op("*").Id(typeName)).Call(jen.Nil()))
 	}
@@ -262,12 +262,12 @@ func generateEnum(name schema.TLName, objects schema.EnumTLObjects) *jen.Stateme
 	return jen.Add(def, jen.Line(), jen.Const().Defs(constants...).Line(), jen.Line())
 }
 
-func generateRequestType(group string, obj schema.TLObject, isParamIface func(schema.TLName) bool) *jen.Statement {
+func generateRequestType(group string, obj schema.TLObject) *jen.Statement {
 	funcName := schema.TLName{Namespace: group, Key: obj.Name.Key}
 	obj.Name = schema.TLName{Namespace: group, Key: obj.Name.Key + "Request"}
 
-	reqObj, reqName := generateObject("", obj, isParamIface)
-	methodFunc := genFunction(funcName, reqName, obj.PolyParams, obj.Type, isParamIface)
+	reqObj, reqName := generateObject("", obj)
+	methodFunc := genFunction(funcName, reqName, obj.PolyParams, obj.Type)
 
 	return jen.Add(reqObj, jen.Line(), jen.Line(), methodFunc, jen.Line())
 }
@@ -311,8 +311,8 @@ func generateRequestBareFunction() *jen.Statement {
 //		var res Response
 //		return res, request(ctx, m, &i, &res)
 //	}
-func genFunction(funcName schema.TLName, requestType string, polyTypes schema.TLParams, returns schema.TLType, isParamIface func(schema.TLName) bool) *jen.Statement {
-	returnType := generateFieldType(returns, false, isParamIface)
+func genFunction(funcName schema.TLName, requestType string, polyTypes schema.TLParams, returns schema.TLType) *jen.Statement {
+	returnType := generateFieldType(returns, false)
 
 	types := make([]jen.Code, len(polyTypes))
 	for i, t := range polyTypes {

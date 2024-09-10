@@ -18,13 +18,8 @@ import (
 func Generate(s *schema.TLSchema) (string, error) {
 	f := jen.NewFile("main")
 
-	isInterface := func(name schema.TLName) bool {
-		_, ok := s.TypeObjMap[name]
-		return ok
-	}
-
 	for _, name := range slices.SortFunc(maps.Keys(s.TypeObjMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
-		f.Add(generateObjects(name, s.TypeObjMap[name], isInterface))
+		f.Add(generateObjects(name, s.TypeObjMap[name]))
 	}
 
 	for _, name := range slices.SortFunc(maps.Keys(s.EnumObjMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
@@ -36,7 +31,7 @@ func Generate(s *schema.TLSchema) (string, error) {
 	for _, methodGroup := range slices.Sort(maps.Keys(s.FunctionMap)) {
 		methods := s.FunctionMap[methodGroup]
 		for _, method := range methods {
-			obj := generateRequestType(methodGroup, method, isInterface)
+			obj := generateRequestType(methodGroup, method)
 			f.Add(obj, jen.Line())
 		}
 	}

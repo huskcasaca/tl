@@ -23,15 +23,15 @@ func Generate(s *schema.TLSchema) (string, error) {
 	}
 
 	for _, name := range slices.SortFunc(maps.Keys(s.EnumObjMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
-		f.Add(generateEnum(name, s.EnumObjMap[name]))
+		f.Add(generateEnums(name, s.EnumObjMap[name]))
 	}
 
-	f.Add(generateRequestBareFunction())
+	f.Add(generateRequestFunc())
 
-	for _, methodGroup := range slices.Sort(maps.Keys(s.FunctionMap)) {
-		methods := s.FunctionMap[methodGroup]
+	for _, namespace := range slices.Sort(maps.Keys(s.FunctionMap)) {
+		methods := s.FunctionMap[namespace]
 		for _, method := range methods {
-			obj := generateRequestType(methodGroup, method)
+			obj := generateRequestType(namespace, method)
 			f.Add(obj, jen.Line())
 		}
 	}

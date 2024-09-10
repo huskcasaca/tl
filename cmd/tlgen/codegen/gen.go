@@ -7,12 +7,10 @@ package codegen
 
 import (
 	"fmt"
-	"strings"
-	"unicode"
-
 	"github.com/dave/jennifer/jen"
 	"github.com/iancoleman/strcase"
 	"github.com/quenbyako/ext/slices"
+	"strings"
 
 	"github.com/xelaj/tl/schema"
 )
@@ -30,61 +28,54 @@ var capitalizePatterns = []string{
 	"url",
 }
 
-func goify(name string, public bool) (res string) {
-	delim := strcase.ToDelimited(name, '|')
-	for i, item := range strings.Split(delim, "|") {
-		item = strings.ToLower(item)
-		if slices.Contains(capitalizePatterns, item) {
-			item = strings.ToUpper(item)
-		}
-
-		itemRunes := []rune(item)
-
-		if i == 0 && !public {
-			// cause `aPI`, `uRL`, etc looks shitty ¯\_(ツ)_/¯
-			itemRunes = []rune(strings.ToLower(item))
+func getGoName(name string, public bool) string {
+	parts := strings.Split(strcase.ToDelimited(name, '|'), "|")
+	for i, part := range parts {
+		part = strings.ToLower(part)
+		if slices.Contains(capitalizePatterns, part) {
+			part = strings.ToUpper(part)
+		} else if i == 0 && !public {
+			part = strings.ToLower(part)
 		} else {
-			itemRunes[0] = unicode.ToUpper(itemRunes[0])
+			part = strings.Title(part)
 		}
-
-		res += string(itemRunes)
+		parts[i] = part
 	}
-
-	return res
+	return strings.Join(parts, "")
 }
 
-func GetFieldName(name schema.TLName) (res string) {
+func getFieldName(name schema.TLName) (res string) {
 	if name.Namespace != "" {
-		res += goify(name.Namespace, true)
+		res += getGoName(name.Namespace, true)
 	}
-	return res + goify(name.Key, true)
+	return res + getGoName(name.Key, true)
 }
 
-func GetPredictName(name schema.TLName) (res string) {
+func getPredictName(name schema.TLName) (res string) {
 	if name.Namespace != "" {
-		res += goify(name.Namespace, true)
+		res += getGoName(name.Namespace, true)
 	}
-	return /*"TL" + */ res + goify(name.Key, true) + "Predict"
+	return /*"TL" + */ res + getGoName(name.Key, true) + "Predict"
 }
 
-func GetTypeName(name schema.TLName) (res string) {
+func getTypeName(name schema.TLName) (res string) {
 	if name.Namespace != "" {
-		res += goify(name.Namespace, true)
+		res += getGoName(name.Namespace, true)
 	}
-	return /*"TL" + */ res + goify(name.Key, true)
+	return /*"TL" + */ res + getGoName(name.Key, true)
 }
 
-func GetEnumName(name schema.TLName) (res string) {
+func getEnumName(name schema.TLName) (res string) {
 	if name.Namespace != "" {
-		res += goify(name.Namespace, true)
+		res += getGoName(name.Namespace, true)
 	}
-	return /*"TL" + */ res + goify(name.Key, true)
+	return /*"TL" + */ res + getGoName(name.Key, true)
 }
 
-func createTypeCrcFunc(typ string, crc uint32) *jen.Statement {
+func generateTypeCrcFunctions(typ jen.Code, crc uint32) *jen.Statement {
 	hex := fmt.Sprintf("0x%x", crc)
 	return jen.Func().
-		Params(jen.Op("*").Id(typ)).
+		Params(jen.Op("*").Add(typ)).
 		Id("CRC").
 		Params().
 		Uint32().
@@ -93,66 +84,95 @@ func createTypeCrcFunc(typ string, crc uint32) *jen.Statement {
 		)
 }
 
-func createIfaceFunc(typ string, ifaceMethod string) *jen.Statement {
+func generateInterfaceFunctions(typ jen.Code, method string) *jen.Statement {
 	return jen.Func().
-		Params(jen.Op("*").Id(typ)).
-		Id(ifaceMethod).
+		Params(jen.Op("*").Add(typ)).
+		Id(method).
 		Params().
 		Block()
 }
 
-func generateObject(ifaceMethod string, m schema.TLObject) (stmt *jen.Statement, objName string) {
-	stmt = &jen.Statement{}
+func generatePredicts(method string, m schema.TLObject) (ret *jen.Statement, objName string) {
+	ret = &jen.Statement{}
 	if m.Comment != "" {
-		stmt = stmt.Comment(m.Comment).Line()
+		ret = ret.Comment(m.Comment).Line()
 	}
 
-	typName := GetPredictName(m.Name)
+	predictTypeName := getPredictName(m.Name)
 
-	typ := stmt.Type().
-		Id(typName).
+	ret = ret.Type().
+		Add(generateGenericTypes(predictTypeName, m.PolyParams)).
 		Struct(
 			slices.Remap(m.Params, func(p schema.TLParam) jen.Code {
 				return generateField(p)
 			})...,
 		)
 
-	crc := createTypeCrcFunc(typName, m.CRC)
-	res := jen.Add(typ, jen.Line(), crc)
-	if ifaceMethod != "" {
-		res = res.Add(jen.Line(), createIfaceFunc(typName, ifaceMethod))
+	ret = ret.Line()
+	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(predictTypeName, m.PolyParams), m.CRC))
+	if method != "" {
+		ret = ret.Add(jen.Line(), generateInterfaceFunctions(generateGenericNames(predictTypeName, m.PolyParams), method))
 	}
 
-	return res, typName
+	return ret, predictTypeName
+}
+
+func generateGenericTypes(name string, polys schema.TLParams) *jen.Statement {
+	genericsTypes := make([]jen.Code, len(polys))
+	for i, t := range polys {
+		genericsTypes[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()})).Any()
+	}
+	return jen.Id(name).Types(genericsTypes...)
+}
+
+func generateGenericNames(name string, polys schema.TLParams) *jen.Statement {
+	genericsNames := make([]jen.Code, len(polys))
+	for i, t := range polys {
+		genericsNames[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()}))
+	}
+	return jen.Id(name).Types(genericsNames...)
 }
 
 func generateField(p schema.TLParam) *jen.Statement {
-	var stmt *jen.Statement
+	ret := generateFieldBase(p)
+	if comment := p.GetComment(); comment != "" {
+		ret = ret.Comment(comment)
+	}
+	return ret
+}
+
+func generateFieldBase(p schema.TLParam) *jen.Statement {
 	switch p := p.(type) {
 	case schema.TLBitflagParam:
-		tag := fmt.Sprintf("%v,bitflag", p.Name)
-		stmt = jen.Id("_").Struct().Tag(map[string]string{"tl": tag})
-
+		return generateBitflagField(p)
 	case schema.TLRequiredParam:
-		stmt = jen.Id(GetFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false))
-
+		return generateRequiredField(p)
 	case schema.TLOptionalParam:
-		tag := fmt.Sprintf(",omitempty:%v:%v", p.FlagTrigger, p.BitTrigger)
-		stmt = jen.Id(GetFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{"tl": tag})
-
+		return generateOptionalField(p)
 	case schema.TLTriggerParam:
-		tag := fmt.Sprintf(",omitempty:%v:%v,implicit", p.FlagTrigger, p.BitTrigger)
-		stmt = jen.Id(GetFieldName(schema.TLName{Key: p.Name})).Bool().Tag(map[string]string{"tl": tag})
-
+		return generateTriggerField(p)
 	default:
 		panic("unknown parameter type")
 	}
+}
 
-	if comment := p.GetComment(); comment != "" {
-		stmt = stmt.Comment(comment)
-	}
+func generateBitflagField(p schema.TLBitflagParam) *jen.Statement {
+	tag := fmt.Sprintf("%v,bitflag", p.Name)
+	return jen.Id("_").Struct().Tag(map[string]string{"tl": tag})
+}
 
-	return stmt
+func generateRequiredField(p schema.TLRequiredParam) *jen.Statement {
+	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false))
+}
+
+func generateOptionalField(p schema.TLOptionalParam) *jen.Statement {
+	tag := fmt.Sprintf(",omitempty:%v:%v", p.FlagTrigger, p.BitTrigger)
+	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{"tl": tag})
+}
+
+func generateTriggerField(p schema.TLTriggerParam) *jen.Statement {
+	tag := fmt.Sprintf(",omitempty:%v:%v,implicit", p.FlagTrigger, p.BitTrigger)
+	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Bool().Tag(map[string]string{"tl": tag})
 }
 
 func generateFieldType(t schema.TLType, isOptional bool) *jen.Statement {
@@ -187,7 +207,7 @@ func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 		if !typ.Name().IsInterface() {
 			panic(fmt.Sprintf("incorrect type name: %v", typ))
 		}
-		return jen.Id(GetTypeName(typ.Name()))
+		return jen.Id(getTypeName(typ.Name()))
 	}
 }
 
@@ -210,66 +230,66 @@ func isDefaultType(typeName schema.TLName) bool {
 }
 
 func generateObjects(name schema.TLName, objects schema.TypeTLObjects) *jen.Statement {
-	ifaceName := GetTypeName(name)
-	ifaceMethod := "_" + ifaceName
+	typeName := getTypeName(name)
+	typeMethod := "_" + typeName
 
-	iface := &jen.Statement{}
+	ret := &jen.Statement{}
 	if objects.Comment != "" {
-		iface = iface.Comment(objects.Comment).Line()
+		ret = ret.Comment(objects.Comment).Line()
 	}
-	iface = iface.Type().Id(ifaceName).Interface(
+	ret = ret.Type().Id(typeName).Interface(
 		jen.Qual("github.com/xelaj/tl", "Object"),
-		jen.Id(ifaceMethod).Params(),
+		jen.Id(typeMethod).Params(),
 	)
 
-	checks := []jen.Code{}
-	implementations := []*jen.Statement{}
+	checkJens := []jen.Code{}
+	objectJens := []*jen.Statement{}
 
-	for _, v := range objects.Objects {
-		impl, typeName := generateObject(ifaceMethod, v)
-		implementations = append(implementations, impl)
-		checks = append(checks, jen.Id("_").Id(ifaceName).Op("=").Call(jen.Op("*").Id(typeName)).Call(jen.Nil()))
+	for _, obj := range objects.Objects {
+		predictJens, predictTypeName := generatePredicts(typeMethod, obj)
+		objectJens = append(objectJens, predictJens)
+		checkJens = append(checkJens, jen.Id("_").Id(typeName).Op("=").Call(jen.Op("*").Id(predictTypeName)).Call(jen.Nil()))
 	}
 
-	res := jen.Add(iface, jen.Line(), jen.Var().Defs(checks...).Line())
+	ret = ret.Add(jen.Line(), jen.Var().Defs(checkJens...).Line())
 
-	for _, impl := range implementations {
-		res = res.Add(impl, jen.Line())
+	for _, jens := range objectJens {
+		ret = ret.Add(jens, jen.Line())
 	}
 
-	return res.Line()
+	return ret.Line()
 }
 
-func generateEnum(name schema.TLName, objects schema.EnumTLObjects) *jen.Statement {
-	defName := GetEnumName(name)
-	def := &jen.Statement{}
+func generateEnums(name schema.TLName, objects schema.EnumTLObjects) *jen.Statement {
+	enumName := getEnumName(name)
+	ret := &jen.Statement{}
 	if objects.Comment != "" {
-		def = def.Comment(objects.Comment).Line()
+		ret = ret.Comment(objects.Comment).Line()
 	}
-	def = jen.Type().Id(defName).Uint32().Line()
+	ret = jen.Type().Id(enumName).Uint32().Line()
 
-	constants := make([]jen.Code, len(objects.Objects))
+	constantJens := make([]jen.Code, len(objects.Objects))
 	for i, obj := range objects.Objects {
 		hex := fmt.Sprintf("0x%x", obj.CRC)
 
-		c := jen.Id(GetPredictName(obj.Name)).Id(defName).Op("=").Id(hex)
+		c := jen.Id(getPredictName(obj.Name)).Id(enumName).Op("=").Id(hex)
 		if obj.Comment != "" {
 			c = c.Comment(obj.Comment)
 		}
-		constants[i] = c
+		constantJens[i] = c
 	}
 
-	return jen.Add(def, jen.Line(), jen.Const().Defs(constants...).Line(), jen.Line())
+	return jen.Add(ret, jen.Line(), jen.Const().Defs(constantJens...).Line(), jen.Line())
 }
 
-func generateRequestType(group string, obj schema.TLObject) *jen.Statement {
-	funcName := schema.TLName{Namespace: group, Key: obj.Name.Key}
-	obj.Name = schema.TLName{Namespace: group, Key: obj.Name.Key + "Request"}
+func generateRequestType(namespace string, obj schema.TLObject) *jen.Statement {
+	funcName := schema.TLName{Namespace: namespace, Key: obj.Name.Key}
+	obj.Name = schema.TLName{Namespace: namespace, Key: obj.Name.Key + "Request"}
 
-	reqObj, reqName := generateObject("", obj)
-	methodFunc := genFunction(funcName, reqName, obj.PolyParams, obj.Type)
+	predictObjJens, predictTypeName := generatePredicts("", obj)
+	predictFuncJens := generateFunction(funcName, predictTypeName, obj.PolyParams, obj.Type)
 
-	return jen.Add(reqObj, jen.Line(), jen.Line(), methodFunc, jen.Line())
+	return jen.Add(predictObjJens, jen.Line(), jen.Line(), predictFuncJens, jen.Line())
 }
 
 // output:
@@ -285,24 +305,48 @@ func generateRequestType(group string, obj schema.TLObject) *jen.Statement {
 //
 //		return nil
 //	}
-func generateRequestBareFunction() *jen.Statement {
-	requester := jen.Type().Id("Requester").Interface(
-		jen.Id("MakeRequest").Params(jen.Id("ctx").Qual("context", "Context"), jen.Id("msg").Index().Byte()).Params(jen.Index().Byte(), jen.Error()),
-	)
-
-	request := jen.Id(`func request[IN, OUT any](ctx context.Context, m Requester, in *IN, out *OUT) error {
-	if msg, err := tl.Marshal(in); err != nil {
-		return fmt.Errorf("marshaling: %w", err)
-	} else if respRaw, err := m.MakeRequest(ctx, msg); err != nil {
-		return fmt.Errorf("sending: %w", err)
-	} else if err := Unmarshal(respRaw, out); err != nil {
-		return fmt.Errorf("got invalid response type: %w", err)
-	}
-
-	return nil
-}`)
-
-	return requester.Line().Add(request).Line()
+func generateRequestFunc() *jen.Statement {
+	return jen.
+		Type().
+		Id("Requester").
+		Interface(
+			jen.Id("MakeRequest").Params(jen.Id("ctx").Qual("context", "Context"), jen.Id("msg").Index().Byte()).Params(jen.Index().Byte(), jen.Error()),
+		).
+		Line().
+		Func().
+		Id("request").
+		Types(
+			jen.Id("IN").Any(),
+			jen.Id("OUT").Any(),
+		).
+		Params(
+			jen.Id("ctx").Qual("context", "Context"),
+			jen.Id("m").Id("Requester"),
+			jen.Id("in").Op("*").Id("IN"),
+			jen.Id("out").Op("*").Id("OUT"),
+		).
+		Params(
+			jen.Error(),
+		).
+		Block(
+			jen.If(
+				jen.List(jen.Id("msg"), jen.Err()).Op(":=").Qual("github.com/xelaj/tl", "Marshal").Call(jen.Id("in")),
+				jen.Err().Op("!=").Nil(),
+			).Block(
+				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("marshaling: %w"), jen.Err())),
+			).Else().If(
+				jen.List(jen.Id("respRaw"), jen.Err()).Op(":=").Id("m").Dot("MakeRequest").Call(jen.Id("ctx"), jen.Id("msg")),
+				jen.Err().Op("!=").Nil(),
+			).Block(
+				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("sending: %w"), jen.Err())),
+			).Else().If(
+				jen.Err().Op(":=").Qual("github.com/xelaj/tl", "Unmarshal").Call(jen.Id("respRaw"), jen.Id("out")),
+				jen.Err().Op("!=").Nil(),
+			).Block(
+				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("got invalid response type: %w"), jen.Err())),
+			),
+			jen.Return(jen.Nil()),
+		).Line()
 }
 
 // output:
@@ -311,21 +355,15 @@ func generateRequestBareFunction() *jen.Statement {
 //		var res Response
 //		return res, request(ctx, m, &i, &res)
 //	}
-func genFunction(funcName schema.TLName, requestType string, polyTypes schema.TLParams, returns schema.TLType) *jen.Statement {
+func generateFunction(funcName schema.TLName, requestType string, polyParams schema.TLParams, returns schema.TLType) *jen.Statement {
 	returnType := generateFieldType(returns, false)
 
-	types := make([]jen.Code, len(polyTypes))
-	for i, t := range polyTypes {
-		types[i] = jen.Id(GetTypeName(schema.TLName{Key: t.GetName()})).Any()
-	}
-
 	return jen.Func().
-		Id(GetFieldName(funcName)).
-		Types(types...).
+		Add(generateGenericTypes(getFieldName(funcName), polyParams)).
 		Params(
 			jen.Id("ctx").Qual("context", "Context"),
 			jen.Id("m").Id("Requester"),
-			jen.Id("i").Id(requestType),
+			jen.Id("i").Add(generateGenericNames(requestType, polyParams)),
 		).
 		Params(
 			returnType,

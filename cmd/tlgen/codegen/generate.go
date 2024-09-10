@@ -23,8 +23,8 @@ func Generate(s *schema.TLSchema) (string, error) {
 
 	f.Add(generateRequestFunc())
 
-	for _, namespace := range slices.Sort(maps.Keys(s.FunctionMap)) {
-		methods := s.FunctionMap[namespace]
+	for _, namespace := range slices.Sort(maps.Keys(s.FuncDeclMap)) {
+		methods := s.FuncDeclMap[namespace]
 		for _, method := range methods {
 			obj := generateRequestType(namespace, method)
 			f.Add(obj, jen.Line())

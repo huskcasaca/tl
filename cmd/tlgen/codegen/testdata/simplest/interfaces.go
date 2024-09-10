@@ -6,7 +6,7 @@ import (
 )
 
 type IAccountDaysTTL interface {
-	tl.Object
+	tl.TLObject
 	_IAccountDaysTTL()
 }
 
@@ -24,7 +24,7 @@ func (*AccountDaysTTL) CRC() uint32 {
 func (*AccountDaysTTL) _IAccountDaysTTL() {}
 
 type IAppWebViewResult interface {
-	tl.Object
+	tl.TLObject
 	_IAppWebViewResult()
 }
 
@@ -42,7 +42,7 @@ func (*AppWebViewResultURL) CRC() uint32 {
 func (*AppWebViewResultURL) _IAppWebViewResult() {}
 
 type IAttachMenuBot interface {
-	tl.Object
+	tl.TLObject
 	_IAttachMenuBot()
 }
 
@@ -70,7 +70,7 @@ func (*AttachMenuBot) CRC() uint32 {
 func (*AttachMenuBot) _IAttachMenuBot() {}
 
 type IAttachMenuBotIcon interface {
-	tl.Object
+	tl.TLObject
 	_IAttachMenuBotIcon()
 }
 
@@ -91,7 +91,7 @@ func (*AttachMenuBotIcon) CRC() uint32 {
 func (*AttachMenuBotIcon) _IAttachMenuBotIcon() {}
 
 type IAttachMenuBotIconColor interface {
-	tl.Object
+	tl.TLObject
 	_IAttachMenuBotIconColor()
 }
 
@@ -110,7 +110,7 @@ func (*AttachMenuBotIconColor) CRC() uint32 {
 func (*AttachMenuBotIconColor) _IAttachMenuBotIconColor() {}
 
 type IAttachMenuBots interface {
-	tl.Object
+	tl.TLObject
 	_IAttachMenuBots()
 }
 
@@ -138,7 +138,7 @@ func (*AttachMenuBots) CRC() uint32 {
 func (*AttachMenuBots) _IAttachMenuBots() {}
 
 type IAttachMenuBotsBot interface {
-	tl.Object
+	tl.TLObject
 	_IAttachMenuBotsBot()
 }
 
@@ -157,7 +157,7 @@ func (*AttachMenuBotsBot) CRC() uint32 {
 func (*AttachMenuBotsBot) _IAttachMenuBotsBot() {}
 
 type IAuthorization interface {
-	tl.Object
+	tl.TLObject
 	_IAuthorization()
 }
 
@@ -193,7 +193,7 @@ func (*Authorization) CRC() uint32 {
 func (*Authorization) _IAuthorization() {}
 
 type IAutoDownloadSettings interface {
-	tl.Object
+	tl.TLObject
 	_IAutoDownloadSettings()
 }
 
@@ -222,7 +222,7 @@ func (*AutoDownloadSettings) CRC() uint32 {
 func (*AutoDownloadSettings) _IAutoDownloadSettings() {}
 
 type IAutoSaveException interface {
-	tl.Object
+	tl.TLObject
 	_IAutoSaveException()
 }
 
@@ -241,7 +241,7 @@ func (*AutoSaveException) CRC() uint32 {
 func (*AutoSaveException) _IAutoSaveException() {}
 
 type IAutoSaveSettings interface {
-	tl.Object
+	tl.TLObject
 	_IAutoSaveSettings()
 }
 
@@ -262,7 +262,7 @@ func (*AutoSaveSettings) CRC() uint32 {
 func (*AutoSaveSettings) _IAutoSaveSettings() {}
 
 type IAvailableReaction interface {
-	tl.Object
+	tl.TLObject
 	_IAvailableReaction()
 }
 
@@ -291,7 +291,7 @@ func (*AvailableReaction) CRC() uint32 {
 func (*AvailableReaction) _IAvailableReaction() {}
 
 type IBankCardOpenURL interface {
-	tl.Object
+	tl.TLObject
 	_IBankCardOpenURL()
 }
 
@@ -310,7 +310,7 @@ func (*BankCardOpenURL) CRC() uint32 {
 func (*BankCardOpenURL) _IBankCardOpenURL() {}
 
 type IBoost interface {
-	tl.Object
+	tl.TLObject
 	_IBoost()
 }
 
@@ -338,7 +338,7 @@ func (*Boost) CRC() uint32 {
 func (*Boost) _IBoost() {}
 
 type IBotApp interface {
-	tl.Object
+	tl.TLObject
 	_IBotApp()
 }
 
@@ -372,7 +372,7 @@ func (*BotApp) CRC() uint32 {
 func (*BotApp) _IBotApp() {}
 
 type IBotCommand interface {
-	tl.Object
+	tl.TLObject
 	_IBotCommand()
 }
 
@@ -391,7 +391,7 @@ func (*BotCommand) CRC() uint32 {
 func (*BotCommand) _IBotCommand() {}
 
 type IBotCommandScope interface {
-	tl.Object
+	tl.TLObject
 	_IBotCommandScope()
 }
 
@@ -462,7 +462,7 @@ func (*BotCommandScopePeerUser) CRC() uint32 {
 func (*BotCommandScopePeerUser) _IBotCommandScope() {}
 
 type IBotInfo interface {
-	tl.Object
+	tl.TLObject
 	_IBotInfo()
 }
 
@@ -486,7 +486,7 @@ func (*BotInfo) CRC() uint32 {
 func (*BotInfo) _IBotInfo() {}
 
 type IBotInlineMessage interface {
-	tl.Object
+	tl.TLObject
 	_IBotInlineMessage()
 }
 
@@ -607,7 +607,7 @@ func (*BotInlineMessageMediaWebPage) CRC() uint32 {
 func (*BotInlineMessageMediaWebPage) _IBotInlineMessage() {}
 
 type IBotInlineResult interface {
-	tl.Object
+	tl.TLObject
 	_IBotInlineResult()
 }
 
@@ -650,7 +650,7 @@ func (*BotInlineMediaResult) CRC() uint32 {
 func (*BotInlineMediaResult) _IBotInlineResult() {}
 
 type IBotMenuButton interface {
-	tl.Object
+	tl.TLObject
 	_IBotMenuButton()
 }
 
@@ -685,7 +685,7 @@ func (*BotMenuButton) CRC() uint32 {
 func (*BotMenuButton) _IBotMenuButton() {}
 
 type ICdnConfig interface {
-	tl.Object
+	tl.TLObject
 	_ICdnConfig()
 }
 
@@ -703,7 +703,7 @@ func (*CdnConfig) CRC() uint32 {
 func (*CdnConfig) _ICdnConfig() {}
 
 type ICdnPublicKey interface {
-	tl.Object
+	tl.TLObject
 	_ICdnPublicKey()
 }
 
@@ -722,7 +722,7 @@ func (*CdnPublicKey) CRC() uint32 {
 func (*CdnPublicKey) _ICdnPublicKey() {}
 
 type IChannelAdminLogEvent interface {
-	tl.Object
+	tl.TLObject
 	_IChannelAdminLogEvent()
 }
 
@@ -743,7 +743,7 @@ func (*ChannelAdminLogEvent) CRC() uint32 {
 func (*ChannelAdminLogEvent) _IChannelAdminLogEvent() {}
 
 type IChannelAdminLogEventAction interface {
-	tl.Object
+	tl.TLObject
 	_IChannelAdminLogEventAction()
 }
 
@@ -1243,7 +1243,7 @@ func (*ChannelAdminLogEventActionChangeEmojiStatus) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeEmojiStatus) _IChannelAdminLogEventAction() {}
 
 type IChannelAdminLogEventsFilter interface {
-	tl.Object
+	tl.TLObject
 	_IChannelAdminLogEventsFilter()
 }
 
@@ -1279,7 +1279,7 @@ func (*ChannelAdminLogEventsFilter) CRC() uint32 {
 func (*ChannelAdminLogEventsFilter) _IChannelAdminLogEventsFilter() {}
 
 type IChannelLocation interface {
-	tl.Object
+	tl.TLObject
 	_IChannelLocation()
 }
 
@@ -1306,7 +1306,7 @@ func (*ChannelLocation) CRC() uint32 {
 func (*ChannelLocation) _IChannelLocation() {}
 
 type IChannelMessagesFilter interface {
-	tl.Object
+	tl.TLObject
 	_IChannelMessagesFilter()
 }
 
@@ -1334,7 +1334,7 @@ func (*ChannelMessagesFilter) CRC() uint32 {
 func (*ChannelMessagesFilter) _IChannelMessagesFilter() {}
 
 type IChannelParticipant interface {
-	tl.Object
+	tl.TLObject
 	_IChannelParticipant()
 }
 
@@ -1423,7 +1423,7 @@ func (*ChannelParticipantLeft) CRC() uint32 {
 func (*ChannelParticipantLeft) _IChannelParticipant() {}
 
 type IChannelParticipantsFilter interface {
-	tl.Object
+	tl.TLObject
 	_IChannelParticipantsFilter()
 }
 
@@ -1506,9 +1506,9 @@ func (*ChannelParticipantsMentions) CRC() uint32 {
 }
 func (*ChannelParticipantsMentions) _IChannelParticipantsFilter() {}
 
-// Object defines a group.
+// TLObject defines a group.
 type IChat interface {
-	tl.Object
+	tl.TLObject
 	_IChat()
 }
 
@@ -1633,7 +1633,7 @@ func (*ChannelForbidden) CRC() uint32 {
 func (*ChannelForbidden) _IChat() {}
 
 type IChatAdminRights interface {
-	tl.Object
+	tl.TLObject
 	_IChatAdminRights()
 }
 
@@ -1666,7 +1666,7 @@ func (*ChatAdminRights) CRC() uint32 {
 func (*ChatAdminRights) _IChatAdminRights() {}
 
 type IChatAdminWithInvites interface {
-	tl.Object
+	tl.TLObject
 	_IChatAdminWithInvites()
 }
 
@@ -1686,7 +1686,7 @@ func (*ChatAdminWithInvites) CRC() uint32 {
 func (*ChatAdminWithInvites) _IChatAdminWithInvites() {}
 
 type IChatBannedRights interface {
-	tl.Object
+	tl.TLObject
 	_IChatBannedRights()
 }
 
@@ -1724,9 +1724,9 @@ func (*ChatBannedRights) CRC() uint32 {
 }
 func (*ChatBannedRights) _IChatBannedRights() {}
 
-// Object containing detailed group info
+// TLObject containing detailed group info
 type IChatFull interface {
-	tl.Object
+	tl.TLObject
 	_IChatFull()
 }
 
@@ -1827,7 +1827,7 @@ func (*ChannelFull) CRC() uint32 {
 func (*ChannelFull) _IChatFull() {}
 
 type IChatInvite interface {
-	tl.Object
+	tl.TLObject
 	_IChatInvite()
 }
 
@@ -1880,7 +1880,7 @@ func (*ChatInvitePeek) CRC() uint32 {
 func (*ChatInvitePeek) _IChatInvite() {}
 
 type IChatInviteImporter interface {
-	tl.Object
+	tl.TLObject
 	_IChatInviteImporter()
 }
 
@@ -1904,7 +1904,7 @@ func (*ChatInviteImporter) CRC() uint32 {
 func (*ChatInviteImporter) _IChatInviteImporter() {}
 
 type IChatOnlines interface {
-	tl.Object
+	tl.TLObject
 	_IChatOnlines()
 }
 
@@ -1922,7 +1922,7 @@ func (*ChatOnlines) CRC() uint32 {
 func (*ChatOnlines) _IChatOnlines() {}
 
 type IChatParticipant interface {
-	tl.Object
+	tl.TLObject
 	_IChatParticipant()
 }
 
@@ -1964,7 +1964,7 @@ func (*ChatParticipantAdmin) CRC() uint32 {
 func (*ChatParticipantAdmin) _IChatParticipant() {}
 
 type IChatParticipants interface {
-	tl.Object
+	tl.TLObject
 	_IChatParticipants()
 }
 
@@ -1996,7 +1996,7 @@ func (*ChatParticipants) CRC() uint32 {
 func (*ChatParticipants) _IChatParticipants() {}
 
 type IChatPhoto interface {
-	tl.Object
+	tl.TLObject
 	_IChatPhoto()
 }
 
@@ -2026,7 +2026,7 @@ func (*ChatPhoto) CRC() uint32 {
 func (*ChatPhoto) _IChatPhoto() {}
 
 type IChatReactions interface {
-	tl.Object
+	tl.TLObject
 	_IChatReactions()
 }
 
@@ -2064,7 +2064,7 @@ func (*ChatReactionsSome) _IChatReactions() {}
 
 // Settings for the code type to send
 type ICodeSettings interface {
-	tl.Object
+	tl.TLObject
 	_ICodeSettings()
 }
 
@@ -2090,9 +2090,9 @@ func (*CodeSettings) CRC() uint32 {
 }
 func (*CodeSettings) _ICodeSettings() {}
 
-// Object contains info on API configuring parameters.
+// TLObject contains info on API configuring parameters.
 type IConfig interface {
-	tl.Object
+	tl.TLObject
 	_IConfig()
 }
 
@@ -2158,7 +2158,7 @@ func (*Config) CRC() uint32 {
 func (*Config) _IConfig() {}
 
 type IContact interface {
-	tl.Object
+	tl.TLObject
 	_IContact()
 }
 
@@ -2177,7 +2177,7 @@ func (*Contact) CRC() uint32 {
 func (*Contact) _IContact() {}
 
 type IContactStatus interface {
-	tl.Object
+	tl.TLObject
 	_IContactStatus()
 }
 
@@ -2196,7 +2196,7 @@ func (*ContactStatus) CRC() uint32 {
 func (*ContactStatus) _IContactStatus() {}
 
 type IDataJSON interface {
-	tl.Object
+	tl.TLObject
 	_IDataJSON()
 }
 
@@ -2214,7 +2214,7 @@ func (*DataJSON) CRC() uint32 {
 func (*DataJSON) _IDataJSON() {}
 
 type IDcOption interface {
-	tl.Object
+	tl.TLObject
 	_IDcOption()
 }
 
@@ -2242,7 +2242,7 @@ func (*DcOption) CRC() uint32 {
 func (*DcOption) _IDcOption() {}
 
 type IDefaultHistoryTTL interface {
-	tl.Object
+	tl.TLObject
 	_IDefaultHistoryTTL()
 }
 
@@ -2260,7 +2260,7 @@ func (*DefaultHistoryTTL) CRC() uint32 {
 func (*DefaultHistoryTTL) _IDefaultHistoryTTL() {}
 
 type IDialog interface {
-	tl.Object
+	tl.TLObject
 	_IDialog()
 }
 
@@ -2311,7 +2311,7 @@ func (*DialogFolder) CRC() uint32 {
 func (*DialogFolder) _IDialog() {}
 
 type IDialogFilter interface {
-	tl.Object
+	tl.TLObject
 	_IDialogFilter()
 }
 
@@ -2367,7 +2367,7 @@ func (*DialogFilterChatlist) CRC() uint32 {
 func (*DialogFilterChatlist) _IDialogFilter() {}
 
 type IDialogFilterSuggested interface {
-	tl.Object
+	tl.TLObject
 	_IDialogFilterSuggested()
 }
 
@@ -2386,7 +2386,7 @@ func (*DialogFilterSuggested) CRC() uint32 {
 func (*DialogFilterSuggested) _IDialogFilterSuggested() {}
 
 type IDialogPeer interface {
-	tl.Object
+	tl.TLObject
 	_IDialogPeer()
 }
 
@@ -2414,7 +2414,7 @@ func (*DialogPeerFolder) CRC() uint32 {
 func (*DialogPeerFolder) _IDialogPeer() {}
 
 type IDocument interface {
-	tl.Object
+	tl.TLObject
 	_IDocument()
 }
 
@@ -2452,7 +2452,7 @@ func (*Document) CRC() uint32 {
 func (*Document) _IDocument() {}
 
 type IDocumentAttribute interface {
-	tl.Object
+	tl.TLObject
 	_IDocumentAttribute()
 }
 
@@ -2557,7 +2557,7 @@ func (*DocumentAttributeCustomEmoji) CRC() uint32 {
 func (*DocumentAttributeCustomEmoji) _IDocumentAttribute() {}
 
 type IDraftMessage interface {
-	tl.Object
+	tl.TLObject
 	_IDraftMessage()
 }
 
@@ -2593,7 +2593,7 @@ func (*DraftMessage) CRC() uint32 {
 func (*DraftMessage) _IDraftMessage() {}
 
 type IEmailVerification interface {
-	tl.Object
+	tl.TLObject
 	_IEmailVerification()
 }
 
@@ -2631,7 +2631,7 @@ func (*EmailVerificationApple) CRC() uint32 {
 func (*EmailVerificationApple) _IEmailVerification() {}
 
 type IEmailVerifyPurpose interface {
-	tl.Object
+	tl.TLObject
 	_IEmailVerifyPurpose()
 }
 
@@ -2666,7 +2666,7 @@ func (*EmailVerifyPurposePassport) CRC() uint32 {
 func (*EmailVerifyPurposePassport) _IEmailVerifyPurpose() {}
 
 type IEmojiGroup interface {
-	tl.Object
+	tl.TLObject
 	_IEmojiGroup()
 }
 
@@ -2686,7 +2686,7 @@ func (*EmojiGroup) CRC() uint32 {
 func (*EmojiGroup) _IEmojiGroup() {}
 
 type IEmojiKeyword interface {
-	tl.Object
+	tl.TLObject
 	_IEmojiKeyword()
 }
 
@@ -2716,7 +2716,7 @@ func (*EmojiKeywordDeleted) CRC() uint32 {
 func (*EmojiKeywordDeleted) _IEmojiKeyword() {}
 
 type IEmojiKeywordsDifference interface {
-	tl.Object
+	tl.TLObject
 	_IEmojiKeywordsDifference()
 }
 
@@ -2737,7 +2737,7 @@ func (*EmojiKeywordsDifference) CRC() uint32 {
 func (*EmojiKeywordsDifference) _IEmojiKeywordsDifference() {}
 
 type IEmojiLanguage interface {
-	tl.Object
+	tl.TLObject
 	_IEmojiLanguage()
 }
 
@@ -2755,7 +2755,7 @@ func (*EmojiLanguage) CRC() uint32 {
 func (*EmojiLanguage) _IEmojiLanguage() {}
 
 type IEmojiList interface {
-	tl.Object
+	tl.TLObject
 	_IEmojiList()
 }
 
@@ -2782,7 +2782,7 @@ func (*EmojiList) CRC() uint32 {
 func (*EmojiList) _IEmojiList() {}
 
 type IEmojiStatus interface {
-	tl.Object
+	tl.TLObject
 	_IEmojiStatus()
 }
 
@@ -2819,7 +2819,7 @@ func (*EmojiStatusUntil) CRC() uint32 {
 func (*EmojiStatusUntil) _IEmojiStatus() {}
 
 type IEmojiURL interface {
-	tl.Object
+	tl.TLObject
 	_IEmojiURL()
 }
 
@@ -2837,7 +2837,7 @@ func (*EmojiURL) CRC() uint32 {
 func (*EmojiURL) _IEmojiURL() {}
 
 type IEncryptedChat interface {
-	tl.Object
+	tl.TLObject
 	_IEncryptedChat()
 }
 
@@ -2914,7 +2914,7 @@ func (*EncryptedChatDiscarded) CRC() uint32 {
 func (*EncryptedChatDiscarded) _IEncryptedChat() {}
 
 type IEncryptedFile interface {
-	tl.Object
+	tl.TLObject
 	_IEncryptedFile()
 }
 
@@ -2944,7 +2944,7 @@ func (*EncryptedFile) CRC() uint32 {
 func (*EncryptedFile) _IEncryptedFile() {}
 
 type IEncryptedMessage interface {
-	tl.Object
+	tl.TLObject
 	_IEncryptedMessage()
 }
 
@@ -2979,7 +2979,7 @@ func (*EncryptedMessageService) CRC() uint32 {
 func (*EncryptedMessageService) _IEncryptedMessage() {}
 
 type IExportedChatInvite interface {
-	tl.Object
+	tl.TLObject
 	_IExportedChatInvite()
 }
 
@@ -3017,7 +3017,7 @@ func (*ChatInvitePublicJoinRequests) CRC() uint32 {
 func (*ChatInvitePublicJoinRequests) _IExportedChatInvite() {}
 
 type IExportedChatlistInvite interface {
-	tl.Object
+	tl.TLObject
 	_IExportedChatlistInvite()
 }
 
@@ -3038,7 +3038,7 @@ func (*ExportedChatlistInvite) CRC() uint32 {
 func (*ExportedChatlistInvite) _IExportedChatlistInvite() {}
 
 type IExportedContactToken interface {
-	tl.Object
+	tl.TLObject
 	_IExportedContactToken()
 }
 
@@ -3057,7 +3057,7 @@ func (*ExportedContactToken) CRC() uint32 {
 func (*ExportedContactToken) _IExportedContactToken() {}
 
 type IExportedMessageLink interface {
-	tl.Object
+	tl.TLObject
 	_IExportedMessageLink()
 }
 
@@ -3076,7 +3076,7 @@ func (*ExportedMessageLink) CRC() uint32 {
 func (*ExportedMessageLink) _IExportedMessageLink() {}
 
 type IExportedStoryLink interface {
-	tl.Object
+	tl.TLObject
 	_IExportedStoryLink()
 }
 
@@ -3094,7 +3094,7 @@ func (*ExportedStoryLink) CRC() uint32 {
 func (*ExportedStoryLink) _IExportedStoryLink() {}
 
 type IFileHash interface {
-	tl.Object
+	tl.TLObject
 	_IFileHash()
 }
 
@@ -3114,7 +3114,7 @@ func (*FileHash) CRC() uint32 {
 func (*FileHash) _IFileHash() {}
 
 type IFolder interface {
-	tl.Object
+	tl.TLObject
 	_IFolder()
 }
 
@@ -3138,7 +3138,7 @@ func (*Folder) CRC() uint32 {
 func (*Folder) _IFolder() {}
 
 type IFolderPeer interface {
-	tl.Object
+	tl.TLObject
 	_IFolderPeer()
 }
 
@@ -3157,7 +3157,7 @@ func (*FolderPeer) CRC() uint32 {
 func (*FolderPeer) _IFolderPeer() {}
 
 type IForumTopic interface {
-	tl.Object
+	tl.TLObject
 	_IForumTopic()
 }
 
@@ -3204,7 +3204,7 @@ func (*ForumTopic) CRC() uint32 {
 func (*ForumTopic) _IForumTopic() {}
 
 type IGame interface {
-	tl.Object
+	tl.TLObject
 	_IGame()
 }
 
@@ -3229,7 +3229,7 @@ func (*Game) CRC() uint32 {
 func (*Game) _IGame() {}
 
 type IGeoPoint interface {
-	tl.Object
+	tl.TLObject
 	_IGeoPoint()
 }
 
@@ -3259,7 +3259,7 @@ func (*GeoPoint) CRC() uint32 {
 func (*GeoPoint) _IGeoPoint() {}
 
 type IGlobalPrivacySettings interface {
-	tl.Object
+	tl.TLObject
 	_IGlobalPrivacySettings()
 }
 
@@ -3280,7 +3280,7 @@ func (*GlobalPrivacySettings) CRC() uint32 {
 func (*GlobalPrivacySettings) _IGlobalPrivacySettings() {}
 
 type IGroupCall interface {
-	tl.Object
+	tl.TLObject
 	_IGroupCall()
 }
 
@@ -3328,7 +3328,7 @@ func (*GroupCall) CRC() uint32 {
 func (*GroupCall) _IGroupCall() {}
 
 type IGroupCallParticipant interface {
-	tl.Object
+	tl.TLObject
 	_IGroupCallParticipant()
 }
 
@@ -3365,7 +3365,7 @@ func (*GroupCallParticipant) CRC() uint32 {
 func (*GroupCallParticipant) _IGroupCallParticipant() {}
 
 type IGroupCallParticipantVideo interface {
-	tl.Object
+	tl.TLObject
 	_IGroupCallParticipantVideo()
 }
 
@@ -3387,7 +3387,7 @@ func (*GroupCallParticipantVideo) CRC() uint32 {
 func (*GroupCallParticipantVideo) _IGroupCallParticipantVideo() {}
 
 type IGroupCallParticipantVideoSourceGroup interface {
-	tl.Object
+	tl.TLObject
 	_IGroupCallParticipantVideoSourceGroup()
 }
 
@@ -3406,7 +3406,7 @@ func (*GroupCallParticipantVideoSourceGroup) CRC() uint32 {
 func (*GroupCallParticipantVideoSourceGroup) _IGroupCallParticipantVideoSourceGroup() {}
 
 type IGroupCallStreamChannel interface {
-	tl.Object
+	tl.TLObject
 	_IGroupCallStreamChannel()
 }
 
@@ -3426,7 +3426,7 @@ func (*GroupCallStreamChannel) CRC() uint32 {
 func (*GroupCallStreamChannel) _IGroupCallStreamChannel() {}
 
 type IHighScore interface {
-	tl.Object
+	tl.TLObject
 	_IHighScore()
 }
 
@@ -3446,7 +3446,7 @@ func (*HighScore) CRC() uint32 {
 func (*HighScore) _IHighScore() {}
 
 type IImportedContact interface {
-	tl.Object
+	tl.TLObject
 	_IImportedContact()
 }
 
@@ -3465,7 +3465,7 @@ func (*ImportedContact) CRC() uint32 {
 func (*ImportedContact) _IImportedContact() {}
 
 type IInlineBotSwitchPm interface {
-	tl.Object
+	tl.TLObject
 	_IInlineBotSwitchPm()
 }
 
@@ -3484,7 +3484,7 @@ func (*InlineBotSwitchPm) CRC() uint32 {
 func (*InlineBotSwitchPm) _IInlineBotSwitchPm() {}
 
 type IInlineBotWebView interface {
-	tl.Object
+	tl.TLObject
 	_IInlineBotWebView()
 }
 
@@ -3503,7 +3503,7 @@ func (*InlineBotWebView) CRC() uint32 {
 func (*InlineBotWebView) _IInlineBotWebView() {}
 
 type IInputAppEvent interface {
-	tl.Object
+	tl.TLObject
 	_IInputAppEvent()
 }
 
@@ -3524,7 +3524,7 @@ func (*InputAppEvent) CRC() uint32 {
 func (*InputAppEvent) _IInputAppEvent() {}
 
 type IInputBotApp interface {
-	tl.Object
+	tl.TLObject
 	_IInputBotApp()
 }
 
@@ -3554,7 +3554,7 @@ func (*InputBotAppShortName) CRC() uint32 {
 func (*InputBotAppShortName) _IInputBotApp() {}
 
 type IInputBotInlineMessage interface {
-	tl.Object
+	tl.TLObject
 	_IInputBotInlineMessage()
 }
 
@@ -3685,7 +3685,7 @@ func (*InputBotInlineMessageMediaWebPage) CRC() uint32 {
 func (*InputBotInlineMessageMediaWebPage) _IInputBotInlineMessage() {}
 
 type IInputBotInlineMessageID interface {
-	tl.Object
+	tl.TLObject
 	_IInputBotInlineMessageID()
 }
 
@@ -3718,7 +3718,7 @@ func (*InputBotInlineMessageID64) CRC() uint32 {
 func (*InputBotInlineMessageID64) _IInputBotInlineMessageID() {}
 
 type IInputBotInlineResult interface {
-	tl.Object
+	tl.TLObject
 	_IInputBotInlineResult()
 }
 
@@ -3785,7 +3785,7 @@ func (*InputBotInlineResultGame) CRC() uint32 {
 func (*InputBotInlineResultGame) _IInputBotInlineResult() {}
 
 type IInputChannel interface {
-	tl.Object
+	tl.TLObject
 	_IInputChannel()
 }
 
@@ -3825,7 +3825,7 @@ func (*InputChannelFromMessage) _IInputChannel() {}
 
 // Defines a new group profile photo.
 type IInputChatPhoto interface {
-	tl.Object
+	tl.TLObject
 	_IInputChatPhoto()
 }
 
@@ -3868,7 +3868,7 @@ func (*InputChatPhoto) CRC() uint32 {
 func (*InputChatPhoto) _IInputChatPhoto() {}
 
 type IInputChatlist interface {
-	tl.Object
+	tl.TLObject
 	_IInputChatlist()
 }
 
@@ -3886,7 +3886,7 @@ func (*InputChatlistDialogFilter) CRC() uint32 {
 func (*InputChatlistDialogFilter) _IInputChatlist() {}
 
 type IInputCheckPasswordSRP interface {
-	tl.Object
+	tl.TLObject
 	_IInputCheckPasswordSRP()
 }
 
@@ -3914,7 +3914,7 @@ func (*InputCheckPasswordSRP) CRC() uint32 {
 func (*InputCheckPasswordSRP) _IInputCheckPasswordSRP() {}
 
 type IInputClientProxy interface {
-	tl.Object
+	tl.TLObject
 	_IInputClientProxy()
 }
 
@@ -3932,9 +3932,9 @@ func (*InputClientProxy) CRC() uint32 {
 }
 func (*InputClientProxy) _IInputClientProxy() {}
 
-// Object defines a contact from the user's phonebook.
+// TLObject defines a contact from the user's phonebook.
 type IInputContact interface {
-	tl.Object
+	tl.TLObject
 	_IInputContact()
 }
 
@@ -3956,7 +3956,7 @@ func (*InputPhoneContact) CRC() uint32 {
 func (*InputPhoneContact) _IInputContact() {}
 
 type IInputDialogPeer interface {
-	tl.Object
+	tl.TLObject
 	_IInputDialogPeer()
 }
 
@@ -3984,7 +3984,7 @@ func (*InputDialogPeerFolder) CRC() uint32 {
 func (*InputDialogPeerFolder) _IInputDialogPeer() {}
 
 type IInputDocument interface {
-	tl.Object
+	tl.TLObject
 	_IInputDocument()
 }
 
@@ -4012,7 +4012,7 @@ func (*InputDocument) CRC() uint32 {
 func (*InputDocument) _IInputDocument() {}
 
 type IInputEncryptedChat interface {
-	tl.Object
+	tl.TLObject
 	_IInputEncryptedChat()
 }
 
@@ -4031,7 +4031,7 @@ func (*InputEncryptedChat) CRC() uint32 {
 func (*InputEncryptedChat) _IInputEncryptedChat() {}
 
 type IInputEncryptedFile interface {
-	tl.Object
+	tl.TLObject
 	_IInputEncryptedFile()
 }
 
@@ -4084,7 +4084,7 @@ func (*InputEncryptedFileBigUploaded) _IInputEncryptedFile() {}
 
 // Defines a file uploaded by the client.
 type IInputFile interface {
-	tl.Object
+	tl.TLObject
 	_IInputFile()
 }
 
@@ -4119,7 +4119,7 @@ func (*InputFileBig) CRC() uint32 {
 func (*InputFileBig) _IInputFile() {}
 
 type IInputFileLocation interface {
-	tl.Object
+	tl.TLObject
 	_IInputFileLocation()
 }
 
@@ -4250,7 +4250,7 @@ func (*InputGroupCallStream) CRC() uint32 {
 func (*InputGroupCallStream) _IInputFileLocation() {}
 
 type IInputFolderPeer interface {
-	tl.Object
+	tl.TLObject
 	_IInputFolderPeer()
 }
 
@@ -4269,7 +4269,7 @@ func (*InputFolderPeer) CRC() uint32 {
 func (*InputFolderPeer) _IInputFolderPeer() {}
 
 type IInputGame interface {
-	tl.Object
+	tl.TLObject
 	_IInputGame()
 }
 
@@ -4300,7 +4300,7 @@ func (*InputGameShortName) _IInputGame() {}
 
 // Defines a GeoPoint.
 type IInputGeoPoint interface {
-	tl.Object
+	tl.TLObject
 	_IInputGeoPoint()
 }
 
@@ -4331,7 +4331,7 @@ func (*InputGeoPoint) CRC() uint32 {
 func (*InputGeoPoint) _IInputGeoPoint() {}
 
 type IInputGroupCall interface {
-	tl.Object
+	tl.TLObject
 	_IInputGroupCall()
 }
 
@@ -4350,7 +4350,7 @@ func (*InputGroupCall) CRC() uint32 {
 func (*InputGroupCall) _IInputGroupCall() {}
 
 type IInputInvoice interface {
-	tl.Object
+	tl.TLObject
 	_IInputInvoice()
 }
 
@@ -4391,7 +4391,7 @@ func (*InputInvoicePremiumGiftCode) _IInputInvoice() {}
 
 // Defines media content of a message.
 type IInputMedia interface {
-	tl.Object
+	tl.TLObject
 	_IInputMedia()
 }
 
@@ -4638,7 +4638,7 @@ func (*InputMediaWebPage) CRC() uint32 {
 func (*InputMediaWebPage) _IInputMedia() {}
 
 type IInputMessage interface {
-	tl.Object
+	tl.TLObject
 	_IInputMessage()
 }
 
@@ -4685,7 +4685,7 @@ func (*InputMessageCallbackQuery) CRC() uint32 {
 func (*InputMessageCallbackQuery) _IInputMessage() {}
 
 type IInputNotifyPeer interface {
-	tl.Object
+	tl.TLObject
 	_IInputNotifyPeer()
 }
 
@@ -4738,7 +4738,7 @@ func (*InputNotifyForumTopic) CRC() uint32 {
 func (*InputNotifyForumTopic) _IInputNotifyPeer() {}
 
 type IInputPaymentCredentials interface {
-	tl.Object
+	tl.TLObject
 	_IInputPaymentCredentials()
 }
 
@@ -4790,7 +4790,7 @@ func (*InputPaymentCredentialsGooglePay) _IInputPaymentCredentials() {}
 
 // Peer
 type IInputPeer interface {
-	tl.Object
+	tl.TLObject
 	_IInputPeer()
 }
 
@@ -4877,7 +4877,7 @@ func (*InputPeerChannelFromMessage) CRC() uint32 {
 func (*InputPeerChannelFromMessage) _IInputPeer() {}
 
 type IInputPeerNotifySettings interface {
-	tl.Object
+	tl.TLObject
 	_IInputPeerNotifySettings()
 }
 
@@ -4902,7 +4902,7 @@ func (*InputPeerNotifySettings) CRC() uint32 {
 func (*InputPeerNotifySettings) _IInputPeerNotifySettings() {}
 
 type IInputPhoneCall interface {
-	tl.Object
+	tl.TLObject
 	_IInputPhoneCall()
 }
 
@@ -4921,7 +4921,7 @@ func (*InputPhoneCall) CRC() uint32 {
 func (*InputPhoneCall) _IInputPhoneCall() {}
 
 type IInputPhoto interface {
-	tl.Object
+	tl.TLObject
 	_IInputPhoto()
 }
 
@@ -4949,7 +4949,7 @@ func (*InputPhoto) CRC() uint32 {
 func (*InputPhoto) _IInputPhoto() {}
 
 type IInputPrivacyRule interface {
-	tl.Object
+	tl.TLObject
 	_IInputPrivacyRule()
 }
 
@@ -5037,7 +5037,7 @@ func (*InputPrivacyValueAllowCloseFriends) CRC() uint32 {
 func (*InputPrivacyValueAllowCloseFriends) _IInputPrivacyRule() {}
 
 type IInputReplyTo interface {
-	tl.Object
+	tl.TLObject
 	_IInputReplyTo()
 }
 
@@ -5072,7 +5072,7 @@ func (*InputReplyToStory) CRC() uint32 {
 func (*InputReplyToStory) _IInputReplyTo() {}
 
 type IInputSecureFile interface {
-	tl.Object
+	tl.TLObject
 	_IInputSecureFile()
 }
 
@@ -5105,7 +5105,7 @@ func (*InputSecureFile) CRC() uint32 {
 func (*InputSecureFile) _IInputSecureFile() {}
 
 type IInputSecureValue interface {
-	tl.Object
+	tl.TLObject
 	_IInputSecureValue()
 }
 
@@ -5131,7 +5131,7 @@ func (*InputSecureValue) CRC() uint32 {
 func (*InputSecureValue) _IInputSecureValue() {}
 
 type IInputSingleMedia interface {
-	tl.Object
+	tl.TLObject
 	_IInputSingleMedia()
 }
 
@@ -5153,7 +5153,7 @@ func (*InputSingleMedia) CRC() uint32 {
 func (*InputSingleMedia) _IInputSingleMedia() {}
 
 type IInputStickerSet interface {
-	tl.Object
+	tl.TLObject
 	_IInputStickerSet()
 }
 
@@ -5256,7 +5256,7 @@ func (*InputStickerSetEmojiChannelDefaultStatuses) CRC() uint32 {
 func (*InputStickerSetEmojiChannelDefaultStatuses) _IInputStickerSet() {}
 
 type IInputStickerSetItem interface {
-	tl.Object
+	tl.TLObject
 	_IInputStickerSetItem()
 }
 
@@ -5278,7 +5278,7 @@ func (*InputStickerSetItem) CRC() uint32 {
 func (*InputStickerSetItem) _IInputStickerSetItem() {}
 
 type IInputStickeredMedia interface {
-	tl.Object
+	tl.TLObject
 	_IInputStickeredMedia()
 }
 
@@ -5306,7 +5306,7 @@ func (*InputStickeredMediaDocument) CRC() uint32 {
 func (*InputStickeredMediaDocument) _IInputStickeredMedia() {}
 
 type IInputStorePaymentPurpose interface {
-	tl.Object
+	tl.TLObject
 	_IInputStorePaymentPurpose()
 }
 
@@ -5372,7 +5372,7 @@ func (*InputStorePaymentPremiumGiveaway) CRC() uint32 {
 func (*InputStorePaymentPremiumGiveaway) _IInputStorePaymentPurpose() {}
 
 type IInputTheme interface {
-	tl.Object
+	tl.TLObject
 	_IInputTheme()
 }
 
@@ -5401,7 +5401,7 @@ func (*InputThemeSlug) CRC() uint32 {
 func (*InputThemeSlug) _IInputTheme() {}
 
 type IInputThemeSettings interface {
-	tl.Object
+	tl.TLObject
 	_IInputThemeSettings()
 }
 
@@ -5427,7 +5427,7 @@ func (*InputThemeSettings) _IInputThemeSettings() {}
 
 // Defines a user for subsequent interaction.
 type IInputUser interface {
-	tl.Object
+	tl.TLObject
 	_IInputUser()
 }
 
@@ -5478,7 +5478,7 @@ func (*InputUserFromMessage) CRC() uint32 {
 func (*InputUserFromMessage) _IInputUser() {}
 
 type IInputWallPaper interface {
-	tl.Object
+	tl.TLObject
 	_IInputWallPaper()
 }
 
@@ -5517,7 +5517,7 @@ func (*InputWallPaperNoFile) CRC() uint32 {
 func (*InputWallPaperNoFile) _IInputWallPaper() {}
 
 type IInputWebDocument interface {
-	tl.Object
+	tl.TLObject
 	_IInputWebDocument()
 }
 
@@ -5538,7 +5538,7 @@ func (*InputWebDocument) CRC() uint32 {
 func (*InputWebDocument) _IInputWebDocument() {}
 
 type IInputWebFileLocation interface {
-	tl.Object
+	tl.TLObject
 	_IInputWebFileLocation()
 }
 
@@ -5586,7 +5586,7 @@ func (*InputWebFileAudioAlbumThumbLocation) CRC() uint32 {
 func (*InputWebFileAudioAlbumThumbLocation) _IInputWebFileLocation() {}
 
 type IInvoice interface {
-	tl.Object
+	tl.TLObject
 	_IInvoice()
 }
 
@@ -5618,7 +5618,7 @@ func (*Invoice) CRC() uint32 {
 func (*Invoice) _IInvoice() {}
 
 type IJSONObjectValue interface {
-	tl.Object
+	tl.TLObject
 	_IJSONObjectValue()
 }
 
@@ -5637,7 +5637,7 @@ func (*JSONObjectValue) CRC() uint32 {
 func (*JSONObjectValue) _IJSONObjectValue() {}
 
 type IJSONValue interface {
-	tl.Object
+	tl.TLObject
 	_IJSONValue()
 }
 
@@ -5703,7 +5703,7 @@ func (*JSONObject) CRC() uint32 {
 func (*JSONObject) _IJSONValue() {}
 
 type IKeyboardButton interface {
-	tl.Object
+	tl.TLObject
 	_IKeyboardButton()
 }
 
@@ -5897,7 +5897,7 @@ func (*KeyboardButtonRequestPeer) CRC() uint32 {
 func (*KeyboardButtonRequestPeer) _IKeyboardButton() {}
 
 type IKeyboardButtonRow interface {
-	tl.Object
+	tl.TLObject
 	_IKeyboardButtonRow()
 }
 
@@ -5915,7 +5915,7 @@ func (*KeyboardButtonRow) CRC() uint32 {
 func (*KeyboardButtonRow) _IKeyboardButtonRow() {}
 
 type ILabeledPrice interface {
-	tl.Object
+	tl.TLObject
 	_ILabeledPrice()
 }
 
@@ -5934,7 +5934,7 @@ func (*LabeledPrice) CRC() uint32 {
 func (*LabeledPrice) _ILabeledPrice() {}
 
 type ILangPackDifference interface {
-	tl.Object
+	tl.TLObject
 	_ILangPackDifference()
 }
 
@@ -5955,7 +5955,7 @@ func (*LangPackDifference) CRC() uint32 {
 func (*LangPackDifference) _ILangPackDifference() {}
 
 type ILangPackLanguage interface {
-	tl.Object
+	tl.TLObject
 	_ILangPackLanguage()
 }
 
@@ -5984,7 +5984,7 @@ func (*LangPackLanguage) CRC() uint32 {
 func (*LangPackLanguage) _ILangPackLanguage() {}
 
 type ILangPackString interface {
-	tl.Object
+	tl.TLObject
 	_ILangPackString()
 }
 
@@ -6030,7 +6030,7 @@ func (*LangPackStringDeleted) CRC() uint32 {
 func (*LangPackStringDeleted) _ILangPackString() {}
 
 type IMaskCoords interface {
-	tl.Object
+	tl.TLObject
 	_IMaskCoords()
 }
 
@@ -6051,7 +6051,7 @@ func (*MaskCoords) CRC() uint32 {
 func (*MaskCoords) _IMaskCoords() {}
 
 type IMediaArea interface {
-	tl.Object
+	tl.TLObject
 	_IMediaArea()
 }
 
@@ -6136,7 +6136,7 @@ func (*InputMediaAreaChannelPost) CRC() uint32 {
 func (*InputMediaAreaChannelPost) _IMediaArea() {}
 
 type IMediaAreaCoordinates interface {
-	tl.Object
+	tl.TLObject
 	_IMediaAreaCoordinates()
 }
 
@@ -6157,9 +6157,9 @@ func (*MediaAreaCoordinates) CRC() uint32 {
 }
 func (*MediaAreaCoordinates) _IMediaAreaCoordinates() {}
 
-// Object describing a message.
+// TLObject describing a message.
 type IMessage interface {
-	tl.Object
+	tl.TLObject
 	_IMessage()
 }
 
@@ -6246,7 +6246,7 @@ func (*MessageService) CRC() uint32 {
 func (*MessageService) _IMessage() {}
 
 type IMessageAction interface {
-	tl.Object
+	tl.TLObject
 	_IMessageAction()
 }
 
@@ -6708,7 +6708,7 @@ func (*MessageActionGiveawayResults) CRC() uint32 {
 func (*MessageActionGiveawayResults) _IMessageAction() {}
 
 type IMessageEntity interface {
-	tl.Object
+	tl.TLObject
 	_IMessageEntity()
 }
 
@@ -6952,7 +6952,7 @@ func (*MessageEntityBlockquote) CRC() uint32 {
 func (*MessageEntityBlockquote) _IMessageEntity() {}
 
 type IMessageExtendedMedia interface {
-	tl.Object
+	tl.TLObject
 	_IMessageExtendedMedia()
 }
 
@@ -6984,7 +6984,7 @@ func (*MessageExtendedMedia) CRC() uint32 {
 func (*MessageExtendedMedia) _IMessageExtendedMedia() {}
 
 type IMessageFwdHeader interface {
-	tl.Object
+	tl.TLObject
 	_IMessageFwdHeader()
 }
 
@@ -7011,7 +7011,7 @@ func (*MessageFwdHeader) CRC() uint32 {
 func (*MessageFwdHeader) _IMessageFwdHeader() {}
 
 type IMessageMedia interface {
-	tl.Object
+	tl.TLObject
 	_IMessageMedia()
 }
 
@@ -7236,7 +7236,7 @@ func (*MessageMediaGiveawayResults) CRC() uint32 {
 func (*MessageMediaGiveawayResults) _IMessageMedia() {}
 
 type IMessagePeerReaction interface {
-	tl.Object
+	tl.TLObject
 	_IMessagePeerReaction()
 }
 
@@ -7260,7 +7260,7 @@ func (*MessagePeerReaction) CRC() uint32 {
 func (*MessagePeerReaction) _IMessagePeerReaction() {}
 
 type IMessagePeerVote interface {
-	tl.Object
+	tl.TLObject
 	_IMessagePeerVote()
 }
 
@@ -7303,7 +7303,7 @@ func (*MessagePeerVoteMultiple) CRC() uint32 {
 func (*MessagePeerVoteMultiple) _IMessagePeerVote() {}
 
 type IMessageRange interface {
-	tl.Object
+	tl.TLObject
 	_IMessageRange()
 }
 
@@ -7322,7 +7322,7 @@ func (*MessageRange) CRC() uint32 {
 func (*MessageRange) _IMessageRange() {}
 
 type IMessageReactions interface {
-	tl.Object
+	tl.TLObject
 	_IMessageReactions()
 }
 
@@ -7344,7 +7344,7 @@ func (*MessageReactions) CRC() uint32 {
 func (*MessageReactions) _IMessageReactions() {}
 
 type IMessageReplies interface {
-	tl.Object
+	tl.TLObject
 	_IMessageReplies()
 }
 
@@ -7369,7 +7369,7 @@ func (*MessageReplies) CRC() uint32 {
 func (*MessageReplies) _IMessageReplies() {}
 
 type IMessageReplyHeader interface {
-	tl.Object
+	tl.TLObject
 	_IMessageReplyHeader()
 }
 
@@ -7409,7 +7409,7 @@ func (*MessageReplyStoryHeader) CRC() uint32 {
 func (*MessageReplyStoryHeader) _IMessageReplyHeader() {}
 
 type IMessageViews interface {
-	tl.Object
+	tl.TLObject
 	_IMessageViews()
 }
 
@@ -7429,9 +7429,9 @@ func (*MessageViews) CRC() uint32 {
 }
 func (*MessageViews) _IMessageViews() {}
 
-// Object describes message filter.
+// TLObject describes message filter.
 type IMessagesFilter interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesFilter()
 }
 
@@ -7595,7 +7595,7 @@ func (*InputMessagesFilterPinned) CRC() uint32 {
 func (*InputMessagesFilterPinned) _IMessagesFilter() {}
 
 type IMyBoost interface {
-	tl.Object
+	tl.TLObject
 	_IMyBoost()
 }
 
@@ -7618,7 +7618,7 @@ func (*MyBoost) CRC() uint32 {
 func (*MyBoost) _IMyBoost() {}
 
 type INearestDc interface {
-	tl.Object
+	tl.TLObject
 	_INearestDc()
 }
 
@@ -7638,7 +7638,7 @@ func (*NearestDc) CRC() uint32 {
 func (*NearestDc) _INearestDc() {}
 
 type INotificationSound interface {
-	tl.Object
+	tl.TLObject
 	_INotificationSound()
 }
 
@@ -7683,7 +7683,7 @@ func (*NotificationSoundRingtone) CRC() uint32 {
 func (*NotificationSoundRingtone) _INotificationSound() {}
 
 type INotifyPeer interface {
-	tl.Object
+	tl.TLObject
 	_INotifyPeer()
 }
 
@@ -7736,7 +7736,7 @@ func (*NotifyForumTopic) CRC() uint32 {
 func (*NotifyForumTopic) _INotifyPeer() {}
 
 type IPage interface {
-	tl.Object
+	tl.TLObject
 	_IPage()
 }
 
@@ -7762,7 +7762,7 @@ func (*Page) CRC() uint32 {
 func (*Page) _IPage() {}
 
 type IPageBlock interface {
-	tl.Object
+	tl.TLObject
 	_IPageBlock()
 }
 
@@ -8097,7 +8097,7 @@ func (*PageBlockMap) CRC() uint32 {
 func (*PageBlockMap) _IPageBlock() {}
 
 type IPageCaption interface {
-	tl.Object
+	tl.TLObject
 	_IPageCaption()
 }
 
@@ -8116,7 +8116,7 @@ func (*PageCaption) CRC() uint32 {
 func (*PageCaption) _IPageCaption() {}
 
 type IPageListItem interface {
-	tl.Object
+	tl.TLObject
 	_IPageListItem()
 }
 
@@ -8144,7 +8144,7 @@ func (*PageListItemBlocks) CRC() uint32 {
 func (*PageListItemBlocks) _IPageListItem() {}
 
 type IPageListOrderedItem interface {
-	tl.Object
+	tl.TLObject
 	_IPageListOrderedItem()
 }
 
@@ -8174,7 +8174,7 @@ func (*PageListOrderedItemBlocks) CRC() uint32 {
 func (*PageListOrderedItemBlocks) _IPageListOrderedItem() {}
 
 type IPageRelatedArticle interface {
-	tl.Object
+	tl.TLObject
 	_IPageRelatedArticle()
 }
 
@@ -8199,7 +8199,7 @@ func (*PageRelatedArticle) CRC() uint32 {
 func (*PageRelatedArticle) _IPageRelatedArticle() {}
 
 type IPageTableCell interface {
-	tl.Object
+	tl.TLObject
 	_IPageTableCell()
 }
 
@@ -8225,7 +8225,7 @@ func (*PageTableCell) CRC() uint32 {
 func (*PageTableCell) _IPageTableCell() {}
 
 type IPageTableRow interface {
-	tl.Object
+	tl.TLObject
 	_IPageTableRow()
 }
 
@@ -8244,7 +8244,7 @@ func (*PageTableRow) _IPageTableRow() {}
 
 // Key derivation function to use when generating the [password hash for SRP two-factor authorization](https://core.telegram.org/api/srp
 type IPasswordKdfAlgo interface {
-	tl.Object
+	tl.TLObject
 	_IPasswordKdfAlgo()
 }
 
@@ -8275,7 +8275,7 @@ func (*PasswordKdfAlgoSHA256SHA256Pbkdf2Hmacsha512Iter100000SHA256ModPow) CRC() 
 func (*PasswordKdfAlgoSHA256SHA256Pbkdf2Hmacsha512Iter100000SHA256ModPow) _IPasswordKdfAlgo() {}
 
 type IPaymentCharge interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentCharge()
 }
 
@@ -8294,7 +8294,7 @@ func (*PaymentCharge) CRC() uint32 {
 func (*PaymentCharge) _IPaymentCharge() {}
 
 type IPaymentFormMethod interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentFormMethod()
 }
 
@@ -8313,7 +8313,7 @@ func (*PaymentFormMethod) CRC() uint32 {
 func (*PaymentFormMethod) _IPaymentFormMethod() {}
 
 type IPaymentRequestedInfo interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentRequestedInfo()
 }
 
@@ -8335,7 +8335,7 @@ func (*PaymentRequestedInfo) CRC() uint32 {
 func (*PaymentRequestedInfo) _IPaymentRequestedInfo() {}
 
 type IPaymentSavedCredentials interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentSavedCredentials()
 }
 
@@ -8355,7 +8355,7 @@ func (*PaymentSavedCredentialsCard) _IPaymentSavedCredentials() {}
 
 // Chat partner or group.
 type IPeer interface {
-	tl.Object
+	tl.TLObject
 	_IPeer()
 }
 
@@ -8396,7 +8396,7 @@ func (*PeerChannel) CRC() uint32 {
 func (*PeerChannel) _IPeer() {}
 
 type IPeerBlocked interface {
-	tl.Object
+	tl.TLObject
 	_IPeerBlocked()
 }
 
@@ -8415,7 +8415,7 @@ func (*PeerBlocked) CRC() uint32 {
 func (*PeerBlocked) _IPeerBlocked() {}
 
 type IPeerColor interface {
-	tl.Object
+	tl.TLObject
 	_IPeerColor()
 }
 
@@ -8435,7 +8435,7 @@ func (*PeerColor) CRC() uint32 {
 func (*PeerColor) _IPeerColor() {}
 
 type IPeerLocated interface {
-	tl.Object
+	tl.TLObject
 	_IPeerLocated()
 }
 
@@ -8465,7 +8465,7 @@ func (*PeerSelfLocated) CRC() uint32 {
 func (*PeerSelfLocated) _IPeerLocated() {}
 
 type IPeerNotifySettings interface {
-	tl.Object
+	tl.TLObject
 	_IPeerNotifySettings()
 }
 
@@ -8494,7 +8494,7 @@ func (*PeerNotifySettings) CRC() uint32 {
 func (*PeerNotifySettings) _IPeerNotifySettings() {}
 
 type IPeerSettings interface {
-	tl.Object
+	tl.TLObject
 	_IPeerSettings()
 }
 
@@ -8524,7 +8524,7 @@ func (*PeerSettings) CRC() uint32 {
 func (*PeerSettings) _IPeerSettings() {}
 
 type IPeerStories interface {
-	tl.Object
+	tl.TLObject
 	_IPeerStories()
 }
 
@@ -8545,7 +8545,7 @@ func (*PeerStories) CRC() uint32 {
 func (*PeerStories) _IPeerStories() {}
 
 type IPhoneCall interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneCall()
 }
 
@@ -8655,7 +8655,7 @@ func (*PhoneCallDiscarded) CRC() uint32 {
 func (*PhoneCallDiscarded) _IPhoneCall() {}
 
 type IPhoneCallProtocol interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneCallProtocol()
 }
 
@@ -8678,7 +8678,7 @@ func (*PhoneCallProtocol) CRC() uint32 {
 func (*PhoneCallProtocol) _IPhoneCallProtocol() {}
 
 type IPhoneConnection interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneConnection()
 }
 
@@ -8720,7 +8720,7 @@ func (*PhoneConnectionWebrtc) CRC() uint32 {
 func (*PhoneConnectionWebrtc) _IPhoneConnection() {}
 
 type IPhoto interface {
-	tl.Object
+	tl.TLObject
 	_IPhoto()
 }
 
@@ -8756,7 +8756,7 @@ func (*Photo) CRC() uint32 {
 func (*Photo) _IPhoto() {}
 
 type IPhotoSize interface {
-	tl.Object
+	tl.TLObject
 	_IPhotoSize()
 }
 
@@ -8835,7 +8835,7 @@ func (*PhotoPathSize) CRC() uint32 {
 func (*PhotoPathSize) _IPhotoSize() {}
 
 type IPoll interface {
-	tl.Object
+	tl.TLObject
 	_IPoll()
 }
 
@@ -8862,7 +8862,7 @@ func (*Poll) CRC() uint32 {
 func (*Poll) _IPoll() {}
 
 type IPollAnswer interface {
-	tl.Object
+	tl.TLObject
 	_IPollAnswer()
 }
 
@@ -8881,7 +8881,7 @@ func (*PollAnswer) CRC() uint32 {
 func (*PollAnswer) _IPollAnswer() {}
 
 type IPollAnswerVoters interface {
-	tl.Object
+	tl.TLObject
 	_IPollAnswerVoters()
 }
 
@@ -8903,7 +8903,7 @@ func (*PollAnswerVoters) CRC() uint32 {
 func (*PollAnswerVoters) _IPollAnswerVoters() {}
 
 type IPollResults interface {
-	tl.Object
+	tl.TLObject
 	_IPollResults()
 }
 
@@ -8927,7 +8927,7 @@ func (*PollResults) CRC() uint32 {
 func (*PollResults) _IPollResults() {}
 
 type IPopularContact interface {
-	tl.Object
+	tl.TLObject
 	_IPopularContact()
 }
 
@@ -8946,7 +8946,7 @@ func (*PopularContact) CRC() uint32 {
 func (*PopularContact) _IPopularContact() {}
 
 type IPostAddress interface {
-	tl.Object
+	tl.TLObject
 	_IPostAddress()
 }
 
@@ -8969,7 +8969,7 @@ func (*PostAddress) CRC() uint32 {
 func (*PostAddress) _IPostAddress() {}
 
 type IPostInteractionCounters interface {
-	tl.Object
+	tl.TLObject
 	_IPostInteractionCounters()
 }
 
@@ -9003,7 +9003,7 @@ func (*PostInteractionCountersStory) CRC() uint32 {
 func (*PostInteractionCountersStory) _IPostInteractionCounters() {}
 
 type IPremiumGiftCodeOption interface {
-	tl.Object
+	tl.TLObject
 	_IPremiumGiftCodeOption()
 }
 
@@ -9027,7 +9027,7 @@ func (*PremiumGiftCodeOption) CRC() uint32 {
 func (*PremiumGiftCodeOption) _IPremiumGiftCodeOption() {}
 
 type IPremiumGiftOption interface {
-	tl.Object
+	tl.TLObject
 	_IPremiumGiftOption()
 }
 
@@ -9050,7 +9050,7 @@ func (*PremiumGiftOption) CRC() uint32 {
 func (*PremiumGiftOption) _IPremiumGiftOption() {}
 
 type IPremiumSubscriptionOption interface {
-	tl.Object
+	tl.TLObject
 	_IPremiumSubscriptionOption()
 }
 
@@ -9076,7 +9076,7 @@ func (*PremiumSubscriptionOption) CRC() uint32 {
 func (*PremiumSubscriptionOption) _IPremiumSubscriptionOption() {}
 
 type IPrepaidGiveaway interface {
-	tl.Object
+	tl.TLObject
 	_IPrepaidGiveaway()
 }
 
@@ -9097,7 +9097,7 @@ func (*PrepaidGiveaway) CRC() uint32 {
 func (*PrepaidGiveaway) _IPrepaidGiveaway() {}
 
 type IPrivacyRule interface {
-	tl.Object
+	tl.TLObject
 	_IPrivacyRule()
 }
 
@@ -9185,7 +9185,7 @@ func (*PrivacyValueAllowCloseFriends) CRC() uint32 {
 func (*PrivacyValueAllowCloseFriends) _IPrivacyRule() {}
 
 type IPublicForward interface {
-	tl.Object
+	tl.TLObject
 	_IPublicForward()
 }
 
@@ -9214,7 +9214,7 @@ func (*PublicForwardStory) CRC() uint32 {
 func (*PublicForwardStory) _IPublicForward() {}
 
 type IReaction interface {
-	tl.Object
+	tl.TLObject
 	_IReaction()
 }
 
@@ -9250,7 +9250,7 @@ func (*ReactionCustomEmoji) CRC() uint32 {
 func (*ReactionCustomEmoji) _IReaction() {}
 
 type IReactionCount interface {
-	tl.Object
+	tl.TLObject
 	_IReactionCount()
 }
 
@@ -9271,7 +9271,7 @@ func (*ReactionCount) CRC() uint32 {
 func (*ReactionCount) _IReactionCount() {}
 
 type IReadParticipantDate interface {
-	tl.Object
+	tl.TLObject
 	_IReadParticipantDate()
 }
 
@@ -9290,7 +9290,7 @@ func (*ReadParticipantDate) CRC() uint32 {
 func (*ReadParticipantDate) _IReadParticipantDate() {}
 
 type IReceivedNotifyMessage interface {
-	tl.Object
+	tl.TLObject
 	_IReceivedNotifyMessage()
 }
 
@@ -9309,7 +9309,7 @@ func (*ReceivedNotifyMessage) CRC() uint32 {
 func (*ReceivedNotifyMessage) _IReceivedNotifyMessage() {}
 
 type IRecentMeURL interface {
-	tl.Object
+	tl.TLObject
 	_IRecentMeURL()
 }
 
@@ -9371,7 +9371,7 @@ func (*RecentMeURLStickerSet) CRC() uint32 {
 func (*RecentMeURLStickerSet) _IRecentMeURL() {}
 
 type IReplyMarkup interface {
-	tl.Object
+	tl.TLObject
 	_IReplyMarkup()
 }
 
@@ -9429,7 +9429,7 @@ func (*ReplyInlineMarkup) CRC() uint32 {
 func (*ReplyInlineMarkup) _IReplyMarkup() {}
 
 type IRequestPeerType interface {
-	tl.Object
+	tl.TLObject
 	_IRequestPeerType()
 }
 
@@ -9479,7 +9479,7 @@ func (*RequestPeerTypeBroadcast) CRC() uint32 {
 func (*RequestPeerTypeBroadcast) _IRequestPeerType() {}
 
 type IRestrictionReason interface {
-	tl.Object
+	tl.TLObject
 	_IRestrictionReason()
 }
 
@@ -9499,7 +9499,7 @@ func (*RestrictionReason) CRC() uint32 {
 func (*RestrictionReason) _IRestrictionReason() {}
 
 type IRichText interface {
-	tl.Object
+	tl.TLObject
 	_IRichText()
 }
 
@@ -9672,7 +9672,7 @@ func (*TextAnchor) CRC() uint32 {
 func (*TextAnchor) _IRichText() {}
 
 type ISavedContact interface {
-	tl.Object
+	tl.TLObject
 	_ISavedContact()
 }
 
@@ -9693,7 +9693,7 @@ func (*SavedPhoneContact) CRC() uint32 {
 func (*SavedPhoneContact) _ISavedContact() {}
 
 type ISearchResultsCalendarPeriod interface {
-	tl.Object
+	tl.TLObject
 	_ISearchResultsCalendarPeriod()
 }
 
@@ -9714,7 +9714,7 @@ func (*SearchResultsCalendarPeriod) CRC() uint32 {
 func (*SearchResultsCalendarPeriod) _ISearchResultsCalendarPeriod() {}
 
 type ISearchResultsPosition interface {
-	tl.Object
+	tl.TLObject
 	_ISearchResultsPosition()
 }
 
@@ -9735,7 +9735,7 @@ func (*SearchResultPosition) _ISearchResultsPosition() {}
 
 // Encrypted secure credentials
 type ISecureCredentialsEncrypted interface {
-	tl.Object
+	tl.TLObject
 	_ISecureCredentialsEncrypted()
 }
 
@@ -9756,7 +9756,7 @@ func (*SecureCredentialsEncrypted) CRC() uint32 {
 func (*SecureCredentialsEncrypted) _ISecureCredentialsEncrypted() {}
 
 type ISecureData interface {
-	tl.Object
+	tl.TLObject
 	_ISecureData()
 }
 
@@ -9776,7 +9776,7 @@ func (*SecureData) CRC() uint32 {
 func (*SecureData) _ISecureData() {}
 
 type ISecureFile interface {
-	tl.Object
+	tl.TLObject
 	_ISecureFile()
 }
 
@@ -9808,7 +9808,7 @@ func (*SecureFile) CRC() uint32 {
 func (*SecureFile) _ISecureFile() {}
 
 type ISecurePasswordKdfAlgo interface {
-	tl.Object
+	tl.TLObject
 	_ISecurePasswordKdfAlgo()
 }
 
@@ -9844,7 +9844,7 @@ func (*SecurePasswordKdfAlgoSHA512) CRC() uint32 {
 func (*SecurePasswordKdfAlgoSHA512) _ISecurePasswordKdfAlgo() {}
 
 type ISecurePlainData interface {
-	tl.Object
+	tl.TLObject
 	_ISecurePlainData()
 }
 
@@ -9872,7 +9872,7 @@ func (*SecurePlainEmail) CRC() uint32 {
 func (*SecurePlainEmail) _ISecurePlainData() {}
 
 type ISecureRequiredType interface {
-	tl.Object
+	tl.TLObject
 	_ISecureRequiredType()
 }
 
@@ -9904,7 +9904,7 @@ func (*SecureRequiredTypeOneOf) CRC() uint32 {
 func (*SecureRequiredTypeOneOf) _ISecureRequiredType() {}
 
 type ISecureSecretSettings interface {
-	tl.Object
+	tl.TLObject
 	_ISecureSecretSettings()
 }
 
@@ -9924,7 +9924,7 @@ func (*SecureSecretSettings) CRC() uint32 {
 func (*SecureSecretSettings) _ISecureSecretSettings() {}
 
 type ISecureValue interface {
-	tl.Object
+	tl.TLObject
 	_ISecureValue()
 }
 
@@ -9951,7 +9951,7 @@ func (*SecureValue) CRC() uint32 {
 func (*SecureValue) _ISecureValue() {}
 
 type ISecureValueError interface {
-	tl.Object
+	tl.TLObject
 	_ISecureValueError()
 }
 
@@ -10068,7 +10068,7 @@ func (*SecureValueErrorTranslationFiles) CRC() uint32 {
 func (*SecureValueErrorTranslationFiles) _ISecureValueError() {}
 
 type ISecureValueHash interface {
-	tl.Object
+	tl.TLObject
 	_ISecureValueHash()
 }
 
@@ -10087,7 +10087,7 @@ func (*SecureValueHash) CRC() uint32 {
 func (*SecureValueHash) _ISecureValueHash() {}
 
 type ISendAsPeer interface {
-	tl.Object
+	tl.TLObject
 	_ISendAsPeer()
 }
 
@@ -10107,7 +10107,7 @@ func (*SendAsPeer) CRC() uint32 {
 func (*SendAsPeer) _ISendAsPeer() {}
 
 type ISendMessageAction interface {
-	tl.Object
+	tl.TLObject
 	_ISendMessageAction()
 }
 
@@ -10277,7 +10277,7 @@ func (*SendMessageEmojiInteractionSeen) CRC() uint32 {
 func (*SendMessageEmojiInteractionSeen) _ISendMessageAction() {}
 
 type IShippingOption interface {
-	tl.Object
+	tl.TLObject
 	_IShippingOption()
 }
 
@@ -10297,7 +10297,7 @@ func (*ShippingOption) CRC() uint32 {
 func (*ShippingOption) _IShippingOption() {}
 
 type ISimpleWebViewResult interface {
-	tl.Object
+	tl.TLObject
 	_ISimpleWebViewResult()
 }
 
@@ -10315,7 +10315,7 @@ func (*SimpleWebViewResultURL) CRC() uint32 {
 func (*SimpleWebViewResultURL) _ISimpleWebViewResult() {}
 
 type ISponsoredMessage interface {
-	tl.Object
+	tl.TLObject
 	_ISponsoredMessage()
 }
 
@@ -10348,7 +10348,7 @@ func (*SponsoredMessage) CRC() uint32 {
 func (*SponsoredMessage) _ISponsoredMessage() {}
 
 type ISponsoredWebPage interface {
-	tl.Object
+	tl.TLObject
 	_ISponsoredWebPage()
 }
 
@@ -10369,7 +10369,7 @@ func (*SponsoredWebPage) CRC() uint32 {
 func (*SponsoredWebPage) _ISponsoredWebPage() {}
 
 type IStatsAbsValueAndPrev interface {
-	tl.Object
+	tl.TLObject
 	_IStatsAbsValueAndPrev()
 }
 
@@ -10388,7 +10388,7 @@ func (*StatsAbsValueAndPrev) CRC() uint32 {
 func (*StatsAbsValueAndPrev) _IStatsAbsValueAndPrev() {}
 
 type IStatsDateRangeDays interface {
-	tl.Object
+	tl.TLObject
 	_IStatsDateRangeDays()
 }
 
@@ -10408,7 +10408,7 @@ func (*StatsDateRangeDays) _IStatsDateRangeDays() {}
 
 // Channel statistics graph
 type IStatsGraph interface {
-	tl.Object
+	tl.TLObject
 	_IStatsGraph()
 }
 
@@ -10450,7 +10450,7 @@ func (*StatsGraph) CRC() uint32 {
 func (*StatsGraph) _IStatsGraph() {}
 
 type IStatsGroupTopAdmin interface {
-	tl.Object
+	tl.TLObject
 	_IStatsGroupTopAdmin()
 }
 
@@ -10471,7 +10471,7 @@ func (*StatsGroupTopAdmin) CRC() uint32 {
 func (*StatsGroupTopAdmin) _IStatsGroupTopAdmin() {}
 
 type IStatsGroupTopInviter interface {
-	tl.Object
+	tl.TLObject
 	_IStatsGroupTopInviter()
 }
 
@@ -10490,7 +10490,7 @@ func (*StatsGroupTopInviter) CRC() uint32 {
 func (*StatsGroupTopInviter) _IStatsGroupTopInviter() {}
 
 type IStatsGroupTopPoster interface {
-	tl.Object
+	tl.TLObject
 	_IStatsGroupTopPoster()
 }
 
@@ -10510,7 +10510,7 @@ func (*StatsGroupTopPoster) CRC() uint32 {
 func (*StatsGroupTopPoster) _IStatsGroupTopPoster() {}
 
 type IStatsPercentValue interface {
-	tl.Object
+	tl.TLObject
 	_IStatsPercentValue()
 }
 
@@ -10529,7 +10529,7 @@ func (*StatsPercentValue) CRC() uint32 {
 func (*StatsPercentValue) _IStatsPercentValue() {}
 
 type IStatsURL interface {
-	tl.Object
+	tl.TLObject
 	_IStatsURL()
 }
 
@@ -10547,7 +10547,7 @@ func (*StatsURL) CRC() uint32 {
 func (*StatsURL) _IStatsURL() {}
 
 type IStickerKeyword interface {
-	tl.Object
+	tl.TLObject
 	_IStickerKeyword()
 }
 
@@ -10566,7 +10566,7 @@ func (*StickerKeyword) CRC() uint32 {
 func (*StickerKeyword) _IStickerKeyword() {}
 
 type IStickerPack interface {
-	tl.Object
+	tl.TLObject
 	_IStickerPack()
 }
 
@@ -10585,7 +10585,7 @@ func (*StickerPack) CRC() uint32 {
 func (*StickerPack) _IStickerPack() {}
 
 type IStickerSet interface {
-	tl.Object
+	tl.TLObject
 	_IStickerSet()
 }
 
@@ -10622,7 +10622,7 @@ func (*StickerSet) CRC() uint32 {
 func (*StickerSet) _IStickerSet() {}
 
 type IStickerSetCovered interface {
-	tl.Object
+	tl.TLObject
 	_IStickerSetCovered()
 }
 
@@ -10675,7 +10675,7 @@ func (*StickerSetNoCovered) CRC() uint32 {
 func (*StickerSetNoCovered) _IStickerSetCovered() {}
 
 type IStoriesStealthMode interface {
-	tl.Object
+	tl.TLObject
 	_IStoriesStealthMode()
 }
 
@@ -10695,7 +10695,7 @@ func (*StoriesStealthMode) CRC() uint32 {
 func (*StoriesStealthMode) _IStoriesStealthMode() {}
 
 type IStoryFwdHeader interface {
-	tl.Object
+	tl.TLObject
 	_IStoryFwdHeader()
 }
 
@@ -10717,7 +10717,7 @@ func (*StoryFwdHeader) CRC() uint32 {
 func (*StoryFwdHeader) _IStoryFwdHeader() {}
 
 type IStoryItem interface {
-	tl.Object
+	tl.TLObject
 	_IStoryItem()
 }
 
@@ -10779,7 +10779,7 @@ func (*StoryItem) CRC() uint32 {
 func (*StoryItem) _IStoryItem() {}
 
 type IStoryReaction interface {
-	tl.Object
+	tl.TLObject
 	_IStoryReaction()
 }
 
@@ -10820,7 +10820,7 @@ func (*StoryReactionPublicRepost) CRC() uint32 {
 func (*StoryReactionPublicRepost) _IStoryReaction() {}
 
 type IStoryView interface {
-	tl.Object
+	tl.TLObject
 	_IStoryView()
 }
 
@@ -10870,7 +10870,7 @@ func (*StoryViewPublicRepost) CRC() uint32 {
 func (*StoryViewPublicRepost) _IStoryView() {}
 
 type IStoryViews interface {
-	tl.Object
+	tl.TLObject
 	_IStoryViews()
 }
 
@@ -10894,7 +10894,7 @@ func (*StoryViews) CRC() uint32 {
 func (*StoryViews) _IStoryViews() {}
 
 type ITextWithEntities interface {
-	tl.Object
+	tl.TLObject
 	_ITextWithEntities()
 }
 
@@ -10913,7 +10913,7 @@ func (*TextWithEntities) CRC() uint32 {
 func (*TextWithEntities) _ITextWithEntities() {}
 
 type ITheme interface {
-	tl.Object
+	tl.TLObject
 	_ITheme()
 }
 
@@ -10942,7 +10942,7 @@ func (*Theme) CRC() uint32 {
 func (*Theme) _ITheme() {}
 
 type IThemeSettings interface {
-	tl.Object
+	tl.TLObject
 	_IThemeSettings()
 }
 
@@ -10966,7 +10966,7 @@ func (*ThemeSettings) CRC() uint32 {
 func (*ThemeSettings) _IThemeSettings() {}
 
 type ITopPeer interface {
-	tl.Object
+	tl.TLObject
 	_ITopPeer()
 }
 
@@ -10985,7 +10985,7 @@ func (*TopPeer) CRC() uint32 {
 func (*TopPeer) _ITopPeer() {}
 
 type ITopPeerCategoryPeers interface {
-	tl.Object
+	tl.TLObject
 	_ITopPeerCategoryPeers()
 }
 
@@ -11004,9 +11004,9 @@ func (*TopPeerCategoryPeers) CRC() uint32 {
 }
 func (*TopPeerCategoryPeers) _ITopPeerCategoryPeers() {}
 
-// Object contains info on events occured.
+// TLObject contains info on events occured.
 type IUpdate interface {
-	tl.Object
+	tl.TLObject
 	_IUpdate()
 }
 
@@ -12540,7 +12540,7 @@ func (*UpdateBotMessageReactions) CRC() uint32 {
 func (*UpdateBotMessageReactions) _IUpdate() {}
 
 type IUpdates interface {
-	tl.Object
+	tl.TLObject
 	_IUpdates()
 }
 
@@ -12665,7 +12665,7 @@ func (*UpdateShortSentMessage) CRC() uint32 {
 func (*UpdateShortSentMessage) _IUpdates() {}
 
 type IURLAuthResult interface {
-	tl.Object
+	tl.TLObject
 	_IURLAuthResult()
 }
 
@@ -12703,9 +12703,9 @@ func (*URLAuthResultDefault) CRC() uint32 {
 }
 func (*URLAuthResultDefault) _IURLAuthResult() {}
 
-// Object defines a user.
+// TLObject defines a user.
 type IUser interface {
-	tl.Object
+	tl.TLObject
 	_IUser()
 }
 
@@ -12775,7 +12775,7 @@ func (*User) CRC() uint32 {
 func (*User) _IUser() {}
 
 type IUserFull interface {
-	tl.Object
+	tl.TLObject
 	_IUserFull()
 }
 
@@ -12823,7 +12823,7 @@ func (*UserFull) CRC() uint32 {
 func (*UserFull) _IUserFull() {}
 
 type IUserProfilePhoto interface {
-	tl.Object
+	tl.TLObject
 	_IUserProfilePhoto()
 }
 
@@ -12854,7 +12854,7 @@ func (*UserProfilePhoto) CRC() uint32 {
 func (*UserProfilePhoto) _IUserProfilePhoto() {}
 
 type IUserStatus interface {
-	tl.Object
+	tl.TLObject
 	_IUserStatus()
 }
 
@@ -12914,7 +12914,7 @@ func (*UserStatusLastMonth) CRC() uint32 {
 func (*UserStatusLastMonth) _IUserStatus() {}
 
 type IUsername interface {
-	tl.Object
+	tl.TLObject
 	_IUsername()
 }
 
@@ -12935,7 +12935,7 @@ func (*Username) CRC() uint32 {
 func (*Username) _IUsername() {}
 
 type IVideoSize interface {
-	tl.Object
+	tl.TLObject
 	_IVideoSize()
 }
 
@@ -12981,7 +12981,7 @@ func (*VideoSizeStickerMarkup) CRC() uint32 {
 func (*VideoSizeStickerMarkup) _IVideoSize() {}
 
 type IWallPaper interface {
-	tl.Object
+	tl.TLObject
 	_IWallPaper()
 }
 
@@ -13022,7 +13022,7 @@ func (*WallPaperNoFile) CRC() uint32 {
 func (*WallPaperNoFile) _IWallPaper() {}
 
 type IWallPaperSettings interface {
-	tl.Object
+	tl.TLObject
 	_IWallPaperSettings()
 }
 
@@ -13049,7 +13049,7 @@ func (*WallPaperSettings) CRC() uint32 {
 func (*WallPaperSettings) _IWallPaperSettings() {}
 
 type IWebAuthorization interface {
-	tl.Object
+	tl.TLObject
 	_IWebAuthorization()
 }
 
@@ -13075,7 +13075,7 @@ func (*WebAuthorization) CRC() uint32 {
 func (*WebAuthorization) _IWebAuthorization() {}
 
 type IWebDocument interface {
-	tl.Object
+	tl.TLObject
 	_IWebDocument()
 }
 
@@ -13111,7 +13111,7 @@ func (*WebDocumentNoProxy) _IWebDocument() {}
 
 // Instant View webpage preview
 type IWebPage interface {
-	tl.Object
+	tl.TLObject
 	_IWebPage()
 }
 
@@ -13188,7 +13188,7 @@ func (*WebPageNotModified) CRC() uint32 {
 func (*WebPageNotModified) _IWebPage() {}
 
 type IWebPageAttribute interface {
-	tl.Object
+	tl.TLObject
 	_IWebPageAttribute()
 }
 
@@ -13221,7 +13221,7 @@ func (*WebPageAttributeStory) CRC() uint32 {
 func (*WebPageAttributeStory) _IWebPageAttribute() {}
 
 type IWebViewMessageSent interface {
-	tl.Object
+	tl.TLObject
 	_IWebViewMessageSent()
 }
 
@@ -13240,7 +13240,7 @@ func (*WebViewMessageSent) CRC() uint32 {
 func (*WebViewMessageSent) _IWebViewMessageSent() {}
 
 type IWebViewResult interface {
-	tl.Object
+	tl.TLObject
 	_IWebViewResult()
 }
 
@@ -13260,7 +13260,7 @@ func (*WebViewResultURL) _IWebViewResult() {}
 
 // Authorization form
 type IAccountAuthorizationForm interface {
-	tl.Object
+	tl.TLObject
 	_IAccountAuthorizationForm()
 }
 
@@ -13284,7 +13284,7 @@ func (*AccountAuthorizationForm) CRC() uint32 {
 func (*AccountAuthorizationForm) _IAccountAuthorizationForm() {}
 
 type IAccountAuthorizations interface {
-	tl.Object
+	tl.TLObject
 	_IAccountAuthorizations()
 }
 
@@ -13303,7 +13303,7 @@ func (*AccountAuthorizations) CRC() uint32 {
 func (*AccountAuthorizations) _IAccountAuthorizations() {}
 
 type IAccountAutoDownloadSettings interface {
-	tl.Object
+	tl.TLObject
 	_IAccountAutoDownloadSettings()
 }
 
@@ -13323,7 +13323,7 @@ func (*AccountAutoDownloadSettings) CRC() uint32 {
 func (*AccountAutoDownloadSettings) _IAccountAutoDownloadSettings() {}
 
 type IAccountAutoSaveSettings interface {
-	tl.Object
+	tl.TLObject
 	_IAccountAutoSaveSettings()
 }
 
@@ -13346,7 +13346,7 @@ func (*AccountAutoSaveSettings) CRC() uint32 {
 func (*AccountAutoSaveSettings) _IAccountAutoSaveSettings() {}
 
 type IAccountContentSettings interface {
-	tl.Object
+	tl.TLObject
 	_IAccountContentSettings()
 }
 
@@ -13366,7 +13366,7 @@ func (*AccountContentSettings) CRC() uint32 {
 func (*AccountContentSettings) _IAccountContentSettings() {}
 
 type IAccountEmailVerified interface {
-	tl.Object
+	tl.TLObject
 	_IAccountEmailVerified()
 }
 
@@ -13395,7 +13395,7 @@ func (*AccountEmailVerifiedLogin) CRC() uint32 {
 func (*AccountEmailVerifiedLogin) _IAccountEmailVerified() {}
 
 type IAccountEmojiStatuses interface {
-	tl.Object
+	tl.TLObject
 	_IAccountEmojiStatuses()
 }
 
@@ -13422,7 +13422,7 @@ func (*AccountEmojiStatuses) CRC() uint32 {
 func (*AccountEmojiStatuses) _IAccountEmojiStatuses() {}
 
 type IAccountPassword interface {
-	tl.Object
+	tl.TLObject
 	_IAccountPassword()
 }
 
@@ -13453,7 +13453,7 @@ func (*AccountPassword) CRC() uint32 {
 func (*AccountPassword) _IAccountPassword() {}
 
 type IAccountPasswordInputSettings interface {
-	tl.Object
+	tl.TLObject
 	_IAccountPasswordInputSettings()
 }
 
@@ -13476,7 +13476,7 @@ func (*AccountPasswordInputSettings) CRC() uint32 {
 func (*AccountPasswordInputSettings) _IAccountPasswordInputSettings() {}
 
 type IAccountPasswordSettings interface {
-	tl.Object
+	tl.TLObject
 	_IAccountPasswordSettings()
 }
 
@@ -13496,7 +13496,7 @@ func (*AccountPasswordSettings) CRC() uint32 {
 func (*AccountPasswordSettings) _IAccountPasswordSettings() {}
 
 type IAccountPrivacyRules interface {
-	tl.Object
+	tl.TLObject
 	_IAccountPrivacyRules()
 }
 
@@ -13516,7 +13516,7 @@ func (*AccountPrivacyRules) CRC() uint32 {
 func (*AccountPrivacyRules) _IAccountPrivacyRules() {}
 
 type IAccountResetPasswordResult interface {
-	tl.Object
+	tl.TLObject
 	_IAccountResetPasswordResult()
 }
 
@@ -13552,7 +13552,7 @@ func (*AccountResetPasswordOk) CRC() uint32 {
 func (*AccountResetPasswordOk) _IAccountResetPasswordResult() {}
 
 type IAccountSavedRingtone interface {
-	tl.Object
+	tl.TLObject
 	_IAccountSavedRingtone()
 }
 
@@ -13578,7 +13578,7 @@ func (*AccountSavedRingtoneConverted) CRC() uint32 {
 func (*AccountSavedRingtoneConverted) _IAccountSavedRingtone() {}
 
 type IAccountSavedRingtones interface {
-	tl.Object
+	tl.TLObject
 	_IAccountSavedRingtones()
 }
 
@@ -13605,7 +13605,7 @@ func (*AccountSavedRingtones) CRC() uint32 {
 func (*AccountSavedRingtones) _IAccountSavedRingtones() {}
 
 type IAccountSentEmailCode interface {
-	tl.Object
+	tl.TLObject
 	_IAccountSentEmailCode()
 }
 
@@ -13624,7 +13624,7 @@ func (*AccountSentEmailCode) CRC() uint32 {
 func (*AccountSentEmailCode) _IAccountSentEmailCode() {}
 
 type IAccountTakeout interface {
-	tl.Object
+	tl.TLObject
 	_IAccountTakeout()
 }
 
@@ -13642,7 +13642,7 @@ func (*AccountTakeout) CRC() uint32 {
 func (*AccountTakeout) _IAccountTakeout() {}
 
 type IAccountThemes interface {
-	tl.Object
+	tl.TLObject
 	_IAccountThemes()
 }
 
@@ -13669,7 +13669,7 @@ func (*AccountThemes) CRC() uint32 {
 func (*AccountThemes) _IAccountThemes() {}
 
 type IAccountTmpPassword interface {
-	tl.Object
+	tl.TLObject
 	_IAccountTmpPassword()
 }
 
@@ -13688,7 +13688,7 @@ func (*AccountTmpPassword) CRC() uint32 {
 func (*AccountTmpPassword) _IAccountTmpPassword() {}
 
 type IAccountWallPapers interface {
-	tl.Object
+	tl.TLObject
 	_IAccountWallPapers()
 }
 
@@ -13715,7 +13715,7 @@ func (*AccountWallPapers) CRC() uint32 {
 func (*AccountWallPapers) _IAccountWallPapers() {}
 
 type IAccountWebAuthorizations interface {
-	tl.Object
+	tl.TLObject
 	_IAccountWebAuthorizations()
 }
 
@@ -13734,7 +13734,7 @@ func (*AccountWebAuthorizations) CRC() uint32 {
 func (*AccountWebAuthorizations) _IAccountWebAuthorizations() {}
 
 type IAuthAuthorization interface {
-	tl.Object
+	tl.TLObject
 	_IAuthAuthorization()
 }
 
@@ -13768,7 +13768,7 @@ func (*AuthAuthorizationSignUpRequired) CRC() uint32 {
 func (*AuthAuthorizationSignUpRequired) _IAuthAuthorization() {}
 
 type IAuthExportedAuthorization interface {
-	tl.Object
+	tl.TLObject
 	_IAuthExportedAuthorization()
 }
 
@@ -13787,7 +13787,7 @@ func (*AuthExportedAuthorization) CRC() uint32 {
 func (*AuthExportedAuthorization) _IAuthExportedAuthorization() {}
 
 type IAuthLoggedOut interface {
-	tl.Object
+	tl.TLObject
 	_IAuthLoggedOut()
 }
 
@@ -13806,7 +13806,7 @@ func (*AuthLoggedOut) CRC() uint32 {
 func (*AuthLoggedOut) _IAuthLoggedOut() {}
 
 type IAuthLoginToken interface {
-	tl.Object
+	tl.TLObject
 	_IAuthLoginToken()
 }
 
@@ -13846,7 +13846,7 @@ func (*AuthLoginTokenSuccess) CRC() uint32 {
 func (*AuthLoginTokenSuccess) _IAuthLoginToken() {}
 
 type IAuthPasswordRecovery interface {
-	tl.Object
+	tl.TLObject
 	_IAuthPasswordRecovery()
 }
 
@@ -13864,7 +13864,7 @@ func (*AuthPasswordRecovery) CRC() uint32 {
 func (*AuthPasswordRecovery) _IAuthPasswordRecovery() {}
 
 type IAuthSentCode interface {
-	tl.Object
+	tl.TLObject
 	_IAuthSentCode()
 }
 
@@ -13896,7 +13896,7 @@ func (*AuthSentCodeSuccess) CRC() uint32 {
 func (*AuthSentCodeSuccess) _IAuthSentCode() {}
 
 type IAuthSentCodeType interface {
-	tl.Object
+	tl.TLObject
 	_IAuthSentCodeType()
 }
 
@@ -14008,7 +14008,7 @@ func (*AuthSentCodeTypeFirebaseSms) CRC() uint32 {
 func (*AuthSentCodeTypeFirebaseSms) _IAuthSentCodeType() {}
 
 type IBotsBotInfo interface {
-	tl.Object
+	tl.TLObject
 	_IBotsBotInfo()
 }
 
@@ -14028,7 +14028,7 @@ func (*BotsBotInfo) CRC() uint32 {
 func (*BotsBotInfo) _IBotsBotInfo() {}
 
 type IChannelsAdminLogResults interface {
-	tl.Object
+	tl.TLObject
 	_IChannelsAdminLogResults()
 }
 
@@ -14048,7 +14048,7 @@ func (*ChannelsAdminLogResults) CRC() uint32 {
 func (*ChannelsAdminLogResults) _IChannelsAdminLogResults() {}
 
 type IChannelsChannelParticipant interface {
-	tl.Object
+	tl.TLObject
 	_IChannelsChannelParticipant()
 }
 
@@ -14068,7 +14068,7 @@ func (*ChannelsChannelParticipant) CRC() uint32 {
 func (*ChannelsChannelParticipant) _IChannelsChannelParticipant() {}
 
 type IChannelsChannelParticipants interface {
-	tl.Object
+	tl.TLObject
 	_IChannelsChannelParticipants()
 }
 
@@ -14097,7 +14097,7 @@ func (*ChannelsChannelParticipantsNotModified) CRC() uint32 {
 func (*ChannelsChannelParticipantsNotModified) _IChannelsChannelParticipants() {}
 
 type IChannelsSendAsPeers interface {
-	tl.Object
+	tl.TLObject
 	_IChannelsSendAsPeers()
 }
 
@@ -14117,7 +14117,7 @@ func (*ChannelsSendAsPeers) CRC() uint32 {
 func (*ChannelsSendAsPeers) _IChannelsSendAsPeers() {}
 
 type IChatlistsChatlistInvite interface {
-	tl.Object
+	tl.TLObject
 	_IChatlistsChatlistInvite()
 }
 
@@ -14154,7 +14154,7 @@ func (*ChatlistsChatlistInvite) CRC() uint32 {
 func (*ChatlistsChatlistInvite) _IChatlistsChatlistInvite() {}
 
 type IChatlistsChatlistUpdates interface {
-	tl.Object
+	tl.TLObject
 	_IChatlistsChatlistUpdates()
 }
 
@@ -14174,7 +14174,7 @@ func (*ChatlistsChatlistUpdates) CRC() uint32 {
 func (*ChatlistsChatlistUpdates) _IChatlistsChatlistUpdates() {}
 
 type IChatlistsExportedChatlistInvite interface {
-	tl.Object
+	tl.TLObject
 	_IChatlistsExportedChatlistInvite()
 }
 
@@ -14193,7 +14193,7 @@ func (*ChatlistsExportedChatlistInvite) CRC() uint32 {
 func (*ChatlistsExportedChatlistInvite) _IChatlistsExportedChatlistInvite() {}
 
 type IChatlistsExportedInvites interface {
-	tl.Object
+	tl.TLObject
 	_IChatlistsExportedInvites()
 }
 
@@ -14213,7 +14213,7 @@ func (*ChatlistsExportedInvites) CRC() uint32 {
 func (*ChatlistsExportedInvites) _IChatlistsExportedInvites() {}
 
 type IContactsBlocked interface {
-	tl.Object
+	tl.TLObject
 	_IContactsBlocked()
 }
 
@@ -14247,7 +14247,7 @@ func (*ContactsBlockedSlice) _IContactsBlocked() {}
 
 // Info on the current user's contact list.
 type IContactsContacts interface {
-	tl.Object
+	tl.TLObject
 	_IContactsContacts()
 }
 
@@ -14277,7 +14277,7 @@ func (*ContactsContacts) CRC() uint32 {
 func (*ContactsContacts) _IContactsContacts() {}
 
 type IContactsFound interface {
-	tl.Object
+	tl.TLObject
 	_IContactsFound()
 }
 
@@ -14298,7 +14298,7 @@ func (*ContactsFound) CRC() uint32 {
 func (*ContactsFound) _IContactsFound() {}
 
 type IContactsImportedContacts interface {
-	tl.Object
+	tl.TLObject
 	_IContactsImportedContacts()
 }
 
@@ -14319,7 +14319,7 @@ func (*ContactsImportedContacts) CRC() uint32 {
 func (*ContactsImportedContacts) _IContactsImportedContacts() {}
 
 type IContactsResolvedPeer interface {
-	tl.Object
+	tl.TLObject
 	_IContactsResolvedPeer()
 }
 
@@ -14339,7 +14339,7 @@ func (*ContactsResolvedPeer) CRC() uint32 {
 func (*ContactsResolvedPeer) _IContactsResolvedPeer() {}
 
 type IContactsTopPeers interface {
-	tl.Object
+	tl.TLObject
 	_IContactsTopPeers()
 }
 
@@ -14375,7 +14375,7 @@ func (*ContactsTopPeersDisabled) CRC() uint32 {
 func (*ContactsTopPeersDisabled) _IContactsTopPeers() {}
 
 type IHelpAppConfig interface {
-	tl.Object
+	tl.TLObject
 	_IHelpAppConfig()
 }
 
@@ -14402,7 +14402,7 @@ func (*HelpAppConfig) CRC() uint32 {
 func (*HelpAppConfig) _IHelpAppConfig() {}
 
 type IHelpAppUpdate interface {
-	tl.Object
+	tl.TLObject
 	_IHelpAppUpdate()
 }
 
@@ -14436,7 +14436,7 @@ func (*HelpNoAppUpdate) CRC() uint32 {
 func (*HelpNoAppUpdate) _IHelpAppUpdate() {}
 
 type IHelpCountriesList interface {
-	tl.Object
+	tl.TLObject
 	_IHelpCountriesList()
 }
 
@@ -14463,7 +14463,7 @@ func (*HelpCountriesList) CRC() uint32 {
 func (*HelpCountriesList) _IHelpCountriesList() {}
 
 type IHelpCountry interface {
-	tl.Object
+	tl.TLObject
 	_IHelpCountry()
 }
 
@@ -14486,7 +14486,7 @@ func (*HelpCountry) CRC() uint32 {
 func (*HelpCountry) _IHelpCountry() {}
 
 type IHelpCountryCode interface {
-	tl.Object
+	tl.TLObject
 	_IHelpCountryCode()
 }
 
@@ -14507,7 +14507,7 @@ func (*HelpCountryCode) CRC() uint32 {
 func (*HelpCountryCode) _IHelpCountryCode() {}
 
 type IHelpDeepLinkInfo interface {
-	tl.Object
+	tl.TLObject
 	_IHelpDeepLinkInfo()
 }
 
@@ -14536,7 +14536,7 @@ func (*HelpDeepLinkInfo) CRC() uint32 {
 func (*HelpDeepLinkInfo) _IHelpDeepLinkInfo() {}
 
 type IHelpInviteText interface {
-	tl.Object
+	tl.TLObject
 	_IHelpInviteText()
 }
 
@@ -14554,7 +14554,7 @@ func (*HelpInviteText) CRC() uint32 {
 func (*HelpInviteText) _IHelpInviteText() {}
 
 type IHelpPassportConfig interface {
-	tl.Object
+	tl.TLObject
 	_IHelpPassportConfig()
 }
 
@@ -14581,7 +14581,7 @@ func (*HelpPassportConfig) CRC() uint32 {
 func (*HelpPassportConfig) _IHelpPassportConfig() {}
 
 type IHelpPeerColorOption interface {
-	tl.Object
+	tl.TLObject
 	_IHelpPeerColorOption()
 }
 
@@ -14604,7 +14604,7 @@ func (*HelpPeerColorOption) CRC() uint32 {
 func (*HelpPeerColorOption) _IHelpPeerColorOption() {}
 
 type IHelpPeerColorSet interface {
-	tl.Object
+	tl.TLObject
 	_IHelpPeerColorSet()
 }
 
@@ -14634,7 +14634,7 @@ func (*HelpPeerColorProfileSet) CRC() uint32 {
 func (*HelpPeerColorProfileSet) _IHelpPeerColorSet() {}
 
 type IHelpPeerColors interface {
-	tl.Object
+	tl.TLObject
 	_IHelpPeerColors()
 }
 
@@ -14661,7 +14661,7 @@ func (*HelpPeerColors) CRC() uint32 {
 func (*HelpPeerColors) _IHelpPeerColors() {}
 
 type IHelpPremiumPromo interface {
-	tl.Object
+	tl.TLObject
 	_IHelpPremiumPromo()
 }
 
@@ -14684,7 +14684,7 @@ func (*HelpPremiumPromo) CRC() uint32 {
 func (*HelpPremiumPromo) _IHelpPremiumPromo() {}
 
 type IHelpPromoData interface {
-	tl.Object
+	tl.TLObject
 	_IHelpPromoData()
 }
 
@@ -14719,7 +14719,7 @@ func (*HelpPromoData) CRC() uint32 {
 func (*HelpPromoData) _IHelpPromoData() {}
 
 type IHelpRecentMeUrls interface {
-	tl.Object
+	tl.TLObject
 	_IHelpRecentMeUrls()
 }
 
@@ -14739,7 +14739,7 @@ func (*HelpRecentMeUrls) CRC() uint32 {
 func (*HelpRecentMeUrls) _IHelpRecentMeUrls() {}
 
 type IHelpSupport interface {
-	tl.Object
+	tl.TLObject
 	_IHelpSupport()
 }
 
@@ -14758,7 +14758,7 @@ func (*HelpSupport) CRC() uint32 {
 func (*HelpSupport) _IHelpSupport() {}
 
 type IHelpSupportName interface {
-	tl.Object
+	tl.TLObject
 	_IHelpSupportName()
 }
 
@@ -14776,7 +14776,7 @@ func (*HelpSupportName) CRC() uint32 {
 func (*HelpSupportName) _IHelpSupportName() {}
 
 type IHelpTermsOfService interface {
-	tl.Object
+	tl.TLObject
 	_IHelpTermsOfService()
 }
 
@@ -14799,7 +14799,7 @@ func (*HelpTermsOfService) CRC() uint32 {
 func (*HelpTermsOfService) _IHelpTermsOfService() {}
 
 type IHelpTermsOfServiceUpdate interface {
-	tl.Object
+	tl.TLObject
 	_IHelpTermsOfServiceUpdate()
 }
 
@@ -14828,7 +14828,7 @@ func (*HelpTermsOfServiceUpdate) CRC() uint32 {
 func (*HelpTermsOfServiceUpdate) _IHelpTermsOfServiceUpdate() {}
 
 type IHelpUserInfo interface {
-	tl.Object
+	tl.TLObject
 	_IHelpUserInfo()
 }
 
@@ -14857,7 +14857,7 @@ func (*HelpUserInfo) CRC() uint32 {
 func (*HelpUserInfo) _IHelpUserInfo() {}
 
 type IMessagesAffectedFoundMessages interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesAffectedFoundMessages()
 }
 
@@ -14878,7 +14878,7 @@ func (*MessagesAffectedFoundMessages) CRC() uint32 {
 func (*MessagesAffectedFoundMessages) _IMessagesAffectedFoundMessages() {}
 
 type IMessagesAffectedHistory interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesAffectedHistory()
 }
 
@@ -14898,7 +14898,7 @@ func (*MessagesAffectedHistory) CRC() uint32 {
 func (*MessagesAffectedHistory) _IMessagesAffectedHistory() {}
 
 type IMessagesAffectedMessages interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesAffectedMessages()
 }
 
@@ -14917,7 +14917,7 @@ func (*MessagesAffectedMessages) CRC() uint32 {
 func (*MessagesAffectedMessages) _IMessagesAffectedMessages() {}
 
 type IMessagesAllStickers interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesAllStickers()
 }
 
@@ -14944,7 +14944,7 @@ func (*MessagesAllStickers) CRC() uint32 {
 func (*MessagesAllStickers) _IMessagesAllStickers() {}
 
 type IMessagesArchivedStickers interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesArchivedStickers()
 }
 
@@ -14963,7 +14963,7 @@ func (*MessagesArchivedStickers) CRC() uint32 {
 func (*MessagesArchivedStickers) _IMessagesArchivedStickers() {}
 
 type IMessagesAvailableReactions interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesAvailableReactions()
 }
 
@@ -14990,7 +14990,7 @@ func (*MessagesAvailableReactions) CRC() uint32 {
 func (*MessagesAvailableReactions) _IMessagesAvailableReactions() {}
 
 type IMessagesBotApp interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesBotApp()
 }
 
@@ -15012,7 +15012,7 @@ func (*MessagesBotApp) CRC() uint32 {
 func (*MessagesBotApp) _IMessagesBotApp() {}
 
 type IMessagesBotCallbackAnswer interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesBotCallbackAnswer()
 }
 
@@ -15036,7 +15036,7 @@ func (*MessagesBotCallbackAnswer) CRC() uint32 {
 func (*MessagesBotCallbackAnswer) _IMessagesBotCallbackAnswer() {}
 
 type IMessagesBotResults interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesBotResults()
 }
 
@@ -15062,7 +15062,7 @@ func (*MessagesBotResults) CRC() uint32 {
 func (*MessagesBotResults) _IMessagesBotResults() {}
 
 type IMessagesChatAdminsWithInvites interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesChatAdminsWithInvites()
 }
 
@@ -15081,7 +15081,7 @@ func (*MessagesChatAdminsWithInvites) CRC() uint32 {
 func (*MessagesChatAdminsWithInvites) _IMessagesChatAdminsWithInvites() {}
 
 type IMessagesChatFull interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesChatFull()
 }
 
@@ -15101,7 +15101,7 @@ func (*MessagesChatFull) CRC() uint32 {
 func (*MessagesChatFull) _IMessagesChatFull() {}
 
 type IMessagesChatInviteImporters interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesChatInviteImporters()
 }
 
@@ -15121,7 +15121,7 @@ func (*MessagesChatInviteImporters) CRC() uint32 {
 func (*MessagesChatInviteImporters) _IMessagesChatInviteImporters() {}
 
 type IMessagesChats interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesChats()
 }
 
@@ -15150,7 +15150,7 @@ func (*MessagesChatsSlice) CRC() uint32 {
 func (*MessagesChatsSlice) _IMessagesChats() {}
 
 type IMessagesCheckedHistoryImportPeer interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesCheckedHistoryImportPeer()
 }
 
@@ -15168,7 +15168,7 @@ func (*MessagesCheckedHistoryImportPeer) CRC() uint32 {
 func (*MessagesCheckedHistoryImportPeer) _IMessagesCheckedHistoryImportPeer() {}
 
 type IMessagesDhConfig interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesDhConfig()
 }
 
@@ -15199,7 +15199,7 @@ func (*MessagesDhConfig) CRC() uint32 {
 func (*MessagesDhConfig) _IMessagesDhConfig() {}
 
 type IMessagesDialogs interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesDialogs()
 }
 
@@ -15244,7 +15244,7 @@ func (*MessagesDialogsNotModified) CRC() uint32 {
 func (*MessagesDialogsNotModified) _IMessagesDialogs() {}
 
 type IMessagesDiscussionMessage interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesDiscussionMessage()
 }
 
@@ -15269,7 +15269,7 @@ func (*MessagesDiscussionMessage) CRC() uint32 {
 func (*MessagesDiscussionMessage) _IMessagesDiscussionMessage() {}
 
 type IMessagesEmojiGroups interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesEmojiGroups()
 }
 
@@ -15296,7 +15296,7 @@ func (*MessagesEmojiGroups) CRC() uint32 {
 func (*MessagesEmojiGroups) _IMessagesEmojiGroups() {}
 
 type IMessagesExportedChatInvite interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesExportedChatInvite()
 }
 
@@ -15327,7 +15327,7 @@ func (*MessagesExportedChatInviteReplaced) CRC() uint32 {
 func (*MessagesExportedChatInviteReplaced) _IMessagesExportedChatInvite() {}
 
 type IMessagesExportedChatInvites interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesExportedChatInvites()
 }
 
@@ -15347,7 +15347,7 @@ func (*MessagesExportedChatInvites) CRC() uint32 {
 func (*MessagesExportedChatInvites) _IMessagesExportedChatInvites() {}
 
 type IMessagesFavedStickers interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesFavedStickers()
 }
 
@@ -15375,7 +15375,7 @@ func (*MessagesFavedStickers) CRC() uint32 {
 func (*MessagesFavedStickers) _IMessagesFavedStickers() {}
 
 type IMessagesFeaturedStickers interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesFeaturedStickers()
 }
 
@@ -15408,7 +15408,7 @@ func (*MessagesFeaturedStickers) CRC() uint32 {
 func (*MessagesFeaturedStickers) _IMessagesFeaturedStickers() {}
 
 type IMessagesForumTopics interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesForumTopics()
 }
 
@@ -15433,7 +15433,7 @@ func (*MessagesForumTopics) CRC() uint32 {
 func (*MessagesForumTopics) _IMessagesForumTopics() {}
 
 type IMessagesFoundStickerSets interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesFoundStickerSets()
 }
 
@@ -15460,7 +15460,7 @@ func (*MessagesFoundStickerSets) CRC() uint32 {
 func (*MessagesFoundStickerSets) _IMessagesFoundStickerSets() {}
 
 type IMessagesHighScores interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesHighScores()
 }
 
@@ -15479,7 +15479,7 @@ func (*MessagesHighScores) CRC() uint32 {
 func (*MessagesHighScores) _IMessagesHighScores() {}
 
 type IMessagesHistoryImport interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesHistoryImport()
 }
 
@@ -15497,7 +15497,7 @@ func (*MessagesHistoryImport) CRC() uint32 {
 func (*MessagesHistoryImport) _IMessagesHistoryImport() {}
 
 type IMessagesHistoryImportParsed interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesHistoryImportParsed()
 }
 
@@ -15518,7 +15518,7 @@ func (*MessagesHistoryImportParsed) CRC() uint32 {
 func (*MessagesHistoryImportParsed) _IMessagesHistoryImportParsed() {}
 
 type IMessagesInactiveChats interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesInactiveChats()
 }
 
@@ -15538,7 +15538,7 @@ func (*MessagesInactiveChats) CRC() uint32 {
 func (*MessagesInactiveChats) _IMessagesInactiveChats() {}
 
 type IMessagesMessageEditData interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesMessageEditData()
 }
 
@@ -15557,7 +15557,7 @@ func (*MessagesMessageEditData) CRC() uint32 {
 func (*MessagesMessageEditData) _IMessagesMessageEditData() {}
 
 type IMessagesMessageReactionsList interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesMessageReactionsList()
 }
 
@@ -15580,7 +15580,7 @@ func (*MessagesMessageReactionsList) CRC() uint32 {
 func (*MessagesMessageReactionsList) _IMessagesMessageReactionsList() {}
 
 type IMessagesMessageViews interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesMessageViews()
 }
 
@@ -15600,7 +15600,7 @@ func (*MessagesMessageViews) CRC() uint32 {
 func (*MessagesMessageViews) _IMessagesMessageViews() {}
 
 type IMessagesMessages interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesMessages()
 }
 
@@ -15665,7 +15665,7 @@ func (*MessagesMessagesNotModified) CRC() uint32 {
 func (*MessagesMessagesNotModified) _IMessagesMessages() {}
 
 type IMessagesPeerDialogs interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesPeerDialogs()
 }
 
@@ -15687,7 +15687,7 @@ func (*MessagesPeerDialogs) CRC() uint32 {
 func (*MessagesPeerDialogs) _IMessagesPeerDialogs() {}
 
 type IMessagesPeerSettings interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesPeerSettings()
 }
 
@@ -15707,7 +15707,7 @@ func (*MessagesPeerSettings) CRC() uint32 {
 func (*MessagesPeerSettings) _IMessagesPeerSettings() {}
 
 type IMessagesReactions interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesReactions()
 }
 
@@ -15734,7 +15734,7 @@ func (*MessagesReactions) CRC() uint32 {
 func (*MessagesReactions) _IMessagesReactions() {}
 
 type IMessagesRecentStickers interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesRecentStickers()
 }
 
@@ -15763,7 +15763,7 @@ func (*MessagesRecentStickers) CRC() uint32 {
 func (*MessagesRecentStickers) _IMessagesRecentStickers() {}
 
 type IMessagesSavedGifs interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesSavedGifs()
 }
 
@@ -15790,7 +15790,7 @@ func (*MessagesSavedGifs) CRC() uint32 {
 func (*MessagesSavedGifs) _IMessagesSavedGifs() {}
 
 type IMessagesSearchCounter interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesSearchCounter()
 }
 
@@ -15811,7 +15811,7 @@ func (*MessagesSearchCounter) CRC() uint32 {
 func (*MessagesSearchCounter) _IMessagesSearchCounter() {}
 
 type IMessagesSearchResultsCalendar interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesSearchResultsCalendar()
 }
 
@@ -15838,7 +15838,7 @@ func (*MessagesSearchResultsCalendar) CRC() uint32 {
 func (*MessagesSearchResultsCalendar) _IMessagesSearchResultsCalendar() {}
 
 type IMessagesSearchResultsPositions interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesSearchResultsPositions()
 }
 
@@ -15857,7 +15857,7 @@ func (*MessagesSearchResultsPositions) CRC() uint32 {
 func (*MessagesSearchResultsPositions) _IMessagesSearchResultsPositions() {}
 
 type IMessagesSentEncryptedMessage interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesSentEncryptedMessage()
 }
 
@@ -15886,7 +15886,7 @@ func (*MessagesSentEncryptedFile) CRC() uint32 {
 func (*MessagesSentEncryptedFile) _IMessagesSentEncryptedMessage() {}
 
 type IMessagesSponsoredMessages interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesSponsoredMessages()
 }
 
@@ -15916,7 +15916,7 @@ func (*MessagesSponsoredMessagesEmpty) CRC() uint32 {
 func (*MessagesSponsoredMessagesEmpty) _IMessagesSponsoredMessages() {}
 
 type IMessagesStickerSet interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesStickerSet()
 }
 
@@ -15945,7 +15945,7 @@ func (*MessagesStickerSetNotModified) CRC() uint32 {
 func (*MessagesStickerSetNotModified) _IMessagesStickerSet() {}
 
 type IMessagesStickerSetInstallResult interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesStickerSetInstallResult()
 }
 
@@ -15971,7 +15971,7 @@ func (*MessagesStickerSetInstallResultArchive) CRC() uint32 {
 func (*MessagesStickerSetInstallResultArchive) _IMessagesStickerSetInstallResult() {}
 
 type IMessagesStickers interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesStickers()
 }
 
@@ -15998,7 +15998,7 @@ func (*MessagesStickers) CRC() uint32 {
 func (*MessagesStickers) _IMessagesStickers() {}
 
 type IMessagesTranscribedAudio interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesTranscribedAudio()
 }
 
@@ -16021,7 +16021,7 @@ func (*MessagesTranscribedAudio) CRC() uint32 {
 func (*MessagesTranscribedAudio) _IMessagesTranscribedAudio() {}
 
 type IMessagesTranslatedText interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesTranslatedText()
 }
 
@@ -16039,7 +16039,7 @@ func (*MessagesTranslateResult) CRC() uint32 {
 func (*MessagesTranslateResult) _IMessagesTranslatedText() {}
 
 type IMessagesVotesList interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesVotesList()
 }
 
@@ -16062,7 +16062,7 @@ func (*MessagesVotesList) CRC() uint32 {
 func (*MessagesVotesList) _IMessagesVotesList() {}
 
 type IMessagesWebPage interface {
-	tl.Object
+	tl.TLObject
 	_IMessagesWebPage()
 }
 
@@ -16082,7 +16082,7 @@ func (*MessagesWebPage) CRC() uint32 {
 func (*MessagesWebPage) _IMessagesWebPage() {}
 
 type IPaymentsBankCardData interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsBankCardData()
 }
 
@@ -16101,7 +16101,7 @@ func (*PaymentsBankCardData) CRC() uint32 {
 func (*PaymentsBankCardData) _IPaymentsBankCardData() {}
 
 type IPaymentsCheckedGiftCode interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsCheckedGiftCode()
 }
 
@@ -16128,7 +16128,7 @@ func (*PaymentsCheckedGiftCode) CRC() uint32 {
 func (*PaymentsCheckedGiftCode) _IPaymentsCheckedGiftCode() {}
 
 type IPaymentsExportedInvoice interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsExportedInvoice()
 }
 
@@ -16146,7 +16146,7 @@ func (*PaymentsExportedInvoice) CRC() uint32 {
 func (*PaymentsExportedInvoice) _IPaymentsExportedInvoice() {}
 
 type IPaymentsGiveawayInfo interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsGiveawayInfo()
 }
 
@@ -16187,7 +16187,7 @@ func (*PaymentsGiveawayInfoResults) CRC() uint32 {
 func (*PaymentsGiveawayInfoResults) _IPaymentsGiveawayInfo() {}
 
 type IPaymentsPaymentForm interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsPaymentForm()
 }
 
@@ -16222,7 +16222,7 @@ func (*PaymentsPaymentForm) CRC() uint32 {
 func (*PaymentsPaymentForm) _IPaymentsPaymentForm() {}
 
 type IPaymentsPaymentReceipt interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsPaymentReceipt()
 }
 
@@ -16254,7 +16254,7 @@ func (*PaymentsPaymentReceipt) CRC() uint32 {
 func (*PaymentsPaymentReceipt) _IPaymentsPaymentReceipt() {}
 
 type IPaymentsPaymentResult interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsPaymentResult()
 }
 
@@ -16282,7 +16282,7 @@ func (*PaymentsPaymentVerificationNeeded) CRC() uint32 {
 func (*PaymentsPaymentVerificationNeeded) _IPaymentsPaymentResult() {}
 
 type IPaymentsSavedInfo interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsSavedInfo()
 }
 
@@ -16302,7 +16302,7 @@ func (*PaymentsSavedInfo) CRC() uint32 {
 func (*PaymentsSavedInfo) _IPaymentsSavedInfo() {}
 
 type IPaymentsValidatedRequestedInfo interface {
-	tl.Object
+	tl.TLObject
 	_IPaymentsValidatedRequestedInfo()
 }
 
@@ -16322,7 +16322,7 @@ func (*PaymentsValidatedRequestedInfo) CRC() uint32 {
 func (*PaymentsValidatedRequestedInfo) _IPaymentsValidatedRequestedInfo() {}
 
 type IPhoneExportedGroupCallInvite interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneExportedGroupCallInvite()
 }
 
@@ -16340,7 +16340,7 @@ func (*PhoneExportedGroupCallInvite) CRC() uint32 {
 func (*PhoneExportedGroupCallInvite) _IPhoneExportedGroupCallInvite() {}
 
 type IPhoneGroupCall interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneGroupCall()
 }
 
@@ -16362,7 +16362,7 @@ func (*PhoneGroupCall) CRC() uint32 {
 func (*PhoneGroupCall) _IPhoneGroupCall() {}
 
 type IPhoneGroupCallStreamChannels interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneGroupCallStreamChannels()
 }
 
@@ -16380,7 +16380,7 @@ func (*PhoneGroupCallStreamChannels) CRC() uint32 {
 func (*PhoneGroupCallStreamChannels) _IPhoneGroupCallStreamChannels() {}
 
 type IPhoneGroupCallStreamRtmpURL interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneGroupCallStreamRtmpURL()
 }
 
@@ -16399,7 +16399,7 @@ func (*PhoneGroupCallStreamRtmpURL) CRC() uint32 {
 func (*PhoneGroupCallStreamRtmpURL) _IPhoneGroupCallStreamRtmpURL() {}
 
 type IPhoneGroupParticipants interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneGroupParticipants()
 }
 
@@ -16422,7 +16422,7 @@ func (*PhoneGroupParticipants) CRC() uint32 {
 func (*PhoneGroupParticipants) _IPhoneGroupParticipants() {}
 
 type IPhoneJoinAsPeers interface {
-	tl.Object
+	tl.TLObject
 	_IPhoneJoinAsPeers()
 }
 
@@ -16442,7 +16442,7 @@ func (*PhoneJoinAsPeers) CRC() uint32 {
 func (*PhoneJoinAsPeers) _IPhoneJoinAsPeers() {}
 
 type IPhonePhoneCall interface {
-	tl.Object
+	tl.TLObject
 	_IPhonePhoneCall()
 }
 
@@ -16461,7 +16461,7 @@ func (*PhonePhoneCall) CRC() uint32 {
 func (*PhonePhoneCall) _IPhonePhoneCall() {}
 
 type IPhotosPhoto interface {
-	tl.Object
+	tl.TLObject
 	_IPhotosPhoto()
 }
 
@@ -16480,7 +16480,7 @@ func (*PhotosPhoto) CRC() uint32 {
 func (*PhotosPhoto) _IPhotosPhoto() {}
 
 type IPhotosPhotos interface {
-	tl.Object
+	tl.TLObject
 	_IPhotosPhotos()
 }
 
@@ -16511,7 +16511,7 @@ func (*PhotosPhotosSlice) CRC() uint32 {
 func (*PhotosPhotosSlice) _IPhotosPhotos() {}
 
 type IPremiumBoostsList interface {
-	tl.Object
+	tl.TLObject
 	_IPremiumBoostsList()
 }
 
@@ -16533,7 +16533,7 @@ func (*PremiumBoostsList) CRC() uint32 {
 func (*PremiumBoostsList) _IPremiumBoostsList() {}
 
 type IPremiumBoostsStatus interface {
-	tl.Object
+	tl.TLObject
 	_IPremiumBoostsStatus()
 }
 
@@ -16561,7 +16561,7 @@ func (*PremiumBoostsStatus) CRC() uint32 {
 func (*PremiumBoostsStatus) _IPremiumBoostsStatus() {}
 
 type IPremiumMyBoosts interface {
-	tl.Object
+	tl.TLObject
 	_IPremiumMyBoosts()
 }
 
@@ -16582,7 +16582,7 @@ func (*PremiumMyBoosts) _IPremiumMyBoosts() {}
 
 // Channel statistics
 type IStatsBroadcastStats interface {
-	tl.Object
+	tl.TLObject
 	_IStatsBroadcastStats()
 }
 
@@ -16622,7 +16622,7 @@ func (*StatsBroadcastStats) CRC() uint32 {
 func (*StatsBroadcastStats) _IStatsBroadcastStats() {}
 
 type IStatsMegagroupStats interface {
-	tl.Object
+	tl.TLObject
 	_IStatsMegagroupStats()
 }
 
@@ -16656,7 +16656,7 @@ func (*StatsMegagroupStats) CRC() uint32 {
 func (*StatsMegagroupStats) _IStatsMegagroupStats() {}
 
 type IStatsMessageStats interface {
-	tl.Object
+	tl.TLObject
 	_IStatsMessageStats()
 }
 
@@ -16675,7 +16675,7 @@ func (*StatsMessageStats) CRC() uint32 {
 func (*StatsMessageStats) _IStatsMessageStats() {}
 
 type IStatsPublicForwards interface {
-	tl.Object
+	tl.TLObject
 	_IStatsPublicForwards()
 }
 
@@ -16698,7 +16698,7 @@ func (*StatsPublicForwards) CRC() uint32 {
 func (*StatsPublicForwards) _IStatsPublicForwards() {}
 
 type IStatsStoryStats interface {
-	tl.Object
+	tl.TLObject
 	_IStatsStoryStats()
 }
 
@@ -16717,7 +16717,7 @@ func (*StatsStoryStats) CRC() uint32 {
 func (*StatsStoryStats) _IStatsStoryStats() {}
 
 type IStickersSuggestedShortName interface {
-	tl.Object
+	tl.TLObject
 	_IStickersSuggestedShortName()
 }
 
@@ -16735,7 +16735,7 @@ func (*StickersSuggestedShortName) CRC() uint32 {
 func (*StickersSuggestedShortName) _IStickersSuggestedShortName() {}
 
 type IStoriesAllStories interface {
-	tl.Object
+	tl.TLObject
 	_IStoriesAllStories()
 }
 
@@ -16772,7 +16772,7 @@ func (*StoriesAllStories) CRC() uint32 {
 func (*StoriesAllStories) _IStoriesAllStories() {}
 
 type IStoriesPeerStories interface {
-	tl.Object
+	tl.TLObject
 	_IStoriesPeerStories()
 }
 
@@ -16792,7 +16792,7 @@ func (*StoriesPeerStories) CRC() uint32 {
 func (*StoriesPeerStories) _IStoriesPeerStories() {}
 
 type IStoriesStories interface {
-	tl.Object
+	tl.TLObject
 	_IStoriesStories()
 }
 
@@ -16813,7 +16813,7 @@ func (*StoriesStories) CRC() uint32 {
 func (*StoriesStories) _IStoriesStories() {}
 
 type IStoriesStoryReactionsList interface {
-	tl.Object
+	tl.TLObject
 	_IStoriesStoryReactionsList()
 }
 
@@ -16836,7 +16836,7 @@ func (*StoriesStoryReactionsList) CRC() uint32 {
 func (*StoriesStoryReactionsList) _IStoriesStoryReactionsList() {}
 
 type IStoriesStoryViews interface {
-	tl.Object
+	tl.TLObject
 	_IStoriesStoryViews()
 }
 
@@ -16855,7 +16855,7 @@ func (*StoriesStoryViews) CRC() uint32 {
 func (*StoriesStoryViews) _IStoriesStoryViews() {}
 
 type IStoriesStoryViewsList interface {
-	tl.Object
+	tl.TLObject
 	_IStoriesStoryViewsList()
 }
 
@@ -16881,7 +16881,7 @@ func (*StoriesStoryViewsList) CRC() uint32 {
 func (*StoriesStoryViewsList) _IStoriesStoryViewsList() {}
 
 type IUpdatesChannelDifference interface {
-	tl.Object
+	tl.TLObject
 	_IUpdatesChannelDifference()
 }
 
@@ -16935,7 +16935,7 @@ func (*UpdatesChannelDifference) CRC() uint32 {
 func (*UpdatesChannelDifference) _IUpdatesChannelDifference() {}
 
 type IUpdatesDifference interface {
-	tl.Object
+	tl.TLObject
 	_IUpdatesDifference()
 }
 
@@ -16994,7 +16994,7 @@ func (*UpdatesDifferenceTooLong) CRC() uint32 {
 func (*UpdatesDifferenceTooLong) _IUpdatesDifference() {}
 
 type IUpdatesState interface {
-	tl.Object
+	tl.TLObject
 	_IUpdatesState()
 }
 
@@ -17016,7 +17016,7 @@ func (*UpdatesState) CRC() uint32 {
 func (*UpdatesState) _IUpdatesState() {}
 
 type IUploadCdnFile interface {
-	tl.Object
+	tl.TLObject
 	_IUploadCdnFile()
 }
 
@@ -17044,7 +17044,7 @@ func (*UploadCdnFile) CRC() uint32 {
 func (*UploadCdnFile) _IUploadCdnFile() {}
 
 type IUploadFile interface {
-	tl.Object
+	tl.TLObject
 	_IUploadFile()
 }
 
@@ -17078,7 +17078,7 @@ func (*UploadFileCdnRedirect) CRC() uint32 {
 func (*UploadFileCdnRedirect) _IUploadFile() {}
 
 type IUploadWebFile interface {
-	tl.Object
+	tl.TLObject
 	_IUploadWebFile()
 }
 
@@ -17100,7 +17100,7 @@ func (*UploadWebFile) CRC() uint32 {
 func (*UploadWebFile) _IUploadWebFile() {}
 
 type IUsersUserFull interface {
-	tl.Object
+	tl.TLObject
 	_IUsersUserFull()
 }
 

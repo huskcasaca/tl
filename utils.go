@@ -42,7 +42,7 @@ func pad(l, padSize int) int {
 // v is bool, pointer, interface or slice.
 func isFieldContainsData(v reflect.Value) bool {
 	// special cases for enums
-	if enum, ok := v.Interface().(Object); ok && v.Kind() == reflect.Uint32 {
+	if enum, ok := v.Interface().(TLObject); ok && v.Kind() == reflect.Uint32 {
 		return enum != nil && enum.CRC() != 0
 	}
 

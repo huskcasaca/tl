@@ -12,23 +12,23 @@ type crc32 = uint32
 var (
 	byteTyp        = reflect.TypeOf((*byte)(nil)).Elem()
 	byteSliceTyp   = reflect.TypeOf((*[]byte)(nil)).Elem()
-	objectTyp      = reflect.TypeOf((*Object)(nil)).Elem()
+	objectTyp      = reflect.TypeOf((*TLObject)(nil)).Elem()
 	unmarshalerTyp = reflect.TypeOf((*Unmarshaler)(nil)).Elem()
 	uint32Typ      = reflect.TypeOf((*uint32)(nil)).Elem()
 )
 
-// Object is default interface, which ANY struct must implement to decode it in
+// TLObject is default interface, which ANY struct must implement to decode it in
 // tl format.
-type Object interface {
+type TLObject interface {
 	CRC() crc32
 }
 
-func asObject[T Object](f func() T) func(uint32) Object {
-	return func(uint32) Object { return Object(f()) }
+func asObject[T TLObject](f func() T) func(uint32) TLObject {
+	return func(uint32) TLObject { return TLObject(f()) }
 }
 
-func asEnum[T Object](f func(uint32) (T, bool)) func(uint32) Object {
-	return func(crc uint32) Object {
+func asEnum[T TLObject](f func(uint32) (T, bool)) func(uint32) TLObject {
+	return func(crc uint32) TLObject {
 		if enum, ok := f(crc); ok {
 			return enum
 		} else {

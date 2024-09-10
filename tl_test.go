@@ -615,14 +615,14 @@ func TestParseTag(t *testing.T) {
 	}
 }
 
-type TcaseParseStructTags[T Object] struct {
+type TcaseParseStructTags[T TLObject] struct {
 	name         string
 	wantTags     []StructTag
 	wantBitflags map[int]BitflagBit
 	wantErr      assert.ErrorAssertionFunc
 }
 
-var _ TestCase = (*TcaseParseStructTags[Object])(nil)
+var _ TestCase = (*TcaseParseStructTags[TLObject])(nil)
 
 func (tt TcaseParseStructTags[T]) Name() string { return tt.name }
 

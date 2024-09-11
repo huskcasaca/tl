@@ -63,7 +63,7 @@ func getTypeName(name schema.TLName) (res string) {
 }
 
 func generateTypeCrcFunctions(typ jen.Code, crc uint32) *jen.Statement {
-	hex := fmt.Sprintf("0x%x", crc)
+	hex := fmt.Sprintf("0x%08x", crc)
 	return jen.Func().
 		Params(jen.Op("*").Add(typ)).
 		Id("CRC").

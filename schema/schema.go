@@ -10,7 +10,6 @@ import (
 type TLSchema struct {
 	TypeSeq     []TLName
 	TypeDeclMap map[TLName]TLTypeDeclaration // key is type name
-	EnumDeclMap map[TLName]TLEnumDeclaration // key is enum name
 
 	FuncSeq     []string
 	FuncDeclMap map[string][]TLDeclaration // methods must be sorted by name
@@ -21,8 +20,6 @@ func (s *TLSchema) String() string {
 	for _, typ := range s.TypeSeq {
 		if decl, ok := s.TypeDeclMap[typ]; ok {
 			parts = append(parts, decl.String())
-		} else if enum, ok := s.EnumDeclMap[typ]; ok {
-			parts = append(parts, enum.String())
 		} else {
 			panic(fmt.Sprintf("missed type %#v", typ))
 		}
@@ -78,25 +75,6 @@ func (s TLTypeDeclaration) String() string {
 
 	for _, decl := range slices.SortFunc(s.Declarations, sortDeclarations) {
 		parts = append(parts, decl.Comments(TLDeclarationTypeConstructor)...)
-		parts = append(parts, decl.String())
-	}
-
-	return strings.Join(parts, "\n")
-}
-
-type TLEnumDeclaration struct {
-	Comment      string
-	Declarations []TLDeclaration // must be sorted by name
-}
-
-func (s TLEnumDeclaration) String() (res string) {
-	var parts []string
-	if s.Comment != "" {
-		parts = append(parts, "// @type "+s.Comment)
-	}
-
-	for _, decl := range slices.SortFunc(s.Declarations, sortDeclarations) {
-		parts = append(parts, decl.Comments(TLDeclarationTypeEnum)...)
 		parts = append(parts, decl.String())
 	}
 

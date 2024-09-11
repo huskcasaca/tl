@@ -28,21 +28,3 @@ type DiffEnum struct {
 	Comment string
 	Changes TLObjectsDiff
 }
-
-func (a TLEnumDeclaration) Diff(b TLEnumDeclaration) (res DiffEnum) {
-	if a.Comment != b.Comment {
-		res.Comment = b.Comment
-	}
-
-	panic("unimplemented")
-}
-
-func (d DiffEnum) Patch(a TLEnumDeclaration) TLEnumDeclaration {
-	if d.Comment != "" {
-		a.Comment = d.Comment
-	}
-
-	a.Declarations = d.Changes.Patch(a.Declarations)
-
-	return a
-}

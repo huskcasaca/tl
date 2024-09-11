@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/alecthomas/participle/v2"
-	"github.com/quenbyako/ext/set"
 	"github.com/quenbyako/ext/slices"
 
 	"github.com/xelaj/tl/schema/internal/declaration"
@@ -332,7 +331,6 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 
 	typeSeq := []TLName{}
 	sortedTypeDecls := map[TLName][]TLDeclaration{}
-	anyTypeHasField := set.New[TLName]()
 	for _, decl := range typeDeclsRaw {
 		typeDeclRaw, ok := decl.Type.(TLTypeCommon)
 		if !ok {
@@ -345,29 +343,18 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 		}
 
 		sortedTypeDecls[declType] = append(sortedTypeDecls[declType], *decl)
-		if len(decl.Params) > 0 {
-			anyTypeHasField = anyTypeHasField.Add(declType)
-		}
 	}
 
 	typeDeclMap := map[TLName]TLTypeDeclaration{}
-	enumDeclMap := map[TLName]TLEnumDeclaration{}
 	for typ, decl := range sortedTypeDecls {
 		var comment string
 		if v, ok := comments[typ]; ok {
 			comment = v
 		}
 
-		if anyTypeHasField.Has(typ) {
-			typeDeclMap[typ] = TLTypeDeclaration{
-				Comment:      comment,
-				Declarations: decl,
-			}
-		} else {
-			enumDeclMap[typ] = TLEnumDeclaration{
-				Comment:      comment,
-				Declarations: decl,
-			}
+		typeDeclMap[typ] = TLTypeDeclaration{
+			Comment:      comment,
+			Declarations: decl,
 		}
 	}
 
@@ -389,7 +376,6 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 	return &TLSchema{
 		TypeSeq:     typeSeq,
 		TypeDeclMap: typeDeclMap,
-		EnumDeclMap: enumDeclMap,
 		FuncSeq:     funcSeq,
 		FuncDeclMap: funcDeclMap,
 	}, nil

@@ -19135,175 +19135,885 @@ func (*UsersUserFullPredict) CRC() uint32 {
 }
 func (*UsersUserFullPredict) _UsersUserFull() {}
 
-type AttachMenuPeerType uint32
+type AttachMenuPeerType interface {
+	tl.TLObject
+	_AttachMenuPeerType()
+}
 
-const (
-	AttachMenuPeerTypeSameBotPmPredict AttachMenuPeerType = 0x7d6be90e
-	AttachMenuPeerTypeBotPmPredict     AttachMenuPeerType = 0xc32bfa1a
-	AttachMenuPeerTypePmPredict        AttachMenuPeerType = 0xf146d31f
-	AttachMenuPeerTypeChatPredict      AttachMenuPeerType = 0x509113f
-	AttachMenuPeerTypeBroadcastPredict AttachMenuPeerType = 0x7bfbdefc
+var (
+	_ AttachMenuPeerType = (*AttachMenuPeerTypeSameBotPmPredict)(nil)
+	_ AttachMenuPeerType = (*AttachMenuPeerTypeBotPmPredict)(nil)
+	_ AttachMenuPeerType = (*AttachMenuPeerTypePmPredict)(nil)
+	_ AttachMenuPeerType = (*AttachMenuPeerTypeChatPredict)(nil)
+	_ AttachMenuPeerType = (*AttachMenuPeerTypeBroadcastPredict)(nil)
 )
 
-type BaseTheme uint32
+type AttachMenuPeerTypeSameBotPmPredict struct{}
 
-const (
-	BaseThemeClassicPredict BaseTheme = 0xc3a12462
-	BaseThemeDayPredict     BaseTheme = 0xfbd81688
-	BaseThemeNightPredict   BaseTheme = 0xb7b31ea8
-	BaseThemeTintedPredict  BaseTheme = 0x6d5f77ee
-	BaseThemeArcticPredict  BaseTheme = 0x5b11125a
+func (*AttachMenuPeerTypeSameBotPmPredict) CRC() uint32 {
+	return 0x7d6be90e
+}
+func (*AttachMenuPeerTypeSameBotPmPredict) _AttachMenuPeerType() {}
+
+type AttachMenuPeerTypeBotPmPredict struct{}
+
+func (*AttachMenuPeerTypeBotPmPredict) CRC() uint32 {
+	return 0xc32bfa1a
+}
+func (*AttachMenuPeerTypeBotPmPredict) _AttachMenuPeerType() {}
+
+type AttachMenuPeerTypePmPredict struct{}
+
+func (*AttachMenuPeerTypePmPredict) CRC() uint32 {
+	return 0xf146d31f
+}
+func (*AttachMenuPeerTypePmPredict) _AttachMenuPeerType() {}
+
+type AttachMenuPeerTypeChatPredict struct{}
+
+func (*AttachMenuPeerTypeChatPredict) CRC() uint32 {
+	return 0x509113f
+}
+func (*AttachMenuPeerTypeChatPredict) _AttachMenuPeerType() {}
+
+type AttachMenuPeerTypeBroadcastPredict struct{}
+
+func (*AttachMenuPeerTypeBroadcastPredict) CRC() uint32 {
+	return 0x7bfbdefc
+}
+func (*AttachMenuPeerTypeBroadcastPredict) _AttachMenuPeerType() {}
+
+type BaseTheme interface {
+	tl.TLObject
+	_BaseTheme()
+}
+
+var (
+	_ BaseTheme = (*BaseThemeClassicPredict)(nil)
+	_ BaseTheme = (*BaseThemeDayPredict)(nil)
+	_ BaseTheme = (*BaseThemeNightPredict)(nil)
+	_ BaseTheme = (*BaseThemeTintedPredict)(nil)
+	_ BaseTheme = (*BaseThemeArcticPredict)(nil)
 )
 
-type Bool uint32
+type BaseThemeClassicPredict struct{}
 
-const (
-	BoolFalsePredict Bool = 0xbc799737
-	BoolTruePredict  Bool = 0x997275b5
+func (*BaseThemeClassicPredict) CRC() uint32 {
+	return 0xc3a12462
+}
+func (*BaseThemeClassicPredict) _BaseTheme() {}
+
+type BaseThemeDayPredict struct{}
+
+func (*BaseThemeDayPredict) CRC() uint32 {
+	return 0xfbd81688
+}
+func (*BaseThemeDayPredict) _BaseTheme() {}
+
+type BaseThemeNightPredict struct{}
+
+func (*BaseThemeNightPredict) CRC() uint32 {
+	return 0xb7b31ea8
+}
+func (*BaseThemeNightPredict) _BaseTheme() {}
+
+type BaseThemeTintedPredict struct{}
+
+func (*BaseThemeTintedPredict) CRC() uint32 {
+	return 0x6d5f77ee
+}
+func (*BaseThemeTintedPredict) _BaseTheme() {}
+
+type BaseThemeArcticPredict struct{}
+
+func (*BaseThemeArcticPredict) CRC() uint32 {
+	return 0x5b11125a
+}
+func (*BaseThemeArcticPredict) _BaseTheme() {}
+
+type Bool interface {
+	tl.TLObject
+	_Bool()
+}
+
+var (
+	_ Bool = (*BoolFalsePredict)(nil)
+	_ Bool = (*BoolTruePredict)(nil)
 )
 
-type InlineQueryPeerType uint32
+type BoolFalsePredict struct{}
 
-const (
-	InlineQueryPeerTypeSameBotPmPredict InlineQueryPeerType = 0x3081ed9d
-	InlineQueryPeerTypePmPredict        InlineQueryPeerType = 0x833c0fac
-	InlineQueryPeerTypeChatPredict      InlineQueryPeerType = 0xd766c50a
-	InlineQueryPeerTypeMegagroupPredict InlineQueryPeerType = 0x5ec4be43
-	InlineQueryPeerTypeBroadcastPredict InlineQueryPeerType = 0x6334ee9a
-	InlineQueryPeerTypeBotPmPredict     InlineQueryPeerType = 0xe3b2d0c
+func (*BoolFalsePredict) CRC() uint32 {
+	return 0xbc799737
+}
+func (*BoolFalsePredict) _Bool() {}
+
+type BoolTruePredict struct{}
+
+func (*BoolTruePredict) CRC() uint32 {
+	return 0x997275b5
+}
+func (*BoolTruePredict) _Bool() {}
+
+type InlineQueryPeerType interface {
+	tl.TLObject
+	_InlineQueryPeerType()
+}
+
+var (
+	_ InlineQueryPeerType = (*InlineQueryPeerTypeSameBotPmPredict)(nil)
+	_ InlineQueryPeerType = (*InlineQueryPeerTypePmPredict)(nil)
+	_ InlineQueryPeerType = (*InlineQueryPeerTypeChatPredict)(nil)
+	_ InlineQueryPeerType = (*InlineQueryPeerTypeMegagroupPredict)(nil)
+	_ InlineQueryPeerType = (*InlineQueryPeerTypeBroadcastPredict)(nil)
+	_ InlineQueryPeerType = (*InlineQueryPeerTypeBotPmPredict)(nil)
 )
 
-type InputPrivacyKey uint32
+type InlineQueryPeerTypeSameBotPmPredict struct{}
 
-const (
-	InputPrivacyKeyStatusTimestampPredict InputPrivacyKey = 0x4f96cb18
-	InputPrivacyKeyChatInvitePredict      InputPrivacyKey = 0xbdfb0426
-	InputPrivacyKeyPhoneCallPredict       InputPrivacyKey = 0xfabadc5f
-	InputPrivacyKeyPhoneP2PPredict        InputPrivacyKey = 0xdb9e70d2
-	InputPrivacyKeyForwardsPredict        InputPrivacyKey = 0xa4dd4c08
-	InputPrivacyKeyProfilePhotoPredict    InputPrivacyKey = 0x5719bacc
-	InputPrivacyKeyPhoneNumberPredict     InputPrivacyKey = 0x352dafa
-	InputPrivacyKeyAddedByPhonePredict    InputPrivacyKey = 0xd1219bdd
-	InputPrivacyKeyVoiceMessagesPredict   InputPrivacyKey = 0xaee69d68
-	InputPrivacyKeyAboutPredict           InputPrivacyKey = 0x3823cc40
-	InputPrivacyKeyBirthdayPredict        InputPrivacyKey = 0xd65a11cc
+func (*InlineQueryPeerTypeSameBotPmPredict) CRC() uint32 {
+	return 0x3081ed9d
+}
+func (*InlineQueryPeerTypeSameBotPmPredict) _InlineQueryPeerType() {}
+
+type InlineQueryPeerTypePmPredict struct{}
+
+func (*InlineQueryPeerTypePmPredict) CRC() uint32 {
+	return 0x833c0fac
+}
+func (*InlineQueryPeerTypePmPredict) _InlineQueryPeerType() {}
+
+type InlineQueryPeerTypeChatPredict struct{}
+
+func (*InlineQueryPeerTypeChatPredict) CRC() uint32 {
+	return 0xd766c50a
+}
+func (*InlineQueryPeerTypeChatPredict) _InlineQueryPeerType() {}
+
+type InlineQueryPeerTypeMegagroupPredict struct{}
+
+func (*InlineQueryPeerTypeMegagroupPredict) CRC() uint32 {
+	return 0x5ec4be43
+}
+func (*InlineQueryPeerTypeMegagroupPredict) _InlineQueryPeerType() {}
+
+type InlineQueryPeerTypeBroadcastPredict struct{}
+
+func (*InlineQueryPeerTypeBroadcastPredict) CRC() uint32 {
+	return 0x6334ee9a
+}
+func (*InlineQueryPeerTypeBroadcastPredict) _InlineQueryPeerType() {}
+
+type InlineQueryPeerTypeBotPmPredict struct{}
+
+func (*InlineQueryPeerTypeBotPmPredict) CRC() uint32 {
+	return 0xe3b2d0c
+}
+func (*InlineQueryPeerTypeBotPmPredict) _InlineQueryPeerType() {}
+
+type InputPrivacyKey interface {
+	tl.TLObject
+	_InputPrivacyKey()
+}
+
+var (
+	_ InputPrivacyKey = (*InputPrivacyKeyStatusTimestampPredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyChatInvitePredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyPhoneCallPredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyPhoneP2PPredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyForwardsPredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyProfilePhotoPredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyPhoneNumberPredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyAddedByPhonePredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyVoiceMessagesPredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyAboutPredict)(nil)
+	_ InputPrivacyKey = (*InputPrivacyKeyBirthdayPredict)(nil)
 )
 
-type Null uint32
+type InputPrivacyKeyStatusTimestampPredict struct{}
 
-const (
-	NullPredict Null = 0x56730bcc
+func (*InputPrivacyKeyStatusTimestampPredict) CRC() uint32 {
+	return 0x4f96cb18
+}
+func (*InputPrivacyKeyStatusTimestampPredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyChatInvitePredict struct{}
+
+func (*InputPrivacyKeyChatInvitePredict) CRC() uint32 {
+	return 0xbdfb0426
+}
+func (*InputPrivacyKeyChatInvitePredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyPhoneCallPredict struct{}
+
+func (*InputPrivacyKeyPhoneCallPredict) CRC() uint32 {
+	return 0xfabadc5f
+}
+func (*InputPrivacyKeyPhoneCallPredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyPhoneP2PPredict struct{}
+
+func (*InputPrivacyKeyPhoneP2PPredict) CRC() uint32 {
+	return 0xdb9e70d2
+}
+func (*InputPrivacyKeyPhoneP2PPredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyForwardsPredict struct{}
+
+func (*InputPrivacyKeyForwardsPredict) CRC() uint32 {
+	return 0xa4dd4c08
+}
+func (*InputPrivacyKeyForwardsPredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyProfilePhotoPredict struct{}
+
+func (*InputPrivacyKeyProfilePhotoPredict) CRC() uint32 {
+	return 0x5719bacc
+}
+func (*InputPrivacyKeyProfilePhotoPredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyPhoneNumberPredict struct{}
+
+func (*InputPrivacyKeyPhoneNumberPredict) CRC() uint32 {
+	return 0x352dafa
+}
+func (*InputPrivacyKeyPhoneNumberPredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyAddedByPhonePredict struct{}
+
+func (*InputPrivacyKeyAddedByPhonePredict) CRC() uint32 {
+	return 0xd1219bdd
+}
+func (*InputPrivacyKeyAddedByPhonePredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyVoiceMessagesPredict struct{}
+
+func (*InputPrivacyKeyVoiceMessagesPredict) CRC() uint32 {
+	return 0xaee69d68
+}
+func (*InputPrivacyKeyVoiceMessagesPredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyAboutPredict struct{}
+
+func (*InputPrivacyKeyAboutPredict) CRC() uint32 {
+	return 0x3823cc40
+}
+func (*InputPrivacyKeyAboutPredict) _InputPrivacyKey() {}
+
+type InputPrivacyKeyBirthdayPredict struct{}
+
+func (*InputPrivacyKeyBirthdayPredict) CRC() uint32 {
+	return 0xd65a11cc
+}
+func (*InputPrivacyKeyBirthdayPredict) _InputPrivacyKey() {}
+
+type Null interface {
+	tl.TLObject
+	_Null()
+}
+
+var (
+	_ Null = (*NullPredict)(nil)
 )
 
-type PhoneCallDiscardReason uint32
+type NullPredict struct{}
 
-const (
-	PhoneCallDiscardReasonMissedPredict     PhoneCallDiscardReason = 0x85e42301
-	PhoneCallDiscardReasonDisconnectPredict PhoneCallDiscardReason = 0xe095c1a0
-	PhoneCallDiscardReasonHangupPredict     PhoneCallDiscardReason = 0x57adc690
-	PhoneCallDiscardReasonBusyPredict       PhoneCallDiscardReason = 0xfaf7e8c9
+func (*NullPredict) CRC() uint32 {
+	return 0x56730bcc
+}
+func (*NullPredict) _Null() {}
+
+type PhoneCallDiscardReason interface {
+	tl.TLObject
+	_PhoneCallDiscardReason()
+}
+
+var (
+	_ PhoneCallDiscardReason = (*PhoneCallDiscardReasonMissedPredict)(nil)
+	_ PhoneCallDiscardReason = (*PhoneCallDiscardReasonDisconnectPredict)(nil)
+	_ PhoneCallDiscardReason = (*PhoneCallDiscardReasonHangupPredict)(nil)
+	_ PhoneCallDiscardReason = (*PhoneCallDiscardReasonBusyPredict)(nil)
 )
 
-type PrivacyKey uint32
+type PhoneCallDiscardReasonMissedPredict struct{}
 
-const (
-	PrivacyKeyStatusTimestampPredict PrivacyKey = 0xbc2eab30
-	PrivacyKeyChatInvitePredict      PrivacyKey = 0x500e6dfa
-	PrivacyKeyPhoneCallPredict       PrivacyKey = 0x3d662b7b
-	PrivacyKeyPhoneP2PPredict        PrivacyKey = 0x39491cc8
-	PrivacyKeyForwardsPredict        PrivacyKey = 0x69ec56a3
-	PrivacyKeyProfilePhotoPredict    PrivacyKey = 0x96151fed
-	PrivacyKeyPhoneNumberPredict     PrivacyKey = 0xd19ae46d
-	PrivacyKeyAddedByPhonePredict    PrivacyKey = 0x42ffd42b
-	PrivacyKeyVoiceMessagesPredict   PrivacyKey = 0x697f414
-	PrivacyKeyAboutPredict           PrivacyKey = 0xa486b761
-	PrivacyKeyBirthdayPredict        PrivacyKey = 0x2000a518
+func (*PhoneCallDiscardReasonMissedPredict) CRC() uint32 {
+	return 0x85e42301
+}
+func (*PhoneCallDiscardReasonMissedPredict) _PhoneCallDiscardReason() {}
+
+type PhoneCallDiscardReasonDisconnectPredict struct{}
+
+func (*PhoneCallDiscardReasonDisconnectPredict) CRC() uint32 {
+	return 0xe095c1a0
+}
+func (*PhoneCallDiscardReasonDisconnectPredict) _PhoneCallDiscardReason() {}
+
+type PhoneCallDiscardReasonHangupPredict struct{}
+
+func (*PhoneCallDiscardReasonHangupPredict) CRC() uint32 {
+	return 0x57adc690
+}
+func (*PhoneCallDiscardReasonHangupPredict) _PhoneCallDiscardReason() {}
+
+type PhoneCallDiscardReasonBusyPredict struct{}
+
+func (*PhoneCallDiscardReasonBusyPredict) CRC() uint32 {
+	return 0xfaf7e8c9
+}
+func (*PhoneCallDiscardReasonBusyPredict) _PhoneCallDiscardReason() {}
+
+type PrivacyKey interface {
+	tl.TLObject
+	_PrivacyKey()
+}
+
+var (
+	_ PrivacyKey = (*PrivacyKeyStatusTimestampPredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyChatInvitePredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyPhoneCallPredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyPhoneP2PPredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyForwardsPredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyProfilePhotoPredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyPhoneNumberPredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyAddedByPhonePredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyVoiceMessagesPredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyAboutPredict)(nil)
+	_ PrivacyKey = (*PrivacyKeyBirthdayPredict)(nil)
 )
 
-type ReactionNotificationsFrom uint32
+type PrivacyKeyStatusTimestampPredict struct{}
 
-const (
-	ReactionNotificationsFromContactsPredict ReactionNotificationsFrom = 0xbac3a61a
-	ReactionNotificationsFromAllPredict      ReactionNotificationsFrom = 0x4b9e22a0
+func (*PrivacyKeyStatusTimestampPredict) CRC() uint32 {
+	return 0xbc2eab30
+}
+func (*PrivacyKeyStatusTimestampPredict) _PrivacyKey() {}
+
+type PrivacyKeyChatInvitePredict struct{}
+
+func (*PrivacyKeyChatInvitePredict) CRC() uint32 {
+	return 0x500e6dfa
+}
+func (*PrivacyKeyChatInvitePredict) _PrivacyKey() {}
+
+type PrivacyKeyPhoneCallPredict struct{}
+
+func (*PrivacyKeyPhoneCallPredict) CRC() uint32 {
+	return 0x3d662b7b
+}
+func (*PrivacyKeyPhoneCallPredict) _PrivacyKey() {}
+
+type PrivacyKeyPhoneP2PPredict struct{}
+
+func (*PrivacyKeyPhoneP2PPredict) CRC() uint32 {
+	return 0x39491cc8
+}
+func (*PrivacyKeyPhoneP2PPredict) _PrivacyKey() {}
+
+type PrivacyKeyForwardsPredict struct{}
+
+func (*PrivacyKeyForwardsPredict) CRC() uint32 {
+	return 0x69ec56a3
+}
+func (*PrivacyKeyForwardsPredict) _PrivacyKey() {}
+
+type PrivacyKeyProfilePhotoPredict struct{}
+
+func (*PrivacyKeyProfilePhotoPredict) CRC() uint32 {
+	return 0x96151fed
+}
+func (*PrivacyKeyProfilePhotoPredict) _PrivacyKey() {}
+
+type PrivacyKeyPhoneNumberPredict struct{}
+
+func (*PrivacyKeyPhoneNumberPredict) CRC() uint32 {
+	return 0xd19ae46d
+}
+func (*PrivacyKeyPhoneNumberPredict) _PrivacyKey() {}
+
+type PrivacyKeyAddedByPhonePredict struct{}
+
+func (*PrivacyKeyAddedByPhonePredict) CRC() uint32 {
+	return 0x42ffd42b
+}
+func (*PrivacyKeyAddedByPhonePredict) _PrivacyKey() {}
+
+type PrivacyKeyVoiceMessagesPredict struct{}
+
+func (*PrivacyKeyVoiceMessagesPredict) CRC() uint32 {
+	return 0x697f414
+}
+func (*PrivacyKeyVoiceMessagesPredict) _PrivacyKey() {}
+
+type PrivacyKeyAboutPredict struct{}
+
+func (*PrivacyKeyAboutPredict) CRC() uint32 {
+	return 0xa486b761
+}
+func (*PrivacyKeyAboutPredict) _PrivacyKey() {}
+
+type PrivacyKeyBirthdayPredict struct{}
+
+func (*PrivacyKeyBirthdayPredict) CRC() uint32 {
+	return 0x2000a518
+}
+func (*PrivacyKeyBirthdayPredict) _PrivacyKey() {}
+
+type ReactionNotificationsFrom interface {
+	tl.TLObject
+	_ReactionNotificationsFrom()
+}
+
+var (
+	_ ReactionNotificationsFrom = (*ReactionNotificationsFromContactsPredict)(nil)
+	_ ReactionNotificationsFrom = (*ReactionNotificationsFromAllPredict)(nil)
 )
 
-type ReportReason uint32
+type ReactionNotificationsFromContactsPredict struct{}
 
-const (
-	InputReportReasonSpamPredict            ReportReason = 0x58dbcab8
-	InputReportReasonViolencePredict        ReportReason = 0x1e22c78d
-	InputReportReasonPornographyPredict     ReportReason = 0x2e59d922
-	InputReportReasonChildAbusePredict      ReportReason = 0xadf44ee3
-	InputReportReasonOtherPredict           ReportReason = 0xc1e4a2b1
-	InputReportReasonCopyrightPredict       ReportReason = 0x9b89f93a
-	InputReportReasonGeoIrrelevantPredict   ReportReason = 0xdbd4feed
-	InputReportReasonFakePredict            ReportReason = 0xf5ddd6e7
-	InputReportReasonIllegalDrugsPredict    ReportReason = 0xa8eb2be
-	InputReportReasonPersonalDetailsPredict ReportReason = 0x9ec7863d
+func (*ReactionNotificationsFromContactsPredict) CRC() uint32 {
+	return 0xbac3a61a
+}
+func (*ReactionNotificationsFromContactsPredict) _ReactionNotificationsFrom() {}
+
+type ReactionNotificationsFromAllPredict struct{}
+
+func (*ReactionNotificationsFromAllPredict) CRC() uint32 {
+	return 0x4b9e22a0
+}
+func (*ReactionNotificationsFromAllPredict) _ReactionNotificationsFrom() {}
+
+type ReportReason interface {
+	tl.TLObject
+	_ReportReason()
+}
+
+var (
+	_ ReportReason = (*InputReportReasonSpamPredict)(nil)
+	_ ReportReason = (*InputReportReasonViolencePredict)(nil)
+	_ ReportReason = (*InputReportReasonPornographyPredict)(nil)
+	_ ReportReason = (*InputReportReasonChildAbusePredict)(nil)
+	_ ReportReason = (*InputReportReasonOtherPredict)(nil)
+	_ ReportReason = (*InputReportReasonCopyrightPredict)(nil)
+	_ ReportReason = (*InputReportReasonGeoIrrelevantPredict)(nil)
+	_ ReportReason = (*InputReportReasonFakePredict)(nil)
+	_ ReportReason = (*InputReportReasonIllegalDrugsPredict)(nil)
+	_ ReportReason = (*InputReportReasonPersonalDetailsPredict)(nil)
 )
 
-type SecureValueType uint32
+type InputReportReasonSpamPredict struct{}
 
-const (
-	SecureValueTypePersonalDetailsPredict       SecureValueType = 0x9d2a81e3
-	SecureValueTypePassportPredict              SecureValueType = 0x3dac6a00
-	SecureValueTypeDriverLicensePredict         SecureValueType = 0x6e425c4
-	SecureValueTypeIdentityCardPredict          SecureValueType = 0xa0d0744b
-	SecureValueTypeInternalPassportPredict      SecureValueType = 0x99a48f23
-	SecureValueTypeAddressPredict               SecureValueType = 0xcbe31e26
-	SecureValueTypeUtilityBillPredict           SecureValueType = 0xfc36954e
-	SecureValueTypeBankStatementPredict         SecureValueType = 0x89137c0d
-	SecureValueTypeRentalAgreementPredict       SecureValueType = 0x8b883488
-	SecureValueTypePassportRegistrationPredict  SecureValueType = 0x99e3806a
-	SecureValueTypeTemporaryRegistrationPredict SecureValueType = 0xea02ec33
-	SecureValueTypePhonePredict                 SecureValueType = 0xb320aadb
-	SecureValueTypeEmailPredict                 SecureValueType = 0x8e3ca7ee
+func (*InputReportReasonSpamPredict) CRC() uint32 {
+	return 0x58dbcab8
+}
+func (*InputReportReasonSpamPredict) _ReportReason() {}
+
+type InputReportReasonViolencePredict struct{}
+
+func (*InputReportReasonViolencePredict) CRC() uint32 {
+	return 0x1e22c78d
+}
+func (*InputReportReasonViolencePredict) _ReportReason() {}
+
+type InputReportReasonPornographyPredict struct{}
+
+func (*InputReportReasonPornographyPredict) CRC() uint32 {
+	return 0x2e59d922
+}
+func (*InputReportReasonPornographyPredict) _ReportReason() {}
+
+type InputReportReasonChildAbusePredict struct{}
+
+func (*InputReportReasonChildAbusePredict) CRC() uint32 {
+	return 0xadf44ee3
+}
+func (*InputReportReasonChildAbusePredict) _ReportReason() {}
+
+type InputReportReasonOtherPredict struct{}
+
+func (*InputReportReasonOtherPredict) CRC() uint32 {
+	return 0xc1e4a2b1
+}
+func (*InputReportReasonOtherPredict) _ReportReason() {}
+
+type InputReportReasonCopyrightPredict struct{}
+
+func (*InputReportReasonCopyrightPredict) CRC() uint32 {
+	return 0x9b89f93a
+}
+func (*InputReportReasonCopyrightPredict) _ReportReason() {}
+
+type InputReportReasonGeoIrrelevantPredict struct{}
+
+func (*InputReportReasonGeoIrrelevantPredict) CRC() uint32 {
+	return 0xdbd4feed
+}
+func (*InputReportReasonGeoIrrelevantPredict) _ReportReason() {}
+
+type InputReportReasonFakePredict struct{}
+
+func (*InputReportReasonFakePredict) CRC() uint32 {
+	return 0xf5ddd6e7
+}
+func (*InputReportReasonFakePredict) _ReportReason() {}
+
+type InputReportReasonIllegalDrugsPredict struct{}
+
+func (*InputReportReasonIllegalDrugsPredict) CRC() uint32 {
+	return 0xa8eb2be
+}
+func (*InputReportReasonIllegalDrugsPredict) _ReportReason() {}
+
+type InputReportReasonPersonalDetailsPredict struct{}
+
+func (*InputReportReasonPersonalDetailsPredict) CRC() uint32 {
+	return 0x9ec7863d
+}
+func (*InputReportReasonPersonalDetailsPredict) _ReportReason() {}
+
+type SecureValueType interface {
+	tl.TLObject
+	_SecureValueType()
+}
+
+var (
+	_ SecureValueType = (*SecureValueTypePersonalDetailsPredict)(nil)
+	_ SecureValueType = (*SecureValueTypePassportPredict)(nil)
+	_ SecureValueType = (*SecureValueTypeDriverLicensePredict)(nil)
+	_ SecureValueType = (*SecureValueTypeIdentityCardPredict)(nil)
+	_ SecureValueType = (*SecureValueTypeInternalPassportPredict)(nil)
+	_ SecureValueType = (*SecureValueTypeAddressPredict)(nil)
+	_ SecureValueType = (*SecureValueTypeUtilityBillPredict)(nil)
+	_ SecureValueType = (*SecureValueTypeBankStatementPredict)(nil)
+	_ SecureValueType = (*SecureValueTypeRentalAgreementPredict)(nil)
+	_ SecureValueType = (*SecureValueTypePassportRegistrationPredict)(nil)
+	_ SecureValueType = (*SecureValueTypeTemporaryRegistrationPredict)(nil)
+	_ SecureValueType = (*SecureValueTypePhonePredict)(nil)
+	_ SecureValueType = (*SecureValueTypeEmailPredict)(nil)
 )
 
-type TopPeerCategory uint32
+type SecureValueTypePersonalDetailsPredict struct{}
 
-const (
-	TopPeerCategoryBotsPmPredict         TopPeerCategory = 0xab661b5b
-	TopPeerCategoryBotsInlinePredict     TopPeerCategory = 0x148677e2
-	TopPeerCategoryCorrespondentsPredict TopPeerCategory = 0x637b7ed
-	TopPeerCategoryGroupsPredict         TopPeerCategory = 0xbd17a14a
-	TopPeerCategoryChannelsPredict       TopPeerCategory = 0x161d9628
-	TopPeerCategoryPhoneCallsPredict     TopPeerCategory = 0x1e76a78c
-	TopPeerCategoryForwardUsersPredict   TopPeerCategory = 0xa8406ca9
-	TopPeerCategoryForwardChatsPredict   TopPeerCategory = 0xfbeec0f0
-	TopPeerCategoryBotsAppPredict        TopPeerCategory = 0xfd9e7bec
+func (*SecureValueTypePersonalDetailsPredict) CRC() uint32 {
+	return 0x9d2a81e3
+}
+func (*SecureValueTypePersonalDetailsPredict) _SecureValueType() {}
+
+type SecureValueTypePassportPredict struct{}
+
+func (*SecureValueTypePassportPredict) CRC() uint32 {
+	return 0x3dac6a00
+}
+func (*SecureValueTypePassportPredict) _SecureValueType() {}
+
+type SecureValueTypeDriverLicensePredict struct{}
+
+func (*SecureValueTypeDriverLicensePredict) CRC() uint32 {
+	return 0x6e425c4
+}
+func (*SecureValueTypeDriverLicensePredict) _SecureValueType() {}
+
+type SecureValueTypeIdentityCardPredict struct{}
+
+func (*SecureValueTypeIdentityCardPredict) CRC() uint32 {
+	return 0xa0d0744b
+}
+func (*SecureValueTypeIdentityCardPredict) _SecureValueType() {}
+
+type SecureValueTypeInternalPassportPredict struct{}
+
+func (*SecureValueTypeInternalPassportPredict) CRC() uint32 {
+	return 0x99a48f23
+}
+func (*SecureValueTypeInternalPassportPredict) _SecureValueType() {}
+
+type SecureValueTypeAddressPredict struct{}
+
+func (*SecureValueTypeAddressPredict) CRC() uint32 {
+	return 0xcbe31e26
+}
+func (*SecureValueTypeAddressPredict) _SecureValueType() {}
+
+type SecureValueTypeUtilityBillPredict struct{}
+
+func (*SecureValueTypeUtilityBillPredict) CRC() uint32 {
+	return 0xfc36954e
+}
+func (*SecureValueTypeUtilityBillPredict) _SecureValueType() {}
+
+type SecureValueTypeBankStatementPredict struct{}
+
+func (*SecureValueTypeBankStatementPredict) CRC() uint32 {
+	return 0x89137c0d
+}
+func (*SecureValueTypeBankStatementPredict) _SecureValueType() {}
+
+type SecureValueTypeRentalAgreementPredict struct{}
+
+func (*SecureValueTypeRentalAgreementPredict) CRC() uint32 {
+	return 0x8b883488
+}
+func (*SecureValueTypeRentalAgreementPredict) _SecureValueType() {}
+
+type SecureValueTypePassportRegistrationPredict struct{}
+
+func (*SecureValueTypePassportRegistrationPredict) CRC() uint32 {
+	return 0x99e3806a
+}
+func (*SecureValueTypePassportRegistrationPredict) _SecureValueType() {}
+
+type SecureValueTypeTemporaryRegistrationPredict struct{}
+
+func (*SecureValueTypeTemporaryRegistrationPredict) CRC() uint32 {
+	return 0xea02ec33
+}
+func (*SecureValueTypeTemporaryRegistrationPredict) _SecureValueType() {}
+
+type SecureValueTypePhonePredict struct{}
+
+func (*SecureValueTypePhonePredict) CRC() uint32 {
+	return 0xb320aadb
+}
+func (*SecureValueTypePhonePredict) _SecureValueType() {}
+
+type SecureValueTypeEmailPredict struct{}
+
+func (*SecureValueTypeEmailPredict) CRC() uint32 {
+	return 0x8e3ca7ee
+}
+func (*SecureValueTypeEmailPredict) _SecureValueType() {}
+
+type TopPeerCategory interface {
+	tl.TLObject
+	_TopPeerCategory()
+}
+
+var (
+	_ TopPeerCategory = (*TopPeerCategoryBotsPmPredict)(nil)
+	_ TopPeerCategory = (*TopPeerCategoryBotsInlinePredict)(nil)
+	_ TopPeerCategory = (*TopPeerCategoryCorrespondentsPredict)(nil)
+	_ TopPeerCategory = (*TopPeerCategoryGroupsPredict)(nil)
+	_ TopPeerCategory = (*TopPeerCategoryChannelsPredict)(nil)
+	_ TopPeerCategory = (*TopPeerCategoryPhoneCallsPredict)(nil)
+	_ TopPeerCategory = (*TopPeerCategoryForwardUsersPredict)(nil)
+	_ TopPeerCategory = (*TopPeerCategoryForwardChatsPredict)(nil)
+	_ TopPeerCategory = (*TopPeerCategoryBotsAppPredict)(nil)
 )
 
-type True uint32
+type TopPeerCategoryBotsPmPredict struct{}
 
-const (
-	TruePredict True = 0x3fedd339
+func (*TopPeerCategoryBotsPmPredict) CRC() uint32 {
+	return 0xab661b5b
+}
+func (*TopPeerCategoryBotsPmPredict) _TopPeerCategory() {}
+
+type TopPeerCategoryBotsInlinePredict struct{}
+
+func (*TopPeerCategoryBotsInlinePredict) CRC() uint32 {
+	return 0x148677e2
+}
+func (*TopPeerCategoryBotsInlinePredict) _TopPeerCategory() {}
+
+type TopPeerCategoryCorrespondentsPredict struct{}
+
+func (*TopPeerCategoryCorrespondentsPredict) CRC() uint32 {
+	return 0x637b7ed
+}
+func (*TopPeerCategoryCorrespondentsPredict) _TopPeerCategory() {}
+
+type TopPeerCategoryGroupsPredict struct{}
+
+func (*TopPeerCategoryGroupsPredict) CRC() uint32 {
+	return 0xbd17a14a
+}
+func (*TopPeerCategoryGroupsPredict) _TopPeerCategory() {}
+
+type TopPeerCategoryChannelsPredict struct{}
+
+func (*TopPeerCategoryChannelsPredict) CRC() uint32 {
+	return 0x161d9628
+}
+func (*TopPeerCategoryChannelsPredict) _TopPeerCategory() {}
+
+type TopPeerCategoryPhoneCallsPredict struct{}
+
+func (*TopPeerCategoryPhoneCallsPredict) CRC() uint32 {
+	return 0x1e76a78c
+}
+func (*TopPeerCategoryPhoneCallsPredict) _TopPeerCategory() {}
+
+type TopPeerCategoryForwardUsersPredict struct{}
+
+func (*TopPeerCategoryForwardUsersPredict) CRC() uint32 {
+	return 0xa8406ca9
+}
+func (*TopPeerCategoryForwardUsersPredict) _TopPeerCategory() {}
+
+type TopPeerCategoryForwardChatsPredict struct{}
+
+func (*TopPeerCategoryForwardChatsPredict) CRC() uint32 {
+	return 0xfbeec0f0
+}
+func (*TopPeerCategoryForwardChatsPredict) _TopPeerCategory() {}
+
+type TopPeerCategoryBotsAppPredict struct{}
+
+func (*TopPeerCategoryBotsAppPredict) CRC() uint32 {
+	return 0xfd9e7bec
+}
+func (*TopPeerCategoryBotsAppPredict) _TopPeerCategory() {}
+
+type True interface {
+	tl.TLObject
+	_True()
+}
+
+var (
+	_ True = (*TruePredict)(nil)
 )
 
-type AuthCodeType uint32
+type TruePredict struct{}
 
-const (
-	AuthCodeTypeSmsPredict         AuthCodeType = 0x72a3158c
-	AuthCodeTypeCallPredict        AuthCodeType = 0x741cd3e3
-	AuthCodeTypeFlashCallPredict   AuthCodeType = 0x226ccefb
-	AuthCodeTypeMissedCallPredict  AuthCodeType = 0xd61ad6ee
-	AuthCodeTypeFragmentSmsPredict AuthCodeType = 0x6ed998c
+func (*TruePredict) CRC() uint32 {
+	return 0x3fedd339
+}
+func (*TruePredict) _True() {}
+
+type AuthCodeType interface {
+	tl.TLObject
+	_AuthCodeType()
+}
+
+var (
+	_ AuthCodeType = (*AuthCodeTypeSmsPredict)(nil)
+	_ AuthCodeType = (*AuthCodeTypeCallPredict)(nil)
+	_ AuthCodeType = (*AuthCodeTypeFlashCallPredict)(nil)
+	_ AuthCodeType = (*AuthCodeTypeMissedCallPredict)(nil)
+	_ AuthCodeType = (*AuthCodeTypeFragmentSmsPredict)(nil)
 )
 
-type StorageFileType uint32
+type AuthCodeTypeSmsPredict struct{}
 
-const (
-	StorageFileUnknownPredict StorageFileType = 0xaa963b05
-	StorageFilePartialPredict StorageFileType = 0x40bc6f52
-	StorageFileJpegPredict    StorageFileType = 0x7efe0e
-	StorageFileGifPredict     StorageFileType = 0xcae1aadf
-	StorageFilePngPredict     StorageFileType = 0xa4f63c0
-	StorageFilePdfPredict     StorageFileType = 0xae1e508d
-	StorageFileMp3Predict     StorageFileType = 0x528a0677
-	StorageFileMovPredict     StorageFileType = 0x4b09ebbc
-	StorageFileMp4Predict     StorageFileType = 0xb3cea0e4
-	StorageFileWebpPredict    StorageFileType = 0x1081464c
+func (*AuthCodeTypeSmsPredict) CRC() uint32 {
+	return 0x72a3158c
+}
+func (*AuthCodeTypeSmsPredict) _AuthCodeType() {}
+
+type AuthCodeTypeCallPredict struct{}
+
+func (*AuthCodeTypeCallPredict) CRC() uint32 {
+	return 0x741cd3e3
+}
+func (*AuthCodeTypeCallPredict) _AuthCodeType() {}
+
+type AuthCodeTypeFlashCallPredict struct{}
+
+func (*AuthCodeTypeFlashCallPredict) CRC() uint32 {
+	return 0x226ccefb
+}
+func (*AuthCodeTypeFlashCallPredict) _AuthCodeType() {}
+
+type AuthCodeTypeMissedCallPredict struct{}
+
+func (*AuthCodeTypeMissedCallPredict) CRC() uint32 {
+	return 0xd61ad6ee
+}
+func (*AuthCodeTypeMissedCallPredict) _AuthCodeType() {}
+
+type AuthCodeTypeFragmentSmsPredict struct{}
+
+func (*AuthCodeTypeFragmentSmsPredict) CRC() uint32 {
+	return 0x6ed998c
+}
+func (*AuthCodeTypeFragmentSmsPredict) _AuthCodeType() {}
+
+type StorageFileType interface {
+	tl.TLObject
+	_StorageFileType()
+}
+
+var (
+	_ StorageFileType = (*StorageFileUnknownPredict)(nil)
+	_ StorageFileType = (*StorageFilePartialPredict)(nil)
+	_ StorageFileType = (*StorageFileJpegPredict)(nil)
+	_ StorageFileType = (*StorageFileGifPredict)(nil)
+	_ StorageFileType = (*StorageFilePngPredict)(nil)
+	_ StorageFileType = (*StorageFilePdfPredict)(nil)
+	_ StorageFileType = (*StorageFileMp3Predict)(nil)
+	_ StorageFileType = (*StorageFileMovPredict)(nil)
+	_ StorageFileType = (*StorageFileMp4Predict)(nil)
+	_ StorageFileType = (*StorageFileWebpPredict)(nil)
 )
+
+type StorageFileUnknownPredict struct{}
+
+func (*StorageFileUnknownPredict) CRC() uint32 {
+	return 0xaa963b05
+}
+func (*StorageFileUnknownPredict) _StorageFileType() {}
+
+type StorageFilePartialPredict struct{}
+
+func (*StorageFilePartialPredict) CRC() uint32 {
+	return 0x40bc6f52
+}
+func (*StorageFilePartialPredict) _StorageFileType() {}
+
+type StorageFileJpegPredict struct{}
+
+func (*StorageFileJpegPredict) CRC() uint32 {
+	return 0x7efe0e
+}
+func (*StorageFileJpegPredict) _StorageFileType() {}
+
+type StorageFileGifPredict struct{}
+
+func (*StorageFileGifPredict) CRC() uint32 {
+	return 0xcae1aadf
+}
+func (*StorageFileGifPredict) _StorageFileType() {}
+
+type StorageFilePngPredict struct{}
+
+func (*StorageFilePngPredict) CRC() uint32 {
+	return 0xa4f63c0
+}
+func (*StorageFilePngPredict) _StorageFileType() {}
+
+type StorageFilePdfPredict struct{}
+
+func (*StorageFilePdfPredict) CRC() uint32 {
+	return 0xae1e508d
+}
+func (*StorageFilePdfPredict) _StorageFileType() {}
+
+type StorageFileMp3Predict struct{}
+
+func (*StorageFileMp3Predict) CRC() uint32 {
+	return 0x528a0677
+}
+func (*StorageFileMp3Predict) _StorageFileType() {}
+
+type StorageFileMovPredict struct{}
+
+func (*StorageFileMovPredict) CRC() uint32 {
+	return 0x4b09ebbc
+}
+func (*StorageFileMovPredict) _StorageFileType() {}
+
+type StorageFileMp4Predict struct{}
+
+func (*StorageFileMp4Predict) CRC() uint32 {
+	return 0xb3cea0e4
+}
+func (*StorageFileMp4Predict) _StorageFileType() {}
+
+type StorageFileWebpPredict struct{}
+
+func (*StorageFileWebpPredict) CRC() uint32 {
+	return 0x1081464c
+}
+func (*StorageFileWebpPredict) _StorageFileType() {}
 
 type Requester interface {
 	MakeRequest(ctx context.Context, msg []byte) ([]byte, error)

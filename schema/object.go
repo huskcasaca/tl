@@ -62,7 +62,6 @@ type TLDeclarationType uint8
 const (
 	TLDeclarationTypeUnknown TLDeclarationType = iota
 	TLDeclarationTypeConstructor
-	TLDeclarationTypeEnum
 	TLDeclarationTypeMethod
 )
 
@@ -70,8 +69,6 @@ func (o TLDeclarationType) String() string {
 	switch o {
 	case TLDeclarationTypeConstructor:
 		return "constructor"
-	case TLDeclarationTypeEnum:
-		return "enum"
 	case TLDeclarationTypeMethod:
 		return "method"
 	default:

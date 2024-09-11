@@ -62,13 +62,6 @@ func getTypeName(name schema.TLName) (res string) {
 	return /*"TL" + */ res + getGoName(name.Key, true)
 }
 
-func getEnumName(name schema.TLName) (res string) {
-	if name.Namespace != "" {
-		res += getGoName(name.Namespace, true)
-	}
-	return /*"TL" + */ res + getGoName(name.Key, true)
-}
-
 func generateTypeCrcFunctions(typ jen.Code, crc uint32) *jen.Statement {
 	hex := fmt.Sprintf("0x%x", crc)
 	return jen.Func().
@@ -262,28 +255,6 @@ func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.
 	}
 
 	return ret.Line()
-}
-
-func generateEnums(name schema.TLName, objects schema.TLEnumDeclaration) *jen.Statement {
-	enumName := getEnumName(name)
-	ret := &jen.Statement{}
-	if objects.Comment != "" {
-		ret = ret.Comment(objects.Comment).Line()
-	}
-	ret = jen.Type().Id(enumName).Uint32().Line()
-
-	constantJens := make([]jen.Code, len(objects.Declarations))
-	for i, obj := range objects.Declarations {
-		hex := fmt.Sprintf("0x%x", obj.CRC)
-
-		c := jen.Id(getPredictName(obj.Name)).Id(enumName).Op("=").Id(hex)
-		if obj.Comment != "" {
-			c = c.Comment(obj.Comment)
-		}
-		constantJens[i] = c
-	}
-
-	return jen.Add(ret, jen.Line(), jen.Const().Defs(constantJens...).Line(), jen.Line())
 }
 
 func generateRequestType(namespace string, obj schema.TLDeclaration) *jen.Statement {

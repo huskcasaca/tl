@@ -22,9 +22,8 @@ func TestParseFile(t *testing.T) {
 	}{{
 		file: "internal/testdata/simplest.tl",
 		expected: &TLSchema{
-			TypeSeq:     []TLName{{Key: "CoolEnumerate"}},
-			TypeDeclMap: map[TLName]TLTypeDeclaration{},
-			EnumDeclMap: map[TLName]TLEnumDeclaration{
+			TypeSeq: []TLName{{Key: "CoolEnumerate"}},
+			TypeDeclMap: map[TLName]TLTypeDeclaration{
 				{Key: "CoolEnumerate"}: {
 					Declarations: []TLDeclaration{{
 						Name:       TLName{Key: "someEnum"},
@@ -84,7 +83,6 @@ func TestParseFile(t *testing.T) {
 					}},
 				},
 			},
-			EnumDeclMap: map[TLName]TLEnumDeclaration{},
 			FuncSeq:     []string{},
 			FuncDeclMap: map[string][]TLDeclaration{},
 		},

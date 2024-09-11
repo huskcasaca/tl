@@ -17,10 +17,6 @@ func Generate(s *schema.TLSchema) (string, error) {
 		f.Add(generateObjects(name, s.TypeDeclMap[name]))
 	}
 
-	for _, name := range slices.SortFunc(maps.Keys(s.EnumDeclMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
-		f.Add(generateEnums(name, s.EnumDeclMap[name]))
-	}
-
 	f.Add(generateRequestFunc())
 
 	for _, namespace := range slices.Sort(maps.Keys(s.FuncDeclMap)) {

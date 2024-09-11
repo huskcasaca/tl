@@ -7,7 +7,7 @@ import (
 )
 
 type AccountDaysTTL interface {
-	tl.Object
+	tl.TLObject
 	_AccountDaysTTL()
 }
 
@@ -16,7 +16,7 @@ var (
 )
 
 type AccountDaysTTLPredict struct {
-	Days int32
+	Days int32 `tl:"days"`
 }
 
 func (*AccountDaysTTLPredict) CRC() uint32 {
@@ -25,7 +25,7 @@ func (*AccountDaysTTLPredict) CRC() uint32 {
 func (*AccountDaysTTLPredict) _AccountDaysTTL() {}
 
 type AttachMenuBot interface {
-	tl.Object
+	tl.TLObject
 	_AttachMenuBot()
 }
 
@@ -34,17 +34,17 @@ var (
 )
 
 type AttachMenuBotPredict struct {
-	_                        struct{} `tl:"flags,bitflag"`
-	Inactive                 bool     `tl:",omitempty:flags:0,implicit"`
-	HasSettings              bool     `tl:",omitempty:flags:1,implicit"`
-	RequestWriteAccess       bool     `tl:",omitempty:flags:2,implicit"`
-	ShowInAttachMenu         bool     `tl:",omitempty:flags:3,implicit"`
-	ShowInSideMenu           bool     `tl:",omitempty:flags:4,implicit"`
-	SideMenuDisclaimerNeeded bool     `tl:",omitempty:flags:5,implicit"`
-	BotID                    int64
-	ShortName                string
-	PeerTypes                []AttachMenuPeerType `tl:",omitempty:flags:3"`
-	Icons                    []AttachMenuBotIcon
+	_                        struct{}             `tl:"flags,bitflag"`
+	Inactive                 bool                 `tl:"inactive,omitempty:flags:0,implicit"`
+	HasSettings              bool                 `tl:"has_settings,omitempty:flags:1,implicit"`
+	RequestWriteAccess       bool                 `tl:"request_write_access,omitempty:flags:2,implicit"`
+	ShowInAttachMenu         bool                 `tl:"show_in_attach_menu,omitempty:flags:3,implicit"`
+	ShowInSideMenu           bool                 `tl:"show_in_side_menu,omitempty:flags:4,implicit"`
+	SideMenuDisclaimerNeeded bool                 `tl:"side_menu_disclaimer_needed,omitempty:flags:5,implicit"`
+	BotID                    int64                `tl:"bot_id"`
+	ShortName                string               `tl:"short_name"`
+	PeerTypes                []AttachMenuPeerType `tl:"peer_types,omitempty:flags:3"`
+	Icons                    []AttachMenuBotIcon  `tl:"icons"`
 }
 
 func (*AttachMenuBotPredict) CRC() uint32 {
@@ -53,7 +53,7 @@ func (*AttachMenuBotPredict) CRC() uint32 {
 func (*AttachMenuBotPredict) _AttachMenuBot() {}
 
 type AttachMenuBotIcon interface {
-	tl.Object
+	tl.TLObject
 	_AttachMenuBotIcon()
 }
 
@@ -62,10 +62,10 @@ var (
 )
 
 type AttachMenuBotIconPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Name   string
-	Icon   Document
-	Colors []AttachMenuBotIconColor `tl:",omitempty:flags:0"`
+	_      struct{}                 `tl:"flags,bitflag"`
+	Name   string                   `tl:"name"`
+	Icon   Document                 `tl:"icon"`
+	Colors []AttachMenuBotIconColor `tl:"colors,omitempty:flags:0"`
 }
 
 func (*AttachMenuBotIconPredict) CRC() uint32 {
@@ -74,7 +74,7 @@ func (*AttachMenuBotIconPredict) CRC() uint32 {
 func (*AttachMenuBotIconPredict) _AttachMenuBotIcon() {}
 
 type AttachMenuBotIconColor interface {
-	tl.Object
+	tl.TLObject
 	_AttachMenuBotIconColor()
 }
 
@@ -83,8 +83,8 @@ var (
 )
 
 type AttachMenuBotIconColorPredict struct {
-	Name  string
-	Color int32
+	Name  string `tl:"name"`
+	Color int32  `tl:"color"`
 }
 
 func (*AttachMenuBotIconColorPredict) CRC() uint32 {
@@ -93,7 +93,7 @@ func (*AttachMenuBotIconColorPredict) CRC() uint32 {
 func (*AttachMenuBotIconColorPredict) _AttachMenuBotIconColor() {}
 
 type AttachMenuBots interface {
-	tl.Object
+	tl.TLObject
 	_AttachMenuBots()
 }
 
@@ -110,9 +110,9 @@ func (*AttachMenuBotsNotModifiedPredict) CRC() uint32 {
 func (*AttachMenuBotsNotModifiedPredict) _AttachMenuBots() {}
 
 type AttachMenuBotsPredict struct {
-	Hash  int64
-	Bots  []AttachMenuBot
-	Users []User
+	Hash  int64           `tl:"hash"`
+	Bots  []AttachMenuBot `tl:"bots"`
+	Users []User          `tl:"users"`
 }
 
 func (*AttachMenuBotsPredict) CRC() uint32 {
@@ -121,7 +121,7 @@ func (*AttachMenuBotsPredict) CRC() uint32 {
 func (*AttachMenuBotsPredict) _AttachMenuBots() {}
 
 type AttachMenuBotsBot interface {
-	tl.Object
+	tl.TLObject
 	_AttachMenuBotsBot()
 }
 
@@ -130,8 +130,8 @@ var (
 )
 
 type AttachMenuBotsBotPredict struct {
-	Bot   AttachMenuBot
-	Users []User
+	Bot   AttachMenuBot `tl:"bot"`
+	Users []User        `tl:"users"`
 }
 
 func (*AttachMenuBotsBotPredict) CRC() uint32 {
@@ -140,7 +140,7 @@ func (*AttachMenuBotsBotPredict) CRC() uint32 {
 func (*AttachMenuBotsBotPredict) _AttachMenuBotsBot() {}
 
 type Authorization interface {
-	tl.Object
+	tl.TLObject
 	_Authorization()
 }
 
@@ -150,24 +150,24 @@ var (
 
 type AuthorizationPredict struct {
 	_                         struct{} `tl:"flags,bitflag"`
-	Current                   bool     `tl:",omitempty:flags:0,implicit"`
-	OfficialApp               bool     `tl:",omitempty:flags:1,implicit"`
-	PasswordPending           bool     `tl:",omitempty:flags:2,implicit"`
-	EncryptedRequestsDisabled bool     `tl:",omitempty:flags:3,implicit"`
-	CallRequestsDisabled      bool     `tl:",omitempty:flags:4,implicit"`
-	Unconfirmed               bool     `tl:",omitempty:flags:5,implicit"`
-	Hash                      int64
-	DeviceModel               string
-	Platform                  string
-	SystemVersion             string
-	APIID                     int32
-	AppName                   string
-	AppVersion                string
-	DateCreated               int32
-	DateActive                int32
-	Ip                        string
-	Country                   string
-	Region                    string
+	Current                   bool     `tl:"current,omitempty:flags:0,implicit"`
+	OfficialApp               bool     `tl:"official_app,omitempty:flags:1,implicit"`
+	PasswordPending           bool     `tl:"password_pending,omitempty:flags:2,implicit"`
+	EncryptedRequestsDisabled bool     `tl:"encrypted_requests_disabled,omitempty:flags:3,implicit"`
+	CallRequestsDisabled      bool     `tl:"call_requests_disabled,omitempty:flags:4,implicit"`
+	Unconfirmed               bool     `tl:"unconfirmed,omitempty:flags:5,implicit"`
+	Hash                      int64    `tl:"hash"`
+	DeviceModel               string   `tl:"device_model"`
+	Platform                  string   `tl:"platform"`
+	SystemVersion             string   `tl:"system_version"`
+	APIID                     int32    `tl:"api_id"`
+	AppName                   string   `tl:"app_name"`
+	AppVersion                string   `tl:"app_version"`
+	DateCreated               int32    `tl:"date_created"`
+	DateActive                int32    `tl:"date_active"`
+	Ip                        string   `tl:"ip"`
+	Country                   string   `tl:"country"`
+	Region                    string   `tl:"region"`
 }
 
 func (*AuthorizationPredict) CRC() uint32 {
@@ -176,7 +176,7 @@ func (*AuthorizationPredict) CRC() uint32 {
 func (*AuthorizationPredict) _Authorization() {}
 
 type AutoDownloadSettings interface {
-	tl.Object
+	tl.TLObject
 	_AutoDownloadSettings()
 }
 
@@ -186,17 +186,17 @@ var (
 
 type AutoDownloadSettingsPredict struct {
 	_                             struct{} `tl:"flags,bitflag"`
-	Disabled                      bool     `tl:",omitempty:flags:0,implicit"`
-	VideoPreloadLarge             bool     `tl:",omitempty:flags:1,implicit"`
-	AudioPreloadNext              bool     `tl:",omitempty:flags:2,implicit"`
-	PhonecallsLessData            bool     `tl:",omitempty:flags:3,implicit"`
-	StoriesPreload                bool     `tl:",omitempty:flags:4,implicit"`
-	PhotoSizeMax                  int32
-	VideoSizeMax                  int64
-	FileSizeMax                   int64
-	VideoUploadMaxbitrate         int32
-	SmallQueueActiveOperationsMax int32
-	LargeQueueActiveOperationsMax int32
+	Disabled                      bool     `tl:"disabled,omitempty:flags:0,implicit"`
+	VideoPreloadLarge             bool     `tl:"video_preload_large,omitempty:flags:1,implicit"`
+	AudioPreloadNext              bool     `tl:"audio_preload_next,omitempty:flags:2,implicit"`
+	PhonecallsLessData            bool     `tl:"phonecalls_less_data,omitempty:flags:3,implicit"`
+	StoriesPreload                bool     `tl:"stories_preload,omitempty:flags:4,implicit"`
+	PhotoSizeMax                  int32    `tl:"photo_size_max"`
+	VideoSizeMax                  int64    `tl:"video_size_max"`
+	FileSizeMax                   int64    `tl:"file_size_max"`
+	VideoUploadMaxbitrate         int32    `tl:"video_upload_maxbitrate"`
+	SmallQueueActiveOperationsMax int32    `tl:"small_queue_active_operations_max"`
+	LargeQueueActiveOperationsMax int32    `tl:"large_queue_active_operations_max"`
 }
 
 func (*AutoDownloadSettingsPredict) CRC() uint32 {
@@ -205,7 +205,7 @@ func (*AutoDownloadSettingsPredict) CRC() uint32 {
 func (*AutoDownloadSettingsPredict) _AutoDownloadSettings() {}
 
 type AutoSaveException interface {
-	tl.Object
+	tl.TLObject
 	_AutoSaveException()
 }
 
@@ -214,8 +214,8 @@ var (
 )
 
 type AutoSaveExceptionPredict struct {
-	Peer     Peer
-	Settings AutoSaveSettings
+	Peer     Peer             `tl:"peer"`
+	Settings AutoSaveSettings `tl:"settings"`
 }
 
 func (*AutoSaveExceptionPredict) CRC() uint32 {
@@ -224,7 +224,7 @@ func (*AutoSaveExceptionPredict) CRC() uint32 {
 func (*AutoSaveExceptionPredict) _AutoSaveException() {}
 
 type AutoSaveSettings interface {
-	tl.Object
+	tl.TLObject
 	_AutoSaveSettings()
 }
 
@@ -234,9 +234,9 @@ var (
 
 type AutoSaveSettingsPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	Photos       bool     `tl:",omitempty:flags:0,implicit"`
-	Videos       bool     `tl:",omitempty:flags:1,implicit"`
-	VideoMaxSize *int64   `tl:",omitempty:flags:2"`
+	Photos       bool     `tl:"photos,omitempty:flags:0,implicit"`
+	Videos       bool     `tl:"videos,omitempty:flags:1,implicit"`
+	VideoMaxSize *int64   `tl:"video_max_size,omitempty:flags:2"`
 }
 
 func (*AutoSaveSettingsPredict) CRC() uint32 {
@@ -245,7 +245,7 @@ func (*AutoSaveSettingsPredict) CRC() uint32 {
 func (*AutoSaveSettingsPredict) _AutoSaveSettings() {}
 
 type AvailableEffect interface {
-	tl.Object
+	tl.TLObject
 	_AvailableEffect()
 }
 
@@ -255,12 +255,12 @@ var (
 
 type AvailableEffectPredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	PremiumRequired   bool     `tl:",omitempty:flags:2,implicit"`
-	ID                int64
-	Emoticon          string
-	StaticIconID      *int64 `tl:",omitempty:flags:0"`
-	EffectStickerID   int64
-	EffectAnimationID *int64 `tl:",omitempty:flags:1"`
+	PremiumRequired   bool     `tl:"premium_required,omitempty:flags:2,implicit"`
+	ID                int64    `tl:"id"`
+	Emoticon          string   `tl:"emoticon"`
+	StaticIconID      *int64   `tl:"static_icon_id,omitempty:flags:0"`
+	EffectStickerID   int64    `tl:"effect_sticker_id"`
+	EffectAnimationID *int64   `tl:"effect_animation_id,omitempty:flags:1"`
 }
 
 func (*AvailableEffectPredict) CRC() uint32 {
@@ -269,7 +269,7 @@ func (*AvailableEffectPredict) CRC() uint32 {
 func (*AvailableEffectPredict) _AvailableEffect() {}
 
 type AvailableReaction interface {
-	tl.Object
+	tl.TLObject
 	_AvailableReaction()
 }
 
@@ -279,17 +279,17 @@ var (
 
 type AvailableReactionPredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	Inactive          bool     `tl:",omitempty:flags:0,implicit"`
-	Premium           bool     `tl:",omitempty:flags:2,implicit"`
-	Reaction          string
-	Title             string
-	StaticIcon        Document
-	AppearAnimation   Document
-	SelectAnimation   Document
-	ActivateAnimation Document
-	EffectAnimation   Document
-	AroundAnimation   Document `tl:",omitempty:flags:1"`
-	CenterIcon        Document `tl:",omitempty:flags:1"`
+	Inactive          bool     `tl:"inactive,omitempty:flags:0,implicit"`
+	Premium           bool     `tl:"premium,omitempty:flags:2,implicit"`
+	Reaction          string   `tl:"reaction"`
+	Title             string   `tl:"title"`
+	StaticIcon        Document `tl:"static_icon"`
+	AppearAnimation   Document `tl:"appear_animation"`
+	SelectAnimation   Document `tl:"select_animation"`
+	ActivateAnimation Document `tl:"activate_animation"`
+	EffectAnimation   Document `tl:"effect_animation"`
+	AroundAnimation   Document `tl:"around_animation,omitempty:flags:1"`
+	CenterIcon        Document `tl:"center_icon,omitempty:flags:1"`
 }
 
 func (*AvailableReactionPredict) CRC() uint32 {
@@ -298,7 +298,7 @@ func (*AvailableReactionPredict) CRC() uint32 {
 func (*AvailableReactionPredict) _AvailableReaction() {}
 
 type BankCardOpenURL interface {
-	tl.Object
+	tl.TLObject
 	_BankCardOpenURL()
 }
 
@@ -307,8 +307,8 @@ var (
 )
 
 type BankCardOpenURLPredict struct {
-	URL  string
-	Name string
+	URL  string `tl:"url"`
+	Name string `tl:"name"`
 }
 
 func (*BankCardOpenURLPredict) CRC() uint32 {
@@ -317,7 +317,7 @@ func (*BankCardOpenURLPredict) CRC() uint32 {
 func (*BankCardOpenURLPredict) _BankCardOpenURL() {}
 
 type Birthday interface {
-	tl.Object
+	tl.TLObject
 	_Birthday()
 }
 
@@ -327,9 +327,9 @@ var (
 
 type BirthdayPredict struct {
 	_     struct{} `tl:"flags,bitflag"`
-	Day   int32
-	Month int32
-	Year  *int32 `tl:",omitempty:flags:0"`
+	Day   int32    `tl:"day"`
+	Month int32    `tl:"month"`
+	Year  *int32   `tl:"year,omitempty:flags:0"`
 }
 
 func (*BirthdayPredict) CRC() uint32 {
@@ -338,7 +338,7 @@ func (*BirthdayPredict) CRC() uint32 {
 func (*BirthdayPredict) _Birthday() {}
 
 type Boost interface {
-	tl.Object
+	tl.TLObject
 	_Boost()
 }
 
@@ -348,16 +348,16 @@ var (
 
 type BoostPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	Gift          bool     `tl:",omitempty:flags:1,implicit"`
-	Giveaway      bool     `tl:",omitempty:flags:2,implicit"`
-	Unclaimed     bool     `tl:",omitempty:flags:3,implicit"`
-	ID            string
-	UserID        *int64 `tl:",omitempty:flags:0"`
-	GiveawayMsgID *int32 `tl:",omitempty:flags:2"`
-	Date          int32
-	Expires       int32
-	UsedGiftSlug  *string `tl:",omitempty:flags:4"`
-	Multiplier    *int32  `tl:",omitempty:flags:5"`
+	Gift          bool     `tl:"gift,omitempty:flags:1,implicit"`
+	Giveaway      bool     `tl:"giveaway,omitempty:flags:2,implicit"`
+	Unclaimed     bool     `tl:"unclaimed,omitempty:flags:3,implicit"`
+	ID            string   `tl:"id"`
+	UserID        *int64   `tl:"user_id,omitempty:flags:0"`
+	GiveawayMsgID *int32   `tl:"giveaway_msg_id,omitempty:flags:2"`
+	Date          int32    `tl:"date"`
+	Expires       int32    `tl:"expires"`
+	UsedGiftSlug  *string  `tl:"used_gift_slug,omitempty:flags:4"`
+	Multiplier    *int32   `tl:"multiplier,omitempty:flags:5"`
 }
 
 func (*BoostPredict) CRC() uint32 {
@@ -366,7 +366,7 @@ func (*BoostPredict) CRC() uint32 {
 func (*BoostPredict) _Boost() {}
 
 type BotApp interface {
-	tl.Object
+	tl.TLObject
 	_BotApp()
 }
 
@@ -384,14 +384,14 @@ func (*BotAppNotModifiedPredict) _BotApp() {}
 
 type BotAppPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	ID          int64
-	AccessHash  int64
-	ShortName   string
-	Title       string
-	Description string
-	Photo       Photo
-	Document    Document `tl:",omitempty:flags:0"`
-	Hash        int64
+	ID          int64    `tl:"id"`
+	AccessHash  int64    `tl:"access_hash"`
+	ShortName   string   `tl:"short_name"`
+	Title       string   `tl:"title"`
+	Description string   `tl:"description"`
+	Photo       Photo    `tl:"photo"`
+	Document    Document `tl:"document,omitempty:flags:0"`
+	Hash        int64    `tl:"hash"`
 }
 
 func (*BotAppPredict) CRC() uint32 {
@@ -400,7 +400,7 @@ func (*BotAppPredict) CRC() uint32 {
 func (*BotAppPredict) _BotApp() {}
 
 type BotBusinessConnection interface {
-	tl.Object
+	tl.TLObject
 	_BotBusinessConnection()
 }
 
@@ -410,12 +410,12 @@ var (
 
 type BotBusinessConnectionPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	CanReply     bool     `tl:",omitempty:flags:0,implicit"`
-	Disabled     bool     `tl:",omitempty:flags:1,implicit"`
-	ConnectionID string
-	UserID       int64
-	DcID         int32
-	Date         int32
+	CanReply     bool     `tl:"can_reply,omitempty:flags:0,implicit"`
+	Disabled     bool     `tl:"disabled,omitempty:flags:1,implicit"`
+	ConnectionID string   `tl:"connection_id"`
+	UserID       int64    `tl:"user_id"`
+	DcID         int32    `tl:"dc_id"`
+	Date         int32    `tl:"date"`
 }
 
 func (*BotBusinessConnectionPredict) CRC() uint32 {
@@ -424,7 +424,7 @@ func (*BotBusinessConnectionPredict) CRC() uint32 {
 func (*BotBusinessConnectionPredict) _BotBusinessConnection() {}
 
 type BotCommand interface {
-	tl.Object
+	tl.TLObject
 	_BotCommand()
 }
 
@@ -433,8 +433,8 @@ var (
 )
 
 type BotCommandPredict struct {
-	Command     string
-	Description string
+	Command     string `tl:"command"`
+	Description string `tl:"description"`
 }
 
 func (*BotCommandPredict) CRC() uint32 {
@@ -443,7 +443,7 @@ func (*BotCommandPredict) CRC() uint32 {
 func (*BotCommandPredict) _BotCommand() {}
 
 type BotCommandScope interface {
-	tl.Object
+	tl.TLObject
 	_BotCommandScope()
 }
 
@@ -486,7 +486,7 @@ func (*BotCommandScopeChatAdminsPredict) CRC() uint32 {
 func (*BotCommandScopeChatAdminsPredict) _BotCommandScope() {}
 
 type BotCommandScopePeerPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*BotCommandScopePeerPredict) CRC() uint32 {
@@ -495,7 +495,7 @@ func (*BotCommandScopePeerPredict) CRC() uint32 {
 func (*BotCommandScopePeerPredict) _BotCommandScope() {}
 
 type BotCommandScopePeerAdminsPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*BotCommandScopePeerAdminsPredict) CRC() uint32 {
@@ -504,8 +504,8 @@ func (*BotCommandScopePeerAdminsPredict) CRC() uint32 {
 func (*BotCommandScopePeerAdminsPredict) _BotCommandScope() {}
 
 type BotCommandScopePeerUserPredict struct {
-	Peer   InputPeer
-	UserID InputUser
+	Peer   InputPeer `tl:"peer"`
+	UserID InputUser `tl:"user_id"`
 }
 
 func (*BotCommandScopePeerUserPredict) CRC() uint32 {
@@ -514,7 +514,7 @@ func (*BotCommandScopePeerUserPredict) CRC() uint32 {
 func (*BotCommandScopePeerUserPredict) _BotCommandScope() {}
 
 type BotInfo interface {
-	tl.Object
+	tl.TLObject
 	_BotInfo()
 }
 
@@ -524,13 +524,13 @@ var (
 
 type BotInfoPredict struct {
 	_                   struct{}      `tl:"flags,bitflag"`
-	HasPreviewMedias    bool          `tl:",omitempty:flags:6,implicit"`
-	UserID              *int64        `tl:",omitempty:flags:0"`
-	Description         *string       `tl:",omitempty:flags:1"`
-	DescriptionPhoto    Photo         `tl:",omitempty:flags:4"`
-	DescriptionDocument Document      `tl:",omitempty:flags:5"`
-	Commands            []BotCommand  `tl:",omitempty:flags:2"`
-	MenuButton          BotMenuButton `tl:",omitempty:flags:3"`
+	HasPreviewMedias    bool          `tl:"has_preview_medias,omitempty:flags:6,implicit"`
+	UserID              *int64        `tl:"user_id,omitempty:flags:0"`
+	Description         *string       `tl:"description,omitempty:flags:1"`
+	DescriptionPhoto    Photo         `tl:"description_photo,omitempty:flags:4"`
+	DescriptionDocument Document      `tl:"description_document,omitempty:flags:5"`
+	Commands            []BotCommand  `tl:"commands,omitempty:flags:2"`
+	MenuButton          BotMenuButton `tl:"menu_button,omitempty:flags:3"`
 }
 
 func (*BotInfoPredict) CRC() uint32 {
@@ -539,7 +539,7 @@ func (*BotInfoPredict) CRC() uint32 {
 func (*BotInfoPredict) _BotInfo() {}
 
 type BotInlineMessage interface {
-	tl.Object
+	tl.TLObject
 	_BotInlineMessage()
 }
 
@@ -554,11 +554,11 @@ var (
 )
 
 type BotInlineMessageMediaAutoPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	InvertMedia bool     `tl:",omitempty:flags:3,implicit"`
-	Message     string
-	Entities    []MessageEntity `tl:",omitempty:flags:1"`
-	ReplyMarkup ReplyMarkup     `tl:",omitempty:flags:2"`
+	_           struct{}        `tl:"flags,bitflag"`
+	InvertMedia bool            `tl:"invert_media,omitempty:flags:3,implicit"`
+	Message     string          `tl:"message"`
+	Entities    []MessageEntity `tl:"entities,omitempty:flags:1"`
+	ReplyMarkup ReplyMarkup     `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*BotInlineMessageMediaAutoPredict) CRC() uint32 {
@@ -567,12 +567,12 @@ func (*BotInlineMessageMediaAutoPredict) CRC() uint32 {
 func (*BotInlineMessageMediaAutoPredict) _BotInlineMessage() {}
 
 type BotInlineMessageTextPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	NoWebpage   bool     `tl:",omitempty:flags:0,implicit"`
-	InvertMedia bool     `tl:",omitempty:flags:3,implicit"`
-	Message     string
-	Entities    []MessageEntity `tl:",omitempty:flags:1"`
-	ReplyMarkup ReplyMarkup     `tl:",omitempty:flags:2"`
+	_           struct{}        `tl:"flags,bitflag"`
+	NoWebpage   bool            `tl:"no_webpage,omitempty:flags:0,implicit"`
+	InvertMedia bool            `tl:"invert_media,omitempty:flags:3,implicit"`
+	Message     string          `tl:"message"`
+	Entities    []MessageEntity `tl:"entities,omitempty:flags:1"`
+	ReplyMarkup ReplyMarkup     `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*BotInlineMessageTextPredict) CRC() uint32 {
@@ -581,12 +581,12 @@ func (*BotInlineMessageTextPredict) CRC() uint32 {
 func (*BotInlineMessageTextPredict) _BotInlineMessage() {}
 
 type BotInlineMessageMediaGeoPredict struct {
-	_                           struct{} `tl:"flags,bitflag"`
-	Geo                         GeoPoint
-	Heading                     *int32      `tl:",omitempty:flags:0"`
-	Period                      *int32      `tl:",omitempty:flags:1"`
-	ProximityNotificationRadius *int32      `tl:",omitempty:flags:3"`
-	ReplyMarkup                 ReplyMarkup `tl:",omitempty:flags:2"`
+	_                           struct{}    `tl:"flags,bitflag"`
+	Geo                         GeoPoint    `tl:"geo"`
+	Heading                     *int32      `tl:"heading,omitempty:flags:0"`
+	Period                      *int32      `tl:"period,omitempty:flags:1"`
+	ProximityNotificationRadius *int32      `tl:"proximity_notification_radius,omitempty:flags:3"`
+	ReplyMarkup                 ReplyMarkup `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*BotInlineMessageMediaGeoPredict) CRC() uint32 {
@@ -595,14 +595,14 @@ func (*BotInlineMessageMediaGeoPredict) CRC() uint32 {
 func (*BotInlineMessageMediaGeoPredict) _BotInlineMessage() {}
 
 type BotInlineMessageMediaVenuePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Geo         GeoPoint
-	Title       string
-	Address     string
-	Provider    string
-	VenueID     string
-	VenueType   string
-	ReplyMarkup ReplyMarkup `tl:",omitempty:flags:2"`
+	_           struct{}    `tl:"flags,bitflag"`
+	Geo         GeoPoint    `tl:"geo"`
+	Title       string      `tl:"title"`
+	Address     string      `tl:"address"`
+	Provider    string      `tl:"provider"`
+	VenueID     string      `tl:"venue_id"`
+	VenueType   string      `tl:"venue_type"`
+	ReplyMarkup ReplyMarkup `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*BotInlineMessageMediaVenuePredict) CRC() uint32 {
@@ -611,12 +611,12 @@ func (*BotInlineMessageMediaVenuePredict) CRC() uint32 {
 func (*BotInlineMessageMediaVenuePredict) _BotInlineMessage() {}
 
 type BotInlineMessageMediaContactPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	PhoneNumber string
-	FirstName   string
-	LastName    string
-	Vcard       string
-	ReplyMarkup ReplyMarkup `tl:",omitempty:flags:2"`
+	_           struct{}    `tl:"flags,bitflag"`
+	PhoneNumber string      `tl:"phone_number"`
+	FirstName   string      `tl:"first_name"`
+	LastName    string      `tl:"last_name"`
+	Vcard       string      `tl:"vcard"`
+	ReplyMarkup ReplyMarkup `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*BotInlineMessageMediaContactPredict) CRC() uint32 {
@@ -625,15 +625,15 @@ func (*BotInlineMessageMediaContactPredict) CRC() uint32 {
 func (*BotInlineMessageMediaContactPredict) _BotInlineMessage() {}
 
 type BotInlineMessageMediaInvoicePredict struct {
-	_                        struct{} `tl:"flags,bitflag"`
-	ShippingAddressRequested bool     `tl:",omitempty:flags:1,implicit"`
-	Test                     bool     `tl:",omitempty:flags:3,implicit"`
-	Title                    string
-	Description              string
-	Photo                    WebDocument `tl:",omitempty:flags:0"`
-	Currency                 string
-	TotalAmount              int64
-	ReplyMarkup              ReplyMarkup `tl:",omitempty:flags:2"`
+	_                        struct{}    `tl:"flags,bitflag"`
+	ShippingAddressRequested bool        `tl:"shipping_address_requested,omitempty:flags:1,implicit"`
+	Test                     bool        `tl:"test,omitempty:flags:3,implicit"`
+	Title                    string      `tl:"title"`
+	Description              string      `tl:"description"`
+	Photo                    WebDocument `tl:"photo,omitempty:flags:0"`
+	Currency                 string      `tl:"currency"`
+	TotalAmount              int64       `tl:"total_amount"`
+	ReplyMarkup              ReplyMarkup `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*BotInlineMessageMediaInvoicePredict) CRC() uint32 {
@@ -642,16 +642,16 @@ func (*BotInlineMessageMediaInvoicePredict) CRC() uint32 {
 func (*BotInlineMessageMediaInvoicePredict) _BotInlineMessage() {}
 
 type BotInlineMessageMediaWebPagePredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	InvertMedia     bool     `tl:",omitempty:flags:3,implicit"`
-	ForceLargeMedia bool     `tl:",omitempty:flags:4,implicit"`
-	ForceSmallMedia bool     `tl:",omitempty:flags:5,implicit"`
-	Manual          bool     `tl:",omitempty:flags:7,implicit"`
-	Safe            bool     `tl:",omitempty:flags:8,implicit"`
-	Message         string
-	Entities        []MessageEntity `tl:",omitempty:flags:1"`
-	URL             string
-	ReplyMarkup     ReplyMarkup `tl:",omitempty:flags:2"`
+	_               struct{}        `tl:"flags,bitflag"`
+	InvertMedia     bool            `tl:"invert_media,omitempty:flags:3,implicit"`
+	ForceLargeMedia bool            `tl:"force_large_media,omitempty:flags:4,implicit"`
+	ForceSmallMedia bool            `tl:"force_small_media,omitempty:flags:5,implicit"`
+	Manual          bool            `tl:"manual,omitempty:flags:7,implicit"`
+	Safe            bool            `tl:"safe,omitempty:flags:8,implicit"`
+	Message         string          `tl:"message"`
+	Entities        []MessageEntity `tl:"entities,omitempty:flags:1"`
+	URL             string          `tl:"url"`
+	ReplyMarkup     ReplyMarkup     `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*BotInlineMessageMediaWebPagePredict) CRC() uint32 {
@@ -660,7 +660,7 @@ func (*BotInlineMessageMediaWebPagePredict) CRC() uint32 {
 func (*BotInlineMessageMediaWebPagePredict) _BotInlineMessage() {}
 
 type BotInlineResult interface {
-	tl.Object
+	tl.TLObject
 	_BotInlineResult()
 }
 
@@ -670,15 +670,15 @@ var (
 )
 
 type BotInlineResultPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	ID          string
-	Type        string
-	Title       *string     `tl:",omitempty:flags:1"`
-	Description *string     `tl:",omitempty:flags:2"`
-	URL         *string     `tl:",omitempty:flags:3"`
-	Thumb       WebDocument `tl:",omitempty:flags:4"`
-	Content     WebDocument `tl:",omitempty:flags:5"`
-	SendMessage BotInlineMessage
+	_           struct{}         `tl:"flags,bitflag"`
+	ID          string           `tl:"id"`
+	Type        string           `tl:"type"`
+	Title       *string          `tl:"title,omitempty:flags:1"`
+	Description *string          `tl:"description,omitempty:flags:2"`
+	URL         *string          `tl:"url,omitempty:flags:3"`
+	Thumb       WebDocument      `tl:"thumb,omitempty:flags:4"`
+	Content     WebDocument      `tl:"content,omitempty:flags:5"`
+	SendMessage BotInlineMessage `tl:"send_message"`
 }
 
 func (*BotInlineResultPredict) CRC() uint32 {
@@ -687,14 +687,14 @@ func (*BotInlineResultPredict) CRC() uint32 {
 func (*BotInlineResultPredict) _BotInlineResult() {}
 
 type BotInlineMediaResultPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	ID          string
-	Type        string
-	Photo       Photo    `tl:",omitempty:flags:0"`
-	Document    Document `tl:",omitempty:flags:1"`
-	Title       *string  `tl:",omitempty:flags:2"`
-	Description *string  `tl:",omitempty:flags:3"`
-	SendMessage BotInlineMessage
+	_           struct{}         `tl:"flags,bitflag"`
+	ID          string           `tl:"id"`
+	Type        string           `tl:"type"`
+	Photo       Photo            `tl:"photo,omitempty:flags:0"`
+	Document    Document         `tl:"document,omitempty:flags:1"`
+	Title       *string          `tl:"title,omitempty:flags:2"`
+	Description *string          `tl:"description,omitempty:flags:3"`
+	SendMessage BotInlineMessage `tl:"send_message"`
 }
 
 func (*BotInlineMediaResultPredict) CRC() uint32 {
@@ -703,7 +703,7 @@ func (*BotInlineMediaResultPredict) CRC() uint32 {
 func (*BotInlineMediaResultPredict) _BotInlineResult() {}
 
 type BotMenuButton interface {
-	tl.Object
+	tl.TLObject
 	_BotMenuButton()
 }
 
@@ -728,8 +728,8 @@ func (*BotMenuButtonCommandsPredict) CRC() uint32 {
 func (*BotMenuButtonCommandsPredict) _BotMenuButton() {}
 
 type BotMenuButtonPredict struct {
-	Text string
-	URL  string
+	Text string `tl:"text"`
+	URL  string `tl:"url"`
 }
 
 func (*BotMenuButtonPredict) CRC() uint32 {
@@ -738,7 +738,7 @@ func (*BotMenuButtonPredict) CRC() uint32 {
 func (*BotMenuButtonPredict) _BotMenuButton() {}
 
 type BotPreviewMedia interface {
-	tl.Object
+	tl.TLObject
 	_BotPreviewMedia()
 }
 
@@ -747,8 +747,8 @@ var (
 )
 
 type BotPreviewMediaPredict struct {
-	Date  int32
-	Media MessageMedia
+	Date  int32        `tl:"date"`
+	Media MessageMedia `tl:"media"`
 }
 
 func (*BotPreviewMediaPredict) CRC() uint32 {
@@ -757,7 +757,7 @@ func (*BotPreviewMediaPredict) CRC() uint32 {
 func (*BotPreviewMediaPredict) _BotPreviewMedia() {}
 
 type BroadcastRevenueBalances interface {
-	tl.Object
+	tl.TLObject
 	_BroadcastRevenueBalances()
 }
 
@@ -766,9 +766,9 @@ var (
 )
 
 type BroadcastRevenueBalancesPredict struct {
-	CurrentBalance   int64
-	AvailableBalance int64
-	OverallRevenue   int64
+	CurrentBalance   int64 `tl:"current_balance"`
+	AvailableBalance int64 `tl:"available_balance"`
+	OverallRevenue   int64 `tl:"overall_revenue"`
 }
 
 func (*BroadcastRevenueBalancesPredict) CRC() uint32 {
@@ -777,7 +777,7 @@ func (*BroadcastRevenueBalancesPredict) CRC() uint32 {
 func (*BroadcastRevenueBalancesPredict) _BroadcastRevenueBalances() {}
 
 type BroadcastRevenueTransaction interface {
-	tl.Object
+	tl.TLObject
 	_BroadcastRevenueTransaction()
 }
 
@@ -788,9 +788,9 @@ var (
 )
 
 type BroadcastRevenueTransactionProceedsPredict struct {
-	Amount   int64
-	FromDate int32
-	ToDate   int32
+	Amount   int64 `tl:"amount"`
+	FromDate int32 `tl:"from_date"`
+	ToDate   int32 `tl:"to_date"`
 }
 
 func (*BroadcastRevenueTransactionProceedsPredict) CRC() uint32 {
@@ -800,13 +800,13 @@ func (*BroadcastRevenueTransactionProceedsPredict) _BroadcastRevenueTransaction(
 
 type BroadcastRevenueTransactionWithdrawalPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	Pending         bool     `tl:",omitempty:flags:0,implicit"`
-	Failed          bool     `tl:",omitempty:flags:2,implicit"`
-	Amount          int64
-	Date            int32
-	Provider        string
-	TransactionDate *int32  `tl:",omitempty:flags:1"`
-	TransactionURL  *string `tl:",omitempty:flags:1"`
+	Pending         bool     `tl:"pending,omitempty:flags:0,implicit"`
+	Failed          bool     `tl:"failed,omitempty:flags:2,implicit"`
+	Amount          int64    `tl:"amount"`
+	Date            int32    `tl:"date"`
+	Provider        string   `tl:"provider"`
+	TransactionDate *int32   `tl:"transaction_date,omitempty:flags:1"`
+	TransactionURL  *string  `tl:"transaction_url,omitempty:flags:1"`
 }
 
 func (*BroadcastRevenueTransactionWithdrawalPredict) CRC() uint32 {
@@ -815,9 +815,9 @@ func (*BroadcastRevenueTransactionWithdrawalPredict) CRC() uint32 {
 func (*BroadcastRevenueTransactionWithdrawalPredict) _BroadcastRevenueTransaction() {}
 
 type BroadcastRevenueTransactionRefundPredict struct {
-	Amount   int64
-	Date     int32
-	Provider string
+	Amount   int64  `tl:"amount"`
+	Date     int32  `tl:"date"`
+	Provider string `tl:"provider"`
 }
 
 func (*BroadcastRevenueTransactionRefundPredict) CRC() uint32 {
@@ -826,7 +826,7 @@ func (*BroadcastRevenueTransactionRefundPredict) CRC() uint32 {
 func (*BroadcastRevenueTransactionRefundPredict) _BroadcastRevenueTransaction() {}
 
 type BusinessAwayMessage interface {
-	tl.Object
+	tl.TLObject
 	_BusinessAwayMessage()
 }
 
@@ -835,11 +835,11 @@ var (
 )
 
 type BusinessAwayMessagePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	OfflineOnly bool     `tl:",omitempty:flags:0,implicit"`
-	ShortcutID  int32
-	Schedule    BusinessAwayMessageSchedule
-	Recipients  BusinessRecipients
+	_           struct{}                    `tl:"flags,bitflag"`
+	OfflineOnly bool                        `tl:"offline_only,omitempty:flags:0,implicit"`
+	ShortcutID  int32                       `tl:"shortcut_id"`
+	Schedule    BusinessAwayMessageSchedule `tl:"schedule"`
+	Recipients  BusinessRecipients          `tl:"recipients"`
 }
 
 func (*BusinessAwayMessagePredict) CRC() uint32 {
@@ -848,7 +848,7 @@ func (*BusinessAwayMessagePredict) CRC() uint32 {
 func (*BusinessAwayMessagePredict) _BusinessAwayMessage() {}
 
 type BusinessAwayMessageSchedule interface {
-	tl.Object
+	tl.TLObject
 	_BusinessAwayMessageSchedule()
 }
 
@@ -873,8 +873,8 @@ func (*BusinessAwayMessageScheduleOutsideWorkHoursPredict) CRC() uint32 {
 func (*BusinessAwayMessageScheduleOutsideWorkHoursPredict) _BusinessAwayMessageSchedule() {}
 
 type BusinessAwayMessageScheduleCustomPredict struct {
-	StartDate int32
-	EndDate   int32
+	StartDate int32 `tl:"start_date"`
+	EndDate   int32 `tl:"end_date"`
 }
 
 func (*BusinessAwayMessageScheduleCustomPredict) CRC() uint32 {
@@ -883,7 +883,7 @@ func (*BusinessAwayMessageScheduleCustomPredict) CRC() uint32 {
 func (*BusinessAwayMessageScheduleCustomPredict) _BusinessAwayMessageSchedule() {}
 
 type BusinessBotRecipients interface {
-	tl.Object
+	tl.TLObject
 	_BusinessBotRecipients()
 }
 
@@ -893,13 +893,13 @@ var (
 
 type BusinessBotRecipientsPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	ExistingChats   bool     `tl:",omitempty:flags:0,implicit"`
-	NewChats        bool     `tl:",omitempty:flags:1,implicit"`
-	Contacts        bool     `tl:",omitempty:flags:2,implicit"`
-	NonContacts     bool     `tl:",omitempty:flags:3,implicit"`
-	ExcludeSelected bool     `tl:",omitempty:flags:5,implicit"`
-	Users           []int64  `tl:",omitempty:flags:4"`
-	ExcludeUsers    []int64  `tl:",omitempty:flags:6"`
+	ExistingChats   bool     `tl:"existing_chats,omitempty:flags:0,implicit"`
+	NewChats        bool     `tl:"new_chats,omitempty:flags:1,implicit"`
+	Contacts        bool     `tl:"contacts,omitempty:flags:2,implicit"`
+	NonContacts     bool     `tl:"non_contacts,omitempty:flags:3,implicit"`
+	ExcludeSelected bool     `tl:"exclude_selected,omitempty:flags:5,implicit"`
+	Users           []int64  `tl:"users,omitempty:flags:4"`
+	ExcludeUsers    []int64  `tl:"exclude_users,omitempty:flags:6"`
 }
 
 func (*BusinessBotRecipientsPredict) CRC() uint32 {
@@ -908,7 +908,7 @@ func (*BusinessBotRecipientsPredict) CRC() uint32 {
 func (*BusinessBotRecipientsPredict) _BusinessBotRecipients() {}
 
 type BusinessChatLink interface {
-	tl.Object
+	tl.TLObject
 	_BusinessChatLink()
 }
 
@@ -917,12 +917,12 @@ var (
 )
 
 type BusinessChatLinkPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Link     string
-	Message  string
-	Entities []MessageEntity `tl:",omitempty:flags:0"`
-	Title    *string         `tl:",omitempty:flags:1"`
-	Views    int32
+	_        struct{}        `tl:"flags,bitflag"`
+	Link     string          `tl:"link"`
+	Message  string          `tl:"message"`
+	Entities []MessageEntity `tl:"entities,omitempty:flags:0"`
+	Title    *string         `tl:"title,omitempty:flags:1"`
+	Views    int32           `tl:"views"`
 }
 
 func (*BusinessChatLinkPredict) CRC() uint32 {
@@ -931,7 +931,7 @@ func (*BusinessChatLinkPredict) CRC() uint32 {
 func (*BusinessChatLinkPredict) _BusinessChatLink() {}
 
 type BusinessGreetingMessage interface {
-	tl.Object
+	tl.TLObject
 	_BusinessGreetingMessage()
 }
 
@@ -940,9 +940,9 @@ var (
 )
 
 type BusinessGreetingMessagePredict struct {
-	ShortcutID     int32
-	Recipients     BusinessRecipients
-	NoActivityDays int32
+	ShortcutID     int32              `tl:"shortcut_id"`
+	Recipients     BusinessRecipients `tl:"recipients"`
+	NoActivityDays int32              `tl:"no_activity_days"`
 }
 
 func (*BusinessGreetingMessagePredict) CRC() uint32 {
@@ -951,7 +951,7 @@ func (*BusinessGreetingMessagePredict) CRC() uint32 {
 func (*BusinessGreetingMessagePredict) _BusinessGreetingMessage() {}
 
 type BusinessIntro interface {
-	tl.Object
+	tl.TLObject
 	_BusinessIntro()
 }
 
@@ -961,9 +961,9 @@ var (
 
 type BusinessIntroPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	Title       string
-	Description string
-	Sticker     Document `tl:",omitempty:flags:0"`
+	Title       string   `tl:"title"`
+	Description string   `tl:"description"`
+	Sticker     Document `tl:"sticker,omitempty:flags:0"`
 }
 
 func (*BusinessIntroPredict) CRC() uint32 {
@@ -972,7 +972,7 @@ func (*BusinessIntroPredict) CRC() uint32 {
 func (*BusinessIntroPredict) _BusinessIntro() {}
 
 type BusinessLocation interface {
-	tl.Object
+	tl.TLObject
 	_BusinessLocation()
 }
 
@@ -982,8 +982,8 @@ var (
 
 type BusinessLocationPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	GeoPoint GeoPoint `tl:",omitempty:flags:0"`
-	Address  string
+	GeoPoint GeoPoint `tl:"geo_point,omitempty:flags:0"`
+	Address  string   `tl:"address"`
 }
 
 func (*BusinessLocationPredict) CRC() uint32 {
@@ -992,7 +992,7 @@ func (*BusinessLocationPredict) CRC() uint32 {
 func (*BusinessLocationPredict) _BusinessLocation() {}
 
 type BusinessRecipients interface {
-	tl.Object
+	tl.TLObject
 	_BusinessRecipients()
 }
 
@@ -1002,12 +1002,12 @@ var (
 
 type BusinessRecipientsPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	ExistingChats   bool     `tl:",omitempty:flags:0,implicit"`
-	NewChats        bool     `tl:",omitempty:flags:1,implicit"`
-	Contacts        bool     `tl:",omitempty:flags:2,implicit"`
-	NonContacts     bool     `tl:",omitempty:flags:3,implicit"`
-	ExcludeSelected bool     `tl:",omitempty:flags:5,implicit"`
-	Users           []int64  `tl:",omitempty:flags:4"`
+	ExistingChats   bool     `tl:"existing_chats,omitempty:flags:0,implicit"`
+	NewChats        bool     `tl:"new_chats,omitempty:flags:1,implicit"`
+	Contacts        bool     `tl:"contacts,omitempty:flags:2,implicit"`
+	NonContacts     bool     `tl:"non_contacts,omitempty:flags:3,implicit"`
+	ExcludeSelected bool     `tl:"exclude_selected,omitempty:flags:5,implicit"`
+	Users           []int64  `tl:"users,omitempty:flags:4"`
 }
 
 func (*BusinessRecipientsPredict) CRC() uint32 {
@@ -1016,7 +1016,7 @@ func (*BusinessRecipientsPredict) CRC() uint32 {
 func (*BusinessRecipientsPredict) _BusinessRecipients() {}
 
 type BusinessWeeklyOpen interface {
-	tl.Object
+	tl.TLObject
 	_BusinessWeeklyOpen()
 }
 
@@ -1025,8 +1025,8 @@ var (
 )
 
 type BusinessWeeklyOpenPredict struct {
-	StartMinute int32
-	EndMinute   int32
+	StartMinute int32 `tl:"start_minute"`
+	EndMinute   int32 `tl:"end_minute"`
 }
 
 func (*BusinessWeeklyOpenPredict) CRC() uint32 {
@@ -1035,7 +1035,7 @@ func (*BusinessWeeklyOpenPredict) CRC() uint32 {
 func (*BusinessWeeklyOpenPredict) _BusinessWeeklyOpen() {}
 
 type BusinessWorkHours interface {
-	tl.Object
+	tl.TLObject
 	_BusinessWorkHours()
 }
 
@@ -1044,10 +1044,10 @@ var (
 )
 
 type BusinessWorkHoursPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	OpenNow    bool     `tl:",omitempty:flags:0,implicit"`
-	TimezoneID string
-	WeeklyOpen []BusinessWeeklyOpen
+	_          struct{}             `tl:"flags,bitflag"`
+	OpenNow    bool                 `tl:"open_now,omitempty:flags:0,implicit"`
+	TimezoneID string               `tl:"timezone_id"`
+	WeeklyOpen []BusinessWeeklyOpen `tl:"weekly_open"`
 }
 
 func (*BusinessWorkHoursPredict) CRC() uint32 {
@@ -1056,7 +1056,7 @@ func (*BusinessWorkHoursPredict) CRC() uint32 {
 func (*BusinessWorkHoursPredict) _BusinessWorkHours() {}
 
 type CdnConfig interface {
-	tl.Object
+	tl.TLObject
 	_CdnConfig()
 }
 
@@ -1065,7 +1065,7 @@ var (
 )
 
 type CdnConfigPredict struct {
-	PublicKeys []CdnPublicKey
+	PublicKeys []CdnPublicKey `tl:"public_keys"`
 }
 
 func (*CdnConfigPredict) CRC() uint32 {
@@ -1074,7 +1074,7 @@ func (*CdnConfigPredict) CRC() uint32 {
 func (*CdnConfigPredict) _CdnConfig() {}
 
 type CdnPublicKey interface {
-	tl.Object
+	tl.TLObject
 	_CdnPublicKey()
 }
 
@@ -1083,8 +1083,8 @@ var (
 )
 
 type CdnPublicKeyPredict struct {
-	DcID      int32
-	PublicKey string
+	DcID      int32  `tl:"dc_id"`
+	PublicKey string `tl:"public_key"`
 }
 
 func (*CdnPublicKeyPredict) CRC() uint32 {
@@ -1093,7 +1093,7 @@ func (*CdnPublicKeyPredict) CRC() uint32 {
 func (*CdnPublicKeyPredict) _CdnPublicKey() {}
 
 type ChannelAdminLogEvent interface {
-	tl.Object
+	tl.TLObject
 	_ChannelAdminLogEvent()
 }
 
@@ -1102,10 +1102,10 @@ var (
 )
 
 type ChannelAdminLogEventPredict struct {
-	ID     int64
-	Date   int32
-	UserID int64
-	Action ChannelAdminLogEventAction
+	ID     int64                      `tl:"id"`
+	Date   int32                      `tl:"date"`
+	UserID int64                      `tl:"user_id"`
+	Action ChannelAdminLogEventAction `tl:"action"`
 }
 
 func (*ChannelAdminLogEventPredict) CRC() uint32 {
@@ -1114,7 +1114,7 @@ func (*ChannelAdminLogEventPredict) CRC() uint32 {
 func (*ChannelAdminLogEventPredict) _ChannelAdminLogEvent() {}
 
 type ChannelAdminLogEventAction interface {
-	tl.Object
+	tl.TLObject
 	_ChannelAdminLogEventAction()
 }
 
@@ -1170,8 +1170,8 @@ var (
 )
 
 type ChannelAdminLogEventActionChangeTitlePredict struct {
-	PrevValue string
-	NewValue  string
+	PrevValue string `tl:"prev_value"`
+	NewValue  string `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeTitlePredict) CRC() uint32 {
@@ -1180,8 +1180,8 @@ func (*ChannelAdminLogEventActionChangeTitlePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeTitlePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeAboutPredict struct {
-	PrevValue string
-	NewValue  string
+	PrevValue string `tl:"prev_value"`
+	NewValue  string `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeAboutPredict) CRC() uint32 {
@@ -1190,8 +1190,8 @@ func (*ChannelAdminLogEventActionChangeAboutPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeAboutPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeUsernamePredict struct {
-	PrevValue string
-	NewValue  string
+	PrevValue string `tl:"prev_value"`
+	NewValue  string `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeUsernamePredict) CRC() uint32 {
@@ -1200,8 +1200,8 @@ func (*ChannelAdminLogEventActionChangeUsernamePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeUsernamePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangePhotoPredict struct {
-	PrevPhoto Photo
-	NewPhoto  Photo
+	PrevPhoto Photo `tl:"prev_photo"`
+	NewPhoto  Photo `tl:"new_photo"`
 }
 
 func (*ChannelAdminLogEventActionChangePhotoPredict) CRC() uint32 {
@@ -1210,7 +1210,7 @@ func (*ChannelAdminLogEventActionChangePhotoPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangePhotoPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionToggleInvitesPredict struct {
-	NewValue bool
+	NewValue bool `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionToggleInvitesPredict) CRC() uint32 {
@@ -1219,7 +1219,7 @@ func (*ChannelAdminLogEventActionToggleInvitesPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionToggleInvitesPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionToggleSignaturesPredict struct {
-	NewValue bool
+	NewValue bool `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionToggleSignaturesPredict) CRC() uint32 {
@@ -1228,7 +1228,7 @@ func (*ChannelAdminLogEventActionToggleSignaturesPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionToggleSignaturesPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionUpdatePinnedPredict struct {
-	Message Message
+	Message Message `tl:"message"`
 }
 
 func (*ChannelAdminLogEventActionUpdatePinnedPredict) CRC() uint32 {
@@ -1237,8 +1237,8 @@ func (*ChannelAdminLogEventActionUpdatePinnedPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionUpdatePinnedPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionEditMessagePredict struct {
-	PrevMessage Message
-	NewMessage  Message
+	PrevMessage Message `tl:"prev_message"`
+	NewMessage  Message `tl:"new_message"`
 }
 
 func (*ChannelAdminLogEventActionEditMessagePredict) CRC() uint32 {
@@ -1247,7 +1247,7 @@ func (*ChannelAdminLogEventActionEditMessagePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionEditMessagePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionDeleteMessagePredict struct {
-	Message Message
+	Message Message `tl:"message"`
 }
 
 func (*ChannelAdminLogEventActionDeleteMessagePredict) CRC() uint32 {
@@ -1270,7 +1270,7 @@ func (*ChannelAdminLogEventActionParticipantLeavePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantLeavePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionParticipantInvitePredict struct {
-	Participant ChannelParticipant
+	Participant ChannelParticipant `tl:"participant"`
 }
 
 func (*ChannelAdminLogEventActionParticipantInvitePredict) CRC() uint32 {
@@ -1279,8 +1279,8 @@ func (*ChannelAdminLogEventActionParticipantInvitePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantInvitePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionParticipantToggleBanPredict struct {
-	PrevParticipant ChannelParticipant
-	NewParticipant  ChannelParticipant
+	PrevParticipant ChannelParticipant `tl:"prev_participant"`
+	NewParticipant  ChannelParticipant `tl:"new_participant"`
 }
 
 func (*ChannelAdminLogEventActionParticipantToggleBanPredict) CRC() uint32 {
@@ -1289,8 +1289,8 @@ func (*ChannelAdminLogEventActionParticipantToggleBanPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantToggleBanPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionParticipantToggleAdminPredict struct {
-	PrevParticipant ChannelParticipant
-	NewParticipant  ChannelParticipant
+	PrevParticipant ChannelParticipant `tl:"prev_participant"`
+	NewParticipant  ChannelParticipant `tl:"new_participant"`
 }
 
 func (*ChannelAdminLogEventActionParticipantToggleAdminPredict) CRC() uint32 {
@@ -1299,8 +1299,8 @@ func (*ChannelAdminLogEventActionParticipantToggleAdminPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantToggleAdminPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeStickerSetPredict struct {
-	PrevStickerset InputStickerSet
-	NewStickerset  InputStickerSet
+	PrevStickerset InputStickerSet `tl:"prev_stickerset"`
+	NewStickerset  InputStickerSet `tl:"new_stickerset"`
 }
 
 func (*ChannelAdminLogEventActionChangeStickerSetPredict) CRC() uint32 {
@@ -1309,7 +1309,7 @@ func (*ChannelAdminLogEventActionChangeStickerSetPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeStickerSetPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionTogglePreHistoryHiddenPredict struct {
-	NewValue bool
+	NewValue bool `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionTogglePreHistoryHiddenPredict) CRC() uint32 {
@@ -1318,8 +1318,8 @@ func (*ChannelAdminLogEventActionTogglePreHistoryHiddenPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionTogglePreHistoryHiddenPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionDefaultBannedRightsPredict struct {
-	PrevBannedRights ChatBannedRights
-	NewBannedRights  ChatBannedRights
+	PrevBannedRights ChatBannedRights `tl:"prev_banned_rights"`
+	NewBannedRights  ChatBannedRights `tl:"new_banned_rights"`
 }
 
 func (*ChannelAdminLogEventActionDefaultBannedRightsPredict) CRC() uint32 {
@@ -1328,7 +1328,7 @@ func (*ChannelAdminLogEventActionDefaultBannedRightsPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionDefaultBannedRightsPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionStopPollPredict struct {
-	Message Message
+	Message Message `tl:"message"`
 }
 
 func (*ChannelAdminLogEventActionStopPollPredict) CRC() uint32 {
@@ -1337,8 +1337,8 @@ func (*ChannelAdminLogEventActionStopPollPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionStopPollPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeLinkedChatPredict struct {
-	PrevValue int64
-	NewValue  int64
+	PrevValue int64 `tl:"prev_value"`
+	NewValue  int64 `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeLinkedChatPredict) CRC() uint32 {
@@ -1347,8 +1347,8 @@ func (*ChannelAdminLogEventActionChangeLinkedChatPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeLinkedChatPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeLocationPredict struct {
-	PrevValue ChannelLocation
-	NewValue  ChannelLocation
+	PrevValue ChannelLocation `tl:"prev_value"`
+	NewValue  ChannelLocation `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeLocationPredict) CRC() uint32 {
@@ -1357,8 +1357,8 @@ func (*ChannelAdminLogEventActionChangeLocationPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeLocationPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionToggleSlowModePredict struct {
-	PrevValue int32
-	NewValue  int32
+	PrevValue int32 `tl:"prev_value"`
+	NewValue  int32 `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionToggleSlowModePredict) CRC() uint32 {
@@ -1367,7 +1367,7 @@ func (*ChannelAdminLogEventActionToggleSlowModePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionToggleSlowModePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionStartGroupCallPredict struct {
-	Call InputGroupCall
+	Call InputGroupCall `tl:"call"`
 }
 
 func (*ChannelAdminLogEventActionStartGroupCallPredict) CRC() uint32 {
@@ -1376,7 +1376,7 @@ func (*ChannelAdminLogEventActionStartGroupCallPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionStartGroupCallPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionDiscardGroupCallPredict struct {
-	Call InputGroupCall
+	Call InputGroupCall `tl:"call"`
 }
 
 func (*ChannelAdminLogEventActionDiscardGroupCallPredict) CRC() uint32 {
@@ -1385,7 +1385,7 @@ func (*ChannelAdminLogEventActionDiscardGroupCallPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionDiscardGroupCallPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionParticipantMutePredict struct {
-	Participant GroupCallParticipant
+	Participant GroupCallParticipant `tl:"participant"`
 }
 
 func (*ChannelAdminLogEventActionParticipantMutePredict) CRC() uint32 {
@@ -1394,7 +1394,7 @@ func (*ChannelAdminLogEventActionParticipantMutePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantMutePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionParticipantUnmutePredict struct {
-	Participant GroupCallParticipant
+	Participant GroupCallParticipant `tl:"participant"`
 }
 
 func (*ChannelAdminLogEventActionParticipantUnmutePredict) CRC() uint32 {
@@ -1403,7 +1403,7 @@ func (*ChannelAdminLogEventActionParticipantUnmutePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantUnmutePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionToggleGroupCallSettingPredict struct {
-	JoinMuted bool
+	JoinMuted bool `tl:"join_muted"`
 }
 
 func (*ChannelAdminLogEventActionToggleGroupCallSettingPredict) CRC() uint32 {
@@ -1412,9 +1412,9 @@ func (*ChannelAdminLogEventActionToggleGroupCallSettingPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionToggleGroupCallSettingPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionParticipantJoinByInvitePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	ViaChatlist bool     `tl:",omitempty:flags:0,implicit"`
-	Invite      ExportedChatInvite
+	_           struct{}           `tl:"flags,bitflag"`
+	ViaChatlist bool               `tl:"via_chatlist,omitempty:flags:0,implicit"`
+	Invite      ExportedChatInvite `tl:"invite"`
 }
 
 func (*ChannelAdminLogEventActionParticipantJoinByInvitePredict) CRC() uint32 {
@@ -1423,7 +1423,7 @@ func (*ChannelAdminLogEventActionParticipantJoinByInvitePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantJoinByInvitePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionExportedInviteDeletePredict struct {
-	Invite ExportedChatInvite
+	Invite ExportedChatInvite `tl:"invite"`
 }
 
 func (*ChannelAdminLogEventActionExportedInviteDeletePredict) CRC() uint32 {
@@ -1432,7 +1432,7 @@ func (*ChannelAdminLogEventActionExportedInviteDeletePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionExportedInviteDeletePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionExportedInviteRevokePredict struct {
-	Invite ExportedChatInvite
+	Invite ExportedChatInvite `tl:"invite"`
 }
 
 func (*ChannelAdminLogEventActionExportedInviteRevokePredict) CRC() uint32 {
@@ -1441,8 +1441,8 @@ func (*ChannelAdminLogEventActionExportedInviteRevokePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionExportedInviteRevokePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionExportedInviteEditPredict struct {
-	PrevInvite ExportedChatInvite
-	NewInvite  ExportedChatInvite
+	PrevInvite ExportedChatInvite `tl:"prev_invite"`
+	NewInvite  ExportedChatInvite `tl:"new_invite"`
 }
 
 func (*ChannelAdminLogEventActionExportedInviteEditPredict) CRC() uint32 {
@@ -1451,7 +1451,7 @@ func (*ChannelAdminLogEventActionExportedInviteEditPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionExportedInviteEditPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionParticipantVolumePredict struct {
-	Participant GroupCallParticipant
+	Participant GroupCallParticipant `tl:"participant"`
 }
 
 func (*ChannelAdminLogEventActionParticipantVolumePredict) CRC() uint32 {
@@ -1460,8 +1460,8 @@ func (*ChannelAdminLogEventActionParticipantVolumePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantVolumePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeHistoryTTLPredict struct {
-	PrevValue int32
-	NewValue  int32
+	PrevValue int32 `tl:"prev_value"`
+	NewValue  int32 `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeHistoryTTLPredict) CRC() uint32 {
@@ -1470,8 +1470,8 @@ func (*ChannelAdminLogEventActionChangeHistoryTTLPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeHistoryTTLPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionParticipantJoinByRequestPredict struct {
-	Invite     ExportedChatInvite
-	ApprovedBy int64
+	Invite     ExportedChatInvite `tl:"invite"`
+	ApprovedBy int64              `tl:"approved_by"`
 }
 
 func (*ChannelAdminLogEventActionParticipantJoinByRequestPredict) CRC() uint32 {
@@ -1480,7 +1480,7 @@ func (*ChannelAdminLogEventActionParticipantJoinByRequestPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionParticipantJoinByRequestPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionToggleNoForwardsPredict struct {
-	NewValue bool
+	NewValue bool `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionToggleNoForwardsPredict) CRC() uint32 {
@@ -1489,7 +1489,7 @@ func (*ChannelAdminLogEventActionToggleNoForwardsPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionToggleNoForwardsPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionSendMessagePredict struct {
-	Message Message
+	Message Message `tl:"message"`
 }
 
 func (*ChannelAdminLogEventActionSendMessagePredict) CRC() uint32 {
@@ -1498,8 +1498,8 @@ func (*ChannelAdminLogEventActionSendMessagePredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionSendMessagePredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeAvailableReactionsPredict struct {
-	PrevValue ChatReactions
-	NewValue  ChatReactions
+	PrevValue ChatReactions `tl:"prev_value"`
+	NewValue  ChatReactions `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeAvailableReactionsPredict) CRC() uint32 {
@@ -1508,8 +1508,8 @@ func (*ChannelAdminLogEventActionChangeAvailableReactionsPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeAvailableReactionsPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeUsernamesPredict struct {
-	PrevValue []string
-	NewValue  []string
+	PrevValue []string `tl:"prev_value"`
+	NewValue  []string `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeUsernamesPredict) CRC() uint32 {
@@ -1518,7 +1518,7 @@ func (*ChannelAdminLogEventActionChangeUsernamesPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeUsernamesPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionToggleForumPredict struct {
-	NewValue bool
+	NewValue bool `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionToggleForumPredict) CRC() uint32 {
@@ -1527,7 +1527,7 @@ func (*ChannelAdminLogEventActionToggleForumPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionToggleForumPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionCreateTopicPredict struct {
-	Topic ForumTopic
+	Topic ForumTopic `tl:"topic"`
 }
 
 func (*ChannelAdminLogEventActionCreateTopicPredict) CRC() uint32 {
@@ -1536,8 +1536,8 @@ func (*ChannelAdminLogEventActionCreateTopicPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionCreateTopicPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionEditTopicPredict struct {
-	PrevTopic ForumTopic
-	NewTopic  ForumTopic
+	PrevTopic ForumTopic `tl:"prev_topic"`
+	NewTopic  ForumTopic `tl:"new_topic"`
 }
 
 func (*ChannelAdminLogEventActionEditTopicPredict) CRC() uint32 {
@@ -1546,7 +1546,7 @@ func (*ChannelAdminLogEventActionEditTopicPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionEditTopicPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionDeleteTopicPredict struct {
-	Topic ForumTopic
+	Topic ForumTopic `tl:"topic"`
 }
 
 func (*ChannelAdminLogEventActionDeleteTopicPredict) CRC() uint32 {
@@ -1556,8 +1556,8 @@ func (*ChannelAdminLogEventActionDeleteTopicPredict) _ChannelAdminLogEventAction
 
 type ChannelAdminLogEventActionPinTopicPredict struct {
 	_         struct{}   `tl:"flags,bitflag"`
-	PrevTopic ForumTopic `tl:",omitempty:flags:0"`
-	NewTopic  ForumTopic `tl:",omitempty:flags:1"`
+	PrevTopic ForumTopic `tl:"prev_topic,omitempty:flags:0"`
+	NewTopic  ForumTopic `tl:"new_topic,omitempty:flags:1"`
 }
 
 func (*ChannelAdminLogEventActionPinTopicPredict) CRC() uint32 {
@@ -1566,7 +1566,7 @@ func (*ChannelAdminLogEventActionPinTopicPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionPinTopicPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionToggleAntiSpamPredict struct {
-	NewValue bool
+	NewValue bool `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionToggleAntiSpamPredict) CRC() uint32 {
@@ -1575,8 +1575,8 @@ func (*ChannelAdminLogEventActionToggleAntiSpamPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionToggleAntiSpamPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangePeerColorPredict struct {
-	PrevValue PeerColor
-	NewValue  PeerColor
+	PrevValue PeerColor `tl:"prev_value"`
+	NewValue  PeerColor `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangePeerColorPredict) CRC() uint32 {
@@ -1585,8 +1585,8 @@ func (*ChannelAdminLogEventActionChangePeerColorPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangePeerColorPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeProfilePeerColorPredict struct {
-	PrevValue PeerColor
-	NewValue  PeerColor
+	PrevValue PeerColor `tl:"prev_value"`
+	NewValue  PeerColor `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeProfilePeerColorPredict) CRC() uint32 {
@@ -1595,8 +1595,8 @@ func (*ChannelAdminLogEventActionChangeProfilePeerColorPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeProfilePeerColorPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeWallpaperPredict struct {
-	PrevValue WallPaper
-	NewValue  WallPaper
+	PrevValue WallPaper `tl:"prev_value"`
+	NewValue  WallPaper `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeWallpaperPredict) CRC() uint32 {
@@ -1605,8 +1605,8 @@ func (*ChannelAdminLogEventActionChangeWallpaperPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeWallpaperPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeEmojiStatusPredict struct {
-	PrevValue EmojiStatus
-	NewValue  EmojiStatus
+	PrevValue EmojiStatus `tl:"prev_value"`
+	NewValue  EmojiStatus `tl:"new_value"`
 }
 
 func (*ChannelAdminLogEventActionChangeEmojiStatusPredict) CRC() uint32 {
@@ -1615,8 +1615,8 @@ func (*ChannelAdminLogEventActionChangeEmojiStatusPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeEmojiStatusPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventActionChangeEmojiStickerSetPredict struct {
-	PrevStickerset InputStickerSet
-	NewStickerset  InputStickerSet
+	PrevStickerset InputStickerSet `tl:"prev_stickerset"`
+	NewStickerset  InputStickerSet `tl:"new_stickerset"`
 }
 
 func (*ChannelAdminLogEventActionChangeEmojiStickerSetPredict) CRC() uint32 {
@@ -1625,7 +1625,7 @@ func (*ChannelAdminLogEventActionChangeEmojiStickerSetPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeEmojiStickerSetPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventsFilter interface {
-	tl.Object
+	tl.TLObject
 	_ChannelAdminLogEventsFilter()
 }
 
@@ -1635,24 +1635,24 @@ var (
 
 type ChannelAdminLogEventsFilterPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Join      bool     `tl:",omitempty:flags:0,implicit"`
-	Leave     bool     `tl:",omitempty:flags:1,implicit"`
-	Invite    bool     `tl:",omitempty:flags:2,implicit"`
-	Ban       bool     `tl:",omitempty:flags:3,implicit"`
-	Unban     bool     `tl:",omitempty:flags:4,implicit"`
-	Kick      bool     `tl:",omitempty:flags:5,implicit"`
-	Unkick    bool     `tl:",omitempty:flags:6,implicit"`
-	Promote   bool     `tl:",omitempty:flags:7,implicit"`
-	Demote    bool     `tl:",omitempty:flags:8,implicit"`
-	Info      bool     `tl:",omitempty:flags:9,implicit"`
-	Settings  bool     `tl:",omitempty:flags:10,implicit"`
-	Pinned    bool     `tl:",omitempty:flags:11,implicit"`
-	Edit      bool     `tl:",omitempty:flags:12,implicit"`
-	Delete    bool     `tl:",omitempty:flags:13,implicit"`
-	GroupCall bool     `tl:",omitempty:flags:14,implicit"`
-	Invites   bool     `tl:",omitempty:flags:15,implicit"`
-	Send      bool     `tl:",omitempty:flags:16,implicit"`
-	Forums    bool     `tl:",omitempty:flags:17,implicit"`
+	Join      bool     `tl:"join,omitempty:flags:0,implicit"`
+	Leave     bool     `tl:"leave,omitempty:flags:1,implicit"`
+	Invite    bool     `tl:"invite,omitempty:flags:2,implicit"`
+	Ban       bool     `tl:"ban,omitempty:flags:3,implicit"`
+	Unban     bool     `tl:"unban,omitempty:flags:4,implicit"`
+	Kick      bool     `tl:"kick,omitempty:flags:5,implicit"`
+	Unkick    bool     `tl:"unkick,omitempty:flags:6,implicit"`
+	Promote   bool     `tl:"promote,omitempty:flags:7,implicit"`
+	Demote    bool     `tl:"demote,omitempty:flags:8,implicit"`
+	Info      bool     `tl:"info,omitempty:flags:9,implicit"`
+	Settings  bool     `tl:"settings,omitempty:flags:10,implicit"`
+	Pinned    bool     `tl:"pinned,omitempty:flags:11,implicit"`
+	Edit      bool     `tl:"edit,omitempty:flags:12,implicit"`
+	Delete    bool     `tl:"delete,omitempty:flags:13,implicit"`
+	GroupCall bool     `tl:"group_call,omitempty:flags:14,implicit"`
+	Invites   bool     `tl:"invites,omitempty:flags:15,implicit"`
+	Send      bool     `tl:"send,omitempty:flags:16,implicit"`
+	Forums    bool     `tl:"forums,omitempty:flags:17,implicit"`
 }
 
 func (*ChannelAdminLogEventsFilterPredict) CRC() uint32 {
@@ -1661,7 +1661,7 @@ func (*ChannelAdminLogEventsFilterPredict) CRC() uint32 {
 func (*ChannelAdminLogEventsFilterPredict) _ChannelAdminLogEventsFilter() {}
 
 type ChannelLocation interface {
-	tl.Object
+	tl.TLObject
 	_ChannelLocation()
 }
 
@@ -1678,8 +1678,8 @@ func (*ChannelLocationEmptyPredict) CRC() uint32 {
 func (*ChannelLocationEmptyPredict) _ChannelLocation() {}
 
 type ChannelLocationPredict struct {
-	GeoPoint GeoPoint
-	Address  string
+	GeoPoint GeoPoint `tl:"geo_point"`
+	Address  string   `tl:"address"`
 }
 
 func (*ChannelLocationPredict) CRC() uint32 {
@@ -1688,7 +1688,7 @@ func (*ChannelLocationPredict) CRC() uint32 {
 func (*ChannelLocationPredict) _ChannelLocation() {}
 
 type ChannelMessagesFilter interface {
-	tl.Object
+	tl.TLObject
 	_ChannelMessagesFilter()
 }
 
@@ -1705,9 +1705,9 @@ func (*ChannelMessagesFilterEmptyPredict) CRC() uint32 {
 func (*ChannelMessagesFilterEmptyPredict) _ChannelMessagesFilter() {}
 
 type ChannelMessagesFilterPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	ExcludeNewMessages bool     `tl:",omitempty:flags:1,implicit"`
-	Ranges             []MessageRange
+	_                  struct{}       `tl:"flags,bitflag"`
+	ExcludeNewMessages bool           `tl:"exclude_new_messages,omitempty:flags:1,implicit"`
+	Ranges             []MessageRange `tl:"ranges"`
 }
 
 func (*ChannelMessagesFilterPredict) CRC() uint32 {
@@ -1716,7 +1716,7 @@ func (*ChannelMessagesFilterPredict) CRC() uint32 {
 func (*ChannelMessagesFilterPredict) _ChannelMessagesFilter() {}
 
 type ChannelParticipant interface {
-	tl.Object
+	tl.TLObject
 	_ChannelParticipant()
 }
 
@@ -1730,8 +1730,8 @@ var (
 )
 
 type ChannelParticipantPredict struct {
-	UserID int64
-	Date   int32
+	UserID int64 `tl:"user_id"`
+	Date   int32 `tl:"date"`
 }
 
 func (*ChannelParticipantPredict) CRC() uint32 {
@@ -1741,10 +1741,10 @@ func (*ChannelParticipantPredict) _ChannelParticipant() {}
 
 type ChannelParticipantSelfPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	ViaRequest bool     `tl:",omitempty:flags:0,implicit"`
-	UserID     int64
-	InviterID  int64
-	Date       int32
+	ViaRequest bool     `tl:"via_request,omitempty:flags:0,implicit"`
+	UserID     int64    `tl:"user_id"`
+	InviterID  int64    `tl:"inviter_id"`
+	Date       int32    `tl:"date"`
 }
 
 func (*ChannelParticipantSelfPredict) CRC() uint32 {
@@ -1753,10 +1753,10 @@ func (*ChannelParticipantSelfPredict) CRC() uint32 {
 func (*ChannelParticipantSelfPredict) _ChannelParticipant() {}
 
 type ChannelParticipantCreatorPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	UserID      int64
-	AdminRights ChatAdminRights
-	Rank        *string `tl:",omitempty:flags:0"`
+	_           struct{}        `tl:"flags,bitflag"`
+	UserID      int64           `tl:"user_id"`
+	AdminRights ChatAdminRights `tl:"admin_rights"`
+	Rank        *string         `tl:"rank,omitempty:flags:0"`
 }
 
 func (*ChannelParticipantCreatorPredict) CRC() uint32 {
@@ -1765,15 +1765,15 @@ func (*ChannelParticipantCreatorPredict) CRC() uint32 {
 func (*ChannelParticipantCreatorPredict) _ChannelParticipant() {}
 
 type ChannelParticipantAdminPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	CanEdit     bool     `tl:",omitempty:flags:0,implicit"`
-	Self        bool     `tl:",omitempty:flags:1,implicit"`
-	UserID      int64
-	InviterID   *int64 `tl:",omitempty:flags:1"`
-	PromotedBy  int64
-	Date        int32
-	AdminRights ChatAdminRights
-	Rank        *string `tl:",omitempty:flags:2"`
+	_           struct{}        `tl:"flags,bitflag"`
+	CanEdit     bool            `tl:"can_edit,omitempty:flags:0,implicit"`
+	Self        bool            `tl:"self,omitempty:flags:1,implicit"`
+	UserID      int64           `tl:"user_id"`
+	InviterID   *int64          `tl:"inviter_id,omitempty:flags:1"`
+	PromotedBy  int64           `tl:"promoted_by"`
+	Date        int32           `tl:"date"`
+	AdminRights ChatAdminRights `tl:"admin_rights"`
+	Rank        *string         `tl:"rank,omitempty:flags:2"`
 }
 
 func (*ChannelParticipantAdminPredict) CRC() uint32 {
@@ -1782,12 +1782,12 @@ func (*ChannelParticipantAdminPredict) CRC() uint32 {
 func (*ChannelParticipantAdminPredict) _ChannelParticipant() {}
 
 type ChannelParticipantBannedPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Left         bool     `tl:",omitempty:flags:0,implicit"`
-	Peer         Peer
-	KickedBy     int64
-	Date         int32
-	BannedRights ChatBannedRights
+	_            struct{}         `tl:"flags,bitflag"`
+	Left         bool             `tl:"left,omitempty:flags:0,implicit"`
+	Peer         Peer             `tl:"peer"`
+	KickedBy     int64            `tl:"kicked_by"`
+	Date         int32            `tl:"date"`
+	BannedRights ChatBannedRights `tl:"banned_rights"`
 }
 
 func (*ChannelParticipantBannedPredict) CRC() uint32 {
@@ -1796,7 +1796,7 @@ func (*ChannelParticipantBannedPredict) CRC() uint32 {
 func (*ChannelParticipantBannedPredict) _ChannelParticipant() {}
 
 type ChannelParticipantLeftPredict struct {
-	Peer Peer
+	Peer Peer `tl:"peer"`
 }
 
 func (*ChannelParticipantLeftPredict) CRC() uint32 {
@@ -1805,7 +1805,7 @@ func (*ChannelParticipantLeftPredict) CRC() uint32 {
 func (*ChannelParticipantLeftPredict) _ChannelParticipant() {}
 
 type ChannelParticipantsFilter interface {
-	tl.Object
+	tl.TLObject
 	_ChannelParticipantsFilter()
 }
 
@@ -1835,7 +1835,7 @@ func (*ChannelParticipantsAdminsPredict) CRC() uint32 {
 func (*ChannelParticipantsAdminsPredict) _ChannelParticipantsFilter() {}
 
 type ChannelParticipantsKickedPredict struct {
-	Q string
+	Q string `tl:"q"`
 }
 
 func (*ChannelParticipantsKickedPredict) CRC() uint32 {
@@ -1851,7 +1851,7 @@ func (*ChannelParticipantsBotsPredict) CRC() uint32 {
 func (*ChannelParticipantsBotsPredict) _ChannelParticipantsFilter() {}
 
 type ChannelParticipantsBannedPredict struct {
-	Q string
+	Q string `tl:"q"`
 }
 
 func (*ChannelParticipantsBannedPredict) CRC() uint32 {
@@ -1860,7 +1860,7 @@ func (*ChannelParticipantsBannedPredict) CRC() uint32 {
 func (*ChannelParticipantsBannedPredict) _ChannelParticipantsFilter() {}
 
 type ChannelParticipantsSearchPredict struct {
-	Q string
+	Q string `tl:"q"`
 }
 
 func (*ChannelParticipantsSearchPredict) CRC() uint32 {
@@ -1869,7 +1869,7 @@ func (*ChannelParticipantsSearchPredict) CRC() uint32 {
 func (*ChannelParticipantsSearchPredict) _ChannelParticipantsFilter() {}
 
 type ChannelParticipantsContactsPredict struct {
-	Q string
+	Q string `tl:"q"`
 }
 
 func (*ChannelParticipantsContactsPredict) CRC() uint32 {
@@ -1879,8 +1879,8 @@ func (*ChannelParticipantsContactsPredict) _ChannelParticipantsFilter() {}
 
 type ChannelParticipantsMentionsPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Q        *string  `tl:",omitempty:flags:0"`
-	TopMsgID *int32   `tl:",omitempty:flags:1"`
+	Q        *string  `tl:"q,omitempty:flags:0"`
+	TopMsgID *int32   `tl:"top_msg_id,omitempty:flags:1"`
 }
 
 func (*ChannelParticipantsMentionsPredict) CRC() uint32 {
@@ -1889,7 +1889,7 @@ func (*ChannelParticipantsMentionsPredict) CRC() uint32 {
 func (*ChannelParticipantsMentionsPredict) _ChannelParticipantsFilter() {}
 
 type Chat interface {
-	tl.Object
+	tl.TLObject
 	_Chat()
 }
 
@@ -1902,7 +1902,7 @@ var (
 )
 
 type ChatEmptyPredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*ChatEmptyPredict) CRC() uint32 {
@@ -1911,22 +1911,22 @@ func (*ChatEmptyPredict) CRC() uint32 {
 func (*ChatEmptyPredict) _Chat() {}
 
 type ChatPredict struct {
-	_                   struct{} `tl:"flags,bitflag"`
-	Creator             bool     `tl:",omitempty:flags:0,implicit"`
-	Left                bool     `tl:",omitempty:flags:2,implicit"`
-	Deactivated         bool     `tl:",omitempty:flags:5,implicit"`
-	CallActive          bool     `tl:",omitempty:flags:23,implicit"`
-	CallNotEmpty        bool     `tl:",omitempty:flags:24,implicit"`
-	Noforwards          bool     `tl:",omitempty:flags:25,implicit"`
-	ID                  int64
-	Title               string
-	Photo               ChatPhoto
-	ParticipantsCount   int32
-	Date                int32
-	Version             int32
-	MigratedTo          InputChannel     `tl:",omitempty:flags:6"`
-	AdminRights         ChatAdminRights  `tl:",omitempty:flags:14"`
-	DefaultBannedRights ChatBannedRights `tl:",omitempty:flags:18"`
+	_                   struct{}         `tl:"flags,bitflag"`
+	Creator             bool             `tl:"creator,omitempty:flags:0,implicit"`
+	Left                bool             `tl:"left,omitempty:flags:2,implicit"`
+	Deactivated         bool             `tl:"deactivated,omitempty:flags:5,implicit"`
+	CallActive          bool             `tl:"call_active,omitempty:flags:23,implicit"`
+	CallNotEmpty        bool             `tl:"call_not_empty,omitempty:flags:24,implicit"`
+	Noforwards          bool             `tl:"noforwards,omitempty:flags:25,implicit"`
+	ID                  int64            `tl:"id"`
+	Title               string           `tl:"title"`
+	Photo               ChatPhoto        `tl:"photo"`
+	ParticipantsCount   int32            `tl:"participants_count"`
+	Date                int32            `tl:"date"`
+	Version             int32            `tl:"version"`
+	MigratedTo          InputChannel     `tl:"migrated_to,omitempty:flags:6"`
+	AdminRights         ChatAdminRights  `tl:"admin_rights,omitempty:flags:14"`
+	DefaultBannedRights ChatBannedRights `tl:"default_banned_rights,omitempty:flags:18"`
 }
 
 func (*ChatPredict) CRC() uint32 {
@@ -1935,8 +1935,8 @@ func (*ChatPredict) CRC() uint32 {
 func (*ChatPredict) _Chat() {}
 
 type ChatForbiddenPredict struct {
-	ID    int64
-	Title string
+	ID    int64  `tl:"id"`
+	Title string `tl:"title"`
 }
 
 func (*ChatForbiddenPredict) CRC() uint32 {
@@ -1945,48 +1945,48 @@ func (*ChatForbiddenPredict) CRC() uint32 {
 func (*ChatForbiddenPredict) _Chat() {}
 
 type ChannelPredict struct {
-	_                   struct{} `tl:"flags,bitflag"`
-	Creator             bool     `tl:",omitempty:flags:0,implicit"`
-	Left                bool     `tl:",omitempty:flags:2,implicit"`
-	Broadcast           bool     `tl:",omitempty:flags:5,implicit"`
-	Verified            bool     `tl:",omitempty:flags:7,implicit"`
-	Megagroup           bool     `tl:",omitempty:flags:8,implicit"`
-	Restricted          bool     `tl:",omitempty:flags:9,implicit"`
-	Signatures          bool     `tl:",omitempty:flags:11,implicit"`
-	Min                 bool     `tl:",omitempty:flags:12,implicit"`
-	Scam                bool     `tl:",omitempty:flags:19,implicit"`
-	HasLink             bool     `tl:",omitempty:flags:20,implicit"`
-	HasGeo              bool     `tl:",omitempty:flags:21,implicit"`
-	SlowmodeEnabled     bool     `tl:",omitempty:flags:22,implicit"`
-	CallActive          bool     `tl:",omitempty:flags:23,implicit"`
-	CallNotEmpty        bool     `tl:",omitempty:flags:24,implicit"`
-	Fake                bool     `tl:",omitempty:flags:25,implicit"`
-	Gigagroup           bool     `tl:",omitempty:flags:26,implicit"`
-	Noforwards          bool     `tl:",omitempty:flags:27,implicit"`
-	JoinToSend          bool     `tl:",omitempty:flags:28,implicit"`
-	JoinRequest         bool     `tl:",omitempty:flags:29,implicit"`
-	Forum               bool     `tl:",omitempty:flags:30,implicit"`
-	_                   struct{} `tl:"flags2,bitflag"`
-	StoriesHidden       bool     `tl:",omitempty:flags2:1,implicit"`
-	StoriesHiddenMin    bool     `tl:",omitempty:flags2:2,implicit"`
-	StoriesUnavailable  bool     `tl:",omitempty:flags2:3,implicit"`
-	ID                  int64
-	AccessHash          *int64 `tl:",omitempty:flags:13"`
-	Title               string
-	Username            *string `tl:",omitempty:flags:6"`
-	Photo               ChatPhoto
-	Date                int32
-	RestrictionReason   []RestrictionReason `tl:",omitempty:flags:9"`
-	AdminRights         ChatAdminRights     `tl:",omitempty:flags:14"`
-	BannedRights        ChatBannedRights    `tl:",omitempty:flags:15"`
-	DefaultBannedRights ChatBannedRights    `tl:",omitempty:flags:18"`
-	ParticipantsCount   *int32              `tl:",omitempty:flags:17"`
-	Usernames           []Username          `tl:",omitempty:flags2:0"`
-	StoriesMaxID        *int32              `tl:",omitempty:flags2:4"`
-	Color               PeerColor           `tl:",omitempty:flags2:7"`
-	ProfileColor        PeerColor           `tl:",omitempty:flags2:8"`
-	EmojiStatus         EmojiStatus         `tl:",omitempty:flags2:9"`
-	Level               *int32              `tl:",omitempty:flags2:10"`
+	_                   struct{}            `tl:"flags,bitflag"`
+	Creator             bool                `tl:"creator,omitempty:flags:0,implicit"`
+	Left                bool                `tl:"left,omitempty:flags:2,implicit"`
+	Broadcast           bool                `tl:"broadcast,omitempty:flags:5,implicit"`
+	Verified            bool                `tl:"verified,omitempty:flags:7,implicit"`
+	Megagroup           bool                `tl:"megagroup,omitempty:flags:8,implicit"`
+	Restricted          bool                `tl:"restricted,omitempty:flags:9,implicit"`
+	Signatures          bool                `tl:"signatures,omitempty:flags:11,implicit"`
+	Min                 bool                `tl:"min,omitempty:flags:12,implicit"`
+	Scam                bool                `tl:"scam,omitempty:flags:19,implicit"`
+	HasLink             bool                `tl:"has_link,omitempty:flags:20,implicit"`
+	HasGeo              bool                `tl:"has_geo,omitempty:flags:21,implicit"`
+	SlowmodeEnabled     bool                `tl:"slowmode_enabled,omitempty:flags:22,implicit"`
+	CallActive          bool                `tl:"call_active,omitempty:flags:23,implicit"`
+	CallNotEmpty        bool                `tl:"call_not_empty,omitempty:flags:24,implicit"`
+	Fake                bool                `tl:"fake,omitempty:flags:25,implicit"`
+	Gigagroup           bool                `tl:"gigagroup,omitempty:flags:26,implicit"`
+	Noforwards          bool                `tl:"noforwards,omitempty:flags:27,implicit"`
+	JoinToSend          bool                `tl:"join_to_send,omitempty:flags:28,implicit"`
+	JoinRequest         bool                `tl:"join_request,omitempty:flags:29,implicit"`
+	Forum               bool                `tl:"forum,omitempty:flags:30,implicit"`
+	_                   struct{}            `tl:"flags2,bitflag"`
+	StoriesHidden       bool                `tl:"stories_hidden,omitempty:flags2:1,implicit"`
+	StoriesHiddenMin    bool                `tl:"stories_hidden_min,omitempty:flags2:2,implicit"`
+	StoriesUnavailable  bool                `tl:"stories_unavailable,omitempty:flags2:3,implicit"`
+	ID                  int64               `tl:"id"`
+	AccessHash          *int64              `tl:"access_hash,omitempty:flags:13"`
+	Title               string              `tl:"title"`
+	Username            *string             `tl:"username,omitempty:flags:6"`
+	Photo               ChatPhoto           `tl:"photo"`
+	Date                int32               `tl:"date"`
+	RestrictionReason   []RestrictionReason `tl:"restriction_reason,omitempty:flags:9"`
+	AdminRights         ChatAdminRights     `tl:"admin_rights,omitempty:flags:14"`
+	BannedRights        ChatBannedRights    `tl:"banned_rights,omitempty:flags:15"`
+	DefaultBannedRights ChatBannedRights    `tl:"default_banned_rights,omitempty:flags:18"`
+	ParticipantsCount   *int32              `tl:"participants_count,omitempty:flags:17"`
+	Usernames           []Username          `tl:"usernames,omitempty:flags2:0"`
+	StoriesMaxID        *int32              `tl:"stories_max_id,omitempty:flags2:4"`
+	Color               PeerColor           `tl:"color,omitempty:flags2:7"`
+	ProfileColor        PeerColor           `tl:"profile_color,omitempty:flags2:8"`
+	EmojiStatus         EmojiStatus         `tl:"emoji_status,omitempty:flags2:9"`
+	Level               *int32              `tl:"level,omitempty:flags2:10"`
 }
 
 func (*ChannelPredict) CRC() uint32 {
@@ -1996,12 +1996,12 @@ func (*ChannelPredict) _Chat() {}
 
 type ChannelForbiddenPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Broadcast  bool     `tl:",omitempty:flags:5,implicit"`
-	Megagroup  bool     `tl:",omitempty:flags:8,implicit"`
-	ID         int64
-	AccessHash int64
-	Title      string
-	UntilDate  *int32 `tl:",omitempty:flags:16"`
+	Broadcast  bool     `tl:"broadcast,omitempty:flags:5,implicit"`
+	Megagroup  bool     `tl:"megagroup,omitempty:flags:8,implicit"`
+	ID         int64    `tl:"id"`
+	AccessHash int64    `tl:"access_hash"`
+	Title      string   `tl:"title"`
+	UntilDate  *int32   `tl:"until_date,omitempty:flags:16"`
 }
 
 func (*ChannelForbiddenPredict) CRC() uint32 {
@@ -2010,7 +2010,7 @@ func (*ChannelForbiddenPredict) CRC() uint32 {
 func (*ChannelForbiddenPredict) _Chat() {}
 
 type ChatAdminRights interface {
-	tl.Object
+	tl.TLObject
 	_ChatAdminRights()
 }
 
@@ -2020,21 +2020,21 @@ var (
 
 type ChatAdminRightsPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	ChangeInfo     bool     `tl:",omitempty:flags:0,implicit"`
-	PostMessages   bool     `tl:",omitempty:flags:1,implicit"`
-	EditMessages   bool     `tl:",omitempty:flags:2,implicit"`
-	DeleteMessages bool     `tl:",omitempty:flags:3,implicit"`
-	BanUsers       bool     `tl:",omitempty:flags:4,implicit"`
-	InviteUsers    bool     `tl:",omitempty:flags:5,implicit"`
-	PinMessages    bool     `tl:",omitempty:flags:7,implicit"`
-	AddAdmins      bool     `tl:",omitempty:flags:9,implicit"`
-	Anonymous      bool     `tl:",omitempty:flags:10,implicit"`
-	ManageCall     bool     `tl:",omitempty:flags:11,implicit"`
-	Other          bool     `tl:",omitempty:flags:12,implicit"`
-	ManageTopics   bool     `tl:",omitempty:flags:13,implicit"`
-	PostStories    bool     `tl:",omitempty:flags:14,implicit"`
-	EditStories    bool     `tl:",omitempty:flags:15,implicit"`
-	DeleteStories  bool     `tl:",omitempty:flags:16,implicit"`
+	ChangeInfo     bool     `tl:"change_info,omitempty:flags:0,implicit"`
+	PostMessages   bool     `tl:"post_messages,omitempty:flags:1,implicit"`
+	EditMessages   bool     `tl:"edit_messages,omitempty:flags:2,implicit"`
+	DeleteMessages bool     `tl:"delete_messages,omitempty:flags:3,implicit"`
+	BanUsers       bool     `tl:"ban_users,omitempty:flags:4,implicit"`
+	InviteUsers    bool     `tl:"invite_users,omitempty:flags:5,implicit"`
+	PinMessages    bool     `tl:"pin_messages,omitempty:flags:7,implicit"`
+	AddAdmins      bool     `tl:"add_admins,omitempty:flags:9,implicit"`
+	Anonymous      bool     `tl:"anonymous,omitempty:flags:10,implicit"`
+	ManageCall     bool     `tl:"manage_call,omitempty:flags:11,implicit"`
+	Other          bool     `tl:"other,omitempty:flags:12,implicit"`
+	ManageTopics   bool     `tl:"manage_topics,omitempty:flags:13,implicit"`
+	PostStories    bool     `tl:"post_stories,omitempty:flags:14,implicit"`
+	EditStories    bool     `tl:"edit_stories,omitempty:flags:15,implicit"`
+	DeleteStories  bool     `tl:"delete_stories,omitempty:flags:16,implicit"`
 }
 
 func (*ChatAdminRightsPredict) CRC() uint32 {
@@ -2043,7 +2043,7 @@ func (*ChatAdminRightsPredict) CRC() uint32 {
 func (*ChatAdminRightsPredict) _ChatAdminRights() {}
 
 type ChatAdminWithInvites interface {
-	tl.Object
+	tl.TLObject
 	_ChatAdminWithInvites()
 }
 
@@ -2052,9 +2052,9 @@ var (
 )
 
 type ChatAdminWithInvitesPredict struct {
-	AdminID             int64
-	InvitesCount        int32
-	RevokedInvitesCount int32
+	AdminID             int64 `tl:"admin_id"`
+	InvitesCount        int32 `tl:"invites_count"`
+	RevokedInvitesCount int32 `tl:"revoked_invites_count"`
 }
 
 func (*ChatAdminWithInvitesPredict) CRC() uint32 {
@@ -2063,7 +2063,7 @@ func (*ChatAdminWithInvitesPredict) CRC() uint32 {
 func (*ChatAdminWithInvitesPredict) _ChatAdminWithInvites() {}
 
 type ChatBannedRights interface {
-	tl.Object
+	tl.TLObject
 	_ChatBannedRights()
 }
 
@@ -2073,27 +2073,27 @@ var (
 
 type ChatBannedRightsPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	ViewMessages    bool     `tl:",omitempty:flags:0,implicit"`
-	SendMessages    bool     `tl:",omitempty:flags:1,implicit"`
-	SendMedia       bool     `tl:",omitempty:flags:2,implicit"`
-	SendStickers    bool     `tl:",omitempty:flags:3,implicit"`
-	SendGifs        bool     `tl:",omitempty:flags:4,implicit"`
-	SendGames       bool     `tl:",omitempty:flags:5,implicit"`
-	SendInline      bool     `tl:",omitempty:flags:6,implicit"`
-	EmbedLinks      bool     `tl:",omitempty:flags:7,implicit"`
-	SendPolls       bool     `tl:",omitempty:flags:8,implicit"`
-	ChangeInfo      bool     `tl:",omitempty:flags:10,implicit"`
-	InviteUsers     bool     `tl:",omitempty:flags:15,implicit"`
-	PinMessages     bool     `tl:",omitempty:flags:17,implicit"`
-	ManageTopics    bool     `tl:",omitempty:flags:18,implicit"`
-	SendPhotos      bool     `tl:",omitempty:flags:19,implicit"`
-	SendVideos      bool     `tl:",omitempty:flags:20,implicit"`
-	SendRoundvideos bool     `tl:",omitempty:flags:21,implicit"`
-	SendAudios      bool     `tl:",omitempty:flags:22,implicit"`
-	SendVoices      bool     `tl:",omitempty:flags:23,implicit"`
-	SendDocs        bool     `tl:",omitempty:flags:24,implicit"`
-	SendPlain       bool     `tl:",omitempty:flags:25,implicit"`
-	UntilDate       int32
+	ViewMessages    bool     `tl:"view_messages,omitempty:flags:0,implicit"`
+	SendMessages    bool     `tl:"send_messages,omitempty:flags:1,implicit"`
+	SendMedia       bool     `tl:"send_media,omitempty:flags:2,implicit"`
+	SendStickers    bool     `tl:"send_stickers,omitempty:flags:3,implicit"`
+	SendGifs        bool     `tl:"send_gifs,omitempty:flags:4,implicit"`
+	SendGames       bool     `tl:"send_games,omitempty:flags:5,implicit"`
+	SendInline      bool     `tl:"send_inline,omitempty:flags:6,implicit"`
+	EmbedLinks      bool     `tl:"embed_links,omitempty:flags:7,implicit"`
+	SendPolls       bool     `tl:"send_polls,omitempty:flags:8,implicit"`
+	ChangeInfo      bool     `tl:"change_info,omitempty:flags:10,implicit"`
+	InviteUsers     bool     `tl:"invite_users,omitempty:flags:15,implicit"`
+	PinMessages     bool     `tl:"pin_messages,omitempty:flags:17,implicit"`
+	ManageTopics    bool     `tl:"manage_topics,omitempty:flags:18,implicit"`
+	SendPhotos      bool     `tl:"send_photos,omitempty:flags:19,implicit"`
+	SendVideos      bool     `tl:"send_videos,omitempty:flags:20,implicit"`
+	SendRoundvideos bool     `tl:"send_roundvideos,omitempty:flags:21,implicit"`
+	SendAudios      bool     `tl:"send_audios,omitempty:flags:22,implicit"`
+	SendVoices      bool     `tl:"send_voices,omitempty:flags:23,implicit"`
+	SendDocs        bool     `tl:"send_docs,omitempty:flags:24,implicit"`
+	SendPlain       bool     `tl:"send_plain,omitempty:flags:25,implicit"`
+	UntilDate       int32    `tl:"until_date"`
 }
 
 func (*ChatBannedRightsPredict) CRC() uint32 {
@@ -2102,7 +2102,7 @@ func (*ChatBannedRightsPredict) CRC() uint32 {
 func (*ChatBannedRightsPredict) _ChatBannedRights() {}
 
 type ChatFull interface {
-	tl.Object
+	tl.TLObject
 	_ChatFull()
 }
 
@@ -2112,27 +2112,27 @@ var (
 )
 
 type ChatFullPredict struct {
-	_                      struct{} `tl:"flags,bitflag"`
-	CanSetUsername         bool     `tl:",omitempty:flags:7,implicit"`
-	HasScheduled           bool     `tl:",omitempty:flags:8,implicit"`
-	TranslationsDisabled   bool     `tl:",omitempty:flags:19,implicit"`
-	ID                     int64
-	About                  string
-	Participants           ChatParticipants
-	ChatPhoto              Photo `tl:",omitempty:flags:2"`
-	NotifySettings         PeerNotifySettings
-	ExportedInvite         ExportedChatInvite `tl:",omitempty:flags:13"`
-	BotInfo                []BotInfo          `tl:",omitempty:flags:3"`
-	PinnedMsgID            *int32             `tl:",omitempty:flags:6"`
-	FolderID               *int32             `tl:",omitempty:flags:11"`
-	Call                   InputGroupCall     `tl:",omitempty:flags:12"`
-	TTLPeriod              *int32             `tl:",omitempty:flags:14"`
-	GroupcallDefaultJoinAs Peer               `tl:",omitempty:flags:15"`
-	ThemeEmoticon          *string            `tl:",omitempty:flags:16"`
-	RequestsPending        *int32             `tl:",omitempty:flags:17"`
-	RecentRequesters       []int64            `tl:",omitempty:flags:17"`
-	AvailableReactions     ChatReactions      `tl:",omitempty:flags:18"`
-	ReactionsLimit         *int32             `tl:",omitempty:flags:20"`
+	_                      struct{}           `tl:"flags,bitflag"`
+	CanSetUsername         bool               `tl:"can_set_username,omitempty:flags:7,implicit"`
+	HasScheduled           bool               `tl:"has_scheduled,omitempty:flags:8,implicit"`
+	TranslationsDisabled   bool               `tl:"translations_disabled,omitempty:flags:19,implicit"`
+	ID                     int64              `tl:"id"`
+	About                  string             `tl:"about"`
+	Participants           ChatParticipants   `tl:"participants"`
+	ChatPhoto              Photo              `tl:"chat_photo,omitempty:flags:2"`
+	NotifySettings         PeerNotifySettings `tl:"notify_settings"`
+	ExportedInvite         ExportedChatInvite `tl:"exported_invite,omitempty:flags:13"`
+	BotInfo                []BotInfo          `tl:"bot_info,omitempty:flags:3"`
+	PinnedMsgID            *int32             `tl:"pinned_msg_id,omitempty:flags:6"`
+	FolderID               *int32             `tl:"folder_id,omitempty:flags:11"`
+	Call                   InputGroupCall     `tl:"call,omitempty:flags:12"`
+	TTLPeriod              *int32             `tl:"ttl_period,omitempty:flags:14"`
+	GroupcallDefaultJoinAs Peer               `tl:"groupcall_default_join_as,omitempty:flags:15"`
+	ThemeEmoticon          *string            `tl:"theme_emoticon,omitempty:flags:16"`
+	RequestsPending        *int32             `tl:"requests_pending,omitempty:flags:17"`
+	RecentRequesters       []int64            `tl:"recent_requesters,omitempty:flags:17"`
+	AvailableReactions     ChatReactions      `tl:"available_reactions,omitempty:flags:18"`
+	ReactionsLimit         *int32             `tl:"reactions_limit,omitempty:flags:20"`
 }
 
 func (*ChatFullPredict) CRC() uint32 {
@@ -2141,67 +2141,67 @@ func (*ChatFullPredict) CRC() uint32 {
 func (*ChatFullPredict) _ChatFull() {}
 
 type ChannelFullPredict struct {
-	_                      struct{} `tl:"flags,bitflag"`
-	CanViewParticipants    bool     `tl:",omitempty:flags:3,implicit"`
-	CanSetUsername         bool     `tl:",omitempty:flags:6,implicit"`
-	CanSetStickers         bool     `tl:",omitempty:flags:7,implicit"`
-	HiddenPrehistory       bool     `tl:",omitempty:flags:10,implicit"`
-	CanSetLocation         bool     `tl:",omitempty:flags:16,implicit"`
-	HasScheduled           bool     `tl:",omitempty:flags:19,implicit"`
-	CanViewStats           bool     `tl:",omitempty:flags:20,implicit"`
-	Blocked                bool     `tl:",omitempty:flags:22,implicit"`
-	_                      struct{} `tl:"flags2,bitflag"`
-	CanDeleteChannel       bool     `tl:",omitempty:flags2:0,implicit"`
-	Antispam               bool     `tl:",omitempty:flags2:1,implicit"`
-	ParticipantsHidden     bool     `tl:",omitempty:flags2:2,implicit"`
-	TranslationsDisabled   bool     `tl:",omitempty:flags2:3,implicit"`
-	StoriesPinnedAvailable bool     `tl:",omitempty:flags2:5,implicit"`
-	ViewForumAsMessages    bool     `tl:",omitempty:flags2:6,implicit"`
-	RestrictedSponsored    bool     `tl:",omitempty:flags2:11,implicit"`
-	CanViewRevenue         bool     `tl:",omitempty:flags2:12,implicit"`
-	PaidMediaAllowed       bool     `tl:",omitempty:flags2:14,implicit"`
-	CanViewStarsRevenue    bool     `tl:",omitempty:flags2:15,implicit"`
-	ID                     int64
-	About                  string
-	ParticipantsCount      *int32 `tl:",omitempty:flags:0"`
-	AdminsCount            *int32 `tl:",omitempty:flags:1"`
-	KickedCount            *int32 `tl:",omitempty:flags:2"`
-	BannedCount            *int32 `tl:",omitempty:flags:2"`
-	OnlineCount            *int32 `tl:",omitempty:flags:13"`
-	ReadInboxMaxID         int32
-	ReadOutboxMaxID        int32
-	UnreadCount            int32
-	ChatPhoto              Photo
-	NotifySettings         PeerNotifySettings
-	ExportedInvite         ExportedChatInvite `tl:",omitempty:flags:23"`
-	BotInfo                []BotInfo
-	MigratedFromChatID     *int64          `tl:",omitempty:flags:4"`
-	MigratedFromMaxID      *int32          `tl:",omitempty:flags:4"`
-	PinnedMsgID            *int32          `tl:",omitempty:flags:5"`
-	Stickerset             StickerSet      `tl:",omitempty:flags:8"`
-	AvailableMinID         *int32          `tl:",omitempty:flags:9"`
-	FolderID               *int32          `tl:",omitempty:flags:11"`
-	LinkedChatID           *int64          `tl:",omitempty:flags:14"`
-	Location               ChannelLocation `tl:",omitempty:flags:15"`
-	SlowmodeSeconds        *int32          `tl:",omitempty:flags:17"`
-	SlowmodeNextSendDate   *int32          `tl:",omitempty:flags:18"`
-	StatsDc                *int32          `tl:",omitempty:flags:12"`
-	Pts                    int32
-	Call                   InputGroupCall `tl:",omitempty:flags:21"`
-	TTLPeriod              *int32         `tl:",omitempty:flags:24"`
-	PendingSuggestions     []string       `tl:",omitempty:flags:25"`
-	GroupcallDefaultJoinAs Peer           `tl:",omitempty:flags:26"`
-	ThemeEmoticon          *string        `tl:",omitempty:flags:27"`
-	RequestsPending        *int32         `tl:",omitempty:flags:28"`
-	RecentRequesters       []int64        `tl:",omitempty:flags:28"`
-	DefaultSendAs          Peer           `tl:",omitempty:flags:29"`
-	AvailableReactions     ChatReactions  `tl:",omitempty:flags:30"`
-	ReactionsLimit         *int32         `tl:",omitempty:flags2:13"`
-	Stories                PeerStories    `tl:",omitempty:flags2:4"`
-	Wallpaper              WallPaper      `tl:",omitempty:flags2:7"`
-	BoostsApplied          *int32         `tl:",omitempty:flags2:8"`
-	BoostsUnrestrict       *int32         `tl:",omitempty:flags2:9"`
-	Emojiset               StickerSet     `tl:",omitempty:flags2:10"`
+	_                      struct{}           `tl:"flags,bitflag"`
+	CanViewParticipants    bool               `tl:"can_view_participants,omitempty:flags:3,implicit"`
+	CanSetUsername         bool               `tl:"can_set_username,omitempty:flags:6,implicit"`
+	CanSetStickers         bool               `tl:"can_set_stickers,omitempty:flags:7,implicit"`
+	HiddenPrehistory       bool               `tl:"hidden_prehistory,omitempty:flags:10,implicit"`
+	CanSetLocation         bool               `tl:"can_set_location,omitempty:flags:16,implicit"`
+	HasScheduled           bool               `tl:"has_scheduled,omitempty:flags:19,implicit"`
+	CanViewStats           bool               `tl:"can_view_stats,omitempty:flags:20,implicit"`
+	Blocked                bool               `tl:"blocked,omitempty:flags:22,implicit"`
+	_                      struct{}           `tl:"flags2,bitflag"`
+	CanDeleteChannel       bool               `tl:"can_delete_channel,omitempty:flags2:0,implicit"`
+	Antispam               bool               `tl:"antispam,omitempty:flags2:1,implicit"`
+	ParticipantsHidden     bool               `tl:"participants_hidden,omitempty:flags2:2,implicit"`
+	TranslationsDisabled   bool               `tl:"translations_disabled,omitempty:flags2:3,implicit"`
+	StoriesPinnedAvailable bool               `tl:"stories_pinned_available,omitempty:flags2:5,implicit"`
+	ViewForumAsMessages    bool               `tl:"view_forum_as_messages,omitempty:flags2:6,implicit"`
+	RestrictedSponsored    bool               `tl:"restricted_sponsored,omitempty:flags2:11,implicit"`
+	CanViewRevenue         bool               `tl:"can_view_revenue,omitempty:flags2:12,implicit"`
+	PaidMediaAllowed       bool               `tl:"paid_media_allowed,omitempty:flags2:14,implicit"`
+	CanViewStarsRevenue    bool               `tl:"can_view_stars_revenue,omitempty:flags2:15,implicit"`
+	ID                     int64              `tl:"id"`
+	About                  string             `tl:"about"`
+	ParticipantsCount      *int32             `tl:"participants_count,omitempty:flags:0"`
+	AdminsCount            *int32             `tl:"admins_count,omitempty:flags:1"`
+	KickedCount            *int32             `tl:"kicked_count,omitempty:flags:2"`
+	BannedCount            *int32             `tl:"banned_count,omitempty:flags:2"`
+	OnlineCount            *int32             `tl:"online_count,omitempty:flags:13"`
+	ReadInboxMaxID         int32              `tl:"read_inbox_max_id"`
+	ReadOutboxMaxID        int32              `tl:"read_outbox_max_id"`
+	UnreadCount            int32              `tl:"unread_count"`
+	ChatPhoto              Photo              `tl:"chat_photo"`
+	NotifySettings         PeerNotifySettings `tl:"notify_settings"`
+	ExportedInvite         ExportedChatInvite `tl:"exported_invite,omitempty:flags:23"`
+	BotInfo                []BotInfo          `tl:"bot_info"`
+	MigratedFromChatID     *int64             `tl:"migrated_from_chat_id,omitempty:flags:4"`
+	MigratedFromMaxID      *int32             `tl:"migrated_from_max_id,omitempty:flags:4"`
+	PinnedMsgID            *int32             `tl:"pinned_msg_id,omitempty:flags:5"`
+	Stickerset             StickerSet         `tl:"stickerset,omitempty:flags:8"`
+	AvailableMinID         *int32             `tl:"available_min_id,omitempty:flags:9"`
+	FolderID               *int32             `tl:"folder_id,omitempty:flags:11"`
+	LinkedChatID           *int64             `tl:"linked_chat_id,omitempty:flags:14"`
+	Location               ChannelLocation    `tl:"location,omitempty:flags:15"`
+	SlowmodeSeconds        *int32             `tl:"slowmode_seconds,omitempty:flags:17"`
+	SlowmodeNextSendDate   *int32             `tl:"slowmode_next_send_date,omitempty:flags:18"`
+	StatsDc                *int32             `tl:"stats_dc,omitempty:flags:12"`
+	Pts                    int32              `tl:"pts"`
+	Call                   InputGroupCall     `tl:"call,omitempty:flags:21"`
+	TTLPeriod              *int32             `tl:"ttl_period,omitempty:flags:24"`
+	PendingSuggestions     []string           `tl:"pending_suggestions,omitempty:flags:25"`
+	GroupcallDefaultJoinAs Peer               `tl:"groupcall_default_join_as,omitempty:flags:26"`
+	ThemeEmoticon          *string            `tl:"theme_emoticon,omitempty:flags:27"`
+	RequestsPending        *int32             `tl:"requests_pending,omitempty:flags:28"`
+	RecentRequesters       []int64            `tl:"recent_requesters,omitempty:flags:28"`
+	DefaultSendAs          Peer               `tl:"default_send_as,omitempty:flags:29"`
+	AvailableReactions     ChatReactions      `tl:"available_reactions,omitempty:flags:30"`
+	ReactionsLimit         *int32             `tl:"reactions_limit,omitempty:flags2:13"`
+	Stories                PeerStories        `tl:"stories,omitempty:flags2:4"`
+	Wallpaper              WallPaper          `tl:"wallpaper,omitempty:flags2:7"`
+	BoostsApplied          *int32             `tl:"boosts_applied,omitempty:flags2:8"`
+	BoostsUnrestrict       *int32             `tl:"boosts_unrestrict,omitempty:flags2:9"`
+	Emojiset               StickerSet         `tl:"emojiset,omitempty:flags2:10"`
 }
 
 func (*ChannelFullPredict) CRC() uint32 {
@@ -2210,7 +2210,7 @@ func (*ChannelFullPredict) CRC() uint32 {
 func (*ChannelFullPredict) _ChatFull() {}
 
 type ChatInvite interface {
-	tl.Object
+	tl.TLObject
 	_ChatInvite()
 }
 
@@ -2221,7 +2221,7 @@ var (
 )
 
 type ChatInviteAlreadyPredict struct {
-	Chat Chat
+	Chat Chat `tl:"chat"`
 }
 
 func (*ChatInviteAlreadyPredict) CRC() uint32 {
@@ -2231,20 +2231,20 @@ func (*ChatInviteAlreadyPredict) _ChatInvite() {}
 
 type ChatInvitePredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	Channel           bool     `tl:",omitempty:flags:0,implicit"`
-	Broadcast         bool     `tl:",omitempty:flags:1,implicit"`
-	Public            bool     `tl:",omitempty:flags:2,implicit"`
-	Megagroup         bool     `tl:",omitempty:flags:3,implicit"`
-	RequestNeeded     bool     `tl:",omitempty:flags:6,implicit"`
-	Verified          bool     `tl:",omitempty:flags:7,implicit"`
-	Scam              bool     `tl:",omitempty:flags:8,implicit"`
-	Fake              bool     `tl:",omitempty:flags:9,implicit"`
-	Title             string
-	About             *string `tl:",omitempty:flags:5"`
-	Photo             Photo
-	ParticipantsCount int32
-	Participants      []User `tl:",omitempty:flags:4"`
-	Color             int32
+	Channel           bool     `tl:"channel,omitempty:flags:0,implicit"`
+	Broadcast         bool     `tl:"broadcast,omitempty:flags:1,implicit"`
+	Public            bool     `tl:"public,omitempty:flags:2,implicit"`
+	Megagroup         bool     `tl:"megagroup,omitempty:flags:3,implicit"`
+	RequestNeeded     bool     `tl:"request_needed,omitempty:flags:6,implicit"`
+	Verified          bool     `tl:"verified,omitempty:flags:7,implicit"`
+	Scam              bool     `tl:"scam,omitempty:flags:8,implicit"`
+	Fake              bool     `tl:"fake,omitempty:flags:9,implicit"`
+	Title             string   `tl:"title"`
+	About             *string  `tl:"about,omitempty:flags:5"`
+	Photo             Photo    `tl:"photo"`
+	ParticipantsCount int32    `tl:"participants_count"`
+	Participants      []User   `tl:"participants,omitempty:flags:4"`
+	Color             int32    `tl:"color"`
 }
 
 func (*ChatInvitePredict) CRC() uint32 {
@@ -2253,8 +2253,8 @@ func (*ChatInvitePredict) CRC() uint32 {
 func (*ChatInvitePredict) _ChatInvite() {}
 
 type ChatInvitePeekPredict struct {
-	Chat    Chat
-	Expires int32
+	Chat    Chat  `tl:"chat"`
+	Expires int32 `tl:"expires"`
 }
 
 func (*ChatInvitePeekPredict) CRC() uint32 {
@@ -2263,7 +2263,7 @@ func (*ChatInvitePeekPredict) CRC() uint32 {
 func (*ChatInvitePeekPredict) _ChatInvite() {}
 
 type ChatInviteImporter interface {
-	tl.Object
+	tl.TLObject
 	_ChatInviteImporter()
 }
 
@@ -2273,12 +2273,12 @@ var (
 
 type ChatInviteImporterPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	Requested   bool     `tl:",omitempty:flags:0,implicit"`
-	ViaChatlist bool     `tl:",omitempty:flags:3,implicit"`
-	UserID      int64
-	Date        int32
-	About       *string `tl:",omitempty:flags:2"`
-	ApprovedBy  *int64  `tl:",omitempty:flags:1"`
+	Requested   bool     `tl:"requested,omitempty:flags:0,implicit"`
+	ViaChatlist bool     `tl:"via_chatlist,omitempty:flags:3,implicit"`
+	UserID      int64    `tl:"user_id"`
+	Date        int32    `tl:"date"`
+	About       *string  `tl:"about,omitempty:flags:2"`
+	ApprovedBy  *int64   `tl:"approved_by,omitempty:flags:1"`
 }
 
 func (*ChatInviteImporterPredict) CRC() uint32 {
@@ -2287,7 +2287,7 @@ func (*ChatInviteImporterPredict) CRC() uint32 {
 func (*ChatInviteImporterPredict) _ChatInviteImporter() {}
 
 type ChatOnlines interface {
-	tl.Object
+	tl.TLObject
 	_ChatOnlines()
 }
 
@@ -2296,7 +2296,7 @@ var (
 )
 
 type ChatOnlinesPredict struct {
-	Onlines int32
+	Onlines int32 `tl:"onlines"`
 }
 
 func (*ChatOnlinesPredict) CRC() uint32 {
@@ -2305,7 +2305,7 @@ func (*ChatOnlinesPredict) CRC() uint32 {
 func (*ChatOnlinesPredict) _ChatOnlines() {}
 
 type ChatParticipant interface {
-	tl.Object
+	tl.TLObject
 	_ChatParticipant()
 }
 
@@ -2316,9 +2316,9 @@ var (
 )
 
 type ChatParticipantPredict struct {
-	UserID    int64
-	InviterID int64
-	Date      int32
+	UserID    int64 `tl:"user_id"`
+	InviterID int64 `tl:"inviter_id"`
+	Date      int32 `tl:"date"`
 }
 
 func (*ChatParticipantPredict) CRC() uint32 {
@@ -2327,7 +2327,7 @@ func (*ChatParticipantPredict) CRC() uint32 {
 func (*ChatParticipantPredict) _ChatParticipant() {}
 
 type ChatParticipantCreatorPredict struct {
-	UserID int64
+	UserID int64 `tl:"user_id"`
 }
 
 func (*ChatParticipantCreatorPredict) CRC() uint32 {
@@ -2336,9 +2336,9 @@ func (*ChatParticipantCreatorPredict) CRC() uint32 {
 func (*ChatParticipantCreatorPredict) _ChatParticipant() {}
 
 type ChatParticipantAdminPredict struct {
-	UserID    int64
-	InviterID int64
-	Date      int32
+	UserID    int64 `tl:"user_id"`
+	InviterID int64 `tl:"inviter_id"`
+	Date      int32 `tl:"date"`
 }
 
 func (*ChatParticipantAdminPredict) CRC() uint32 {
@@ -2347,7 +2347,7 @@ func (*ChatParticipantAdminPredict) CRC() uint32 {
 func (*ChatParticipantAdminPredict) _ChatParticipant() {}
 
 type ChatParticipants interface {
-	tl.Object
+	tl.TLObject
 	_ChatParticipants()
 }
 
@@ -2357,9 +2357,9 @@ var (
 )
 
 type ChatParticipantsForbiddenPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	ChatID          int64
-	SelfParticipant ChatParticipant `tl:",omitempty:flags:0"`
+	_               struct{}        `tl:"flags,bitflag"`
+	ChatID          int64           `tl:"chat_id"`
+	SelfParticipant ChatParticipant `tl:"self_participant,omitempty:flags:0"`
 }
 
 func (*ChatParticipantsForbiddenPredict) CRC() uint32 {
@@ -2368,9 +2368,9 @@ func (*ChatParticipantsForbiddenPredict) CRC() uint32 {
 func (*ChatParticipantsForbiddenPredict) _ChatParticipants() {}
 
 type ChatParticipantsPredict struct {
-	ChatID       int64
-	Participants []ChatParticipant
-	Version      int32
+	ChatID       int64             `tl:"chat_id"`
+	Participants []ChatParticipant `tl:"participants"`
+	Version      int32             `tl:"version"`
 }
 
 func (*ChatParticipantsPredict) CRC() uint32 {
@@ -2379,7 +2379,7 @@ func (*ChatParticipantsPredict) CRC() uint32 {
 func (*ChatParticipantsPredict) _ChatParticipants() {}
 
 type ChatPhoto interface {
-	tl.Object
+	tl.TLObject
 	_ChatPhoto()
 }
 
@@ -2397,10 +2397,10 @@ func (*ChatPhotoEmptyPredict) _ChatPhoto() {}
 
 type ChatPhotoPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	HasVideo      bool     `tl:",omitempty:flags:0,implicit"`
-	PhotoID       int64
-	StrippedThumb *[]byte `tl:",omitempty:flags:1"`
-	DcID          int32
+	HasVideo      bool     `tl:"has_video,omitempty:flags:0,implicit"`
+	PhotoID       int64    `tl:"photo_id"`
+	StrippedThumb *[]byte  `tl:"stripped_thumb,omitempty:flags:1"`
+	DcID          int32    `tl:"dc_id"`
 }
 
 func (*ChatPhotoPredict) CRC() uint32 {
@@ -2409,7 +2409,7 @@ func (*ChatPhotoPredict) CRC() uint32 {
 func (*ChatPhotoPredict) _ChatPhoto() {}
 
 type ChatReactions interface {
-	tl.Object
+	tl.TLObject
 	_ChatReactions()
 }
 
@@ -2428,7 +2428,7 @@ func (*ChatReactionsNonePredict) _ChatReactions() {}
 
 type ChatReactionsAllPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	AllowCustom bool     `tl:",omitempty:flags:0,implicit"`
+	AllowCustom bool     `tl:"allow_custom,omitempty:flags:0,implicit"`
 }
 
 func (*ChatReactionsAllPredict) CRC() uint32 {
@@ -2437,7 +2437,7 @@ func (*ChatReactionsAllPredict) CRC() uint32 {
 func (*ChatReactionsAllPredict) _ChatReactions() {}
 
 type ChatReactionsSomePredict struct {
-	Reactions []Reaction
+	Reactions []Reaction `tl:"reactions"`
 }
 
 func (*ChatReactionsSomePredict) CRC() uint32 {
@@ -2446,7 +2446,7 @@ func (*ChatReactionsSomePredict) CRC() uint32 {
 func (*ChatReactionsSomePredict) _ChatReactions() {}
 
 type CodeSettings interface {
-	tl.Object
+	tl.TLObject
 	_CodeSettings()
 }
 
@@ -2456,15 +2456,15 @@ var (
 
 type CodeSettingsPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	AllowFlashcall  bool     `tl:",omitempty:flags:0,implicit"`
-	CurrentNumber   bool     `tl:",omitempty:flags:1,implicit"`
-	AllowAppHash    bool     `tl:",omitempty:flags:4,implicit"`
-	AllowMissedCall bool     `tl:",omitempty:flags:5,implicit"`
-	AllowFirebase   bool     `tl:",omitempty:flags:7,implicit"`
-	UnknownNumber   bool     `tl:",omitempty:flags:9,implicit"`
-	LogoutTokens    [][]byte `tl:",omitempty:flags:6"`
-	Token           *string  `tl:",omitempty:flags:8"`
-	AppSandbox      *bool    `tl:",omitempty:flags:8"`
+	AllowFlashcall  bool     `tl:"allow_flashcall,omitempty:flags:0,implicit"`
+	CurrentNumber   bool     `tl:"current_number,omitempty:flags:1,implicit"`
+	AllowAppHash    bool     `tl:"allow_app_hash,omitempty:flags:4,implicit"`
+	AllowMissedCall bool     `tl:"allow_missed_call,omitempty:flags:5,implicit"`
+	AllowFirebase   bool     `tl:"allow_firebase,omitempty:flags:7,implicit"`
+	UnknownNumber   bool     `tl:"unknown_number,omitempty:flags:9,implicit"`
+	LogoutTokens    [][]byte `tl:"logout_tokens,omitempty:flags:6"`
+	Token           *string  `tl:"token,omitempty:flags:8"`
+	AppSandbox      *bool    `tl:"app_sandbox,omitempty:flags:8"`
 }
 
 func (*CodeSettingsPredict) CRC() uint32 {
@@ -2473,7 +2473,7 @@ func (*CodeSettingsPredict) CRC() uint32 {
 func (*CodeSettingsPredict) _CodeSettings() {}
 
 type Config interface {
-	tl.Object
+	tl.TLObject
 	_Config()
 }
 
@@ -2482,54 +2482,54 @@ var (
 )
 
 type ConfigPredict struct {
-	_                       struct{} `tl:"flags,bitflag"`
-	DefaultP2PContacts      bool     `tl:",omitempty:flags:3,implicit"`
-	PreloadFeaturedStickers bool     `tl:",omitempty:flags:4,implicit"`
-	RevokePmInbox           bool     `tl:",omitempty:flags:6,implicit"`
-	BlockedMode             bool     `tl:",omitempty:flags:8,implicit"`
-	ForceTryIpv6            bool     `tl:",omitempty:flags:14,implicit"`
-	Date                    int32
-	Expires                 int32
-	TestMode                bool
-	ThisDc                  int32
-	DcOptions               []DcOption
-	DcTxtDomainName         string
-	ChatSizeMax             int32
-	MegagroupSizeMax        int32
-	ForwardedCountMax       int32
-	OnlineUpdatePeriodMs    int32
-	OfflineBlurTimeoutMs    int32
-	OfflineIdleTimeoutMs    int32
-	OnlineCloudTimeoutMs    int32
-	NotifyCloudDelayMs      int32
-	NotifyDefaultDelayMs    int32
-	PushChatPeriodMs        int32
-	PushChatLimit           int32
-	EditTimeLimit           int32
-	RevokeTimeLimit         int32
-	RevokePmTimeLimit       int32
-	RatingEDecay            int32
-	StickersRecentLimit     int32
-	ChannelsReadMediaPeriod int32
-	TmpSessions             *int32 `tl:",omitempty:flags:0"`
-	CallReceiveTimeoutMs    int32
-	CallRingTimeoutMs       int32
-	CallConnectTimeoutMs    int32
-	CallPacketTimeoutMs     int32
-	MeURLPrefix             string
-	AutoupdateURLPrefix     *string `tl:",omitempty:flags:7"`
-	GifSearchUsername       *string `tl:",omitempty:flags:9"`
-	VenueSearchUsername     *string `tl:",omitempty:flags:10"`
-	ImgSearchUsername       *string `tl:",omitempty:flags:11"`
-	StaticMapsProvider      *string `tl:",omitempty:flags:12"`
-	CaptionLengthMax        int32
-	MessageLengthMax        int32
-	WebfileDcID             int32
-	SuggestedLangCode       *string  `tl:",omitempty:flags:2"`
-	LangPackVersion         *int32   `tl:",omitempty:flags:2"`
-	BaseLangPackVersion     *int32   `tl:",omitempty:flags:2"`
-	ReactionsDefault        Reaction `tl:",omitempty:flags:15"`
-	AutologinToken          *string  `tl:",omitempty:flags:16"`
+	_                       struct{}   `tl:"flags,bitflag"`
+	DefaultP2PContacts      bool       `tl:"default_p2p_contacts,omitempty:flags:3,implicit"`
+	PreloadFeaturedStickers bool       `tl:"preload_featured_stickers,omitempty:flags:4,implicit"`
+	RevokePmInbox           bool       `tl:"revoke_pm_inbox,omitempty:flags:6,implicit"`
+	BlockedMode             bool       `tl:"blocked_mode,omitempty:flags:8,implicit"`
+	ForceTryIpv6            bool       `tl:"force_try_ipv6,omitempty:flags:14,implicit"`
+	Date                    int32      `tl:"date"`
+	Expires                 int32      `tl:"expires"`
+	TestMode                bool       `tl:"test_mode"`
+	ThisDc                  int32      `tl:"this_dc"`
+	DcOptions               []DcOption `tl:"dc_options"`
+	DcTxtDomainName         string     `tl:"dc_txt_domain_name"`
+	ChatSizeMax             int32      `tl:"chat_size_max"`
+	MegagroupSizeMax        int32      `tl:"megagroup_size_max"`
+	ForwardedCountMax       int32      `tl:"forwarded_count_max"`
+	OnlineUpdatePeriodMs    int32      `tl:"online_update_period_ms"`
+	OfflineBlurTimeoutMs    int32      `tl:"offline_blur_timeout_ms"`
+	OfflineIdleTimeoutMs    int32      `tl:"offline_idle_timeout_ms"`
+	OnlineCloudTimeoutMs    int32      `tl:"online_cloud_timeout_ms"`
+	NotifyCloudDelayMs      int32      `tl:"notify_cloud_delay_ms"`
+	NotifyDefaultDelayMs    int32      `tl:"notify_default_delay_ms"`
+	PushChatPeriodMs        int32      `tl:"push_chat_period_ms"`
+	PushChatLimit           int32      `tl:"push_chat_limit"`
+	EditTimeLimit           int32      `tl:"edit_time_limit"`
+	RevokeTimeLimit         int32      `tl:"revoke_time_limit"`
+	RevokePmTimeLimit       int32      `tl:"revoke_pm_time_limit"`
+	RatingEDecay            int32      `tl:"rating_e_decay"`
+	StickersRecentLimit     int32      `tl:"stickers_recent_limit"`
+	ChannelsReadMediaPeriod int32      `tl:"channels_read_media_period"`
+	TmpSessions             *int32     `tl:"tmp_sessions,omitempty:flags:0"`
+	CallReceiveTimeoutMs    int32      `tl:"call_receive_timeout_ms"`
+	CallRingTimeoutMs       int32      `tl:"call_ring_timeout_ms"`
+	CallConnectTimeoutMs    int32      `tl:"call_connect_timeout_ms"`
+	CallPacketTimeoutMs     int32      `tl:"call_packet_timeout_ms"`
+	MeURLPrefix             string     `tl:"me_url_prefix"`
+	AutoupdateURLPrefix     *string    `tl:"autoupdate_url_prefix,omitempty:flags:7"`
+	GifSearchUsername       *string    `tl:"gif_search_username,omitempty:flags:9"`
+	VenueSearchUsername     *string    `tl:"venue_search_username,omitempty:flags:10"`
+	ImgSearchUsername       *string    `tl:"img_search_username,omitempty:flags:11"`
+	StaticMapsProvider      *string    `tl:"static_maps_provider,omitempty:flags:12"`
+	CaptionLengthMax        int32      `tl:"caption_length_max"`
+	MessageLengthMax        int32      `tl:"message_length_max"`
+	WebfileDcID             int32      `tl:"webfile_dc_id"`
+	SuggestedLangCode       *string    `tl:"suggested_lang_code,omitempty:flags:2"`
+	LangPackVersion         *int32     `tl:"lang_pack_version,omitempty:flags:2"`
+	BaseLangPackVersion     *int32     `tl:"base_lang_pack_version,omitempty:flags:2"`
+	ReactionsDefault        Reaction   `tl:"reactions_default,omitempty:flags:15"`
+	AutologinToken          *string    `tl:"autologin_token,omitempty:flags:16"`
 }
 
 func (*ConfigPredict) CRC() uint32 {
@@ -2538,7 +2538,7 @@ func (*ConfigPredict) CRC() uint32 {
 func (*ConfigPredict) _Config() {}
 
 type ConnectedBot interface {
-	tl.Object
+	tl.TLObject
 	_ConnectedBot()
 }
 
@@ -2547,10 +2547,10 @@ var (
 )
 
 type ConnectedBotPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	CanReply   bool     `tl:",omitempty:flags:0,implicit"`
-	BotID      int64
-	Recipients BusinessBotRecipients
+	_          struct{}              `tl:"flags,bitflag"`
+	CanReply   bool                  `tl:"can_reply,omitempty:flags:0,implicit"`
+	BotID      int64                 `tl:"bot_id"`
+	Recipients BusinessBotRecipients `tl:"recipients"`
 }
 
 func (*ConnectedBotPredict) CRC() uint32 {
@@ -2559,7 +2559,7 @@ func (*ConnectedBotPredict) CRC() uint32 {
 func (*ConnectedBotPredict) _ConnectedBot() {}
 
 type Contact interface {
-	tl.Object
+	tl.TLObject
 	_Contact()
 }
 
@@ -2568,8 +2568,8 @@ var (
 )
 
 type ContactPredict struct {
-	UserID int64
-	Mutual bool
+	UserID int64 `tl:"user_id"`
+	Mutual bool  `tl:"mutual"`
 }
 
 func (*ContactPredict) CRC() uint32 {
@@ -2578,7 +2578,7 @@ func (*ContactPredict) CRC() uint32 {
 func (*ContactPredict) _Contact() {}
 
 type ContactBirthday interface {
-	tl.Object
+	tl.TLObject
 	_ContactBirthday()
 }
 
@@ -2587,8 +2587,8 @@ var (
 )
 
 type ContactBirthdayPredict struct {
-	ContactID int64
-	Birthday  Birthday
+	ContactID int64    `tl:"contact_id"`
+	Birthday  Birthday `tl:"birthday"`
 }
 
 func (*ContactBirthdayPredict) CRC() uint32 {
@@ -2597,7 +2597,7 @@ func (*ContactBirthdayPredict) CRC() uint32 {
 func (*ContactBirthdayPredict) _ContactBirthday() {}
 
 type ContactStatus interface {
-	tl.Object
+	tl.TLObject
 	_ContactStatus()
 }
 
@@ -2606,8 +2606,8 @@ var (
 )
 
 type ContactStatusPredict struct {
-	UserID int64
-	Status UserStatus
+	UserID int64      `tl:"user_id"`
+	Status UserStatus `tl:"status"`
 }
 
 func (*ContactStatusPredict) CRC() uint32 {
@@ -2616,7 +2616,7 @@ func (*ContactStatusPredict) CRC() uint32 {
 func (*ContactStatusPredict) _ContactStatus() {}
 
 type DataJSON interface {
-	tl.Object
+	tl.TLObject
 	_DataJSON()
 }
 
@@ -2625,7 +2625,7 @@ var (
 )
 
 type DataJSONPredict struct {
-	Data string
+	Data string `tl:"data"`
 }
 
 func (*DataJSONPredict) CRC() uint32 {
@@ -2634,7 +2634,7 @@ func (*DataJSONPredict) CRC() uint32 {
 func (*DataJSONPredict) _DataJSON() {}
 
 type DcOption interface {
-	tl.Object
+	tl.TLObject
 	_DcOption()
 }
 
@@ -2644,16 +2644,16 @@ var (
 
 type DcOptionPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	Ipv6         bool     `tl:",omitempty:flags:0,implicit"`
-	MediaOnly    bool     `tl:",omitempty:flags:1,implicit"`
-	TcpoOnly     bool     `tl:",omitempty:flags:2,implicit"`
-	Cdn          bool     `tl:",omitempty:flags:3,implicit"`
-	Static       bool     `tl:",omitempty:flags:4,implicit"`
-	ThisPortOnly bool     `tl:",omitempty:flags:5,implicit"`
-	ID           int32
-	IpAddress    string
-	Port         int32
-	Secret       *[]byte `tl:",omitempty:flags:10"`
+	Ipv6         bool     `tl:"ipv6,omitempty:flags:0,implicit"`
+	MediaOnly    bool     `tl:"media_only,omitempty:flags:1,implicit"`
+	TcpoOnly     bool     `tl:"tcpo_only,omitempty:flags:2,implicit"`
+	Cdn          bool     `tl:"cdn,omitempty:flags:3,implicit"`
+	Static       bool     `tl:"static,omitempty:flags:4,implicit"`
+	ThisPortOnly bool     `tl:"this_port_only,omitempty:flags:5,implicit"`
+	ID           int32    `tl:"id"`
+	IpAddress    string   `tl:"ip_address"`
+	Port         int32    `tl:"port"`
+	Secret       *[]byte  `tl:"secret,omitempty:flags:10"`
 }
 
 func (*DcOptionPredict) CRC() uint32 {
@@ -2662,7 +2662,7 @@ func (*DcOptionPredict) CRC() uint32 {
 func (*DcOptionPredict) _DcOption() {}
 
 type DefaultHistoryTTL interface {
-	tl.Object
+	tl.TLObject
 	_DefaultHistoryTTL()
 }
 
@@ -2671,7 +2671,7 @@ var (
 )
 
 type DefaultHistoryTTLPredict struct {
-	Period int32
+	Period int32 `tl:"period"`
 }
 
 func (*DefaultHistoryTTLPredict) CRC() uint32 {
@@ -2680,7 +2680,7 @@ func (*DefaultHistoryTTLPredict) CRC() uint32 {
 func (*DefaultHistoryTTLPredict) _DefaultHistoryTTL() {}
 
 type Dialog interface {
-	tl.Object
+	tl.TLObject
 	_Dialog()
 }
 
@@ -2690,22 +2690,22 @@ var (
 )
 
 type DialogPredict struct {
-	_                    struct{} `tl:"flags,bitflag"`
-	Pinned               bool     `tl:",omitempty:flags:2,implicit"`
-	UnreadMark           bool     `tl:",omitempty:flags:3,implicit"`
-	ViewForumAsMessages  bool     `tl:",omitempty:flags:6,implicit"`
-	Peer                 Peer
-	TopMessage           int32
-	ReadInboxMaxID       int32
-	ReadOutboxMaxID      int32
-	UnreadCount          int32
-	UnreadMentionsCount  int32
-	UnreadReactionsCount int32
-	NotifySettings       PeerNotifySettings
-	Pts                  *int32       `tl:",omitempty:flags:0"`
-	Draft                DraftMessage `tl:",omitempty:flags:1"`
-	FolderID             *int32       `tl:",omitempty:flags:4"`
-	TTLPeriod            *int32       `tl:",omitempty:flags:5"`
+	_                    struct{}           `tl:"flags,bitflag"`
+	Pinned               bool               `tl:"pinned,omitempty:flags:2,implicit"`
+	UnreadMark           bool               `tl:"unread_mark,omitempty:flags:3,implicit"`
+	ViewForumAsMessages  bool               `tl:"view_forum_as_messages,omitempty:flags:6,implicit"`
+	Peer                 Peer               `tl:"peer"`
+	TopMessage           int32              `tl:"top_message"`
+	ReadInboxMaxID       int32              `tl:"read_inbox_max_id"`
+	ReadOutboxMaxID      int32              `tl:"read_outbox_max_id"`
+	UnreadCount          int32              `tl:"unread_count"`
+	UnreadMentionsCount  int32              `tl:"unread_mentions_count"`
+	UnreadReactionsCount int32              `tl:"unread_reactions_count"`
+	NotifySettings       PeerNotifySettings `tl:"notify_settings"`
+	Pts                  *int32             `tl:"pts,omitempty:flags:0"`
+	Draft                DraftMessage       `tl:"draft,omitempty:flags:1"`
+	FolderID             *int32             `tl:"folder_id,omitempty:flags:4"`
+	TTLPeriod            *int32             `tl:"ttl_period,omitempty:flags:5"`
 }
 
 func (*DialogPredict) CRC() uint32 {
@@ -2715,14 +2715,14 @@ func (*DialogPredict) _Dialog() {}
 
 type DialogFolderPredict struct {
 	_                          struct{} `tl:"flags,bitflag"`
-	Pinned                     bool     `tl:",omitempty:flags:2,implicit"`
-	Folder                     Folder
-	Peer                       Peer
-	TopMessage                 int32
-	UnreadMutedPeersCount      int32
-	UnreadUnmutedPeersCount    int32
-	UnreadMutedMessagesCount   int32
-	UnreadUnmutedMessagesCount int32
+	Pinned                     bool     `tl:"pinned,omitempty:flags:2,implicit"`
+	Folder                     Folder   `tl:"folder"`
+	Peer                       Peer     `tl:"peer"`
+	TopMessage                 int32    `tl:"top_message"`
+	UnreadMutedPeersCount      int32    `tl:"unread_muted_peers_count"`
+	UnreadUnmutedPeersCount    int32    `tl:"unread_unmuted_peers_count"`
+	UnreadMutedMessagesCount   int32    `tl:"unread_muted_messages_count"`
+	UnreadUnmutedMessagesCount int32    `tl:"unread_unmuted_messages_count"`
 }
 
 func (*DialogFolderPredict) CRC() uint32 {
@@ -2731,7 +2731,7 @@ func (*DialogFolderPredict) CRC() uint32 {
 func (*DialogFolderPredict) _Dialog() {}
 
 type DialogFilter interface {
-	tl.Object
+	tl.TLObject
 	_DialogFilter()
 }
 
@@ -2742,22 +2742,22 @@ var (
 )
 
 type DialogFilterPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	Contacts        bool     `tl:",omitempty:flags:0,implicit"`
-	NonContacts     bool     `tl:",omitempty:flags:1,implicit"`
-	Groups          bool     `tl:",omitempty:flags:2,implicit"`
-	Broadcasts      bool     `tl:",omitempty:flags:3,implicit"`
-	Bots            bool     `tl:",omitempty:flags:4,implicit"`
-	ExcludeMuted    bool     `tl:",omitempty:flags:11,implicit"`
-	ExcludeRead     bool     `tl:",omitempty:flags:12,implicit"`
-	ExcludeArchived bool     `tl:",omitempty:flags:13,implicit"`
-	ID              int32
-	Title           string
-	Emoticon        *string `tl:",omitempty:flags:25"`
-	Color           *int32  `tl:",omitempty:flags:27"`
-	PinnedPeers     []InputPeer
-	IncludePeers    []InputPeer
-	ExcludePeers    []InputPeer
+	_               struct{}    `tl:"flags,bitflag"`
+	Contacts        bool        `tl:"contacts,omitempty:flags:0,implicit"`
+	NonContacts     bool        `tl:"non_contacts,omitempty:flags:1,implicit"`
+	Groups          bool        `tl:"groups,omitempty:flags:2,implicit"`
+	Broadcasts      bool        `tl:"broadcasts,omitempty:flags:3,implicit"`
+	Bots            bool        `tl:"bots,omitempty:flags:4,implicit"`
+	ExcludeMuted    bool        `tl:"exclude_muted,omitempty:flags:11,implicit"`
+	ExcludeRead     bool        `tl:"exclude_read,omitempty:flags:12,implicit"`
+	ExcludeArchived bool        `tl:"exclude_archived,omitempty:flags:13,implicit"`
+	ID              int32       `tl:"id"`
+	Title           string      `tl:"title"`
+	Emoticon        *string     `tl:"emoticon,omitempty:flags:25"`
+	Color           *int32      `tl:"color,omitempty:flags:27"`
+	PinnedPeers     []InputPeer `tl:"pinned_peers"`
+	IncludePeers    []InputPeer `tl:"include_peers"`
+	ExcludePeers    []InputPeer `tl:"exclude_peers"`
 }
 
 func (*DialogFilterPredict) CRC() uint32 {
@@ -2773,14 +2773,14 @@ func (*DialogFilterDefaultPredict) CRC() uint32 {
 func (*DialogFilterDefaultPredict) _DialogFilter() {}
 
 type DialogFilterChatlistPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	HasMyInvites bool     `tl:",omitempty:flags:26,implicit"`
-	ID           int32
-	Title        string
-	Emoticon     *string `tl:",omitempty:flags:25"`
-	Color        *int32  `tl:",omitempty:flags:27"`
-	PinnedPeers  []InputPeer
-	IncludePeers []InputPeer
+	_            struct{}    `tl:"flags,bitflag"`
+	HasMyInvites bool        `tl:"has_my_invites,omitempty:flags:26,implicit"`
+	ID           int32       `tl:"id"`
+	Title        string      `tl:"title"`
+	Emoticon     *string     `tl:"emoticon,omitempty:flags:25"`
+	Color        *int32      `tl:"color,omitempty:flags:27"`
+	PinnedPeers  []InputPeer `tl:"pinned_peers"`
+	IncludePeers []InputPeer `tl:"include_peers"`
 }
 
 func (*DialogFilterChatlistPredict) CRC() uint32 {
@@ -2789,7 +2789,7 @@ func (*DialogFilterChatlistPredict) CRC() uint32 {
 func (*DialogFilterChatlistPredict) _DialogFilter() {}
 
 type DialogFilterSuggested interface {
-	tl.Object
+	tl.TLObject
 	_DialogFilterSuggested()
 }
 
@@ -2798,8 +2798,8 @@ var (
 )
 
 type DialogFilterSuggestedPredict struct {
-	Filter      DialogFilter
-	Description string
+	Filter      DialogFilter `tl:"filter"`
+	Description string       `tl:"description"`
 }
 
 func (*DialogFilterSuggestedPredict) CRC() uint32 {
@@ -2808,7 +2808,7 @@ func (*DialogFilterSuggestedPredict) CRC() uint32 {
 func (*DialogFilterSuggestedPredict) _DialogFilterSuggested() {}
 
 type DialogPeer interface {
-	tl.Object
+	tl.TLObject
 	_DialogPeer()
 }
 
@@ -2818,7 +2818,7 @@ var (
 )
 
 type DialogPeerPredict struct {
-	Peer Peer
+	Peer Peer `tl:"peer"`
 }
 
 func (*DialogPeerPredict) CRC() uint32 {
@@ -2827,7 +2827,7 @@ func (*DialogPeerPredict) CRC() uint32 {
 func (*DialogPeerPredict) _DialogPeer() {}
 
 type DialogPeerFolderPredict struct {
-	FolderID int32
+	FolderID int32 `tl:"folder_id"`
 }
 
 func (*DialogPeerFolderPredict) CRC() uint32 {
@@ -2836,7 +2836,7 @@ func (*DialogPeerFolderPredict) CRC() uint32 {
 func (*DialogPeerFolderPredict) _DialogPeer() {}
 
 type Document interface {
-	tl.Object
+	tl.TLObject
 	_Document()
 }
 
@@ -2846,7 +2846,7 @@ var (
 )
 
 type DocumentEmptyPredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*DocumentEmptyPredict) CRC() uint32 {
@@ -2855,17 +2855,17 @@ func (*DocumentEmptyPredict) CRC() uint32 {
 func (*DocumentEmptyPredict) _Document() {}
 
 type DocumentPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	ID            int64
-	AccessHash    int64
-	FileReference []byte
-	Date          int32
-	MimeType      string
-	Size          int64
-	Thumbs        []PhotoSize `tl:",omitempty:flags:0"`
-	VideoThumbs   []VideoSize `tl:",omitempty:flags:1"`
-	DcID          int32
-	Attributes    []DocumentAttribute
+	_             struct{}            `tl:"flags,bitflag"`
+	ID            int64               `tl:"id"`
+	AccessHash    int64               `tl:"access_hash"`
+	FileReference []byte              `tl:"file_reference"`
+	Date          int32               `tl:"date"`
+	MimeType      string              `tl:"mime_type"`
+	Size          int64               `tl:"size"`
+	Thumbs        []PhotoSize         `tl:"thumbs,omitempty:flags:0"`
+	VideoThumbs   []VideoSize         `tl:"video_thumbs,omitempty:flags:1"`
+	DcID          int32               `tl:"dc_id"`
+	Attributes    []DocumentAttribute `tl:"attributes"`
 }
 
 func (*DocumentPredict) CRC() uint32 {
@@ -2874,7 +2874,7 @@ func (*DocumentPredict) CRC() uint32 {
 func (*DocumentPredict) _Document() {}
 
 type DocumentAttribute interface {
-	tl.Object
+	tl.TLObject
 	_DocumentAttribute()
 }
 
@@ -2890,8 +2890,8 @@ var (
 )
 
 type DocumentAttributeImageSizePredict struct {
-	W int32
-	H int32
+	W int32 `tl:"w"`
+	H int32 `tl:"h"`
 }
 
 func (*DocumentAttributeImageSizePredict) CRC() uint32 {
@@ -2907,11 +2907,11 @@ func (*DocumentAttributeAnimatedPredict) CRC() uint32 {
 func (*DocumentAttributeAnimatedPredict) _DocumentAttribute() {}
 
 type DocumentAttributeStickerPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Mask       bool     `tl:",omitempty:flags:1,implicit"`
-	Alt        string
-	Stickerset InputStickerSet
-	MaskCoords MaskCoords `tl:",omitempty:flags:0"`
+	_          struct{}        `tl:"flags,bitflag"`
+	Mask       bool            `tl:"mask,omitempty:flags:1,implicit"`
+	Alt        string          `tl:"alt"`
+	Stickerset InputStickerSet `tl:"stickerset"`
+	MaskCoords MaskCoords      `tl:"mask_coords,omitempty:flags:0"`
 }
 
 func (*DocumentAttributeStickerPredict) CRC() uint32 {
@@ -2921,14 +2921,14 @@ func (*DocumentAttributeStickerPredict) _DocumentAttribute() {}
 
 type DocumentAttributeVideoPredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	RoundMessage      bool     `tl:",omitempty:flags:0,implicit"`
-	SupportsStreaming bool     `tl:",omitempty:flags:1,implicit"`
-	Nosound           bool     `tl:",omitempty:flags:3,implicit"`
-	Duration          float64
-	W                 int32
-	H                 int32
-	PreloadPrefixSize *int32   `tl:",omitempty:flags:2"`
-	VideoStartTs      *float64 `tl:",omitempty:flags:4"`
+	RoundMessage      bool     `tl:"round_message,omitempty:flags:0,implicit"`
+	SupportsStreaming bool     `tl:"supports_streaming,omitempty:flags:1,implicit"`
+	Nosound           bool     `tl:"nosound,omitempty:flags:3,implicit"`
+	Duration          float64  `tl:"duration"`
+	W                 int32    `tl:"w"`
+	H                 int32    `tl:"h"`
+	PreloadPrefixSize *int32   `tl:"preload_prefix_size,omitempty:flags:2"`
+	VideoStartTs      *float64 `tl:"video_start_ts,omitempty:flags:4"`
 }
 
 func (*DocumentAttributeVideoPredict) CRC() uint32 {
@@ -2938,11 +2938,11 @@ func (*DocumentAttributeVideoPredict) _DocumentAttribute() {}
 
 type DocumentAttributeAudioPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Voice     bool     `tl:",omitempty:flags:10,implicit"`
-	Duration  int32
-	Title     *string `tl:",omitempty:flags:0"`
-	Performer *string `tl:",omitempty:flags:1"`
-	Waveform  *[]byte `tl:",omitempty:flags:2"`
+	Voice     bool     `tl:"voice,omitempty:flags:10,implicit"`
+	Duration  int32    `tl:"duration"`
+	Title     *string  `tl:"title,omitempty:flags:0"`
+	Performer *string  `tl:"performer,omitempty:flags:1"`
+	Waveform  *[]byte  `tl:"waveform,omitempty:flags:2"`
 }
 
 func (*DocumentAttributeAudioPredict) CRC() uint32 {
@@ -2951,7 +2951,7 @@ func (*DocumentAttributeAudioPredict) CRC() uint32 {
 func (*DocumentAttributeAudioPredict) _DocumentAttribute() {}
 
 type DocumentAttributeFilenamePredict struct {
-	FileName string
+	FileName string `tl:"file_name"`
 }
 
 func (*DocumentAttributeFilenamePredict) CRC() uint32 {
@@ -2967,11 +2967,11 @@ func (*DocumentAttributeHasStickersPredict) CRC() uint32 {
 func (*DocumentAttributeHasStickersPredict) _DocumentAttribute() {}
 
 type DocumentAttributeCustomEmojiPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Free       bool     `tl:",omitempty:flags:0,implicit"`
-	TextColor  bool     `tl:",omitempty:flags:1,implicit"`
-	Alt        string
-	Stickerset InputStickerSet
+	_          struct{}        `tl:"flags,bitflag"`
+	Free       bool            `tl:"free,omitempty:flags:0,implicit"`
+	TextColor  bool            `tl:"text_color,omitempty:flags:1,implicit"`
+	Alt        string          `tl:"alt"`
+	Stickerset InputStickerSet `tl:"stickerset"`
 }
 
 func (*DocumentAttributeCustomEmojiPredict) CRC() uint32 {
@@ -2980,7 +2980,7 @@ func (*DocumentAttributeCustomEmojiPredict) CRC() uint32 {
 func (*DocumentAttributeCustomEmojiPredict) _DocumentAttribute() {}
 
 type DraftMessage interface {
-	tl.Object
+	tl.TLObject
 	_DraftMessage()
 }
 
@@ -2991,7 +2991,7 @@ var (
 
 type DraftMessageEmptyPredict struct {
 	_    struct{} `tl:"flags,bitflag"`
-	Date *int32   `tl:",omitempty:flags:0"`
+	Date *int32   `tl:"date,omitempty:flags:0"`
 }
 
 func (*DraftMessageEmptyPredict) CRC() uint32 {
@@ -3000,15 +3000,15 @@ func (*DraftMessageEmptyPredict) CRC() uint32 {
 func (*DraftMessageEmptyPredict) _DraftMessage() {}
 
 type DraftMessagePredict struct {
-	_           struct{}     `tl:"flags,bitflag"`
-	NoWebpage   bool         `tl:",omitempty:flags:1,implicit"`
-	InvertMedia bool         `tl:",omitempty:flags:6,implicit"`
-	ReplyTo     InputReplyTo `tl:",omitempty:flags:4"`
-	Message     string
-	Entities    []MessageEntity `tl:",omitempty:flags:3"`
-	Media       InputMedia      `tl:",omitempty:flags:5"`
-	Date        int32
-	Effect      *int64 `tl:",omitempty:flags:7"`
+	_           struct{}        `tl:"flags,bitflag"`
+	NoWebpage   bool            `tl:"no_webpage,omitempty:flags:1,implicit"`
+	InvertMedia bool            `tl:"invert_media,omitempty:flags:6,implicit"`
+	ReplyTo     InputReplyTo    `tl:"reply_to,omitempty:flags:4"`
+	Message     string          `tl:"message"`
+	Entities    []MessageEntity `tl:"entities,omitempty:flags:3"`
+	Media       InputMedia      `tl:"media,omitempty:flags:5"`
+	Date        int32           `tl:"date"`
+	Effect      *int64          `tl:"effect,omitempty:flags:7"`
 }
 
 func (*DraftMessagePredict) CRC() uint32 {
@@ -3017,7 +3017,7 @@ func (*DraftMessagePredict) CRC() uint32 {
 func (*DraftMessagePredict) _DraftMessage() {}
 
 type EmailVerification interface {
-	tl.Object
+	tl.TLObject
 	_EmailVerification()
 }
 
@@ -3028,7 +3028,7 @@ var (
 )
 
 type EmailVerificationCodePredict struct {
-	Code string
+	Code string `tl:"code"`
 }
 
 func (*EmailVerificationCodePredict) CRC() uint32 {
@@ -3037,7 +3037,7 @@ func (*EmailVerificationCodePredict) CRC() uint32 {
 func (*EmailVerificationCodePredict) _EmailVerification() {}
 
 type EmailVerificationGooglePredict struct {
-	Token string
+	Token string `tl:"token"`
 }
 
 func (*EmailVerificationGooglePredict) CRC() uint32 {
@@ -3046,7 +3046,7 @@ func (*EmailVerificationGooglePredict) CRC() uint32 {
 func (*EmailVerificationGooglePredict) _EmailVerification() {}
 
 type EmailVerificationApplePredict struct {
-	Token string
+	Token string `tl:"token"`
 }
 
 func (*EmailVerificationApplePredict) CRC() uint32 {
@@ -3055,7 +3055,7 @@ func (*EmailVerificationApplePredict) CRC() uint32 {
 func (*EmailVerificationApplePredict) _EmailVerification() {}
 
 type EmailVerifyPurpose interface {
-	tl.Object
+	tl.TLObject
 	_EmailVerifyPurpose()
 }
 
@@ -3066,8 +3066,8 @@ var (
 )
 
 type EmailVerifyPurposeLoginSetupPredict struct {
-	PhoneNumber   string
-	PhoneCodeHash string
+	PhoneNumber   string `tl:"phone_number"`
+	PhoneCodeHash string `tl:"phone_code_hash"`
 }
 
 func (*EmailVerifyPurposeLoginSetupPredict) CRC() uint32 {
@@ -3090,7 +3090,7 @@ func (*EmailVerifyPurposePassportPredict) CRC() uint32 {
 func (*EmailVerifyPurposePassportPredict) _EmailVerifyPurpose() {}
 
 type EmojiGroup interface {
-	tl.Object
+	tl.TLObject
 	_EmojiGroup()
 }
 
@@ -3101,9 +3101,9 @@ var (
 )
 
 type EmojiGroupPredict struct {
-	Title       string
-	IconEmojiID int64
-	Emoticons   []string
+	Title       string   `tl:"title"`
+	IconEmojiID int64    `tl:"icon_emoji_id"`
+	Emoticons   []string `tl:"emoticons"`
 }
 
 func (*EmojiGroupPredict) CRC() uint32 {
@@ -3112,9 +3112,9 @@ func (*EmojiGroupPredict) CRC() uint32 {
 func (*EmojiGroupPredict) _EmojiGroup() {}
 
 type EmojiGroupGreetingPredict struct {
-	Title       string
-	IconEmojiID int64
-	Emoticons   []string
+	Title       string   `tl:"title"`
+	IconEmojiID int64    `tl:"icon_emoji_id"`
+	Emoticons   []string `tl:"emoticons"`
 }
 
 func (*EmojiGroupGreetingPredict) CRC() uint32 {
@@ -3123,8 +3123,8 @@ func (*EmojiGroupGreetingPredict) CRC() uint32 {
 func (*EmojiGroupGreetingPredict) _EmojiGroup() {}
 
 type EmojiGroupPremiumPredict struct {
-	Title       string
-	IconEmojiID int64
+	Title       string `tl:"title"`
+	IconEmojiID int64  `tl:"icon_emoji_id"`
 }
 
 func (*EmojiGroupPremiumPredict) CRC() uint32 {
@@ -3133,7 +3133,7 @@ func (*EmojiGroupPremiumPredict) CRC() uint32 {
 func (*EmojiGroupPremiumPredict) _EmojiGroup() {}
 
 type EmojiKeyword interface {
-	tl.Object
+	tl.TLObject
 	_EmojiKeyword()
 }
 
@@ -3143,8 +3143,8 @@ var (
 )
 
 type EmojiKeywordPredict struct {
-	Keyword   string
-	Emoticons []string
+	Keyword   string   `tl:"keyword"`
+	Emoticons []string `tl:"emoticons"`
 }
 
 func (*EmojiKeywordPredict) CRC() uint32 {
@@ -3153,8 +3153,8 @@ func (*EmojiKeywordPredict) CRC() uint32 {
 func (*EmojiKeywordPredict) _EmojiKeyword() {}
 
 type EmojiKeywordDeletedPredict struct {
-	Keyword   string
-	Emoticons []string
+	Keyword   string   `tl:"keyword"`
+	Emoticons []string `tl:"emoticons"`
 }
 
 func (*EmojiKeywordDeletedPredict) CRC() uint32 {
@@ -3163,7 +3163,7 @@ func (*EmojiKeywordDeletedPredict) CRC() uint32 {
 func (*EmojiKeywordDeletedPredict) _EmojiKeyword() {}
 
 type EmojiKeywordsDifference interface {
-	tl.Object
+	tl.TLObject
 	_EmojiKeywordsDifference()
 }
 
@@ -3172,10 +3172,10 @@ var (
 )
 
 type EmojiKeywordsDifferencePredict struct {
-	LangCode    string
-	FromVersion int32
-	Version     int32
-	Keywords    []EmojiKeyword
+	LangCode    string         `tl:"lang_code"`
+	FromVersion int32          `tl:"from_version"`
+	Version     int32          `tl:"version"`
+	Keywords    []EmojiKeyword `tl:"keywords"`
 }
 
 func (*EmojiKeywordsDifferencePredict) CRC() uint32 {
@@ -3184,7 +3184,7 @@ func (*EmojiKeywordsDifferencePredict) CRC() uint32 {
 func (*EmojiKeywordsDifferencePredict) _EmojiKeywordsDifference() {}
 
 type EmojiLanguage interface {
-	tl.Object
+	tl.TLObject
 	_EmojiLanguage()
 }
 
@@ -3193,7 +3193,7 @@ var (
 )
 
 type EmojiLanguagePredict struct {
-	LangCode string
+	LangCode string `tl:"lang_code"`
 }
 
 func (*EmojiLanguagePredict) CRC() uint32 {
@@ -3202,7 +3202,7 @@ func (*EmojiLanguagePredict) CRC() uint32 {
 func (*EmojiLanguagePredict) _EmojiLanguage() {}
 
 type EmojiList interface {
-	tl.Object
+	tl.TLObject
 	_EmojiList()
 }
 
@@ -3219,8 +3219,8 @@ func (*EmojiListNotModifiedPredict) CRC() uint32 {
 func (*EmojiListNotModifiedPredict) _EmojiList() {}
 
 type EmojiListPredict struct {
-	Hash       int64
-	DocumentID []int64
+	Hash       int64   `tl:"hash"`
+	DocumentID []int64 `tl:"document_id"`
 }
 
 func (*EmojiListPredict) CRC() uint32 {
@@ -3229,7 +3229,7 @@ func (*EmojiListPredict) CRC() uint32 {
 func (*EmojiListPredict) _EmojiList() {}
 
 type EmojiStatus interface {
-	tl.Object
+	tl.TLObject
 	_EmojiStatus()
 }
 
@@ -3247,7 +3247,7 @@ func (*EmojiStatusEmptyPredict) CRC() uint32 {
 func (*EmojiStatusEmptyPredict) _EmojiStatus() {}
 
 type EmojiStatusPredict struct {
-	DocumentID int64
+	DocumentID int64 `tl:"document_id"`
 }
 
 func (*EmojiStatusPredict) CRC() uint32 {
@@ -3256,8 +3256,8 @@ func (*EmojiStatusPredict) CRC() uint32 {
 func (*EmojiStatusPredict) _EmojiStatus() {}
 
 type EmojiStatusUntilPredict struct {
-	DocumentID int64
-	Until      int32
+	DocumentID int64 `tl:"document_id"`
+	Until      int32 `tl:"until"`
 }
 
 func (*EmojiStatusUntilPredict) CRC() uint32 {
@@ -3266,7 +3266,7 @@ func (*EmojiStatusUntilPredict) CRC() uint32 {
 func (*EmojiStatusUntilPredict) _EmojiStatus() {}
 
 type EmojiURL interface {
-	tl.Object
+	tl.TLObject
 	_EmojiURL()
 }
 
@@ -3275,7 +3275,7 @@ var (
 )
 
 type EmojiURLPredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*EmojiURLPredict) CRC() uint32 {
@@ -3284,7 +3284,7 @@ func (*EmojiURLPredict) CRC() uint32 {
 func (*EmojiURLPredict) _EmojiURL() {}
 
 type EncryptedChat interface {
-	tl.Object
+	tl.TLObject
 	_EncryptedChat()
 }
 
@@ -3297,7 +3297,7 @@ var (
 )
 
 type EncryptedChatEmptyPredict struct {
-	ID int32
+	ID int32 `tl:"id"`
 }
 
 func (*EncryptedChatEmptyPredict) CRC() uint32 {
@@ -3306,11 +3306,11 @@ func (*EncryptedChatEmptyPredict) CRC() uint32 {
 func (*EncryptedChatEmptyPredict) _EncryptedChat() {}
 
 type EncryptedChatWaitingPredict struct {
-	ID            int32
-	AccessHash    int64
-	Date          int32
-	AdminID       int64
-	ParticipantID int64
+	ID            int32 `tl:"id"`
+	AccessHash    int64 `tl:"access_hash"`
+	Date          int32 `tl:"date"`
+	AdminID       int64 `tl:"admin_id"`
+	ParticipantID int64 `tl:"participant_id"`
 }
 
 func (*EncryptedChatWaitingPredict) CRC() uint32 {
@@ -3320,13 +3320,13 @@ func (*EncryptedChatWaitingPredict) _EncryptedChat() {}
 
 type EncryptedChatRequestedPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	FolderID      *int32   `tl:",omitempty:flags:0"`
-	ID            int32
-	AccessHash    int64
-	Date          int32
-	AdminID       int64
-	ParticipantID int64
-	GA            []byte
+	FolderID      *int32   `tl:"folder_id,omitempty:flags:0"`
+	ID            int32    `tl:"id"`
+	AccessHash    int64    `tl:"access_hash"`
+	Date          int32    `tl:"date"`
+	AdminID       int64    `tl:"admin_id"`
+	ParticipantID int64    `tl:"participant_id"`
+	GA            []byte   `tl:"g_a"`
 }
 
 func (*EncryptedChatRequestedPredict) CRC() uint32 {
@@ -3335,13 +3335,13 @@ func (*EncryptedChatRequestedPredict) CRC() uint32 {
 func (*EncryptedChatRequestedPredict) _EncryptedChat() {}
 
 type EncryptedChatPredict struct {
-	ID             int32
-	AccessHash     int64
-	Date           int32
-	AdminID        int64
-	ParticipantID  int64
-	GAOrB          []byte
-	KeyFingerprint int64
+	ID             int32  `tl:"id"`
+	AccessHash     int64  `tl:"access_hash"`
+	Date           int32  `tl:"date"`
+	AdminID        int64  `tl:"admin_id"`
+	ParticipantID  int64  `tl:"participant_id"`
+	GAOrB          []byte `tl:"g_a_or_b"`
+	KeyFingerprint int64  `tl:"key_fingerprint"`
 }
 
 func (*EncryptedChatPredict) CRC() uint32 {
@@ -3351,8 +3351,8 @@ func (*EncryptedChatPredict) _EncryptedChat() {}
 
 type EncryptedChatDiscardedPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	HistoryDeleted bool     `tl:",omitempty:flags:0,implicit"`
-	ID             int32
+	HistoryDeleted bool     `tl:"history_deleted,omitempty:flags:0,implicit"`
+	ID             int32    `tl:"id"`
 }
 
 func (*EncryptedChatDiscardedPredict) CRC() uint32 {
@@ -3361,7 +3361,7 @@ func (*EncryptedChatDiscardedPredict) CRC() uint32 {
 func (*EncryptedChatDiscardedPredict) _EncryptedChat() {}
 
 type EncryptedFile interface {
-	tl.Object
+	tl.TLObject
 	_EncryptedFile()
 }
 
@@ -3378,11 +3378,11 @@ func (*EncryptedFileEmptyPredict) CRC() uint32 {
 func (*EncryptedFileEmptyPredict) _EncryptedFile() {}
 
 type EncryptedFilePredict struct {
-	ID             int64
-	AccessHash     int64
-	Size           int64
-	DcID           int32
-	KeyFingerprint int32
+	ID             int64 `tl:"id"`
+	AccessHash     int64 `tl:"access_hash"`
+	Size           int64 `tl:"size"`
+	DcID           int32 `tl:"dc_id"`
+	KeyFingerprint int32 `tl:"key_fingerprint"`
 }
 
 func (*EncryptedFilePredict) CRC() uint32 {
@@ -3391,7 +3391,7 @@ func (*EncryptedFilePredict) CRC() uint32 {
 func (*EncryptedFilePredict) _EncryptedFile() {}
 
 type EncryptedMessage interface {
-	tl.Object
+	tl.TLObject
 	_EncryptedMessage()
 }
 
@@ -3401,11 +3401,11 @@ var (
 )
 
 type EncryptedMessagePredict struct {
-	RandomID int64
-	ChatID   int32
-	Date     int32
-	Bytes    []byte
-	File     EncryptedFile
+	RandomID int64         `tl:"random_id"`
+	ChatID   int32         `tl:"chat_id"`
+	Date     int32         `tl:"date"`
+	Bytes    []byte        `tl:"bytes"`
+	File     EncryptedFile `tl:"file"`
 }
 
 func (*EncryptedMessagePredict) CRC() uint32 {
@@ -3414,10 +3414,10 @@ func (*EncryptedMessagePredict) CRC() uint32 {
 func (*EncryptedMessagePredict) _EncryptedMessage() {}
 
 type EncryptedMessageServicePredict struct {
-	RandomID int64
-	ChatID   int32
-	Date     int32
-	Bytes    []byte
+	RandomID int64  `tl:"random_id"`
+	ChatID   int32  `tl:"chat_id"`
+	Date     int32  `tl:"date"`
+	Bytes    []byte `tl:"bytes"`
 }
 
 func (*EncryptedMessageServicePredict) CRC() uint32 {
@@ -3426,7 +3426,7 @@ func (*EncryptedMessageServicePredict) CRC() uint32 {
 func (*EncryptedMessageServicePredict) _EncryptedMessage() {}
 
 type Error interface {
-	tl.Object
+	tl.TLObject
 	_Error()
 }
 
@@ -3435,8 +3435,8 @@ var (
 )
 
 type ErrorPredict struct {
-	Code int32
-	Text string
+	Code int32  `tl:"code"`
+	Text string `tl:"text"`
 }
 
 func (*ErrorPredict) CRC() uint32 {
@@ -3445,7 +3445,7 @@ func (*ErrorPredict) CRC() uint32 {
 func (*ErrorPredict) _Error() {}
 
 type ExportedChatInvite interface {
-	tl.Object
+	tl.TLObject
 	_ExportedChatInvite()
 }
 
@@ -3456,18 +3456,18 @@ var (
 
 type ChatInviteExportedPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	Revoked       bool     `tl:",omitempty:flags:0,implicit"`
-	Permanent     bool     `tl:",omitempty:flags:5,implicit"`
-	RequestNeeded bool     `tl:",omitempty:flags:6,implicit"`
-	Link          string
-	AdminID       int64
-	Date          int32
-	StartDate     *int32  `tl:",omitempty:flags:4"`
-	ExpireDate    *int32  `tl:",omitempty:flags:1"`
-	UsageLimit    *int32  `tl:",omitempty:flags:2"`
-	Usage         *int32  `tl:",omitempty:flags:3"`
-	Requested     *int32  `tl:",omitempty:flags:7"`
-	Title         *string `tl:",omitempty:flags:8"`
+	Revoked       bool     `tl:"revoked,omitempty:flags:0,implicit"`
+	Permanent     bool     `tl:"permanent,omitempty:flags:5,implicit"`
+	RequestNeeded bool     `tl:"request_needed,omitempty:flags:6,implicit"`
+	Link          string   `tl:"link"`
+	AdminID       int64    `tl:"admin_id"`
+	Date          int32    `tl:"date"`
+	StartDate     *int32   `tl:"start_date,omitempty:flags:4"`
+	ExpireDate    *int32   `tl:"expire_date,omitempty:flags:1"`
+	UsageLimit    *int32   `tl:"usage_limit,omitempty:flags:2"`
+	Usage         *int32   `tl:"usage,omitempty:flags:3"`
+	Requested     *int32   `tl:"requested,omitempty:flags:7"`
+	Title         *string  `tl:"title,omitempty:flags:8"`
 }
 
 func (*ChatInviteExportedPredict) CRC() uint32 {
@@ -3483,7 +3483,7 @@ func (*ChatInvitePublicJoinRequestsPredict) CRC() uint32 {
 func (*ChatInvitePublicJoinRequestsPredict) _ExportedChatInvite() {}
 
 type ExportedChatlistInvite interface {
-	tl.Object
+	tl.TLObject
 	_ExportedChatlistInvite()
 }
 
@@ -3493,9 +3493,9 @@ var (
 
 type ExportedChatlistInvitePredict struct {
 	_     struct{} `tl:"flags,bitflag"`
-	Title string
-	URL   string
-	Peers []Peer
+	Title string   `tl:"title"`
+	URL   string   `tl:"url"`
+	Peers []Peer   `tl:"peers"`
 }
 
 func (*ExportedChatlistInvitePredict) CRC() uint32 {
@@ -3504,7 +3504,7 @@ func (*ExportedChatlistInvitePredict) CRC() uint32 {
 func (*ExportedChatlistInvitePredict) _ExportedChatlistInvite() {}
 
 type ExportedContactToken interface {
-	tl.Object
+	tl.TLObject
 	_ExportedContactToken()
 }
 
@@ -3513,8 +3513,8 @@ var (
 )
 
 type ExportedContactTokenPredict struct {
-	URL     string
-	Expires int32
+	URL     string `tl:"url"`
+	Expires int32  `tl:"expires"`
 }
 
 func (*ExportedContactTokenPredict) CRC() uint32 {
@@ -3523,7 +3523,7 @@ func (*ExportedContactTokenPredict) CRC() uint32 {
 func (*ExportedContactTokenPredict) _ExportedContactToken() {}
 
 type ExportedMessageLink interface {
-	tl.Object
+	tl.TLObject
 	_ExportedMessageLink()
 }
 
@@ -3532,8 +3532,8 @@ var (
 )
 
 type ExportedMessageLinkPredict struct {
-	Link string
-	Html string
+	Link string `tl:"link"`
+	Html string `tl:"html"`
 }
 
 func (*ExportedMessageLinkPredict) CRC() uint32 {
@@ -3542,7 +3542,7 @@ func (*ExportedMessageLinkPredict) CRC() uint32 {
 func (*ExportedMessageLinkPredict) _ExportedMessageLink() {}
 
 type ExportedStoryLink interface {
-	tl.Object
+	tl.TLObject
 	_ExportedStoryLink()
 }
 
@@ -3551,7 +3551,7 @@ var (
 )
 
 type ExportedStoryLinkPredict struct {
-	Link string
+	Link string `tl:"link"`
 }
 
 func (*ExportedStoryLinkPredict) CRC() uint32 {
@@ -3560,7 +3560,7 @@ func (*ExportedStoryLinkPredict) CRC() uint32 {
 func (*ExportedStoryLinkPredict) _ExportedStoryLink() {}
 
 type FactCheck interface {
-	tl.Object
+	tl.TLObject
 	_FactCheck()
 }
 
@@ -3570,10 +3570,10 @@ var (
 
 type FactCheckPredict struct {
 	_         struct{}         `tl:"flags,bitflag"`
-	NeedCheck bool             `tl:",omitempty:flags:0,implicit"`
-	Country   *string          `tl:",omitempty:flags:1"`
-	Text      TextWithEntities `tl:",omitempty:flags:1"`
-	Hash      int64
+	NeedCheck bool             `tl:"need_check,omitempty:flags:0,implicit"`
+	Country   *string          `tl:"country,omitempty:flags:1"`
+	Text      TextWithEntities `tl:"text,omitempty:flags:1"`
+	Hash      int64            `tl:"hash"`
 }
 
 func (*FactCheckPredict) CRC() uint32 {
@@ -3582,7 +3582,7 @@ func (*FactCheckPredict) CRC() uint32 {
 func (*FactCheckPredict) _FactCheck() {}
 
 type FileHash interface {
-	tl.Object
+	tl.TLObject
 	_FileHash()
 }
 
@@ -3591,9 +3591,9 @@ var (
 )
 
 type FileHashPredict struct {
-	Offset int64
-	Limit  int32
-	Hash   []byte
+	Offset int64  `tl:"offset"`
+	Limit  int32  `tl:"limit"`
+	Hash   []byte `tl:"hash"`
 }
 
 func (*FileHashPredict) CRC() uint32 {
@@ -3602,7 +3602,7 @@ func (*FileHashPredict) CRC() uint32 {
 func (*FileHashPredict) _FileHash() {}
 
 type Folder interface {
-	tl.Object
+	tl.TLObject
 	_Folder()
 }
 
@@ -3611,13 +3611,13 @@ var (
 )
 
 type FolderPredict struct {
-	_                         struct{} `tl:"flags,bitflag"`
-	AutofillNewBroadcasts     bool     `tl:",omitempty:flags:0,implicit"`
-	AutofillPublicGroups      bool     `tl:",omitempty:flags:1,implicit"`
-	AutofillNewCorrespondents bool     `tl:",omitempty:flags:2,implicit"`
-	ID                        int32
-	Title                     string
-	Photo                     ChatPhoto `tl:",omitempty:flags:3"`
+	_                         struct{}  `tl:"flags,bitflag"`
+	AutofillNewBroadcasts     bool      `tl:"autofill_new_broadcasts,omitempty:flags:0,implicit"`
+	AutofillPublicGroups      bool      `tl:"autofill_public_groups,omitempty:flags:1,implicit"`
+	AutofillNewCorrespondents bool      `tl:"autofill_new_correspondents,omitempty:flags:2,implicit"`
+	ID                        int32     `tl:"id"`
+	Title                     string    `tl:"title"`
+	Photo                     ChatPhoto `tl:"photo,omitempty:flags:3"`
 }
 
 func (*FolderPredict) CRC() uint32 {
@@ -3626,7 +3626,7 @@ func (*FolderPredict) CRC() uint32 {
 func (*FolderPredict) _Folder() {}
 
 type FolderPeer interface {
-	tl.Object
+	tl.TLObject
 	_FolderPeer()
 }
 
@@ -3635,8 +3635,8 @@ var (
 )
 
 type FolderPeerPredict struct {
-	Peer     Peer
-	FolderID int32
+	Peer     Peer  `tl:"peer"`
+	FolderID int32 `tl:"folder_id"`
 }
 
 func (*FolderPeerPredict) CRC() uint32 {
@@ -3645,7 +3645,7 @@ func (*FolderPeerPredict) CRC() uint32 {
 func (*FolderPeerPredict) _FolderPeer() {}
 
 type ForumTopic interface {
-	tl.Object
+	tl.TLObject
 	_ForumTopic()
 }
 
@@ -3655,7 +3655,7 @@ var (
 )
 
 type ForumTopicDeletedPredict struct {
-	ID int32
+	ID int32 `tl:"id"`
 }
 
 func (*ForumTopicDeletedPredict) CRC() uint32 {
@@ -3664,26 +3664,26 @@ func (*ForumTopicDeletedPredict) CRC() uint32 {
 func (*ForumTopicDeletedPredict) _ForumTopic() {}
 
 type ForumTopicPredict struct {
-	_                    struct{} `tl:"flags,bitflag"`
-	My                   bool     `tl:",omitempty:flags:1,implicit"`
-	Closed               bool     `tl:",omitempty:flags:2,implicit"`
-	Pinned               bool     `tl:",omitempty:flags:3,implicit"`
-	Short                bool     `tl:",omitempty:flags:5,implicit"`
-	Hidden               bool     `tl:",omitempty:flags:6,implicit"`
-	ID                   int32
-	Date                 int32
-	Title                string
-	IconColor            int32
-	IconEmojiID          *int64 `tl:",omitempty:flags:0"`
-	TopMessage           int32
-	ReadInboxMaxID       int32
-	ReadOutboxMaxID      int32
-	UnreadCount          int32
-	UnreadMentionsCount  int32
-	UnreadReactionsCount int32
-	FromID               Peer
-	NotifySettings       PeerNotifySettings
-	Draft                DraftMessage `tl:",omitempty:flags:4"`
+	_                    struct{}           `tl:"flags,bitflag"`
+	My                   bool               `tl:"my,omitempty:flags:1,implicit"`
+	Closed               bool               `tl:"closed,omitempty:flags:2,implicit"`
+	Pinned               bool               `tl:"pinned,omitempty:flags:3,implicit"`
+	Short                bool               `tl:"short,omitempty:flags:5,implicit"`
+	Hidden               bool               `tl:"hidden,omitempty:flags:6,implicit"`
+	ID                   int32              `tl:"id"`
+	Date                 int32              `tl:"date"`
+	Title                string             `tl:"title"`
+	IconColor            int32              `tl:"icon_color"`
+	IconEmojiID          *int64             `tl:"icon_emoji_id,omitempty:flags:0"`
+	TopMessage           int32              `tl:"top_message"`
+	ReadInboxMaxID       int32              `tl:"read_inbox_max_id"`
+	ReadOutboxMaxID      int32              `tl:"read_outbox_max_id"`
+	UnreadCount          int32              `tl:"unread_count"`
+	UnreadMentionsCount  int32              `tl:"unread_mentions_count"`
+	UnreadReactionsCount int32              `tl:"unread_reactions_count"`
+	FromID               Peer               `tl:"from_id"`
+	NotifySettings       PeerNotifySettings `tl:"notify_settings"`
+	Draft                DraftMessage       `tl:"draft,omitempty:flags:4"`
 }
 
 func (*ForumTopicPredict) CRC() uint32 {
@@ -3692,7 +3692,7 @@ func (*ForumTopicPredict) CRC() uint32 {
 func (*ForumTopicPredict) _ForumTopic() {}
 
 type FoundStory interface {
-	tl.Object
+	tl.TLObject
 	_FoundStory()
 }
 
@@ -3701,8 +3701,8 @@ var (
 )
 
 type FoundStoryPredict struct {
-	Peer  Peer
-	Story StoryItem
+	Peer  Peer      `tl:"peer"`
+	Story StoryItem `tl:"story"`
 }
 
 func (*FoundStoryPredict) CRC() uint32 {
@@ -3711,7 +3711,7 @@ func (*FoundStoryPredict) CRC() uint32 {
 func (*FoundStoryPredict) _FoundStory() {}
 
 type Game interface {
-	tl.Object
+	tl.TLObject
 	_Game()
 }
 
@@ -3721,13 +3721,13 @@ var (
 
 type GamePredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	ID          int64
-	AccessHash  int64
-	ShortName   string
-	Title       string
-	Description string
-	Photo       Photo
-	Document    Document `tl:",omitempty:flags:0"`
+	ID          int64    `tl:"id"`
+	AccessHash  int64    `tl:"access_hash"`
+	ShortName   string   `tl:"short_name"`
+	Title       string   `tl:"title"`
+	Description string   `tl:"description"`
+	Photo       Photo    `tl:"photo"`
+	Document    Document `tl:"document,omitempty:flags:0"`
 }
 
 func (*GamePredict) CRC() uint32 {
@@ -3736,7 +3736,7 @@ func (*GamePredict) CRC() uint32 {
 func (*GamePredict) _Game() {}
 
 type GeoPoint interface {
-	tl.Object
+	tl.TLObject
 	_GeoPoint()
 }
 
@@ -3754,10 +3754,10 @@ func (*GeoPointEmptyPredict) _GeoPoint() {}
 
 type GeoPointPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	Long           float64
-	Lat            float64
-	AccessHash     int64
-	AccuracyRadius *int32 `tl:",omitempty:flags:0"`
+	Long           float64  `tl:"long"`
+	Lat            float64  `tl:"lat"`
+	AccessHash     int64    `tl:"access_hash"`
+	AccuracyRadius *int32   `tl:"accuracy_radius,omitempty:flags:0"`
 }
 
 func (*GeoPointPredict) CRC() uint32 {
@@ -3766,7 +3766,7 @@ func (*GeoPointPredict) CRC() uint32 {
 func (*GeoPointPredict) _GeoPoint() {}
 
 type GeoPointAddress interface {
-	tl.Object
+	tl.TLObject
 	_GeoPointAddress()
 }
 
@@ -3776,10 +3776,10 @@ var (
 
 type GeoPointAddressPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	CountryIso2 string
-	State       *string `tl:",omitempty:flags:0"`
-	City        *string `tl:",omitempty:flags:1"`
-	Street      *string `tl:",omitempty:flags:2"`
+	CountryIso2 string   `tl:"country_iso2"`
+	State       *string  `tl:"state,omitempty:flags:0"`
+	City        *string  `tl:"city,omitempty:flags:1"`
+	Street      *string  `tl:"street,omitempty:flags:2"`
 }
 
 func (*GeoPointAddressPredict) CRC() uint32 {
@@ -3788,7 +3788,7 @@ func (*GeoPointAddressPredict) CRC() uint32 {
 func (*GeoPointAddressPredict) _GeoPointAddress() {}
 
 type GlobalPrivacySettings interface {
-	tl.Object
+	tl.TLObject
 	_GlobalPrivacySettings()
 }
 
@@ -3798,11 +3798,11 @@ var (
 
 type GlobalPrivacySettingsPredict struct {
 	_                                struct{} `tl:"flags,bitflag"`
-	ArchiveAndMuteNewNoncontactPeers bool     `tl:",omitempty:flags:0,implicit"`
-	KeepArchivedUnmuted              bool     `tl:",omitempty:flags:1,implicit"`
-	KeepArchivedFolders              bool     `tl:",omitempty:flags:2,implicit"`
-	HideReadMarks                    bool     `tl:",omitempty:flags:3,implicit"`
-	NewNoncontactPeersRequirePremium bool     `tl:",omitempty:flags:4,implicit"`
+	ArchiveAndMuteNewNoncontactPeers bool     `tl:"archive_and_mute_new_noncontact_peers,omitempty:flags:0,implicit"`
+	KeepArchivedUnmuted              bool     `tl:"keep_archived_unmuted,omitempty:flags:1,implicit"`
+	KeepArchivedFolders              bool     `tl:"keep_archived_folders,omitempty:flags:2,implicit"`
+	HideReadMarks                    bool     `tl:"hide_read_marks,omitempty:flags:3,implicit"`
+	NewNoncontactPeersRequirePremium bool     `tl:"new_noncontact_peers_require_premium,omitempty:flags:4,implicit"`
 }
 
 func (*GlobalPrivacySettingsPredict) CRC() uint32 {
@@ -3811,7 +3811,7 @@ func (*GlobalPrivacySettingsPredict) CRC() uint32 {
 func (*GlobalPrivacySettingsPredict) _GlobalPrivacySettings() {}
 
 type GroupCall interface {
-	tl.Object
+	tl.TLObject
 	_GroupCall()
 }
 
@@ -3821,9 +3821,9 @@ var (
 )
 
 type GroupCallDiscardedPredict struct {
-	ID         int64
-	AccessHash int64
-	Duration   int32
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
+	Duration   int32 `tl:"duration"`
 }
 
 func (*GroupCallDiscardedPredict) CRC() uint32 {
@@ -3833,24 +3833,24 @@ func (*GroupCallDiscardedPredict) _GroupCall() {}
 
 type GroupCallPredict struct {
 	_                       struct{} `tl:"flags,bitflag"`
-	JoinMuted               bool     `tl:",omitempty:flags:1,implicit"`
-	CanChangeJoinMuted      bool     `tl:",omitempty:flags:2,implicit"`
-	JoinDateAsc             bool     `tl:",omitempty:flags:6,implicit"`
-	ScheduleStartSubscribed bool     `tl:",omitempty:flags:8,implicit"`
-	CanStartVideo           bool     `tl:",omitempty:flags:9,implicit"`
-	RecordVideoActive       bool     `tl:",omitempty:flags:11,implicit"`
-	RtmpStream              bool     `tl:",omitempty:flags:12,implicit"`
-	ListenersHidden         bool     `tl:",omitempty:flags:13,implicit"`
-	ID                      int64
-	AccessHash              int64
-	ParticipantsCount       int32
-	Title                   *string `tl:",omitempty:flags:3"`
-	StreamDcID              *int32  `tl:",omitempty:flags:4"`
-	RecordStartDate         *int32  `tl:",omitempty:flags:5"`
-	ScheduleDate            *int32  `tl:",omitempty:flags:7"`
-	UnmutedVideoCount       *int32  `tl:",omitempty:flags:10"`
-	UnmutedVideoLimit       int32
-	Version                 int32
+	JoinMuted               bool     `tl:"join_muted,omitempty:flags:1,implicit"`
+	CanChangeJoinMuted      bool     `tl:"can_change_join_muted,omitempty:flags:2,implicit"`
+	JoinDateAsc             bool     `tl:"join_date_asc,omitempty:flags:6,implicit"`
+	ScheduleStartSubscribed bool     `tl:"schedule_start_subscribed,omitempty:flags:8,implicit"`
+	CanStartVideo           bool     `tl:"can_start_video,omitempty:flags:9,implicit"`
+	RecordVideoActive       bool     `tl:"record_video_active,omitempty:flags:11,implicit"`
+	RtmpStream              bool     `tl:"rtmp_stream,omitempty:flags:12,implicit"`
+	ListenersHidden         bool     `tl:"listeners_hidden,omitempty:flags:13,implicit"`
+	ID                      int64    `tl:"id"`
+	AccessHash              int64    `tl:"access_hash"`
+	ParticipantsCount       int32    `tl:"participants_count"`
+	Title                   *string  `tl:"title,omitempty:flags:3"`
+	StreamDcID              *int32   `tl:"stream_dc_id,omitempty:flags:4"`
+	RecordStartDate         *int32   `tl:"record_start_date,omitempty:flags:5"`
+	ScheduleDate            *int32   `tl:"schedule_date,omitempty:flags:7"`
+	UnmutedVideoCount       *int32   `tl:"unmuted_video_count,omitempty:flags:10"`
+	UnmutedVideoLimit       int32    `tl:"unmuted_video_limit"`
+	Version                 int32    `tl:"version"`
 }
 
 func (*GroupCallPredict) CRC() uint32 {
@@ -3859,7 +3859,7 @@ func (*GroupCallPredict) CRC() uint32 {
 func (*GroupCallPredict) _GroupCall() {}
 
 type GroupCallParticipant interface {
-	tl.Object
+	tl.TLObject
 	_GroupCallParticipant()
 }
 
@@ -3868,26 +3868,26 @@ var (
 )
 
 type GroupCallParticipantPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	Muted           bool     `tl:",omitempty:flags:0,implicit"`
-	Left            bool     `tl:",omitempty:flags:1,implicit"`
-	CanSelfUnmute   bool     `tl:",omitempty:flags:2,implicit"`
-	JustJoined      bool     `tl:",omitempty:flags:4,implicit"`
-	Versioned       bool     `tl:",omitempty:flags:5,implicit"`
-	Min             bool     `tl:",omitempty:flags:8,implicit"`
-	MutedByYou      bool     `tl:",omitempty:flags:9,implicit"`
-	VolumeByAdmin   bool     `tl:",omitempty:flags:10,implicit"`
-	Self            bool     `tl:",omitempty:flags:12,implicit"`
-	VideoJoined     bool     `tl:",omitempty:flags:15,implicit"`
-	Peer            Peer
-	Date            int32
-	ActiveDate      *int32 `tl:",omitempty:flags:3"`
-	Source          int32
-	Volume          *int32                    `tl:",omitempty:flags:7"`
-	About           *string                   `tl:",omitempty:flags:11"`
-	RaiseHandRating *int64                    `tl:",omitempty:flags:13"`
-	Video           GroupCallParticipantVideo `tl:",omitempty:flags:6"`
-	Presentation    GroupCallParticipantVideo `tl:",omitempty:flags:14"`
+	_               struct{}                  `tl:"flags,bitflag"`
+	Muted           bool                      `tl:"muted,omitempty:flags:0,implicit"`
+	Left            bool                      `tl:"left,omitempty:flags:1,implicit"`
+	CanSelfUnmute   bool                      `tl:"can_self_unmute,omitempty:flags:2,implicit"`
+	JustJoined      bool                      `tl:"just_joined,omitempty:flags:4,implicit"`
+	Versioned       bool                      `tl:"versioned,omitempty:flags:5,implicit"`
+	Min             bool                      `tl:"min,omitempty:flags:8,implicit"`
+	MutedByYou      bool                      `tl:"muted_by_you,omitempty:flags:9,implicit"`
+	VolumeByAdmin   bool                      `tl:"volume_by_admin,omitempty:flags:10,implicit"`
+	Self            bool                      `tl:"self,omitempty:flags:12,implicit"`
+	VideoJoined     bool                      `tl:"video_joined,omitempty:flags:15,implicit"`
+	Peer            Peer                      `tl:"peer"`
+	Date            int32                     `tl:"date"`
+	ActiveDate      *int32                    `tl:"active_date,omitempty:flags:3"`
+	Source          int32                     `tl:"source"`
+	Volume          *int32                    `tl:"volume,omitempty:flags:7"`
+	About           *string                   `tl:"about,omitempty:flags:11"`
+	RaiseHandRating *int64                    `tl:"raise_hand_rating,omitempty:flags:13"`
+	Video           GroupCallParticipantVideo `tl:"video,omitempty:flags:6"`
+	Presentation    GroupCallParticipantVideo `tl:"presentation,omitempty:flags:14"`
 }
 
 func (*GroupCallParticipantPredict) CRC() uint32 {
@@ -3896,7 +3896,7 @@ func (*GroupCallParticipantPredict) CRC() uint32 {
 func (*GroupCallParticipantPredict) _GroupCallParticipant() {}
 
 type GroupCallParticipantVideo interface {
-	tl.Object
+	tl.TLObject
 	_GroupCallParticipantVideo()
 }
 
@@ -3905,11 +3905,11 @@ var (
 )
 
 type GroupCallParticipantVideoPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Paused       bool     `tl:",omitempty:flags:0,implicit"`
-	Endpoint     string
-	SourceGroups []GroupCallParticipantVideoSourceGroup
-	AudioSource  *int32 `tl:",omitempty:flags:1"`
+	_            struct{}                               `tl:"flags,bitflag"`
+	Paused       bool                                   `tl:"paused,omitempty:flags:0,implicit"`
+	Endpoint     string                                 `tl:"endpoint"`
+	SourceGroups []GroupCallParticipantVideoSourceGroup `tl:"source_groups"`
+	AudioSource  *int32                                 `tl:"audio_source,omitempty:flags:1"`
 }
 
 func (*GroupCallParticipantVideoPredict) CRC() uint32 {
@@ -3918,7 +3918,7 @@ func (*GroupCallParticipantVideoPredict) CRC() uint32 {
 func (*GroupCallParticipantVideoPredict) _GroupCallParticipantVideo() {}
 
 type GroupCallParticipantVideoSourceGroup interface {
-	tl.Object
+	tl.TLObject
 	_GroupCallParticipantVideoSourceGroup()
 }
 
@@ -3927,8 +3927,8 @@ var (
 )
 
 type GroupCallParticipantVideoSourceGroupPredict struct {
-	Semantics string
-	Sources   []int32
+	Semantics string  `tl:"semantics"`
+	Sources   []int32 `tl:"sources"`
 }
 
 func (*GroupCallParticipantVideoSourceGroupPredict) CRC() uint32 {
@@ -3937,7 +3937,7 @@ func (*GroupCallParticipantVideoSourceGroupPredict) CRC() uint32 {
 func (*GroupCallParticipantVideoSourceGroupPredict) _GroupCallParticipantVideoSourceGroup() {}
 
 type GroupCallStreamChannel interface {
-	tl.Object
+	tl.TLObject
 	_GroupCallStreamChannel()
 }
 
@@ -3946,9 +3946,9 @@ var (
 )
 
 type GroupCallStreamChannelPredict struct {
-	Channel         int32
-	Scale           int32
-	LastTimestampMs int64
+	Channel         int32 `tl:"channel"`
+	Scale           int32 `tl:"scale"`
+	LastTimestampMs int64 `tl:"last_timestamp_ms"`
 }
 
 func (*GroupCallStreamChannelPredict) CRC() uint32 {
@@ -3957,7 +3957,7 @@ func (*GroupCallStreamChannelPredict) CRC() uint32 {
 func (*GroupCallStreamChannelPredict) _GroupCallStreamChannel() {}
 
 type HighScore interface {
-	tl.Object
+	tl.TLObject
 	_HighScore()
 }
 
@@ -3966,9 +3966,9 @@ var (
 )
 
 type HighScorePredict struct {
-	Pos    int32
-	UserID int64
-	Score  int32
+	Pos    int32 `tl:"pos"`
+	UserID int64 `tl:"user_id"`
+	Score  int32 `tl:"score"`
 }
 
 func (*HighScorePredict) CRC() uint32 {
@@ -3977,7 +3977,7 @@ func (*HighScorePredict) CRC() uint32 {
 func (*HighScorePredict) _HighScore() {}
 
 type ImportedContact interface {
-	tl.Object
+	tl.TLObject
 	_ImportedContact()
 }
 
@@ -3986,8 +3986,8 @@ var (
 )
 
 type ImportedContactPredict struct {
-	UserID   int64
-	ClientID int64
+	UserID   int64 `tl:"user_id"`
+	ClientID int64 `tl:"client_id"`
 }
 
 func (*ImportedContactPredict) CRC() uint32 {
@@ -3996,7 +3996,7 @@ func (*ImportedContactPredict) CRC() uint32 {
 func (*ImportedContactPredict) _ImportedContact() {}
 
 type InlineBotSwitchPm interface {
-	tl.Object
+	tl.TLObject
 	_InlineBotSwitchPm()
 }
 
@@ -4005,8 +4005,8 @@ var (
 )
 
 type InlineBotSwitchPmPredict struct {
-	Text       string
-	StartParam string
+	Text       string `tl:"text"`
+	StartParam string `tl:"start_param"`
 }
 
 func (*InlineBotSwitchPmPredict) CRC() uint32 {
@@ -4015,7 +4015,7 @@ func (*InlineBotSwitchPmPredict) CRC() uint32 {
 func (*InlineBotSwitchPmPredict) _InlineBotSwitchPm() {}
 
 type InlineBotWebView interface {
-	tl.Object
+	tl.TLObject
 	_InlineBotWebView()
 }
 
@@ -4024,8 +4024,8 @@ var (
 )
 
 type InlineBotWebViewPredict struct {
-	Text string
-	URL  string
+	Text string `tl:"text"`
+	URL  string `tl:"url"`
 }
 
 func (*InlineBotWebViewPredict) CRC() uint32 {
@@ -4034,7 +4034,7 @@ func (*InlineBotWebViewPredict) CRC() uint32 {
 func (*InlineBotWebViewPredict) _InlineBotWebView() {}
 
 type InputAppEvent interface {
-	tl.Object
+	tl.TLObject
 	_InputAppEvent()
 }
 
@@ -4043,10 +4043,10 @@ var (
 )
 
 type InputAppEventPredict struct {
-	Time float64
-	Type string
-	Peer int64
-	Data JSONValue
+	Time float64   `tl:"time"`
+	Type string    `tl:"type"`
+	Peer int64     `tl:"peer"`
+	Data JSONValue `tl:"data"`
 }
 
 func (*InputAppEventPredict) CRC() uint32 {
@@ -4055,7 +4055,7 @@ func (*InputAppEventPredict) CRC() uint32 {
 func (*InputAppEventPredict) _InputAppEvent() {}
 
 type InputBotApp interface {
-	tl.Object
+	tl.TLObject
 	_InputBotApp()
 }
 
@@ -4065,8 +4065,8 @@ var (
 )
 
 type InputBotAppIDPredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputBotAppIDPredict) CRC() uint32 {
@@ -4075,8 +4075,8 @@ func (*InputBotAppIDPredict) CRC() uint32 {
 func (*InputBotAppIDPredict) _InputBotApp() {}
 
 type InputBotAppShortNamePredict struct {
-	BotID     InputUser
-	ShortName string
+	BotID     InputUser `tl:"bot_id"`
+	ShortName string    `tl:"short_name"`
 }
 
 func (*InputBotAppShortNamePredict) CRC() uint32 {
@@ -4085,7 +4085,7 @@ func (*InputBotAppShortNamePredict) CRC() uint32 {
 func (*InputBotAppShortNamePredict) _InputBotApp() {}
 
 type InputBotInlineMessage interface {
-	tl.Object
+	tl.TLObject
 	_InputBotInlineMessage()
 }
 
@@ -4101,11 +4101,11 @@ var (
 )
 
 type InputBotInlineMessageMediaAutoPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	InvertMedia bool     `tl:",omitempty:flags:3,implicit"`
-	Message     string
-	Entities    []MessageEntity `tl:",omitempty:flags:1"`
-	ReplyMarkup ReplyMarkup     `tl:",omitempty:flags:2"`
+	_           struct{}        `tl:"flags,bitflag"`
+	InvertMedia bool            `tl:"invert_media,omitempty:flags:3,implicit"`
+	Message     string          `tl:"message"`
+	Entities    []MessageEntity `tl:"entities,omitempty:flags:1"`
+	ReplyMarkup ReplyMarkup     `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*InputBotInlineMessageMediaAutoPredict) CRC() uint32 {
@@ -4114,12 +4114,12 @@ func (*InputBotInlineMessageMediaAutoPredict) CRC() uint32 {
 func (*InputBotInlineMessageMediaAutoPredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageTextPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	NoWebpage   bool     `tl:",omitempty:flags:0,implicit"`
-	InvertMedia bool     `tl:",omitempty:flags:3,implicit"`
-	Message     string
-	Entities    []MessageEntity `tl:",omitempty:flags:1"`
-	ReplyMarkup ReplyMarkup     `tl:",omitempty:flags:2"`
+	_           struct{}        `tl:"flags,bitflag"`
+	NoWebpage   bool            `tl:"no_webpage,omitempty:flags:0,implicit"`
+	InvertMedia bool            `tl:"invert_media,omitempty:flags:3,implicit"`
+	Message     string          `tl:"message"`
+	Entities    []MessageEntity `tl:"entities,omitempty:flags:1"`
+	ReplyMarkup ReplyMarkup     `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*InputBotInlineMessageTextPredict) CRC() uint32 {
@@ -4128,12 +4128,12 @@ func (*InputBotInlineMessageTextPredict) CRC() uint32 {
 func (*InputBotInlineMessageTextPredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageMediaGeoPredict struct {
-	_                           struct{} `tl:"flags,bitflag"`
-	GeoPoint                    InputGeoPoint
-	Heading                     *int32      `tl:",omitempty:flags:0"`
-	Period                      *int32      `tl:",omitempty:flags:1"`
-	ProximityNotificationRadius *int32      `tl:",omitempty:flags:3"`
-	ReplyMarkup                 ReplyMarkup `tl:",omitempty:flags:2"`
+	_                           struct{}      `tl:"flags,bitflag"`
+	GeoPoint                    InputGeoPoint `tl:"geo_point"`
+	Heading                     *int32        `tl:"heading,omitempty:flags:0"`
+	Period                      *int32        `tl:"period,omitempty:flags:1"`
+	ProximityNotificationRadius *int32        `tl:"proximity_notification_radius,omitempty:flags:3"`
+	ReplyMarkup                 ReplyMarkup   `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*InputBotInlineMessageMediaGeoPredict) CRC() uint32 {
@@ -4142,14 +4142,14 @@ func (*InputBotInlineMessageMediaGeoPredict) CRC() uint32 {
 func (*InputBotInlineMessageMediaGeoPredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageMediaVenuePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	GeoPoint    InputGeoPoint
-	Title       string
-	Address     string
-	Provider    string
-	VenueID     string
-	VenueType   string
-	ReplyMarkup ReplyMarkup `tl:",omitempty:flags:2"`
+	_           struct{}      `tl:"flags,bitflag"`
+	GeoPoint    InputGeoPoint `tl:"geo_point"`
+	Title       string        `tl:"title"`
+	Address     string        `tl:"address"`
+	Provider    string        `tl:"provider"`
+	VenueID     string        `tl:"venue_id"`
+	VenueType   string        `tl:"venue_type"`
+	ReplyMarkup ReplyMarkup   `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*InputBotInlineMessageMediaVenuePredict) CRC() uint32 {
@@ -4158,12 +4158,12 @@ func (*InputBotInlineMessageMediaVenuePredict) CRC() uint32 {
 func (*InputBotInlineMessageMediaVenuePredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageMediaContactPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	PhoneNumber string
-	FirstName   string
-	LastName    string
-	Vcard       string
-	ReplyMarkup ReplyMarkup `tl:",omitempty:flags:2"`
+	_           struct{}    `tl:"flags,bitflag"`
+	PhoneNumber string      `tl:"phone_number"`
+	FirstName   string      `tl:"first_name"`
+	LastName    string      `tl:"last_name"`
+	Vcard       string      `tl:"vcard"`
+	ReplyMarkup ReplyMarkup `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*InputBotInlineMessageMediaContactPredict) CRC() uint32 {
@@ -4173,7 +4173,7 @@ func (*InputBotInlineMessageMediaContactPredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageGamePredict struct {
 	_           struct{}    `tl:"flags,bitflag"`
-	ReplyMarkup ReplyMarkup `tl:",omitempty:flags:2"`
+	ReplyMarkup ReplyMarkup `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*InputBotInlineMessageGamePredict) CRC() uint32 {
@@ -4182,15 +4182,15 @@ func (*InputBotInlineMessageGamePredict) CRC() uint32 {
 func (*InputBotInlineMessageGamePredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageMediaInvoicePredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Title        string
-	Description  string
-	Photo        InputWebDocument `tl:",omitempty:flags:0"`
-	Invoice      Invoice
-	Payload      []byte
-	Provider     string
-	ProviderData DataJSON
-	ReplyMarkup  ReplyMarkup `tl:",omitempty:flags:2"`
+	_            struct{}         `tl:"flags,bitflag"`
+	Title        string           `tl:"title"`
+	Description  string           `tl:"description"`
+	Photo        InputWebDocument `tl:"photo,omitempty:flags:0"`
+	Invoice      Invoice          `tl:"invoice"`
+	Payload      []byte           `tl:"payload"`
+	Provider     string           `tl:"provider"`
+	ProviderData DataJSON         `tl:"provider_data"`
+	ReplyMarkup  ReplyMarkup      `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*InputBotInlineMessageMediaInvoicePredict) CRC() uint32 {
@@ -4199,15 +4199,15 @@ func (*InputBotInlineMessageMediaInvoicePredict) CRC() uint32 {
 func (*InputBotInlineMessageMediaInvoicePredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageMediaWebPagePredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	InvertMedia     bool     `tl:",omitempty:flags:3,implicit"`
-	ForceLargeMedia bool     `tl:",omitempty:flags:4,implicit"`
-	ForceSmallMedia bool     `tl:",omitempty:flags:5,implicit"`
-	Optional        bool     `tl:",omitempty:flags:6,implicit"`
-	Message         string
-	Entities        []MessageEntity `tl:",omitempty:flags:1"`
-	URL             string
-	ReplyMarkup     ReplyMarkup `tl:",omitempty:flags:2"`
+	_               struct{}        `tl:"flags,bitflag"`
+	InvertMedia     bool            `tl:"invert_media,omitempty:flags:3,implicit"`
+	ForceLargeMedia bool            `tl:"force_large_media,omitempty:flags:4,implicit"`
+	ForceSmallMedia bool            `tl:"force_small_media,omitempty:flags:5,implicit"`
+	Optional        bool            `tl:"optional,omitempty:flags:6,implicit"`
+	Message         string          `tl:"message"`
+	Entities        []MessageEntity `tl:"entities,omitempty:flags:1"`
+	URL             string          `tl:"url"`
+	ReplyMarkup     ReplyMarkup     `tl:"reply_markup,omitempty:flags:2"`
 }
 
 func (*InputBotInlineMessageMediaWebPagePredict) CRC() uint32 {
@@ -4216,7 +4216,7 @@ func (*InputBotInlineMessageMediaWebPagePredict) CRC() uint32 {
 func (*InputBotInlineMessageMediaWebPagePredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageID interface {
-	tl.Object
+	tl.TLObject
 	_InputBotInlineMessageID()
 }
 
@@ -4226,9 +4226,9 @@ var (
 )
 
 type InputBotInlineMessageIDPredict struct {
-	DcID       int32
-	ID         int64
-	AccessHash int64
+	DcID       int32 `tl:"dc_id"`
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputBotInlineMessageIDPredict) CRC() uint32 {
@@ -4237,10 +4237,10 @@ func (*InputBotInlineMessageIDPredict) CRC() uint32 {
 func (*InputBotInlineMessageIDPredict) _InputBotInlineMessageID() {}
 
 type InputBotInlineMessageID64Predict struct {
-	DcID       int32
-	OwnerID    int64
-	ID         int32
-	AccessHash int64
+	DcID       int32 `tl:"dc_id"`
+	OwnerID    int64 `tl:"owner_id"`
+	ID         int32 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputBotInlineMessageID64Predict) CRC() uint32 {
@@ -4249,7 +4249,7 @@ func (*InputBotInlineMessageID64Predict) CRC() uint32 {
 func (*InputBotInlineMessageID64Predict) _InputBotInlineMessageID() {}
 
 type InputBotInlineResult interface {
-	tl.Object
+	tl.TLObject
 	_InputBotInlineResult()
 }
 
@@ -4261,15 +4261,15 @@ var (
 )
 
 type InputBotInlineResultPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	ID          string
-	Type        string
-	Title       *string          `tl:",omitempty:flags:1"`
-	Description *string          `tl:",omitempty:flags:2"`
-	URL         *string          `tl:",omitempty:flags:3"`
-	Thumb       InputWebDocument `tl:",omitempty:flags:4"`
-	Content     InputWebDocument `tl:",omitempty:flags:5"`
-	SendMessage InputBotInlineMessage
+	_           struct{}              `tl:"flags,bitflag"`
+	ID          string                `tl:"id"`
+	Type        string                `tl:"type"`
+	Title       *string               `tl:"title,omitempty:flags:1"`
+	Description *string               `tl:"description,omitempty:flags:2"`
+	URL         *string               `tl:"url,omitempty:flags:3"`
+	Thumb       InputWebDocument      `tl:"thumb,omitempty:flags:4"`
+	Content     InputWebDocument      `tl:"content,omitempty:flags:5"`
+	SendMessage InputBotInlineMessage `tl:"send_message"`
 }
 
 func (*InputBotInlineResultPredict) CRC() uint32 {
@@ -4278,10 +4278,10 @@ func (*InputBotInlineResultPredict) CRC() uint32 {
 func (*InputBotInlineResultPredict) _InputBotInlineResult() {}
 
 type InputBotInlineResultPhotoPredict struct {
-	ID          string
-	Type        string
-	Photo       InputPhoto
-	SendMessage InputBotInlineMessage
+	ID          string                `tl:"id"`
+	Type        string                `tl:"type"`
+	Photo       InputPhoto            `tl:"photo"`
+	SendMessage InputBotInlineMessage `tl:"send_message"`
 }
 
 func (*InputBotInlineResultPhotoPredict) CRC() uint32 {
@@ -4290,13 +4290,13 @@ func (*InputBotInlineResultPhotoPredict) CRC() uint32 {
 func (*InputBotInlineResultPhotoPredict) _InputBotInlineResult() {}
 
 type InputBotInlineResultDocumentPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	ID          string
-	Type        string
-	Title       *string `tl:",omitempty:flags:1"`
-	Description *string `tl:",omitempty:flags:2"`
-	Document    InputDocument
-	SendMessage InputBotInlineMessage
+	_           struct{}              `tl:"flags,bitflag"`
+	ID          string                `tl:"id"`
+	Type        string                `tl:"type"`
+	Title       *string               `tl:"title,omitempty:flags:1"`
+	Description *string               `tl:"description,omitempty:flags:2"`
+	Document    InputDocument         `tl:"document"`
+	SendMessage InputBotInlineMessage `tl:"send_message"`
 }
 
 func (*InputBotInlineResultDocumentPredict) CRC() uint32 {
@@ -4305,9 +4305,9 @@ func (*InputBotInlineResultDocumentPredict) CRC() uint32 {
 func (*InputBotInlineResultDocumentPredict) _InputBotInlineResult() {}
 
 type InputBotInlineResultGamePredict struct {
-	ID          string
-	ShortName   string
-	SendMessage InputBotInlineMessage
+	ID          string                `tl:"id"`
+	ShortName   string                `tl:"short_name"`
+	SendMessage InputBotInlineMessage `tl:"send_message"`
 }
 
 func (*InputBotInlineResultGamePredict) CRC() uint32 {
@@ -4316,7 +4316,7 @@ func (*InputBotInlineResultGamePredict) CRC() uint32 {
 func (*InputBotInlineResultGamePredict) _InputBotInlineResult() {}
 
 type InputBusinessAwayMessage interface {
-	tl.Object
+	tl.TLObject
 	_InputBusinessAwayMessage()
 }
 
@@ -4325,11 +4325,11 @@ var (
 )
 
 type InputBusinessAwayMessagePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	OfflineOnly bool     `tl:",omitempty:flags:0,implicit"`
-	ShortcutID  int32
-	Schedule    BusinessAwayMessageSchedule
-	Recipients  InputBusinessRecipients
+	_           struct{}                    `tl:"flags,bitflag"`
+	OfflineOnly bool                        `tl:"offline_only,omitempty:flags:0,implicit"`
+	ShortcutID  int32                       `tl:"shortcut_id"`
+	Schedule    BusinessAwayMessageSchedule `tl:"schedule"`
+	Recipients  InputBusinessRecipients     `tl:"recipients"`
 }
 
 func (*InputBusinessAwayMessagePredict) CRC() uint32 {
@@ -4338,7 +4338,7 @@ func (*InputBusinessAwayMessagePredict) CRC() uint32 {
 func (*InputBusinessAwayMessagePredict) _InputBusinessAwayMessage() {}
 
 type InputBusinessBotRecipients interface {
-	tl.Object
+	tl.TLObject
 	_InputBusinessBotRecipients()
 }
 
@@ -4348,13 +4348,13 @@ var (
 
 type InputBusinessBotRecipientsPredict struct {
 	_               struct{}    `tl:"flags,bitflag"`
-	ExistingChats   bool        `tl:",omitempty:flags:0,implicit"`
-	NewChats        bool        `tl:",omitempty:flags:1,implicit"`
-	Contacts        bool        `tl:",omitempty:flags:2,implicit"`
-	NonContacts     bool        `tl:",omitempty:flags:3,implicit"`
-	ExcludeSelected bool        `tl:",omitempty:flags:5,implicit"`
-	Users           []InputUser `tl:",omitempty:flags:4"`
-	ExcludeUsers    []InputUser `tl:",omitempty:flags:6"`
+	ExistingChats   bool        `tl:"existing_chats,omitempty:flags:0,implicit"`
+	NewChats        bool        `tl:"new_chats,omitempty:flags:1,implicit"`
+	Contacts        bool        `tl:"contacts,omitempty:flags:2,implicit"`
+	NonContacts     bool        `tl:"non_contacts,omitempty:flags:3,implicit"`
+	ExcludeSelected bool        `tl:"exclude_selected,omitempty:flags:5,implicit"`
+	Users           []InputUser `tl:"users,omitempty:flags:4"`
+	ExcludeUsers    []InputUser `tl:"exclude_users,omitempty:flags:6"`
 }
 
 func (*InputBusinessBotRecipientsPredict) CRC() uint32 {
@@ -4363,7 +4363,7 @@ func (*InputBusinessBotRecipientsPredict) CRC() uint32 {
 func (*InputBusinessBotRecipientsPredict) _InputBusinessBotRecipients() {}
 
 type InputBusinessChatLink interface {
-	tl.Object
+	tl.TLObject
 	_InputBusinessChatLink()
 }
 
@@ -4372,10 +4372,10 @@ var (
 )
 
 type InputBusinessChatLinkPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Message  string
-	Entities []MessageEntity `tl:",omitempty:flags:0"`
-	Title    *string         `tl:",omitempty:flags:1"`
+	_        struct{}        `tl:"flags,bitflag"`
+	Message  string          `tl:"message"`
+	Entities []MessageEntity `tl:"entities,omitempty:flags:0"`
+	Title    *string         `tl:"title,omitempty:flags:1"`
 }
 
 func (*InputBusinessChatLinkPredict) CRC() uint32 {
@@ -4384,7 +4384,7 @@ func (*InputBusinessChatLinkPredict) CRC() uint32 {
 func (*InputBusinessChatLinkPredict) _InputBusinessChatLink() {}
 
 type InputBusinessGreetingMessage interface {
-	tl.Object
+	tl.TLObject
 	_InputBusinessGreetingMessage()
 }
 
@@ -4393,9 +4393,9 @@ var (
 )
 
 type InputBusinessGreetingMessagePredict struct {
-	ShortcutID     int32
-	Recipients     InputBusinessRecipients
-	NoActivityDays int32
+	ShortcutID     int32                   `tl:"shortcut_id"`
+	Recipients     InputBusinessRecipients `tl:"recipients"`
+	NoActivityDays int32                   `tl:"no_activity_days"`
 }
 
 func (*InputBusinessGreetingMessagePredict) CRC() uint32 {
@@ -4404,7 +4404,7 @@ func (*InputBusinessGreetingMessagePredict) CRC() uint32 {
 func (*InputBusinessGreetingMessagePredict) _InputBusinessGreetingMessage() {}
 
 type InputBusinessIntro interface {
-	tl.Object
+	tl.TLObject
 	_InputBusinessIntro()
 }
 
@@ -4413,10 +4413,10 @@ var (
 )
 
 type InputBusinessIntroPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Title       string
-	Description string
-	Sticker     InputDocument `tl:",omitempty:flags:0"`
+	_           struct{}      `tl:"flags,bitflag"`
+	Title       string        `tl:"title"`
+	Description string        `tl:"description"`
+	Sticker     InputDocument `tl:"sticker,omitempty:flags:0"`
 }
 
 func (*InputBusinessIntroPredict) CRC() uint32 {
@@ -4425,7 +4425,7 @@ func (*InputBusinessIntroPredict) CRC() uint32 {
 func (*InputBusinessIntroPredict) _InputBusinessIntro() {}
 
 type InputBusinessRecipients interface {
-	tl.Object
+	tl.TLObject
 	_InputBusinessRecipients()
 }
 
@@ -4435,12 +4435,12 @@ var (
 
 type InputBusinessRecipientsPredict struct {
 	_               struct{}    `tl:"flags,bitflag"`
-	ExistingChats   bool        `tl:",omitempty:flags:0,implicit"`
-	NewChats        bool        `tl:",omitempty:flags:1,implicit"`
-	Contacts        bool        `tl:",omitempty:flags:2,implicit"`
-	NonContacts     bool        `tl:",omitempty:flags:3,implicit"`
-	ExcludeSelected bool        `tl:",omitempty:flags:5,implicit"`
-	Users           []InputUser `tl:",omitempty:flags:4"`
+	ExistingChats   bool        `tl:"existing_chats,omitempty:flags:0,implicit"`
+	NewChats        bool        `tl:"new_chats,omitempty:flags:1,implicit"`
+	Contacts        bool        `tl:"contacts,omitempty:flags:2,implicit"`
+	NonContacts     bool        `tl:"non_contacts,omitempty:flags:3,implicit"`
+	ExcludeSelected bool        `tl:"exclude_selected,omitempty:flags:5,implicit"`
+	Users           []InputUser `tl:"users,omitempty:flags:4"`
 }
 
 func (*InputBusinessRecipientsPredict) CRC() uint32 {
@@ -4449,7 +4449,7 @@ func (*InputBusinessRecipientsPredict) CRC() uint32 {
 func (*InputBusinessRecipientsPredict) _InputBusinessRecipients() {}
 
 type InputChannel interface {
-	tl.Object
+	tl.TLObject
 	_InputChannel()
 }
 
@@ -4467,8 +4467,8 @@ func (*InputChannelEmptyPredict) CRC() uint32 {
 func (*InputChannelEmptyPredict) _InputChannel() {}
 
 type InputChannelPredict struct {
-	ChannelID  int64
-	AccessHash int64
+	ChannelID  int64 `tl:"channel_id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputChannelPredict) CRC() uint32 {
@@ -4477,9 +4477,9 @@ func (*InputChannelPredict) CRC() uint32 {
 func (*InputChannelPredict) _InputChannel() {}
 
 type InputChannelFromMessagePredict struct {
-	Peer      InputPeer
-	MsgID     int32
-	ChannelID int64
+	Peer      InputPeer `tl:"peer"`
+	MsgID     int32     `tl:"msg_id"`
+	ChannelID int64     `tl:"channel_id"`
 }
 
 func (*InputChannelFromMessagePredict) CRC() uint32 {
@@ -4488,7 +4488,7 @@ func (*InputChannelFromMessagePredict) CRC() uint32 {
 func (*InputChannelFromMessagePredict) _InputChannel() {}
 
 type InputChatPhoto interface {
-	tl.Object
+	tl.TLObject
 	_InputChatPhoto()
 }
 
@@ -4507,10 +4507,10 @@ func (*InputChatPhotoEmptyPredict) _InputChatPhoto() {}
 
 type InputChatUploadedPhotoPredict struct {
 	_                struct{}  `tl:"flags,bitflag"`
-	File             InputFile `tl:",omitempty:flags:0"`
-	Video            InputFile `tl:",omitempty:flags:1"`
-	VideoStartTs     *float64  `tl:",omitempty:flags:2"`
-	VideoEmojiMarkup VideoSize `tl:",omitempty:flags:3"`
+	File             InputFile `tl:"file,omitempty:flags:0"`
+	Video            InputFile `tl:"video,omitempty:flags:1"`
+	VideoStartTs     *float64  `tl:"video_start_ts,omitempty:flags:2"`
+	VideoEmojiMarkup VideoSize `tl:"video_emoji_markup,omitempty:flags:3"`
 }
 
 func (*InputChatUploadedPhotoPredict) CRC() uint32 {
@@ -4519,7 +4519,7 @@ func (*InputChatUploadedPhotoPredict) CRC() uint32 {
 func (*InputChatUploadedPhotoPredict) _InputChatPhoto() {}
 
 type InputChatPhotoPredict struct {
-	ID InputPhoto
+	ID InputPhoto `tl:"id"`
 }
 
 func (*InputChatPhotoPredict) CRC() uint32 {
@@ -4528,7 +4528,7 @@ func (*InputChatPhotoPredict) CRC() uint32 {
 func (*InputChatPhotoPredict) _InputChatPhoto() {}
 
 type InputChatlist interface {
-	tl.Object
+	tl.TLObject
 	_InputChatlist()
 }
 
@@ -4537,7 +4537,7 @@ var (
 )
 
 type InputChatlistDialogFilterPredict struct {
-	FilterID int32
+	FilterID int32 `tl:"filter_id"`
 }
 
 func (*InputChatlistDialogFilterPredict) CRC() uint32 {
@@ -4546,7 +4546,7 @@ func (*InputChatlistDialogFilterPredict) CRC() uint32 {
 func (*InputChatlistDialogFilterPredict) _InputChatlist() {}
 
 type InputCheckPasswordSRP interface {
-	tl.Object
+	tl.TLObject
 	_InputCheckPasswordSRP()
 }
 
@@ -4563,9 +4563,9 @@ func (*InputCheckPasswordEmptyPredict) CRC() uint32 {
 func (*InputCheckPasswordEmptyPredict) _InputCheckPasswordSRP() {}
 
 type InputCheckPasswordSRPPredict struct {
-	SRPID int64
-	A     []byte
-	M1    []byte
+	SRPID int64  `tl:"srp_id"`
+	A     []byte `tl:"A"`
+	M1    []byte `tl:"M1"`
 }
 
 func (*InputCheckPasswordSRPPredict) CRC() uint32 {
@@ -4574,7 +4574,7 @@ func (*InputCheckPasswordSRPPredict) CRC() uint32 {
 func (*InputCheckPasswordSRPPredict) _InputCheckPasswordSRP() {}
 
 type InputClientProxy interface {
-	tl.Object
+	tl.TLObject
 	_InputClientProxy()
 }
 
@@ -4583,8 +4583,8 @@ var (
 )
 
 type InputClientProxyPredict struct {
-	Address string
-	Port    int32
+	Address string `tl:"address"`
+	Port    int32  `tl:"port"`
 }
 
 func (*InputClientProxyPredict) CRC() uint32 {
@@ -4593,7 +4593,7 @@ func (*InputClientProxyPredict) CRC() uint32 {
 func (*InputClientProxyPredict) _InputClientProxy() {}
 
 type InputCollectible interface {
-	tl.Object
+	tl.TLObject
 	_InputCollectible()
 }
 
@@ -4603,7 +4603,7 @@ var (
 )
 
 type InputCollectibleUsernamePredict struct {
-	Username string
+	Username string `tl:"username"`
 }
 
 func (*InputCollectibleUsernamePredict) CRC() uint32 {
@@ -4612,7 +4612,7 @@ func (*InputCollectibleUsernamePredict) CRC() uint32 {
 func (*InputCollectibleUsernamePredict) _InputCollectible() {}
 
 type InputCollectiblePhonePredict struct {
-	Phone string
+	Phone string `tl:"phone"`
 }
 
 func (*InputCollectiblePhonePredict) CRC() uint32 {
@@ -4621,7 +4621,7 @@ func (*InputCollectiblePhonePredict) CRC() uint32 {
 func (*InputCollectiblePhonePredict) _InputCollectible() {}
 
 type InputContact interface {
-	tl.Object
+	tl.TLObject
 	_InputContact()
 }
 
@@ -4630,10 +4630,10 @@ var (
 )
 
 type InputPhoneContactPredict struct {
-	ClientID  int64
-	Phone     string
-	FirstName string
-	LastName  string
+	ClientID  int64  `tl:"client_id"`
+	Phone     string `tl:"phone"`
+	FirstName string `tl:"first_name"`
+	LastName  string `tl:"last_name"`
 }
 
 func (*InputPhoneContactPredict) CRC() uint32 {
@@ -4642,7 +4642,7 @@ func (*InputPhoneContactPredict) CRC() uint32 {
 func (*InputPhoneContactPredict) _InputContact() {}
 
 type InputDialogPeer interface {
-	tl.Object
+	tl.TLObject
 	_InputDialogPeer()
 }
 
@@ -4652,7 +4652,7 @@ var (
 )
 
 type InputDialogPeerPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*InputDialogPeerPredict) CRC() uint32 {
@@ -4661,7 +4661,7 @@ func (*InputDialogPeerPredict) CRC() uint32 {
 func (*InputDialogPeerPredict) _InputDialogPeer() {}
 
 type InputDialogPeerFolderPredict struct {
-	FolderID int32
+	FolderID int32 `tl:"folder_id"`
 }
 
 func (*InputDialogPeerFolderPredict) CRC() uint32 {
@@ -4670,7 +4670,7 @@ func (*InputDialogPeerFolderPredict) CRC() uint32 {
 func (*InputDialogPeerFolderPredict) _InputDialogPeer() {}
 
 type InputDocument interface {
-	tl.Object
+	tl.TLObject
 	_InputDocument()
 }
 
@@ -4687,9 +4687,9 @@ func (*InputDocumentEmptyPredict) CRC() uint32 {
 func (*InputDocumentEmptyPredict) _InputDocument() {}
 
 type InputDocumentPredict struct {
-	ID            int64
-	AccessHash    int64
-	FileReference []byte
+	ID            int64  `tl:"id"`
+	AccessHash    int64  `tl:"access_hash"`
+	FileReference []byte `tl:"file_reference"`
 }
 
 func (*InputDocumentPredict) CRC() uint32 {
@@ -4698,7 +4698,7 @@ func (*InputDocumentPredict) CRC() uint32 {
 func (*InputDocumentPredict) _InputDocument() {}
 
 type InputEncryptedChat interface {
-	tl.Object
+	tl.TLObject
 	_InputEncryptedChat()
 }
 
@@ -4707,8 +4707,8 @@ var (
 )
 
 type InputEncryptedChatPredict struct {
-	ChatID     int32
-	AccessHash int64
+	ChatID     int32 `tl:"chat_id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputEncryptedChatPredict) CRC() uint32 {
@@ -4717,7 +4717,7 @@ func (*InputEncryptedChatPredict) CRC() uint32 {
 func (*InputEncryptedChatPredict) _InputEncryptedChat() {}
 
 type InputEncryptedFile interface {
-	tl.Object
+	tl.TLObject
 	_InputEncryptedFile()
 }
 
@@ -4736,10 +4736,10 @@ func (*InputEncryptedFileEmptyPredict) CRC() uint32 {
 func (*InputEncryptedFileEmptyPredict) _InputEncryptedFile() {}
 
 type InputEncryptedFileUploadedPredict struct {
-	ID             int64
-	Parts          int32
-	Md5Checksum    string
-	KeyFingerprint int32
+	ID             int64  `tl:"id"`
+	Parts          int32  `tl:"parts"`
+	Md5Checksum    string `tl:"md5_checksum"`
+	KeyFingerprint int32  `tl:"key_fingerprint"`
 }
 
 func (*InputEncryptedFileUploadedPredict) CRC() uint32 {
@@ -4748,8 +4748,8 @@ func (*InputEncryptedFileUploadedPredict) CRC() uint32 {
 func (*InputEncryptedFileUploadedPredict) _InputEncryptedFile() {}
 
 type InputEncryptedFilePredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputEncryptedFilePredict) CRC() uint32 {
@@ -4758,9 +4758,9 @@ func (*InputEncryptedFilePredict) CRC() uint32 {
 func (*InputEncryptedFilePredict) _InputEncryptedFile() {}
 
 type InputEncryptedFileBigUploadedPredict struct {
-	ID             int64
-	Parts          int32
-	KeyFingerprint int32
+	ID             int64 `tl:"id"`
+	Parts          int32 `tl:"parts"`
+	KeyFingerprint int32 `tl:"key_fingerprint"`
 }
 
 func (*InputEncryptedFileBigUploadedPredict) CRC() uint32 {
@@ -4769,7 +4769,7 @@ func (*InputEncryptedFileBigUploadedPredict) CRC() uint32 {
 func (*InputEncryptedFileBigUploadedPredict) _InputEncryptedFile() {}
 
 type InputFile interface {
-	tl.Object
+	tl.TLObject
 	_InputFile()
 }
 
@@ -4779,10 +4779,10 @@ var (
 )
 
 type InputFilePredict struct {
-	ID          int64
-	Parts       int32
-	Name        string
-	Md5Checksum string
+	ID          int64  `tl:"id"`
+	Parts       int32  `tl:"parts"`
+	Name        string `tl:"name"`
+	Md5Checksum string `tl:"md5_checksum"`
 }
 
 func (*InputFilePredict) CRC() uint32 {
@@ -4791,9 +4791,9 @@ func (*InputFilePredict) CRC() uint32 {
 func (*InputFilePredict) _InputFile() {}
 
 type InputFileBigPredict struct {
-	ID    int64
-	Parts int32
-	Name  string
+	ID    int64  `tl:"id"`
+	Parts int32  `tl:"parts"`
+	Name  string `tl:"name"`
 }
 
 func (*InputFileBigPredict) CRC() uint32 {
@@ -4802,7 +4802,7 @@ func (*InputFileBigPredict) CRC() uint32 {
 func (*InputFileBigPredict) _InputFile() {}
 
 type InputFileLocation interface {
-	tl.Object
+	tl.TLObject
 	_InputFileLocation()
 }
 
@@ -4820,10 +4820,10 @@ var (
 )
 
 type InputFileLocationPredict struct {
-	VolumeID      int64
-	LocalID       int32
-	Secret        int64
-	FileReference []byte
+	VolumeID      int64  `tl:"volume_id"`
+	LocalID       int32  `tl:"local_id"`
+	Secret        int64  `tl:"secret"`
+	FileReference []byte `tl:"file_reference"`
 }
 
 func (*InputFileLocationPredict) CRC() uint32 {
@@ -4832,8 +4832,8 @@ func (*InputFileLocationPredict) CRC() uint32 {
 func (*InputFileLocationPredict) _InputFileLocation() {}
 
 type InputEncryptedFileLocationPredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputEncryptedFileLocationPredict) CRC() uint32 {
@@ -4842,10 +4842,10 @@ func (*InputEncryptedFileLocationPredict) CRC() uint32 {
 func (*InputEncryptedFileLocationPredict) _InputFileLocation() {}
 
 type InputDocumentFileLocationPredict struct {
-	ID            int64
-	AccessHash    int64
-	FileReference []byte
-	ThumbSize     string
+	ID            int64  `tl:"id"`
+	AccessHash    int64  `tl:"access_hash"`
+	FileReference []byte `tl:"file_reference"`
+	ThumbSize     string `tl:"thumb_size"`
 }
 
 func (*InputDocumentFileLocationPredict) CRC() uint32 {
@@ -4854,8 +4854,8 @@ func (*InputDocumentFileLocationPredict) CRC() uint32 {
 func (*InputDocumentFileLocationPredict) _InputFileLocation() {}
 
 type InputSecureFileLocationPredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputSecureFileLocationPredict) CRC() uint32 {
@@ -4871,10 +4871,10 @@ func (*InputTakeoutFileLocationPredict) CRC() uint32 {
 func (*InputTakeoutFileLocationPredict) _InputFileLocation() {}
 
 type InputPhotoFileLocationPredict struct {
-	ID            int64
-	AccessHash    int64
-	FileReference []byte
-	ThumbSize     string
+	ID            int64  `tl:"id"`
+	AccessHash    int64  `tl:"access_hash"`
+	FileReference []byte `tl:"file_reference"`
+	ThumbSize     string `tl:"thumb_size"`
 }
 
 func (*InputPhotoFileLocationPredict) CRC() uint32 {
@@ -4883,12 +4883,12 @@ func (*InputPhotoFileLocationPredict) CRC() uint32 {
 func (*InputPhotoFileLocationPredict) _InputFileLocation() {}
 
 type InputPhotoLegacyFileLocationPredict struct {
-	ID            int64
-	AccessHash    int64
-	FileReference []byte
-	VolumeID      int64
-	LocalID       int32
-	Secret        int64
+	ID            int64  `tl:"id"`
+	AccessHash    int64  `tl:"access_hash"`
+	FileReference []byte `tl:"file_reference"`
+	VolumeID      int64  `tl:"volume_id"`
+	LocalID       int32  `tl:"local_id"`
+	Secret        int64  `tl:"secret"`
 }
 
 func (*InputPhotoLegacyFileLocationPredict) CRC() uint32 {
@@ -4897,10 +4897,10 @@ func (*InputPhotoLegacyFileLocationPredict) CRC() uint32 {
 func (*InputPhotoLegacyFileLocationPredict) _InputFileLocation() {}
 
 type InputPeerPhotoFileLocationPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Big     bool     `tl:",omitempty:flags:0,implicit"`
-	Peer    InputPeer
-	PhotoID int64
+	_       struct{}  `tl:"flags,bitflag"`
+	Big     bool      `tl:"big,omitempty:flags:0,implicit"`
+	Peer    InputPeer `tl:"peer"`
+	PhotoID int64     `tl:"photo_id"`
 }
 
 func (*InputPeerPhotoFileLocationPredict) CRC() uint32 {
@@ -4909,8 +4909,8 @@ func (*InputPeerPhotoFileLocationPredict) CRC() uint32 {
 func (*InputPeerPhotoFileLocationPredict) _InputFileLocation() {}
 
 type InputStickerSetThumbPredict struct {
-	Stickerset   InputStickerSet
-	ThumbVersion int32
+	Stickerset   InputStickerSet `tl:"stickerset"`
+	ThumbVersion int32           `tl:"thumb_version"`
 }
 
 func (*InputStickerSetThumbPredict) CRC() uint32 {
@@ -4919,12 +4919,12 @@ func (*InputStickerSetThumbPredict) CRC() uint32 {
 func (*InputStickerSetThumbPredict) _InputFileLocation() {}
 
 type InputGroupCallStreamPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Call         InputGroupCall
-	TimeMs       int64
-	Scale        int32
-	VideoChannel *int32 `tl:",omitempty:flags:0"`
-	VideoQuality *int32 `tl:",omitempty:flags:0"`
+	_            struct{}       `tl:"flags,bitflag"`
+	Call         InputGroupCall `tl:"call"`
+	TimeMs       int64          `tl:"time_ms"`
+	Scale        int32          `tl:"scale"`
+	VideoChannel *int32         `tl:"video_channel,omitempty:flags:0"`
+	VideoQuality *int32         `tl:"video_quality,omitempty:flags:0"`
 }
 
 func (*InputGroupCallStreamPredict) CRC() uint32 {
@@ -4933,7 +4933,7 @@ func (*InputGroupCallStreamPredict) CRC() uint32 {
 func (*InputGroupCallStreamPredict) _InputFileLocation() {}
 
 type InputFolderPeer interface {
-	tl.Object
+	tl.TLObject
 	_InputFolderPeer()
 }
 
@@ -4942,8 +4942,8 @@ var (
 )
 
 type InputFolderPeerPredict struct {
-	Peer     InputPeer
-	FolderID int32
+	Peer     InputPeer `tl:"peer"`
+	FolderID int32     `tl:"folder_id"`
 }
 
 func (*InputFolderPeerPredict) CRC() uint32 {
@@ -4952,7 +4952,7 @@ func (*InputFolderPeerPredict) CRC() uint32 {
 func (*InputFolderPeerPredict) _InputFolderPeer() {}
 
 type InputGame interface {
-	tl.Object
+	tl.TLObject
 	_InputGame()
 }
 
@@ -4962,8 +4962,8 @@ var (
 )
 
 type InputGameIDPredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputGameIDPredict) CRC() uint32 {
@@ -4972,8 +4972,8 @@ func (*InputGameIDPredict) CRC() uint32 {
 func (*InputGameIDPredict) _InputGame() {}
 
 type InputGameShortNamePredict struct {
-	BotID     InputUser
-	ShortName string
+	BotID     InputUser `tl:"bot_id"`
+	ShortName string    `tl:"short_name"`
 }
 
 func (*InputGameShortNamePredict) CRC() uint32 {
@@ -4982,7 +4982,7 @@ func (*InputGameShortNamePredict) CRC() uint32 {
 func (*InputGameShortNamePredict) _InputGame() {}
 
 type InputGeoPoint interface {
-	tl.Object
+	tl.TLObject
 	_InputGeoPoint()
 }
 
@@ -5000,9 +5000,9 @@ func (*InputGeoPointEmptyPredict) _InputGeoPoint() {}
 
 type InputGeoPointPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	Lat            float64
-	Long           float64
-	AccuracyRadius *int32 `tl:",omitempty:flags:0"`
+	Lat            float64  `tl:"lat"`
+	Long           float64  `tl:"long"`
+	AccuracyRadius *int32   `tl:"accuracy_radius,omitempty:flags:0"`
 }
 
 func (*InputGeoPointPredict) CRC() uint32 {
@@ -5011,7 +5011,7 @@ func (*InputGeoPointPredict) CRC() uint32 {
 func (*InputGeoPointPredict) _InputGeoPoint() {}
 
 type InputGroupCall interface {
-	tl.Object
+	tl.TLObject
 	_InputGroupCall()
 }
 
@@ -5020,8 +5020,8 @@ var (
 )
 
 type InputGroupCallPredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputGroupCallPredict) CRC() uint32 {
@@ -5030,7 +5030,7 @@ func (*InputGroupCallPredict) CRC() uint32 {
 func (*InputGroupCallPredict) _InputGroupCall() {}
 
 type InputInvoice interface {
-	tl.Object
+	tl.TLObject
 	_InputInvoice()
 }
 
@@ -5042,8 +5042,8 @@ var (
 )
 
 type InputInvoiceMessagePredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*InputInvoiceMessagePredict) CRC() uint32 {
@@ -5052,7 +5052,7 @@ func (*InputInvoiceMessagePredict) CRC() uint32 {
 func (*InputInvoiceMessagePredict) _InputInvoice() {}
 
 type InputInvoiceSlugPredict struct {
-	Slug string
+	Slug string `tl:"slug"`
 }
 
 func (*InputInvoiceSlugPredict) CRC() uint32 {
@@ -5061,8 +5061,8 @@ func (*InputInvoiceSlugPredict) CRC() uint32 {
 func (*InputInvoiceSlugPredict) _InputInvoice() {}
 
 type InputInvoicePremiumGiftCodePredict struct {
-	Purpose InputStorePaymentPurpose
-	Option  PremiumGiftCodeOption
+	Purpose InputStorePaymentPurpose `tl:"purpose"`
+	Option  PremiumGiftCodeOption    `tl:"option"`
 }
 
 func (*InputInvoicePremiumGiftCodePredict) CRC() uint32 {
@@ -5071,7 +5071,7 @@ func (*InputInvoicePremiumGiftCodePredict) CRC() uint32 {
 func (*InputInvoicePremiumGiftCodePredict) _InputInvoice() {}
 
 type InputInvoiceStarsPredict struct {
-	Purpose InputStorePaymentPurpose
+	Purpose InputStorePaymentPurpose `tl:"purpose"`
 }
 
 func (*InputInvoiceStarsPredict) CRC() uint32 {
@@ -5080,7 +5080,7 @@ func (*InputInvoiceStarsPredict) CRC() uint32 {
 func (*InputInvoiceStarsPredict) _InputInvoice() {}
 
 type InputMedia interface {
-	tl.Object
+	tl.TLObject
 	_InputMedia()
 }
 
@@ -5113,11 +5113,11 @@ func (*InputMediaEmptyPredict) CRC() uint32 {
 func (*InputMediaEmptyPredict) _InputMedia() {}
 
 type InputMediaUploadedPhotoPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Spoiler    bool     `tl:",omitempty:flags:2,implicit"`
-	File       InputFile
-	Stickers   []InputDocument `tl:",omitempty:flags:0"`
-	TTLSeconds *int32          `tl:",omitempty:flags:1"`
+	_          struct{}        `tl:"flags,bitflag"`
+	Spoiler    bool            `tl:"spoiler,omitempty:flags:2,implicit"`
+	File       InputFile       `tl:"file"`
+	Stickers   []InputDocument `tl:"stickers,omitempty:flags:0"`
+	TTLSeconds *int32          `tl:"ttl_seconds,omitempty:flags:1"`
 }
 
 func (*InputMediaUploadedPhotoPredict) CRC() uint32 {
@@ -5126,10 +5126,10 @@ func (*InputMediaUploadedPhotoPredict) CRC() uint32 {
 func (*InputMediaUploadedPhotoPredict) _InputMedia() {}
 
 type InputMediaPhotoPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Spoiler    bool     `tl:",omitempty:flags:1,implicit"`
-	ID         InputPhoto
-	TTLSeconds *int32 `tl:",omitempty:flags:0"`
+	_          struct{}   `tl:"flags,bitflag"`
+	Spoiler    bool       `tl:"spoiler,omitempty:flags:1,implicit"`
+	ID         InputPhoto `tl:"id"`
+	TTLSeconds *int32     `tl:"ttl_seconds,omitempty:flags:0"`
 }
 
 func (*InputMediaPhotoPredict) CRC() uint32 {
@@ -5138,7 +5138,7 @@ func (*InputMediaPhotoPredict) CRC() uint32 {
 func (*InputMediaPhotoPredict) _InputMedia() {}
 
 type InputMediaGeoPointPredict struct {
-	GeoPoint InputGeoPoint
+	GeoPoint InputGeoPoint `tl:"geo_point"`
 }
 
 func (*InputMediaGeoPointPredict) CRC() uint32 {
@@ -5147,10 +5147,10 @@ func (*InputMediaGeoPointPredict) CRC() uint32 {
 func (*InputMediaGeoPointPredict) _InputMedia() {}
 
 type InputMediaContactPredict struct {
-	PhoneNumber string
-	FirstName   string
-	LastName    string
-	Vcard       string
+	PhoneNumber string `tl:"phone_number"`
+	FirstName   string `tl:"first_name"`
+	LastName    string `tl:"last_name"`
+	Vcard       string `tl:"vcard"`
 }
 
 func (*InputMediaContactPredict) CRC() uint32 {
@@ -5159,16 +5159,16 @@ func (*InputMediaContactPredict) CRC() uint32 {
 func (*InputMediaContactPredict) _InputMedia() {}
 
 type InputMediaUploadedDocumentPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	NosoundVideo bool     `tl:",omitempty:flags:3,implicit"`
-	ForceFile    bool     `tl:",omitempty:flags:4,implicit"`
-	Spoiler      bool     `tl:",omitempty:flags:5,implicit"`
-	File         InputFile
-	Thumb        InputFile `tl:",omitempty:flags:2"`
-	MimeType     string
-	Attributes   []DocumentAttribute
-	Stickers     []InputDocument `tl:",omitempty:flags:0"`
-	TTLSeconds   *int32          `tl:",omitempty:flags:1"`
+	_            struct{}            `tl:"flags,bitflag"`
+	NosoundVideo bool                `tl:"nosound_video,omitempty:flags:3,implicit"`
+	ForceFile    bool                `tl:"force_file,omitempty:flags:4,implicit"`
+	Spoiler      bool                `tl:"spoiler,omitempty:flags:5,implicit"`
+	File         InputFile           `tl:"file"`
+	Thumb        InputFile           `tl:"thumb,omitempty:flags:2"`
+	MimeType     string              `tl:"mime_type"`
+	Attributes   []DocumentAttribute `tl:"attributes"`
+	Stickers     []InputDocument     `tl:"stickers,omitempty:flags:0"`
+	TTLSeconds   *int32              `tl:"ttl_seconds,omitempty:flags:1"`
 }
 
 func (*InputMediaUploadedDocumentPredict) CRC() uint32 {
@@ -5177,11 +5177,11 @@ func (*InputMediaUploadedDocumentPredict) CRC() uint32 {
 func (*InputMediaUploadedDocumentPredict) _InputMedia() {}
 
 type InputMediaDocumentPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Spoiler    bool     `tl:",omitempty:flags:2,implicit"`
-	ID         InputDocument
-	TTLSeconds *int32  `tl:",omitempty:flags:0"`
-	Query      *string `tl:",omitempty:flags:1"`
+	_          struct{}      `tl:"flags,bitflag"`
+	Spoiler    bool          `tl:"spoiler,omitempty:flags:2,implicit"`
+	ID         InputDocument `tl:"id"`
+	TTLSeconds *int32        `tl:"ttl_seconds,omitempty:flags:0"`
+	Query      *string       `tl:"query,omitempty:flags:1"`
 }
 
 func (*InputMediaDocumentPredict) CRC() uint32 {
@@ -5190,12 +5190,12 @@ func (*InputMediaDocumentPredict) CRC() uint32 {
 func (*InputMediaDocumentPredict) _InputMedia() {}
 
 type InputMediaVenuePredict struct {
-	GeoPoint  InputGeoPoint
-	Title     string
-	Address   string
-	Provider  string
-	VenueID   string
-	VenueType string
+	GeoPoint  InputGeoPoint `tl:"geo_point"`
+	Title     string        `tl:"title"`
+	Address   string        `tl:"address"`
+	Provider  string        `tl:"provider"`
+	VenueID   string        `tl:"venue_id"`
+	VenueType string        `tl:"venue_type"`
 }
 
 func (*InputMediaVenuePredict) CRC() uint32 {
@@ -5205,9 +5205,9 @@ func (*InputMediaVenuePredict) _InputMedia() {}
 
 type InputMediaPhotoExternalPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Spoiler    bool     `tl:",omitempty:flags:1,implicit"`
-	URL        string
-	TTLSeconds *int32 `tl:",omitempty:flags:0"`
+	Spoiler    bool     `tl:"spoiler,omitempty:flags:1,implicit"`
+	URL        string   `tl:"url"`
+	TTLSeconds *int32   `tl:"ttl_seconds,omitempty:flags:0"`
 }
 
 func (*InputMediaPhotoExternalPredict) CRC() uint32 {
@@ -5217,9 +5217,9 @@ func (*InputMediaPhotoExternalPredict) _InputMedia() {}
 
 type InputMediaDocumentExternalPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Spoiler    bool     `tl:",omitempty:flags:1,implicit"`
-	URL        string
-	TTLSeconds *int32 `tl:",omitempty:flags:0"`
+	Spoiler    bool     `tl:"spoiler,omitempty:flags:1,implicit"`
+	URL        string   `tl:"url"`
+	TTLSeconds *int32   `tl:"ttl_seconds,omitempty:flags:0"`
 }
 
 func (*InputMediaDocumentExternalPredict) CRC() uint32 {
@@ -5228,7 +5228,7 @@ func (*InputMediaDocumentExternalPredict) CRC() uint32 {
 func (*InputMediaDocumentExternalPredict) _InputMedia() {}
 
 type InputMediaGamePredict struct {
-	ID InputGame
+	ID InputGame `tl:"id"`
 }
 
 func (*InputMediaGamePredict) CRC() uint32 {
@@ -5237,16 +5237,16 @@ func (*InputMediaGamePredict) CRC() uint32 {
 func (*InputMediaGamePredict) _InputMedia() {}
 
 type InputMediaInvoicePredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Title         string
-	Description   string
-	Photo         InputWebDocument `tl:",omitempty:flags:0"`
-	Invoice       Invoice
-	Payload       []byte
-	Provider      *string `tl:",omitempty:flags:3"`
-	ProviderData  DataJSON
-	StartParam    *string    `tl:",omitempty:flags:1"`
-	ExtendedMedia InputMedia `tl:",omitempty:flags:2"`
+	_             struct{}         `tl:"flags,bitflag"`
+	Title         string           `tl:"title"`
+	Description   string           `tl:"description"`
+	Photo         InputWebDocument `tl:"photo,omitempty:flags:0"`
+	Invoice       Invoice          `tl:"invoice"`
+	Payload       []byte           `tl:"payload"`
+	Provider      *string          `tl:"provider,omitempty:flags:3"`
+	ProviderData  DataJSON         `tl:"provider_data"`
+	StartParam    *string          `tl:"start_param,omitempty:flags:1"`
+	ExtendedMedia InputMedia       `tl:"extended_media,omitempty:flags:2"`
 }
 
 func (*InputMediaInvoicePredict) CRC() uint32 {
@@ -5255,12 +5255,12 @@ func (*InputMediaInvoicePredict) CRC() uint32 {
 func (*InputMediaInvoicePredict) _InputMedia() {}
 
 type InputMediaGeoLivePredict struct {
-	_                           struct{} `tl:"flags,bitflag"`
-	Stopped                     bool     `tl:",omitempty:flags:0,implicit"`
-	GeoPoint                    InputGeoPoint
-	Heading                     *int32 `tl:",omitempty:flags:2"`
-	Period                      *int32 `tl:",omitempty:flags:1"`
-	ProximityNotificationRadius *int32 `tl:",omitempty:flags:3"`
+	_                           struct{}      `tl:"flags,bitflag"`
+	Stopped                     bool          `tl:"stopped,omitempty:flags:0,implicit"`
+	GeoPoint                    InputGeoPoint `tl:"geo_point"`
+	Heading                     *int32        `tl:"heading,omitempty:flags:2"`
+	Period                      *int32        `tl:"period,omitempty:flags:1"`
+	ProximityNotificationRadius *int32        `tl:"proximity_notification_radius,omitempty:flags:3"`
 }
 
 func (*InputMediaGeoLivePredict) CRC() uint32 {
@@ -5269,11 +5269,11 @@ func (*InputMediaGeoLivePredict) CRC() uint32 {
 func (*InputMediaGeoLivePredict) _InputMedia() {}
 
 type InputMediaPollPredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	Poll             Poll
-	CorrectAnswers   [][]byte        `tl:",omitempty:flags:0"`
-	Solution         *string         `tl:",omitempty:flags:1"`
-	SolutionEntities []MessageEntity `tl:",omitempty:flags:1"`
+	_                struct{}        `tl:"flags,bitflag"`
+	Poll             Poll            `tl:"poll"`
+	CorrectAnswers   [][]byte        `tl:"correct_answers,omitempty:flags:0"`
+	Solution         *string         `tl:"solution,omitempty:flags:1"`
+	SolutionEntities []MessageEntity `tl:"solution_entities,omitempty:flags:1"`
 }
 
 func (*InputMediaPollPredict) CRC() uint32 {
@@ -5282,7 +5282,7 @@ func (*InputMediaPollPredict) CRC() uint32 {
 func (*InputMediaPollPredict) _InputMedia() {}
 
 type InputMediaDicePredict struct {
-	Emoticon string
+	Emoticon string `tl:"emoticon"`
 }
 
 func (*InputMediaDicePredict) CRC() uint32 {
@@ -5291,8 +5291,8 @@ func (*InputMediaDicePredict) CRC() uint32 {
 func (*InputMediaDicePredict) _InputMedia() {}
 
 type InputMediaStoryPredict struct {
-	Peer InputPeer
-	ID   int32
+	Peer InputPeer `tl:"peer"`
+	ID   int32     `tl:"id"`
 }
 
 func (*InputMediaStoryPredict) CRC() uint32 {
@@ -5302,10 +5302,10 @@ func (*InputMediaStoryPredict) _InputMedia() {}
 
 type InputMediaWebPagePredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	ForceLargeMedia bool     `tl:",omitempty:flags:0,implicit"`
-	ForceSmallMedia bool     `tl:",omitempty:flags:1,implicit"`
-	Optional        bool     `tl:",omitempty:flags:2,implicit"`
-	URL             string
+	ForceLargeMedia bool     `tl:"force_large_media,omitempty:flags:0,implicit"`
+	ForceSmallMedia bool     `tl:"force_small_media,omitempty:flags:1,implicit"`
+	Optional        bool     `tl:"optional,omitempty:flags:2,implicit"`
+	URL             string   `tl:"url"`
 }
 
 func (*InputMediaWebPagePredict) CRC() uint32 {
@@ -5314,8 +5314,8 @@ func (*InputMediaWebPagePredict) CRC() uint32 {
 func (*InputMediaWebPagePredict) _InputMedia() {}
 
 type InputMediaPaidMediaPredict struct {
-	StarsAmount   int64
-	ExtendedMedia []InputMedia
+	StarsAmount   int64        `tl:"stars_amount"`
+	ExtendedMedia []InputMedia `tl:"extended_media"`
 }
 
 func (*InputMediaPaidMediaPredict) CRC() uint32 {
@@ -5324,7 +5324,7 @@ func (*InputMediaPaidMediaPredict) CRC() uint32 {
 func (*InputMediaPaidMediaPredict) _InputMedia() {}
 
 type InputMessage interface {
-	tl.Object
+	tl.TLObject
 	_InputMessage()
 }
 
@@ -5336,7 +5336,7 @@ var (
 )
 
 type InputMessageIDPredict struct {
-	ID int32
+	ID int32 `tl:"id"`
 }
 
 func (*InputMessageIDPredict) CRC() uint32 {
@@ -5345,7 +5345,7 @@ func (*InputMessageIDPredict) CRC() uint32 {
 func (*InputMessageIDPredict) _InputMessage() {}
 
 type InputMessageReplyToPredict struct {
-	ID int32
+	ID int32 `tl:"id"`
 }
 
 func (*InputMessageReplyToPredict) CRC() uint32 {
@@ -5361,8 +5361,8 @@ func (*InputMessagePinnedPredict) CRC() uint32 {
 func (*InputMessagePinnedPredict) _InputMessage() {}
 
 type InputMessageCallbackQueryPredict struct {
-	ID      int32
-	QueryID int64
+	ID      int32 `tl:"id"`
+	QueryID int64 `tl:"query_id"`
 }
 
 func (*InputMessageCallbackQueryPredict) CRC() uint32 {
@@ -5371,7 +5371,7 @@ func (*InputMessageCallbackQueryPredict) CRC() uint32 {
 func (*InputMessageCallbackQueryPredict) _InputMessage() {}
 
 type InputNotifyPeer interface {
-	tl.Object
+	tl.TLObject
 	_InputNotifyPeer()
 }
 
@@ -5384,7 +5384,7 @@ var (
 )
 
 type InputNotifyPeerPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*InputNotifyPeerPredict) CRC() uint32 {
@@ -5414,8 +5414,8 @@ func (*InputNotifyBroadcastsPredict) CRC() uint32 {
 func (*InputNotifyBroadcastsPredict) _InputNotifyPeer() {}
 
 type InputNotifyForumTopicPredict struct {
-	Peer     InputPeer
-	TopMsgID int32
+	Peer     InputPeer `tl:"peer"`
+	TopMsgID int32     `tl:"top_msg_id"`
 }
 
 func (*InputNotifyForumTopicPredict) CRC() uint32 {
@@ -5424,7 +5424,7 @@ func (*InputNotifyForumTopicPredict) CRC() uint32 {
 func (*InputNotifyForumTopicPredict) _InputNotifyPeer() {}
 
 type InputPaymentCredentials interface {
-	tl.Object
+	tl.TLObject
 	_InputPaymentCredentials()
 }
 
@@ -5436,8 +5436,8 @@ var (
 )
 
 type InputPaymentCredentialsSavedPredict struct {
-	ID          string
-	TmpPassword []byte
+	ID          string `tl:"id"`
+	TmpPassword []byte `tl:"tmp_password"`
 }
 
 func (*InputPaymentCredentialsSavedPredict) CRC() uint32 {
@@ -5447,8 +5447,8 @@ func (*InputPaymentCredentialsSavedPredict) _InputPaymentCredentials() {}
 
 type InputPaymentCredentialsPredict struct {
 	_    struct{} `tl:"flags,bitflag"`
-	Save bool     `tl:",omitempty:flags:0,implicit"`
-	Data DataJSON
+	Save bool     `tl:"save,omitempty:flags:0,implicit"`
+	Data DataJSON `tl:"data"`
 }
 
 func (*InputPaymentCredentialsPredict) CRC() uint32 {
@@ -5457,7 +5457,7 @@ func (*InputPaymentCredentialsPredict) CRC() uint32 {
 func (*InputPaymentCredentialsPredict) _InputPaymentCredentials() {}
 
 type InputPaymentCredentialsApplePayPredict struct {
-	PaymentData DataJSON
+	PaymentData DataJSON `tl:"payment_data"`
 }
 
 func (*InputPaymentCredentialsApplePayPredict) CRC() uint32 {
@@ -5466,7 +5466,7 @@ func (*InputPaymentCredentialsApplePayPredict) CRC() uint32 {
 func (*InputPaymentCredentialsApplePayPredict) _InputPaymentCredentials() {}
 
 type InputPaymentCredentialsGooglePayPredict struct {
-	PaymentToken DataJSON
+	PaymentToken DataJSON `tl:"payment_token"`
 }
 
 func (*InputPaymentCredentialsGooglePayPredict) CRC() uint32 {
@@ -5475,7 +5475,7 @@ func (*InputPaymentCredentialsGooglePayPredict) CRC() uint32 {
 func (*InputPaymentCredentialsGooglePayPredict) _InputPaymentCredentials() {}
 
 type InputPeer interface {
-	tl.Object
+	tl.TLObject
 	_InputPeer()
 }
 
@@ -5504,7 +5504,7 @@ func (*InputPeerSelfPredict) CRC() uint32 {
 func (*InputPeerSelfPredict) _InputPeer() {}
 
 type InputPeerChatPredict struct {
-	ChatID int64
+	ChatID int64 `tl:"chat_id"`
 }
 
 func (*InputPeerChatPredict) CRC() uint32 {
@@ -5513,8 +5513,8 @@ func (*InputPeerChatPredict) CRC() uint32 {
 func (*InputPeerChatPredict) _InputPeer() {}
 
 type InputPeerUserPredict struct {
-	UserID     int64
-	AccessHash int64
+	UserID     int64 `tl:"user_id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputPeerUserPredict) CRC() uint32 {
@@ -5523,8 +5523,8 @@ func (*InputPeerUserPredict) CRC() uint32 {
 func (*InputPeerUserPredict) _InputPeer() {}
 
 type InputPeerChannelPredict struct {
-	ChannelID  int64
-	AccessHash int64
+	ChannelID  int64 `tl:"channel_id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputPeerChannelPredict) CRC() uint32 {
@@ -5533,9 +5533,9 @@ func (*InputPeerChannelPredict) CRC() uint32 {
 func (*InputPeerChannelPredict) _InputPeer() {}
 
 type InputPeerUserFromMessagePredict struct {
-	Peer   InputPeer
-	MsgID  int32
-	UserID int64
+	Peer   InputPeer `tl:"peer"`
+	MsgID  int32     `tl:"msg_id"`
+	UserID int64     `tl:"user_id"`
 }
 
 func (*InputPeerUserFromMessagePredict) CRC() uint32 {
@@ -5544,9 +5544,9 @@ func (*InputPeerUserFromMessagePredict) CRC() uint32 {
 func (*InputPeerUserFromMessagePredict) _InputPeer() {}
 
 type InputPeerChannelFromMessagePredict struct {
-	Peer      InputPeer
-	MsgID     int32
-	ChannelID int64
+	Peer      InputPeer `tl:"peer"`
+	MsgID     int32     `tl:"msg_id"`
+	ChannelID int64     `tl:"channel_id"`
 }
 
 func (*InputPeerChannelFromMessagePredict) CRC() uint32 {
@@ -5555,7 +5555,7 @@ func (*InputPeerChannelFromMessagePredict) CRC() uint32 {
 func (*InputPeerChannelFromMessagePredict) _InputPeer() {}
 
 type InputPeerNotifySettings interface {
-	tl.Object
+	tl.TLObject
 	_InputPeerNotifySettings()
 }
 
@@ -5565,13 +5565,13 @@ var (
 
 type InputPeerNotifySettingsPredict struct {
 	_                 struct{}          `tl:"flags,bitflag"`
-	ShowPreviews      *bool             `tl:",omitempty:flags:0"`
-	Silent            *bool             `tl:",omitempty:flags:1"`
-	MuteUntil         *int32            `tl:",omitempty:flags:2"`
-	Sound             NotificationSound `tl:",omitempty:flags:3"`
-	StoriesMuted      *bool             `tl:",omitempty:flags:6"`
-	StoriesHideSender *bool             `tl:",omitempty:flags:7"`
-	StoriesSound      NotificationSound `tl:",omitempty:flags:8"`
+	ShowPreviews      *bool             `tl:"show_previews,omitempty:flags:0"`
+	Silent            *bool             `tl:"silent,omitempty:flags:1"`
+	MuteUntil         *int32            `tl:"mute_until,omitempty:flags:2"`
+	Sound             NotificationSound `tl:"sound,omitempty:flags:3"`
+	StoriesMuted      *bool             `tl:"stories_muted,omitempty:flags:6"`
+	StoriesHideSender *bool             `tl:"stories_hide_sender,omitempty:flags:7"`
+	StoriesSound      NotificationSound `tl:"stories_sound,omitempty:flags:8"`
 }
 
 func (*InputPeerNotifySettingsPredict) CRC() uint32 {
@@ -5580,7 +5580,7 @@ func (*InputPeerNotifySettingsPredict) CRC() uint32 {
 func (*InputPeerNotifySettingsPredict) _InputPeerNotifySettings() {}
 
 type InputPhoneCall interface {
-	tl.Object
+	tl.TLObject
 	_InputPhoneCall()
 }
 
@@ -5589,8 +5589,8 @@ var (
 )
 
 type InputPhoneCallPredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputPhoneCallPredict) CRC() uint32 {
@@ -5599,7 +5599,7 @@ func (*InputPhoneCallPredict) CRC() uint32 {
 func (*InputPhoneCallPredict) _InputPhoneCall() {}
 
 type InputPhoto interface {
-	tl.Object
+	tl.TLObject
 	_InputPhoto()
 }
 
@@ -5616,9 +5616,9 @@ func (*InputPhotoEmptyPredict) CRC() uint32 {
 func (*InputPhotoEmptyPredict) _InputPhoto() {}
 
 type InputPhotoPredict struct {
-	ID            int64
-	AccessHash    int64
-	FileReference []byte
+	ID            int64  `tl:"id"`
+	AccessHash    int64  `tl:"access_hash"`
+	FileReference []byte `tl:"file_reference"`
 }
 
 func (*InputPhotoPredict) CRC() uint32 {
@@ -5627,7 +5627,7 @@ func (*InputPhotoPredict) CRC() uint32 {
 func (*InputPhotoPredict) _InputPhoto() {}
 
 type InputPrivacyRule interface {
-	tl.Object
+	tl.TLObject
 	_InputPrivacyRule()
 }
 
@@ -5659,7 +5659,7 @@ func (*InputPrivacyValueAllowAllPredict) CRC() uint32 {
 func (*InputPrivacyValueAllowAllPredict) _InputPrivacyRule() {}
 
 type InputPrivacyValueAllowUsersPredict struct {
-	Users []InputUser
+	Users []InputUser `tl:"users"`
 }
 
 func (*InputPrivacyValueAllowUsersPredict) CRC() uint32 {
@@ -5682,7 +5682,7 @@ func (*InputPrivacyValueDisallowAllPredict) CRC() uint32 {
 func (*InputPrivacyValueDisallowAllPredict) _InputPrivacyRule() {}
 
 type InputPrivacyValueDisallowUsersPredict struct {
-	Users []InputUser
+	Users []InputUser `tl:"users"`
 }
 
 func (*InputPrivacyValueDisallowUsersPredict) CRC() uint32 {
@@ -5691,7 +5691,7 @@ func (*InputPrivacyValueDisallowUsersPredict) CRC() uint32 {
 func (*InputPrivacyValueDisallowUsersPredict) _InputPrivacyRule() {}
 
 type InputPrivacyValueAllowChatParticipantsPredict struct {
-	Chats []int64
+	Chats []int64 `tl:"chats"`
 }
 
 func (*InputPrivacyValueAllowChatParticipantsPredict) CRC() uint32 {
@@ -5700,7 +5700,7 @@ func (*InputPrivacyValueAllowChatParticipantsPredict) CRC() uint32 {
 func (*InputPrivacyValueAllowChatParticipantsPredict) _InputPrivacyRule() {}
 
 type InputPrivacyValueDisallowChatParticipantsPredict struct {
-	Chats []int64
+	Chats []int64 `tl:"chats"`
 }
 
 func (*InputPrivacyValueDisallowChatParticipantsPredict) CRC() uint32 {
@@ -5723,7 +5723,7 @@ func (*InputPrivacyValueAllowPremiumPredict) CRC() uint32 {
 func (*InputPrivacyValueAllowPremiumPredict) _InputPrivacyRule() {}
 
 type InputQuickReplyShortcut interface {
-	tl.Object
+	tl.TLObject
 	_InputQuickReplyShortcut()
 }
 
@@ -5733,7 +5733,7 @@ var (
 )
 
 type InputQuickReplyShortcutPredict struct {
-	Shortcut string
+	Shortcut string `tl:"shortcut"`
 }
 
 func (*InputQuickReplyShortcutPredict) CRC() uint32 {
@@ -5742,7 +5742,7 @@ func (*InputQuickReplyShortcutPredict) CRC() uint32 {
 func (*InputQuickReplyShortcutPredict) _InputQuickReplyShortcut() {}
 
 type InputQuickReplyShortcutIDPredict struct {
-	ShortcutID int32
+	ShortcutID int32 `tl:"shortcut_id"`
 }
 
 func (*InputQuickReplyShortcutIDPredict) CRC() uint32 {
@@ -5751,7 +5751,7 @@ func (*InputQuickReplyShortcutIDPredict) CRC() uint32 {
 func (*InputQuickReplyShortcutIDPredict) _InputQuickReplyShortcut() {}
 
 type InputReplyTo interface {
-	tl.Object
+	tl.TLObject
 	_InputReplyTo()
 }
 
@@ -5761,13 +5761,13 @@ var (
 )
 
 type InputReplyToMessagePredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	ReplyToMsgID  int32
-	TopMsgID      *int32          `tl:",omitempty:flags:0"`
-	ReplyToPeerID InputPeer       `tl:",omitempty:flags:1"`
-	QuoteText     *string         `tl:",omitempty:flags:2"`
-	QuoteEntities []MessageEntity `tl:",omitempty:flags:3"`
-	QuoteOffset   *int32          `tl:",omitempty:flags:4"`
+	_             struct{}        `tl:"flags,bitflag"`
+	ReplyToMsgID  int32           `tl:"reply_to_msg_id"`
+	TopMsgID      *int32          `tl:"top_msg_id,omitempty:flags:0"`
+	ReplyToPeerID InputPeer       `tl:"reply_to_peer_id,omitempty:flags:1"`
+	QuoteText     *string         `tl:"quote_text,omitempty:flags:2"`
+	QuoteEntities []MessageEntity `tl:"quote_entities,omitempty:flags:3"`
+	QuoteOffset   *int32          `tl:"quote_offset,omitempty:flags:4"`
 }
 
 func (*InputReplyToMessagePredict) CRC() uint32 {
@@ -5776,8 +5776,8 @@ func (*InputReplyToMessagePredict) CRC() uint32 {
 func (*InputReplyToMessagePredict) _InputReplyTo() {}
 
 type InputReplyToStoryPredict struct {
-	Peer    InputPeer
-	StoryID int32
+	Peer    InputPeer `tl:"peer"`
+	StoryID int32     `tl:"story_id"`
 }
 
 func (*InputReplyToStoryPredict) CRC() uint32 {
@@ -5786,7 +5786,7 @@ func (*InputReplyToStoryPredict) CRC() uint32 {
 func (*InputReplyToStoryPredict) _InputReplyTo() {}
 
 type InputSecureFile interface {
-	tl.Object
+	tl.TLObject
 	_InputSecureFile()
 }
 
@@ -5796,11 +5796,11 @@ var (
 )
 
 type InputSecureFileUploadedPredict struct {
-	ID          int64
-	Parts       int32
-	Md5Checksum string
-	FileHash    []byte
-	Secret      []byte
+	ID          int64  `tl:"id"`
+	Parts       int32  `tl:"parts"`
+	Md5Checksum string `tl:"md5_checksum"`
+	FileHash    []byte `tl:"file_hash"`
+	Secret      []byte `tl:"secret"`
 }
 
 func (*InputSecureFileUploadedPredict) CRC() uint32 {
@@ -5809,8 +5809,8 @@ func (*InputSecureFileUploadedPredict) CRC() uint32 {
 func (*InputSecureFileUploadedPredict) _InputSecureFile() {}
 
 type InputSecureFilePredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputSecureFilePredict) CRC() uint32 {
@@ -5819,7 +5819,7 @@ func (*InputSecureFilePredict) CRC() uint32 {
 func (*InputSecureFilePredict) _InputSecureFile() {}
 
 type InputSecureValue interface {
-	tl.Object
+	tl.TLObject
 	_InputSecureValue()
 }
 
@@ -5828,15 +5828,15 @@ var (
 )
 
 type InputSecureValuePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Type        SecureValueType
-	Data        SecureData        `tl:",omitempty:flags:0"`
-	FrontSide   InputSecureFile   `tl:",omitempty:flags:1"`
-	ReverseSide InputSecureFile   `tl:",omitempty:flags:2"`
-	Selfie      InputSecureFile   `tl:",omitempty:flags:3"`
-	Translation []InputSecureFile `tl:",omitempty:flags:6"`
-	Files       []InputSecureFile `tl:",omitempty:flags:4"`
-	PlainData   SecurePlainData   `tl:",omitempty:flags:5"`
+	_           struct{}          `tl:"flags,bitflag"`
+	Type        SecureValueType   `tl:"type"`
+	Data        SecureData        `tl:"data,omitempty:flags:0"`
+	FrontSide   InputSecureFile   `tl:"front_side,omitempty:flags:1"`
+	ReverseSide InputSecureFile   `tl:"reverse_side,omitempty:flags:2"`
+	Selfie      InputSecureFile   `tl:"selfie,omitempty:flags:3"`
+	Translation []InputSecureFile `tl:"translation,omitempty:flags:6"`
+	Files       []InputSecureFile `tl:"files,omitempty:flags:4"`
+	PlainData   SecurePlainData   `tl:"plain_data,omitempty:flags:5"`
 }
 
 func (*InputSecureValuePredict) CRC() uint32 {
@@ -5845,7 +5845,7 @@ func (*InputSecureValuePredict) CRC() uint32 {
 func (*InputSecureValuePredict) _InputSecureValue() {}
 
 type InputSingleMedia interface {
-	tl.Object
+	tl.TLObject
 	_InputSingleMedia()
 }
 
@@ -5854,11 +5854,11 @@ var (
 )
 
 type InputSingleMediaPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Media    InputMedia
-	RandomID int64
-	Message  string
-	Entities []MessageEntity `tl:",omitempty:flags:0"`
+	_        struct{}        `tl:"flags,bitflag"`
+	Media    InputMedia      `tl:"media"`
+	RandomID int64           `tl:"random_id"`
+	Message  string          `tl:"message"`
+	Entities []MessageEntity `tl:"entities,omitempty:flags:0"`
 }
 
 func (*InputSingleMediaPredict) CRC() uint32 {
@@ -5867,7 +5867,7 @@ func (*InputSingleMediaPredict) CRC() uint32 {
 func (*InputSingleMediaPredict) _InputSingleMedia() {}
 
 type InputStarsTransaction interface {
-	tl.Object
+	tl.TLObject
 	_InputStarsTransaction()
 }
 
@@ -5877,8 +5877,8 @@ var (
 
 type InputStarsTransactionPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Refund bool     `tl:",omitempty:flags:0,implicit"`
-	ID     string
+	Refund bool     `tl:"refund,omitempty:flags:0,implicit"`
+	ID     string   `tl:"id"`
 }
 
 func (*InputStarsTransactionPredict) CRC() uint32 {
@@ -5887,7 +5887,7 @@ func (*InputStarsTransactionPredict) CRC() uint32 {
 func (*InputStarsTransactionPredict) _InputStarsTransaction() {}
 
 type InputStickerSet interface {
-	tl.Object
+	tl.TLObject
 	_InputStickerSet()
 }
 
@@ -5913,8 +5913,8 @@ func (*InputStickerSetEmptyPredict) CRC() uint32 {
 func (*InputStickerSetEmptyPredict) _InputStickerSet() {}
 
 type InputStickerSetIDPredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputStickerSetIDPredict) CRC() uint32 {
@@ -5923,7 +5923,7 @@ func (*InputStickerSetIDPredict) CRC() uint32 {
 func (*InputStickerSetIDPredict) _InputStickerSet() {}
 
 type InputStickerSetShortNamePredict struct {
-	ShortName string
+	ShortName string `tl:"short_name"`
 }
 
 func (*InputStickerSetShortNamePredict) CRC() uint32 {
@@ -5939,7 +5939,7 @@ func (*InputStickerSetAnimatedEmojiPredict) CRC() uint32 {
 func (*InputStickerSetAnimatedEmojiPredict) _InputStickerSet() {}
 
 type InputStickerSetDicePredict struct {
-	Emoticon string
+	Emoticon string `tl:"emoticon"`
 }
 
 func (*InputStickerSetDicePredict) CRC() uint32 {
@@ -5990,7 +5990,7 @@ func (*InputStickerSetEmojiChannelDefaultStatusesPredict) CRC() uint32 {
 func (*InputStickerSetEmojiChannelDefaultStatusesPredict) _InputStickerSet() {}
 
 type InputStickerSetItem interface {
-	tl.Object
+	tl.TLObject
 	_InputStickerSetItem()
 }
 
@@ -5999,11 +5999,11 @@ var (
 )
 
 type InputStickerSetItemPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Document   InputDocument
-	Emoji      string
-	MaskCoords MaskCoords `tl:",omitempty:flags:0"`
-	Keywords   *string    `tl:",omitempty:flags:1"`
+	_          struct{}      `tl:"flags,bitflag"`
+	Document   InputDocument `tl:"document"`
+	Emoji      string        `tl:"emoji"`
+	MaskCoords MaskCoords    `tl:"mask_coords,omitempty:flags:0"`
+	Keywords   *string       `tl:"keywords,omitempty:flags:1"`
 }
 
 func (*InputStickerSetItemPredict) CRC() uint32 {
@@ -6012,7 +6012,7 @@ func (*InputStickerSetItemPredict) CRC() uint32 {
 func (*InputStickerSetItemPredict) _InputStickerSetItem() {}
 
 type InputStickeredMedia interface {
-	tl.Object
+	tl.TLObject
 	_InputStickeredMedia()
 }
 
@@ -6022,7 +6022,7 @@ var (
 )
 
 type InputStickeredMediaPhotoPredict struct {
-	ID InputPhoto
+	ID InputPhoto `tl:"id"`
 }
 
 func (*InputStickeredMediaPhotoPredict) CRC() uint32 {
@@ -6031,7 +6031,7 @@ func (*InputStickeredMediaPhotoPredict) CRC() uint32 {
 func (*InputStickeredMediaPhotoPredict) _InputStickeredMedia() {}
 
 type InputStickeredMediaDocumentPredict struct {
-	ID InputDocument
+	ID InputDocument `tl:"id"`
 }
 
 func (*InputStickeredMediaDocumentPredict) CRC() uint32 {
@@ -6040,7 +6040,7 @@ func (*InputStickeredMediaDocumentPredict) CRC() uint32 {
 func (*InputStickeredMediaDocumentPredict) _InputStickeredMedia() {}
 
 type InputStorePaymentPurpose interface {
-	tl.Object
+	tl.TLObject
 	_InputStorePaymentPurpose()
 }
 
@@ -6055,8 +6055,8 @@ var (
 
 type InputStorePaymentPremiumSubscriptionPredict struct {
 	_       struct{} `tl:"flags,bitflag"`
-	Restore bool     `tl:",omitempty:flags:0,implicit"`
-	Upgrade bool     `tl:",omitempty:flags:1,implicit"`
+	Restore bool     `tl:"restore,omitempty:flags:0,implicit"`
+	Upgrade bool     `tl:"upgrade,omitempty:flags:1,implicit"`
 }
 
 func (*InputStorePaymentPremiumSubscriptionPredict) CRC() uint32 {
@@ -6065,9 +6065,9 @@ func (*InputStorePaymentPremiumSubscriptionPredict) CRC() uint32 {
 func (*InputStorePaymentPremiumSubscriptionPredict) _InputStorePaymentPurpose() {}
 
 type InputStorePaymentGiftPremiumPredict struct {
-	UserID   InputUser
-	Currency string
-	Amount   int64
+	UserID   InputUser `tl:"user_id"`
+	Currency string    `tl:"currency"`
+	Amount   int64     `tl:"amount"`
 }
 
 func (*InputStorePaymentGiftPremiumPredict) CRC() uint32 {
@@ -6076,11 +6076,11 @@ func (*InputStorePaymentGiftPremiumPredict) CRC() uint32 {
 func (*InputStorePaymentGiftPremiumPredict) _InputStorePaymentPurpose() {}
 
 type InputStorePaymentPremiumGiftCodePredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Users     []InputUser
-	BoostPeer InputPeer `tl:",omitempty:flags:0"`
-	Currency  string
-	Amount    int64
+	_         struct{}    `tl:"flags,bitflag"`
+	Users     []InputUser `tl:"users"`
+	BoostPeer InputPeer   `tl:"boost_peer,omitempty:flags:0"`
+	Currency  string      `tl:"currency"`
+	Amount    int64       `tl:"amount"`
 }
 
 func (*InputStorePaymentPremiumGiftCodePredict) CRC() uint32 {
@@ -6089,17 +6089,17 @@ func (*InputStorePaymentPremiumGiftCodePredict) CRC() uint32 {
 func (*InputStorePaymentPremiumGiftCodePredict) _InputStorePaymentPurpose() {}
 
 type InputStorePaymentPremiumGiveawayPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	OnlyNewSubscribers bool     `tl:",omitempty:flags:0,implicit"`
-	WinnersAreVisible  bool     `tl:",omitempty:flags:3,implicit"`
-	BoostPeer          InputPeer
-	AdditionalPeers    []InputPeer `tl:",omitempty:flags:1"`
-	CountriesIso2      []string    `tl:",omitempty:flags:2"`
-	PrizeDescription   *string     `tl:",omitempty:flags:4"`
-	RandomID           int64
-	UntilDate          int32
-	Currency           string
-	Amount             int64
+	_                  struct{}    `tl:"flags,bitflag"`
+	OnlyNewSubscribers bool        `tl:"only_new_subscribers,omitempty:flags:0,implicit"`
+	WinnersAreVisible  bool        `tl:"winners_are_visible,omitempty:flags:3,implicit"`
+	BoostPeer          InputPeer   `tl:"boost_peer"`
+	AdditionalPeers    []InputPeer `tl:"additional_peers,omitempty:flags:1"`
+	CountriesIso2      []string    `tl:"countries_iso2,omitempty:flags:2"`
+	PrizeDescription   *string     `tl:"prize_description,omitempty:flags:4"`
+	RandomID           int64       `tl:"random_id"`
+	UntilDate          int32       `tl:"until_date"`
+	Currency           string      `tl:"currency"`
+	Amount             int64       `tl:"amount"`
 }
 
 func (*InputStorePaymentPremiumGiveawayPredict) CRC() uint32 {
@@ -6108,9 +6108,9 @@ func (*InputStorePaymentPremiumGiveawayPredict) CRC() uint32 {
 func (*InputStorePaymentPremiumGiveawayPredict) _InputStorePaymentPurpose() {}
 
 type InputStorePaymentStarsTopupPredict struct {
-	Stars    int64
-	Currency string
-	Amount   int64
+	Stars    int64  `tl:"stars"`
+	Currency string `tl:"currency"`
+	Amount   int64  `tl:"amount"`
 }
 
 func (*InputStorePaymentStarsTopupPredict) CRC() uint32 {
@@ -6119,10 +6119,10 @@ func (*InputStorePaymentStarsTopupPredict) CRC() uint32 {
 func (*InputStorePaymentStarsTopupPredict) _InputStorePaymentPurpose() {}
 
 type InputStorePaymentStarsGiftPredict struct {
-	UserID   InputUser
-	Stars    int64
-	Currency string
-	Amount   int64
+	UserID   InputUser `tl:"user_id"`
+	Stars    int64     `tl:"stars"`
+	Currency string    `tl:"currency"`
+	Amount   int64     `tl:"amount"`
 }
 
 func (*InputStorePaymentStarsGiftPredict) CRC() uint32 {
@@ -6131,7 +6131,7 @@ func (*InputStorePaymentStarsGiftPredict) CRC() uint32 {
 func (*InputStorePaymentStarsGiftPredict) _InputStorePaymentPurpose() {}
 
 type InputTheme interface {
-	tl.Object
+	tl.TLObject
 	_InputTheme()
 }
 
@@ -6141,8 +6141,8 @@ var (
 )
 
 type InputThemePredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputThemePredict) CRC() uint32 {
@@ -6151,7 +6151,7 @@ func (*InputThemePredict) CRC() uint32 {
 func (*InputThemePredict) _InputTheme() {}
 
 type InputThemeSlugPredict struct {
-	Slug string
+	Slug string `tl:"slug"`
 }
 
 func (*InputThemeSlugPredict) CRC() uint32 {
@@ -6160,7 +6160,7 @@ func (*InputThemeSlugPredict) CRC() uint32 {
 func (*InputThemeSlugPredict) _InputTheme() {}
 
 type InputThemeSettings interface {
-	tl.Object
+	tl.TLObject
 	_InputThemeSettings()
 }
 
@@ -6169,14 +6169,14 @@ var (
 )
 
 type InputThemeSettingsPredict struct {
-	_                     struct{} `tl:"flags,bitflag"`
-	MessageColorsAnimated bool     `tl:",omitempty:flags:2,implicit"`
-	BaseTheme             BaseTheme
-	AccentColor           int32
-	OutboxAccentColor     *int32            `tl:",omitempty:flags:3"`
-	MessageColors         []int32           `tl:",omitempty:flags:0"`
-	Wallpaper             InputWallPaper    `tl:",omitempty:flags:1"`
-	WallpaperSettings     WallPaperSettings `tl:",omitempty:flags:1"`
+	_                     struct{}          `tl:"flags,bitflag"`
+	MessageColorsAnimated bool              `tl:"message_colors_animated,omitempty:flags:2,implicit"`
+	BaseTheme             BaseTheme         `tl:"base_theme"`
+	AccentColor           int32             `tl:"accent_color"`
+	OutboxAccentColor     *int32            `tl:"outbox_accent_color,omitempty:flags:3"`
+	MessageColors         []int32           `tl:"message_colors,omitempty:flags:0"`
+	Wallpaper             InputWallPaper    `tl:"wallpaper,omitempty:flags:1"`
+	WallpaperSettings     WallPaperSettings `tl:"wallpaper_settings,omitempty:flags:1"`
 }
 
 func (*InputThemeSettingsPredict) CRC() uint32 {
@@ -6185,7 +6185,7 @@ func (*InputThemeSettingsPredict) CRC() uint32 {
 func (*InputThemeSettingsPredict) _InputThemeSettings() {}
 
 type InputUser interface {
-	tl.Object
+	tl.TLObject
 	_InputUser()
 }
 
@@ -6211,8 +6211,8 @@ func (*InputUserSelfPredict) CRC() uint32 {
 func (*InputUserSelfPredict) _InputUser() {}
 
 type InputUserPredict struct {
-	UserID     int64
-	AccessHash int64
+	UserID     int64 `tl:"user_id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputUserPredict) CRC() uint32 {
@@ -6221,9 +6221,9 @@ func (*InputUserPredict) CRC() uint32 {
 func (*InputUserPredict) _InputUser() {}
 
 type InputUserFromMessagePredict struct {
-	Peer   InputPeer
-	MsgID  int32
-	UserID int64
+	Peer   InputPeer `tl:"peer"`
+	MsgID  int32     `tl:"msg_id"`
+	UserID int64     `tl:"user_id"`
 }
 
 func (*InputUserFromMessagePredict) CRC() uint32 {
@@ -6232,7 +6232,7 @@ func (*InputUserFromMessagePredict) CRC() uint32 {
 func (*InputUserFromMessagePredict) _InputUser() {}
 
 type InputWallPaper interface {
-	tl.Object
+	tl.TLObject
 	_InputWallPaper()
 }
 
@@ -6243,8 +6243,8 @@ var (
 )
 
 type InputWallPaperPredict struct {
-	ID         int64
-	AccessHash int64
+	ID         int64 `tl:"id"`
+	AccessHash int64 `tl:"access_hash"`
 }
 
 func (*InputWallPaperPredict) CRC() uint32 {
@@ -6253,7 +6253,7 @@ func (*InputWallPaperPredict) CRC() uint32 {
 func (*InputWallPaperPredict) _InputWallPaper() {}
 
 type InputWallPaperSlugPredict struct {
-	Slug string
+	Slug string `tl:"slug"`
 }
 
 func (*InputWallPaperSlugPredict) CRC() uint32 {
@@ -6262,7 +6262,7 @@ func (*InputWallPaperSlugPredict) CRC() uint32 {
 func (*InputWallPaperSlugPredict) _InputWallPaper() {}
 
 type InputWallPaperNoFilePredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*InputWallPaperNoFilePredict) CRC() uint32 {
@@ -6271,7 +6271,7 @@ func (*InputWallPaperNoFilePredict) CRC() uint32 {
 func (*InputWallPaperNoFilePredict) _InputWallPaper() {}
 
 type InputWebDocument interface {
-	tl.Object
+	tl.TLObject
 	_InputWebDocument()
 }
 
@@ -6280,10 +6280,10 @@ var (
 )
 
 type InputWebDocumentPredict struct {
-	URL        string
-	Size       int32
-	MimeType   string
-	Attributes []DocumentAttribute
+	URL        string              `tl:"url"`
+	Size       int32               `tl:"size"`
+	MimeType   string              `tl:"mime_type"`
+	Attributes []DocumentAttribute `tl:"attributes"`
 }
 
 func (*InputWebDocumentPredict) CRC() uint32 {
@@ -6292,7 +6292,7 @@ func (*InputWebDocumentPredict) CRC() uint32 {
 func (*InputWebDocumentPredict) _InputWebDocument() {}
 
 type InputWebFileLocation interface {
-	tl.Object
+	tl.TLObject
 	_InputWebFileLocation()
 }
 
@@ -6303,8 +6303,8 @@ var (
 )
 
 type InputWebFileLocationPredict struct {
-	URL        string
-	AccessHash int64
+	URL        string `tl:"url"`
+	AccessHash int64  `tl:"access_hash"`
 }
 
 func (*InputWebFileLocationPredict) CRC() uint32 {
@@ -6313,12 +6313,12 @@ func (*InputWebFileLocationPredict) CRC() uint32 {
 func (*InputWebFileLocationPredict) _InputWebFileLocation() {}
 
 type InputWebFileGeoPointLocationPredict struct {
-	GeoPoint   InputGeoPoint
-	AccessHash int64
-	W          int32
-	H          int32
-	Zoom       int32
-	Scale      int32
+	GeoPoint   InputGeoPoint `tl:"geo_point"`
+	AccessHash int64         `tl:"access_hash"`
+	W          int32         `tl:"w"`
+	H          int32         `tl:"h"`
+	Zoom       int32         `tl:"zoom"`
+	Scale      int32         `tl:"scale"`
 }
 
 func (*InputWebFileGeoPointLocationPredict) CRC() uint32 {
@@ -6328,10 +6328,10 @@ func (*InputWebFileGeoPointLocationPredict) _InputWebFileLocation() {}
 
 type InputWebFileAudioAlbumThumbLocationPredict struct {
 	_         struct{}      `tl:"flags,bitflag"`
-	Small     bool          `tl:",omitempty:flags:2,implicit"`
-	Document  InputDocument `tl:",omitempty:flags:0"`
-	Title     *string       `tl:",omitempty:flags:1"`
-	Performer *string       `tl:",omitempty:flags:1"`
+	Small     bool          `tl:"small,omitempty:flags:2,implicit"`
+	Document  InputDocument `tl:"document,omitempty:flags:0"`
+	Title     *string       `tl:"title,omitempty:flags:1"`
+	Performer *string       `tl:"performer,omitempty:flags:1"`
 }
 
 func (*InputWebFileAudioAlbumThumbLocationPredict) CRC() uint32 {
@@ -6340,7 +6340,7 @@ func (*InputWebFileAudioAlbumThumbLocationPredict) CRC() uint32 {
 func (*InputWebFileAudioAlbumThumbLocationPredict) _InputWebFileLocation() {}
 
 type Invoice interface {
-	tl.Object
+	tl.TLObject
 	_Invoice()
 }
 
@@ -6349,21 +6349,21 @@ var (
 )
 
 type InvoicePredict struct {
-	_                        struct{} `tl:"flags,bitflag"`
-	Test                     bool     `tl:",omitempty:flags:0,implicit"`
-	NameRequested            bool     `tl:",omitempty:flags:1,implicit"`
-	PhoneRequested           bool     `tl:",omitempty:flags:2,implicit"`
-	EmailRequested           bool     `tl:",omitempty:flags:3,implicit"`
-	ShippingAddressRequested bool     `tl:",omitempty:flags:4,implicit"`
-	Flexible                 bool     `tl:",omitempty:flags:5,implicit"`
-	PhoneToProvider          bool     `tl:",omitempty:flags:6,implicit"`
-	EmailToProvider          bool     `tl:",omitempty:flags:7,implicit"`
-	Recurring                bool     `tl:",omitempty:flags:9,implicit"`
-	Currency                 string
-	Prices                   []LabeledPrice
-	MaxTipAmount             *int64  `tl:",omitempty:flags:8"`
-	SuggestedTipAmounts      []int64 `tl:",omitempty:flags:8"`
-	TermsURL                 *string `tl:",omitempty:flags:10"`
+	_                        struct{}       `tl:"flags,bitflag"`
+	Test                     bool           `tl:"test,omitempty:flags:0,implicit"`
+	NameRequested            bool           `tl:"name_requested,omitempty:flags:1,implicit"`
+	PhoneRequested           bool           `tl:"phone_requested,omitempty:flags:2,implicit"`
+	EmailRequested           bool           `tl:"email_requested,omitempty:flags:3,implicit"`
+	ShippingAddressRequested bool           `tl:"shipping_address_requested,omitempty:flags:4,implicit"`
+	Flexible                 bool           `tl:"flexible,omitempty:flags:5,implicit"`
+	PhoneToProvider          bool           `tl:"phone_to_provider,omitempty:flags:6,implicit"`
+	EmailToProvider          bool           `tl:"email_to_provider,omitempty:flags:7,implicit"`
+	Recurring                bool           `tl:"recurring,omitempty:flags:9,implicit"`
+	Currency                 string         `tl:"currency"`
+	Prices                   []LabeledPrice `tl:"prices"`
+	MaxTipAmount             *int64         `tl:"max_tip_amount,omitempty:flags:8"`
+	SuggestedTipAmounts      []int64        `tl:"suggested_tip_amounts,omitempty:flags:8"`
+	TermsURL                 *string        `tl:"terms_url,omitempty:flags:10"`
 }
 
 func (*InvoicePredict) CRC() uint32 {
@@ -6372,7 +6372,7 @@ func (*InvoicePredict) CRC() uint32 {
 func (*InvoicePredict) _Invoice() {}
 
 type JSONObjectValue interface {
-	tl.Object
+	tl.TLObject
 	_JSONObjectValue()
 }
 
@@ -6381,8 +6381,8 @@ var (
 )
 
 type JSONObjectValuePredict struct {
-	Key   string
-	Value JSONValue
+	Key   string    `tl:"key"`
+	Value JSONValue `tl:"value"`
 }
 
 func (*JSONObjectValuePredict) CRC() uint32 {
@@ -6391,7 +6391,7 @@ func (*JSONObjectValuePredict) CRC() uint32 {
 func (*JSONObjectValuePredict) _JSONObjectValue() {}
 
 type JSONValue interface {
-	tl.Object
+	tl.TLObject
 	_JSONValue()
 }
 
@@ -6412,7 +6412,7 @@ func (*JSONNullPredict) CRC() uint32 {
 func (*JSONNullPredict) _JSONValue() {}
 
 type JSONBoolPredict struct {
-	Value bool
+	Value bool `tl:"value"`
 }
 
 func (*JSONBoolPredict) CRC() uint32 {
@@ -6421,7 +6421,7 @@ func (*JSONBoolPredict) CRC() uint32 {
 func (*JSONBoolPredict) _JSONValue() {}
 
 type JSONNumberPredict struct {
-	Value float64
+	Value float64 `tl:"value"`
 }
 
 func (*JSONNumberPredict) CRC() uint32 {
@@ -6430,7 +6430,7 @@ func (*JSONNumberPredict) CRC() uint32 {
 func (*JSONNumberPredict) _JSONValue() {}
 
 type JSONStringPredict struct {
-	Value string
+	Value string `tl:"value"`
 }
 
 func (*JSONStringPredict) CRC() uint32 {
@@ -6439,7 +6439,7 @@ func (*JSONStringPredict) CRC() uint32 {
 func (*JSONStringPredict) _JSONValue() {}
 
 type JSONArrayPredict struct {
-	Value []JSONValue
+	Value []JSONValue `tl:"value"`
 }
 
 func (*JSONArrayPredict) CRC() uint32 {
@@ -6448,7 +6448,7 @@ func (*JSONArrayPredict) CRC() uint32 {
 func (*JSONArrayPredict) _JSONValue() {}
 
 type JSONObjectPredict struct {
-	Value []JSONObjectValue
+	Value []JSONObjectValue `tl:"value"`
 }
 
 func (*JSONObjectPredict) CRC() uint32 {
@@ -6457,7 +6457,7 @@ func (*JSONObjectPredict) CRC() uint32 {
 func (*JSONObjectPredict) _JSONValue() {}
 
 type KeyboardButton interface {
-	tl.Object
+	tl.TLObject
 	_KeyboardButton()
 }
 
@@ -6482,7 +6482,7 @@ var (
 )
 
 type KeyboardButtonPredict struct {
-	Text string
+	Text string `tl:"text"`
 }
 
 func (*KeyboardButtonPredict) CRC() uint32 {
@@ -6491,8 +6491,8 @@ func (*KeyboardButtonPredict) CRC() uint32 {
 func (*KeyboardButtonPredict) _KeyboardButton() {}
 
 type KeyboardButtonURLPredict struct {
-	Text string
-	URL  string
+	Text string `tl:"text"`
+	URL  string `tl:"url"`
 }
 
 func (*KeyboardButtonURLPredict) CRC() uint32 {
@@ -6502,9 +6502,9 @@ func (*KeyboardButtonURLPredict) _KeyboardButton() {}
 
 type KeyboardButtonCallbackPredict struct {
 	_                struct{} `tl:"flags,bitflag"`
-	RequiresPassword bool     `tl:",omitempty:flags:0,implicit"`
-	Text             string
-	Data             []byte
+	RequiresPassword bool     `tl:"requires_password,omitempty:flags:0,implicit"`
+	Text             string   `tl:"text"`
+	Data             []byte   `tl:"data"`
 }
 
 func (*KeyboardButtonCallbackPredict) CRC() uint32 {
@@ -6513,7 +6513,7 @@ func (*KeyboardButtonCallbackPredict) CRC() uint32 {
 func (*KeyboardButtonCallbackPredict) _KeyboardButton() {}
 
 type KeyboardButtonRequestPhonePredict struct {
-	Text string
+	Text string `tl:"text"`
 }
 
 func (*KeyboardButtonRequestPhonePredict) CRC() uint32 {
@@ -6522,7 +6522,7 @@ func (*KeyboardButtonRequestPhonePredict) CRC() uint32 {
 func (*KeyboardButtonRequestPhonePredict) _KeyboardButton() {}
 
 type KeyboardButtonRequestGeoLocationPredict struct {
-	Text string
+	Text string `tl:"text"`
 }
 
 func (*KeyboardButtonRequestGeoLocationPredict) CRC() uint32 {
@@ -6531,11 +6531,11 @@ func (*KeyboardButtonRequestGeoLocationPredict) CRC() uint32 {
 func (*KeyboardButtonRequestGeoLocationPredict) _KeyboardButton() {}
 
 type KeyboardButtonSwitchInlinePredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	SamePeer  bool     `tl:",omitempty:flags:0,implicit"`
-	Text      string
-	Query     string
-	PeerTypes []InlineQueryPeerType `tl:",omitempty:flags:1"`
+	_         struct{}              `tl:"flags,bitflag"`
+	SamePeer  bool                  `tl:"same_peer,omitempty:flags:0,implicit"`
+	Text      string                `tl:"text"`
+	Query     string                `tl:"query"`
+	PeerTypes []InlineQueryPeerType `tl:"peer_types,omitempty:flags:1"`
 }
 
 func (*KeyboardButtonSwitchInlinePredict) CRC() uint32 {
@@ -6544,7 +6544,7 @@ func (*KeyboardButtonSwitchInlinePredict) CRC() uint32 {
 func (*KeyboardButtonSwitchInlinePredict) _KeyboardButton() {}
 
 type KeyboardButtonGamePredict struct {
-	Text string
+	Text string `tl:"text"`
 }
 
 func (*KeyboardButtonGamePredict) CRC() uint32 {
@@ -6553,7 +6553,7 @@ func (*KeyboardButtonGamePredict) CRC() uint32 {
 func (*KeyboardButtonGamePredict) _KeyboardButton() {}
 
 type KeyboardButtonBuyPredict struct {
-	Text string
+	Text string `tl:"text"`
 }
 
 func (*KeyboardButtonBuyPredict) CRC() uint32 {
@@ -6563,10 +6563,10 @@ func (*KeyboardButtonBuyPredict) _KeyboardButton() {}
 
 type KeyboardButtonURLAuthPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Text     string
-	FwdText  *string `tl:",omitempty:flags:0"`
-	URL      string
-	ButtonID int32
+	Text     string   `tl:"text"`
+	FwdText  *string  `tl:"fwd_text,omitempty:flags:0"`
+	URL      string   `tl:"url"`
+	ButtonID int32    `tl:"button_id"`
 }
 
 func (*KeyboardButtonURLAuthPredict) CRC() uint32 {
@@ -6575,12 +6575,12 @@ func (*KeyboardButtonURLAuthPredict) CRC() uint32 {
 func (*KeyboardButtonURLAuthPredict) _KeyboardButton() {}
 
 type InputKeyboardButtonURLAuthPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	RequestWriteAccess bool     `tl:",omitempty:flags:0,implicit"`
-	Text               string
-	FwdText            *string `tl:",omitempty:flags:1"`
-	URL                string
-	Bot                InputUser
+	_                  struct{}  `tl:"flags,bitflag"`
+	RequestWriteAccess bool      `tl:"request_write_access,omitempty:flags:0,implicit"`
+	Text               string    `tl:"text"`
+	FwdText            *string   `tl:"fwd_text,omitempty:flags:1"`
+	URL                string    `tl:"url"`
+	Bot                InputUser `tl:"bot"`
 }
 
 func (*InputKeyboardButtonURLAuthPredict) CRC() uint32 {
@@ -6590,8 +6590,8 @@ func (*InputKeyboardButtonURLAuthPredict) _KeyboardButton() {}
 
 type KeyboardButtonRequestPollPredict struct {
 	_    struct{} `tl:"flags,bitflag"`
-	Quiz *bool    `tl:",omitempty:flags:0"`
-	Text string
+	Quiz *bool    `tl:"quiz,omitempty:flags:0"`
+	Text string   `tl:"text"`
 }
 
 func (*KeyboardButtonRequestPollPredict) CRC() uint32 {
@@ -6600,8 +6600,8 @@ func (*KeyboardButtonRequestPollPredict) CRC() uint32 {
 func (*KeyboardButtonRequestPollPredict) _KeyboardButton() {}
 
 type InputKeyboardButtonUserProfilePredict struct {
-	Text   string
-	UserID InputUser
+	Text   string    `tl:"text"`
+	UserID InputUser `tl:"user_id"`
 }
 
 func (*InputKeyboardButtonUserProfilePredict) CRC() uint32 {
@@ -6610,8 +6610,8 @@ func (*InputKeyboardButtonUserProfilePredict) CRC() uint32 {
 func (*InputKeyboardButtonUserProfilePredict) _KeyboardButton() {}
 
 type KeyboardButtonUserProfilePredict struct {
-	Text   string
-	UserID int64
+	Text   string `tl:"text"`
+	UserID int64  `tl:"user_id"`
 }
 
 func (*KeyboardButtonUserProfilePredict) CRC() uint32 {
@@ -6620,8 +6620,8 @@ func (*KeyboardButtonUserProfilePredict) CRC() uint32 {
 func (*KeyboardButtonUserProfilePredict) _KeyboardButton() {}
 
 type KeyboardButtonWebViewPredict struct {
-	Text string
-	URL  string
+	Text string `tl:"text"`
+	URL  string `tl:"url"`
 }
 
 func (*KeyboardButtonWebViewPredict) CRC() uint32 {
@@ -6630,8 +6630,8 @@ func (*KeyboardButtonWebViewPredict) CRC() uint32 {
 func (*KeyboardButtonWebViewPredict) _KeyboardButton() {}
 
 type KeyboardButtonSimpleWebViewPredict struct {
-	Text string
-	URL  string
+	Text string `tl:"text"`
+	URL  string `tl:"url"`
 }
 
 func (*KeyboardButtonSimpleWebViewPredict) CRC() uint32 {
@@ -6640,10 +6640,10 @@ func (*KeyboardButtonSimpleWebViewPredict) CRC() uint32 {
 func (*KeyboardButtonSimpleWebViewPredict) _KeyboardButton() {}
 
 type KeyboardButtonRequestPeerPredict struct {
-	Text        string
-	ButtonID    int32
-	PeerType    RequestPeerType
-	MaxQuantity int32
+	Text        string          `tl:"text"`
+	ButtonID    int32           `tl:"button_id"`
+	PeerType    RequestPeerType `tl:"peer_type"`
+	MaxQuantity int32           `tl:"max_quantity"`
 }
 
 func (*KeyboardButtonRequestPeerPredict) CRC() uint32 {
@@ -6652,14 +6652,14 @@ func (*KeyboardButtonRequestPeerPredict) CRC() uint32 {
 func (*KeyboardButtonRequestPeerPredict) _KeyboardButton() {}
 
 type InputKeyboardButtonRequestPeerPredict struct {
-	_                 struct{} `tl:"flags,bitflag"`
-	NameRequested     bool     `tl:",omitempty:flags:0,implicit"`
-	UsernameRequested bool     `tl:",omitempty:flags:1,implicit"`
-	PhotoRequested    bool     `tl:",omitempty:flags:2,implicit"`
-	Text              string
-	ButtonID          int32
-	PeerType          RequestPeerType
-	MaxQuantity       int32
+	_                 struct{}        `tl:"flags,bitflag"`
+	NameRequested     bool            `tl:"name_requested,omitempty:flags:0,implicit"`
+	UsernameRequested bool            `tl:"username_requested,omitempty:flags:1,implicit"`
+	PhotoRequested    bool            `tl:"photo_requested,omitempty:flags:2,implicit"`
+	Text              string          `tl:"text"`
+	ButtonID          int32           `tl:"button_id"`
+	PeerType          RequestPeerType `tl:"peer_type"`
+	MaxQuantity       int32           `tl:"max_quantity"`
 }
 
 func (*InputKeyboardButtonRequestPeerPredict) CRC() uint32 {
@@ -6668,7 +6668,7 @@ func (*InputKeyboardButtonRequestPeerPredict) CRC() uint32 {
 func (*InputKeyboardButtonRequestPeerPredict) _KeyboardButton() {}
 
 type KeyboardButtonRow interface {
-	tl.Object
+	tl.TLObject
 	_KeyboardButtonRow()
 }
 
@@ -6677,7 +6677,7 @@ var (
 )
 
 type KeyboardButtonRowPredict struct {
-	Buttons []KeyboardButton
+	Buttons []KeyboardButton `tl:"buttons"`
 }
 
 func (*KeyboardButtonRowPredict) CRC() uint32 {
@@ -6686,7 +6686,7 @@ func (*KeyboardButtonRowPredict) CRC() uint32 {
 func (*KeyboardButtonRowPredict) _KeyboardButtonRow() {}
 
 type LabeledPrice interface {
-	tl.Object
+	tl.TLObject
 	_LabeledPrice()
 }
 
@@ -6695,8 +6695,8 @@ var (
 )
 
 type LabeledPricePredict struct {
-	Label  string
-	Amount int64
+	Label  string `tl:"label"`
+	Amount int64  `tl:"amount"`
 }
 
 func (*LabeledPricePredict) CRC() uint32 {
@@ -6705,7 +6705,7 @@ func (*LabeledPricePredict) CRC() uint32 {
 func (*LabeledPricePredict) _LabeledPrice() {}
 
 type LangPackDifference interface {
-	tl.Object
+	tl.TLObject
 	_LangPackDifference()
 }
 
@@ -6714,10 +6714,10 @@ var (
 )
 
 type LangPackDifferencePredict struct {
-	LangCode    string
-	FromVersion int32
-	Version     int32
-	Strings     []LangPackString
+	LangCode    string           `tl:"lang_code"`
+	FromVersion int32            `tl:"from_version"`
+	Version     int32            `tl:"version"`
+	Strings     []LangPackString `tl:"strings"`
 }
 
 func (*LangPackDifferencePredict) CRC() uint32 {
@@ -6726,7 +6726,7 @@ func (*LangPackDifferencePredict) CRC() uint32 {
 func (*LangPackDifferencePredict) _LangPackDifference() {}
 
 type LangPackLanguage interface {
-	tl.Object
+	tl.TLObject
 	_LangPackLanguage()
 }
 
@@ -6736,17 +6736,17 @@ var (
 
 type LangPackLanguagePredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	Official        bool     `tl:",omitempty:flags:0,implicit"`
-	Rtl             bool     `tl:",omitempty:flags:2,implicit"`
-	Beta            bool     `tl:",omitempty:flags:3,implicit"`
-	Name            string
-	NativeName      string
-	LangCode        string
-	BaseLangCode    *string `tl:",omitempty:flags:1"`
-	PluralCode      string
-	StringsCount    int32
-	TranslatedCount int32
-	TranslationsURL string
+	Official        bool     `tl:"official,omitempty:flags:0,implicit"`
+	Rtl             bool     `tl:"rtl,omitempty:flags:2,implicit"`
+	Beta            bool     `tl:"beta,omitempty:flags:3,implicit"`
+	Name            string   `tl:"name"`
+	NativeName      string   `tl:"native_name"`
+	LangCode        string   `tl:"lang_code"`
+	BaseLangCode    *string  `tl:"base_lang_code,omitempty:flags:1"`
+	PluralCode      string   `tl:"plural_code"`
+	StringsCount    int32    `tl:"strings_count"`
+	TranslatedCount int32    `tl:"translated_count"`
+	TranslationsURL string   `tl:"translations_url"`
 }
 
 func (*LangPackLanguagePredict) CRC() uint32 {
@@ -6755,7 +6755,7 @@ func (*LangPackLanguagePredict) CRC() uint32 {
 func (*LangPackLanguagePredict) _LangPackLanguage() {}
 
 type LangPackString interface {
-	tl.Object
+	tl.TLObject
 	_LangPackString()
 }
 
@@ -6766,8 +6766,8 @@ var (
 )
 
 type LangPackStringPredict struct {
-	Key   string
-	Value string
+	Key   string `tl:"key"`
+	Value string `tl:"value"`
 }
 
 func (*LangPackStringPredict) CRC() uint32 {
@@ -6777,13 +6777,13 @@ func (*LangPackStringPredict) _LangPackString() {}
 
 type LangPackStringPluralizedPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Key        string
-	ZeroValue  *string `tl:",omitempty:flags:0"`
-	OneValue   *string `tl:",omitempty:flags:1"`
-	TwoValue   *string `tl:",omitempty:flags:2"`
-	FewValue   *string `tl:",omitempty:flags:3"`
-	ManyValue  *string `tl:",omitempty:flags:4"`
-	OtherValue string
+	Key        string   `tl:"key"`
+	ZeroValue  *string  `tl:"zero_value,omitempty:flags:0"`
+	OneValue   *string  `tl:"one_value,omitempty:flags:1"`
+	TwoValue   *string  `tl:"two_value,omitempty:flags:2"`
+	FewValue   *string  `tl:"few_value,omitempty:flags:3"`
+	ManyValue  *string  `tl:"many_value,omitempty:flags:4"`
+	OtherValue string   `tl:"other_value"`
 }
 
 func (*LangPackStringPluralizedPredict) CRC() uint32 {
@@ -6792,7 +6792,7 @@ func (*LangPackStringPluralizedPredict) CRC() uint32 {
 func (*LangPackStringPluralizedPredict) _LangPackString() {}
 
 type LangPackStringDeletedPredict struct {
-	Key string
+	Key string `tl:"key"`
 }
 
 func (*LangPackStringDeletedPredict) CRC() uint32 {
@@ -6801,7 +6801,7 @@ func (*LangPackStringDeletedPredict) CRC() uint32 {
 func (*LangPackStringDeletedPredict) _LangPackString() {}
 
 type MaskCoords interface {
-	tl.Object
+	tl.TLObject
 	_MaskCoords()
 }
 
@@ -6810,10 +6810,10 @@ var (
 )
 
 type MaskCoordsPredict struct {
-	N    int32
-	X    float64
-	Y    float64
-	Zoom float64
+	N    int32   `tl:"n"`
+	X    float64 `tl:"x"`
+	Y    float64 `tl:"y"`
+	Zoom float64 `tl:"zoom"`
 }
 
 func (*MaskCoordsPredict) CRC() uint32 {
@@ -6822,7 +6822,7 @@ func (*MaskCoordsPredict) CRC() uint32 {
 func (*MaskCoordsPredict) _MaskCoords() {}
 
 type MediaArea interface {
-	tl.Object
+	tl.TLObject
 	_MediaArea()
 }
 
@@ -6838,13 +6838,13 @@ var (
 )
 
 type MediaAreaVenuePredict struct {
-	Coordinates MediaAreaCoordinates
-	Geo         GeoPoint
-	Title       string
-	Address     string
-	Provider    string
-	VenueID     string
-	VenueType   string
+	Coordinates MediaAreaCoordinates `tl:"coordinates"`
+	Geo         GeoPoint             `tl:"geo"`
+	Title       string               `tl:"title"`
+	Address     string               `tl:"address"`
+	Provider    string               `tl:"provider"`
+	VenueID     string               `tl:"venue_id"`
+	VenueType   string               `tl:"venue_type"`
 }
 
 func (*MediaAreaVenuePredict) CRC() uint32 {
@@ -6853,9 +6853,9 @@ func (*MediaAreaVenuePredict) CRC() uint32 {
 func (*MediaAreaVenuePredict) _MediaArea() {}
 
 type InputMediaAreaVenuePredict struct {
-	Coordinates MediaAreaCoordinates
-	QueryID     int64
-	ResultID    string
+	Coordinates MediaAreaCoordinates `tl:"coordinates"`
+	QueryID     int64                `tl:"query_id"`
+	ResultID    string               `tl:"result_id"`
 }
 
 func (*InputMediaAreaVenuePredict) CRC() uint32 {
@@ -6864,10 +6864,10 @@ func (*InputMediaAreaVenuePredict) CRC() uint32 {
 func (*InputMediaAreaVenuePredict) _MediaArea() {}
 
 type MediaAreaGeoPointPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Coordinates MediaAreaCoordinates
-	Geo         GeoPoint
-	Address     GeoPointAddress `tl:",omitempty:flags:0"`
+	_           struct{}             `tl:"flags,bitflag"`
+	Coordinates MediaAreaCoordinates `tl:"coordinates"`
+	Geo         GeoPoint             `tl:"geo"`
+	Address     GeoPointAddress      `tl:"address,omitempty:flags:0"`
 }
 
 func (*MediaAreaGeoPointPredict) CRC() uint32 {
@@ -6876,11 +6876,11 @@ func (*MediaAreaGeoPointPredict) CRC() uint32 {
 func (*MediaAreaGeoPointPredict) _MediaArea() {}
 
 type MediaAreaSuggestedReactionPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Dark        bool     `tl:",omitempty:flags:0,implicit"`
-	Flipped     bool     `tl:",omitempty:flags:1,implicit"`
-	Coordinates MediaAreaCoordinates
-	Reaction    Reaction
+	_           struct{}             `tl:"flags,bitflag"`
+	Dark        bool                 `tl:"dark,omitempty:flags:0,implicit"`
+	Flipped     bool                 `tl:"flipped,omitempty:flags:1,implicit"`
+	Coordinates MediaAreaCoordinates `tl:"coordinates"`
+	Reaction    Reaction             `tl:"reaction"`
 }
 
 func (*MediaAreaSuggestedReactionPredict) CRC() uint32 {
@@ -6889,9 +6889,9 @@ func (*MediaAreaSuggestedReactionPredict) CRC() uint32 {
 func (*MediaAreaSuggestedReactionPredict) _MediaArea() {}
 
 type MediaAreaChannelPostPredict struct {
-	Coordinates MediaAreaCoordinates
-	ChannelID   int64
-	MsgID       int32
+	Coordinates MediaAreaCoordinates `tl:"coordinates"`
+	ChannelID   int64                `tl:"channel_id"`
+	MsgID       int32                `tl:"msg_id"`
 }
 
 func (*MediaAreaChannelPostPredict) CRC() uint32 {
@@ -6900,9 +6900,9 @@ func (*MediaAreaChannelPostPredict) CRC() uint32 {
 func (*MediaAreaChannelPostPredict) _MediaArea() {}
 
 type InputMediaAreaChannelPostPredict struct {
-	Coordinates MediaAreaCoordinates
-	Channel     InputChannel
-	MsgID       int32
+	Coordinates MediaAreaCoordinates `tl:"coordinates"`
+	Channel     InputChannel         `tl:"channel"`
+	MsgID       int32                `tl:"msg_id"`
 }
 
 func (*InputMediaAreaChannelPostPredict) CRC() uint32 {
@@ -6911,8 +6911,8 @@ func (*InputMediaAreaChannelPostPredict) CRC() uint32 {
 func (*InputMediaAreaChannelPostPredict) _MediaArea() {}
 
 type MediaAreaURLPredict struct {
-	Coordinates MediaAreaCoordinates
-	URL         string
+	Coordinates MediaAreaCoordinates `tl:"coordinates"`
+	URL         string               `tl:"url"`
 }
 
 func (*MediaAreaURLPredict) CRC() uint32 {
@@ -6921,10 +6921,10 @@ func (*MediaAreaURLPredict) CRC() uint32 {
 func (*MediaAreaURLPredict) _MediaArea() {}
 
 type MediaAreaWeatherPredict struct {
-	Coordinates  MediaAreaCoordinates
-	Emoji        string
-	TemperatureC float64
-	Color        int32
+	Coordinates  MediaAreaCoordinates `tl:"coordinates"`
+	Emoji        string               `tl:"emoji"`
+	TemperatureC float64              `tl:"temperature_c"`
+	Color        int32                `tl:"color"`
 }
 
 func (*MediaAreaWeatherPredict) CRC() uint32 {
@@ -6933,7 +6933,7 @@ func (*MediaAreaWeatherPredict) CRC() uint32 {
 func (*MediaAreaWeatherPredict) _MediaArea() {}
 
 type MediaAreaCoordinates interface {
-	tl.Object
+	tl.TLObject
 	_MediaAreaCoordinates()
 }
 
@@ -6943,12 +6943,12 @@ var (
 
 type MediaAreaCoordinatesPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	X        float64
-	Y        float64
-	W        float64
-	H        float64
-	Rotation float64
-	Radius   *float64 `tl:",omitempty:flags:0"`
+	X        float64  `tl:"x"`
+	Y        float64  `tl:"y"`
+	W        float64  `tl:"w"`
+	H        float64  `tl:"h"`
+	Rotation float64  `tl:"rotation"`
+	Radius   *float64 `tl:"radius,omitempty:flags:0"`
 }
 
 func (*MediaAreaCoordinatesPredict) CRC() uint32 {
@@ -6957,7 +6957,7 @@ func (*MediaAreaCoordinatesPredict) CRC() uint32 {
 func (*MediaAreaCoordinatesPredict) _MediaAreaCoordinates() {}
 
 type Message interface {
-	tl.Object
+	tl.TLObject
 	_Message()
 }
 
@@ -6969,8 +6969,8 @@ var (
 
 type MessageEmptyPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	ID     int32
-	PeerID Peer `tl:",omitempty:flags:0"`
+	ID     int32    `tl:"id"`
+	PeerID Peer     `tl:"peer_id,omitempty:flags:0"`
 }
 
 func (*MessageEmptyPredict) CRC() uint32 {
@@ -6979,46 +6979,46 @@ func (*MessageEmptyPredict) CRC() uint32 {
 func (*MessageEmptyPredict) _Message() {}
 
 type MessagePredict struct {
-	_                    struct{} `tl:"flags,bitflag"`
-	Out                  bool     `tl:",omitempty:flags:1,implicit"`
-	Mentioned            bool     `tl:",omitempty:flags:4,implicit"`
-	MediaUnread          bool     `tl:",omitempty:flags:5,implicit"`
-	Silent               bool     `tl:",omitempty:flags:13,implicit"`
-	Post                 bool     `tl:",omitempty:flags:14,implicit"`
-	FromScheduled        bool     `tl:",omitempty:flags:18,implicit"`
-	Legacy               bool     `tl:",omitempty:flags:19,implicit"`
-	EditHide             bool     `tl:",omitempty:flags:21,implicit"`
-	Pinned               bool     `tl:",omitempty:flags:24,implicit"`
-	Noforwards           bool     `tl:",omitempty:flags:26,implicit"`
-	InvertMedia          bool     `tl:",omitempty:flags:27,implicit"`
-	_                    struct{} `tl:"flags2,bitflag"`
-	Offline              bool     `tl:",omitempty:flags2:1,implicit"`
-	ID                   int32
-	FromID               Peer   `tl:",omitempty:flags:8"`
-	FromBoostsApplied    *int32 `tl:",omitempty:flags:29"`
-	PeerID               Peer
-	SavedPeerID          Peer               `tl:",omitempty:flags:28"`
-	FwdFrom              MessageFwdHeader   `tl:",omitempty:flags:2"`
-	ViaBotID             *int64             `tl:",omitempty:flags:11"`
-	ViaBusinessBotID     *int64             `tl:",omitempty:flags2:0"`
-	ReplyTo              MessageReplyHeader `tl:",omitempty:flags:3"`
-	Date                 int32
-	Message              string
-	Media                MessageMedia        `tl:",omitempty:flags:9"`
-	ReplyMarkup          ReplyMarkup         `tl:",omitempty:flags:6"`
-	Entities             []MessageEntity     `tl:",omitempty:flags:7"`
-	Views                *int32              `tl:",omitempty:flags:10"`
-	Forwards             *int32              `tl:",omitempty:flags:10"`
-	Replies              MessageReplies      `tl:",omitempty:flags:23"`
-	EditDate             *int32              `tl:",omitempty:flags:15"`
-	PostAuthor           *string             `tl:",omitempty:flags:16"`
-	GroupedID            *int64              `tl:",omitempty:flags:17"`
-	Reactions            MessageReactions    `tl:",omitempty:flags:20"`
-	RestrictionReason    []RestrictionReason `tl:",omitempty:flags:22"`
-	TTLPeriod            *int32              `tl:",omitempty:flags:25"`
-	QuickReplyShortcutID *int32              `tl:",omitempty:flags:30"`
-	Effect               *int64              `tl:",omitempty:flags2:2"`
-	Factcheck            FactCheck           `tl:",omitempty:flags2:3"`
+	_                    struct{}            `tl:"flags,bitflag"`
+	Out                  bool                `tl:"out,omitempty:flags:1,implicit"`
+	Mentioned            bool                `tl:"mentioned,omitempty:flags:4,implicit"`
+	MediaUnread          bool                `tl:"media_unread,omitempty:flags:5,implicit"`
+	Silent               bool                `tl:"silent,omitempty:flags:13,implicit"`
+	Post                 bool                `tl:"post,omitempty:flags:14,implicit"`
+	FromScheduled        bool                `tl:"from_scheduled,omitempty:flags:18,implicit"`
+	Legacy               bool                `tl:"legacy,omitempty:flags:19,implicit"`
+	EditHide             bool                `tl:"edit_hide,omitempty:flags:21,implicit"`
+	Pinned               bool                `tl:"pinned,omitempty:flags:24,implicit"`
+	Noforwards           bool                `tl:"noforwards,omitempty:flags:26,implicit"`
+	InvertMedia          bool                `tl:"invert_media,omitempty:flags:27,implicit"`
+	_                    struct{}            `tl:"flags2,bitflag"`
+	Offline              bool                `tl:"offline,omitempty:flags2:1,implicit"`
+	ID                   int32               `tl:"id"`
+	FromID               Peer                `tl:"from_id,omitempty:flags:8"`
+	FromBoostsApplied    *int32              `tl:"from_boosts_applied,omitempty:flags:29"`
+	PeerID               Peer                `tl:"peer_id"`
+	SavedPeerID          Peer                `tl:"saved_peer_id,omitempty:flags:28"`
+	FwdFrom              MessageFwdHeader    `tl:"fwd_from,omitempty:flags:2"`
+	ViaBotID             *int64              `tl:"via_bot_id,omitempty:flags:11"`
+	ViaBusinessBotID     *int64              `tl:"via_business_bot_id,omitempty:flags2:0"`
+	ReplyTo              MessageReplyHeader  `tl:"reply_to,omitempty:flags:3"`
+	Date                 int32               `tl:"date"`
+	Message              string              `tl:"message"`
+	Media                MessageMedia        `tl:"media,omitempty:flags:9"`
+	ReplyMarkup          ReplyMarkup         `tl:"reply_markup,omitempty:flags:6"`
+	Entities             []MessageEntity     `tl:"entities,omitempty:flags:7"`
+	Views                *int32              `tl:"views,omitempty:flags:10"`
+	Forwards             *int32              `tl:"forwards,omitempty:flags:10"`
+	Replies              MessageReplies      `tl:"replies,omitempty:flags:23"`
+	EditDate             *int32              `tl:"edit_date,omitempty:flags:15"`
+	PostAuthor           *string             `tl:"post_author,omitempty:flags:16"`
+	GroupedID            *int64              `tl:"grouped_id,omitempty:flags:17"`
+	Reactions            MessageReactions    `tl:"reactions,omitempty:flags:20"`
+	RestrictionReason    []RestrictionReason `tl:"restriction_reason,omitempty:flags:22"`
+	TTLPeriod            *int32              `tl:"ttl_period,omitempty:flags:25"`
+	QuickReplyShortcutID *int32              `tl:"quick_reply_shortcut_id,omitempty:flags:30"`
+	Effect               *int64              `tl:"effect,omitempty:flags2:2"`
+	Factcheck            FactCheck           `tl:"factcheck,omitempty:flags2:3"`
 }
 
 func (*MessagePredict) CRC() uint32 {
@@ -7027,20 +7027,20 @@ func (*MessagePredict) CRC() uint32 {
 func (*MessagePredict) _Message() {}
 
 type MessageServicePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Out         bool     `tl:",omitempty:flags:1,implicit"`
-	Mentioned   bool     `tl:",omitempty:flags:4,implicit"`
-	MediaUnread bool     `tl:",omitempty:flags:5,implicit"`
-	Silent      bool     `tl:",omitempty:flags:13,implicit"`
-	Post        bool     `tl:",omitempty:flags:14,implicit"`
-	Legacy      bool     `tl:",omitempty:flags:19,implicit"`
-	ID          int32
-	FromID      Peer `tl:",omitempty:flags:8"`
-	PeerID      Peer
-	ReplyTo     MessageReplyHeader `tl:",omitempty:flags:3"`
-	Date        int32
-	Action      MessageAction
-	TTLPeriod   *int32 `tl:",omitempty:flags:25"`
+	_           struct{}           `tl:"flags,bitflag"`
+	Out         bool               `tl:"out,omitempty:flags:1,implicit"`
+	Mentioned   bool               `tl:"mentioned,omitempty:flags:4,implicit"`
+	MediaUnread bool               `tl:"media_unread,omitempty:flags:5,implicit"`
+	Silent      bool               `tl:"silent,omitempty:flags:13,implicit"`
+	Post        bool               `tl:"post,omitempty:flags:14,implicit"`
+	Legacy      bool               `tl:"legacy,omitempty:flags:19,implicit"`
+	ID          int32              `tl:"id"`
+	FromID      Peer               `tl:"from_id,omitempty:flags:8"`
+	PeerID      Peer               `tl:"peer_id"`
+	ReplyTo     MessageReplyHeader `tl:"reply_to,omitempty:flags:3"`
+	Date        int32              `tl:"date"`
+	Action      MessageAction      `tl:"action"`
+	TTLPeriod   *int32             `tl:"ttl_period,omitempty:flags:25"`
 }
 
 func (*MessageServicePredict) CRC() uint32 {
@@ -7049,7 +7049,7 @@ func (*MessageServicePredict) CRC() uint32 {
 func (*MessageServicePredict) _Message() {}
 
 type MessageAction interface {
-	tl.Object
+	tl.TLObject
 	_MessageAction()
 }
 
@@ -7109,8 +7109,8 @@ func (*MessageActionEmptyPredict) CRC() uint32 {
 func (*MessageActionEmptyPredict) _MessageAction() {}
 
 type MessageActionChatCreatePredict struct {
-	Title string
-	Users []int64
+	Title string  `tl:"title"`
+	Users []int64 `tl:"users"`
 }
 
 func (*MessageActionChatCreatePredict) CRC() uint32 {
@@ -7119,7 +7119,7 @@ func (*MessageActionChatCreatePredict) CRC() uint32 {
 func (*MessageActionChatCreatePredict) _MessageAction() {}
 
 type MessageActionChatEditTitlePredict struct {
-	Title string
+	Title string `tl:"title"`
 }
 
 func (*MessageActionChatEditTitlePredict) CRC() uint32 {
@@ -7128,7 +7128,7 @@ func (*MessageActionChatEditTitlePredict) CRC() uint32 {
 func (*MessageActionChatEditTitlePredict) _MessageAction() {}
 
 type MessageActionChatEditPhotoPredict struct {
-	Photo Photo
+	Photo Photo `tl:"photo"`
 }
 
 func (*MessageActionChatEditPhotoPredict) CRC() uint32 {
@@ -7144,7 +7144,7 @@ func (*MessageActionChatDeletePhotoPredict) CRC() uint32 {
 func (*MessageActionChatDeletePhotoPredict) _MessageAction() {}
 
 type MessageActionChatAddUserPredict struct {
-	Users []int64
+	Users []int64 `tl:"users"`
 }
 
 func (*MessageActionChatAddUserPredict) CRC() uint32 {
@@ -7153,7 +7153,7 @@ func (*MessageActionChatAddUserPredict) CRC() uint32 {
 func (*MessageActionChatAddUserPredict) _MessageAction() {}
 
 type MessageActionChatDeleteUserPredict struct {
-	UserID int64
+	UserID int64 `tl:"user_id"`
 }
 
 func (*MessageActionChatDeleteUserPredict) CRC() uint32 {
@@ -7162,7 +7162,7 @@ func (*MessageActionChatDeleteUserPredict) CRC() uint32 {
 func (*MessageActionChatDeleteUserPredict) _MessageAction() {}
 
 type MessageActionChatJoinedByLinkPredict struct {
-	InviterID int64
+	InviterID int64 `tl:"inviter_id"`
 }
 
 func (*MessageActionChatJoinedByLinkPredict) CRC() uint32 {
@@ -7171,7 +7171,7 @@ func (*MessageActionChatJoinedByLinkPredict) CRC() uint32 {
 func (*MessageActionChatJoinedByLinkPredict) _MessageAction() {}
 
 type MessageActionChannelCreatePredict struct {
-	Title string
+	Title string `tl:"title"`
 }
 
 func (*MessageActionChannelCreatePredict) CRC() uint32 {
@@ -7180,7 +7180,7 @@ func (*MessageActionChannelCreatePredict) CRC() uint32 {
 func (*MessageActionChannelCreatePredict) _MessageAction() {}
 
 type MessageActionChatMigrateToPredict struct {
-	ChannelID int64
+	ChannelID int64 `tl:"channel_id"`
 }
 
 func (*MessageActionChatMigrateToPredict) CRC() uint32 {
@@ -7189,8 +7189,8 @@ func (*MessageActionChatMigrateToPredict) CRC() uint32 {
 func (*MessageActionChatMigrateToPredict) _MessageAction() {}
 
 type MessageActionChannelMigrateFromPredict struct {
-	Title  string
-	ChatID int64
+	Title  string `tl:"title"`
+	ChatID int64  `tl:"chat_id"`
 }
 
 func (*MessageActionChannelMigrateFromPredict) CRC() uint32 {
@@ -7213,8 +7213,8 @@ func (*MessageActionHistoryClearPredict) CRC() uint32 {
 func (*MessageActionHistoryClearPredict) _MessageAction() {}
 
 type MessageActionGameScorePredict struct {
-	GameID int64
-	Score  int32
+	GameID int64 `tl:"game_id"`
+	Score  int32 `tl:"score"`
 }
 
 func (*MessageActionGameScorePredict) CRC() uint32 {
@@ -7223,15 +7223,15 @@ func (*MessageActionGameScorePredict) CRC() uint32 {
 func (*MessageActionGameScorePredict) _MessageAction() {}
 
 type MessageActionPaymentSentMePredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	RecurringInit    bool     `tl:",omitempty:flags:2,implicit"`
-	RecurringUsed    bool     `tl:",omitempty:flags:3,implicit"`
-	Currency         string
-	TotalAmount      int64
-	Payload          []byte
-	Info             PaymentRequestedInfo `tl:",omitempty:flags:0"`
-	ShippingOptionID *string              `tl:",omitempty:flags:1"`
-	Charge           PaymentCharge
+	_                struct{}             `tl:"flags,bitflag"`
+	RecurringInit    bool                 `tl:"recurring_init,omitempty:flags:2,implicit"`
+	RecurringUsed    bool                 `tl:"recurring_used,omitempty:flags:3,implicit"`
+	Currency         string               `tl:"currency"`
+	TotalAmount      int64                `tl:"total_amount"`
+	Payload          []byte               `tl:"payload"`
+	Info             PaymentRequestedInfo `tl:"info,omitempty:flags:0"`
+	ShippingOptionID *string              `tl:"shipping_option_id,omitempty:flags:1"`
+	Charge           PaymentCharge        `tl:"charge"`
 }
 
 func (*MessageActionPaymentSentMePredict) CRC() uint32 {
@@ -7241,11 +7241,11 @@ func (*MessageActionPaymentSentMePredict) _MessageAction() {}
 
 type MessageActionPaymentSentPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	RecurringInit bool     `tl:",omitempty:flags:2,implicit"`
-	RecurringUsed bool     `tl:",omitempty:flags:3,implicit"`
-	Currency      string
-	TotalAmount   int64
-	InvoiceSlug   *string `tl:",omitempty:flags:0"`
+	RecurringInit bool     `tl:"recurring_init,omitempty:flags:2,implicit"`
+	RecurringUsed bool     `tl:"recurring_used,omitempty:flags:3,implicit"`
+	Currency      string   `tl:"currency"`
+	TotalAmount   int64    `tl:"total_amount"`
+	InvoiceSlug   *string  `tl:"invoice_slug,omitempty:flags:0"`
 }
 
 func (*MessageActionPaymentSentPredict) CRC() uint32 {
@@ -7254,11 +7254,11 @@ func (*MessageActionPaymentSentPredict) CRC() uint32 {
 func (*MessageActionPaymentSentPredict) _MessageAction() {}
 
 type MessageActionPhoneCallPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Video    bool     `tl:",omitempty:flags:2,implicit"`
-	CallID   int64
-	Reason   PhoneCallDiscardReason `tl:",omitempty:flags:0"`
-	Duration *int32                 `tl:",omitempty:flags:1"`
+	_        struct{}               `tl:"flags,bitflag"`
+	Video    bool                   `tl:"video,omitempty:flags:2,implicit"`
+	CallID   int64                  `tl:"call_id"`
+	Reason   PhoneCallDiscardReason `tl:"reason,omitempty:flags:0"`
+	Duration *int32                 `tl:"duration,omitempty:flags:1"`
 }
 
 func (*MessageActionPhoneCallPredict) CRC() uint32 {
@@ -7274,7 +7274,7 @@ func (*MessageActionScreenshotTakenPredict) CRC() uint32 {
 func (*MessageActionScreenshotTakenPredict) _MessageAction() {}
 
 type MessageActionCustomActionPredict struct {
-	Message string
+	Message string `tl:"message"`
 }
 
 func (*MessageActionCustomActionPredict) CRC() uint32 {
@@ -7284,10 +7284,10 @@ func (*MessageActionCustomActionPredict) _MessageAction() {}
 
 type MessageActionBotAllowedPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	AttachMenu  bool     `tl:",omitempty:flags:1,implicit"`
-	FromRequest bool     `tl:",omitempty:flags:3,implicit"`
-	Domain      *string  `tl:",omitempty:flags:0"`
-	App         BotApp   `tl:",omitempty:flags:2"`
+	AttachMenu  bool     `tl:"attach_menu,omitempty:flags:1,implicit"`
+	FromRequest bool     `tl:"from_request,omitempty:flags:3,implicit"`
+	Domain      *string  `tl:"domain,omitempty:flags:0"`
+	App         BotApp   `tl:"app,omitempty:flags:2"`
 }
 
 func (*MessageActionBotAllowedPredict) CRC() uint32 {
@@ -7296,8 +7296,8 @@ func (*MessageActionBotAllowedPredict) CRC() uint32 {
 func (*MessageActionBotAllowedPredict) _MessageAction() {}
 
 type MessageActionSecureValuesSentMePredict struct {
-	Values      []SecureValue
-	Credentials SecureCredentialsEncrypted
+	Values      []SecureValue              `tl:"values"`
+	Credentials SecureCredentialsEncrypted `tl:"credentials"`
 }
 
 func (*MessageActionSecureValuesSentMePredict) CRC() uint32 {
@@ -7306,7 +7306,7 @@ func (*MessageActionSecureValuesSentMePredict) CRC() uint32 {
 func (*MessageActionSecureValuesSentMePredict) _MessageAction() {}
 
 type MessageActionSecureValuesSentPredict struct {
-	Types []SecureValueType
+	Types []SecureValueType `tl:"types"`
 }
 
 func (*MessageActionSecureValuesSentPredict) CRC() uint32 {
@@ -7322,9 +7322,9 @@ func (*MessageActionContactSignUpPredict) CRC() uint32 {
 func (*MessageActionContactSignUpPredict) _MessageAction() {}
 
 type MessageActionGeoProximityReachedPredict struct {
-	FromID   Peer
-	ToID     Peer
-	Distance int32
+	FromID   Peer  `tl:"from_id"`
+	ToID     Peer  `tl:"to_id"`
+	Distance int32 `tl:"distance"`
 }
 
 func (*MessageActionGeoProximityReachedPredict) CRC() uint32 {
@@ -7333,9 +7333,9 @@ func (*MessageActionGeoProximityReachedPredict) CRC() uint32 {
 func (*MessageActionGeoProximityReachedPredict) _MessageAction() {}
 
 type MessageActionGroupCallPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Call     InputGroupCall
-	Duration *int32 `tl:",omitempty:flags:0"`
+	_        struct{}       `tl:"flags,bitflag"`
+	Call     InputGroupCall `tl:"call"`
+	Duration *int32         `tl:"duration,omitempty:flags:0"`
 }
 
 func (*MessageActionGroupCallPredict) CRC() uint32 {
@@ -7344,8 +7344,8 @@ func (*MessageActionGroupCallPredict) CRC() uint32 {
 func (*MessageActionGroupCallPredict) _MessageAction() {}
 
 type MessageActionInviteToGroupCallPredict struct {
-	Call  InputGroupCall
-	Users []int64
+	Call  InputGroupCall `tl:"call"`
+	Users []int64        `tl:"users"`
 }
 
 func (*MessageActionInviteToGroupCallPredict) CRC() uint32 {
@@ -7355,8 +7355,8 @@ func (*MessageActionInviteToGroupCallPredict) _MessageAction() {}
 
 type MessageActionSetMessagesTTLPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	Period          int32
-	AutoSettingFrom *int64 `tl:",omitempty:flags:0"`
+	Period          int32    `tl:"period"`
+	AutoSettingFrom *int64   `tl:"auto_setting_from,omitempty:flags:0"`
 }
 
 func (*MessageActionSetMessagesTTLPredict) CRC() uint32 {
@@ -7365,8 +7365,8 @@ func (*MessageActionSetMessagesTTLPredict) CRC() uint32 {
 func (*MessageActionSetMessagesTTLPredict) _MessageAction() {}
 
 type MessageActionGroupCallScheduledPredict struct {
-	Call         InputGroupCall
-	ScheduleDate int32
+	Call         InputGroupCall `tl:"call"`
+	ScheduleDate int32          `tl:"schedule_date"`
 }
 
 func (*MessageActionGroupCallScheduledPredict) CRC() uint32 {
@@ -7375,7 +7375,7 @@ func (*MessageActionGroupCallScheduledPredict) CRC() uint32 {
 func (*MessageActionGroupCallScheduledPredict) _MessageAction() {}
 
 type MessageActionSetChatThemePredict struct {
-	Emoticon string
+	Emoticon string `tl:"emoticon"`
 }
 
 func (*MessageActionSetChatThemePredict) CRC() uint32 {
@@ -7391,8 +7391,8 @@ func (*MessageActionChatJoinedByRequestPredict) CRC() uint32 {
 func (*MessageActionChatJoinedByRequestPredict) _MessageAction() {}
 
 type MessageActionWebViewDataSentMePredict struct {
-	Text string
-	Data string
+	Text string `tl:"text"`
+	Data string `tl:"data"`
 }
 
 func (*MessageActionWebViewDataSentMePredict) CRC() uint32 {
@@ -7401,7 +7401,7 @@ func (*MessageActionWebViewDataSentMePredict) CRC() uint32 {
 func (*MessageActionWebViewDataSentMePredict) _MessageAction() {}
 
 type MessageActionWebViewDataSentPredict struct {
-	Text string
+	Text string `tl:"text"`
 }
 
 func (*MessageActionWebViewDataSentPredict) CRC() uint32 {
@@ -7411,11 +7411,11 @@ func (*MessageActionWebViewDataSentPredict) _MessageAction() {}
 
 type MessageActionGiftPremiumPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	Currency       string
-	Amount         int64
-	Months         int32
-	CryptoCurrency *string `tl:",omitempty:flags:0"`
-	CryptoAmount   *int64  `tl:",omitempty:flags:0"`
+	Currency       string   `tl:"currency"`
+	Amount         int64    `tl:"amount"`
+	Months         int32    `tl:"months"`
+	CryptoCurrency *string  `tl:"crypto_currency,omitempty:flags:0"`
+	CryptoAmount   *int64   `tl:"crypto_amount,omitempty:flags:0"`
 }
 
 func (*MessageActionGiftPremiumPredict) CRC() uint32 {
@@ -7425,9 +7425,9 @@ func (*MessageActionGiftPremiumPredict) _MessageAction() {}
 
 type MessageActionTopicCreatePredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	Title       string
-	IconColor   int32
-	IconEmojiID *int64 `tl:",omitempty:flags:0"`
+	Title       string   `tl:"title"`
+	IconColor   int32    `tl:"icon_color"`
+	IconEmojiID *int64   `tl:"icon_emoji_id,omitempty:flags:0"`
 }
 
 func (*MessageActionTopicCreatePredict) CRC() uint32 {
@@ -7437,10 +7437,10 @@ func (*MessageActionTopicCreatePredict) _MessageAction() {}
 
 type MessageActionTopicEditPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	Title       *string  `tl:",omitempty:flags:0"`
-	IconEmojiID *int64   `tl:",omitempty:flags:1"`
-	Closed      *bool    `tl:",omitempty:flags:2"`
-	Hidden      *bool    `tl:",omitempty:flags:3"`
+	Title       *string  `tl:"title,omitempty:flags:0"`
+	IconEmojiID *int64   `tl:"icon_emoji_id,omitempty:flags:1"`
+	Closed      *bool    `tl:"closed,omitempty:flags:2"`
+	Hidden      *bool    `tl:"hidden,omitempty:flags:3"`
 }
 
 func (*MessageActionTopicEditPredict) CRC() uint32 {
@@ -7449,7 +7449,7 @@ func (*MessageActionTopicEditPredict) CRC() uint32 {
 func (*MessageActionTopicEditPredict) _MessageAction() {}
 
 type MessageActionSuggestProfilePhotoPredict struct {
-	Photo Photo
+	Photo Photo `tl:"photo"`
 }
 
 func (*MessageActionSuggestProfilePhotoPredict) CRC() uint32 {
@@ -7458,8 +7458,8 @@ func (*MessageActionSuggestProfilePhotoPredict) CRC() uint32 {
 func (*MessageActionSuggestProfilePhotoPredict) _MessageAction() {}
 
 type MessageActionRequestedPeerPredict struct {
-	ButtonID int32
-	Peers    []Peer
+	ButtonID int32  `tl:"button_id"`
+	Peers    []Peer `tl:"peers"`
 }
 
 func (*MessageActionRequestedPeerPredict) CRC() uint32 {
@@ -7468,10 +7468,10 @@ func (*MessageActionRequestedPeerPredict) CRC() uint32 {
 func (*MessageActionRequestedPeerPredict) _MessageAction() {}
 
 type MessageActionSetChatWallPaperPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Same      bool     `tl:",omitempty:flags:0,implicit"`
-	ForBoth   bool     `tl:",omitempty:flags:1,implicit"`
-	Wallpaper WallPaper
+	_         struct{}  `tl:"flags,bitflag"`
+	Same      bool      `tl:"same,omitempty:flags:0,implicit"`
+	ForBoth   bool      `tl:"for_both,omitempty:flags:1,implicit"`
+	Wallpaper WallPaper `tl:"wallpaper"`
 }
 
 func (*MessageActionSetChatWallPaperPredict) CRC() uint32 {
@@ -7481,15 +7481,15 @@ func (*MessageActionSetChatWallPaperPredict) _MessageAction() {}
 
 type MessageActionGiftCodePredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	ViaGiveaway    bool     `tl:",omitempty:flags:0,implicit"`
-	Unclaimed      bool     `tl:",omitempty:flags:2,implicit"`
-	BoostPeer      Peer     `tl:",omitempty:flags:1"`
-	Months         int32
-	Slug           string
-	Currency       *string `tl:",omitempty:flags:2"`
-	Amount         *int64  `tl:",omitempty:flags:2"`
-	CryptoCurrency *string `tl:",omitempty:flags:3"`
-	CryptoAmount   *int64  `tl:",omitempty:flags:3"`
+	ViaGiveaway    bool     `tl:"via_giveaway,omitempty:flags:0,implicit"`
+	Unclaimed      bool     `tl:"unclaimed,omitempty:flags:2,implicit"`
+	BoostPeer      Peer     `tl:"boost_peer,omitempty:flags:1"`
+	Months         int32    `tl:"months"`
+	Slug           string   `tl:"slug"`
+	Currency       *string  `tl:"currency,omitempty:flags:2"`
+	Amount         *int64   `tl:"amount,omitempty:flags:2"`
+	CryptoCurrency *string  `tl:"crypto_currency,omitempty:flags:3"`
+	CryptoAmount   *int64   `tl:"crypto_amount,omitempty:flags:3"`
 }
 
 func (*MessageActionGiftCodePredict) CRC() uint32 {
@@ -7505,8 +7505,8 @@ func (*MessageActionGiveawayLaunchPredict) CRC() uint32 {
 func (*MessageActionGiveawayLaunchPredict) _MessageAction() {}
 
 type MessageActionGiveawayResultsPredict struct {
-	WinnersCount   int32
-	UnclaimedCount int32
+	WinnersCount   int32 `tl:"winners_count"`
+	UnclaimedCount int32 `tl:"unclaimed_count"`
 }
 
 func (*MessageActionGiveawayResultsPredict) CRC() uint32 {
@@ -7515,7 +7515,7 @@ func (*MessageActionGiveawayResultsPredict) CRC() uint32 {
 func (*MessageActionGiveawayResultsPredict) _MessageAction() {}
 
 type MessageActionBoostApplyPredict struct {
-	Boosts int32
+	Boosts int32 `tl:"boosts"`
 }
 
 func (*MessageActionBoostApplyPredict) CRC() uint32 {
@@ -7524,8 +7524,8 @@ func (*MessageActionBoostApplyPredict) CRC() uint32 {
 func (*MessageActionBoostApplyPredict) _MessageAction() {}
 
 type MessageActionRequestedPeerSentMePredict struct {
-	ButtonID int32
-	Peers    []RequestedPeer
+	ButtonID int32           `tl:"button_id"`
+	Peers    []RequestedPeer `tl:"peers"`
 }
 
 func (*MessageActionRequestedPeerSentMePredict) CRC() uint32 {
@@ -7534,12 +7534,12 @@ func (*MessageActionRequestedPeerSentMePredict) CRC() uint32 {
 func (*MessageActionRequestedPeerSentMePredict) _MessageAction() {}
 
 type MessageActionPaymentRefundedPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Peer        Peer
-	Currency    string
-	TotalAmount int64
-	Payload     *[]byte `tl:",omitempty:flags:0"`
-	Charge      PaymentCharge
+	_           struct{}      `tl:"flags,bitflag"`
+	Peer        Peer          `tl:"peer"`
+	Currency    string        `tl:"currency"`
+	TotalAmount int64         `tl:"total_amount"`
+	Payload     *[]byte       `tl:"payload,omitempty:flags:0"`
+	Charge      PaymentCharge `tl:"charge"`
 }
 
 func (*MessageActionPaymentRefundedPredict) CRC() uint32 {
@@ -7549,12 +7549,12 @@ func (*MessageActionPaymentRefundedPredict) _MessageAction() {}
 
 type MessageActionGiftStarsPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	Currency       string
-	Amount         int64
-	Stars          int64
-	CryptoCurrency *string `tl:",omitempty:flags:0"`
-	CryptoAmount   *int64  `tl:",omitempty:flags:0"`
-	TransactionID  *string `tl:",omitempty:flags:1"`
+	Currency       string   `tl:"currency"`
+	Amount         int64    `tl:"amount"`
+	Stars          int64    `tl:"stars"`
+	CryptoCurrency *string  `tl:"crypto_currency,omitempty:flags:0"`
+	CryptoAmount   *int64   `tl:"crypto_amount,omitempty:flags:0"`
+	TransactionID  *string  `tl:"transaction_id,omitempty:flags:1"`
 }
 
 func (*MessageActionGiftStarsPredict) CRC() uint32 {
@@ -7563,7 +7563,7 @@ func (*MessageActionGiftStarsPredict) CRC() uint32 {
 func (*MessageActionGiftStarsPredict) _MessageAction() {}
 
 type MessageEntity interface {
-	tl.Object
+	tl.TLObject
 	_MessageEntity()
 }
 
@@ -7592,8 +7592,8 @@ var (
 )
 
 type MessageEntityUnknownPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityUnknownPredict) CRC() uint32 {
@@ -7602,8 +7602,8 @@ func (*MessageEntityUnknownPredict) CRC() uint32 {
 func (*MessageEntityUnknownPredict) _MessageEntity() {}
 
 type MessageEntityMentionPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityMentionPredict) CRC() uint32 {
@@ -7612,8 +7612,8 @@ func (*MessageEntityMentionPredict) CRC() uint32 {
 func (*MessageEntityMentionPredict) _MessageEntity() {}
 
 type MessageEntityHashtagPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityHashtagPredict) CRC() uint32 {
@@ -7622,8 +7622,8 @@ func (*MessageEntityHashtagPredict) CRC() uint32 {
 func (*MessageEntityHashtagPredict) _MessageEntity() {}
 
 type MessageEntityBotCommandPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityBotCommandPredict) CRC() uint32 {
@@ -7632,8 +7632,8 @@ func (*MessageEntityBotCommandPredict) CRC() uint32 {
 func (*MessageEntityBotCommandPredict) _MessageEntity() {}
 
 type MessageEntityURLPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityURLPredict) CRC() uint32 {
@@ -7642,8 +7642,8 @@ func (*MessageEntityURLPredict) CRC() uint32 {
 func (*MessageEntityURLPredict) _MessageEntity() {}
 
 type MessageEntityEmailPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityEmailPredict) CRC() uint32 {
@@ -7652,8 +7652,8 @@ func (*MessageEntityEmailPredict) CRC() uint32 {
 func (*MessageEntityEmailPredict) _MessageEntity() {}
 
 type MessageEntityBoldPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityBoldPredict) CRC() uint32 {
@@ -7662,8 +7662,8 @@ func (*MessageEntityBoldPredict) CRC() uint32 {
 func (*MessageEntityBoldPredict) _MessageEntity() {}
 
 type MessageEntityItalicPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityItalicPredict) CRC() uint32 {
@@ -7672,8 +7672,8 @@ func (*MessageEntityItalicPredict) CRC() uint32 {
 func (*MessageEntityItalicPredict) _MessageEntity() {}
 
 type MessageEntityCodePredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityCodePredict) CRC() uint32 {
@@ -7682,9 +7682,9 @@ func (*MessageEntityCodePredict) CRC() uint32 {
 func (*MessageEntityCodePredict) _MessageEntity() {}
 
 type MessageEntityPrePredict struct {
-	Offset   int32
-	Length   int32
-	Language string
+	Offset   int32  `tl:"offset"`
+	Length   int32  `tl:"length"`
+	Language string `tl:"language"`
 }
 
 func (*MessageEntityPrePredict) CRC() uint32 {
@@ -7693,9 +7693,9 @@ func (*MessageEntityPrePredict) CRC() uint32 {
 func (*MessageEntityPrePredict) _MessageEntity() {}
 
 type MessageEntityTextURLPredict struct {
-	Offset int32
-	Length int32
-	URL    string
+	Offset int32  `tl:"offset"`
+	Length int32  `tl:"length"`
+	URL    string `tl:"url"`
 }
 
 func (*MessageEntityTextURLPredict) CRC() uint32 {
@@ -7704,9 +7704,9 @@ func (*MessageEntityTextURLPredict) CRC() uint32 {
 func (*MessageEntityTextURLPredict) _MessageEntity() {}
 
 type MessageEntityMentionNamePredict struct {
-	Offset int32
-	Length int32
-	UserID int64
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
+	UserID int64 `tl:"user_id"`
 }
 
 func (*MessageEntityMentionNamePredict) CRC() uint32 {
@@ -7715,9 +7715,9 @@ func (*MessageEntityMentionNamePredict) CRC() uint32 {
 func (*MessageEntityMentionNamePredict) _MessageEntity() {}
 
 type InputMessageEntityMentionNamePredict struct {
-	Offset int32
-	Length int32
-	UserID InputUser
+	Offset int32     `tl:"offset"`
+	Length int32     `tl:"length"`
+	UserID InputUser `tl:"user_id"`
 }
 
 func (*InputMessageEntityMentionNamePredict) CRC() uint32 {
@@ -7726,8 +7726,8 @@ func (*InputMessageEntityMentionNamePredict) CRC() uint32 {
 func (*InputMessageEntityMentionNamePredict) _MessageEntity() {}
 
 type MessageEntityPhonePredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityPhonePredict) CRC() uint32 {
@@ -7736,8 +7736,8 @@ func (*MessageEntityPhonePredict) CRC() uint32 {
 func (*MessageEntityPhonePredict) _MessageEntity() {}
 
 type MessageEntityCashtagPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityCashtagPredict) CRC() uint32 {
@@ -7746,8 +7746,8 @@ func (*MessageEntityCashtagPredict) CRC() uint32 {
 func (*MessageEntityCashtagPredict) _MessageEntity() {}
 
 type MessageEntityUnderlinePredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityUnderlinePredict) CRC() uint32 {
@@ -7756,8 +7756,8 @@ func (*MessageEntityUnderlinePredict) CRC() uint32 {
 func (*MessageEntityUnderlinePredict) _MessageEntity() {}
 
 type MessageEntityStrikePredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityStrikePredict) CRC() uint32 {
@@ -7766,8 +7766,8 @@ func (*MessageEntityStrikePredict) CRC() uint32 {
 func (*MessageEntityStrikePredict) _MessageEntity() {}
 
 type MessageEntityBankCardPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntityBankCardPredict) CRC() uint32 {
@@ -7776,8 +7776,8 @@ func (*MessageEntityBankCardPredict) CRC() uint32 {
 func (*MessageEntityBankCardPredict) _MessageEntity() {}
 
 type MessageEntitySpoilerPredict struct {
-	Offset int32
-	Length int32
+	Offset int32 `tl:"offset"`
+	Length int32 `tl:"length"`
 }
 
 func (*MessageEntitySpoilerPredict) CRC() uint32 {
@@ -7786,9 +7786,9 @@ func (*MessageEntitySpoilerPredict) CRC() uint32 {
 func (*MessageEntitySpoilerPredict) _MessageEntity() {}
 
 type MessageEntityCustomEmojiPredict struct {
-	Offset     int32
-	Length     int32
-	DocumentID int64
+	Offset     int32 `tl:"offset"`
+	Length     int32 `tl:"length"`
+	DocumentID int64 `tl:"document_id"`
 }
 
 func (*MessageEntityCustomEmojiPredict) CRC() uint32 {
@@ -7798,9 +7798,9 @@ func (*MessageEntityCustomEmojiPredict) _MessageEntity() {}
 
 type MessageEntityBlockquotePredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Collapsed bool     `tl:",omitempty:flags:0,implicit"`
-	Offset    int32
-	Length    int32
+	Collapsed bool     `tl:"collapsed,omitempty:flags:0,implicit"`
+	Offset    int32    `tl:"offset"`
+	Length    int32    `tl:"length"`
 }
 
 func (*MessageEntityBlockquotePredict) CRC() uint32 {
@@ -7809,7 +7809,7 @@ func (*MessageEntityBlockquotePredict) CRC() uint32 {
 func (*MessageEntityBlockquotePredict) _MessageEntity() {}
 
 type MessageExtendedMedia interface {
-	tl.Object
+	tl.TLObject
 	_MessageExtendedMedia()
 }
 
@@ -7820,10 +7820,10 @@ var (
 
 type MessageExtendedMediaPreviewPredict struct {
 	_             struct{}  `tl:"flags,bitflag"`
-	W             *int32    `tl:",omitempty:flags:0"`
-	H             *int32    `tl:",omitempty:flags:0"`
-	Thumb         PhotoSize `tl:",omitempty:flags:1"`
-	VideoDuration *int32    `tl:",omitempty:flags:2"`
+	W             *int32    `tl:"w,omitempty:flags:0"`
+	H             *int32    `tl:"h,omitempty:flags:0"`
+	Thumb         PhotoSize `tl:"thumb,omitempty:flags:1"`
+	VideoDuration *int32    `tl:"video_duration,omitempty:flags:2"`
 }
 
 func (*MessageExtendedMediaPreviewPredict) CRC() uint32 {
@@ -7832,7 +7832,7 @@ func (*MessageExtendedMediaPreviewPredict) CRC() uint32 {
 func (*MessageExtendedMediaPreviewPredict) _MessageExtendedMedia() {}
 
 type MessageExtendedMediaPredict struct {
-	Media MessageMedia
+	Media MessageMedia `tl:"media"`
 }
 
 func (*MessageExtendedMediaPredict) CRC() uint32 {
@@ -7841,7 +7841,7 @@ func (*MessageExtendedMediaPredict) CRC() uint32 {
 func (*MessageExtendedMediaPredict) _MessageExtendedMedia() {}
 
 type MessageFwdHeader interface {
-	tl.Object
+	tl.TLObject
 	_MessageFwdHeader()
 }
 
@@ -7851,19 +7851,19 @@ var (
 
 type MessageFwdHeaderPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	Imported       bool     `tl:",omitempty:flags:7,implicit"`
-	SavedOut       bool     `tl:",omitempty:flags:11,implicit"`
-	FromID         Peer     `tl:",omitempty:flags:0"`
-	FromName       *string  `tl:",omitempty:flags:5"`
-	Date           int32
-	ChannelPost    *int32  `tl:",omitempty:flags:2"`
-	PostAuthor     *string `tl:",omitempty:flags:3"`
-	SavedFromPeer  Peer    `tl:",omitempty:flags:4"`
-	SavedFromMsgID *int32  `tl:",omitempty:flags:4"`
-	SavedFromID    Peer    `tl:",omitempty:flags:8"`
-	SavedFromName  *string `tl:",omitempty:flags:9"`
-	SavedDate      *int32  `tl:",omitempty:flags:10"`
-	PsaType        *string `tl:",omitempty:flags:6"`
+	Imported       bool     `tl:"imported,omitempty:flags:7,implicit"`
+	SavedOut       bool     `tl:"saved_out,omitempty:flags:11,implicit"`
+	FromID         Peer     `tl:"from_id,omitempty:flags:0"`
+	FromName       *string  `tl:"from_name,omitempty:flags:5"`
+	Date           int32    `tl:"date"`
+	ChannelPost    *int32   `tl:"channel_post,omitempty:flags:2"`
+	PostAuthor     *string  `tl:"post_author,omitempty:flags:3"`
+	SavedFromPeer  Peer     `tl:"saved_from_peer,omitempty:flags:4"`
+	SavedFromMsgID *int32   `tl:"saved_from_msg_id,omitempty:flags:4"`
+	SavedFromID    Peer     `tl:"saved_from_id,omitempty:flags:8"`
+	SavedFromName  *string  `tl:"saved_from_name,omitempty:flags:9"`
+	SavedDate      *int32   `tl:"saved_date,omitempty:flags:10"`
+	PsaType        *string  `tl:"psa_type,omitempty:flags:6"`
 }
 
 func (*MessageFwdHeaderPredict) CRC() uint32 {
@@ -7872,7 +7872,7 @@ func (*MessageFwdHeaderPredict) CRC() uint32 {
 func (*MessageFwdHeaderPredict) _MessageFwdHeader() {}
 
 type MessageMedia interface {
-	tl.Object
+	tl.TLObject
 	_MessageMedia()
 }
 
@@ -7905,9 +7905,9 @@ func (*MessageMediaEmptyPredict) _MessageMedia() {}
 
 type MessageMediaPhotoPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Spoiler    bool     `tl:",omitempty:flags:3,implicit"`
-	Photo      Photo    `tl:",omitempty:flags:0"`
-	TTLSeconds *int32   `tl:",omitempty:flags:2"`
+	Spoiler    bool     `tl:"spoiler,omitempty:flags:3,implicit"`
+	Photo      Photo    `tl:"photo,omitempty:flags:0"`
+	TTLSeconds *int32   `tl:"ttl_seconds,omitempty:flags:2"`
 }
 
 func (*MessageMediaPhotoPredict) CRC() uint32 {
@@ -7916,7 +7916,7 @@ func (*MessageMediaPhotoPredict) CRC() uint32 {
 func (*MessageMediaPhotoPredict) _MessageMedia() {}
 
 type MessageMediaGeoPredict struct {
-	Geo GeoPoint
+	Geo GeoPoint `tl:"geo"`
 }
 
 func (*MessageMediaGeoPredict) CRC() uint32 {
@@ -7925,11 +7925,11 @@ func (*MessageMediaGeoPredict) CRC() uint32 {
 func (*MessageMediaGeoPredict) _MessageMedia() {}
 
 type MessageMediaContactPredict struct {
-	PhoneNumber string
-	FirstName   string
-	LastName    string
-	Vcard       string
-	UserID      int64
+	PhoneNumber string `tl:"phone_number"`
+	FirstName   string `tl:"first_name"`
+	LastName    string `tl:"last_name"`
+	Vcard       string `tl:"vcard"`
+	UserID      int64  `tl:"user_id"`
 }
 
 func (*MessageMediaContactPredict) CRC() uint32 {
@@ -7946,14 +7946,14 @@ func (*MessageMediaUnsupportedPredict) _MessageMedia() {}
 
 type MessageMediaDocumentPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	Nopremium   bool     `tl:",omitempty:flags:3,implicit"`
-	Spoiler     bool     `tl:",omitempty:flags:4,implicit"`
-	Video       bool     `tl:",omitempty:flags:6,implicit"`
-	Round       bool     `tl:",omitempty:flags:7,implicit"`
-	Voice       bool     `tl:",omitempty:flags:8,implicit"`
-	Document    Document `tl:",omitempty:flags:0"`
-	AltDocument Document `tl:",omitempty:flags:5"`
-	TTLSeconds  *int32   `tl:",omitempty:flags:2"`
+	Nopremium   bool     `tl:"nopremium,omitempty:flags:3,implicit"`
+	Spoiler     bool     `tl:"spoiler,omitempty:flags:4,implicit"`
+	Video       bool     `tl:"video,omitempty:flags:6,implicit"`
+	Round       bool     `tl:"round,omitempty:flags:7,implicit"`
+	Voice       bool     `tl:"voice,omitempty:flags:8,implicit"`
+	Document    Document `tl:"document,omitempty:flags:0"`
+	AltDocument Document `tl:"alt_document,omitempty:flags:5"`
+	TTLSeconds  *int32   `tl:"ttl_seconds,omitempty:flags:2"`
 }
 
 func (*MessageMediaDocumentPredict) CRC() uint32 {
@@ -7963,11 +7963,11 @@ func (*MessageMediaDocumentPredict) _MessageMedia() {}
 
 type MessageMediaWebPagePredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	ForceLargeMedia bool     `tl:",omitempty:flags:0,implicit"`
-	ForceSmallMedia bool     `tl:",omitempty:flags:1,implicit"`
-	Manual          bool     `tl:",omitempty:flags:3,implicit"`
-	Safe            bool     `tl:",omitempty:flags:4,implicit"`
-	Webpage         WebPage
+	ForceLargeMedia bool     `tl:"force_large_media,omitempty:flags:0,implicit"`
+	ForceSmallMedia bool     `tl:"force_small_media,omitempty:flags:1,implicit"`
+	Manual          bool     `tl:"manual,omitempty:flags:3,implicit"`
+	Safe            bool     `tl:"safe,omitempty:flags:4,implicit"`
+	Webpage         WebPage  `tl:"webpage"`
 }
 
 func (*MessageMediaWebPagePredict) CRC() uint32 {
@@ -7976,12 +7976,12 @@ func (*MessageMediaWebPagePredict) CRC() uint32 {
 func (*MessageMediaWebPagePredict) _MessageMedia() {}
 
 type MessageMediaVenuePredict struct {
-	Geo       GeoPoint
-	Title     string
-	Address   string
-	Provider  string
-	VenueID   string
-	VenueType string
+	Geo       GeoPoint `tl:"geo"`
+	Title     string   `tl:"title"`
+	Address   string   `tl:"address"`
+	Provider  string   `tl:"provider"`
+	VenueID   string   `tl:"venue_id"`
+	VenueType string   `tl:"venue_type"`
 }
 
 func (*MessageMediaVenuePredict) CRC() uint32 {
@@ -7990,7 +7990,7 @@ func (*MessageMediaVenuePredict) CRC() uint32 {
 func (*MessageMediaVenuePredict) _MessageMedia() {}
 
 type MessageMediaGamePredict struct {
-	Game Game
+	Game Game `tl:"game"`
 }
 
 func (*MessageMediaGamePredict) CRC() uint32 {
@@ -7999,17 +7999,17 @@ func (*MessageMediaGamePredict) CRC() uint32 {
 func (*MessageMediaGamePredict) _MessageMedia() {}
 
 type MessageMediaInvoicePredict struct {
-	_                        struct{} `tl:"flags,bitflag"`
-	ShippingAddressRequested bool     `tl:",omitempty:flags:1,implicit"`
-	Test                     bool     `tl:",omitempty:flags:3,implicit"`
-	Title                    string
-	Description              string
-	Photo                    WebDocument `tl:",omitempty:flags:0"`
-	ReceiptMsgID             *int32      `tl:",omitempty:flags:2"`
-	Currency                 string
-	TotalAmount              int64
-	StartParam               string
-	ExtendedMedia            MessageExtendedMedia `tl:",omitempty:flags:4"`
+	_                        struct{}             `tl:"flags,bitflag"`
+	ShippingAddressRequested bool                 `tl:"shipping_address_requested,omitempty:flags:1,implicit"`
+	Test                     bool                 `tl:"test,omitempty:flags:3,implicit"`
+	Title                    string               `tl:"title"`
+	Description              string               `tl:"description"`
+	Photo                    WebDocument          `tl:"photo,omitempty:flags:0"`
+	ReceiptMsgID             *int32               `tl:"receipt_msg_id,omitempty:flags:2"`
+	Currency                 string               `tl:"currency"`
+	TotalAmount              int64                `tl:"total_amount"`
+	StartParam               string               `tl:"start_param"`
+	ExtendedMedia            MessageExtendedMedia `tl:"extended_media,omitempty:flags:4"`
 }
 
 func (*MessageMediaInvoicePredict) CRC() uint32 {
@@ -8019,10 +8019,10 @@ func (*MessageMediaInvoicePredict) _MessageMedia() {}
 
 type MessageMediaGeoLivePredict struct {
 	_                           struct{} `tl:"flags,bitflag"`
-	Geo                         GeoPoint
-	Heading                     *int32 `tl:",omitempty:flags:0"`
-	Period                      int32
-	ProximityNotificationRadius *int32 `tl:",omitempty:flags:1"`
+	Geo                         GeoPoint `tl:"geo"`
+	Heading                     *int32   `tl:"heading,omitempty:flags:0"`
+	Period                      int32    `tl:"period"`
+	ProximityNotificationRadius *int32   `tl:"proximity_notification_radius,omitempty:flags:1"`
 }
 
 func (*MessageMediaGeoLivePredict) CRC() uint32 {
@@ -8031,8 +8031,8 @@ func (*MessageMediaGeoLivePredict) CRC() uint32 {
 func (*MessageMediaGeoLivePredict) _MessageMedia() {}
 
 type MessageMediaPollPredict struct {
-	Poll    Poll
-	Results PollResults
+	Poll    Poll        `tl:"poll"`
+	Results PollResults `tl:"results"`
 }
 
 func (*MessageMediaPollPredict) CRC() uint32 {
@@ -8041,8 +8041,8 @@ func (*MessageMediaPollPredict) CRC() uint32 {
 func (*MessageMediaPollPredict) _MessageMedia() {}
 
 type MessageMediaDicePredict struct {
-	Value    int32
-	Emoticon string
+	Value    int32  `tl:"value"`
+	Emoticon string `tl:"emoticon"`
 }
 
 func (*MessageMediaDicePredict) CRC() uint32 {
@@ -8051,11 +8051,11 @@ func (*MessageMediaDicePredict) CRC() uint32 {
 func (*MessageMediaDicePredict) _MessageMedia() {}
 
 type MessageMediaStoryPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	ViaMention bool     `tl:",omitempty:flags:1,implicit"`
-	Peer       Peer
-	ID         int32
-	Story      StoryItem `tl:",omitempty:flags:0"`
+	_          struct{}  `tl:"flags,bitflag"`
+	ViaMention bool      `tl:"via_mention,omitempty:flags:1,implicit"`
+	Peer       Peer      `tl:"peer"`
+	ID         int32     `tl:"id"`
+	Story      StoryItem `tl:"story,omitempty:flags:0"`
 }
 
 func (*MessageMediaStoryPredict) CRC() uint32 {
@@ -8065,14 +8065,14 @@ func (*MessageMediaStoryPredict) _MessageMedia() {}
 
 type MessageMediaGiveawayPredict struct {
 	_                  struct{} `tl:"flags,bitflag"`
-	OnlyNewSubscribers bool     `tl:",omitempty:flags:0,implicit"`
-	WinnersAreVisible  bool     `tl:",omitempty:flags:2,implicit"`
-	Channels           []int64
-	CountriesIso2      []string `tl:",omitempty:flags:1"`
-	PrizeDescription   *string  `tl:",omitempty:flags:3"`
-	Quantity           int32
-	Months             int32
-	UntilDate          int32
+	OnlyNewSubscribers bool     `tl:"only_new_subscribers,omitempty:flags:0,implicit"`
+	WinnersAreVisible  bool     `tl:"winners_are_visible,omitempty:flags:2,implicit"`
+	Channels           []int64  `tl:"channels"`
+	CountriesIso2      []string `tl:"countries_iso2,omitempty:flags:1"`
+	PrizeDescription   *string  `tl:"prize_description,omitempty:flags:3"`
+	Quantity           int32    `tl:"quantity"`
+	Months             int32    `tl:"months"`
+	UntilDate          int32    `tl:"until_date"`
 }
 
 func (*MessageMediaGiveawayPredict) CRC() uint32 {
@@ -8082,17 +8082,17 @@ func (*MessageMediaGiveawayPredict) _MessageMedia() {}
 
 type MessageMediaGiveawayResultsPredict struct {
 	_                    struct{} `tl:"flags,bitflag"`
-	OnlyNewSubscribers   bool     `tl:",omitempty:flags:0,implicit"`
-	Refunded             bool     `tl:",omitempty:flags:2,implicit"`
-	ChannelID            int64
-	AdditionalPeersCount *int32 `tl:",omitempty:flags:3"`
-	LaunchMsgID          int32
-	WinnersCount         int32
-	UnclaimedCount       int32
-	Winners              []int64
-	Months               int32
-	PrizeDescription     *string `tl:",omitempty:flags:1"`
-	UntilDate            int32
+	OnlyNewSubscribers   bool     `tl:"only_new_subscribers,omitempty:flags:0,implicit"`
+	Refunded             bool     `tl:"refunded,omitempty:flags:2,implicit"`
+	ChannelID            int64    `tl:"channel_id"`
+	AdditionalPeersCount *int32   `tl:"additional_peers_count,omitempty:flags:3"`
+	LaunchMsgID          int32    `tl:"launch_msg_id"`
+	WinnersCount         int32    `tl:"winners_count"`
+	UnclaimedCount       int32    `tl:"unclaimed_count"`
+	Winners              []int64  `tl:"winners"`
+	Months               int32    `tl:"months"`
+	PrizeDescription     *string  `tl:"prize_description,omitempty:flags:1"`
+	UntilDate            int32    `tl:"until_date"`
 }
 
 func (*MessageMediaGiveawayResultsPredict) CRC() uint32 {
@@ -8101,8 +8101,8 @@ func (*MessageMediaGiveawayResultsPredict) CRC() uint32 {
 func (*MessageMediaGiveawayResultsPredict) _MessageMedia() {}
 
 type MessageMediaPaidMediaPredict struct {
-	StarsAmount   int64
-	ExtendedMedia []MessageExtendedMedia
+	StarsAmount   int64                  `tl:"stars_amount"`
+	ExtendedMedia []MessageExtendedMedia `tl:"extended_media"`
 }
 
 func (*MessageMediaPaidMediaPredict) CRC() uint32 {
@@ -8111,7 +8111,7 @@ func (*MessageMediaPaidMediaPredict) CRC() uint32 {
 func (*MessageMediaPaidMediaPredict) _MessageMedia() {}
 
 type MessagePeerReaction interface {
-	tl.Object
+	tl.TLObject
 	_MessagePeerReaction()
 }
 
@@ -8121,12 +8121,12 @@ var (
 
 type MessagePeerReactionPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Big      bool     `tl:",omitempty:flags:0,implicit"`
-	Unread   bool     `tl:",omitempty:flags:1,implicit"`
-	My       bool     `tl:",omitempty:flags:2,implicit"`
-	PeerID   Peer
-	Date     int32
-	Reaction Reaction
+	Big      bool     `tl:"big,omitempty:flags:0,implicit"`
+	Unread   bool     `tl:"unread,omitempty:flags:1,implicit"`
+	My       bool     `tl:"my,omitempty:flags:2,implicit"`
+	PeerID   Peer     `tl:"peer_id"`
+	Date     int32    `tl:"date"`
+	Reaction Reaction `tl:"reaction"`
 }
 
 func (*MessagePeerReactionPredict) CRC() uint32 {
@@ -8135,7 +8135,7 @@ func (*MessagePeerReactionPredict) CRC() uint32 {
 func (*MessagePeerReactionPredict) _MessagePeerReaction() {}
 
 type MessagePeerVote interface {
-	tl.Object
+	tl.TLObject
 	_MessagePeerVote()
 }
 
@@ -8146,9 +8146,9 @@ var (
 )
 
 type MessagePeerVotePredict struct {
-	Peer   Peer
-	Option []byte
-	Date   int32
+	Peer   Peer   `tl:"peer"`
+	Option []byte `tl:"option"`
+	Date   int32  `tl:"date"`
 }
 
 func (*MessagePeerVotePredict) CRC() uint32 {
@@ -8157,8 +8157,8 @@ func (*MessagePeerVotePredict) CRC() uint32 {
 func (*MessagePeerVotePredict) _MessagePeerVote() {}
 
 type MessagePeerVoteInputOptionPredict struct {
-	Peer Peer
-	Date int32
+	Peer Peer  `tl:"peer"`
+	Date int32 `tl:"date"`
 }
 
 func (*MessagePeerVoteInputOptionPredict) CRC() uint32 {
@@ -8167,9 +8167,9 @@ func (*MessagePeerVoteInputOptionPredict) CRC() uint32 {
 func (*MessagePeerVoteInputOptionPredict) _MessagePeerVote() {}
 
 type MessagePeerVoteMultiplePredict struct {
-	Peer    Peer
-	Options [][]byte
-	Date    int32
+	Peer    Peer     `tl:"peer"`
+	Options [][]byte `tl:"options"`
+	Date    int32    `tl:"date"`
 }
 
 func (*MessagePeerVoteMultiplePredict) CRC() uint32 {
@@ -8178,7 +8178,7 @@ func (*MessagePeerVoteMultiplePredict) CRC() uint32 {
 func (*MessagePeerVoteMultiplePredict) _MessagePeerVote() {}
 
 type MessageRange interface {
-	tl.Object
+	tl.TLObject
 	_MessageRange()
 }
 
@@ -8187,8 +8187,8 @@ var (
 )
 
 type MessageRangePredict struct {
-	MinID int32
-	MaxID int32
+	MinID int32 `tl:"min_id"`
+	MaxID int32 `tl:"max_id"`
 }
 
 func (*MessageRangePredict) CRC() uint32 {
@@ -8197,7 +8197,7 @@ func (*MessageRangePredict) CRC() uint32 {
 func (*MessageRangePredict) _MessageRange() {}
 
 type MessageReactions interface {
-	tl.Object
+	tl.TLObject
 	_MessageReactions()
 }
 
@@ -8206,12 +8206,12 @@ var (
 )
 
 type MessageReactionsPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	Min             bool     `tl:",omitempty:flags:0,implicit"`
-	CanSeeList      bool     `tl:",omitempty:flags:2,implicit"`
-	ReactionsAsTags bool     `tl:",omitempty:flags:3,implicit"`
-	Results         []ReactionCount
-	RecentReactions []MessagePeerReaction `tl:",omitempty:flags:1"`
+	_               struct{}              `tl:"flags,bitflag"`
+	Min             bool                  `tl:"min,omitempty:flags:0,implicit"`
+	CanSeeList      bool                  `tl:"can_see_list,omitempty:flags:2,implicit"`
+	ReactionsAsTags bool                  `tl:"reactions_as_tags,omitempty:flags:3,implicit"`
+	Results         []ReactionCount       `tl:"results"`
+	RecentReactions []MessagePeerReaction `tl:"recent_reactions,omitempty:flags:1"`
 }
 
 func (*MessageReactionsPredict) CRC() uint32 {
@@ -8220,7 +8220,7 @@ func (*MessageReactionsPredict) CRC() uint32 {
 func (*MessageReactionsPredict) _MessageReactions() {}
 
 type MessageReplies interface {
-	tl.Object
+	tl.TLObject
 	_MessageReplies()
 }
 
@@ -8230,13 +8230,13 @@ var (
 
 type MessageRepliesPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	Comments       bool     `tl:",omitempty:flags:0,implicit"`
-	Replies        int32
-	RepliesPts     int32
-	RecentRepliers []Peer `tl:",omitempty:flags:1"`
-	ChannelID      *int64 `tl:",omitempty:flags:0"`
-	MaxID          *int32 `tl:",omitempty:flags:2"`
-	ReadMaxID      *int32 `tl:",omitempty:flags:3"`
+	Comments       bool     `tl:"comments,omitempty:flags:0,implicit"`
+	Replies        int32    `tl:"replies"`
+	RepliesPts     int32    `tl:"replies_pts"`
+	RecentRepliers []Peer   `tl:"recent_repliers,omitempty:flags:1"`
+	ChannelID      *int64   `tl:"channel_id,omitempty:flags:0"`
+	MaxID          *int32   `tl:"max_id,omitempty:flags:2"`
+	ReadMaxID      *int32   `tl:"read_max_id,omitempty:flags:3"`
 }
 
 func (*MessageRepliesPredict) CRC() uint32 {
@@ -8245,7 +8245,7 @@ func (*MessageRepliesPredict) CRC() uint32 {
 func (*MessageRepliesPredict) _MessageReplies() {}
 
 type MessageReplyHeader interface {
-	tl.Object
+	tl.TLObject
 	_MessageReplyHeader()
 }
 
@@ -8256,17 +8256,17 @@ var (
 
 type MessageReplyHeaderPredict struct {
 	_                struct{}         `tl:"flags,bitflag"`
-	ReplyToScheduled bool             `tl:",omitempty:flags:2,implicit"`
-	ForumTopic       bool             `tl:",omitempty:flags:3,implicit"`
-	Quote            bool             `tl:",omitempty:flags:9,implicit"`
-	ReplyToMsgID     *int32           `tl:",omitempty:flags:4"`
-	ReplyToPeerID    Peer             `tl:",omitempty:flags:0"`
-	ReplyFrom        MessageFwdHeader `tl:",omitempty:flags:5"`
-	ReplyMedia       MessageMedia     `tl:",omitempty:flags:8"`
-	ReplyToTopID     *int32           `tl:",omitempty:flags:1"`
-	QuoteText        *string          `tl:",omitempty:flags:6"`
-	QuoteEntities    []MessageEntity  `tl:",omitempty:flags:7"`
-	QuoteOffset      *int32           `tl:",omitempty:flags:10"`
+	ReplyToScheduled bool             `tl:"reply_to_scheduled,omitempty:flags:2,implicit"`
+	ForumTopic       bool             `tl:"forum_topic,omitempty:flags:3,implicit"`
+	Quote            bool             `tl:"quote,omitempty:flags:9,implicit"`
+	ReplyToMsgID     *int32           `tl:"reply_to_msg_id,omitempty:flags:4"`
+	ReplyToPeerID    Peer             `tl:"reply_to_peer_id,omitempty:flags:0"`
+	ReplyFrom        MessageFwdHeader `tl:"reply_from,omitempty:flags:5"`
+	ReplyMedia       MessageMedia     `tl:"reply_media,omitempty:flags:8"`
+	ReplyToTopID     *int32           `tl:"reply_to_top_id,omitempty:flags:1"`
+	QuoteText        *string          `tl:"quote_text,omitempty:flags:6"`
+	QuoteEntities    []MessageEntity  `tl:"quote_entities,omitempty:flags:7"`
+	QuoteOffset      *int32           `tl:"quote_offset,omitempty:flags:10"`
 }
 
 func (*MessageReplyHeaderPredict) CRC() uint32 {
@@ -8275,8 +8275,8 @@ func (*MessageReplyHeaderPredict) CRC() uint32 {
 func (*MessageReplyHeaderPredict) _MessageReplyHeader() {}
 
 type MessageReplyStoryHeaderPredict struct {
-	Peer    Peer
-	StoryID int32
+	Peer    Peer  `tl:"peer"`
+	StoryID int32 `tl:"story_id"`
 }
 
 func (*MessageReplyStoryHeaderPredict) CRC() uint32 {
@@ -8285,7 +8285,7 @@ func (*MessageReplyStoryHeaderPredict) CRC() uint32 {
 func (*MessageReplyStoryHeaderPredict) _MessageReplyHeader() {}
 
 type MessageViews interface {
-	tl.Object
+	tl.TLObject
 	_MessageViews()
 }
 
@@ -8295,9 +8295,9 @@ var (
 
 type MessageViewsPredict struct {
 	_        struct{}       `tl:"flags,bitflag"`
-	Views    *int32         `tl:",omitempty:flags:0"`
-	Forwards *int32         `tl:",omitempty:flags:1"`
-	Replies  MessageReplies `tl:",omitempty:flags:2"`
+	Views    *int32         `tl:"views,omitempty:flags:0"`
+	Forwards *int32         `tl:"forwards,omitempty:flags:1"`
+	Replies  MessageReplies `tl:"replies,omitempty:flags:2"`
 }
 
 func (*MessageViewsPredict) CRC() uint32 {
@@ -8306,7 +8306,7 @@ func (*MessageViewsPredict) CRC() uint32 {
 func (*MessageViewsPredict) _MessageViews() {}
 
 type MessagesFilter interface {
-	tl.Object
+	tl.TLObject
 	_MessagesFilter()
 }
 
@@ -8402,7 +8402,7 @@ func (*InputMessagesFilterChatPhotosPredict) _MessagesFilter() {}
 
 type InputMessagesFilterPhoneCallsPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Missed bool     `tl:",omitempty:flags:0,implicit"`
+	Missed bool     `tl:"missed,omitempty:flags:0,implicit"`
 }
 
 func (*InputMessagesFilterPhoneCallsPredict) CRC() uint32 {
@@ -8453,7 +8453,7 @@ func (*InputMessagesFilterPinnedPredict) CRC() uint32 {
 func (*InputMessagesFilterPinnedPredict) _MessagesFilter() {}
 
 type MissingInvitee interface {
-	tl.Object
+	tl.TLObject
 	_MissingInvitee()
 }
 
@@ -8463,9 +8463,9 @@ var (
 
 type MissingInviteePredict struct {
 	_                       struct{} `tl:"flags,bitflag"`
-	PremiumWouldAllowInvite bool     `tl:",omitempty:flags:0,implicit"`
-	PremiumRequiredForPm    bool     `tl:",omitempty:flags:1,implicit"`
-	UserID                  int64
+	PremiumWouldAllowInvite bool     `tl:"premium_would_allow_invite,omitempty:flags:0,implicit"`
+	PremiumRequiredForPm    bool     `tl:"premium_required_for_pm,omitempty:flags:1,implicit"`
+	UserID                  int64    `tl:"user_id"`
 }
 
 func (*MissingInviteePredict) CRC() uint32 {
@@ -8474,7 +8474,7 @@ func (*MissingInviteePredict) CRC() uint32 {
 func (*MissingInviteePredict) _MissingInvitee() {}
 
 type MyBoost interface {
-	tl.Object
+	tl.TLObject
 	_MyBoost()
 }
 
@@ -8484,11 +8484,11 @@ var (
 
 type MyBoostPredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	Slot              int32
-	Peer              Peer `tl:",omitempty:flags:0"`
-	Date              int32
-	Expires           int32
-	CooldownUntilDate *int32 `tl:",omitempty:flags:1"`
+	Slot              int32    `tl:"slot"`
+	Peer              Peer     `tl:"peer,omitempty:flags:0"`
+	Date              int32    `tl:"date"`
+	Expires           int32    `tl:"expires"`
+	CooldownUntilDate *int32   `tl:"cooldown_until_date,omitempty:flags:1"`
 }
 
 func (*MyBoostPredict) CRC() uint32 {
@@ -8497,7 +8497,7 @@ func (*MyBoostPredict) CRC() uint32 {
 func (*MyBoostPredict) _MyBoost() {}
 
 type NearestDc interface {
-	tl.Object
+	tl.TLObject
 	_NearestDc()
 }
 
@@ -8506,9 +8506,9 @@ var (
 )
 
 type NearestDcPredict struct {
-	Country   string
-	ThisDc    int32
-	NearestDc int32
+	Country   string `tl:"country"`
+	ThisDc    int32  `tl:"this_dc"`
+	NearestDc int32  `tl:"nearest_dc"`
 }
 
 func (*NearestDcPredict) CRC() uint32 {
@@ -8517,7 +8517,7 @@ func (*NearestDcPredict) CRC() uint32 {
 func (*NearestDcPredict) _NearestDc() {}
 
 type NotificationSound interface {
-	tl.Object
+	tl.TLObject
 	_NotificationSound()
 }
 
@@ -8543,8 +8543,8 @@ func (*NotificationSoundNonePredict) CRC() uint32 {
 func (*NotificationSoundNonePredict) _NotificationSound() {}
 
 type NotificationSoundLocalPredict struct {
-	Title string
-	Data  string
+	Title string `tl:"title"`
+	Data  string `tl:"data"`
 }
 
 func (*NotificationSoundLocalPredict) CRC() uint32 {
@@ -8553,7 +8553,7 @@ func (*NotificationSoundLocalPredict) CRC() uint32 {
 func (*NotificationSoundLocalPredict) _NotificationSound() {}
 
 type NotificationSoundRingtonePredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*NotificationSoundRingtonePredict) CRC() uint32 {
@@ -8562,7 +8562,7 @@ func (*NotificationSoundRingtonePredict) CRC() uint32 {
 func (*NotificationSoundRingtonePredict) _NotificationSound() {}
 
 type NotifyPeer interface {
-	tl.Object
+	tl.TLObject
 	_NotifyPeer()
 }
 
@@ -8575,7 +8575,7 @@ var (
 )
 
 type NotifyPeerPredict struct {
-	Peer Peer
+	Peer Peer `tl:"peer"`
 }
 
 func (*NotifyPeerPredict) CRC() uint32 {
@@ -8605,8 +8605,8 @@ func (*NotifyBroadcastsPredict) CRC() uint32 {
 func (*NotifyBroadcastsPredict) _NotifyPeer() {}
 
 type NotifyForumTopicPredict struct {
-	Peer     Peer
-	TopMsgID int32
+	Peer     Peer  `tl:"peer"`
+	TopMsgID int32 `tl:"top_msg_id"`
 }
 
 func (*NotifyForumTopicPredict) CRC() uint32 {
@@ -8615,7 +8615,7 @@ func (*NotifyForumTopicPredict) CRC() uint32 {
 func (*NotifyForumTopicPredict) _NotifyPeer() {}
 
 type OutboxReadDate interface {
-	tl.Object
+	tl.TLObject
 	_OutboxReadDate()
 }
 
@@ -8624,7 +8624,7 @@ var (
 )
 
 type OutboxReadDatePredict struct {
-	Date int32
+	Date int32 `tl:"date"`
 }
 
 func (*OutboxReadDatePredict) CRC() uint32 {
@@ -8633,7 +8633,7 @@ func (*OutboxReadDatePredict) CRC() uint32 {
 func (*OutboxReadDatePredict) _OutboxReadDate() {}
 
 type Page interface {
-	tl.Object
+	tl.TLObject
 	_Page()
 }
 
@@ -8642,15 +8642,15 @@ var (
 )
 
 type PagePredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Part      bool     `tl:",omitempty:flags:0,implicit"`
-	Rtl       bool     `tl:",omitempty:flags:1,implicit"`
-	V2        bool     `tl:",omitempty:flags:2,implicit"`
-	URL       string
-	Blocks    []PageBlock
-	Photos    []Photo
-	Documents []Document
-	Views     *int32 `tl:",omitempty:flags:3"`
+	_         struct{}    `tl:"flags,bitflag"`
+	Part      bool        `tl:"part,omitempty:flags:0,implicit"`
+	Rtl       bool        `tl:"rtl,omitempty:flags:1,implicit"`
+	V2        bool        `tl:"v2,omitempty:flags:2,implicit"`
+	URL       string      `tl:"url"`
+	Blocks    []PageBlock `tl:"blocks"`
+	Photos    []Photo     `tl:"photos"`
+	Documents []Document  `tl:"documents"`
+	Views     *int32      `tl:"views,omitempty:flags:3"`
 }
 
 func (*PagePredict) CRC() uint32 {
@@ -8659,7 +8659,7 @@ func (*PagePredict) CRC() uint32 {
 func (*PagePredict) _Page() {}
 
 type PageBlock interface {
-	tl.Object
+	tl.TLObject
 	_PageBlock()
 }
 
@@ -8703,7 +8703,7 @@ func (*PageBlockUnsupportedPredict) CRC() uint32 {
 func (*PageBlockUnsupportedPredict) _PageBlock() {}
 
 type PageBlockTitlePredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*PageBlockTitlePredict) CRC() uint32 {
@@ -8712,7 +8712,7 @@ func (*PageBlockTitlePredict) CRC() uint32 {
 func (*PageBlockTitlePredict) _PageBlock() {}
 
 type PageBlockSubtitlePredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*PageBlockSubtitlePredict) CRC() uint32 {
@@ -8721,8 +8721,8 @@ func (*PageBlockSubtitlePredict) CRC() uint32 {
 func (*PageBlockSubtitlePredict) _PageBlock() {}
 
 type PageBlockAuthorDatePredict struct {
-	Author        RichText
-	PublishedDate int32
+	Author        RichText `tl:"author"`
+	PublishedDate int32    `tl:"published_date"`
 }
 
 func (*PageBlockAuthorDatePredict) CRC() uint32 {
@@ -8731,7 +8731,7 @@ func (*PageBlockAuthorDatePredict) CRC() uint32 {
 func (*PageBlockAuthorDatePredict) _PageBlock() {}
 
 type PageBlockHeaderPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*PageBlockHeaderPredict) CRC() uint32 {
@@ -8740,7 +8740,7 @@ func (*PageBlockHeaderPredict) CRC() uint32 {
 func (*PageBlockHeaderPredict) _PageBlock() {}
 
 type PageBlockSubheaderPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*PageBlockSubheaderPredict) CRC() uint32 {
@@ -8749,7 +8749,7 @@ func (*PageBlockSubheaderPredict) CRC() uint32 {
 func (*PageBlockSubheaderPredict) _PageBlock() {}
 
 type PageBlockParagraphPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*PageBlockParagraphPredict) CRC() uint32 {
@@ -8758,8 +8758,8 @@ func (*PageBlockParagraphPredict) CRC() uint32 {
 func (*PageBlockParagraphPredict) _PageBlock() {}
 
 type PageBlockPreformattedPredict struct {
-	Text     RichText
-	Language string
+	Text     RichText `tl:"text"`
+	Language string   `tl:"language"`
 }
 
 func (*PageBlockPreformattedPredict) CRC() uint32 {
@@ -8768,7 +8768,7 @@ func (*PageBlockPreformattedPredict) CRC() uint32 {
 func (*PageBlockPreformattedPredict) _PageBlock() {}
 
 type PageBlockFooterPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*PageBlockFooterPredict) CRC() uint32 {
@@ -8784,7 +8784,7 @@ func (*PageBlockDividerPredict) CRC() uint32 {
 func (*PageBlockDividerPredict) _PageBlock() {}
 
 type PageBlockAnchorPredict struct {
-	Name string
+	Name string `tl:"name"`
 }
 
 func (*PageBlockAnchorPredict) CRC() uint32 {
@@ -8793,7 +8793,7 @@ func (*PageBlockAnchorPredict) CRC() uint32 {
 func (*PageBlockAnchorPredict) _PageBlock() {}
 
 type PageBlockListPredict struct {
-	Items []PageListItem
+	Items []PageListItem `tl:"items"`
 }
 
 func (*PageBlockListPredict) CRC() uint32 {
@@ -8802,8 +8802,8 @@ func (*PageBlockListPredict) CRC() uint32 {
 func (*PageBlockListPredict) _PageBlock() {}
 
 type PageBlockBlockquotePredict struct {
-	Text    RichText
-	Caption RichText
+	Text    RichText `tl:"text"`
+	Caption RichText `tl:"caption"`
 }
 
 func (*PageBlockBlockquotePredict) CRC() uint32 {
@@ -8812,8 +8812,8 @@ func (*PageBlockBlockquotePredict) CRC() uint32 {
 func (*PageBlockBlockquotePredict) _PageBlock() {}
 
 type PageBlockPullquotePredict struct {
-	Text    RichText
-	Caption RichText
+	Text    RichText `tl:"text"`
+	Caption RichText `tl:"caption"`
 }
 
 func (*PageBlockPullquotePredict) CRC() uint32 {
@@ -8822,11 +8822,11 @@ func (*PageBlockPullquotePredict) CRC() uint32 {
 func (*PageBlockPullquotePredict) _PageBlock() {}
 
 type PageBlockPhotoPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	PhotoID   int64
-	Caption   PageCaption
-	URL       *string `tl:",omitempty:flags:0"`
-	WebpageID *int64  `tl:",omitempty:flags:0"`
+	_         struct{}    `tl:"flags,bitflag"`
+	PhotoID   int64       `tl:"photo_id"`
+	Caption   PageCaption `tl:"caption"`
+	URL       *string     `tl:"url,omitempty:flags:0"`
+	WebpageID *int64      `tl:"webpage_id,omitempty:flags:0"`
 }
 
 func (*PageBlockPhotoPredict) CRC() uint32 {
@@ -8835,11 +8835,11 @@ func (*PageBlockPhotoPredict) CRC() uint32 {
 func (*PageBlockPhotoPredict) _PageBlock() {}
 
 type PageBlockVideoPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Autoplay bool     `tl:",omitempty:flags:0,implicit"`
-	Loop     bool     `tl:",omitempty:flags:1,implicit"`
-	VideoID  int64
-	Caption  PageCaption
+	_        struct{}    `tl:"flags,bitflag"`
+	Autoplay bool        `tl:"autoplay,omitempty:flags:0,implicit"`
+	Loop     bool        `tl:"loop,omitempty:flags:1,implicit"`
+	VideoID  int64       `tl:"video_id"`
+	Caption  PageCaption `tl:"caption"`
 }
 
 func (*PageBlockVideoPredict) CRC() uint32 {
@@ -8848,7 +8848,7 @@ func (*PageBlockVideoPredict) CRC() uint32 {
 func (*PageBlockVideoPredict) _PageBlock() {}
 
 type PageBlockCoverPredict struct {
-	Cover PageBlock
+	Cover PageBlock `tl:"cover"`
 }
 
 func (*PageBlockCoverPredict) CRC() uint32 {
@@ -8857,15 +8857,15 @@ func (*PageBlockCoverPredict) CRC() uint32 {
 func (*PageBlockCoverPredict) _PageBlock() {}
 
 type PageBlockEmbedPredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	FullWidth      bool     `tl:",omitempty:flags:0,implicit"`
-	AllowScrolling bool     `tl:",omitempty:flags:3,implicit"`
-	URL            *string  `tl:",omitempty:flags:1"`
-	Html           *string  `tl:",omitempty:flags:2"`
-	PosterPhotoID  *int64   `tl:",omitempty:flags:4"`
-	W              *int32   `tl:",omitempty:flags:5"`
-	H              *int32   `tl:",omitempty:flags:5"`
-	Caption        PageCaption
+	_              struct{}    `tl:"flags,bitflag"`
+	FullWidth      bool        `tl:"full_width,omitempty:flags:0,implicit"`
+	AllowScrolling bool        `tl:"allow_scrolling,omitempty:flags:3,implicit"`
+	URL            *string     `tl:"url,omitempty:flags:1"`
+	Html           *string     `tl:"html,omitempty:flags:2"`
+	PosterPhotoID  *int64      `tl:"poster_photo_id,omitempty:flags:4"`
+	W              *int32      `tl:"w,omitempty:flags:5"`
+	H              *int32      `tl:"h,omitempty:flags:5"`
+	Caption        PageCaption `tl:"caption"`
 }
 
 func (*PageBlockEmbedPredict) CRC() uint32 {
@@ -8874,13 +8874,13 @@ func (*PageBlockEmbedPredict) CRC() uint32 {
 func (*PageBlockEmbedPredict) _PageBlock() {}
 
 type PageBlockEmbedPostPredict struct {
-	URL           string
-	WebpageID     int64
-	AuthorPhotoID int64
-	Author        string
-	Date          int32
-	Blocks        []PageBlock
-	Caption       PageCaption
+	URL           string      `tl:"url"`
+	WebpageID     int64       `tl:"webpage_id"`
+	AuthorPhotoID int64       `tl:"author_photo_id"`
+	Author        string      `tl:"author"`
+	Date          int32       `tl:"date"`
+	Blocks        []PageBlock `tl:"blocks"`
+	Caption       PageCaption `tl:"caption"`
 }
 
 func (*PageBlockEmbedPostPredict) CRC() uint32 {
@@ -8889,8 +8889,8 @@ func (*PageBlockEmbedPostPredict) CRC() uint32 {
 func (*PageBlockEmbedPostPredict) _PageBlock() {}
 
 type PageBlockCollagePredict struct {
-	Items   []PageBlock
-	Caption PageCaption
+	Items   []PageBlock `tl:"items"`
+	Caption PageCaption `tl:"caption"`
 }
 
 func (*PageBlockCollagePredict) CRC() uint32 {
@@ -8899,8 +8899,8 @@ func (*PageBlockCollagePredict) CRC() uint32 {
 func (*PageBlockCollagePredict) _PageBlock() {}
 
 type PageBlockSlideshowPredict struct {
-	Items   []PageBlock
-	Caption PageCaption
+	Items   []PageBlock `tl:"items"`
+	Caption PageCaption `tl:"caption"`
 }
 
 func (*PageBlockSlideshowPredict) CRC() uint32 {
@@ -8909,7 +8909,7 @@ func (*PageBlockSlideshowPredict) CRC() uint32 {
 func (*PageBlockSlideshowPredict) _PageBlock() {}
 
 type PageBlockChannelPredict struct {
-	Channel Chat
+	Channel Chat `tl:"channel"`
 }
 
 func (*PageBlockChannelPredict) CRC() uint32 {
@@ -8918,8 +8918,8 @@ func (*PageBlockChannelPredict) CRC() uint32 {
 func (*PageBlockChannelPredict) _PageBlock() {}
 
 type PageBlockAudioPredict struct {
-	AudioID int64
-	Caption PageCaption
+	AudioID int64       `tl:"audio_id"`
+	Caption PageCaption `tl:"caption"`
 }
 
 func (*PageBlockAudioPredict) CRC() uint32 {
@@ -8928,7 +8928,7 @@ func (*PageBlockAudioPredict) CRC() uint32 {
 func (*PageBlockAudioPredict) _PageBlock() {}
 
 type PageBlockKickerPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*PageBlockKickerPredict) CRC() uint32 {
@@ -8937,11 +8937,11 @@ func (*PageBlockKickerPredict) CRC() uint32 {
 func (*PageBlockKickerPredict) _PageBlock() {}
 
 type PageBlockTablePredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Bordered bool     `tl:",omitempty:flags:0,implicit"`
-	Striped  bool     `tl:",omitempty:flags:1,implicit"`
-	Title    RichText
-	Rows     []PageTableRow
+	_        struct{}       `tl:"flags,bitflag"`
+	Bordered bool           `tl:"bordered,omitempty:flags:0,implicit"`
+	Striped  bool           `tl:"striped,omitempty:flags:1,implicit"`
+	Title    RichText       `tl:"title"`
+	Rows     []PageTableRow `tl:"rows"`
 }
 
 func (*PageBlockTablePredict) CRC() uint32 {
@@ -8950,7 +8950,7 @@ func (*PageBlockTablePredict) CRC() uint32 {
 func (*PageBlockTablePredict) _PageBlock() {}
 
 type PageBlockOrderedListPredict struct {
-	Items []PageListOrderedItem
+	Items []PageListOrderedItem `tl:"items"`
 }
 
 func (*PageBlockOrderedListPredict) CRC() uint32 {
@@ -8959,10 +8959,10 @@ func (*PageBlockOrderedListPredict) CRC() uint32 {
 func (*PageBlockOrderedListPredict) _PageBlock() {}
 
 type PageBlockDetailsPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Open   bool     `tl:",omitempty:flags:0,implicit"`
-	Blocks []PageBlock
-	Title  RichText
+	_      struct{}    `tl:"flags,bitflag"`
+	Open   bool        `tl:"open,omitempty:flags:0,implicit"`
+	Blocks []PageBlock `tl:"blocks"`
+	Title  RichText    `tl:"title"`
 }
 
 func (*PageBlockDetailsPredict) CRC() uint32 {
@@ -8971,8 +8971,8 @@ func (*PageBlockDetailsPredict) CRC() uint32 {
 func (*PageBlockDetailsPredict) _PageBlock() {}
 
 type PageBlockRelatedArticlesPredict struct {
-	Title    RichText
-	Articles []PageRelatedArticle
+	Title    RichText             `tl:"title"`
+	Articles []PageRelatedArticle `tl:"articles"`
 }
 
 func (*PageBlockRelatedArticlesPredict) CRC() uint32 {
@@ -8981,11 +8981,11 @@ func (*PageBlockRelatedArticlesPredict) CRC() uint32 {
 func (*PageBlockRelatedArticlesPredict) _PageBlock() {}
 
 type PageBlockMapPredict struct {
-	Geo     GeoPoint
-	Zoom    int32
-	W       int32
-	H       int32
-	Caption PageCaption
+	Geo     GeoPoint    `tl:"geo"`
+	Zoom    int32       `tl:"zoom"`
+	W       int32       `tl:"w"`
+	H       int32       `tl:"h"`
+	Caption PageCaption `tl:"caption"`
 }
 
 func (*PageBlockMapPredict) CRC() uint32 {
@@ -8994,7 +8994,7 @@ func (*PageBlockMapPredict) CRC() uint32 {
 func (*PageBlockMapPredict) _PageBlock() {}
 
 type PageCaption interface {
-	tl.Object
+	tl.TLObject
 	_PageCaption()
 }
 
@@ -9003,8 +9003,8 @@ var (
 )
 
 type PageCaptionPredict struct {
-	Text   RichText
-	Credit RichText
+	Text   RichText `tl:"text"`
+	Credit RichText `tl:"credit"`
 }
 
 func (*PageCaptionPredict) CRC() uint32 {
@@ -9013,7 +9013,7 @@ func (*PageCaptionPredict) CRC() uint32 {
 func (*PageCaptionPredict) _PageCaption() {}
 
 type PageListItem interface {
-	tl.Object
+	tl.TLObject
 	_PageListItem()
 }
 
@@ -9023,7 +9023,7 @@ var (
 )
 
 type PageListItemTextPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*PageListItemTextPredict) CRC() uint32 {
@@ -9032,7 +9032,7 @@ func (*PageListItemTextPredict) CRC() uint32 {
 func (*PageListItemTextPredict) _PageListItem() {}
 
 type PageListItemBlocksPredict struct {
-	Blocks []PageBlock
+	Blocks []PageBlock `tl:"blocks"`
 }
 
 func (*PageListItemBlocksPredict) CRC() uint32 {
@@ -9041,7 +9041,7 @@ func (*PageListItemBlocksPredict) CRC() uint32 {
 func (*PageListItemBlocksPredict) _PageListItem() {}
 
 type PageListOrderedItem interface {
-	tl.Object
+	tl.TLObject
 	_PageListOrderedItem()
 }
 
@@ -9051,8 +9051,8 @@ var (
 )
 
 type PageListOrderedItemTextPredict struct {
-	Num  string
-	Text RichText
+	Num  string   `tl:"num"`
+	Text RichText `tl:"text"`
 }
 
 func (*PageListOrderedItemTextPredict) CRC() uint32 {
@@ -9061,8 +9061,8 @@ func (*PageListOrderedItemTextPredict) CRC() uint32 {
 func (*PageListOrderedItemTextPredict) _PageListOrderedItem() {}
 
 type PageListOrderedItemBlocksPredict struct {
-	Num    string
-	Blocks []PageBlock
+	Num    string      `tl:"num"`
+	Blocks []PageBlock `tl:"blocks"`
 }
 
 func (*PageListOrderedItemBlocksPredict) CRC() uint32 {
@@ -9071,7 +9071,7 @@ func (*PageListOrderedItemBlocksPredict) CRC() uint32 {
 func (*PageListOrderedItemBlocksPredict) _PageListOrderedItem() {}
 
 type PageRelatedArticle interface {
-	tl.Object
+	tl.TLObject
 	_PageRelatedArticle()
 }
 
@@ -9081,13 +9081,13 @@ var (
 
 type PageRelatedArticlePredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	URL           string
-	WebpageID     int64
-	Title         *string `tl:",omitempty:flags:0"`
-	Description   *string `tl:",omitempty:flags:1"`
-	PhotoID       *int64  `tl:",omitempty:flags:2"`
-	Author        *string `tl:",omitempty:flags:3"`
-	PublishedDate *int32  `tl:",omitempty:flags:4"`
+	URL           string   `tl:"url"`
+	WebpageID     int64    `tl:"webpage_id"`
+	Title         *string  `tl:"title,omitempty:flags:0"`
+	Description   *string  `tl:"description,omitempty:flags:1"`
+	PhotoID       *int64   `tl:"photo_id,omitempty:flags:2"`
+	Author        *string  `tl:"author,omitempty:flags:3"`
+	PublishedDate *int32   `tl:"published_date,omitempty:flags:4"`
 }
 
 func (*PageRelatedArticlePredict) CRC() uint32 {
@@ -9096,7 +9096,7 @@ func (*PageRelatedArticlePredict) CRC() uint32 {
 func (*PageRelatedArticlePredict) _PageRelatedArticle() {}
 
 type PageTableCell interface {
-	tl.Object
+	tl.TLObject
 	_PageTableCell()
 }
 
@@ -9106,14 +9106,14 @@ var (
 
 type PageTableCellPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	Header       bool     `tl:",omitempty:flags:0,implicit"`
-	AlignCenter  bool     `tl:",omitempty:flags:3,implicit"`
-	AlignRight   bool     `tl:",omitempty:flags:4,implicit"`
-	ValignMiddle bool     `tl:",omitempty:flags:5,implicit"`
-	ValignBottom bool     `tl:",omitempty:flags:6,implicit"`
-	Text         RichText `tl:",omitempty:flags:7"`
-	Colspan      *int32   `tl:",omitempty:flags:1"`
-	Rowspan      *int32   `tl:",omitempty:flags:2"`
+	Header       bool     `tl:"header,omitempty:flags:0,implicit"`
+	AlignCenter  bool     `tl:"align_center,omitempty:flags:3,implicit"`
+	AlignRight   bool     `tl:"align_right,omitempty:flags:4,implicit"`
+	ValignMiddle bool     `tl:"valign_middle,omitempty:flags:5,implicit"`
+	ValignBottom bool     `tl:"valign_bottom,omitempty:flags:6,implicit"`
+	Text         RichText `tl:"text,omitempty:flags:7"`
+	Colspan      *int32   `tl:"colspan,omitempty:flags:1"`
+	Rowspan      *int32   `tl:"rowspan,omitempty:flags:2"`
 }
 
 func (*PageTableCellPredict) CRC() uint32 {
@@ -9122,7 +9122,7 @@ func (*PageTableCellPredict) CRC() uint32 {
 func (*PageTableCellPredict) _PageTableCell() {}
 
 type PageTableRow interface {
-	tl.Object
+	tl.TLObject
 	_PageTableRow()
 }
 
@@ -9131,7 +9131,7 @@ var (
 )
 
 type PageTableRowPredict struct {
-	Cells []PageTableCell
+	Cells []PageTableCell `tl:"cells"`
 }
 
 func (*PageTableRowPredict) CRC() uint32 {
@@ -9140,7 +9140,7 @@ func (*PageTableRowPredict) CRC() uint32 {
 func (*PageTableRowPredict) _PageTableRow() {}
 
 type PasswordKdfAlgo interface {
-	tl.Object
+	tl.TLObject
 	_PasswordKdfAlgo()
 }
 
@@ -9157,10 +9157,10 @@ func (*PasswordKdfAlgoUnknownPredict) CRC() uint32 {
 func (*PasswordKdfAlgoUnknownPredict) _PasswordKdfAlgo() {}
 
 type PasswordKdfAlgoSHA256SHA256Pbkdf2Hmacsha512Iter100000SHA256ModPowPredict struct {
-	Salt1 []byte
-	Salt2 []byte
-	G     int32
-	P     []byte
+	Salt1 []byte `tl:"salt1"`
+	Salt2 []byte `tl:"salt2"`
+	G     int32  `tl:"g"`
+	P     []byte `tl:"p"`
 }
 
 func (*PasswordKdfAlgoSHA256SHA256Pbkdf2Hmacsha512Iter100000SHA256ModPowPredict) CRC() uint32 {
@@ -9169,7 +9169,7 @@ func (*PasswordKdfAlgoSHA256SHA256Pbkdf2Hmacsha512Iter100000SHA256ModPowPredict)
 func (*PasswordKdfAlgoSHA256SHA256Pbkdf2Hmacsha512Iter100000SHA256ModPowPredict) _PasswordKdfAlgo() {}
 
 type PaymentCharge interface {
-	tl.Object
+	tl.TLObject
 	_PaymentCharge()
 }
 
@@ -9178,8 +9178,8 @@ var (
 )
 
 type PaymentChargePredict struct {
-	ID               string
-	ProviderChargeID string
+	ID               string `tl:"id"`
+	ProviderChargeID string `tl:"provider_charge_id"`
 }
 
 func (*PaymentChargePredict) CRC() uint32 {
@@ -9188,7 +9188,7 @@ func (*PaymentChargePredict) CRC() uint32 {
 func (*PaymentChargePredict) _PaymentCharge() {}
 
 type PaymentFormMethod interface {
-	tl.Object
+	tl.TLObject
 	_PaymentFormMethod()
 }
 
@@ -9197,8 +9197,8 @@ var (
 )
 
 type PaymentFormMethodPredict struct {
-	URL   string
-	Title string
+	URL   string `tl:"url"`
+	Title string `tl:"title"`
 }
 
 func (*PaymentFormMethodPredict) CRC() uint32 {
@@ -9207,7 +9207,7 @@ func (*PaymentFormMethodPredict) CRC() uint32 {
 func (*PaymentFormMethodPredict) _PaymentFormMethod() {}
 
 type PaymentRequestedInfo interface {
-	tl.Object
+	tl.TLObject
 	_PaymentRequestedInfo()
 }
 
@@ -9217,10 +9217,10 @@ var (
 
 type PaymentRequestedInfoPredict struct {
 	_               struct{}    `tl:"flags,bitflag"`
-	Name            *string     `tl:",omitempty:flags:0"`
-	Phone           *string     `tl:",omitempty:flags:1"`
-	Email           *string     `tl:",omitempty:flags:2"`
-	ShippingAddress PostAddress `tl:",omitempty:flags:3"`
+	Name            *string     `tl:"name,omitempty:flags:0"`
+	Phone           *string     `tl:"phone,omitempty:flags:1"`
+	Email           *string     `tl:"email,omitempty:flags:2"`
+	ShippingAddress PostAddress `tl:"shipping_address,omitempty:flags:3"`
 }
 
 func (*PaymentRequestedInfoPredict) CRC() uint32 {
@@ -9229,7 +9229,7 @@ func (*PaymentRequestedInfoPredict) CRC() uint32 {
 func (*PaymentRequestedInfoPredict) _PaymentRequestedInfo() {}
 
 type PaymentSavedCredentials interface {
-	tl.Object
+	tl.TLObject
 	_PaymentSavedCredentials()
 }
 
@@ -9238,8 +9238,8 @@ var (
 )
 
 type PaymentSavedCredentialsCardPredict struct {
-	ID    string
-	Title string
+	ID    string `tl:"id"`
+	Title string `tl:"title"`
 }
 
 func (*PaymentSavedCredentialsCardPredict) CRC() uint32 {
@@ -9248,7 +9248,7 @@ func (*PaymentSavedCredentialsCardPredict) CRC() uint32 {
 func (*PaymentSavedCredentialsCardPredict) _PaymentSavedCredentials() {}
 
 type Peer interface {
-	tl.Object
+	tl.TLObject
 	_Peer()
 }
 
@@ -9259,7 +9259,7 @@ var (
 )
 
 type PeerUserPredict struct {
-	UserID int64
+	UserID int64 `tl:"user_id"`
 }
 
 func (*PeerUserPredict) CRC() uint32 {
@@ -9268,7 +9268,7 @@ func (*PeerUserPredict) CRC() uint32 {
 func (*PeerUserPredict) _Peer() {}
 
 type PeerChatPredict struct {
-	ChatID int64
+	ChatID int64 `tl:"chat_id"`
 }
 
 func (*PeerChatPredict) CRC() uint32 {
@@ -9277,7 +9277,7 @@ func (*PeerChatPredict) CRC() uint32 {
 func (*PeerChatPredict) _Peer() {}
 
 type PeerChannelPredict struct {
-	ChannelID int64
+	ChannelID int64 `tl:"channel_id"`
 }
 
 func (*PeerChannelPredict) CRC() uint32 {
@@ -9286,7 +9286,7 @@ func (*PeerChannelPredict) CRC() uint32 {
 func (*PeerChannelPredict) _Peer() {}
 
 type PeerBlocked interface {
-	tl.Object
+	tl.TLObject
 	_PeerBlocked()
 }
 
@@ -9295,8 +9295,8 @@ var (
 )
 
 type PeerBlockedPredict struct {
-	PeerID Peer
-	Date   int32
+	PeerID Peer  `tl:"peer_id"`
+	Date   int32 `tl:"date"`
 }
 
 func (*PeerBlockedPredict) CRC() uint32 {
@@ -9305,7 +9305,7 @@ func (*PeerBlockedPredict) CRC() uint32 {
 func (*PeerBlockedPredict) _PeerBlocked() {}
 
 type PeerColor interface {
-	tl.Object
+	tl.TLObject
 	_PeerColor()
 }
 
@@ -9315,8 +9315,8 @@ var (
 
 type PeerColorPredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	Color             *int32   `tl:",omitempty:flags:0"`
-	BackgroundEmojiID *int64   `tl:",omitempty:flags:1"`
+	Color             *int32   `tl:"color,omitempty:flags:0"`
+	BackgroundEmojiID *int64   `tl:"background_emoji_id,omitempty:flags:1"`
 }
 
 func (*PeerColorPredict) CRC() uint32 {
@@ -9325,7 +9325,7 @@ func (*PeerColorPredict) CRC() uint32 {
 func (*PeerColorPredict) _PeerColor() {}
 
 type PeerLocated interface {
-	tl.Object
+	tl.TLObject
 	_PeerLocated()
 }
 
@@ -9335,9 +9335,9 @@ var (
 )
 
 type PeerLocatedPredict struct {
-	Peer     Peer
-	Expires  int32
-	Distance int32
+	Peer     Peer  `tl:"peer"`
+	Expires  int32 `tl:"expires"`
+	Distance int32 `tl:"distance"`
 }
 
 func (*PeerLocatedPredict) CRC() uint32 {
@@ -9346,7 +9346,7 @@ func (*PeerLocatedPredict) CRC() uint32 {
 func (*PeerLocatedPredict) _PeerLocated() {}
 
 type PeerSelfLocatedPredict struct {
-	Expires int32
+	Expires int32 `tl:"expires"`
 }
 
 func (*PeerSelfLocatedPredict) CRC() uint32 {
@@ -9355,7 +9355,7 @@ func (*PeerSelfLocatedPredict) CRC() uint32 {
 func (*PeerSelfLocatedPredict) _PeerLocated() {}
 
 type PeerNotifySettings interface {
-	tl.Object
+	tl.TLObject
 	_PeerNotifySettings()
 }
 
@@ -9365,17 +9365,17 @@ var (
 
 type PeerNotifySettingsPredict struct {
 	_                   struct{}          `tl:"flags,bitflag"`
-	ShowPreviews        *bool             `tl:",omitempty:flags:0"`
-	Silent              *bool             `tl:",omitempty:flags:1"`
-	MuteUntil           *int32            `tl:",omitempty:flags:2"`
-	IosSound            NotificationSound `tl:",omitempty:flags:3"`
-	AndroidSound        NotificationSound `tl:",omitempty:flags:4"`
-	OtherSound          NotificationSound `tl:",omitempty:flags:5"`
-	StoriesMuted        *bool             `tl:",omitempty:flags:6"`
-	StoriesHideSender   *bool             `tl:",omitempty:flags:7"`
-	StoriesIosSound     NotificationSound `tl:",omitempty:flags:8"`
-	StoriesAndroidSound NotificationSound `tl:",omitempty:flags:9"`
-	StoriesOtherSound   NotificationSound `tl:",omitempty:flags:10"`
+	ShowPreviews        *bool             `tl:"show_previews,omitempty:flags:0"`
+	Silent              *bool             `tl:"silent,omitempty:flags:1"`
+	MuteUntil           *int32            `tl:"mute_until,omitempty:flags:2"`
+	IosSound            NotificationSound `tl:"ios_sound,omitempty:flags:3"`
+	AndroidSound        NotificationSound `tl:"android_sound,omitempty:flags:4"`
+	OtherSound          NotificationSound `tl:"other_sound,omitempty:flags:5"`
+	StoriesMuted        *bool             `tl:"stories_muted,omitempty:flags:6"`
+	StoriesHideSender   *bool             `tl:"stories_hide_sender,omitempty:flags:7"`
+	StoriesIosSound     NotificationSound `tl:"stories_ios_sound,omitempty:flags:8"`
+	StoriesAndroidSound NotificationSound `tl:"stories_android_sound,omitempty:flags:9"`
+	StoriesOtherSound   NotificationSound `tl:"stories_other_sound,omitempty:flags:10"`
 }
 
 func (*PeerNotifySettingsPredict) CRC() uint32 {
@@ -9384,7 +9384,7 @@ func (*PeerNotifySettingsPredict) CRC() uint32 {
 func (*PeerNotifySettingsPredict) _PeerNotifySettings() {}
 
 type PeerSettings interface {
-	tl.Object
+	tl.TLObject
 	_PeerSettings()
 }
 
@@ -9394,22 +9394,22 @@ var (
 
 type PeerSettingsPredict struct {
 	_                     struct{} `tl:"flags,bitflag"`
-	ReportSpam            bool     `tl:",omitempty:flags:0,implicit"`
-	AddContact            bool     `tl:",omitempty:flags:1,implicit"`
-	BlockContact          bool     `tl:",omitempty:flags:2,implicit"`
-	ShareContact          bool     `tl:",omitempty:flags:3,implicit"`
-	NeedContactsException bool     `tl:",omitempty:flags:4,implicit"`
-	ReportGeo             bool     `tl:",omitempty:flags:5,implicit"`
-	Autoarchived          bool     `tl:",omitempty:flags:7,implicit"`
-	InviteMembers         bool     `tl:",omitempty:flags:8,implicit"`
-	RequestChatBroadcast  bool     `tl:",omitempty:flags:10,implicit"`
-	BusinessBotPaused     bool     `tl:",omitempty:flags:11,implicit"`
-	BusinessBotCanReply   bool     `tl:",omitempty:flags:12,implicit"`
-	GeoDistance           *int32   `tl:",omitempty:flags:6"`
-	RequestChatTitle      *string  `tl:",omitempty:flags:9"`
-	RequestChatDate       *int32   `tl:",omitempty:flags:9"`
-	BusinessBotID         *int64   `tl:",omitempty:flags:13"`
-	BusinessBotManageURL  *string  `tl:",omitempty:flags:13"`
+	ReportSpam            bool     `tl:"report_spam,omitempty:flags:0,implicit"`
+	AddContact            bool     `tl:"add_contact,omitempty:flags:1,implicit"`
+	BlockContact          bool     `tl:"block_contact,omitempty:flags:2,implicit"`
+	ShareContact          bool     `tl:"share_contact,omitempty:flags:3,implicit"`
+	NeedContactsException bool     `tl:"need_contacts_exception,omitempty:flags:4,implicit"`
+	ReportGeo             bool     `tl:"report_geo,omitempty:flags:5,implicit"`
+	Autoarchived          bool     `tl:"autoarchived,omitempty:flags:7,implicit"`
+	InviteMembers         bool     `tl:"invite_members,omitempty:flags:8,implicit"`
+	RequestChatBroadcast  bool     `tl:"request_chat_broadcast,omitempty:flags:10,implicit"`
+	BusinessBotPaused     bool     `tl:"business_bot_paused,omitempty:flags:11,implicit"`
+	BusinessBotCanReply   bool     `tl:"business_bot_can_reply,omitempty:flags:12,implicit"`
+	GeoDistance           *int32   `tl:"geo_distance,omitempty:flags:6"`
+	RequestChatTitle      *string  `tl:"request_chat_title,omitempty:flags:9"`
+	RequestChatDate       *int32   `tl:"request_chat_date,omitempty:flags:9"`
+	BusinessBotID         *int64   `tl:"business_bot_id,omitempty:flags:13"`
+	BusinessBotManageURL  *string  `tl:"business_bot_manage_url,omitempty:flags:13"`
 }
 
 func (*PeerSettingsPredict) CRC() uint32 {
@@ -9418,7 +9418,7 @@ func (*PeerSettingsPredict) CRC() uint32 {
 func (*PeerSettingsPredict) _PeerSettings() {}
 
 type PeerStories interface {
-	tl.Object
+	tl.TLObject
 	_PeerStories()
 }
 
@@ -9427,10 +9427,10 @@ var (
 )
 
 type PeerStoriesPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Peer      Peer
-	MaxReadID *int32 `tl:",omitempty:flags:0"`
-	Stories   []StoryItem
+	_         struct{}    `tl:"flags,bitflag"`
+	Peer      Peer        `tl:"peer"`
+	MaxReadID *int32      `tl:"max_read_id,omitempty:flags:0"`
+	Stories   []StoryItem `tl:"stories"`
 }
 
 func (*PeerStoriesPredict) CRC() uint32 {
@@ -9439,7 +9439,7 @@ func (*PeerStoriesPredict) CRC() uint32 {
 func (*PeerStoriesPredict) _PeerStories() {}
 
 type PhoneCall interface {
-	tl.Object
+	tl.TLObject
 	_PhoneCall()
 }
 
@@ -9453,7 +9453,7 @@ var (
 )
 
 type PhoneCallEmptyPredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*PhoneCallEmptyPredict) CRC() uint32 {
@@ -9462,15 +9462,15 @@ func (*PhoneCallEmptyPredict) CRC() uint32 {
 func (*PhoneCallEmptyPredict) _PhoneCall() {}
 
 type PhoneCallWaitingPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Video         bool     `tl:",omitempty:flags:6,implicit"`
-	ID            int64
-	AccessHash    int64
-	Date          int32
-	AdminID       int64
-	ParticipantID int64
-	Protocol      PhoneCallProtocol
-	ReceiveDate   *int32 `tl:",omitempty:flags:0"`
+	_             struct{}          `tl:"flags,bitflag"`
+	Video         bool              `tl:"video,omitempty:flags:6,implicit"`
+	ID            int64             `tl:"id"`
+	AccessHash    int64             `tl:"access_hash"`
+	Date          int32             `tl:"date"`
+	AdminID       int64             `tl:"admin_id"`
+	ParticipantID int64             `tl:"participant_id"`
+	Protocol      PhoneCallProtocol `tl:"protocol"`
+	ReceiveDate   *int32            `tl:"receive_date,omitempty:flags:0"`
 }
 
 func (*PhoneCallWaitingPredict) CRC() uint32 {
@@ -9479,15 +9479,15 @@ func (*PhoneCallWaitingPredict) CRC() uint32 {
 func (*PhoneCallWaitingPredict) _PhoneCall() {}
 
 type PhoneCallRequestedPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Video         bool     `tl:",omitempty:flags:6,implicit"`
-	ID            int64
-	AccessHash    int64
-	Date          int32
-	AdminID       int64
-	ParticipantID int64
-	GAHash        []byte
-	Protocol      PhoneCallProtocol
+	_             struct{}          `tl:"flags,bitflag"`
+	Video         bool              `tl:"video,omitempty:flags:6,implicit"`
+	ID            int64             `tl:"id"`
+	AccessHash    int64             `tl:"access_hash"`
+	Date          int32             `tl:"date"`
+	AdminID       int64             `tl:"admin_id"`
+	ParticipantID int64             `tl:"participant_id"`
+	GAHash        []byte            `tl:"g_a_hash"`
+	Protocol      PhoneCallProtocol `tl:"protocol"`
 }
 
 func (*PhoneCallRequestedPredict) CRC() uint32 {
@@ -9496,15 +9496,15 @@ func (*PhoneCallRequestedPredict) CRC() uint32 {
 func (*PhoneCallRequestedPredict) _PhoneCall() {}
 
 type PhoneCallAcceptedPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Video         bool     `tl:",omitempty:flags:6,implicit"`
-	ID            int64
-	AccessHash    int64
-	Date          int32
-	AdminID       int64
-	ParticipantID int64
-	GB            []byte
-	Protocol      PhoneCallProtocol
+	_             struct{}          `tl:"flags,bitflag"`
+	Video         bool              `tl:"video,omitempty:flags:6,implicit"`
+	ID            int64             `tl:"id"`
+	AccessHash    int64             `tl:"access_hash"`
+	Date          int32             `tl:"date"`
+	AdminID       int64             `tl:"admin_id"`
+	ParticipantID int64             `tl:"participant_id"`
+	GB            []byte            `tl:"g_b"`
+	Protocol      PhoneCallProtocol `tl:"protocol"`
 }
 
 func (*PhoneCallAcceptedPredict) CRC() uint32 {
@@ -9513,20 +9513,20 @@ func (*PhoneCallAcceptedPredict) CRC() uint32 {
 func (*PhoneCallAcceptedPredict) _PhoneCall() {}
 
 type PhoneCallPredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	P2PAllowed       bool     `tl:",omitempty:flags:5,implicit"`
-	Video            bool     `tl:",omitempty:flags:6,implicit"`
-	ID               int64
-	AccessHash       int64
-	Date             int32
-	AdminID          int64
-	ParticipantID    int64
-	GAOrB            []byte
-	KeyFingerprint   int64
-	Protocol         PhoneCallProtocol
-	Connections      []PhoneConnection
-	StartDate        int32
-	CustomParameters DataJSON `tl:",omitempty:flags:7"`
+	_                struct{}          `tl:"flags,bitflag"`
+	P2PAllowed       bool              `tl:"p2p_allowed,omitempty:flags:5,implicit"`
+	Video            bool              `tl:"video,omitempty:flags:6,implicit"`
+	ID               int64             `tl:"id"`
+	AccessHash       int64             `tl:"access_hash"`
+	Date             int32             `tl:"date"`
+	AdminID          int64             `tl:"admin_id"`
+	ParticipantID    int64             `tl:"participant_id"`
+	GAOrB            []byte            `tl:"g_a_or_b"`
+	KeyFingerprint   int64             `tl:"key_fingerprint"`
+	Protocol         PhoneCallProtocol `tl:"protocol"`
+	Connections      []PhoneConnection `tl:"connections"`
+	StartDate        int32             `tl:"start_date"`
+	CustomParameters DataJSON          `tl:"custom_parameters,omitempty:flags:7"`
 }
 
 func (*PhoneCallPredict) CRC() uint32 {
@@ -9535,13 +9535,13 @@ func (*PhoneCallPredict) CRC() uint32 {
 func (*PhoneCallPredict) _PhoneCall() {}
 
 type PhoneCallDiscardedPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	NeedRating bool     `tl:",omitempty:flags:2,implicit"`
-	NeedDebug  bool     `tl:",omitempty:flags:3,implicit"`
-	Video      bool     `tl:",omitempty:flags:6,implicit"`
-	ID         int64
-	Reason     PhoneCallDiscardReason `tl:",omitempty:flags:0"`
-	Duration   *int32                 `tl:",omitempty:flags:1"`
+	_          struct{}               `tl:"flags,bitflag"`
+	NeedRating bool                   `tl:"need_rating,omitempty:flags:2,implicit"`
+	NeedDebug  bool                   `tl:"need_debug,omitempty:flags:3,implicit"`
+	Video      bool                   `tl:"video,omitempty:flags:6,implicit"`
+	ID         int64                  `tl:"id"`
+	Reason     PhoneCallDiscardReason `tl:"reason,omitempty:flags:0"`
+	Duration   *int32                 `tl:"duration,omitempty:flags:1"`
 }
 
 func (*PhoneCallDiscardedPredict) CRC() uint32 {
@@ -9550,7 +9550,7 @@ func (*PhoneCallDiscardedPredict) CRC() uint32 {
 func (*PhoneCallDiscardedPredict) _PhoneCall() {}
 
 type PhoneCallProtocol interface {
-	tl.Object
+	tl.TLObject
 	_PhoneCallProtocol()
 }
 
@@ -9560,11 +9560,11 @@ var (
 
 type PhoneCallProtocolPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	UdpP2P          bool     `tl:",omitempty:flags:0,implicit"`
-	UdpReflector    bool     `tl:",omitempty:flags:1,implicit"`
-	MinLayer        int32
-	MaxLayer        int32
-	LibraryVersions []string
+	UdpP2P          bool     `tl:"udp_p2p,omitempty:flags:0,implicit"`
+	UdpReflector    bool     `tl:"udp_reflector,omitempty:flags:1,implicit"`
+	MinLayer        int32    `tl:"min_layer"`
+	MaxLayer        int32    `tl:"max_layer"`
+	LibraryVersions []string `tl:"library_versions"`
 }
 
 func (*PhoneCallProtocolPredict) CRC() uint32 {
@@ -9573,7 +9573,7 @@ func (*PhoneCallProtocolPredict) CRC() uint32 {
 func (*PhoneCallProtocolPredict) _PhoneCallProtocol() {}
 
 type PhoneConnection interface {
-	tl.Object
+	tl.TLObject
 	_PhoneConnection()
 }
 
@@ -9584,12 +9584,12 @@ var (
 
 type PhoneConnectionPredict struct {
 	_       struct{} `tl:"flags,bitflag"`
-	Tcp     bool     `tl:",omitempty:flags:0,implicit"`
-	ID      int64
-	Ip      string
-	Ipv6    string
-	Port    int32
-	PeerTag []byte
+	Tcp     bool     `tl:"tcp,omitempty:flags:0,implicit"`
+	ID      int64    `tl:"id"`
+	Ip      string   `tl:"ip"`
+	Ipv6    string   `tl:"ipv6"`
+	Port    int32    `tl:"port"`
+	PeerTag []byte   `tl:"peer_tag"`
 }
 
 func (*PhoneConnectionPredict) CRC() uint32 {
@@ -9599,14 +9599,14 @@ func (*PhoneConnectionPredict) _PhoneConnection() {}
 
 type PhoneConnectionWebrtcPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Turn     bool     `tl:",omitempty:flags:0,implicit"`
-	Stun     bool     `tl:",omitempty:flags:1,implicit"`
-	ID       int64
-	Ip       string
-	Ipv6     string
-	Port     int32
-	Username string
-	Password string
+	Turn     bool     `tl:"turn,omitempty:flags:0,implicit"`
+	Stun     bool     `tl:"stun,omitempty:flags:1,implicit"`
+	ID       int64    `tl:"id"`
+	Ip       string   `tl:"ip"`
+	Ipv6     string   `tl:"ipv6"`
+	Port     int32    `tl:"port"`
+	Username string   `tl:"username"`
+	Password string   `tl:"password"`
 }
 
 func (*PhoneConnectionWebrtcPredict) CRC() uint32 {
@@ -9615,7 +9615,7 @@ func (*PhoneConnectionWebrtcPredict) CRC() uint32 {
 func (*PhoneConnectionWebrtcPredict) _PhoneConnection() {}
 
 type Photo interface {
-	tl.Object
+	tl.TLObject
 	_Photo()
 }
 
@@ -9625,7 +9625,7 @@ var (
 )
 
 type PhotoEmptyPredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*PhotoEmptyPredict) CRC() uint32 {
@@ -9634,15 +9634,15 @@ func (*PhotoEmptyPredict) CRC() uint32 {
 func (*PhotoEmptyPredict) _Photo() {}
 
 type PhotoPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	HasStickers   bool     `tl:",omitempty:flags:0,implicit"`
-	ID            int64
-	AccessHash    int64
-	FileReference []byte
-	Date          int32
-	Sizes         []PhotoSize
-	VideoSizes    []VideoSize `tl:",omitempty:flags:1"`
-	DcID          int32
+	_             struct{}    `tl:"flags,bitflag"`
+	HasStickers   bool        `tl:"has_stickers,omitempty:flags:0,implicit"`
+	ID            int64       `tl:"id"`
+	AccessHash    int64       `tl:"access_hash"`
+	FileReference []byte      `tl:"file_reference"`
+	Date          int32       `tl:"date"`
+	Sizes         []PhotoSize `tl:"sizes"`
+	VideoSizes    []VideoSize `tl:"video_sizes,omitempty:flags:1"`
+	DcID          int32       `tl:"dc_id"`
 }
 
 func (*PhotoPredict) CRC() uint32 {
@@ -9651,7 +9651,7 @@ func (*PhotoPredict) CRC() uint32 {
 func (*PhotoPredict) _Photo() {}
 
 type PhotoSize interface {
-	tl.Object
+	tl.TLObject
 	_PhotoSize()
 }
 
@@ -9665,7 +9665,7 @@ var (
 )
 
 type PhotoSizeEmptyPredict struct {
-	Type string
+	Type string `tl:"type"`
 }
 
 func (*PhotoSizeEmptyPredict) CRC() uint32 {
@@ -9674,10 +9674,10 @@ func (*PhotoSizeEmptyPredict) CRC() uint32 {
 func (*PhotoSizeEmptyPredict) _PhotoSize() {}
 
 type PhotoSizePredict struct {
-	Type string
-	W    int32
-	H    int32
-	Size int32
+	Type string `tl:"type"`
+	W    int32  `tl:"w"`
+	H    int32  `tl:"h"`
+	Size int32  `tl:"size"`
 }
 
 func (*PhotoSizePredict) CRC() uint32 {
@@ -9686,10 +9686,10 @@ func (*PhotoSizePredict) CRC() uint32 {
 func (*PhotoSizePredict) _PhotoSize() {}
 
 type PhotoCachedSizePredict struct {
-	Type  string
-	W     int32
-	H     int32
-	Bytes []byte
+	Type  string `tl:"type"`
+	W     int32  `tl:"w"`
+	H     int32  `tl:"h"`
+	Bytes []byte `tl:"bytes"`
 }
 
 func (*PhotoCachedSizePredict) CRC() uint32 {
@@ -9698,8 +9698,8 @@ func (*PhotoCachedSizePredict) CRC() uint32 {
 func (*PhotoCachedSizePredict) _PhotoSize() {}
 
 type PhotoStrippedSizePredict struct {
-	Type  string
-	Bytes []byte
+	Type  string `tl:"type"`
+	Bytes []byte `tl:"bytes"`
 }
 
 func (*PhotoStrippedSizePredict) CRC() uint32 {
@@ -9708,10 +9708,10 @@ func (*PhotoStrippedSizePredict) CRC() uint32 {
 func (*PhotoStrippedSizePredict) _PhotoSize() {}
 
 type PhotoSizeProgressivePredict struct {
-	Type  string
-	W     int32
-	H     int32
-	Sizes []int32
+	Type  string  `tl:"type"`
+	W     int32   `tl:"w"`
+	H     int32   `tl:"h"`
+	Sizes []int32 `tl:"sizes"`
 }
 
 func (*PhotoSizeProgressivePredict) CRC() uint32 {
@@ -9720,8 +9720,8 @@ func (*PhotoSizeProgressivePredict) CRC() uint32 {
 func (*PhotoSizeProgressivePredict) _PhotoSize() {}
 
 type PhotoPathSizePredict struct {
-	Type  string
-	Bytes []byte
+	Type  string `tl:"type"`
+	Bytes []byte `tl:"bytes"`
 }
 
 func (*PhotoPathSizePredict) CRC() uint32 {
@@ -9730,7 +9730,7 @@ func (*PhotoPathSizePredict) CRC() uint32 {
 func (*PhotoPathSizePredict) _PhotoSize() {}
 
 type Poll interface {
-	tl.Object
+	tl.TLObject
 	_Poll()
 }
 
@@ -9739,16 +9739,16 @@ var (
 )
 
 type PollPredict struct {
-	ID             int64
-	_              struct{} `tl:"flags,bitflag"`
-	Closed         bool     `tl:",omitempty:flags:0,implicit"`
-	PublicVoters   bool     `tl:",omitempty:flags:1,implicit"`
-	MultipleChoice bool     `tl:",omitempty:flags:2,implicit"`
-	Quiz           bool     `tl:",omitempty:flags:3,implicit"`
-	Question       TextWithEntities
-	Answers        []PollAnswer
-	ClosePeriod    *int32 `tl:",omitempty:flags:4"`
-	CloseDate      *int32 `tl:",omitempty:flags:5"`
+	ID             int64            `tl:"id"`
+	_              struct{}         `tl:"flags,bitflag"`
+	Closed         bool             `tl:"closed,omitempty:flags:0,implicit"`
+	PublicVoters   bool             `tl:"public_voters,omitempty:flags:1,implicit"`
+	MultipleChoice bool             `tl:"multiple_choice,omitempty:flags:2,implicit"`
+	Quiz           bool             `tl:"quiz,omitempty:flags:3,implicit"`
+	Question       TextWithEntities `tl:"question"`
+	Answers        []PollAnswer     `tl:"answers"`
+	ClosePeriod    *int32           `tl:"close_period,omitempty:flags:4"`
+	CloseDate      *int32           `tl:"close_date,omitempty:flags:5"`
 }
 
 func (*PollPredict) CRC() uint32 {
@@ -9757,7 +9757,7 @@ func (*PollPredict) CRC() uint32 {
 func (*PollPredict) _Poll() {}
 
 type PollAnswer interface {
-	tl.Object
+	tl.TLObject
 	_PollAnswer()
 }
 
@@ -9766,8 +9766,8 @@ var (
 )
 
 type PollAnswerPredict struct {
-	Text   TextWithEntities
-	Option []byte
+	Text   TextWithEntities `tl:"text"`
+	Option []byte           `tl:"option"`
 }
 
 func (*PollAnswerPredict) CRC() uint32 {
@@ -9776,7 +9776,7 @@ func (*PollAnswerPredict) CRC() uint32 {
 func (*PollAnswerPredict) _PollAnswer() {}
 
 type PollAnswerVoters interface {
-	tl.Object
+	tl.TLObject
 	_PollAnswerVoters()
 }
 
@@ -9786,10 +9786,10 @@ var (
 
 type PollAnswerVotersPredict struct {
 	_       struct{} `tl:"flags,bitflag"`
-	Chosen  bool     `tl:",omitempty:flags:0,implicit"`
-	Correct bool     `tl:",omitempty:flags:1,implicit"`
-	Option  []byte
-	Voters  int32
+	Chosen  bool     `tl:"chosen,omitempty:flags:0,implicit"`
+	Correct bool     `tl:"correct,omitempty:flags:1,implicit"`
+	Option  []byte   `tl:"option"`
+	Voters  int32    `tl:"voters"`
 }
 
 func (*PollAnswerVotersPredict) CRC() uint32 {
@@ -9798,7 +9798,7 @@ func (*PollAnswerVotersPredict) CRC() uint32 {
 func (*PollAnswerVotersPredict) _PollAnswerVoters() {}
 
 type PollResults interface {
-	tl.Object
+	tl.TLObject
 	_PollResults()
 }
 
@@ -9808,12 +9808,12 @@ var (
 
 type PollResultsPredict struct {
 	_                struct{}           `tl:"flags,bitflag"`
-	Min              bool               `tl:",omitempty:flags:0,implicit"`
-	Results          []PollAnswerVoters `tl:",omitempty:flags:1"`
-	TotalVoters      *int32             `tl:",omitempty:flags:2"`
-	RecentVoters     []Peer             `tl:",omitempty:flags:3"`
-	Solution         *string            `tl:",omitempty:flags:4"`
-	SolutionEntities []MessageEntity    `tl:",omitempty:flags:4"`
+	Min              bool               `tl:"min,omitempty:flags:0,implicit"`
+	Results          []PollAnswerVoters `tl:"results,omitempty:flags:1"`
+	TotalVoters      *int32             `tl:"total_voters,omitempty:flags:2"`
+	RecentVoters     []Peer             `tl:"recent_voters,omitempty:flags:3"`
+	Solution         *string            `tl:"solution,omitempty:flags:4"`
+	SolutionEntities []MessageEntity    `tl:"solution_entities,omitempty:flags:4"`
 }
 
 func (*PollResultsPredict) CRC() uint32 {
@@ -9822,7 +9822,7 @@ func (*PollResultsPredict) CRC() uint32 {
 func (*PollResultsPredict) _PollResults() {}
 
 type PopularContact interface {
-	tl.Object
+	tl.TLObject
 	_PopularContact()
 }
 
@@ -9831,8 +9831,8 @@ var (
 )
 
 type PopularContactPredict struct {
-	ClientID  int64
-	Importers int32
+	ClientID  int64 `tl:"client_id"`
+	Importers int32 `tl:"importers"`
 }
 
 func (*PopularContactPredict) CRC() uint32 {
@@ -9841,7 +9841,7 @@ func (*PopularContactPredict) CRC() uint32 {
 func (*PopularContactPredict) _PopularContact() {}
 
 type PostAddress interface {
-	tl.Object
+	tl.TLObject
 	_PostAddress()
 }
 
@@ -9850,12 +9850,12 @@ var (
 )
 
 type PostAddressPredict struct {
-	StreetLine1 string
-	StreetLine2 string
-	City        string
-	State       string
-	CountryIso2 string
-	PostCode    string
+	StreetLine1 string `tl:"street_line1"`
+	StreetLine2 string `tl:"street_line2"`
+	City        string `tl:"city"`
+	State       string `tl:"state"`
+	CountryIso2 string `tl:"country_iso2"`
+	PostCode    string `tl:"post_code"`
 }
 
 func (*PostAddressPredict) CRC() uint32 {
@@ -9864,7 +9864,7 @@ func (*PostAddressPredict) CRC() uint32 {
 func (*PostAddressPredict) _PostAddress() {}
 
 type PostInteractionCounters interface {
-	tl.Object
+	tl.TLObject
 	_PostInteractionCounters()
 }
 
@@ -9874,10 +9874,10 @@ var (
 )
 
 type PostInteractionCountersMessagePredict struct {
-	MsgID     int32
-	Views     int32
-	Forwards  int32
-	Reactions int32
+	MsgID     int32 `tl:"msg_id"`
+	Views     int32 `tl:"views"`
+	Forwards  int32 `tl:"forwards"`
+	Reactions int32 `tl:"reactions"`
 }
 
 func (*PostInteractionCountersMessagePredict) CRC() uint32 {
@@ -9886,10 +9886,10 @@ func (*PostInteractionCountersMessagePredict) CRC() uint32 {
 func (*PostInteractionCountersMessagePredict) _PostInteractionCounters() {}
 
 type PostInteractionCountersStoryPredict struct {
-	StoryID   int32
-	Views     int32
-	Forwards  int32
-	Reactions int32
+	StoryID   int32 `tl:"story_id"`
+	Views     int32 `tl:"views"`
+	Forwards  int32 `tl:"forwards"`
+	Reactions int32 `tl:"reactions"`
 }
 
 func (*PostInteractionCountersStoryPredict) CRC() uint32 {
@@ -9898,7 +9898,7 @@ func (*PostInteractionCountersStoryPredict) CRC() uint32 {
 func (*PostInteractionCountersStoryPredict) _PostInteractionCounters() {}
 
 type PremiumGiftCodeOption interface {
-	tl.Object
+	tl.TLObject
 	_PremiumGiftCodeOption()
 }
 
@@ -9908,12 +9908,12 @@ var (
 
 type PremiumGiftCodeOptionPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	Users         int32
-	Months        int32
-	StoreProduct  *string `tl:",omitempty:flags:0"`
-	StoreQuantity *int32  `tl:",omitempty:flags:1"`
-	Currency      string
-	Amount        int64
+	Users         int32    `tl:"users"`
+	Months        int32    `tl:"months"`
+	StoreProduct  *string  `tl:"store_product,omitempty:flags:0"`
+	StoreQuantity *int32   `tl:"store_quantity,omitempty:flags:1"`
+	Currency      string   `tl:"currency"`
+	Amount        int64    `tl:"amount"`
 }
 
 func (*PremiumGiftCodeOptionPredict) CRC() uint32 {
@@ -9922,7 +9922,7 @@ func (*PremiumGiftCodeOptionPredict) CRC() uint32 {
 func (*PremiumGiftCodeOptionPredict) _PremiumGiftCodeOption() {}
 
 type PremiumGiftOption interface {
-	tl.Object
+	tl.TLObject
 	_PremiumGiftOption()
 }
 
@@ -9932,11 +9932,11 @@ var (
 
 type PremiumGiftOptionPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	Months       int32
-	Currency     string
-	Amount       int64
-	BotURL       string
-	StoreProduct *string `tl:",omitempty:flags:0"`
+	Months       int32    `tl:"months"`
+	Currency     string   `tl:"currency"`
+	Amount       int64    `tl:"amount"`
+	BotURL       string   `tl:"bot_url"`
+	StoreProduct *string  `tl:"store_product,omitempty:flags:0"`
 }
 
 func (*PremiumGiftOptionPredict) CRC() uint32 {
@@ -9945,7 +9945,7 @@ func (*PremiumGiftOptionPredict) CRC() uint32 {
 func (*PremiumGiftOptionPredict) _PremiumGiftOption() {}
 
 type PremiumSubscriptionOption interface {
-	tl.Object
+	tl.TLObject
 	_PremiumSubscriptionOption()
 }
 
@@ -9955,14 +9955,14 @@ var (
 
 type PremiumSubscriptionOptionPredict struct {
 	_                  struct{} `tl:"flags,bitflag"`
-	Current            bool     `tl:",omitempty:flags:1,implicit"`
-	CanPurchaseUpgrade bool     `tl:",omitempty:flags:2,implicit"`
-	Transaction        *string  `tl:",omitempty:flags:3"`
-	Months             int32
-	Currency           string
-	Amount             int64
-	BotURL             string
-	StoreProduct       *string `tl:",omitempty:flags:0"`
+	Current            bool     `tl:"current,omitempty:flags:1,implicit"`
+	CanPurchaseUpgrade bool     `tl:"can_purchase_upgrade,omitempty:flags:2,implicit"`
+	Transaction        *string  `tl:"transaction,omitempty:flags:3"`
+	Months             int32    `tl:"months"`
+	Currency           string   `tl:"currency"`
+	Amount             int64    `tl:"amount"`
+	BotURL             string   `tl:"bot_url"`
+	StoreProduct       *string  `tl:"store_product,omitempty:flags:0"`
 }
 
 func (*PremiumSubscriptionOptionPredict) CRC() uint32 {
@@ -9971,7 +9971,7 @@ func (*PremiumSubscriptionOptionPredict) CRC() uint32 {
 func (*PremiumSubscriptionOptionPredict) _PremiumSubscriptionOption() {}
 
 type PrepaidGiveaway interface {
-	tl.Object
+	tl.TLObject
 	_PrepaidGiveaway()
 }
 
@@ -9980,10 +9980,10 @@ var (
 )
 
 type PrepaidGiveawayPredict struct {
-	ID       int64
-	Months   int32
-	Quantity int32
-	Date     int32
+	ID       int64 `tl:"id"`
+	Months   int32 `tl:"months"`
+	Quantity int32 `tl:"quantity"`
+	Date     int32 `tl:"date"`
 }
 
 func (*PrepaidGiveawayPredict) CRC() uint32 {
@@ -9992,7 +9992,7 @@ func (*PrepaidGiveawayPredict) CRC() uint32 {
 func (*PrepaidGiveawayPredict) _PrepaidGiveaway() {}
 
 type PrivacyRule interface {
-	tl.Object
+	tl.TLObject
 	_PrivacyRule()
 }
 
@@ -10024,7 +10024,7 @@ func (*PrivacyValueAllowAllPredict) CRC() uint32 {
 func (*PrivacyValueAllowAllPredict) _PrivacyRule() {}
 
 type PrivacyValueAllowUsersPredict struct {
-	Users []int64
+	Users []int64 `tl:"users"`
 }
 
 func (*PrivacyValueAllowUsersPredict) CRC() uint32 {
@@ -10047,7 +10047,7 @@ func (*PrivacyValueDisallowAllPredict) CRC() uint32 {
 func (*PrivacyValueDisallowAllPredict) _PrivacyRule() {}
 
 type PrivacyValueDisallowUsersPredict struct {
-	Users []int64
+	Users []int64 `tl:"users"`
 }
 
 func (*PrivacyValueDisallowUsersPredict) CRC() uint32 {
@@ -10056,7 +10056,7 @@ func (*PrivacyValueDisallowUsersPredict) CRC() uint32 {
 func (*PrivacyValueDisallowUsersPredict) _PrivacyRule() {}
 
 type PrivacyValueAllowChatParticipantsPredict struct {
-	Chats []int64
+	Chats []int64 `tl:"chats"`
 }
 
 func (*PrivacyValueAllowChatParticipantsPredict) CRC() uint32 {
@@ -10065,7 +10065,7 @@ func (*PrivacyValueAllowChatParticipantsPredict) CRC() uint32 {
 func (*PrivacyValueAllowChatParticipantsPredict) _PrivacyRule() {}
 
 type PrivacyValueDisallowChatParticipantsPredict struct {
-	Chats []int64
+	Chats []int64 `tl:"chats"`
 }
 
 func (*PrivacyValueDisallowChatParticipantsPredict) CRC() uint32 {
@@ -10088,7 +10088,7 @@ func (*PrivacyValueAllowPremiumPredict) CRC() uint32 {
 func (*PrivacyValueAllowPremiumPredict) _PrivacyRule() {}
 
 type PublicForward interface {
-	tl.Object
+	tl.TLObject
 	_PublicForward()
 }
 
@@ -10098,7 +10098,7 @@ var (
 )
 
 type PublicForwardMessagePredict struct {
-	Message Message
+	Message Message `tl:"message"`
 }
 
 func (*PublicForwardMessagePredict) CRC() uint32 {
@@ -10107,8 +10107,8 @@ func (*PublicForwardMessagePredict) CRC() uint32 {
 func (*PublicForwardMessagePredict) _PublicForward() {}
 
 type PublicForwardStoryPredict struct {
-	Peer  Peer
-	Story StoryItem
+	Peer  Peer      `tl:"peer"`
+	Story StoryItem `tl:"story"`
 }
 
 func (*PublicForwardStoryPredict) CRC() uint32 {
@@ -10117,7 +10117,7 @@ func (*PublicForwardStoryPredict) CRC() uint32 {
 func (*PublicForwardStoryPredict) _PublicForward() {}
 
 type QuickReply interface {
-	tl.Object
+	tl.TLObject
 	_QuickReply()
 }
 
@@ -10126,10 +10126,10 @@ var (
 )
 
 type QuickReplyPredict struct {
-	ShortcutID int32
-	Shortcut   string
-	TopMessage int32
-	Count      int32
+	ShortcutID int32  `tl:"shortcut_id"`
+	Shortcut   string `tl:"shortcut"`
+	TopMessage int32  `tl:"top_message"`
+	Count      int32  `tl:"count"`
 }
 
 func (*QuickReplyPredict) CRC() uint32 {
@@ -10138,7 +10138,7 @@ func (*QuickReplyPredict) CRC() uint32 {
 func (*QuickReplyPredict) _QuickReply() {}
 
 type Reaction interface {
-	tl.Object
+	tl.TLObject
 	_Reaction()
 }
 
@@ -10156,7 +10156,7 @@ func (*ReactionEmptyPredict) CRC() uint32 {
 func (*ReactionEmptyPredict) _Reaction() {}
 
 type ReactionEmojiPredict struct {
-	Emoticon string
+	Emoticon string `tl:"emoticon"`
 }
 
 func (*ReactionEmojiPredict) CRC() uint32 {
@@ -10165,7 +10165,7 @@ func (*ReactionEmojiPredict) CRC() uint32 {
 func (*ReactionEmojiPredict) _Reaction() {}
 
 type ReactionCustomEmojiPredict struct {
-	DocumentID int64
+	DocumentID int64 `tl:"document_id"`
 }
 
 func (*ReactionCustomEmojiPredict) CRC() uint32 {
@@ -10174,7 +10174,7 @@ func (*ReactionCustomEmojiPredict) CRC() uint32 {
 func (*ReactionCustomEmojiPredict) _Reaction() {}
 
 type ReactionCount interface {
-	tl.Object
+	tl.TLObject
 	_ReactionCount()
 }
 
@@ -10184,9 +10184,9 @@ var (
 
 type ReactionCountPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	ChosenOrder *int32   `tl:",omitempty:flags:0"`
-	Reaction    Reaction
-	Count       int32
+	ChosenOrder *int32   `tl:"chosen_order,omitempty:flags:0"`
+	Reaction    Reaction `tl:"reaction"`
+	Count       int32    `tl:"count"`
 }
 
 func (*ReactionCountPredict) CRC() uint32 {
@@ -10195,7 +10195,7 @@ func (*ReactionCountPredict) CRC() uint32 {
 func (*ReactionCountPredict) _ReactionCount() {}
 
 type ReactionsNotifySettings interface {
-	tl.Object
+	tl.TLObject
 	_ReactionsNotifySettings()
 }
 
@@ -10205,10 +10205,10 @@ var (
 
 type ReactionsNotifySettingsPredict struct {
 	_                  struct{}                  `tl:"flags,bitflag"`
-	MessagesNotifyFrom ReactionNotificationsFrom `tl:",omitempty:flags:0"`
-	StoriesNotifyFrom  ReactionNotificationsFrom `tl:",omitempty:flags:1"`
-	Sound              NotificationSound
-	ShowPreviews       bool
+	MessagesNotifyFrom ReactionNotificationsFrom `tl:"messages_notify_from,omitempty:flags:0"`
+	StoriesNotifyFrom  ReactionNotificationsFrom `tl:"stories_notify_from,omitempty:flags:1"`
+	Sound              NotificationSound         `tl:"sound"`
+	ShowPreviews       bool                      `tl:"show_previews"`
 }
 
 func (*ReactionsNotifySettingsPredict) CRC() uint32 {
@@ -10217,7 +10217,7 @@ func (*ReactionsNotifySettingsPredict) CRC() uint32 {
 func (*ReactionsNotifySettingsPredict) _ReactionsNotifySettings() {}
 
 type ReadParticipantDate interface {
-	tl.Object
+	tl.TLObject
 	_ReadParticipantDate()
 }
 
@@ -10226,8 +10226,8 @@ var (
 )
 
 type ReadParticipantDatePredict struct {
-	UserID int64
-	Date   int32
+	UserID int64 `tl:"user_id"`
+	Date   int32 `tl:"date"`
 }
 
 func (*ReadParticipantDatePredict) CRC() uint32 {
@@ -10236,7 +10236,7 @@ func (*ReadParticipantDatePredict) CRC() uint32 {
 func (*ReadParticipantDatePredict) _ReadParticipantDate() {}
 
 type ReceivedNotifyMessage interface {
-	tl.Object
+	tl.TLObject
 	_ReceivedNotifyMessage()
 }
 
@@ -10245,8 +10245,8 @@ var (
 )
 
 type ReceivedNotifyMessagePredict struct {
-	ID    int32
-	Flags int32
+	ID    int32 `tl:"id"`
+	Flags int32 `tl:"flags"`
 }
 
 func (*ReceivedNotifyMessagePredict) CRC() uint32 {
@@ -10255,7 +10255,7 @@ func (*ReceivedNotifyMessagePredict) CRC() uint32 {
 func (*ReceivedNotifyMessagePredict) _ReceivedNotifyMessage() {}
 
 type RecentMeURL interface {
-	tl.Object
+	tl.TLObject
 	_RecentMeURL()
 }
 
@@ -10268,7 +10268,7 @@ var (
 )
 
 type RecentMeURLUnknownPredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*RecentMeURLUnknownPredict) CRC() uint32 {
@@ -10277,8 +10277,8 @@ func (*RecentMeURLUnknownPredict) CRC() uint32 {
 func (*RecentMeURLUnknownPredict) _RecentMeURL() {}
 
 type RecentMeURLUserPredict struct {
-	URL    string
-	UserID int64
+	URL    string `tl:"url"`
+	UserID int64  `tl:"user_id"`
 }
 
 func (*RecentMeURLUserPredict) CRC() uint32 {
@@ -10287,8 +10287,8 @@ func (*RecentMeURLUserPredict) CRC() uint32 {
 func (*RecentMeURLUserPredict) _RecentMeURL() {}
 
 type RecentMeURLChatPredict struct {
-	URL    string
-	ChatID int64
+	URL    string `tl:"url"`
+	ChatID int64  `tl:"chat_id"`
 }
 
 func (*RecentMeURLChatPredict) CRC() uint32 {
@@ -10297,8 +10297,8 @@ func (*RecentMeURLChatPredict) CRC() uint32 {
 func (*RecentMeURLChatPredict) _RecentMeURL() {}
 
 type RecentMeURLChatInvitePredict struct {
-	URL        string
-	ChatInvite ChatInvite
+	URL        string     `tl:"url"`
+	ChatInvite ChatInvite `tl:"chat_invite"`
 }
 
 func (*RecentMeURLChatInvitePredict) CRC() uint32 {
@@ -10307,8 +10307,8 @@ func (*RecentMeURLChatInvitePredict) CRC() uint32 {
 func (*RecentMeURLChatInvitePredict) _RecentMeURL() {}
 
 type RecentMeURLStickerSetPredict struct {
-	URL string
-	Set StickerSetCovered
+	URL string            `tl:"url"`
+	Set StickerSetCovered `tl:"set"`
 }
 
 func (*RecentMeURLStickerSetPredict) CRC() uint32 {
@@ -10317,7 +10317,7 @@ func (*RecentMeURLStickerSetPredict) CRC() uint32 {
 func (*RecentMeURLStickerSetPredict) _RecentMeURL() {}
 
 type ReplyMarkup interface {
-	tl.Object
+	tl.TLObject
 	_ReplyMarkup()
 }
 
@@ -10330,7 +10330,7 @@ var (
 
 type ReplyKeyboardHidePredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Selective bool     `tl:",omitempty:flags:2,implicit"`
+	Selective bool     `tl:"selective,omitempty:flags:2,implicit"`
 }
 
 func (*ReplyKeyboardHidePredict) CRC() uint32 {
@@ -10340,9 +10340,9 @@ func (*ReplyKeyboardHidePredict) _ReplyMarkup() {}
 
 type ReplyKeyboardForceReplyPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	SingleUse   bool     `tl:",omitempty:flags:1,implicit"`
-	Selective   bool     `tl:",omitempty:flags:2,implicit"`
-	Placeholder *string  `tl:",omitempty:flags:3"`
+	SingleUse   bool     `tl:"single_use,omitempty:flags:1,implicit"`
+	Selective   bool     `tl:"selective,omitempty:flags:2,implicit"`
+	Placeholder *string  `tl:"placeholder,omitempty:flags:3"`
 }
 
 func (*ReplyKeyboardForceReplyPredict) CRC() uint32 {
@@ -10351,13 +10351,13 @@ func (*ReplyKeyboardForceReplyPredict) CRC() uint32 {
 func (*ReplyKeyboardForceReplyPredict) _ReplyMarkup() {}
 
 type ReplyKeyboardMarkupPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Resize      bool     `tl:",omitempty:flags:0,implicit"`
-	SingleUse   bool     `tl:",omitempty:flags:1,implicit"`
-	Selective   bool     `tl:",omitempty:flags:2,implicit"`
-	Persistent  bool     `tl:",omitempty:flags:4,implicit"`
-	Rows        []KeyboardButtonRow
-	Placeholder *string `tl:",omitempty:flags:3"`
+	_           struct{}            `tl:"flags,bitflag"`
+	Resize      bool                `tl:"resize,omitempty:flags:0,implicit"`
+	SingleUse   bool                `tl:"single_use,omitempty:flags:1,implicit"`
+	Selective   bool                `tl:"selective,omitempty:flags:2,implicit"`
+	Persistent  bool                `tl:"persistent,omitempty:flags:4,implicit"`
+	Rows        []KeyboardButtonRow `tl:"rows"`
+	Placeholder *string             `tl:"placeholder,omitempty:flags:3"`
 }
 
 func (*ReplyKeyboardMarkupPredict) CRC() uint32 {
@@ -10366,7 +10366,7 @@ func (*ReplyKeyboardMarkupPredict) CRC() uint32 {
 func (*ReplyKeyboardMarkupPredict) _ReplyMarkup() {}
 
 type ReplyInlineMarkupPredict struct {
-	Rows []KeyboardButtonRow
+	Rows []KeyboardButtonRow `tl:"rows"`
 }
 
 func (*ReplyInlineMarkupPredict) CRC() uint32 {
@@ -10375,7 +10375,7 @@ func (*ReplyInlineMarkupPredict) CRC() uint32 {
 func (*ReplyInlineMarkupPredict) _ReplyMarkup() {}
 
 type RequestPeerType interface {
-	tl.Object
+	tl.TLObject
 	_RequestPeerType()
 }
 
@@ -10387,8 +10387,8 @@ var (
 
 type RequestPeerTypeUserPredict struct {
 	_       struct{} `tl:"flags,bitflag"`
-	Bot     *bool    `tl:",omitempty:flags:0"`
-	Premium *bool    `tl:",omitempty:flags:1"`
+	Bot     *bool    `tl:"bot,omitempty:flags:0"`
+	Premium *bool    `tl:"premium,omitempty:flags:1"`
 }
 
 func (*RequestPeerTypeUserPredict) CRC() uint32 {
@@ -10398,12 +10398,12 @@ func (*RequestPeerTypeUserPredict) _RequestPeerType() {}
 
 type RequestPeerTypeChatPredict struct {
 	_               struct{}        `tl:"flags,bitflag"`
-	Creator         bool            `tl:",omitempty:flags:0,implicit"`
-	BotParticipant  bool            `tl:",omitempty:flags:5,implicit"`
-	HasUsername     *bool           `tl:",omitempty:flags:3"`
-	Forum           *bool           `tl:",omitempty:flags:4"`
-	UserAdminRights ChatAdminRights `tl:",omitempty:flags:1"`
-	BotAdminRights  ChatAdminRights `tl:",omitempty:flags:2"`
+	Creator         bool            `tl:"creator,omitempty:flags:0,implicit"`
+	BotParticipant  bool            `tl:"bot_participant,omitempty:flags:5,implicit"`
+	HasUsername     *bool           `tl:"has_username,omitempty:flags:3"`
+	Forum           *bool           `tl:"forum,omitempty:flags:4"`
+	UserAdminRights ChatAdminRights `tl:"user_admin_rights,omitempty:flags:1"`
+	BotAdminRights  ChatAdminRights `tl:"bot_admin_rights,omitempty:flags:2"`
 }
 
 func (*RequestPeerTypeChatPredict) CRC() uint32 {
@@ -10413,10 +10413,10 @@ func (*RequestPeerTypeChatPredict) _RequestPeerType() {}
 
 type RequestPeerTypeBroadcastPredict struct {
 	_               struct{}        `tl:"flags,bitflag"`
-	Creator         bool            `tl:",omitempty:flags:0,implicit"`
-	HasUsername     *bool           `tl:",omitempty:flags:3"`
-	UserAdminRights ChatAdminRights `tl:",omitempty:flags:1"`
-	BotAdminRights  ChatAdminRights `tl:",omitempty:flags:2"`
+	Creator         bool            `tl:"creator,omitempty:flags:0,implicit"`
+	HasUsername     *bool           `tl:"has_username,omitempty:flags:3"`
+	UserAdminRights ChatAdminRights `tl:"user_admin_rights,omitempty:flags:1"`
+	BotAdminRights  ChatAdminRights `tl:"bot_admin_rights,omitempty:flags:2"`
 }
 
 func (*RequestPeerTypeBroadcastPredict) CRC() uint32 {
@@ -10425,7 +10425,7 @@ func (*RequestPeerTypeBroadcastPredict) CRC() uint32 {
 func (*RequestPeerTypeBroadcastPredict) _RequestPeerType() {}
 
 type RequestedPeer interface {
-	tl.Object
+	tl.TLObject
 	_RequestedPeer()
 }
 
@@ -10437,11 +10437,11 @@ var (
 
 type RequestedPeerUserPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	UserID    int64
-	FirstName *string `tl:",omitempty:flags:0"`
-	LastName  *string `tl:",omitempty:flags:0"`
-	Username  *string `tl:",omitempty:flags:1"`
-	Photo     Photo   `tl:",omitempty:flags:2"`
+	UserID    int64    `tl:"user_id"`
+	FirstName *string  `tl:"first_name,omitempty:flags:0"`
+	LastName  *string  `tl:"last_name,omitempty:flags:0"`
+	Username  *string  `tl:"username,omitempty:flags:1"`
+	Photo     Photo    `tl:"photo,omitempty:flags:2"`
 }
 
 func (*RequestedPeerUserPredict) CRC() uint32 {
@@ -10451,9 +10451,9 @@ func (*RequestedPeerUserPredict) _RequestedPeer() {}
 
 type RequestedPeerChatPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	ChatID int64
-	Title  *string `tl:",omitempty:flags:0"`
-	Photo  Photo   `tl:",omitempty:flags:2"`
+	ChatID int64    `tl:"chat_id"`
+	Title  *string  `tl:"title,omitempty:flags:0"`
+	Photo  Photo    `tl:"photo,omitempty:flags:2"`
 }
 
 func (*RequestedPeerChatPredict) CRC() uint32 {
@@ -10463,10 +10463,10 @@ func (*RequestedPeerChatPredict) _RequestedPeer() {}
 
 type RequestedPeerChannelPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	ChannelID int64
-	Title     *string `tl:",omitempty:flags:0"`
-	Username  *string `tl:",omitempty:flags:1"`
-	Photo     Photo   `tl:",omitempty:flags:2"`
+	ChannelID int64    `tl:"channel_id"`
+	Title     *string  `tl:"title,omitempty:flags:0"`
+	Username  *string  `tl:"username,omitempty:flags:1"`
+	Photo     Photo    `tl:"photo,omitempty:flags:2"`
 }
 
 func (*RequestedPeerChannelPredict) CRC() uint32 {
@@ -10475,7 +10475,7 @@ func (*RequestedPeerChannelPredict) CRC() uint32 {
 func (*RequestedPeerChannelPredict) _RequestedPeer() {}
 
 type RestrictionReason interface {
-	tl.Object
+	tl.TLObject
 	_RestrictionReason()
 }
 
@@ -10484,9 +10484,9 @@ var (
 )
 
 type RestrictionReasonPredict struct {
-	Platform string
-	Reason   string
-	Text     string
+	Platform string `tl:"platform"`
+	Reason   string `tl:"reason"`
+	Text     string `tl:"text"`
 }
 
 func (*RestrictionReasonPredict) CRC() uint32 {
@@ -10495,7 +10495,7 @@ func (*RestrictionReasonPredict) CRC() uint32 {
 func (*RestrictionReasonPredict) _RestrictionReason() {}
 
 type RichText interface {
-	tl.Object
+	tl.TLObject
 	_RichText()
 }
 
@@ -10526,7 +10526,7 @@ func (*TextEmptyPredict) CRC() uint32 {
 func (*TextEmptyPredict) _RichText() {}
 
 type TextPlainPredict struct {
-	Text string
+	Text string `tl:"text"`
 }
 
 func (*TextPlainPredict) CRC() uint32 {
@@ -10535,7 +10535,7 @@ func (*TextPlainPredict) CRC() uint32 {
 func (*TextPlainPredict) _RichText() {}
 
 type TextBoldPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*TextBoldPredict) CRC() uint32 {
@@ -10544,7 +10544,7 @@ func (*TextBoldPredict) CRC() uint32 {
 func (*TextBoldPredict) _RichText() {}
 
 type TextItalicPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*TextItalicPredict) CRC() uint32 {
@@ -10553,7 +10553,7 @@ func (*TextItalicPredict) CRC() uint32 {
 func (*TextItalicPredict) _RichText() {}
 
 type TextUnderlinePredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*TextUnderlinePredict) CRC() uint32 {
@@ -10562,7 +10562,7 @@ func (*TextUnderlinePredict) CRC() uint32 {
 func (*TextUnderlinePredict) _RichText() {}
 
 type TextStrikePredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*TextStrikePredict) CRC() uint32 {
@@ -10571,7 +10571,7 @@ func (*TextStrikePredict) CRC() uint32 {
 func (*TextStrikePredict) _RichText() {}
 
 type TextFixedPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*TextFixedPredict) CRC() uint32 {
@@ -10580,9 +10580,9 @@ func (*TextFixedPredict) CRC() uint32 {
 func (*TextFixedPredict) _RichText() {}
 
 type TextURLPredict struct {
-	Text      RichText
-	URL       string
-	WebpageID int64
+	Text      RichText `tl:"text"`
+	URL       string   `tl:"url"`
+	WebpageID int64    `tl:"webpage_id"`
 }
 
 func (*TextURLPredict) CRC() uint32 {
@@ -10591,8 +10591,8 @@ func (*TextURLPredict) CRC() uint32 {
 func (*TextURLPredict) _RichText() {}
 
 type TextEmailPredict struct {
-	Text  RichText
-	Email string
+	Text  RichText `tl:"text"`
+	Email string   `tl:"email"`
 }
 
 func (*TextEmailPredict) CRC() uint32 {
@@ -10601,7 +10601,7 @@ func (*TextEmailPredict) CRC() uint32 {
 func (*TextEmailPredict) _RichText() {}
 
 type TextConcatPredict struct {
-	Texts []RichText
+	Texts []RichText `tl:"texts"`
 }
 
 func (*TextConcatPredict) CRC() uint32 {
@@ -10610,7 +10610,7 @@ func (*TextConcatPredict) CRC() uint32 {
 func (*TextConcatPredict) _RichText() {}
 
 type TextSubscriptPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*TextSubscriptPredict) CRC() uint32 {
@@ -10619,7 +10619,7 @@ func (*TextSubscriptPredict) CRC() uint32 {
 func (*TextSubscriptPredict) _RichText() {}
 
 type TextSuperscriptPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*TextSuperscriptPredict) CRC() uint32 {
@@ -10628,7 +10628,7 @@ func (*TextSuperscriptPredict) CRC() uint32 {
 func (*TextSuperscriptPredict) _RichText() {}
 
 type TextMarkedPredict struct {
-	Text RichText
+	Text RichText `tl:"text"`
 }
 
 func (*TextMarkedPredict) CRC() uint32 {
@@ -10637,8 +10637,8 @@ func (*TextMarkedPredict) CRC() uint32 {
 func (*TextMarkedPredict) _RichText() {}
 
 type TextPhonePredict struct {
-	Text  RichText
-	Phone string
+	Text  RichText `tl:"text"`
+	Phone string   `tl:"phone"`
 }
 
 func (*TextPhonePredict) CRC() uint32 {
@@ -10647,9 +10647,9 @@ func (*TextPhonePredict) CRC() uint32 {
 func (*TextPhonePredict) _RichText() {}
 
 type TextImagePredict struct {
-	DocumentID int64
-	W          int32
-	H          int32
+	DocumentID int64 `tl:"document_id"`
+	W          int32 `tl:"w"`
+	H          int32 `tl:"h"`
 }
 
 func (*TextImagePredict) CRC() uint32 {
@@ -10658,8 +10658,8 @@ func (*TextImagePredict) CRC() uint32 {
 func (*TextImagePredict) _RichText() {}
 
 type TextAnchorPredict struct {
-	Text RichText
-	Name string
+	Text RichText `tl:"text"`
+	Name string   `tl:"name"`
 }
 
 func (*TextAnchorPredict) CRC() uint32 {
@@ -10668,7 +10668,7 @@ func (*TextAnchorPredict) CRC() uint32 {
 func (*TextAnchorPredict) _RichText() {}
 
 type SavedContact interface {
-	tl.Object
+	tl.TLObject
 	_SavedContact()
 }
 
@@ -10677,10 +10677,10 @@ var (
 )
 
 type SavedPhoneContactPredict struct {
-	Phone     string
-	FirstName string
-	LastName  string
-	Date      int32
+	Phone     string `tl:"phone"`
+	FirstName string `tl:"first_name"`
+	LastName  string `tl:"last_name"`
+	Date      int32  `tl:"date"`
 }
 
 func (*SavedPhoneContactPredict) CRC() uint32 {
@@ -10689,7 +10689,7 @@ func (*SavedPhoneContactPredict) CRC() uint32 {
 func (*SavedPhoneContactPredict) _SavedContact() {}
 
 type SavedDialog interface {
-	tl.Object
+	tl.TLObject
 	_SavedDialog()
 }
 
@@ -10699,9 +10699,9 @@ var (
 
 type SavedDialogPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Pinned     bool     `tl:",omitempty:flags:2,implicit"`
-	Peer       Peer
-	TopMessage int32
+	Pinned     bool     `tl:"pinned,omitempty:flags:2,implicit"`
+	Peer       Peer     `tl:"peer"`
+	TopMessage int32    `tl:"top_message"`
 }
 
 func (*SavedDialogPredict) CRC() uint32 {
@@ -10710,7 +10710,7 @@ func (*SavedDialogPredict) CRC() uint32 {
 func (*SavedDialogPredict) _SavedDialog() {}
 
 type SavedReactionTag interface {
-	tl.Object
+	tl.TLObject
 	_SavedReactionTag()
 }
 
@@ -10720,9 +10720,9 @@ var (
 
 type SavedReactionTagPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Reaction Reaction
-	Title    *string `tl:",omitempty:flags:0"`
-	Count    int32
+	Reaction Reaction `tl:"reaction"`
+	Title    *string  `tl:"title,omitempty:flags:0"`
+	Count    int32    `tl:"count"`
 }
 
 func (*SavedReactionTagPredict) CRC() uint32 {
@@ -10731,7 +10731,7 @@ func (*SavedReactionTagPredict) CRC() uint32 {
 func (*SavedReactionTagPredict) _SavedReactionTag() {}
 
 type SearchResultsCalendarPeriod interface {
-	tl.Object
+	tl.TLObject
 	_SearchResultsCalendarPeriod()
 }
 
@@ -10740,10 +10740,10 @@ var (
 )
 
 type SearchResultsCalendarPeriodPredict struct {
-	Date     int32
-	MinMsgID int32
-	MaxMsgID int32
-	Count    int32
+	Date     int32 `tl:"date"`
+	MinMsgID int32 `tl:"min_msg_id"`
+	MaxMsgID int32 `tl:"max_msg_id"`
+	Count    int32 `tl:"count"`
 }
 
 func (*SearchResultsCalendarPeriodPredict) CRC() uint32 {
@@ -10752,7 +10752,7 @@ func (*SearchResultsCalendarPeriodPredict) CRC() uint32 {
 func (*SearchResultsCalendarPeriodPredict) _SearchResultsCalendarPeriod() {}
 
 type SearchResultsPosition interface {
-	tl.Object
+	tl.TLObject
 	_SearchResultsPosition()
 }
 
@@ -10761,9 +10761,9 @@ var (
 )
 
 type SearchResultPositionPredict struct {
-	MsgID  int32
-	Date   int32
-	Offset int32
+	MsgID  int32 `tl:"msg_id"`
+	Date   int32 `tl:"date"`
+	Offset int32 `tl:"offset"`
 }
 
 func (*SearchResultPositionPredict) CRC() uint32 {
@@ -10772,7 +10772,7 @@ func (*SearchResultPositionPredict) CRC() uint32 {
 func (*SearchResultPositionPredict) _SearchResultsPosition() {}
 
 type SecureCredentialsEncrypted interface {
-	tl.Object
+	tl.TLObject
 	_SecureCredentialsEncrypted()
 }
 
@@ -10781,9 +10781,9 @@ var (
 )
 
 type SecureCredentialsEncryptedPredict struct {
-	Data   []byte
-	Hash   []byte
-	Secret []byte
+	Data   []byte `tl:"data"`
+	Hash   []byte `tl:"hash"`
+	Secret []byte `tl:"secret"`
 }
 
 func (*SecureCredentialsEncryptedPredict) CRC() uint32 {
@@ -10792,7 +10792,7 @@ func (*SecureCredentialsEncryptedPredict) CRC() uint32 {
 func (*SecureCredentialsEncryptedPredict) _SecureCredentialsEncrypted() {}
 
 type SecureData interface {
-	tl.Object
+	tl.TLObject
 	_SecureData()
 }
 
@@ -10801,9 +10801,9 @@ var (
 )
 
 type SecureDataPredict struct {
-	Data     []byte
-	DataHash []byte
-	Secret   []byte
+	Data     []byte `tl:"data"`
+	DataHash []byte `tl:"data_hash"`
+	Secret   []byte `tl:"secret"`
 }
 
 func (*SecureDataPredict) CRC() uint32 {
@@ -10812,7 +10812,7 @@ func (*SecureDataPredict) CRC() uint32 {
 func (*SecureDataPredict) _SecureData() {}
 
 type SecureFile interface {
-	tl.Object
+	tl.TLObject
 	_SecureFile()
 }
 
@@ -10829,13 +10829,13 @@ func (*SecureFileEmptyPredict) CRC() uint32 {
 func (*SecureFileEmptyPredict) _SecureFile() {}
 
 type SecureFilePredict struct {
-	ID         int64
-	AccessHash int64
-	Size       int64
-	DcID       int32
-	Date       int32
-	FileHash   []byte
-	Secret     []byte
+	ID         int64  `tl:"id"`
+	AccessHash int64  `tl:"access_hash"`
+	Size       int64  `tl:"size"`
+	DcID       int32  `tl:"dc_id"`
+	Date       int32  `tl:"date"`
+	FileHash   []byte `tl:"file_hash"`
+	Secret     []byte `tl:"secret"`
 }
 
 func (*SecureFilePredict) CRC() uint32 {
@@ -10844,7 +10844,7 @@ func (*SecureFilePredict) CRC() uint32 {
 func (*SecureFilePredict) _SecureFile() {}
 
 type SecurePasswordKdfAlgo interface {
-	tl.Object
+	tl.TLObject
 	_SecurePasswordKdfAlgo()
 }
 
@@ -10862,7 +10862,7 @@ func (*SecurePasswordKdfAlgoUnknownPredict) CRC() uint32 {
 func (*SecurePasswordKdfAlgoUnknownPredict) _SecurePasswordKdfAlgo() {}
 
 type SecurePasswordKdfAlgoPbkdf2Hmacsha512Iter100000Predict struct {
-	Salt []byte
+	Salt []byte `tl:"salt"`
 }
 
 func (*SecurePasswordKdfAlgoPbkdf2Hmacsha512Iter100000Predict) CRC() uint32 {
@@ -10871,7 +10871,7 @@ func (*SecurePasswordKdfAlgoPbkdf2Hmacsha512Iter100000Predict) CRC() uint32 {
 func (*SecurePasswordKdfAlgoPbkdf2Hmacsha512Iter100000Predict) _SecurePasswordKdfAlgo() {}
 
 type SecurePasswordKdfAlgoSHA512Predict struct {
-	Salt []byte
+	Salt []byte `tl:"salt"`
 }
 
 func (*SecurePasswordKdfAlgoSHA512Predict) CRC() uint32 {
@@ -10880,7 +10880,7 @@ func (*SecurePasswordKdfAlgoSHA512Predict) CRC() uint32 {
 func (*SecurePasswordKdfAlgoSHA512Predict) _SecurePasswordKdfAlgo() {}
 
 type SecurePlainData interface {
-	tl.Object
+	tl.TLObject
 	_SecurePlainData()
 }
 
@@ -10890,7 +10890,7 @@ var (
 )
 
 type SecurePlainPhonePredict struct {
-	Phone string
+	Phone string `tl:"phone"`
 }
 
 func (*SecurePlainPhonePredict) CRC() uint32 {
@@ -10899,7 +10899,7 @@ func (*SecurePlainPhonePredict) CRC() uint32 {
 func (*SecurePlainPhonePredict) _SecurePlainData() {}
 
 type SecurePlainEmailPredict struct {
-	Email string
+	Email string `tl:"email"`
 }
 
 func (*SecurePlainEmailPredict) CRC() uint32 {
@@ -10908,7 +10908,7 @@ func (*SecurePlainEmailPredict) CRC() uint32 {
 func (*SecurePlainEmailPredict) _SecurePlainData() {}
 
 type SecureRequiredType interface {
-	tl.Object
+	tl.TLObject
 	_SecureRequiredType()
 }
 
@@ -10918,11 +10918,11 @@ var (
 )
 
 type SecureRequiredTypePredict struct {
-	_                   struct{} `tl:"flags,bitflag"`
-	NativeNames         bool     `tl:",omitempty:flags:0,implicit"`
-	SelfieRequired      bool     `tl:",omitempty:flags:1,implicit"`
-	TranslationRequired bool     `tl:",omitempty:flags:2,implicit"`
-	Type                SecureValueType
+	_                   struct{}        `tl:"flags,bitflag"`
+	NativeNames         bool            `tl:"native_names,omitempty:flags:0,implicit"`
+	SelfieRequired      bool            `tl:"selfie_required,omitempty:flags:1,implicit"`
+	TranslationRequired bool            `tl:"translation_required,omitempty:flags:2,implicit"`
+	Type                SecureValueType `tl:"type"`
 }
 
 func (*SecureRequiredTypePredict) CRC() uint32 {
@@ -10931,7 +10931,7 @@ func (*SecureRequiredTypePredict) CRC() uint32 {
 func (*SecureRequiredTypePredict) _SecureRequiredType() {}
 
 type SecureRequiredTypeOneOfPredict struct {
-	Types []SecureRequiredType
+	Types []SecureRequiredType `tl:"types"`
 }
 
 func (*SecureRequiredTypeOneOfPredict) CRC() uint32 {
@@ -10940,7 +10940,7 @@ func (*SecureRequiredTypeOneOfPredict) CRC() uint32 {
 func (*SecureRequiredTypeOneOfPredict) _SecureRequiredType() {}
 
 type SecureSecretSettings interface {
-	tl.Object
+	tl.TLObject
 	_SecureSecretSettings()
 }
 
@@ -10949,9 +10949,9 @@ var (
 )
 
 type SecureSecretSettingsPredict struct {
-	SecureAlgo     SecurePasswordKdfAlgo
-	SecureSecret   []byte
-	SecureSecretID int64
+	SecureAlgo     SecurePasswordKdfAlgo `tl:"secure_algo"`
+	SecureSecret   []byte                `tl:"secure_secret"`
+	SecureSecretID int64                 `tl:"secure_secret_id"`
 }
 
 func (*SecureSecretSettingsPredict) CRC() uint32 {
@@ -10960,7 +10960,7 @@ func (*SecureSecretSettingsPredict) CRC() uint32 {
 func (*SecureSecretSettingsPredict) _SecureSecretSettings() {}
 
 type SecureValue interface {
-	tl.Object
+	tl.TLObject
 	_SecureValue()
 }
 
@@ -10969,16 +10969,16 @@ var (
 )
 
 type SecureValuePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Type        SecureValueType
-	Data        SecureData      `tl:",omitempty:flags:0"`
-	FrontSide   SecureFile      `tl:",omitempty:flags:1"`
-	ReverseSide SecureFile      `tl:",omitempty:flags:2"`
-	Selfie      SecureFile      `tl:",omitempty:flags:3"`
-	Translation []SecureFile    `tl:",omitempty:flags:6"`
-	Files       []SecureFile    `tl:",omitempty:flags:4"`
-	PlainData   SecurePlainData `tl:",omitempty:flags:5"`
-	Hash        []byte
+	_           struct{}        `tl:"flags,bitflag"`
+	Type        SecureValueType `tl:"type"`
+	Data        SecureData      `tl:"data,omitempty:flags:0"`
+	FrontSide   SecureFile      `tl:"front_side,omitempty:flags:1"`
+	ReverseSide SecureFile      `tl:"reverse_side,omitempty:flags:2"`
+	Selfie      SecureFile      `tl:"selfie,omitempty:flags:3"`
+	Translation []SecureFile    `tl:"translation,omitempty:flags:6"`
+	Files       []SecureFile    `tl:"files,omitempty:flags:4"`
+	PlainData   SecurePlainData `tl:"plain_data,omitempty:flags:5"`
+	Hash        []byte          `tl:"hash"`
 }
 
 func (*SecureValuePredict) CRC() uint32 {
@@ -10987,7 +10987,7 @@ func (*SecureValuePredict) CRC() uint32 {
 func (*SecureValuePredict) _SecureValue() {}
 
 type SecureValueError interface {
-	tl.Object
+	tl.TLObject
 	_SecureValueError()
 }
 
@@ -11004,10 +11004,10 @@ var (
 )
 
 type SecureValueErrorDataPredict struct {
-	Type     SecureValueType
-	DataHash []byte
-	Field    string
-	Text     string
+	Type     SecureValueType `tl:"type"`
+	DataHash []byte          `tl:"data_hash"`
+	Field    string          `tl:"field"`
+	Text     string          `tl:"text"`
 }
 
 func (*SecureValueErrorDataPredict) CRC() uint32 {
@@ -11016,9 +11016,9 @@ func (*SecureValueErrorDataPredict) CRC() uint32 {
 func (*SecureValueErrorDataPredict) _SecureValueError() {}
 
 type SecureValueErrorFrontSidePredict struct {
-	Type     SecureValueType
-	FileHash []byte
-	Text     string
+	Type     SecureValueType `tl:"type"`
+	FileHash []byte          `tl:"file_hash"`
+	Text     string          `tl:"text"`
 }
 
 func (*SecureValueErrorFrontSidePredict) CRC() uint32 {
@@ -11027,9 +11027,9 @@ func (*SecureValueErrorFrontSidePredict) CRC() uint32 {
 func (*SecureValueErrorFrontSidePredict) _SecureValueError() {}
 
 type SecureValueErrorReverseSidePredict struct {
-	Type     SecureValueType
-	FileHash []byte
-	Text     string
+	Type     SecureValueType `tl:"type"`
+	FileHash []byte          `tl:"file_hash"`
+	Text     string          `tl:"text"`
 }
 
 func (*SecureValueErrorReverseSidePredict) CRC() uint32 {
@@ -11038,9 +11038,9 @@ func (*SecureValueErrorReverseSidePredict) CRC() uint32 {
 func (*SecureValueErrorReverseSidePredict) _SecureValueError() {}
 
 type SecureValueErrorSelfiePredict struct {
-	Type     SecureValueType
-	FileHash []byte
-	Text     string
+	Type     SecureValueType `tl:"type"`
+	FileHash []byte          `tl:"file_hash"`
+	Text     string          `tl:"text"`
 }
 
 func (*SecureValueErrorSelfiePredict) CRC() uint32 {
@@ -11049,9 +11049,9 @@ func (*SecureValueErrorSelfiePredict) CRC() uint32 {
 func (*SecureValueErrorSelfiePredict) _SecureValueError() {}
 
 type SecureValueErrorFilePredict struct {
-	Type     SecureValueType
-	FileHash []byte
-	Text     string
+	Type     SecureValueType `tl:"type"`
+	FileHash []byte          `tl:"file_hash"`
+	Text     string          `tl:"text"`
 }
 
 func (*SecureValueErrorFilePredict) CRC() uint32 {
@@ -11060,9 +11060,9 @@ func (*SecureValueErrorFilePredict) CRC() uint32 {
 func (*SecureValueErrorFilePredict) _SecureValueError() {}
 
 type SecureValueErrorFilesPredict struct {
-	Type     SecureValueType
-	FileHash [][]byte
-	Text     string
+	Type     SecureValueType `tl:"type"`
+	FileHash [][]byte        `tl:"file_hash"`
+	Text     string          `tl:"text"`
 }
 
 func (*SecureValueErrorFilesPredict) CRC() uint32 {
@@ -11071,9 +11071,9 @@ func (*SecureValueErrorFilesPredict) CRC() uint32 {
 func (*SecureValueErrorFilesPredict) _SecureValueError() {}
 
 type SecureValueErrorPredict struct {
-	Type SecureValueType
-	Hash []byte
-	Text string
+	Type SecureValueType `tl:"type"`
+	Hash []byte          `tl:"hash"`
+	Text string          `tl:"text"`
 }
 
 func (*SecureValueErrorPredict) CRC() uint32 {
@@ -11082,9 +11082,9 @@ func (*SecureValueErrorPredict) CRC() uint32 {
 func (*SecureValueErrorPredict) _SecureValueError() {}
 
 type SecureValueErrorTranslationFilePredict struct {
-	Type     SecureValueType
-	FileHash []byte
-	Text     string
+	Type     SecureValueType `tl:"type"`
+	FileHash []byte          `tl:"file_hash"`
+	Text     string          `tl:"text"`
 }
 
 func (*SecureValueErrorTranslationFilePredict) CRC() uint32 {
@@ -11093,9 +11093,9 @@ func (*SecureValueErrorTranslationFilePredict) CRC() uint32 {
 func (*SecureValueErrorTranslationFilePredict) _SecureValueError() {}
 
 type SecureValueErrorTranslationFilesPredict struct {
-	Type     SecureValueType
-	FileHash [][]byte
-	Text     string
+	Type     SecureValueType `tl:"type"`
+	FileHash [][]byte        `tl:"file_hash"`
+	Text     string          `tl:"text"`
 }
 
 func (*SecureValueErrorTranslationFilesPredict) CRC() uint32 {
@@ -11104,7 +11104,7 @@ func (*SecureValueErrorTranslationFilesPredict) CRC() uint32 {
 func (*SecureValueErrorTranslationFilesPredict) _SecureValueError() {}
 
 type SecureValueHash interface {
-	tl.Object
+	tl.TLObject
 	_SecureValueHash()
 }
 
@@ -11113,8 +11113,8 @@ var (
 )
 
 type SecureValueHashPredict struct {
-	Type SecureValueType
-	Hash []byte
+	Type SecureValueType `tl:"type"`
+	Hash []byte          `tl:"hash"`
 }
 
 func (*SecureValueHashPredict) CRC() uint32 {
@@ -11123,7 +11123,7 @@ func (*SecureValueHashPredict) CRC() uint32 {
 func (*SecureValueHashPredict) _SecureValueHash() {}
 
 type SendAsPeer interface {
-	tl.Object
+	tl.TLObject
 	_SendAsPeer()
 }
 
@@ -11133,8 +11133,8 @@ var (
 
 type SendAsPeerPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	PremiumRequired bool     `tl:",omitempty:flags:0,implicit"`
-	Peer            Peer
+	PremiumRequired bool     `tl:"premium_required,omitempty:flags:0,implicit"`
+	Peer            Peer     `tl:"peer"`
 }
 
 func (*SendAsPeerPredict) CRC() uint32 {
@@ -11143,7 +11143,7 @@ func (*SendAsPeerPredict) CRC() uint32 {
 func (*SendAsPeerPredict) _SendAsPeer() {}
 
 type SendMessageAction interface {
-	tl.Object
+	tl.TLObject
 	_SendMessageAction()
 }
 
@@ -11190,7 +11190,7 @@ func (*SendMessageRecordVideoActionPredict) CRC() uint32 {
 func (*SendMessageRecordVideoActionPredict) _SendMessageAction() {}
 
 type SendMessageUploadVideoActionPredict struct {
-	Progress int32
+	Progress int32 `tl:"progress"`
 }
 
 func (*SendMessageUploadVideoActionPredict) CRC() uint32 {
@@ -11206,7 +11206,7 @@ func (*SendMessageRecordAudioActionPredict) CRC() uint32 {
 func (*SendMessageRecordAudioActionPredict) _SendMessageAction() {}
 
 type SendMessageUploadAudioActionPredict struct {
-	Progress int32
+	Progress int32 `tl:"progress"`
 }
 
 func (*SendMessageUploadAudioActionPredict) CRC() uint32 {
@@ -11215,7 +11215,7 @@ func (*SendMessageUploadAudioActionPredict) CRC() uint32 {
 func (*SendMessageUploadAudioActionPredict) _SendMessageAction() {}
 
 type SendMessageUploadPhotoActionPredict struct {
-	Progress int32
+	Progress int32 `tl:"progress"`
 }
 
 func (*SendMessageUploadPhotoActionPredict) CRC() uint32 {
@@ -11224,7 +11224,7 @@ func (*SendMessageUploadPhotoActionPredict) CRC() uint32 {
 func (*SendMessageUploadPhotoActionPredict) _SendMessageAction() {}
 
 type SendMessageUploadDocumentActionPredict struct {
-	Progress int32
+	Progress int32 `tl:"progress"`
 }
 
 func (*SendMessageUploadDocumentActionPredict) CRC() uint32 {
@@ -11261,7 +11261,7 @@ func (*SendMessageRecordRoundActionPredict) CRC() uint32 {
 func (*SendMessageRecordRoundActionPredict) _SendMessageAction() {}
 
 type SendMessageUploadRoundActionPredict struct {
-	Progress int32
+	Progress int32 `tl:"progress"`
 }
 
 func (*SendMessageUploadRoundActionPredict) CRC() uint32 {
@@ -11277,7 +11277,7 @@ func (*SpeakingInGroupCallActionPredict) CRC() uint32 {
 func (*SpeakingInGroupCallActionPredict) _SendMessageAction() {}
 
 type SendMessageHistoryImportActionPredict struct {
-	Progress int32
+	Progress int32 `tl:"progress"`
 }
 
 func (*SendMessageHistoryImportActionPredict) CRC() uint32 {
@@ -11293,9 +11293,9 @@ func (*SendMessageChooseStickerActionPredict) CRC() uint32 {
 func (*SendMessageChooseStickerActionPredict) _SendMessageAction() {}
 
 type SendMessageEmojiInteractionPredict struct {
-	Emoticon    string
-	MsgID       int32
-	Interaction DataJSON
+	Emoticon    string   `tl:"emoticon"`
+	MsgID       int32    `tl:"msg_id"`
+	Interaction DataJSON `tl:"interaction"`
 }
 
 func (*SendMessageEmojiInteractionPredict) CRC() uint32 {
@@ -11304,7 +11304,7 @@ func (*SendMessageEmojiInteractionPredict) CRC() uint32 {
 func (*SendMessageEmojiInteractionPredict) _SendMessageAction() {}
 
 type SendMessageEmojiInteractionSeenPredict struct {
-	Emoticon string
+	Emoticon string `tl:"emoticon"`
 }
 
 func (*SendMessageEmojiInteractionSeenPredict) CRC() uint32 {
@@ -11313,7 +11313,7 @@ func (*SendMessageEmojiInteractionSeenPredict) CRC() uint32 {
 func (*SendMessageEmojiInteractionSeenPredict) _SendMessageAction() {}
 
 type ShippingOption interface {
-	tl.Object
+	tl.TLObject
 	_ShippingOption()
 }
 
@@ -11322,9 +11322,9 @@ var (
 )
 
 type ShippingOptionPredict struct {
-	ID     string
-	Title  string
-	Prices []LabeledPrice
+	ID     string         `tl:"id"`
+	Title  string         `tl:"title"`
+	Prices []LabeledPrice `tl:"prices"`
 }
 
 func (*ShippingOptionPredict) CRC() uint32 {
@@ -11333,7 +11333,7 @@ func (*ShippingOptionPredict) CRC() uint32 {
 func (*ShippingOptionPredict) _ShippingOption() {}
 
 type SmsJob interface {
-	tl.Object
+	tl.TLObject
 	_SmsJob()
 }
 
@@ -11342,9 +11342,9 @@ var (
 )
 
 type SmsJobPredict struct {
-	JobID       string
-	PhoneNumber string
-	Text        string
+	JobID       string `tl:"job_id"`
+	PhoneNumber string `tl:"phone_number"`
+	Text        string `tl:"text"`
 }
 
 func (*SmsJobPredict) CRC() uint32 {
@@ -11353,7 +11353,7 @@ func (*SmsJobPredict) CRC() uint32 {
 func (*SmsJobPredict) _SmsJob() {}
 
 type SponsoredMessage interface {
-	tl.Object
+	tl.TLObject
 	_SponsoredMessage()
 }
 
@@ -11362,19 +11362,19 @@ var (
 )
 
 type SponsoredMessagePredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	Recommended    bool     `tl:",omitempty:flags:5,implicit"`
-	CanReport      bool     `tl:",omitempty:flags:12,implicit"`
-	RandomID       []byte
-	URL            string
-	Title          string
-	Message        string
-	Entities       []MessageEntity `tl:",omitempty:flags:1"`
-	Photo          Photo           `tl:",omitempty:flags:6"`
-	Color          PeerColor       `tl:",omitempty:flags:13"`
-	ButtonText     string
-	SponsorInfo    *string `tl:",omitempty:flags:7"`
-	AdditionalInfo *string `tl:",omitempty:flags:8"`
+	_              struct{}        `tl:"flags,bitflag"`
+	Recommended    bool            `tl:"recommended,omitempty:flags:5,implicit"`
+	CanReport      bool            `tl:"can_report,omitempty:flags:12,implicit"`
+	RandomID       []byte          `tl:"random_id"`
+	URL            string          `tl:"url"`
+	Title          string          `tl:"title"`
+	Message        string          `tl:"message"`
+	Entities       []MessageEntity `tl:"entities,omitempty:flags:1"`
+	Photo          Photo           `tl:"photo,omitempty:flags:6"`
+	Color          PeerColor       `tl:"color,omitempty:flags:13"`
+	ButtonText     string          `tl:"button_text"`
+	SponsorInfo    *string         `tl:"sponsor_info,omitempty:flags:7"`
+	AdditionalInfo *string         `tl:"additional_info,omitempty:flags:8"`
 }
 
 func (*SponsoredMessagePredict) CRC() uint32 {
@@ -11383,7 +11383,7 @@ func (*SponsoredMessagePredict) CRC() uint32 {
 func (*SponsoredMessagePredict) _SponsoredMessage() {}
 
 type SponsoredMessageReportOption interface {
-	tl.Object
+	tl.TLObject
 	_SponsoredMessageReportOption()
 }
 
@@ -11392,8 +11392,8 @@ var (
 )
 
 type SponsoredMessageReportOptionPredict struct {
-	Text   string
-	Option []byte
+	Text   string `tl:"text"`
+	Option []byte `tl:"option"`
 }
 
 func (*SponsoredMessageReportOptionPredict) CRC() uint32 {
@@ -11402,7 +11402,7 @@ func (*SponsoredMessageReportOptionPredict) CRC() uint32 {
 func (*SponsoredMessageReportOptionPredict) _SponsoredMessageReportOption() {}
 
 type StarsGiftOption interface {
-	tl.Object
+	tl.TLObject
 	_StarsGiftOption()
 }
 
@@ -11412,11 +11412,11 @@ var (
 
 type StarsGiftOptionPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	Extended     bool     `tl:",omitempty:flags:1,implicit"`
-	Stars        int64
-	StoreProduct *string `tl:",omitempty:flags:0"`
-	Currency     string
-	Amount       int64
+	Extended     bool     `tl:"extended,omitempty:flags:1,implicit"`
+	Stars        int64    `tl:"stars"`
+	StoreProduct *string  `tl:"store_product,omitempty:flags:0"`
+	Currency     string   `tl:"currency"`
+	Amount       int64    `tl:"amount"`
 }
 
 func (*StarsGiftOptionPredict) CRC() uint32 {
@@ -11425,7 +11425,7 @@ func (*StarsGiftOptionPredict) CRC() uint32 {
 func (*StarsGiftOptionPredict) _StarsGiftOption() {}
 
 type StarsRevenueStatus interface {
-	tl.Object
+	tl.TLObject
 	_StarsRevenueStatus()
 }
 
@@ -11435,11 +11435,11 @@ var (
 
 type StarsRevenueStatusPredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	WithdrawalEnabled bool     `tl:",omitempty:flags:0,implicit"`
-	CurrentBalance    int64
-	AvailableBalance  int64
-	OverallRevenue    int64
-	NextWithdrawalAt  *int32 `tl:",omitempty:flags:1"`
+	WithdrawalEnabled bool     `tl:"withdrawal_enabled,omitempty:flags:0,implicit"`
+	CurrentBalance    int64    `tl:"current_balance"`
+	AvailableBalance  int64    `tl:"available_balance"`
+	OverallRevenue    int64    `tl:"overall_revenue"`
+	NextWithdrawalAt  *int32   `tl:"next_withdrawal_at,omitempty:flags:1"`
 }
 
 func (*StarsRevenueStatusPredict) CRC() uint32 {
@@ -11448,7 +11448,7 @@ func (*StarsRevenueStatusPredict) CRC() uint32 {
 func (*StarsRevenueStatusPredict) _StarsRevenueStatus() {}
 
 type StarsTopupOption interface {
-	tl.Object
+	tl.TLObject
 	_StarsTopupOption()
 }
 
@@ -11458,11 +11458,11 @@ var (
 
 type StarsTopupOptionPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	Extended     bool     `tl:",omitempty:flags:1,implicit"`
-	Stars        int64
-	StoreProduct *string `tl:",omitempty:flags:0"`
-	Currency     string
-	Amount       int64
+	Extended     bool     `tl:"extended,omitempty:flags:1,implicit"`
+	Stars        int64    `tl:"stars"`
+	StoreProduct *string  `tl:"store_product,omitempty:flags:0"`
+	Currency     string   `tl:"currency"`
+	Amount       int64    `tl:"amount"`
 }
 
 func (*StarsTopupOptionPredict) CRC() uint32 {
@@ -11471,7 +11471,7 @@ func (*StarsTopupOptionPredict) CRC() uint32 {
 func (*StarsTopupOptionPredict) _StarsTopupOption() {}
 
 type StarsTransaction interface {
-	tl.Object
+	tl.TLObject
 	_StarsTransaction()
 }
 
@@ -11480,23 +11480,23 @@ var (
 )
 
 type StarsTransactionPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	Refund          bool     `tl:",omitempty:flags:3,implicit"`
-	Pending         bool     `tl:",omitempty:flags:4,implicit"`
-	Failed          bool     `tl:",omitempty:flags:6,implicit"`
-	Gift            bool     `tl:",omitempty:flags:10,implicit"`
-	ID              string
-	Stars           int64
-	Date            int32
-	Peer            StarsTransactionPeer
-	Title           *string        `tl:",omitempty:flags:0"`
-	Description     *string        `tl:",omitempty:flags:1"`
-	Photo           WebDocument    `tl:",omitempty:flags:2"`
-	TransactionDate *int32         `tl:",omitempty:flags:5"`
-	TransactionURL  *string        `tl:",omitempty:flags:5"`
-	BotPayload      *[]byte        `tl:",omitempty:flags:7"`
-	MsgID           *int32         `tl:",omitempty:flags:8"`
-	ExtendedMedia   []MessageMedia `tl:",omitempty:flags:9"`
+	_               struct{}             `tl:"flags,bitflag"`
+	Refund          bool                 `tl:"refund,omitempty:flags:3,implicit"`
+	Pending         bool                 `tl:"pending,omitempty:flags:4,implicit"`
+	Failed          bool                 `tl:"failed,omitempty:flags:6,implicit"`
+	Gift            bool                 `tl:"gift,omitempty:flags:10,implicit"`
+	ID              string               `tl:"id"`
+	Stars           int64                `tl:"stars"`
+	Date            int32                `tl:"date"`
+	Peer            StarsTransactionPeer `tl:"peer"`
+	Title           *string              `tl:"title,omitempty:flags:0"`
+	Description     *string              `tl:"description,omitempty:flags:1"`
+	Photo           WebDocument          `tl:"photo,omitempty:flags:2"`
+	TransactionDate *int32               `tl:"transaction_date,omitempty:flags:5"`
+	TransactionURL  *string              `tl:"transaction_url,omitempty:flags:5"`
+	BotPayload      *[]byte              `tl:"bot_payload,omitempty:flags:7"`
+	MsgID           *int32               `tl:"msg_id,omitempty:flags:8"`
+	ExtendedMedia   []MessageMedia       `tl:"extended_media,omitempty:flags:9"`
 }
 
 func (*StarsTransactionPredict) CRC() uint32 {
@@ -11505,7 +11505,7 @@ func (*StarsTransactionPredict) CRC() uint32 {
 func (*StarsTransactionPredict) _StarsTransaction() {}
 
 type StarsTransactionPeer interface {
-	tl.Object
+	tl.TLObject
 	_StarsTransactionPeer()
 }
 
@@ -11555,7 +11555,7 @@ func (*StarsTransactionPeerFragmentPredict) CRC() uint32 {
 func (*StarsTransactionPeerFragmentPredict) _StarsTransactionPeer() {}
 
 type StarsTransactionPeerPredict struct {
-	Peer Peer
+	Peer Peer `tl:"peer"`
 }
 
 func (*StarsTransactionPeerPredict) CRC() uint32 {
@@ -11571,7 +11571,7 @@ func (*StarsTransactionPeerAdsPredict) CRC() uint32 {
 func (*StarsTransactionPeerAdsPredict) _StarsTransactionPeer() {}
 
 type StatsAbsValueAndPrev interface {
-	tl.Object
+	tl.TLObject
 	_StatsAbsValueAndPrev()
 }
 
@@ -11580,8 +11580,8 @@ var (
 )
 
 type StatsAbsValueAndPrevPredict struct {
-	Current  float64
-	Previous float64
+	Current  float64 `tl:"current"`
+	Previous float64 `tl:"previous"`
 }
 
 func (*StatsAbsValueAndPrevPredict) CRC() uint32 {
@@ -11590,7 +11590,7 @@ func (*StatsAbsValueAndPrevPredict) CRC() uint32 {
 func (*StatsAbsValueAndPrevPredict) _StatsAbsValueAndPrev() {}
 
 type StatsDateRangeDays interface {
-	tl.Object
+	tl.TLObject
 	_StatsDateRangeDays()
 }
 
@@ -11599,8 +11599,8 @@ var (
 )
 
 type StatsDateRangeDaysPredict struct {
-	MinDate int32
-	MaxDate int32
+	MinDate int32 `tl:"min_date"`
+	MaxDate int32 `tl:"max_date"`
 }
 
 func (*StatsDateRangeDaysPredict) CRC() uint32 {
@@ -11609,7 +11609,7 @@ func (*StatsDateRangeDaysPredict) CRC() uint32 {
 func (*StatsDateRangeDaysPredict) _StatsDateRangeDays() {}
 
 type StatsGraph interface {
-	tl.Object
+	tl.TLObject
 	_StatsGraph()
 }
 
@@ -11620,7 +11620,7 @@ var (
 )
 
 type StatsGraphAsyncPredict struct {
-	Token string
+	Token string `tl:"token"`
 }
 
 func (*StatsGraphAsyncPredict) CRC() uint32 {
@@ -11629,7 +11629,7 @@ func (*StatsGraphAsyncPredict) CRC() uint32 {
 func (*StatsGraphAsyncPredict) _StatsGraph() {}
 
 type StatsGraphErrorPredict struct {
-	Error string
+	Error string `tl:"error"`
 }
 
 func (*StatsGraphErrorPredict) CRC() uint32 {
@@ -11639,8 +11639,8 @@ func (*StatsGraphErrorPredict) _StatsGraph() {}
 
 type StatsGraphPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	JSON      DataJSON
-	ZoomToken *string `tl:",omitempty:flags:0"`
+	JSON      DataJSON `tl:"json"`
+	ZoomToken *string  `tl:"zoom_token,omitempty:flags:0"`
 }
 
 func (*StatsGraphPredict) CRC() uint32 {
@@ -11649,7 +11649,7 @@ func (*StatsGraphPredict) CRC() uint32 {
 func (*StatsGraphPredict) _StatsGraph() {}
 
 type StatsGroupTopAdmin interface {
-	tl.Object
+	tl.TLObject
 	_StatsGroupTopAdmin()
 }
 
@@ -11658,10 +11658,10 @@ var (
 )
 
 type StatsGroupTopAdminPredict struct {
-	UserID  int64
-	Deleted int32
-	Kicked  int32
-	Banned  int32
+	UserID  int64 `tl:"user_id"`
+	Deleted int32 `tl:"deleted"`
+	Kicked  int32 `tl:"kicked"`
+	Banned  int32 `tl:"banned"`
 }
 
 func (*StatsGroupTopAdminPredict) CRC() uint32 {
@@ -11670,7 +11670,7 @@ func (*StatsGroupTopAdminPredict) CRC() uint32 {
 func (*StatsGroupTopAdminPredict) _StatsGroupTopAdmin() {}
 
 type StatsGroupTopInviter interface {
-	tl.Object
+	tl.TLObject
 	_StatsGroupTopInviter()
 }
 
@@ -11679,8 +11679,8 @@ var (
 )
 
 type StatsGroupTopInviterPredict struct {
-	UserID      int64
-	Invitations int32
+	UserID      int64 `tl:"user_id"`
+	Invitations int32 `tl:"invitations"`
 }
 
 func (*StatsGroupTopInviterPredict) CRC() uint32 {
@@ -11689,7 +11689,7 @@ func (*StatsGroupTopInviterPredict) CRC() uint32 {
 func (*StatsGroupTopInviterPredict) _StatsGroupTopInviter() {}
 
 type StatsGroupTopPoster interface {
-	tl.Object
+	tl.TLObject
 	_StatsGroupTopPoster()
 }
 
@@ -11698,9 +11698,9 @@ var (
 )
 
 type StatsGroupTopPosterPredict struct {
-	UserID   int64
-	Messages int32
-	AvgChars int32
+	UserID   int64 `tl:"user_id"`
+	Messages int32 `tl:"messages"`
+	AvgChars int32 `tl:"avg_chars"`
 }
 
 func (*StatsGroupTopPosterPredict) CRC() uint32 {
@@ -11709,7 +11709,7 @@ func (*StatsGroupTopPosterPredict) CRC() uint32 {
 func (*StatsGroupTopPosterPredict) _StatsGroupTopPoster() {}
 
 type StatsPercentValue interface {
-	tl.Object
+	tl.TLObject
 	_StatsPercentValue()
 }
 
@@ -11718,8 +11718,8 @@ var (
 )
 
 type StatsPercentValuePredict struct {
-	Part  float64
-	Total float64
+	Part  float64 `tl:"part"`
+	Total float64 `tl:"total"`
 }
 
 func (*StatsPercentValuePredict) CRC() uint32 {
@@ -11728,7 +11728,7 @@ func (*StatsPercentValuePredict) CRC() uint32 {
 func (*StatsPercentValuePredict) _StatsPercentValue() {}
 
 type StatsURL interface {
-	tl.Object
+	tl.TLObject
 	_StatsURL()
 }
 
@@ -11737,7 +11737,7 @@ var (
 )
 
 type StatsURLPredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*StatsURLPredict) CRC() uint32 {
@@ -11746,7 +11746,7 @@ func (*StatsURLPredict) CRC() uint32 {
 func (*StatsURLPredict) _StatsURL() {}
 
 type StickerKeyword interface {
-	tl.Object
+	tl.TLObject
 	_StickerKeyword()
 }
 
@@ -11755,8 +11755,8 @@ var (
 )
 
 type StickerKeywordPredict struct {
-	DocumentID int64
-	Keyword    []string
+	DocumentID int64    `tl:"document_id"`
+	Keyword    []string `tl:"keyword"`
 }
 
 func (*StickerKeywordPredict) CRC() uint32 {
@@ -11765,7 +11765,7 @@ func (*StickerKeywordPredict) CRC() uint32 {
 func (*StickerKeywordPredict) _StickerKeyword() {}
 
 type StickerPack interface {
-	tl.Object
+	tl.TLObject
 	_StickerPack()
 }
 
@@ -11774,8 +11774,8 @@ var (
 )
 
 type StickerPackPredict struct {
-	Emoticon  string
-	Documents []int64
+	Emoticon  string  `tl:"emoticon"`
+	Documents []int64 `tl:"documents"`
 }
 
 func (*StickerPackPredict) CRC() uint32 {
@@ -11784,7 +11784,7 @@ func (*StickerPackPredict) CRC() uint32 {
 func (*StickerPackPredict) _StickerPack() {}
 
 type StickerSet interface {
-	tl.Object
+	tl.TLObject
 	_StickerSet()
 }
 
@@ -11793,25 +11793,25 @@ var (
 )
 
 type StickerSetPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	Archived           bool     `tl:",omitempty:flags:1,implicit"`
-	Official           bool     `tl:",omitempty:flags:2,implicit"`
-	Masks              bool     `tl:",omitempty:flags:3,implicit"`
-	Emojis             bool     `tl:",omitempty:flags:7,implicit"`
-	TextColor          bool     `tl:",omitempty:flags:9,implicit"`
-	ChannelEmojiStatus bool     `tl:",omitempty:flags:10,implicit"`
-	Creator            bool     `tl:",omitempty:flags:11,implicit"`
-	InstalledDate      *int32   `tl:",omitempty:flags:0"`
-	ID                 int64
-	AccessHash         int64
-	Title              string
-	ShortName          string
-	Thumbs             []PhotoSize `tl:",omitempty:flags:4"`
-	ThumbDcID          *int32      `tl:",omitempty:flags:4"`
-	ThumbVersion       *int32      `tl:",omitempty:flags:4"`
-	ThumbDocumentID    *int64      `tl:",omitempty:flags:8"`
-	Count              int32
-	Hash               int32
+	_                  struct{}    `tl:"flags,bitflag"`
+	Archived           bool        `tl:"archived,omitempty:flags:1,implicit"`
+	Official           bool        `tl:"official,omitempty:flags:2,implicit"`
+	Masks              bool        `tl:"masks,omitempty:flags:3,implicit"`
+	Emojis             bool        `tl:"emojis,omitempty:flags:7,implicit"`
+	TextColor          bool        `tl:"text_color,omitempty:flags:9,implicit"`
+	ChannelEmojiStatus bool        `tl:"channel_emoji_status,omitempty:flags:10,implicit"`
+	Creator            bool        `tl:"creator,omitempty:flags:11,implicit"`
+	InstalledDate      *int32      `tl:"installed_date,omitempty:flags:0"`
+	ID                 int64       `tl:"id"`
+	AccessHash         int64       `tl:"access_hash"`
+	Title              string      `tl:"title"`
+	ShortName          string      `tl:"short_name"`
+	Thumbs             []PhotoSize `tl:"thumbs,omitempty:flags:4"`
+	ThumbDcID          *int32      `tl:"thumb_dc_id,omitempty:flags:4"`
+	ThumbVersion       *int32      `tl:"thumb_version,omitempty:flags:4"`
+	ThumbDocumentID    *int64      `tl:"thumb_document_id,omitempty:flags:8"`
+	Count              int32       `tl:"count"`
+	Hash               int32       `tl:"hash"`
 }
 
 func (*StickerSetPredict) CRC() uint32 {
@@ -11820,7 +11820,7 @@ func (*StickerSetPredict) CRC() uint32 {
 func (*StickerSetPredict) _StickerSet() {}
 
 type StickerSetCovered interface {
-	tl.Object
+	tl.TLObject
 	_StickerSetCovered()
 }
 
@@ -11832,8 +11832,8 @@ var (
 )
 
 type StickerSetCoveredPredict struct {
-	Set   StickerSet
-	Cover Document
+	Set   StickerSet `tl:"set"`
+	Cover Document   `tl:"cover"`
 }
 
 func (*StickerSetCoveredPredict) CRC() uint32 {
@@ -11842,8 +11842,8 @@ func (*StickerSetCoveredPredict) CRC() uint32 {
 func (*StickerSetCoveredPredict) _StickerSetCovered() {}
 
 type StickerSetMultiCoveredPredict struct {
-	Set    StickerSet
-	Covers []Document
+	Set    StickerSet `tl:"set"`
+	Covers []Document `tl:"covers"`
 }
 
 func (*StickerSetMultiCoveredPredict) CRC() uint32 {
@@ -11852,10 +11852,10 @@ func (*StickerSetMultiCoveredPredict) CRC() uint32 {
 func (*StickerSetMultiCoveredPredict) _StickerSetCovered() {}
 
 type StickerSetFullCoveredPredict struct {
-	Set       StickerSet
-	Packs     []StickerPack
-	Keywords  []StickerKeyword
-	Documents []Document
+	Set       StickerSet       `tl:"set"`
+	Packs     []StickerPack    `tl:"packs"`
+	Keywords  []StickerKeyword `tl:"keywords"`
+	Documents []Document       `tl:"documents"`
 }
 
 func (*StickerSetFullCoveredPredict) CRC() uint32 {
@@ -11864,7 +11864,7 @@ func (*StickerSetFullCoveredPredict) CRC() uint32 {
 func (*StickerSetFullCoveredPredict) _StickerSetCovered() {}
 
 type StickerSetNoCoveredPredict struct {
-	Set StickerSet
+	Set StickerSet `tl:"set"`
 }
 
 func (*StickerSetNoCoveredPredict) CRC() uint32 {
@@ -11873,7 +11873,7 @@ func (*StickerSetNoCoveredPredict) CRC() uint32 {
 func (*StickerSetNoCoveredPredict) _StickerSetCovered() {}
 
 type StoriesStealthMode interface {
-	tl.Object
+	tl.TLObject
 	_StoriesStealthMode()
 }
 
@@ -11883,8 +11883,8 @@ var (
 
 type StoriesStealthModePredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	ActiveUntilDate   *int32   `tl:",omitempty:flags:0"`
-	CooldownUntilDate *int32   `tl:",omitempty:flags:1"`
+	ActiveUntilDate   *int32   `tl:"active_until_date,omitempty:flags:0"`
+	CooldownUntilDate *int32   `tl:"cooldown_until_date,omitempty:flags:1"`
 }
 
 func (*StoriesStealthModePredict) CRC() uint32 {
@@ -11893,7 +11893,7 @@ func (*StoriesStealthModePredict) CRC() uint32 {
 func (*StoriesStealthModePredict) _StoriesStealthMode() {}
 
 type StoryFwdHeader interface {
-	tl.Object
+	tl.TLObject
 	_StoryFwdHeader()
 }
 
@@ -11903,10 +11903,10 @@ var (
 
 type StoryFwdHeaderPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Modified bool     `tl:",omitempty:flags:3,implicit"`
-	From     Peer     `tl:",omitempty:flags:0"`
-	FromName *string  `tl:",omitempty:flags:1"`
-	StoryID  *int32   `tl:",omitempty:flags:2"`
+	Modified bool     `tl:"modified,omitempty:flags:3,implicit"`
+	From     Peer     `tl:"from,omitempty:flags:0"`
+	FromName *string  `tl:"from_name,omitempty:flags:1"`
+	StoryID  *int32   `tl:"story_id,omitempty:flags:2"`
 }
 
 func (*StoryFwdHeaderPredict) CRC() uint32 {
@@ -11915,7 +11915,7 @@ func (*StoryFwdHeaderPredict) CRC() uint32 {
 func (*StoryFwdHeaderPredict) _StoryFwdHeader() {}
 
 type StoryItem interface {
-	tl.Object
+	tl.TLObject
 	_StoryItem()
 }
 
@@ -11926,7 +11926,7 @@ var (
 )
 
 type StoryItemDeletedPredict struct {
-	ID int32
+	ID int32 `tl:"id"`
 }
 
 func (*StoryItemDeletedPredict) CRC() uint32 {
@@ -11936,10 +11936,10 @@ func (*StoryItemDeletedPredict) _StoryItem() {}
 
 type StoryItemSkippedPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	CloseFriends bool     `tl:",omitempty:flags:8,implicit"`
-	ID           int32
-	Date         int32
-	ExpireDate   int32
+	CloseFriends bool     `tl:"close_friends,omitempty:flags:8,implicit"`
+	ID           int32    `tl:"id"`
+	Date         int32    `tl:"date"`
+	ExpireDate   int32    `tl:"expire_date"`
 }
 
 func (*StoryItemSkippedPredict) CRC() uint32 {
@@ -11948,28 +11948,28 @@ func (*StoryItemSkippedPredict) CRC() uint32 {
 func (*StoryItemSkippedPredict) _StoryItem() {}
 
 type StoryItemPredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	Pinned           bool     `tl:",omitempty:flags:5,implicit"`
-	Public           bool     `tl:",omitempty:flags:7,implicit"`
-	CloseFriends     bool     `tl:",omitempty:flags:8,implicit"`
-	Min              bool     `tl:",omitempty:flags:9,implicit"`
-	Noforwards       bool     `tl:",omitempty:flags:10,implicit"`
-	Edited           bool     `tl:",omitempty:flags:11,implicit"`
-	Contacts         bool     `tl:",omitempty:flags:12,implicit"`
-	SelectedContacts bool     `tl:",omitempty:flags:13,implicit"`
-	Out              bool     `tl:",omitempty:flags:16,implicit"`
-	ID               int32
-	Date             int32
-	FromID           Peer           `tl:",omitempty:flags:18"`
-	FwdFrom          StoryFwdHeader `tl:",omitempty:flags:17"`
-	ExpireDate       int32
-	Caption          *string         `tl:",omitempty:flags:0"`
-	Entities         []MessageEntity `tl:",omitempty:flags:1"`
-	Media            MessageMedia
-	MediaAreas       []MediaArea   `tl:",omitempty:flags:14"`
-	Privacy          []PrivacyRule `tl:",omitempty:flags:2"`
-	Views            StoryViews    `tl:",omitempty:flags:3"`
-	SentReaction     Reaction      `tl:",omitempty:flags:15"`
+	_                struct{}        `tl:"flags,bitflag"`
+	Pinned           bool            `tl:"pinned,omitempty:flags:5,implicit"`
+	Public           bool            `tl:"public,omitempty:flags:7,implicit"`
+	CloseFriends     bool            `tl:"close_friends,omitempty:flags:8,implicit"`
+	Min              bool            `tl:"min,omitempty:flags:9,implicit"`
+	Noforwards       bool            `tl:"noforwards,omitempty:flags:10,implicit"`
+	Edited           bool            `tl:"edited,omitempty:flags:11,implicit"`
+	Contacts         bool            `tl:"contacts,omitempty:flags:12,implicit"`
+	SelectedContacts bool            `tl:"selected_contacts,omitempty:flags:13,implicit"`
+	Out              bool            `tl:"out,omitempty:flags:16,implicit"`
+	ID               int32           `tl:"id"`
+	Date             int32           `tl:"date"`
+	FromID           Peer            `tl:"from_id,omitempty:flags:18"`
+	FwdFrom          StoryFwdHeader  `tl:"fwd_from,omitempty:flags:17"`
+	ExpireDate       int32           `tl:"expire_date"`
+	Caption          *string         `tl:"caption,omitempty:flags:0"`
+	Entities         []MessageEntity `tl:"entities,omitempty:flags:1"`
+	Media            MessageMedia    `tl:"media"`
+	MediaAreas       []MediaArea     `tl:"media_areas,omitempty:flags:14"`
+	Privacy          []PrivacyRule   `tl:"privacy,omitempty:flags:2"`
+	Views            StoryViews      `tl:"views,omitempty:flags:3"`
+	SentReaction     Reaction        `tl:"sent_reaction,omitempty:flags:15"`
 }
 
 func (*StoryItemPredict) CRC() uint32 {
@@ -11978,7 +11978,7 @@ func (*StoryItemPredict) CRC() uint32 {
 func (*StoryItemPredict) _StoryItem() {}
 
 type StoryReaction interface {
-	tl.Object
+	tl.TLObject
 	_StoryReaction()
 }
 
@@ -11989,9 +11989,9 @@ var (
 )
 
 type StoryReactionPredict struct {
-	PeerID   Peer
-	Date     int32
-	Reaction Reaction
+	PeerID   Peer     `tl:"peer_id"`
+	Date     int32    `tl:"date"`
+	Reaction Reaction `tl:"reaction"`
 }
 
 func (*StoryReactionPredict) CRC() uint32 {
@@ -12000,7 +12000,7 @@ func (*StoryReactionPredict) CRC() uint32 {
 func (*StoryReactionPredict) _StoryReaction() {}
 
 type StoryReactionPublicForwardPredict struct {
-	Message Message
+	Message Message `tl:"message"`
 }
 
 func (*StoryReactionPublicForwardPredict) CRC() uint32 {
@@ -12009,8 +12009,8 @@ func (*StoryReactionPublicForwardPredict) CRC() uint32 {
 func (*StoryReactionPublicForwardPredict) _StoryReaction() {}
 
 type StoryReactionPublicRepostPredict struct {
-	PeerID Peer
-	Story  StoryItem
+	PeerID Peer      `tl:"peer_id"`
+	Story  StoryItem `tl:"story"`
 }
 
 func (*StoryReactionPublicRepostPredict) CRC() uint32 {
@@ -12019,7 +12019,7 @@ func (*StoryReactionPublicRepostPredict) CRC() uint32 {
 func (*StoryReactionPublicRepostPredict) _StoryReaction() {}
 
 type StoryView interface {
-	tl.Object
+	tl.TLObject
 	_StoryView()
 }
 
@@ -12031,11 +12031,11 @@ var (
 
 type StoryViewPredict struct {
 	_                    struct{} `tl:"flags,bitflag"`
-	Blocked              bool     `tl:",omitempty:flags:0,implicit"`
-	BlockedMyStoriesFrom bool     `tl:",omitempty:flags:1,implicit"`
-	UserID               int64
-	Date                 int32
-	Reaction             Reaction `tl:",omitempty:flags:2"`
+	Blocked              bool     `tl:"blocked,omitempty:flags:0,implicit"`
+	BlockedMyStoriesFrom bool     `tl:"blocked_my_stories_from,omitempty:flags:1,implicit"`
+	UserID               int64    `tl:"user_id"`
+	Date                 int32    `tl:"date"`
+	Reaction             Reaction `tl:"reaction,omitempty:flags:2"`
 }
 
 func (*StoryViewPredict) CRC() uint32 {
@@ -12045,9 +12045,9 @@ func (*StoryViewPredict) _StoryView() {}
 
 type StoryViewPublicForwardPredict struct {
 	_                    struct{} `tl:"flags,bitflag"`
-	Blocked              bool     `tl:",omitempty:flags:0,implicit"`
-	BlockedMyStoriesFrom bool     `tl:",omitempty:flags:1,implicit"`
-	Message              Message
+	Blocked              bool     `tl:"blocked,omitempty:flags:0,implicit"`
+	BlockedMyStoriesFrom bool     `tl:"blocked_my_stories_from,omitempty:flags:1,implicit"`
+	Message              Message  `tl:"message"`
 }
 
 func (*StoryViewPublicForwardPredict) CRC() uint32 {
@@ -12056,11 +12056,11 @@ func (*StoryViewPublicForwardPredict) CRC() uint32 {
 func (*StoryViewPublicForwardPredict) _StoryView() {}
 
 type StoryViewPublicRepostPredict struct {
-	_                    struct{} `tl:"flags,bitflag"`
-	Blocked              bool     `tl:",omitempty:flags:0,implicit"`
-	BlockedMyStoriesFrom bool     `tl:",omitempty:flags:1,implicit"`
-	PeerID               Peer
-	Story                StoryItem
+	_                    struct{}  `tl:"flags,bitflag"`
+	Blocked              bool      `tl:"blocked,omitempty:flags:0,implicit"`
+	BlockedMyStoriesFrom bool      `tl:"blocked_my_stories_from,omitempty:flags:1,implicit"`
+	PeerID               Peer      `tl:"peer_id"`
+	Story                StoryItem `tl:"story"`
 }
 
 func (*StoryViewPublicRepostPredict) CRC() uint32 {
@@ -12069,7 +12069,7 @@ func (*StoryViewPublicRepostPredict) CRC() uint32 {
 func (*StoryViewPublicRepostPredict) _StoryView() {}
 
 type StoryViews interface {
-	tl.Object
+	tl.TLObject
 	_StoryViews()
 }
 
@@ -12078,13 +12078,13 @@ var (
 )
 
 type StoryViewsPredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	HasViewers     bool     `tl:",omitempty:flags:1,implicit"`
-	ViewsCount     int32
-	ForwardsCount  *int32          `tl:",omitempty:flags:2"`
-	Reactions      []ReactionCount `tl:",omitempty:flags:3"`
-	ReactionsCount *int32          `tl:",omitempty:flags:4"`
-	RecentViewers  []int64         `tl:",omitempty:flags:0"`
+	_              struct{}        `tl:"flags,bitflag"`
+	HasViewers     bool            `tl:"has_viewers,omitempty:flags:1,implicit"`
+	ViewsCount     int32           `tl:"views_count"`
+	ForwardsCount  *int32          `tl:"forwards_count,omitempty:flags:2"`
+	Reactions      []ReactionCount `tl:"reactions,omitempty:flags:3"`
+	ReactionsCount *int32          `tl:"reactions_count,omitempty:flags:4"`
+	RecentViewers  []int64         `tl:"recent_viewers,omitempty:flags:0"`
 }
 
 func (*StoryViewsPredict) CRC() uint32 {
@@ -12093,7 +12093,7 @@ func (*StoryViewsPredict) CRC() uint32 {
 func (*StoryViewsPredict) _StoryViews() {}
 
 type TextWithEntities interface {
-	tl.Object
+	tl.TLObject
 	_TextWithEntities()
 }
 
@@ -12102,8 +12102,8 @@ var (
 )
 
 type TextWithEntitiesPredict struct {
-	Text     string
-	Entities []MessageEntity
+	Text     string          `tl:"text"`
+	Entities []MessageEntity `tl:"entities"`
 }
 
 func (*TextWithEntitiesPredict) CRC() uint32 {
@@ -12112,7 +12112,7 @@ func (*TextWithEntitiesPredict) CRC() uint32 {
 func (*TextWithEntitiesPredict) _TextWithEntities() {}
 
 type Theme interface {
-	tl.Object
+	tl.TLObject
 	_Theme()
 }
 
@@ -12121,18 +12121,18 @@ var (
 )
 
 type ThemePredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Creator       bool     `tl:",omitempty:flags:0,implicit"`
-	Default       bool     `tl:",omitempty:flags:1,implicit"`
-	ForChat       bool     `tl:",omitempty:flags:5,implicit"`
-	ID            int64
-	AccessHash    int64
-	Slug          string
-	Title         string
-	Document      Document        `tl:",omitempty:flags:2"`
-	Settings      []ThemeSettings `tl:",omitempty:flags:3"`
-	Emoticon      *string         `tl:",omitempty:flags:6"`
-	InstallsCount *int32          `tl:",omitempty:flags:4"`
+	_             struct{}        `tl:"flags,bitflag"`
+	Creator       bool            `tl:"creator,omitempty:flags:0,implicit"`
+	Default       bool            `tl:"default,omitempty:flags:1,implicit"`
+	ForChat       bool            `tl:"for_chat,omitempty:flags:5,implicit"`
+	ID            int64           `tl:"id"`
+	AccessHash    int64           `tl:"access_hash"`
+	Slug          string          `tl:"slug"`
+	Title         string          `tl:"title"`
+	Document      Document        `tl:"document,omitempty:flags:2"`
+	Settings      []ThemeSettings `tl:"settings,omitempty:flags:3"`
+	Emoticon      *string         `tl:"emoticon,omitempty:flags:6"`
+	InstallsCount *int32          `tl:"installs_count,omitempty:flags:4"`
 }
 
 func (*ThemePredict) CRC() uint32 {
@@ -12141,7 +12141,7 @@ func (*ThemePredict) CRC() uint32 {
 func (*ThemePredict) _Theme() {}
 
 type ThemeSettings interface {
-	tl.Object
+	tl.TLObject
 	_ThemeSettings()
 }
 
@@ -12150,13 +12150,13 @@ var (
 )
 
 type ThemeSettingsPredict struct {
-	_                     struct{} `tl:"flags,bitflag"`
-	MessageColorsAnimated bool     `tl:",omitempty:flags:2,implicit"`
-	BaseTheme             BaseTheme
-	AccentColor           int32
-	OutboxAccentColor     *int32    `tl:",omitempty:flags:3"`
-	MessageColors         []int32   `tl:",omitempty:flags:0"`
-	Wallpaper             WallPaper `tl:",omitempty:flags:1"`
+	_                     struct{}  `tl:"flags,bitflag"`
+	MessageColorsAnimated bool      `tl:"message_colors_animated,omitempty:flags:2,implicit"`
+	BaseTheme             BaseTheme `tl:"base_theme"`
+	AccentColor           int32     `tl:"accent_color"`
+	OutboxAccentColor     *int32    `tl:"outbox_accent_color,omitempty:flags:3"`
+	MessageColors         []int32   `tl:"message_colors,omitempty:flags:0"`
+	Wallpaper             WallPaper `tl:"wallpaper,omitempty:flags:1"`
 }
 
 func (*ThemeSettingsPredict) CRC() uint32 {
@@ -12165,7 +12165,7 @@ func (*ThemeSettingsPredict) CRC() uint32 {
 func (*ThemeSettingsPredict) _ThemeSettings() {}
 
 type Timezone interface {
-	tl.Object
+	tl.TLObject
 	_Timezone()
 }
 
@@ -12174,9 +12174,9 @@ var (
 )
 
 type TimezonePredict struct {
-	ID        string
-	Name      string
-	UtcOffset int32
+	ID        string `tl:"id"`
+	Name      string `tl:"name"`
+	UtcOffset int32  `tl:"utc_offset"`
 }
 
 func (*TimezonePredict) CRC() uint32 {
@@ -12185,7 +12185,7 @@ func (*TimezonePredict) CRC() uint32 {
 func (*TimezonePredict) _Timezone() {}
 
 type TopPeer interface {
-	tl.Object
+	tl.TLObject
 	_TopPeer()
 }
 
@@ -12194,8 +12194,8 @@ var (
 )
 
 type TopPeerPredict struct {
-	Peer   Peer
-	Rating float64
+	Peer   Peer    `tl:"peer"`
+	Rating float64 `tl:"rating"`
 }
 
 func (*TopPeerPredict) CRC() uint32 {
@@ -12204,7 +12204,7 @@ func (*TopPeerPredict) CRC() uint32 {
 func (*TopPeerPredict) _TopPeer() {}
 
 type TopPeerCategoryPeers interface {
-	tl.Object
+	tl.TLObject
 	_TopPeerCategoryPeers()
 }
 
@@ -12213,9 +12213,9 @@ var (
 )
 
 type TopPeerCategoryPeersPredict struct {
-	Category TopPeerCategory
-	Count    int32
-	Peers    []TopPeer
+	Category TopPeerCategory `tl:"category"`
+	Count    int32           `tl:"count"`
+	Peers    []TopPeer       `tl:"peers"`
 }
 
 func (*TopPeerCategoryPeersPredict) CRC() uint32 {
@@ -12224,7 +12224,7 @@ func (*TopPeerCategoryPeersPredict) CRC() uint32 {
 func (*TopPeerCategoryPeersPredict) _TopPeerCategoryPeers() {}
 
 type Update interface {
-	tl.Object
+	tl.TLObject
 	_Update()
 }
 
@@ -12371,9 +12371,9 @@ var (
 )
 
 type UpdateNewMessagePredict struct {
-	Message  Message
-	Pts      int32
-	PtsCount int32
+	Message  Message `tl:"message"`
+	Pts      int32   `tl:"pts"`
+	PtsCount int32   `tl:"pts_count"`
 }
 
 func (*UpdateNewMessagePredict) CRC() uint32 {
@@ -12382,8 +12382,8 @@ func (*UpdateNewMessagePredict) CRC() uint32 {
 func (*UpdateNewMessagePredict) _Update() {}
 
 type UpdateMessageIDPredict struct {
-	ID       int32
-	RandomID int64
+	ID       int32 `tl:"id"`
+	RandomID int64 `tl:"random_id"`
 }
 
 func (*UpdateMessageIDPredict) CRC() uint32 {
@@ -12392,9 +12392,9 @@ func (*UpdateMessageIDPredict) CRC() uint32 {
 func (*UpdateMessageIDPredict) _Update() {}
 
 type UpdateDeleteMessagesPredict struct {
-	Messages []int32
-	Pts      int32
-	PtsCount int32
+	Messages []int32 `tl:"messages"`
+	Pts      int32   `tl:"pts"`
+	PtsCount int32   `tl:"pts_count"`
 }
 
 func (*UpdateDeleteMessagesPredict) CRC() uint32 {
@@ -12403,8 +12403,8 @@ func (*UpdateDeleteMessagesPredict) CRC() uint32 {
 func (*UpdateDeleteMessagesPredict) _Update() {}
 
 type UpdateUserTypingPredict struct {
-	UserID int64
-	Action SendMessageAction
+	UserID int64             `tl:"user_id"`
+	Action SendMessageAction `tl:"action"`
 }
 
 func (*UpdateUserTypingPredict) CRC() uint32 {
@@ -12413,9 +12413,9 @@ func (*UpdateUserTypingPredict) CRC() uint32 {
 func (*UpdateUserTypingPredict) _Update() {}
 
 type UpdateChatUserTypingPredict struct {
-	ChatID int64
-	FromID Peer
-	Action SendMessageAction
+	ChatID int64             `tl:"chat_id"`
+	FromID Peer              `tl:"from_id"`
+	Action SendMessageAction `tl:"action"`
 }
 
 func (*UpdateChatUserTypingPredict) CRC() uint32 {
@@ -12424,7 +12424,7 @@ func (*UpdateChatUserTypingPredict) CRC() uint32 {
 func (*UpdateChatUserTypingPredict) _Update() {}
 
 type UpdateChatParticipantsPredict struct {
-	Participants ChatParticipants
+	Participants ChatParticipants `tl:"participants"`
 }
 
 func (*UpdateChatParticipantsPredict) CRC() uint32 {
@@ -12433,8 +12433,8 @@ func (*UpdateChatParticipantsPredict) CRC() uint32 {
 func (*UpdateChatParticipantsPredict) _Update() {}
 
 type UpdateUserStatusPredict struct {
-	UserID int64
-	Status UserStatus
+	UserID int64      `tl:"user_id"`
+	Status UserStatus `tl:"status"`
 }
 
 func (*UpdateUserStatusPredict) CRC() uint32 {
@@ -12443,10 +12443,10 @@ func (*UpdateUserStatusPredict) CRC() uint32 {
 func (*UpdateUserStatusPredict) _Update() {}
 
 type UpdateUserNamePredict struct {
-	UserID    int64
-	FirstName string
-	LastName  string
-	Usernames []Username
+	UserID    int64      `tl:"user_id"`
+	FirstName string     `tl:"first_name"`
+	LastName  string     `tl:"last_name"`
+	Usernames []Username `tl:"usernames"`
 }
 
 func (*UpdateUserNamePredict) CRC() uint32 {
@@ -12456,11 +12456,11 @@ func (*UpdateUserNamePredict) _Update() {}
 
 type UpdateNewAuthorizationPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	Unconfirmed bool     `tl:",omitempty:flags:0,implicit"`
-	Hash        int64
-	Date        *int32  `tl:",omitempty:flags:0"`
-	Device      *string `tl:",omitempty:flags:0"`
-	Location    *string `tl:",omitempty:flags:0"`
+	Unconfirmed bool     `tl:"unconfirmed,omitempty:flags:0,implicit"`
+	Hash        int64    `tl:"hash"`
+	Date        *int32   `tl:"date,omitempty:flags:0"`
+	Device      *string  `tl:"device,omitempty:flags:0"`
+	Location    *string  `tl:"location,omitempty:flags:0"`
 }
 
 func (*UpdateNewAuthorizationPredict) CRC() uint32 {
@@ -12469,8 +12469,8 @@ func (*UpdateNewAuthorizationPredict) CRC() uint32 {
 func (*UpdateNewAuthorizationPredict) _Update() {}
 
 type UpdateNewEncryptedMessagePredict struct {
-	Message EncryptedMessage
-	Qts     int32
+	Message EncryptedMessage `tl:"message"`
+	Qts     int32            `tl:"qts"`
 }
 
 func (*UpdateNewEncryptedMessagePredict) CRC() uint32 {
@@ -12479,7 +12479,7 @@ func (*UpdateNewEncryptedMessagePredict) CRC() uint32 {
 func (*UpdateNewEncryptedMessagePredict) _Update() {}
 
 type UpdateEncryptedChatTypingPredict struct {
-	ChatID int32
+	ChatID int32 `tl:"chat_id"`
 }
 
 func (*UpdateEncryptedChatTypingPredict) CRC() uint32 {
@@ -12488,8 +12488,8 @@ func (*UpdateEncryptedChatTypingPredict) CRC() uint32 {
 func (*UpdateEncryptedChatTypingPredict) _Update() {}
 
 type UpdateEncryptionPredict struct {
-	Chat EncryptedChat
-	Date int32
+	Chat EncryptedChat `tl:"chat"`
+	Date int32         `tl:"date"`
 }
 
 func (*UpdateEncryptionPredict) CRC() uint32 {
@@ -12498,9 +12498,9 @@ func (*UpdateEncryptionPredict) CRC() uint32 {
 func (*UpdateEncryptionPredict) _Update() {}
 
 type UpdateEncryptedMessagesReadPredict struct {
-	ChatID  int32
-	MaxDate int32
-	Date    int32
+	ChatID  int32 `tl:"chat_id"`
+	MaxDate int32 `tl:"max_date"`
+	Date    int32 `tl:"date"`
 }
 
 func (*UpdateEncryptedMessagesReadPredict) CRC() uint32 {
@@ -12509,11 +12509,11 @@ func (*UpdateEncryptedMessagesReadPredict) CRC() uint32 {
 func (*UpdateEncryptedMessagesReadPredict) _Update() {}
 
 type UpdateChatParticipantAddPredict struct {
-	ChatID    int64
-	UserID    int64
-	InviterID int64
-	Date      int32
-	Version   int32
+	ChatID    int64 `tl:"chat_id"`
+	UserID    int64 `tl:"user_id"`
+	InviterID int64 `tl:"inviter_id"`
+	Date      int32 `tl:"date"`
+	Version   int32 `tl:"version"`
 }
 
 func (*UpdateChatParticipantAddPredict) CRC() uint32 {
@@ -12522,9 +12522,9 @@ func (*UpdateChatParticipantAddPredict) CRC() uint32 {
 func (*UpdateChatParticipantAddPredict) _Update() {}
 
 type UpdateChatParticipantDeletePredict struct {
-	ChatID  int64
-	UserID  int64
-	Version int32
+	ChatID  int64 `tl:"chat_id"`
+	UserID  int64 `tl:"user_id"`
+	Version int32 `tl:"version"`
 }
 
 func (*UpdateChatParticipantDeletePredict) CRC() uint32 {
@@ -12533,7 +12533,7 @@ func (*UpdateChatParticipantDeletePredict) CRC() uint32 {
 func (*UpdateChatParticipantDeletePredict) _Update() {}
 
 type UpdateDcOptionsPredict struct {
-	DcOptions []DcOption
+	DcOptions []DcOption `tl:"dc_options"`
 }
 
 func (*UpdateDcOptionsPredict) CRC() uint32 {
@@ -12542,8 +12542,8 @@ func (*UpdateDcOptionsPredict) CRC() uint32 {
 func (*UpdateDcOptionsPredict) _Update() {}
 
 type UpdateNotifySettingsPredict struct {
-	Peer           NotifyPeer
-	NotifySettings PeerNotifySettings
+	Peer           NotifyPeer         `tl:"peer"`
+	NotifySettings PeerNotifySettings `tl:"notify_settings"`
 }
 
 func (*UpdateNotifySettingsPredict) CRC() uint32 {
@@ -12552,14 +12552,14 @@ func (*UpdateNotifySettingsPredict) CRC() uint32 {
 func (*UpdateNotifySettingsPredict) _Update() {}
 
 type UpdateServiceNotificationPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Popup       bool     `tl:",omitempty:flags:0,implicit"`
-	InvertMedia bool     `tl:",omitempty:flags:2,implicit"`
-	InboxDate   *int32   `tl:",omitempty:flags:1"`
-	Type        string
-	Message     string
-	Media       MessageMedia
-	Entities    []MessageEntity
+	_           struct{}        `tl:"flags,bitflag"`
+	Popup       bool            `tl:"popup,omitempty:flags:0,implicit"`
+	InvertMedia bool            `tl:"invert_media,omitempty:flags:2,implicit"`
+	InboxDate   *int32          `tl:"inbox_date,omitempty:flags:1"`
+	Type        string          `tl:"type"`
+	Message     string          `tl:"message"`
+	Media       MessageMedia    `tl:"media"`
+	Entities    []MessageEntity `tl:"entities"`
 }
 
 func (*UpdateServiceNotificationPredict) CRC() uint32 {
@@ -12568,8 +12568,8 @@ func (*UpdateServiceNotificationPredict) CRC() uint32 {
 func (*UpdateServiceNotificationPredict) _Update() {}
 
 type UpdatePrivacyPredict struct {
-	Key   PrivacyKey
-	Rules []PrivacyRule
+	Key   PrivacyKey    `tl:"key"`
+	Rules []PrivacyRule `tl:"rules"`
 }
 
 func (*UpdatePrivacyPredict) CRC() uint32 {
@@ -12578,8 +12578,8 @@ func (*UpdatePrivacyPredict) CRC() uint32 {
 func (*UpdatePrivacyPredict) _Update() {}
 
 type UpdateUserPhonePredict struct {
-	UserID int64
-	Phone  string
+	UserID int64  `tl:"user_id"`
+	Phone  string `tl:"phone"`
 }
 
 func (*UpdateUserPhonePredict) CRC() uint32 {
@@ -12589,12 +12589,12 @@ func (*UpdateUserPhonePredict) _Update() {}
 
 type UpdateReadHistoryInboxPredict struct {
 	_                struct{} `tl:"flags,bitflag"`
-	FolderID         *int32   `tl:",omitempty:flags:0"`
-	Peer             Peer
-	MaxID            int32
-	StillUnreadCount int32
-	Pts              int32
-	PtsCount         int32
+	FolderID         *int32   `tl:"folder_id,omitempty:flags:0"`
+	Peer             Peer     `tl:"peer"`
+	MaxID            int32    `tl:"max_id"`
+	StillUnreadCount int32    `tl:"still_unread_count"`
+	Pts              int32    `tl:"pts"`
+	PtsCount         int32    `tl:"pts_count"`
 }
 
 func (*UpdateReadHistoryInboxPredict) CRC() uint32 {
@@ -12603,10 +12603,10 @@ func (*UpdateReadHistoryInboxPredict) CRC() uint32 {
 func (*UpdateReadHistoryInboxPredict) _Update() {}
 
 type UpdateReadHistoryOutboxPredict struct {
-	Peer     Peer
-	MaxID    int32
-	Pts      int32
-	PtsCount int32
+	Peer     Peer  `tl:"peer"`
+	MaxID    int32 `tl:"max_id"`
+	Pts      int32 `tl:"pts"`
+	PtsCount int32 `tl:"pts_count"`
 }
 
 func (*UpdateReadHistoryOutboxPredict) CRC() uint32 {
@@ -12615,9 +12615,9 @@ func (*UpdateReadHistoryOutboxPredict) CRC() uint32 {
 func (*UpdateReadHistoryOutboxPredict) _Update() {}
 
 type UpdateWebPagePredict struct {
-	Webpage  WebPage
-	Pts      int32
-	PtsCount int32
+	Webpage  WebPage `tl:"webpage"`
+	Pts      int32   `tl:"pts"`
+	PtsCount int32   `tl:"pts_count"`
 }
 
 func (*UpdateWebPagePredict) CRC() uint32 {
@@ -12627,10 +12627,10 @@ func (*UpdateWebPagePredict) _Update() {}
 
 type UpdateReadMessagesContentsPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Messages []int32
-	Pts      int32
-	PtsCount int32
-	Date     *int32 `tl:",omitempty:flags:0"`
+	Messages []int32  `tl:"messages"`
+	Pts      int32    `tl:"pts"`
+	PtsCount int32    `tl:"pts_count"`
+	Date     *int32   `tl:"date,omitempty:flags:0"`
 }
 
 func (*UpdateReadMessagesContentsPredict) CRC() uint32 {
@@ -12640,8 +12640,8 @@ func (*UpdateReadMessagesContentsPredict) _Update() {}
 
 type UpdateChannelTooLongPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	ChannelID int64
-	Pts       *int32 `tl:",omitempty:flags:0"`
+	ChannelID int64    `tl:"channel_id"`
+	Pts       *int32   `tl:"pts,omitempty:flags:0"`
 }
 
 func (*UpdateChannelTooLongPredict) CRC() uint32 {
@@ -12650,7 +12650,7 @@ func (*UpdateChannelTooLongPredict) CRC() uint32 {
 func (*UpdateChannelTooLongPredict) _Update() {}
 
 type UpdateChannelPredict struct {
-	ChannelID int64
+	ChannelID int64 `tl:"channel_id"`
 }
 
 func (*UpdateChannelPredict) CRC() uint32 {
@@ -12659,9 +12659,9 @@ func (*UpdateChannelPredict) CRC() uint32 {
 func (*UpdateChannelPredict) _Update() {}
 
 type UpdateNewChannelMessagePredict struct {
-	Message  Message
-	Pts      int32
-	PtsCount int32
+	Message  Message `tl:"message"`
+	Pts      int32   `tl:"pts"`
+	PtsCount int32   `tl:"pts_count"`
 }
 
 func (*UpdateNewChannelMessagePredict) CRC() uint32 {
@@ -12671,11 +12671,11 @@ func (*UpdateNewChannelMessagePredict) _Update() {}
 
 type UpdateReadChannelInboxPredict struct {
 	_                struct{} `tl:"flags,bitflag"`
-	FolderID         *int32   `tl:",omitempty:flags:0"`
-	ChannelID        int64
-	MaxID            int32
-	StillUnreadCount int32
-	Pts              int32
+	FolderID         *int32   `tl:"folder_id,omitempty:flags:0"`
+	ChannelID        int64    `tl:"channel_id"`
+	MaxID            int32    `tl:"max_id"`
+	StillUnreadCount int32    `tl:"still_unread_count"`
+	Pts              int32    `tl:"pts"`
 }
 
 func (*UpdateReadChannelInboxPredict) CRC() uint32 {
@@ -12684,10 +12684,10 @@ func (*UpdateReadChannelInboxPredict) CRC() uint32 {
 func (*UpdateReadChannelInboxPredict) _Update() {}
 
 type UpdateDeleteChannelMessagesPredict struct {
-	ChannelID int64
-	Messages  []int32
-	Pts       int32
-	PtsCount  int32
+	ChannelID int64   `tl:"channel_id"`
+	Messages  []int32 `tl:"messages"`
+	Pts       int32   `tl:"pts"`
+	PtsCount  int32   `tl:"pts_count"`
 }
 
 func (*UpdateDeleteChannelMessagesPredict) CRC() uint32 {
@@ -12696,9 +12696,9 @@ func (*UpdateDeleteChannelMessagesPredict) CRC() uint32 {
 func (*UpdateDeleteChannelMessagesPredict) _Update() {}
 
 type UpdateChannelMessageViewsPredict struct {
-	ChannelID int64
-	ID        int32
-	Views     int32
+	ChannelID int64 `tl:"channel_id"`
+	ID        int32 `tl:"id"`
+	Views     int32 `tl:"views"`
 }
 
 func (*UpdateChannelMessageViewsPredict) CRC() uint32 {
@@ -12707,10 +12707,10 @@ func (*UpdateChannelMessageViewsPredict) CRC() uint32 {
 func (*UpdateChannelMessageViewsPredict) _Update() {}
 
 type UpdateChatParticipantAdminPredict struct {
-	ChatID  int64
-	UserID  int64
-	IsAdmin bool
-	Version int32
+	ChatID  int64 `tl:"chat_id"`
+	UserID  int64 `tl:"user_id"`
+	IsAdmin bool  `tl:"is_admin"`
+	Version int32 `tl:"version"`
 }
 
 func (*UpdateChatParticipantAdminPredict) CRC() uint32 {
@@ -12719,7 +12719,7 @@ func (*UpdateChatParticipantAdminPredict) CRC() uint32 {
 func (*UpdateChatParticipantAdminPredict) _Update() {}
 
 type UpdateNewStickerSetPredict struct {
-	Stickerset MessagesStickerSet
+	Stickerset MessagesStickerSet `tl:"stickerset"`
 }
 
 func (*UpdateNewStickerSetPredict) CRC() uint32 {
@@ -12729,9 +12729,9 @@ func (*UpdateNewStickerSetPredict) _Update() {}
 
 type UpdateStickerSetsOrderPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Masks  bool     `tl:",omitempty:flags:0,implicit"`
-	Emojis bool     `tl:",omitempty:flags:1,implicit"`
-	Order  []int64
+	Masks  bool     `tl:"masks,omitempty:flags:0,implicit"`
+	Emojis bool     `tl:"emojis,omitempty:flags:1,implicit"`
+	Order  []int64  `tl:"order"`
 }
 
 func (*UpdateStickerSetsOrderPredict) CRC() uint32 {
@@ -12741,8 +12741,8 @@ func (*UpdateStickerSetsOrderPredict) _Update() {}
 
 type UpdateStickerSetsPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Masks  bool     `tl:",omitempty:flags:0,implicit"`
-	Emojis bool     `tl:",omitempty:flags:1,implicit"`
+	Masks  bool     `tl:"masks,omitempty:flags:0,implicit"`
+	Emojis bool     `tl:"emojis,omitempty:flags:1,implicit"`
 }
 
 func (*UpdateStickerSetsPredict) CRC() uint32 {
@@ -12758,13 +12758,13 @@ func (*UpdateSavedGifsPredict) CRC() uint32 {
 func (*UpdateSavedGifsPredict) _Update() {}
 
 type UpdateBotInlineQueryPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	QueryID  int64
-	UserID   int64
-	Query    string
-	Geo      GeoPoint            `tl:",omitempty:flags:0"`
-	PeerType InlineQueryPeerType `tl:",omitempty:flags:1"`
-	Offset   string
+	_        struct{}            `tl:"flags,bitflag"`
+	QueryID  int64               `tl:"query_id"`
+	UserID   int64               `tl:"user_id"`
+	Query    string              `tl:"query"`
+	Geo      GeoPoint            `tl:"geo,omitempty:flags:0"`
+	PeerType InlineQueryPeerType `tl:"peer_type,omitempty:flags:1"`
+	Offset   string              `tl:"offset"`
 }
 
 func (*UpdateBotInlineQueryPredict) CRC() uint32 {
@@ -12773,12 +12773,12 @@ func (*UpdateBotInlineQueryPredict) CRC() uint32 {
 func (*UpdateBotInlineQueryPredict) _Update() {}
 
 type UpdateBotInlineSendPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	UserID int64
-	Query  string
-	Geo    GeoPoint `tl:",omitempty:flags:0"`
-	ID     string
-	MsgID  InputBotInlineMessageID `tl:",omitempty:flags:1"`
+	_      struct{}                `tl:"flags,bitflag"`
+	UserID int64                   `tl:"user_id"`
+	Query  string                  `tl:"query"`
+	Geo    GeoPoint                `tl:"geo,omitempty:flags:0"`
+	ID     string                  `tl:"id"`
+	MsgID  InputBotInlineMessageID `tl:"msg_id,omitempty:flags:1"`
 }
 
 func (*UpdateBotInlineSendPredict) CRC() uint32 {
@@ -12787,9 +12787,9 @@ func (*UpdateBotInlineSendPredict) CRC() uint32 {
 func (*UpdateBotInlineSendPredict) _Update() {}
 
 type UpdateEditChannelMessagePredict struct {
-	Message  Message
-	Pts      int32
-	PtsCount int32
+	Message  Message `tl:"message"`
+	Pts      int32   `tl:"pts"`
+	PtsCount int32   `tl:"pts_count"`
 }
 
 func (*UpdateEditChannelMessagePredict) CRC() uint32 {
@@ -12799,13 +12799,13 @@ func (*UpdateEditChannelMessagePredict) _Update() {}
 
 type UpdateBotCallbackQueryPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	QueryID       int64
-	UserID        int64
-	Peer          Peer
-	MsgID         int32
-	ChatInstance  int64
-	Data          *[]byte `tl:",omitempty:flags:0"`
-	GameShortName *string `tl:",omitempty:flags:1"`
+	QueryID       int64    `tl:"query_id"`
+	UserID        int64    `tl:"user_id"`
+	Peer          Peer     `tl:"peer"`
+	MsgID         int32    `tl:"msg_id"`
+	ChatInstance  int64    `tl:"chat_instance"`
+	Data          *[]byte  `tl:"data,omitempty:flags:0"`
+	GameShortName *string  `tl:"game_short_name,omitempty:flags:1"`
 }
 
 func (*UpdateBotCallbackQueryPredict) CRC() uint32 {
@@ -12814,9 +12814,9 @@ func (*UpdateBotCallbackQueryPredict) CRC() uint32 {
 func (*UpdateBotCallbackQueryPredict) _Update() {}
 
 type UpdateEditMessagePredict struct {
-	Message  Message
-	Pts      int32
-	PtsCount int32
+	Message  Message `tl:"message"`
+	Pts      int32   `tl:"pts"`
+	PtsCount int32   `tl:"pts_count"`
 }
 
 func (*UpdateEditMessagePredict) CRC() uint32 {
@@ -12825,13 +12825,13 @@ func (*UpdateEditMessagePredict) CRC() uint32 {
 func (*UpdateEditMessagePredict) _Update() {}
 
 type UpdateInlineBotCallbackQueryPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	QueryID       int64
-	UserID        int64
-	MsgID         InputBotInlineMessageID
-	ChatInstance  int64
-	Data          *[]byte `tl:",omitempty:flags:0"`
-	GameShortName *string `tl:",omitempty:flags:1"`
+	_             struct{}                `tl:"flags,bitflag"`
+	QueryID       int64                   `tl:"query_id"`
+	UserID        int64                   `tl:"user_id"`
+	MsgID         InputBotInlineMessageID `tl:"msg_id"`
+	ChatInstance  int64                   `tl:"chat_instance"`
+	Data          *[]byte                 `tl:"data,omitempty:flags:0"`
+	GameShortName *string                 `tl:"game_short_name,omitempty:flags:1"`
 }
 
 func (*UpdateInlineBotCallbackQueryPredict) CRC() uint32 {
@@ -12840,8 +12840,8 @@ func (*UpdateInlineBotCallbackQueryPredict) CRC() uint32 {
 func (*UpdateInlineBotCallbackQueryPredict) _Update() {}
 
 type UpdateReadChannelOutboxPredict struct {
-	ChannelID int64
-	MaxID     int32
+	ChannelID int64 `tl:"channel_id"`
+	MaxID     int32 `tl:"max_id"`
 }
 
 func (*UpdateReadChannelOutboxPredict) CRC() uint32 {
@@ -12850,10 +12850,10 @@ func (*UpdateReadChannelOutboxPredict) CRC() uint32 {
 func (*UpdateReadChannelOutboxPredict) _Update() {}
 
 type UpdateDraftMessagePredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Peer     Peer
-	TopMsgID *int32 `tl:",omitempty:flags:0"`
-	Draft    DraftMessage
+	_        struct{}     `tl:"flags,bitflag"`
+	Peer     Peer         `tl:"peer"`
+	TopMsgID *int32       `tl:"top_msg_id,omitempty:flags:0"`
+	Draft    DraftMessage `tl:"draft"`
 }
 
 func (*UpdateDraftMessagePredict) CRC() uint32 {
@@ -12890,10 +12890,10 @@ func (*UpdatePtsChangedPredict) CRC() uint32 {
 func (*UpdatePtsChangedPredict) _Update() {}
 
 type UpdateChannelWebPagePredict struct {
-	ChannelID int64
-	Webpage   WebPage
-	Pts       int32
-	PtsCount  int32
+	ChannelID int64   `tl:"channel_id"`
+	Webpage   WebPage `tl:"webpage"`
+	Pts       int32   `tl:"pts"`
+	PtsCount  int32   `tl:"pts_count"`
 }
 
 func (*UpdateChannelWebPagePredict) CRC() uint32 {
@@ -12902,10 +12902,10 @@ func (*UpdateChannelWebPagePredict) CRC() uint32 {
 func (*UpdateChannelWebPagePredict) _Update() {}
 
 type UpdateDialogPinnedPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Pinned   bool     `tl:",omitempty:flags:0,implicit"`
-	FolderID *int32   `tl:",omitempty:flags:1"`
-	Peer     DialogPeer
+	_        struct{}   `tl:"flags,bitflag"`
+	Pinned   bool       `tl:"pinned,omitempty:flags:0,implicit"`
+	FolderID *int32     `tl:"folder_id,omitempty:flags:1"`
+	Peer     DialogPeer `tl:"peer"`
 }
 
 func (*UpdateDialogPinnedPredict) CRC() uint32 {
@@ -12915,8 +12915,8 @@ func (*UpdateDialogPinnedPredict) _Update() {}
 
 type UpdatePinnedDialogsPredict struct {
 	_        struct{}     `tl:"flags,bitflag"`
-	FolderID *int32       `tl:",omitempty:flags:1"`
-	Order    []DialogPeer `tl:",omitempty:flags:0"`
+	FolderID *int32       `tl:"folder_id,omitempty:flags:1"`
+	Order    []DialogPeer `tl:"order,omitempty:flags:0"`
 }
 
 func (*UpdatePinnedDialogsPredict) CRC() uint32 {
@@ -12925,7 +12925,7 @@ func (*UpdatePinnedDialogsPredict) CRC() uint32 {
 func (*UpdatePinnedDialogsPredict) _Update() {}
 
 type UpdateBotWebhookJSONPredict struct {
-	Data DataJSON
+	Data DataJSON `tl:"data"`
 }
 
 func (*UpdateBotWebhookJSONPredict) CRC() uint32 {
@@ -12934,9 +12934,9 @@ func (*UpdateBotWebhookJSONPredict) CRC() uint32 {
 func (*UpdateBotWebhookJSONPredict) _Update() {}
 
 type UpdateBotWebhookJSONQueryPredict struct {
-	QueryID int64
-	Data    DataJSON
-	Timeout int32
+	QueryID int64    `tl:"query_id"`
+	Data    DataJSON `tl:"data"`
+	Timeout int32    `tl:"timeout"`
 }
 
 func (*UpdateBotWebhookJSONQueryPredict) CRC() uint32 {
@@ -12945,10 +12945,10 @@ func (*UpdateBotWebhookJSONQueryPredict) CRC() uint32 {
 func (*UpdateBotWebhookJSONQueryPredict) _Update() {}
 
 type UpdateBotShippingQueryPredict struct {
-	QueryID         int64
-	UserID          int64
-	Payload         []byte
-	ShippingAddress PostAddress
+	QueryID         int64       `tl:"query_id"`
+	UserID          int64       `tl:"user_id"`
+	Payload         []byte      `tl:"payload"`
+	ShippingAddress PostAddress `tl:"shipping_address"`
 }
 
 func (*UpdateBotShippingQueryPredict) CRC() uint32 {
@@ -12957,14 +12957,14 @@ func (*UpdateBotShippingQueryPredict) CRC() uint32 {
 func (*UpdateBotShippingQueryPredict) _Update() {}
 
 type UpdateBotPrecheckoutQueryPredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	QueryID          int64
-	UserID           int64
-	Payload          []byte
-	Info             PaymentRequestedInfo `tl:",omitempty:flags:0"`
-	ShippingOptionID *string              `tl:",omitempty:flags:1"`
-	Currency         string
-	TotalAmount      int64
+	_                struct{}             `tl:"flags,bitflag"`
+	QueryID          int64                `tl:"query_id"`
+	UserID           int64                `tl:"user_id"`
+	Payload          []byte               `tl:"payload"`
+	Info             PaymentRequestedInfo `tl:"info,omitempty:flags:0"`
+	ShippingOptionID *string              `tl:"shipping_option_id,omitempty:flags:1"`
+	Currency         string               `tl:"currency"`
+	TotalAmount      int64                `tl:"total_amount"`
 }
 
 func (*UpdateBotPrecheckoutQueryPredict) CRC() uint32 {
@@ -12973,7 +12973,7 @@ func (*UpdateBotPrecheckoutQueryPredict) CRC() uint32 {
 func (*UpdateBotPrecheckoutQueryPredict) _Update() {}
 
 type UpdatePhoneCallPredict struct {
-	PhoneCall PhoneCall
+	PhoneCall PhoneCall `tl:"phone_call"`
 }
 
 func (*UpdatePhoneCallPredict) CRC() uint32 {
@@ -12982,7 +12982,7 @@ func (*UpdatePhoneCallPredict) CRC() uint32 {
 func (*UpdatePhoneCallPredict) _Update() {}
 
 type UpdateLangPackTooLongPredict struct {
-	LangCode string
+	LangCode string `tl:"lang_code"`
 }
 
 func (*UpdateLangPackTooLongPredict) CRC() uint32 {
@@ -12991,7 +12991,7 @@ func (*UpdateLangPackTooLongPredict) CRC() uint32 {
 func (*UpdateLangPackTooLongPredict) _Update() {}
 
 type UpdateLangPackPredict struct {
-	Difference LangPackDifference
+	Difference LangPackDifference `tl:"difference"`
 }
 
 func (*UpdateLangPackPredict) CRC() uint32 {
@@ -13008,9 +13008,9 @@ func (*UpdateFavedStickersPredict) _Update() {}
 
 type UpdateChannelReadMessagesContentsPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	ChannelID int64
-	TopMsgID  *int32 `tl:",omitempty:flags:0"`
-	Messages  []int32
+	ChannelID int64    `tl:"channel_id"`
+	TopMsgID  *int32   `tl:"top_msg_id,omitempty:flags:0"`
+	Messages  []int32  `tl:"messages"`
 }
 
 func (*UpdateChannelReadMessagesContentsPredict) CRC() uint32 {
@@ -13026,8 +13026,8 @@ func (*UpdateContactsResetPredict) CRC() uint32 {
 func (*UpdateContactsResetPredict) _Update() {}
 
 type UpdateChannelAvailableMessagesPredict struct {
-	ChannelID      int64
-	AvailableMinID int32
+	ChannelID      int64 `tl:"channel_id"`
+	AvailableMinID int32 `tl:"available_min_id"`
 }
 
 func (*UpdateChannelAvailableMessagesPredict) CRC() uint32 {
@@ -13036,9 +13036,9 @@ func (*UpdateChannelAvailableMessagesPredict) CRC() uint32 {
 func (*UpdateChannelAvailableMessagesPredict) _Update() {}
 
 type UpdateDialogUnreadMarkPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Unread bool     `tl:",omitempty:flags:0,implicit"`
-	Peer   DialogPeer
+	_      struct{}   `tl:"flags,bitflag"`
+	Unread bool       `tl:"unread,omitempty:flags:0,implicit"`
+	Peer   DialogPeer `tl:"peer"`
 }
 
 func (*UpdateDialogUnreadMarkPredict) CRC() uint32 {
@@ -13047,10 +13047,10 @@ func (*UpdateDialogUnreadMarkPredict) CRC() uint32 {
 func (*UpdateDialogUnreadMarkPredict) _Update() {}
 
 type UpdateMessagePollPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	PollID  int64
-	Poll    Poll `tl:",omitempty:flags:0"`
-	Results PollResults
+	_       struct{}    `tl:"flags,bitflag"`
+	PollID  int64       `tl:"poll_id"`
+	Poll    Poll        `tl:"poll,omitempty:flags:0"`
+	Results PollResults `tl:"results"`
 }
 
 func (*UpdateMessagePollPredict) CRC() uint32 {
@@ -13059,9 +13059,9 @@ func (*UpdateMessagePollPredict) CRC() uint32 {
 func (*UpdateMessagePollPredict) _Update() {}
 
 type UpdateChatDefaultBannedRightsPredict struct {
-	Peer                Peer
-	DefaultBannedRights ChatBannedRights
-	Version             int32
+	Peer                Peer             `tl:"peer"`
+	DefaultBannedRights ChatBannedRights `tl:"default_banned_rights"`
+	Version             int32            `tl:"version"`
 }
 
 func (*UpdateChatDefaultBannedRightsPredict) CRC() uint32 {
@@ -13070,9 +13070,9 @@ func (*UpdateChatDefaultBannedRightsPredict) CRC() uint32 {
 func (*UpdateChatDefaultBannedRightsPredict) _Update() {}
 
 type UpdateFolderPeersPredict struct {
-	FolderPeers []FolderPeer
-	Pts         int32
-	PtsCount    int32
+	FolderPeers []FolderPeer `tl:"folder_peers"`
+	Pts         int32        `tl:"pts"`
+	PtsCount    int32        `tl:"pts_count"`
 }
 
 func (*UpdateFolderPeersPredict) CRC() uint32 {
@@ -13081,8 +13081,8 @@ func (*UpdateFolderPeersPredict) CRC() uint32 {
 func (*UpdateFolderPeersPredict) _Update() {}
 
 type UpdatePeerSettingsPredict struct {
-	Peer     Peer
-	Settings PeerSettings
+	Peer     Peer         `tl:"peer"`
+	Settings PeerSettings `tl:"settings"`
 }
 
 func (*UpdatePeerSettingsPredict) CRC() uint32 {
@@ -13091,7 +13091,7 @@ func (*UpdatePeerSettingsPredict) CRC() uint32 {
 func (*UpdatePeerSettingsPredict) _Update() {}
 
 type UpdatePeerLocatedPredict struct {
-	Peers []PeerLocated
+	Peers []PeerLocated `tl:"peers"`
 }
 
 func (*UpdatePeerLocatedPredict) CRC() uint32 {
@@ -13100,7 +13100,7 @@ func (*UpdatePeerLocatedPredict) CRC() uint32 {
 func (*UpdatePeerLocatedPredict) _Update() {}
 
 type UpdateNewScheduledMessagePredict struct {
-	Message Message
+	Message Message `tl:"message"`
 }
 
 func (*UpdateNewScheduledMessagePredict) CRC() uint32 {
@@ -13109,8 +13109,8 @@ func (*UpdateNewScheduledMessagePredict) CRC() uint32 {
 func (*UpdateNewScheduledMessagePredict) _Update() {}
 
 type UpdateDeleteScheduledMessagesPredict struct {
-	Peer     Peer
-	Messages []int32
+	Peer     Peer    `tl:"peer"`
+	Messages []int32 `tl:"messages"`
 }
 
 func (*UpdateDeleteScheduledMessagesPredict) CRC() uint32 {
@@ -13119,7 +13119,7 @@ func (*UpdateDeleteScheduledMessagesPredict) CRC() uint32 {
 func (*UpdateDeleteScheduledMessagesPredict) _Update() {}
 
 type UpdateThemePredict struct {
-	Theme Theme
+	Theme Theme `tl:"theme"`
 }
 
 func (*UpdateThemePredict) CRC() uint32 {
@@ -13128,8 +13128,8 @@ func (*UpdateThemePredict) CRC() uint32 {
 func (*UpdateThemePredict) _Update() {}
 
 type UpdateGeoLiveViewedPredict struct {
-	Peer  Peer
-	MsgID int32
+	Peer  Peer  `tl:"peer"`
+	MsgID int32 `tl:"msg_id"`
 }
 
 func (*UpdateGeoLiveViewedPredict) CRC() uint32 {
@@ -13145,10 +13145,10 @@ func (*UpdateLoginTokenPredict) CRC() uint32 {
 func (*UpdateLoginTokenPredict) _Update() {}
 
 type UpdateMessagePollVotePredict struct {
-	PollID  int64
-	Peer    Peer
-	Options [][]byte
-	Qts     int32
+	PollID  int64    `tl:"poll_id"`
+	Peer    Peer     `tl:"peer"`
+	Options [][]byte `tl:"options"`
+	Qts     int32    `tl:"qts"`
 }
 
 func (*UpdateMessagePollVotePredict) CRC() uint32 {
@@ -13157,9 +13157,9 @@ func (*UpdateMessagePollVotePredict) CRC() uint32 {
 func (*UpdateMessagePollVotePredict) _Update() {}
 
 type UpdateDialogFilterPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	ID     int32
-	Filter DialogFilter `tl:",omitempty:flags:0"`
+	_      struct{}     `tl:"flags,bitflag"`
+	ID     int32        `tl:"id"`
+	Filter DialogFilter `tl:"filter,omitempty:flags:0"`
 }
 
 func (*UpdateDialogFilterPredict) CRC() uint32 {
@@ -13168,7 +13168,7 @@ func (*UpdateDialogFilterPredict) CRC() uint32 {
 func (*UpdateDialogFilterPredict) _Update() {}
 
 type UpdateDialogFilterOrderPredict struct {
-	Order []int32
+	Order []int32 `tl:"order"`
 }
 
 func (*UpdateDialogFilterOrderPredict) CRC() uint32 {
@@ -13184,8 +13184,8 @@ func (*UpdateDialogFiltersPredict) CRC() uint32 {
 func (*UpdateDialogFiltersPredict) _Update() {}
 
 type UpdatePhoneCallSignalingDataPredict struct {
-	PhoneCallID int64
-	Data        []byte
+	PhoneCallID int64  `tl:"phone_call_id"`
+	Data        []byte `tl:"data"`
 }
 
 func (*UpdatePhoneCallSignalingDataPredict) CRC() uint32 {
@@ -13194,9 +13194,9 @@ func (*UpdatePhoneCallSignalingDataPredict) CRC() uint32 {
 func (*UpdatePhoneCallSignalingDataPredict) _Update() {}
 
 type UpdateChannelMessageForwardsPredict struct {
-	ChannelID int64
-	ID        int32
-	Forwards  int32
+	ChannelID int64 `tl:"channel_id"`
+	ID        int32 `tl:"id"`
+	Forwards  int32 `tl:"forwards"`
 }
 
 func (*UpdateChannelMessageForwardsPredict) CRC() uint32 {
@@ -13206,11 +13206,11 @@ func (*UpdateChannelMessageForwardsPredict) _Update() {}
 
 type UpdateReadChannelDiscussionInboxPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	ChannelID     int64
-	TopMsgID      int32
-	ReadMaxID     int32
-	BroadcastID   *int64 `tl:",omitempty:flags:0"`
-	BroadcastPost *int32 `tl:",omitempty:flags:0"`
+	ChannelID     int64    `tl:"channel_id"`
+	TopMsgID      int32    `tl:"top_msg_id"`
+	ReadMaxID     int32    `tl:"read_max_id"`
+	BroadcastID   *int64   `tl:"broadcast_id,omitempty:flags:0"`
+	BroadcastPost *int32   `tl:"broadcast_post,omitempty:flags:0"`
 }
 
 func (*UpdateReadChannelDiscussionInboxPredict) CRC() uint32 {
@@ -13219,9 +13219,9 @@ func (*UpdateReadChannelDiscussionInboxPredict) CRC() uint32 {
 func (*UpdateReadChannelDiscussionInboxPredict) _Update() {}
 
 type UpdateReadChannelDiscussionOutboxPredict struct {
-	ChannelID int64
-	TopMsgID  int32
-	ReadMaxID int32
+	ChannelID int64 `tl:"channel_id"`
+	TopMsgID  int32 `tl:"top_msg_id"`
+	ReadMaxID int32 `tl:"read_max_id"`
 }
 
 func (*UpdateReadChannelDiscussionOutboxPredict) CRC() uint32 {
@@ -13231,9 +13231,9 @@ func (*UpdateReadChannelDiscussionOutboxPredict) _Update() {}
 
 type UpdatePeerBlockedPredict struct {
 	_                    struct{} `tl:"flags,bitflag"`
-	Blocked              bool     `tl:",omitempty:flags:0,implicit"`
-	BlockedMyStoriesFrom bool     `tl:",omitempty:flags:1,implicit"`
-	PeerID               Peer
+	Blocked              bool     `tl:"blocked,omitempty:flags:0,implicit"`
+	BlockedMyStoriesFrom bool     `tl:"blocked_my_stories_from,omitempty:flags:1,implicit"`
+	PeerID               Peer     `tl:"peer_id"`
 }
 
 func (*UpdatePeerBlockedPredict) CRC() uint32 {
@@ -13242,11 +13242,11 @@ func (*UpdatePeerBlockedPredict) CRC() uint32 {
 func (*UpdatePeerBlockedPredict) _Update() {}
 
 type UpdateChannelUserTypingPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	ChannelID int64
-	TopMsgID  *int32 `tl:",omitempty:flags:0"`
-	FromID    Peer
-	Action    SendMessageAction
+	_         struct{}          `tl:"flags,bitflag"`
+	ChannelID int64             `tl:"channel_id"`
+	TopMsgID  *int32            `tl:"top_msg_id,omitempty:flags:0"`
+	FromID    Peer              `tl:"from_id"`
+	Action    SendMessageAction `tl:"action"`
 }
 
 func (*UpdateChannelUserTypingPredict) CRC() uint32 {
@@ -13256,11 +13256,11 @@ func (*UpdateChannelUserTypingPredict) _Update() {}
 
 type UpdatePinnedMessagesPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Pinned   bool     `tl:",omitempty:flags:0,implicit"`
-	Peer     Peer
-	Messages []int32
-	Pts      int32
-	PtsCount int32
+	Pinned   bool     `tl:"pinned,omitempty:flags:0,implicit"`
+	Peer     Peer     `tl:"peer"`
+	Messages []int32  `tl:"messages"`
+	Pts      int32    `tl:"pts"`
+	PtsCount int32    `tl:"pts_count"`
 }
 
 func (*UpdatePinnedMessagesPredict) CRC() uint32 {
@@ -13270,11 +13270,11 @@ func (*UpdatePinnedMessagesPredict) _Update() {}
 
 type UpdatePinnedChannelMessagesPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Pinned    bool     `tl:",omitempty:flags:0,implicit"`
-	ChannelID int64
-	Messages  []int32
-	Pts       int32
-	PtsCount  int32
+	Pinned    bool     `tl:"pinned,omitempty:flags:0,implicit"`
+	ChannelID int64    `tl:"channel_id"`
+	Messages  []int32  `tl:"messages"`
+	Pts       int32    `tl:"pts"`
+	PtsCount  int32    `tl:"pts_count"`
 }
 
 func (*UpdatePinnedChannelMessagesPredict) CRC() uint32 {
@@ -13283,7 +13283,7 @@ func (*UpdatePinnedChannelMessagesPredict) CRC() uint32 {
 func (*UpdatePinnedChannelMessagesPredict) _Update() {}
 
 type UpdateChatPredict struct {
-	ChatID int64
+	ChatID int64 `tl:"chat_id"`
 }
 
 func (*UpdateChatPredict) CRC() uint32 {
@@ -13292,9 +13292,9 @@ func (*UpdateChatPredict) CRC() uint32 {
 func (*UpdateChatPredict) _Update() {}
 
 type UpdateGroupCallParticipantsPredict struct {
-	Call         InputGroupCall
-	Participants []GroupCallParticipant
-	Version      int32
+	Call         InputGroupCall         `tl:"call"`
+	Participants []GroupCallParticipant `tl:"participants"`
+	Version      int32                  `tl:"version"`
 }
 
 func (*UpdateGroupCallParticipantsPredict) CRC() uint32 {
@@ -13303,8 +13303,8 @@ func (*UpdateGroupCallParticipantsPredict) CRC() uint32 {
 func (*UpdateGroupCallParticipantsPredict) _Update() {}
 
 type UpdateGroupCallPredict struct {
-	ChatID int64
-	Call   GroupCall
+	ChatID int64     `tl:"chat_id"`
+	Call   GroupCall `tl:"call"`
 }
 
 func (*UpdateGroupCallPredict) CRC() uint32 {
@@ -13314,8 +13314,8 @@ func (*UpdateGroupCallPredict) _Update() {}
 
 type UpdatePeerHistoryTTLPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Peer      Peer
-	TTLPeriod *int32 `tl:",omitempty:flags:0"`
+	Peer      Peer     `tl:"peer"`
+	TTLPeriod *int32   `tl:"ttl_period,omitempty:flags:0"`
 }
 
 func (*UpdatePeerHistoryTTLPredict) CRC() uint32 {
@@ -13324,15 +13324,15 @@ func (*UpdatePeerHistoryTTLPredict) CRC() uint32 {
 func (*UpdatePeerHistoryTTLPredict) _Update() {}
 
 type UpdateChatParticipantPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	ChatID          int64
-	Date            int32
-	ActorID         int64
-	UserID          int64
-	PrevParticipant ChatParticipant    `tl:",omitempty:flags:0"`
-	NewParticipant  ChatParticipant    `tl:",omitempty:flags:1"`
-	Invite          ExportedChatInvite `tl:",omitempty:flags:2"`
-	Qts             int32
+	_               struct{}           `tl:"flags,bitflag"`
+	ChatID          int64              `tl:"chat_id"`
+	Date            int32              `tl:"date"`
+	ActorID         int64              `tl:"actor_id"`
+	UserID          int64              `tl:"user_id"`
+	PrevParticipant ChatParticipant    `tl:"prev_participant,omitempty:flags:0"`
+	NewParticipant  ChatParticipant    `tl:"new_participant,omitempty:flags:1"`
+	Invite          ExportedChatInvite `tl:"invite,omitempty:flags:2"`
+	Qts             int32              `tl:"qts"`
 }
 
 func (*UpdateChatParticipantPredict) CRC() uint32 {
@@ -13341,16 +13341,16 @@ func (*UpdateChatParticipantPredict) CRC() uint32 {
 func (*UpdateChatParticipantPredict) _Update() {}
 
 type UpdateChannelParticipantPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	ViaChatlist     bool     `tl:",omitempty:flags:3,implicit"`
-	ChannelID       int64
-	Date            int32
-	ActorID         int64
-	UserID          int64
-	PrevParticipant ChannelParticipant `tl:",omitempty:flags:0"`
-	NewParticipant  ChannelParticipant `tl:",omitempty:flags:1"`
-	Invite          ExportedChatInvite `tl:",omitempty:flags:2"`
-	Qts             int32
+	_               struct{}           `tl:"flags,bitflag"`
+	ViaChatlist     bool               `tl:"via_chatlist,omitempty:flags:3,implicit"`
+	ChannelID       int64              `tl:"channel_id"`
+	Date            int32              `tl:"date"`
+	ActorID         int64              `tl:"actor_id"`
+	UserID          int64              `tl:"user_id"`
+	PrevParticipant ChannelParticipant `tl:"prev_participant,omitempty:flags:0"`
+	NewParticipant  ChannelParticipant `tl:"new_participant,omitempty:flags:1"`
+	Invite          ExportedChatInvite `tl:"invite,omitempty:flags:2"`
+	Qts             int32              `tl:"qts"`
 }
 
 func (*UpdateChannelParticipantPredict) CRC() uint32 {
@@ -13359,10 +13359,10 @@ func (*UpdateChannelParticipantPredict) CRC() uint32 {
 func (*UpdateChannelParticipantPredict) _Update() {}
 
 type UpdateBotStoppedPredict struct {
-	UserID  int64
-	Date    int32
-	Stopped bool
-	Qts     int32
+	UserID  int64 `tl:"user_id"`
+	Date    int32 `tl:"date"`
+	Stopped bool  `tl:"stopped"`
+	Qts     int32 `tl:"qts"`
 }
 
 func (*UpdateBotStoppedPredict) CRC() uint32 {
@@ -13372,8 +13372,8 @@ func (*UpdateBotStoppedPredict) _Update() {}
 
 type UpdateGroupCallConnectionPredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	Presentation bool     `tl:",omitempty:flags:0,implicit"`
-	Params       DataJSON
+	Presentation bool     `tl:"presentation,omitempty:flags:0,implicit"`
+	Params       DataJSON `tl:"params"`
 }
 
 func (*UpdateGroupCallConnectionPredict) CRC() uint32 {
@@ -13382,9 +13382,9 @@ func (*UpdateGroupCallConnectionPredict) CRC() uint32 {
 func (*UpdateGroupCallConnectionPredict) _Update() {}
 
 type UpdateBotCommandsPredict struct {
-	Peer     Peer
-	BotID    int64
-	Commands []BotCommand
+	Peer     Peer         `tl:"peer"`
+	BotID    int64        `tl:"bot_id"`
+	Commands []BotCommand `tl:"commands"`
 }
 
 func (*UpdateBotCommandsPredict) CRC() uint32 {
@@ -13393,9 +13393,9 @@ func (*UpdateBotCommandsPredict) CRC() uint32 {
 func (*UpdateBotCommandsPredict) _Update() {}
 
 type UpdatePendingJoinRequestsPredict struct {
-	Peer             Peer
-	RequestsPending  int32
-	RecentRequesters []int64
+	Peer             Peer    `tl:"peer"`
+	RequestsPending  int32   `tl:"requests_pending"`
+	RecentRequesters []int64 `tl:"recent_requesters"`
 }
 
 func (*UpdatePendingJoinRequestsPredict) CRC() uint32 {
@@ -13404,12 +13404,12 @@ func (*UpdatePendingJoinRequestsPredict) CRC() uint32 {
 func (*UpdatePendingJoinRequestsPredict) _Update() {}
 
 type UpdateBotChatInviteRequesterPredict struct {
-	Peer   Peer
-	Date   int32
-	UserID int64
-	About  string
-	Invite ExportedChatInvite
-	Qts    int32
+	Peer   Peer               `tl:"peer"`
+	Date   int32              `tl:"date"`
+	UserID int64              `tl:"user_id"`
+	About  string             `tl:"about"`
+	Invite ExportedChatInvite `tl:"invite"`
+	Qts    int32              `tl:"qts"`
 }
 
 func (*UpdateBotChatInviteRequesterPredict) CRC() uint32 {
@@ -13418,11 +13418,11 @@ func (*UpdateBotChatInviteRequesterPredict) CRC() uint32 {
 func (*UpdateBotChatInviteRequesterPredict) _Update() {}
 
 type UpdateMessageReactionsPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Peer      Peer
-	MsgID     int32
-	TopMsgID  *int32 `tl:",omitempty:flags:0"`
-	Reactions MessageReactions
+	_         struct{}         `tl:"flags,bitflag"`
+	Peer      Peer             `tl:"peer"`
+	MsgID     int32            `tl:"msg_id"`
+	TopMsgID  *int32           `tl:"top_msg_id,omitempty:flags:0"`
+	Reactions MessageReactions `tl:"reactions"`
 }
 
 func (*UpdateMessageReactionsPredict) CRC() uint32 {
@@ -13438,7 +13438,7 @@ func (*UpdateAttachMenuBotsPredict) CRC() uint32 {
 func (*UpdateAttachMenuBotsPredict) _Update() {}
 
 type UpdateWebViewResultSentPredict struct {
-	QueryID int64
+	QueryID int64 `tl:"query_id"`
 }
 
 func (*UpdateWebViewResultSentPredict) CRC() uint32 {
@@ -13447,8 +13447,8 @@ func (*UpdateWebViewResultSentPredict) CRC() uint32 {
 func (*UpdateWebViewResultSentPredict) _Update() {}
 
 type UpdateBotMenuButtonPredict struct {
-	BotID  int64
-	Button BotMenuButton
+	BotID  int64         `tl:"bot_id"`
+	Button BotMenuButton `tl:"button"`
 }
 
 func (*UpdateBotMenuButtonPredict) CRC() uint32 {
@@ -13465,11 +13465,11 @@ func (*UpdateSavedRingtonesPredict) _Update() {}
 
 type UpdateTranscribedAudioPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	Pending         bool     `tl:",omitempty:flags:0,implicit"`
-	Peer            Peer
-	MsgID           int32
-	TranscriptionID int64
-	Text            string
+	Pending         bool     `tl:"pending,omitempty:flags:0,implicit"`
+	Peer            Peer     `tl:"peer"`
+	MsgID           int32    `tl:"msg_id"`
+	TranscriptionID int64    `tl:"transcription_id"`
+	Text            string   `tl:"text"`
 }
 
 func (*UpdateTranscribedAudioPredict) CRC() uint32 {
@@ -13485,8 +13485,8 @@ func (*UpdateReadFeaturedEmojiStickersPredict) CRC() uint32 {
 func (*UpdateReadFeaturedEmojiStickersPredict) _Update() {}
 
 type UpdateUserEmojiStatusPredict struct {
-	UserID      int64
-	EmojiStatus EmojiStatus
+	UserID      int64       `tl:"user_id"`
+	EmojiStatus EmojiStatus `tl:"emoji_status"`
 }
 
 func (*UpdateUserEmojiStatusPredict) CRC() uint32 {
@@ -13510,9 +13510,9 @@ func (*UpdateRecentReactionsPredict) _Update() {}
 
 type UpdateMoveStickerSetToTopPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Masks      bool     `tl:",omitempty:flags:0,implicit"`
-	Emojis     bool     `tl:",omitempty:flags:1,implicit"`
-	Stickerset int64
+	Masks      bool     `tl:"masks,omitempty:flags:0,implicit"`
+	Emojis     bool     `tl:"emojis,omitempty:flags:1,implicit"`
+	Stickerset int64    `tl:"stickerset"`
 }
 
 func (*UpdateMoveStickerSetToTopPredict) CRC() uint32 {
@@ -13521,9 +13521,9 @@ func (*UpdateMoveStickerSetToTopPredict) CRC() uint32 {
 func (*UpdateMoveStickerSetToTopPredict) _Update() {}
 
 type UpdateMessageExtendedMediaPredict struct {
-	Peer          Peer
-	MsgID         int32
-	ExtendedMedia []MessageExtendedMedia
+	Peer          Peer                   `tl:"peer"`
+	MsgID         int32                  `tl:"msg_id"`
+	ExtendedMedia []MessageExtendedMedia `tl:"extended_media"`
 }
 
 func (*UpdateMessageExtendedMediaPredict) CRC() uint32 {
@@ -13533,9 +13533,9 @@ func (*UpdateMessageExtendedMediaPredict) _Update() {}
 
 type UpdateChannelPinnedTopicPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Pinned    bool     `tl:",omitempty:flags:0,implicit"`
-	ChannelID int64
-	TopicID   int32
+	Pinned    bool     `tl:"pinned,omitempty:flags:0,implicit"`
+	ChannelID int64    `tl:"channel_id"`
+	TopicID   int32    `tl:"topic_id"`
 }
 
 func (*UpdateChannelPinnedTopicPredict) CRC() uint32 {
@@ -13545,8 +13545,8 @@ func (*UpdateChannelPinnedTopicPredict) _Update() {}
 
 type UpdateChannelPinnedTopicsPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	ChannelID int64
-	Order     []int32 `tl:",omitempty:flags:0"`
+	ChannelID int64    `tl:"channel_id"`
+	Order     []int32  `tl:"order,omitempty:flags:0"`
 }
 
 func (*UpdateChannelPinnedTopicsPredict) CRC() uint32 {
@@ -13555,7 +13555,7 @@ func (*UpdateChannelPinnedTopicsPredict) CRC() uint32 {
 func (*UpdateChannelPinnedTopicsPredict) _Update() {}
 
 type UpdateUserPredict struct {
-	UserID int64
+	UserID int64 `tl:"user_id"`
 }
 
 func (*UpdateUserPredict) CRC() uint32 {
@@ -13571,8 +13571,8 @@ func (*UpdateAutoSaveSettingsPredict) CRC() uint32 {
 func (*UpdateAutoSaveSettingsPredict) _Update() {}
 
 type UpdateStoryPredict struct {
-	Peer  Peer
-	Story StoryItem
+	Peer  Peer      `tl:"peer"`
+	Story StoryItem `tl:"story"`
 }
 
 func (*UpdateStoryPredict) CRC() uint32 {
@@ -13581,8 +13581,8 @@ func (*UpdateStoryPredict) CRC() uint32 {
 func (*UpdateStoryPredict) _Update() {}
 
 type UpdateReadStoriesPredict struct {
-	Peer  Peer
-	MaxID int32
+	Peer  Peer  `tl:"peer"`
+	MaxID int32 `tl:"max_id"`
 }
 
 func (*UpdateReadStoriesPredict) CRC() uint32 {
@@ -13591,8 +13591,8 @@ func (*UpdateReadStoriesPredict) CRC() uint32 {
 func (*UpdateReadStoriesPredict) _Update() {}
 
 type UpdateStoryIDPredict struct {
-	ID       int32
-	RandomID int64
+	ID       int32 `tl:"id"`
+	RandomID int64 `tl:"random_id"`
 }
 
 func (*UpdateStoryIDPredict) CRC() uint32 {
@@ -13601,7 +13601,7 @@ func (*UpdateStoryIDPredict) CRC() uint32 {
 func (*UpdateStoryIDPredict) _Update() {}
 
 type UpdateStoriesStealthModePredict struct {
-	StealthMode StoriesStealthMode
+	StealthMode StoriesStealthMode `tl:"stealth_mode"`
 }
 
 func (*UpdateStoriesStealthModePredict) CRC() uint32 {
@@ -13610,9 +13610,9 @@ func (*UpdateStoriesStealthModePredict) CRC() uint32 {
 func (*UpdateStoriesStealthModePredict) _Update() {}
 
 type UpdateSentStoryReactionPredict struct {
-	Peer     Peer
-	StoryID  int32
-	Reaction Reaction
+	Peer     Peer     `tl:"peer"`
+	StoryID  int32    `tl:"story_id"`
+	Reaction Reaction `tl:"reaction"`
 }
 
 func (*UpdateSentStoryReactionPredict) CRC() uint32 {
@@ -13621,9 +13621,9 @@ func (*UpdateSentStoryReactionPredict) CRC() uint32 {
 func (*UpdateSentStoryReactionPredict) _Update() {}
 
 type UpdateBotChatBoostPredict struct {
-	Peer  Peer
-	Boost Boost
-	Qts   int32
+	Peer  Peer  `tl:"peer"`
+	Boost Boost `tl:"boost"`
+	Qts   int32 `tl:"qts"`
 }
 
 func (*UpdateBotChatBoostPredict) CRC() uint32 {
@@ -13632,8 +13632,8 @@ func (*UpdateBotChatBoostPredict) CRC() uint32 {
 func (*UpdateBotChatBoostPredict) _Update() {}
 
 type UpdateChannelViewForumAsMessagesPredict struct {
-	ChannelID int64
-	Enabled   bool
+	ChannelID int64 `tl:"channel_id"`
+	Enabled   bool  `tl:"enabled"`
 }
 
 func (*UpdateChannelViewForumAsMessagesPredict) CRC() uint32 {
@@ -13642,10 +13642,10 @@ func (*UpdateChannelViewForumAsMessagesPredict) CRC() uint32 {
 func (*UpdateChannelViewForumAsMessagesPredict) _Update() {}
 
 type UpdatePeerWallpaperPredict struct {
-	_                   struct{} `tl:"flags,bitflag"`
-	WallpaperOverridden bool     `tl:",omitempty:flags:1,implicit"`
-	Peer                Peer
-	Wallpaper           WallPaper `tl:",omitempty:flags:0"`
+	_                   struct{}  `tl:"flags,bitflag"`
+	WallpaperOverridden bool      `tl:"wallpaper_overridden,omitempty:flags:1,implicit"`
+	Peer                Peer      `tl:"peer"`
+	Wallpaper           WallPaper `tl:"wallpaper,omitempty:flags:0"`
 }
 
 func (*UpdatePeerWallpaperPredict) CRC() uint32 {
@@ -13654,13 +13654,13 @@ func (*UpdatePeerWallpaperPredict) CRC() uint32 {
 func (*UpdatePeerWallpaperPredict) _Update() {}
 
 type UpdateBotMessageReactionPredict struct {
-	Peer         Peer
-	MsgID        int32
-	Date         int32
-	Actor        Peer
-	OldReactions []Reaction
-	NewReactions []Reaction
-	Qts          int32
+	Peer         Peer       `tl:"peer"`
+	MsgID        int32      `tl:"msg_id"`
+	Date         int32      `tl:"date"`
+	Actor        Peer       `tl:"actor"`
+	OldReactions []Reaction `tl:"old_reactions"`
+	NewReactions []Reaction `tl:"new_reactions"`
+	Qts          int32      `tl:"qts"`
 }
 
 func (*UpdateBotMessageReactionPredict) CRC() uint32 {
@@ -13669,11 +13669,11 @@ func (*UpdateBotMessageReactionPredict) CRC() uint32 {
 func (*UpdateBotMessageReactionPredict) _Update() {}
 
 type UpdateBotMessageReactionsPredict struct {
-	Peer      Peer
-	MsgID     int32
-	Date      int32
-	Reactions []ReactionCount
-	Qts       int32
+	Peer      Peer            `tl:"peer"`
+	MsgID     int32           `tl:"msg_id"`
+	Date      int32           `tl:"date"`
+	Reactions []ReactionCount `tl:"reactions"`
+	Qts       int32           `tl:"qts"`
 }
 
 func (*UpdateBotMessageReactionsPredict) CRC() uint32 {
@@ -13682,9 +13682,9 @@ func (*UpdateBotMessageReactionsPredict) CRC() uint32 {
 func (*UpdateBotMessageReactionsPredict) _Update() {}
 
 type UpdateSavedDialogPinnedPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Pinned bool     `tl:",omitempty:flags:0,implicit"`
-	Peer   DialogPeer
+	_      struct{}   `tl:"flags,bitflag"`
+	Pinned bool       `tl:"pinned,omitempty:flags:0,implicit"`
+	Peer   DialogPeer `tl:"peer"`
 }
 
 func (*UpdateSavedDialogPinnedPredict) CRC() uint32 {
@@ -13694,7 +13694,7 @@ func (*UpdateSavedDialogPinnedPredict) _Update() {}
 
 type UpdatePinnedSavedDialogsPredict struct {
 	_     struct{}     `tl:"flags,bitflag"`
-	Order []DialogPeer `tl:",omitempty:flags:0"`
+	Order []DialogPeer `tl:"order,omitempty:flags:0"`
 }
 
 func (*UpdatePinnedSavedDialogsPredict) CRC() uint32 {
@@ -13710,7 +13710,7 @@ func (*UpdateSavedReactionTagsPredict) CRC() uint32 {
 func (*UpdateSavedReactionTagsPredict) _Update() {}
 
 type UpdateSmsJobPredict struct {
-	JobID string
+	JobID string `tl:"job_id"`
 }
 
 func (*UpdateSmsJobPredict) CRC() uint32 {
@@ -13719,7 +13719,7 @@ func (*UpdateSmsJobPredict) CRC() uint32 {
 func (*UpdateSmsJobPredict) _Update() {}
 
 type UpdateQuickRepliesPredict struct {
-	QuickReplies []QuickReply
+	QuickReplies []QuickReply `tl:"quick_replies"`
 }
 
 func (*UpdateQuickRepliesPredict) CRC() uint32 {
@@ -13728,7 +13728,7 @@ func (*UpdateQuickRepliesPredict) CRC() uint32 {
 func (*UpdateQuickRepliesPredict) _Update() {}
 
 type UpdateNewQuickReplyPredict struct {
-	QuickReply QuickReply
+	QuickReply QuickReply `tl:"quick_reply"`
 }
 
 func (*UpdateNewQuickReplyPredict) CRC() uint32 {
@@ -13737,7 +13737,7 @@ func (*UpdateNewQuickReplyPredict) CRC() uint32 {
 func (*UpdateNewQuickReplyPredict) _Update() {}
 
 type UpdateDeleteQuickReplyPredict struct {
-	ShortcutID int32
+	ShortcutID int32 `tl:"shortcut_id"`
 }
 
 func (*UpdateDeleteQuickReplyPredict) CRC() uint32 {
@@ -13746,7 +13746,7 @@ func (*UpdateDeleteQuickReplyPredict) CRC() uint32 {
 func (*UpdateDeleteQuickReplyPredict) _Update() {}
 
 type UpdateQuickReplyMessagePredict struct {
-	Message Message
+	Message Message `tl:"message"`
 }
 
 func (*UpdateQuickReplyMessagePredict) CRC() uint32 {
@@ -13755,8 +13755,8 @@ func (*UpdateQuickReplyMessagePredict) CRC() uint32 {
 func (*UpdateQuickReplyMessagePredict) _Update() {}
 
 type UpdateDeleteQuickReplyMessagesPredict struct {
-	ShortcutID int32
-	Messages   []int32
+	ShortcutID int32   `tl:"shortcut_id"`
+	Messages   []int32 `tl:"messages"`
 }
 
 func (*UpdateDeleteQuickReplyMessagesPredict) CRC() uint32 {
@@ -13765,8 +13765,8 @@ func (*UpdateDeleteQuickReplyMessagesPredict) CRC() uint32 {
 func (*UpdateDeleteQuickReplyMessagesPredict) _Update() {}
 
 type UpdateBotBusinessConnectPredict struct {
-	Connection BotBusinessConnection
-	Qts        int32
+	Connection BotBusinessConnection `tl:"connection"`
+	Qts        int32                 `tl:"qts"`
 }
 
 func (*UpdateBotBusinessConnectPredict) CRC() uint32 {
@@ -13776,10 +13776,10 @@ func (*UpdateBotBusinessConnectPredict) _Update() {}
 
 type UpdateBotNewBusinessMessagePredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	ConnectionID   string
-	Message        Message
-	ReplyToMessage Message `tl:",omitempty:flags:0"`
-	Qts            int32
+	ConnectionID   string   `tl:"connection_id"`
+	Message        Message  `tl:"message"`
+	ReplyToMessage Message  `tl:"reply_to_message,omitempty:flags:0"`
+	Qts            int32    `tl:"qts"`
 }
 
 func (*UpdateBotNewBusinessMessagePredict) CRC() uint32 {
@@ -13789,10 +13789,10 @@ func (*UpdateBotNewBusinessMessagePredict) _Update() {}
 
 type UpdateBotEditBusinessMessagePredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	ConnectionID   string
-	Message        Message
-	ReplyToMessage Message `tl:",omitempty:flags:0"`
-	Qts            int32
+	ConnectionID   string   `tl:"connection_id"`
+	Message        Message  `tl:"message"`
+	ReplyToMessage Message  `tl:"reply_to_message,omitempty:flags:0"`
+	Qts            int32    `tl:"qts"`
 }
 
 func (*UpdateBotEditBusinessMessagePredict) CRC() uint32 {
@@ -13801,10 +13801,10 @@ func (*UpdateBotEditBusinessMessagePredict) CRC() uint32 {
 func (*UpdateBotEditBusinessMessagePredict) _Update() {}
 
 type UpdateBotDeleteBusinessMessagePredict struct {
-	ConnectionID string
-	Peer         Peer
-	Messages     []int32
-	Qts          int32
+	ConnectionID string  `tl:"connection_id"`
+	Peer         Peer    `tl:"peer"`
+	Messages     []int32 `tl:"messages"`
+	Qts          int32   `tl:"qts"`
 }
 
 func (*UpdateBotDeleteBusinessMessagePredict) CRC() uint32 {
@@ -13813,9 +13813,9 @@ func (*UpdateBotDeleteBusinessMessagePredict) CRC() uint32 {
 func (*UpdateBotDeleteBusinessMessagePredict) _Update() {}
 
 type UpdateNewStoryReactionPredict struct {
-	StoryID  int32
-	Peer     Peer
-	Reaction Reaction
+	StoryID  int32    `tl:"story_id"`
+	Peer     Peer     `tl:"peer"`
+	Reaction Reaction `tl:"reaction"`
 }
 
 func (*UpdateNewStoryReactionPredict) CRC() uint32 {
@@ -13824,8 +13824,8 @@ func (*UpdateNewStoryReactionPredict) CRC() uint32 {
 func (*UpdateNewStoryReactionPredict) _Update() {}
 
 type UpdateBroadcastRevenueTransactionsPredict struct {
-	Peer     Peer
-	Balances BroadcastRevenueBalances
+	Peer     Peer                     `tl:"peer"`
+	Balances BroadcastRevenueBalances `tl:"balances"`
 }
 
 func (*UpdateBroadcastRevenueTransactionsPredict) CRC() uint32 {
@@ -13834,7 +13834,7 @@ func (*UpdateBroadcastRevenueTransactionsPredict) CRC() uint32 {
 func (*UpdateBroadcastRevenueTransactionsPredict) _Update() {}
 
 type UpdateStarsBalancePredict struct {
-	Balance int64
+	Balance int64 `tl:"balance"`
 }
 
 func (*UpdateStarsBalancePredict) CRC() uint32 {
@@ -13844,13 +13844,13 @@ func (*UpdateStarsBalancePredict) _Update() {}
 
 type UpdateBusinessBotCallbackQueryPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	QueryID        int64
-	UserID         int64
-	ConnectionID   string
-	Message        Message
-	ReplyToMessage Message `tl:",omitempty:flags:2"`
-	ChatInstance   int64
-	Data           *[]byte `tl:",omitempty:flags:0"`
+	QueryID        int64    `tl:"query_id"`
+	UserID         int64    `tl:"user_id"`
+	ConnectionID   string   `tl:"connection_id"`
+	Message        Message  `tl:"message"`
+	ReplyToMessage Message  `tl:"reply_to_message,omitempty:flags:2"`
+	ChatInstance   int64    `tl:"chat_instance"`
+	Data           *[]byte  `tl:"data,omitempty:flags:0"`
 }
 
 func (*UpdateBusinessBotCallbackQueryPredict) CRC() uint32 {
@@ -13859,8 +13859,8 @@ func (*UpdateBusinessBotCallbackQueryPredict) CRC() uint32 {
 func (*UpdateBusinessBotCallbackQueryPredict) _Update() {}
 
 type UpdateStarsRevenueStatusPredict struct {
-	Peer   Peer
-	Status StarsRevenueStatus
+	Peer   Peer               `tl:"peer"`
+	Status StarsRevenueStatus `tl:"status"`
 }
 
 func (*UpdateStarsRevenueStatusPredict) CRC() uint32 {
@@ -13869,7 +13869,7 @@ func (*UpdateStarsRevenueStatusPredict) CRC() uint32 {
 func (*UpdateStarsRevenueStatusPredict) _Update() {}
 
 type Updates interface {
-	tl.Object
+	tl.TLObject
 	_Updates()
 }
 
@@ -13891,22 +13891,22 @@ func (*UpdatesTooLongPredict) CRC() uint32 {
 func (*UpdatesTooLongPredict) _Updates() {}
 
 type UpdateShortMessagePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Out         bool     `tl:",omitempty:flags:1,implicit"`
-	Mentioned   bool     `tl:",omitempty:flags:4,implicit"`
-	MediaUnread bool     `tl:",omitempty:flags:5,implicit"`
-	Silent      bool     `tl:",omitempty:flags:13,implicit"`
-	ID          int32
-	UserID      int64
-	Message     string
-	Pts         int32
-	PtsCount    int32
-	Date        int32
-	FwdFrom     MessageFwdHeader   `tl:",omitempty:flags:2"`
-	ViaBotID    *int64             `tl:",omitempty:flags:11"`
-	ReplyTo     MessageReplyHeader `tl:",omitempty:flags:3"`
-	Entities    []MessageEntity    `tl:",omitempty:flags:7"`
-	TTLPeriod   *int32             `tl:",omitempty:flags:25"`
+	_           struct{}           `tl:"flags,bitflag"`
+	Out         bool               `tl:"out,omitempty:flags:1,implicit"`
+	Mentioned   bool               `tl:"mentioned,omitempty:flags:4,implicit"`
+	MediaUnread bool               `tl:"media_unread,omitempty:flags:5,implicit"`
+	Silent      bool               `tl:"silent,omitempty:flags:13,implicit"`
+	ID          int32              `tl:"id"`
+	UserID      int64              `tl:"user_id"`
+	Message     string             `tl:"message"`
+	Pts         int32              `tl:"pts"`
+	PtsCount    int32              `tl:"pts_count"`
+	Date        int32              `tl:"date"`
+	FwdFrom     MessageFwdHeader   `tl:"fwd_from,omitempty:flags:2"`
+	ViaBotID    *int64             `tl:"via_bot_id,omitempty:flags:11"`
+	ReplyTo     MessageReplyHeader `tl:"reply_to,omitempty:flags:3"`
+	Entities    []MessageEntity    `tl:"entities,omitempty:flags:7"`
+	TTLPeriod   *int32             `tl:"ttl_period,omitempty:flags:25"`
 }
 
 func (*UpdateShortMessagePredict) CRC() uint32 {
@@ -13915,23 +13915,23 @@ func (*UpdateShortMessagePredict) CRC() uint32 {
 func (*UpdateShortMessagePredict) _Updates() {}
 
 type UpdateShortChatMessagePredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Out         bool     `tl:",omitempty:flags:1,implicit"`
-	Mentioned   bool     `tl:",omitempty:flags:4,implicit"`
-	MediaUnread bool     `tl:",omitempty:flags:5,implicit"`
-	Silent      bool     `tl:",omitempty:flags:13,implicit"`
-	ID          int32
-	FromID      int64
-	ChatID      int64
-	Message     string
-	Pts         int32
-	PtsCount    int32
-	Date        int32
-	FwdFrom     MessageFwdHeader   `tl:",omitempty:flags:2"`
-	ViaBotID    *int64             `tl:",omitempty:flags:11"`
-	ReplyTo     MessageReplyHeader `tl:",omitempty:flags:3"`
-	Entities    []MessageEntity    `tl:",omitempty:flags:7"`
-	TTLPeriod   *int32             `tl:",omitempty:flags:25"`
+	_           struct{}           `tl:"flags,bitflag"`
+	Out         bool               `tl:"out,omitempty:flags:1,implicit"`
+	Mentioned   bool               `tl:"mentioned,omitempty:flags:4,implicit"`
+	MediaUnread bool               `tl:"media_unread,omitempty:flags:5,implicit"`
+	Silent      bool               `tl:"silent,omitempty:flags:13,implicit"`
+	ID          int32              `tl:"id"`
+	FromID      int64              `tl:"from_id"`
+	ChatID      int64              `tl:"chat_id"`
+	Message     string             `tl:"message"`
+	Pts         int32              `tl:"pts"`
+	PtsCount    int32              `tl:"pts_count"`
+	Date        int32              `tl:"date"`
+	FwdFrom     MessageFwdHeader   `tl:"fwd_from,omitempty:flags:2"`
+	ViaBotID    *int64             `tl:"via_bot_id,omitempty:flags:11"`
+	ReplyTo     MessageReplyHeader `tl:"reply_to,omitempty:flags:3"`
+	Entities    []MessageEntity    `tl:"entities,omitempty:flags:7"`
+	TTLPeriod   *int32             `tl:"ttl_period,omitempty:flags:25"`
 }
 
 func (*UpdateShortChatMessagePredict) CRC() uint32 {
@@ -13940,8 +13940,8 @@ func (*UpdateShortChatMessagePredict) CRC() uint32 {
 func (*UpdateShortChatMessagePredict) _Updates() {}
 
 type UpdateShortPredict struct {
-	Update Update
-	Date   int32
+	Update Update `tl:"update"`
+	Date   int32  `tl:"date"`
 }
 
 func (*UpdateShortPredict) CRC() uint32 {
@@ -13950,12 +13950,12 @@ func (*UpdateShortPredict) CRC() uint32 {
 func (*UpdateShortPredict) _Updates() {}
 
 type UpdatesCombinedPredict struct {
-	Updates  []Update
-	Users    []User
-	Chats    []Chat
-	Date     int32
-	SeqStart int32
-	Seq      int32
+	Updates  []Update `tl:"updates"`
+	Users    []User   `tl:"users"`
+	Chats    []Chat   `tl:"chats"`
+	Date     int32    `tl:"date"`
+	SeqStart int32    `tl:"seq_start"`
+	Seq      int32    `tl:"seq"`
 }
 
 func (*UpdatesCombinedPredict) CRC() uint32 {
@@ -13964,11 +13964,11 @@ func (*UpdatesCombinedPredict) CRC() uint32 {
 func (*UpdatesCombinedPredict) _Updates() {}
 
 type UpdatesPredict struct {
-	Updates []Update
-	Users   []User
-	Chats   []Chat
-	Date    int32
-	Seq     int32
+	Updates []Update `tl:"updates"`
+	Users   []User   `tl:"users"`
+	Chats   []Chat   `tl:"chats"`
+	Date    int32    `tl:"date"`
+	Seq     int32    `tl:"seq"`
 }
 
 func (*UpdatesPredict) CRC() uint32 {
@@ -13977,15 +13977,15 @@ func (*UpdatesPredict) CRC() uint32 {
 func (*UpdatesPredict) _Updates() {}
 
 type UpdateShortSentMessagePredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Out       bool     `tl:",omitempty:flags:1,implicit"`
-	ID        int32
-	Pts       int32
-	PtsCount  int32
-	Date      int32
-	Media     MessageMedia    `tl:",omitempty:flags:9"`
-	Entities  []MessageEntity `tl:",omitempty:flags:7"`
-	TTLPeriod *int32          `tl:",omitempty:flags:25"`
+	_         struct{}        `tl:"flags,bitflag"`
+	Out       bool            `tl:"out,omitempty:flags:1,implicit"`
+	ID        int32           `tl:"id"`
+	Pts       int32           `tl:"pts"`
+	PtsCount  int32           `tl:"pts_count"`
+	Date      int32           `tl:"date"`
+	Media     MessageMedia    `tl:"media,omitempty:flags:9"`
+	Entities  []MessageEntity `tl:"entities,omitempty:flags:7"`
+	TTLPeriod *int32          `tl:"ttl_period,omitempty:flags:25"`
 }
 
 func (*UpdateShortSentMessagePredict) CRC() uint32 {
@@ -13994,7 +13994,7 @@ func (*UpdateShortSentMessagePredict) CRC() uint32 {
 func (*UpdateShortSentMessagePredict) _Updates() {}
 
 type URLAuthResult interface {
-	tl.Object
+	tl.TLObject
 	_URLAuthResult()
 }
 
@@ -14006,9 +14006,9 @@ var (
 
 type URLAuthResultRequestPredict struct {
 	_                  struct{} `tl:"flags,bitflag"`
-	RequestWriteAccess bool     `tl:",omitempty:flags:0,implicit"`
-	Bot                User
-	Domain             string
+	RequestWriteAccess bool     `tl:"request_write_access,omitempty:flags:0,implicit"`
+	Bot                User     `tl:"bot"`
+	Domain             string   `tl:"domain"`
 }
 
 func (*URLAuthResultRequestPredict) CRC() uint32 {
@@ -14017,7 +14017,7 @@ func (*URLAuthResultRequestPredict) CRC() uint32 {
 func (*URLAuthResultRequestPredict) _URLAuthResult() {}
 
 type URLAuthResultAcceptedPredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*URLAuthResultAcceptedPredict) CRC() uint32 {
@@ -14033,7 +14033,7 @@ func (*URLAuthResultDefaultPredict) CRC() uint32 {
 func (*URLAuthResultDefaultPredict) _URLAuthResult() {}
 
 type User interface {
-	tl.Object
+	tl.TLObject
 	_User()
 }
 
@@ -14043,7 +14043,7 @@ var (
 )
 
 type UserEmptyPredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*UserEmptyPredict) CRC() uint32 {
@@ -14052,51 +14052,51 @@ func (*UserEmptyPredict) CRC() uint32 {
 func (*UserEmptyPredict) _User() {}
 
 type UserPredict struct {
-	_                     struct{} `tl:"flags,bitflag"`
-	Self                  bool     `tl:",omitempty:flags:10,implicit"`
-	Contact               bool     `tl:",omitempty:flags:11,implicit"`
-	MutualContact         bool     `tl:",omitempty:flags:12,implicit"`
-	Deleted               bool     `tl:",omitempty:flags:13,implicit"`
-	Bot                   bool     `tl:",omitempty:flags:14,implicit"`
-	BotChatHistory        bool     `tl:",omitempty:flags:15,implicit"`
-	BotNochats            bool     `tl:",omitempty:flags:16,implicit"`
-	Verified              bool     `tl:",omitempty:flags:17,implicit"`
-	Restricted            bool     `tl:",omitempty:flags:18,implicit"`
-	Min                   bool     `tl:",omitempty:flags:20,implicit"`
-	BotInlineGeo          bool     `tl:",omitempty:flags:21,implicit"`
-	Support               bool     `tl:",omitempty:flags:23,implicit"`
-	Scam                  bool     `tl:",omitempty:flags:24,implicit"`
-	ApplyMinPhoto         bool     `tl:",omitempty:flags:25,implicit"`
-	Fake                  bool     `tl:",omitempty:flags:26,implicit"`
-	BotAttachMenu         bool     `tl:",omitempty:flags:27,implicit"`
-	Premium               bool     `tl:",omitempty:flags:28,implicit"`
-	AttachMenuEnabled     bool     `tl:",omitempty:flags:29,implicit"`
-	_                     struct{} `tl:"flags2,bitflag"`
-	BotCanEdit            bool     `tl:",omitempty:flags2:1,implicit"`
-	CloseFriend           bool     `tl:",omitempty:flags2:2,implicit"`
-	StoriesHidden         bool     `tl:",omitempty:flags2:3,implicit"`
-	StoriesUnavailable    bool     `tl:",omitempty:flags2:4,implicit"`
-	ContactRequirePremium bool     `tl:",omitempty:flags2:10,implicit"`
-	BotBusiness           bool     `tl:",omitempty:flags2:11,implicit"`
-	BotHasMainApp         bool     `tl:",omitempty:flags2:13,implicit"`
-	ID                    int64
-	AccessHash            *int64              `tl:",omitempty:flags:0"`
-	FirstName             *string             `tl:",omitempty:flags:1"`
-	LastName              *string             `tl:",omitempty:flags:2"`
-	Username              *string             `tl:",omitempty:flags:3"`
-	Phone                 *string             `tl:",omitempty:flags:4"`
-	Photo                 UserProfilePhoto    `tl:",omitempty:flags:5"`
-	Status                UserStatus          `tl:",omitempty:flags:6"`
-	BotInfoVersion        *int32              `tl:",omitempty:flags:14"`
-	RestrictionReason     []RestrictionReason `tl:",omitempty:flags:18"`
-	BotInlinePlaceholder  *string             `tl:",omitempty:flags:19"`
-	LangCode              *string             `tl:",omitempty:flags:22"`
-	EmojiStatus           EmojiStatus         `tl:",omitempty:flags:30"`
-	Usernames             []Username          `tl:",omitempty:flags2:0"`
-	StoriesMaxID          *int32              `tl:",omitempty:flags2:5"`
-	Color                 PeerColor           `tl:",omitempty:flags2:8"`
-	ProfileColor          PeerColor           `tl:",omitempty:flags2:9"`
-	BotActiveUsers        *int32              `tl:",omitempty:flags2:12"`
+	_                     struct{}            `tl:"flags,bitflag"`
+	Self                  bool                `tl:"self,omitempty:flags:10,implicit"`
+	Contact               bool                `tl:"contact,omitempty:flags:11,implicit"`
+	MutualContact         bool                `tl:"mutual_contact,omitempty:flags:12,implicit"`
+	Deleted               bool                `tl:"deleted,omitempty:flags:13,implicit"`
+	Bot                   bool                `tl:"bot,omitempty:flags:14,implicit"`
+	BotChatHistory        bool                `tl:"bot_chat_history,omitempty:flags:15,implicit"`
+	BotNochats            bool                `tl:"bot_nochats,omitempty:flags:16,implicit"`
+	Verified              bool                `tl:"verified,omitempty:flags:17,implicit"`
+	Restricted            bool                `tl:"restricted,omitempty:flags:18,implicit"`
+	Min                   bool                `tl:"min,omitempty:flags:20,implicit"`
+	BotInlineGeo          bool                `tl:"bot_inline_geo,omitempty:flags:21,implicit"`
+	Support               bool                `tl:"support,omitempty:flags:23,implicit"`
+	Scam                  bool                `tl:"scam,omitempty:flags:24,implicit"`
+	ApplyMinPhoto         bool                `tl:"apply_min_photo,omitempty:flags:25,implicit"`
+	Fake                  bool                `tl:"fake,omitempty:flags:26,implicit"`
+	BotAttachMenu         bool                `tl:"bot_attach_menu,omitempty:flags:27,implicit"`
+	Premium               bool                `tl:"premium,omitempty:flags:28,implicit"`
+	AttachMenuEnabled     bool                `tl:"attach_menu_enabled,omitempty:flags:29,implicit"`
+	_                     struct{}            `tl:"flags2,bitflag"`
+	BotCanEdit            bool                `tl:"bot_can_edit,omitempty:flags2:1,implicit"`
+	CloseFriend           bool                `tl:"close_friend,omitempty:flags2:2,implicit"`
+	StoriesHidden         bool                `tl:"stories_hidden,omitempty:flags2:3,implicit"`
+	StoriesUnavailable    bool                `tl:"stories_unavailable,omitempty:flags2:4,implicit"`
+	ContactRequirePremium bool                `tl:"contact_require_premium,omitempty:flags2:10,implicit"`
+	BotBusiness           bool                `tl:"bot_business,omitempty:flags2:11,implicit"`
+	BotHasMainApp         bool                `tl:"bot_has_main_app,omitempty:flags2:13,implicit"`
+	ID                    int64               `tl:"id"`
+	AccessHash            *int64              `tl:"access_hash,omitempty:flags:0"`
+	FirstName             *string             `tl:"first_name,omitempty:flags:1"`
+	LastName              *string             `tl:"last_name,omitempty:flags:2"`
+	Username              *string             `tl:"username,omitempty:flags:3"`
+	Phone                 *string             `tl:"phone,omitempty:flags:4"`
+	Photo                 UserProfilePhoto    `tl:"photo,omitempty:flags:5"`
+	Status                UserStatus          `tl:"status,omitempty:flags:6"`
+	BotInfoVersion        *int32              `tl:"bot_info_version,omitempty:flags:14"`
+	RestrictionReason     []RestrictionReason `tl:"restriction_reason,omitempty:flags:18"`
+	BotInlinePlaceholder  *string             `tl:"bot_inline_placeholder,omitempty:flags:19"`
+	LangCode              *string             `tl:"lang_code,omitempty:flags:22"`
+	EmojiStatus           EmojiStatus         `tl:"emoji_status,omitempty:flags:30"`
+	Usernames             []Username          `tl:"usernames,omitempty:flags2:0"`
+	StoriesMaxID          *int32              `tl:"stories_max_id,omitempty:flags2:5"`
+	Color                 PeerColor           `tl:"color,omitempty:flags2:8"`
+	ProfileColor          PeerColor           `tl:"profile_color,omitempty:flags2:9"`
+	BotActiveUsers        *int32              `tl:"bot_active_users,omitempty:flags2:12"`
 }
 
 func (*UserPredict) CRC() uint32 {
@@ -14105,7 +14105,7 @@ func (*UserPredict) CRC() uint32 {
 func (*UserPredict) _User() {}
 
 type UserFull interface {
-	tl.Object
+	tl.TLObject
 	_UserFull()
 }
 
@@ -14114,49 +14114,49 @@ var (
 )
 
 type UserFullPredict struct {
-	_                       struct{} `tl:"flags,bitflag"`
-	Blocked                 bool     `tl:",omitempty:flags:0,implicit"`
-	PhoneCallsAvailable     bool     `tl:",omitempty:flags:4,implicit"`
-	PhoneCallsPrivate       bool     `tl:",omitempty:flags:5,implicit"`
-	CanPinMessage           bool     `tl:",omitempty:flags:7,implicit"`
-	HasScheduled            bool     `tl:",omitempty:flags:12,implicit"`
-	VideoCallsAvailable     bool     `tl:",omitempty:flags:13,implicit"`
-	VoiceMessagesForbidden  bool     `tl:",omitempty:flags:20,implicit"`
-	TranslationsDisabled    bool     `tl:",omitempty:flags:23,implicit"`
-	StoriesPinnedAvailable  bool     `tl:",omitempty:flags:26,implicit"`
-	BlockedMyStoriesFrom    bool     `tl:",omitempty:flags:27,implicit"`
-	WallpaperOverridden     bool     `tl:",omitempty:flags:28,implicit"`
-	ContactRequirePremium   bool     `tl:",omitempty:flags:29,implicit"`
-	ReadDatesPrivate        bool     `tl:",omitempty:flags:30,implicit"`
-	_                       struct{} `tl:"flags2,bitflag"`
-	SponsoredEnabled        bool     `tl:",omitempty:flags2:7,implicit"`
-	ID                      int64
-	About                   *string `tl:",omitempty:flags:1"`
-	Settings                PeerSettings
-	PersonalPhoto           Photo `tl:",omitempty:flags:21"`
-	ProfilePhoto            Photo `tl:",omitempty:flags:2"`
-	FallbackPhoto           Photo `tl:",omitempty:flags:22"`
-	NotifySettings          PeerNotifySettings
-	BotInfo                 BotInfo `tl:",omitempty:flags:3"`
-	PinnedMsgID             *int32  `tl:",omitempty:flags:6"`
-	CommonChatsCount        int32
-	FolderID                *int32                  `tl:",omitempty:flags:11"`
-	TTLPeriod               *int32                  `tl:",omitempty:flags:14"`
-	ThemeEmoticon           *string                 `tl:",omitempty:flags:15"`
-	PrivateForwardName      *string                 `tl:",omitempty:flags:16"`
-	BotGroupAdminRights     ChatAdminRights         `tl:",omitempty:flags:17"`
-	BotBroadcastAdminRights ChatAdminRights         `tl:",omitempty:flags:18"`
-	PremiumGifts            []PremiumGiftOption     `tl:",omitempty:flags:19"`
-	Wallpaper               WallPaper               `tl:",omitempty:flags:24"`
-	Stories                 PeerStories             `tl:",omitempty:flags:25"`
-	BusinessWorkHours       BusinessWorkHours       `tl:",omitempty:flags2:0"`
-	BusinessLocation        BusinessLocation        `tl:",omitempty:flags2:1"`
-	BusinessGreetingMessage BusinessGreetingMessage `tl:",omitempty:flags2:2"`
-	BusinessAwayMessage     BusinessAwayMessage     `tl:",omitempty:flags2:3"`
-	BusinessIntro           BusinessIntro           `tl:",omitempty:flags2:4"`
-	Birthday                Birthday                `tl:",omitempty:flags2:5"`
-	PersonalChannelID       *int64                  `tl:",omitempty:flags2:6"`
-	PersonalChannelMessage  *int32                  `tl:",omitempty:flags2:6"`
+	_                       struct{}                `tl:"flags,bitflag"`
+	Blocked                 bool                    `tl:"blocked,omitempty:flags:0,implicit"`
+	PhoneCallsAvailable     bool                    `tl:"phone_calls_available,omitempty:flags:4,implicit"`
+	PhoneCallsPrivate       bool                    `tl:"phone_calls_private,omitempty:flags:5,implicit"`
+	CanPinMessage           bool                    `tl:"can_pin_message,omitempty:flags:7,implicit"`
+	HasScheduled            bool                    `tl:"has_scheduled,omitempty:flags:12,implicit"`
+	VideoCallsAvailable     bool                    `tl:"video_calls_available,omitempty:flags:13,implicit"`
+	VoiceMessagesForbidden  bool                    `tl:"voice_messages_forbidden,omitempty:flags:20,implicit"`
+	TranslationsDisabled    bool                    `tl:"translations_disabled,omitempty:flags:23,implicit"`
+	StoriesPinnedAvailable  bool                    `tl:"stories_pinned_available,omitempty:flags:26,implicit"`
+	BlockedMyStoriesFrom    bool                    `tl:"blocked_my_stories_from,omitempty:flags:27,implicit"`
+	WallpaperOverridden     bool                    `tl:"wallpaper_overridden,omitempty:flags:28,implicit"`
+	ContactRequirePremium   bool                    `tl:"contact_require_premium,omitempty:flags:29,implicit"`
+	ReadDatesPrivate        bool                    `tl:"read_dates_private,omitempty:flags:30,implicit"`
+	_                       struct{}                `tl:"flags2,bitflag"`
+	SponsoredEnabled        bool                    `tl:"sponsored_enabled,omitempty:flags2:7,implicit"`
+	ID                      int64                   `tl:"id"`
+	About                   *string                 `tl:"about,omitempty:flags:1"`
+	Settings                PeerSettings            `tl:"settings"`
+	PersonalPhoto           Photo                   `tl:"personal_photo,omitempty:flags:21"`
+	ProfilePhoto            Photo                   `tl:"profile_photo,omitempty:flags:2"`
+	FallbackPhoto           Photo                   `tl:"fallback_photo,omitempty:flags:22"`
+	NotifySettings          PeerNotifySettings      `tl:"notify_settings"`
+	BotInfo                 BotInfo                 `tl:"bot_info,omitempty:flags:3"`
+	PinnedMsgID             *int32                  `tl:"pinned_msg_id,omitempty:flags:6"`
+	CommonChatsCount        int32                   `tl:"common_chats_count"`
+	FolderID                *int32                  `tl:"folder_id,omitempty:flags:11"`
+	TTLPeriod               *int32                  `tl:"ttl_period,omitempty:flags:14"`
+	ThemeEmoticon           *string                 `tl:"theme_emoticon,omitempty:flags:15"`
+	PrivateForwardName      *string                 `tl:"private_forward_name,omitempty:flags:16"`
+	BotGroupAdminRights     ChatAdminRights         `tl:"bot_group_admin_rights,omitempty:flags:17"`
+	BotBroadcastAdminRights ChatAdminRights         `tl:"bot_broadcast_admin_rights,omitempty:flags:18"`
+	PremiumGifts            []PremiumGiftOption     `tl:"premium_gifts,omitempty:flags:19"`
+	Wallpaper               WallPaper               `tl:"wallpaper,omitempty:flags:24"`
+	Stories                 PeerStories             `tl:"stories,omitempty:flags:25"`
+	BusinessWorkHours       BusinessWorkHours       `tl:"business_work_hours,omitempty:flags2:0"`
+	BusinessLocation        BusinessLocation        `tl:"business_location,omitempty:flags2:1"`
+	BusinessGreetingMessage BusinessGreetingMessage `tl:"business_greeting_message,omitempty:flags2:2"`
+	BusinessAwayMessage     BusinessAwayMessage     `tl:"business_away_message,omitempty:flags2:3"`
+	BusinessIntro           BusinessIntro           `tl:"business_intro,omitempty:flags2:4"`
+	Birthday                Birthday                `tl:"birthday,omitempty:flags2:5"`
+	PersonalChannelID       *int64                  `tl:"personal_channel_id,omitempty:flags2:6"`
+	PersonalChannelMessage  *int32                  `tl:"personal_channel_message,omitempty:flags2:6"`
 }
 
 func (*UserFullPredict) CRC() uint32 {
@@ -14165,7 +14165,7 @@ func (*UserFullPredict) CRC() uint32 {
 func (*UserFullPredict) _UserFull() {}
 
 type UserProfilePhoto interface {
-	tl.Object
+	tl.TLObject
 	_UserProfilePhoto()
 }
 
@@ -14183,11 +14183,11 @@ func (*UserProfilePhotoEmptyPredict) _UserProfilePhoto() {}
 
 type UserProfilePhotoPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	HasVideo      bool     `tl:",omitempty:flags:0,implicit"`
-	Personal      bool     `tl:",omitempty:flags:2,implicit"`
-	PhotoID       int64
-	StrippedThumb *[]byte `tl:",omitempty:flags:1"`
-	DcID          int32
+	HasVideo      bool     `tl:"has_video,omitempty:flags:0,implicit"`
+	Personal      bool     `tl:"personal,omitempty:flags:2,implicit"`
+	PhotoID       int64    `tl:"photo_id"`
+	StrippedThumb *[]byte  `tl:"stripped_thumb,omitempty:flags:1"`
+	DcID          int32    `tl:"dc_id"`
 }
 
 func (*UserProfilePhotoPredict) CRC() uint32 {
@@ -14196,7 +14196,7 @@ func (*UserProfilePhotoPredict) CRC() uint32 {
 func (*UserProfilePhotoPredict) _UserProfilePhoto() {}
 
 type UserStatus interface {
-	tl.Object
+	tl.TLObject
 	_UserStatus()
 }
 
@@ -14217,7 +14217,7 @@ func (*UserStatusEmptyPredict) CRC() uint32 {
 func (*UserStatusEmptyPredict) _UserStatus() {}
 
 type UserStatusOnlinePredict struct {
-	Expires int32
+	Expires int32 `tl:"expires"`
 }
 
 func (*UserStatusOnlinePredict) CRC() uint32 {
@@ -14226,7 +14226,7 @@ func (*UserStatusOnlinePredict) CRC() uint32 {
 func (*UserStatusOnlinePredict) _UserStatus() {}
 
 type UserStatusOfflinePredict struct {
-	WasOnline int32
+	WasOnline int32 `tl:"was_online"`
 }
 
 func (*UserStatusOfflinePredict) CRC() uint32 {
@@ -14236,7 +14236,7 @@ func (*UserStatusOfflinePredict) _UserStatus() {}
 
 type UserStatusRecentlyPredict struct {
 	_    struct{} `tl:"flags,bitflag"`
-	ByMe bool     `tl:",omitempty:flags:0,implicit"`
+	ByMe bool     `tl:"by_me,omitempty:flags:0,implicit"`
 }
 
 func (*UserStatusRecentlyPredict) CRC() uint32 {
@@ -14246,7 +14246,7 @@ func (*UserStatusRecentlyPredict) _UserStatus() {}
 
 type UserStatusLastWeekPredict struct {
 	_    struct{} `tl:"flags,bitflag"`
-	ByMe bool     `tl:",omitempty:flags:0,implicit"`
+	ByMe bool     `tl:"by_me,omitempty:flags:0,implicit"`
 }
 
 func (*UserStatusLastWeekPredict) CRC() uint32 {
@@ -14256,7 +14256,7 @@ func (*UserStatusLastWeekPredict) _UserStatus() {}
 
 type UserStatusLastMonthPredict struct {
 	_    struct{} `tl:"flags,bitflag"`
-	ByMe bool     `tl:",omitempty:flags:0,implicit"`
+	ByMe bool     `tl:"by_me,omitempty:flags:0,implicit"`
 }
 
 func (*UserStatusLastMonthPredict) CRC() uint32 {
@@ -14265,7 +14265,7 @@ func (*UserStatusLastMonthPredict) CRC() uint32 {
 func (*UserStatusLastMonthPredict) _UserStatus() {}
 
 type Username interface {
-	tl.Object
+	tl.TLObject
 	_Username()
 }
 
@@ -14275,9 +14275,9 @@ var (
 
 type UsernamePredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Editable bool     `tl:",omitempty:flags:0,implicit"`
-	Active   bool     `tl:",omitempty:flags:1,implicit"`
-	Username string
+	Editable bool     `tl:"editable,omitempty:flags:0,implicit"`
+	Active   bool     `tl:"active,omitempty:flags:1,implicit"`
+	Username string   `tl:"username"`
 }
 
 func (*UsernamePredict) CRC() uint32 {
@@ -14286,7 +14286,7 @@ func (*UsernamePredict) CRC() uint32 {
 func (*UsernamePredict) _Username() {}
 
 type VideoSize interface {
-	tl.Object
+	tl.TLObject
 	_VideoSize()
 }
 
@@ -14298,11 +14298,11 @@ var (
 
 type VideoSizePredict struct {
 	_            struct{} `tl:"flags,bitflag"`
-	Type         string
-	W            int32
-	H            int32
-	Size         int32
-	VideoStartTs *float64 `tl:",omitempty:flags:0"`
+	Type         string   `tl:"type"`
+	W            int32    `tl:"w"`
+	H            int32    `tl:"h"`
+	Size         int32    `tl:"size"`
+	VideoStartTs *float64 `tl:"video_start_ts,omitempty:flags:0"`
 }
 
 func (*VideoSizePredict) CRC() uint32 {
@@ -14311,8 +14311,8 @@ func (*VideoSizePredict) CRC() uint32 {
 func (*VideoSizePredict) _VideoSize() {}
 
 type VideoSizeEmojiMarkupPredict struct {
-	EmojiID          int64
-	BackgroundColors []int32
+	EmojiID          int64   `tl:"emoji_id"`
+	BackgroundColors []int32 `tl:"background_colors"`
 }
 
 func (*VideoSizeEmojiMarkupPredict) CRC() uint32 {
@@ -14321,9 +14321,9 @@ func (*VideoSizeEmojiMarkupPredict) CRC() uint32 {
 func (*VideoSizeEmojiMarkupPredict) _VideoSize() {}
 
 type VideoSizeStickerMarkupPredict struct {
-	Stickerset       InputStickerSet
-	StickerID        int64
-	BackgroundColors []int32
+	Stickerset       InputStickerSet `tl:"stickerset"`
+	StickerID        int64           `tl:"sticker_id"`
+	BackgroundColors []int32         `tl:"background_colors"`
 }
 
 func (*VideoSizeStickerMarkupPredict) CRC() uint32 {
@@ -14332,7 +14332,7 @@ func (*VideoSizeStickerMarkupPredict) CRC() uint32 {
 func (*VideoSizeStickerMarkupPredict) _VideoSize() {}
 
 type WallPaper interface {
-	tl.Object
+	tl.TLObject
 	_WallPaper()
 }
 
@@ -14342,16 +14342,16 @@ var (
 )
 
 type WallPaperPredict struct {
-	ID         int64
-	_          struct{} `tl:"flags,bitflag"`
-	Creator    bool     `tl:",omitempty:flags:0,implicit"`
-	Default    bool     `tl:",omitempty:flags:1,implicit"`
-	Pattern    bool     `tl:",omitempty:flags:3,implicit"`
-	Dark       bool     `tl:",omitempty:flags:4,implicit"`
-	AccessHash int64
-	Slug       string
-	Document   Document
-	Settings   WallPaperSettings `tl:",omitempty:flags:2"`
+	ID         int64             `tl:"id"`
+	_          struct{}          `tl:"flags,bitflag"`
+	Creator    bool              `tl:"creator,omitempty:flags:0,implicit"`
+	Default    bool              `tl:"default,omitempty:flags:1,implicit"`
+	Pattern    bool              `tl:"pattern,omitempty:flags:3,implicit"`
+	Dark       bool              `tl:"dark,omitempty:flags:4,implicit"`
+	AccessHash int64             `tl:"access_hash"`
+	Slug       string            `tl:"slug"`
+	Document   Document          `tl:"document"`
+	Settings   WallPaperSettings `tl:"settings,omitempty:flags:2"`
 }
 
 func (*WallPaperPredict) CRC() uint32 {
@@ -14360,11 +14360,11 @@ func (*WallPaperPredict) CRC() uint32 {
 func (*WallPaperPredict) _WallPaper() {}
 
 type WallPaperNoFilePredict struct {
-	ID       int64
+	ID       int64             `tl:"id"`
 	_        struct{}          `tl:"flags,bitflag"`
-	Default  bool              `tl:",omitempty:flags:1,implicit"`
-	Dark     bool              `tl:",omitempty:flags:4,implicit"`
-	Settings WallPaperSettings `tl:",omitempty:flags:2"`
+	Default  bool              `tl:"default,omitempty:flags:1,implicit"`
+	Dark     bool              `tl:"dark,omitempty:flags:4,implicit"`
+	Settings WallPaperSettings `tl:"settings,omitempty:flags:2"`
 }
 
 func (*WallPaperNoFilePredict) CRC() uint32 {
@@ -14373,7 +14373,7 @@ func (*WallPaperNoFilePredict) CRC() uint32 {
 func (*WallPaperNoFilePredict) _WallPaper() {}
 
 type WallPaperSettings interface {
-	tl.Object
+	tl.TLObject
 	_WallPaperSettings()
 }
 
@@ -14383,15 +14383,15 @@ var (
 
 type WallPaperSettingsPredict struct {
 	_                     struct{} `tl:"flags,bitflag"`
-	Blur                  bool     `tl:",omitempty:flags:1,implicit"`
-	Motion                bool     `tl:",omitempty:flags:2,implicit"`
-	BackgroundColor       *int32   `tl:",omitempty:flags:0"`
-	SecondBackgroundColor *int32   `tl:",omitempty:flags:4"`
-	ThirdBackgroundColor  *int32   `tl:",omitempty:flags:5"`
-	FourthBackgroundColor *int32   `tl:",omitempty:flags:6"`
-	Intensity             *int32   `tl:",omitempty:flags:3"`
-	Rotation              *int32   `tl:",omitempty:flags:4"`
-	Emoticon              *string  `tl:",omitempty:flags:7"`
+	Blur                  bool     `tl:"blur,omitempty:flags:1,implicit"`
+	Motion                bool     `tl:"motion,omitempty:flags:2,implicit"`
+	BackgroundColor       *int32   `tl:"background_color,omitempty:flags:0"`
+	SecondBackgroundColor *int32   `tl:"second_background_color,omitempty:flags:4"`
+	ThirdBackgroundColor  *int32   `tl:"third_background_color,omitempty:flags:5"`
+	FourthBackgroundColor *int32   `tl:"fourth_background_color,omitempty:flags:6"`
+	Intensity             *int32   `tl:"intensity,omitempty:flags:3"`
+	Rotation              *int32   `tl:"rotation,omitempty:flags:4"`
+	Emoticon              *string  `tl:"emoticon,omitempty:flags:7"`
 }
 
 func (*WallPaperSettingsPredict) CRC() uint32 {
@@ -14400,7 +14400,7 @@ func (*WallPaperSettingsPredict) CRC() uint32 {
 func (*WallPaperSettingsPredict) _WallPaperSettings() {}
 
 type WebAuthorization interface {
-	tl.Object
+	tl.TLObject
 	_WebAuthorization()
 }
 
@@ -14409,15 +14409,15 @@ var (
 )
 
 type WebAuthorizationPredict struct {
-	Hash        int64
-	BotID       int64
-	Domain      string
-	Browser     string
-	Platform    string
-	DateCreated int32
-	DateActive  int32
-	Ip          string
-	Region      string
+	Hash        int64  `tl:"hash"`
+	BotID       int64  `tl:"bot_id"`
+	Domain      string `tl:"domain"`
+	Browser     string `tl:"browser"`
+	Platform    string `tl:"platform"`
+	DateCreated int32  `tl:"date_created"`
+	DateActive  int32  `tl:"date_active"`
+	Ip          string `tl:"ip"`
+	Region      string `tl:"region"`
 }
 
 func (*WebAuthorizationPredict) CRC() uint32 {
@@ -14426,7 +14426,7 @@ func (*WebAuthorizationPredict) CRC() uint32 {
 func (*WebAuthorizationPredict) _WebAuthorization() {}
 
 type WebDocument interface {
-	tl.Object
+	tl.TLObject
 	_WebDocument()
 }
 
@@ -14436,11 +14436,11 @@ var (
 )
 
 type WebDocumentPredict struct {
-	URL        string
-	AccessHash int64
-	Size       int32
-	MimeType   string
-	Attributes []DocumentAttribute
+	URL        string              `tl:"url"`
+	AccessHash int64               `tl:"access_hash"`
+	Size       int32               `tl:"size"`
+	MimeType   string              `tl:"mime_type"`
+	Attributes []DocumentAttribute `tl:"attributes"`
 }
 
 func (*WebDocumentPredict) CRC() uint32 {
@@ -14449,10 +14449,10 @@ func (*WebDocumentPredict) CRC() uint32 {
 func (*WebDocumentPredict) _WebDocument() {}
 
 type WebDocumentNoProxyPredict struct {
-	URL        string
-	Size       int32
-	MimeType   string
-	Attributes []DocumentAttribute
+	URL        string              `tl:"url"`
+	Size       int32               `tl:"size"`
+	MimeType   string              `tl:"mime_type"`
+	Attributes []DocumentAttribute `tl:"attributes"`
 }
 
 func (*WebDocumentNoProxyPredict) CRC() uint32 {
@@ -14461,7 +14461,7 @@ func (*WebDocumentNoProxyPredict) CRC() uint32 {
 func (*WebDocumentNoProxyPredict) _WebDocument() {}
 
 type WebPage interface {
-	tl.Object
+	tl.TLObject
 	_WebPage()
 }
 
@@ -14474,8 +14474,8 @@ var (
 
 type WebPageEmptyPredict struct {
 	_   struct{} `tl:"flags,bitflag"`
-	ID  int64
-	URL *string `tl:",omitempty:flags:0"`
+	ID  int64    `tl:"id"`
+	URL *string  `tl:"url,omitempty:flags:0"`
 }
 
 func (*WebPageEmptyPredict) CRC() uint32 {
@@ -14485,9 +14485,9 @@ func (*WebPageEmptyPredict) _WebPage() {}
 
 type WebPagePendingPredict struct {
 	_    struct{} `tl:"flags,bitflag"`
-	ID   int64
-	URL  *string `tl:",omitempty:flags:0"`
-	Date int32
+	ID   int64    `tl:"id"`
+	URL  *string  `tl:"url,omitempty:flags:0"`
+	Date int32    `tl:"date"`
 }
 
 func (*WebPagePendingPredict) CRC() uint32 {
@@ -14496,26 +14496,26 @@ func (*WebPagePendingPredict) CRC() uint32 {
 func (*WebPagePendingPredict) _WebPage() {}
 
 type WebPagePredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	HasLargeMedia bool     `tl:",omitempty:flags:13,implicit"`
-	ID            int64
-	URL           string
-	DisplayURL    string
-	Hash          int32
-	Type          *string            `tl:",omitempty:flags:0"`
-	SiteName      *string            `tl:",omitempty:flags:1"`
-	Title         *string            `tl:",omitempty:flags:2"`
-	Description   *string            `tl:",omitempty:flags:3"`
-	Photo         Photo              `tl:",omitempty:flags:4"`
-	EmbedURL      *string            `tl:",omitempty:flags:5"`
-	EmbedType     *string            `tl:",omitempty:flags:5"`
-	EmbedWidth    *int32             `tl:",omitempty:flags:6"`
-	EmbedHeight   *int32             `tl:",omitempty:flags:6"`
-	Duration      *int32             `tl:",omitempty:flags:7"`
-	Author        *string            `tl:",omitempty:flags:8"`
-	Document      Document           `tl:",omitempty:flags:9"`
-	CachedPage    Page               `tl:",omitempty:flags:10"`
-	Attributes    []WebPageAttribute `tl:",omitempty:flags:12"`
+	_             struct{}           `tl:"flags,bitflag"`
+	HasLargeMedia bool               `tl:"has_large_media,omitempty:flags:13,implicit"`
+	ID            int64              `tl:"id"`
+	URL           string             `tl:"url"`
+	DisplayURL    string             `tl:"display_url"`
+	Hash          int32              `tl:"hash"`
+	Type          *string            `tl:"type,omitempty:flags:0"`
+	SiteName      *string            `tl:"site_name,omitempty:flags:1"`
+	Title         *string            `tl:"title,omitempty:flags:2"`
+	Description   *string            `tl:"description,omitempty:flags:3"`
+	Photo         Photo              `tl:"photo,omitempty:flags:4"`
+	EmbedURL      *string            `tl:"embed_url,omitempty:flags:5"`
+	EmbedType     *string            `tl:"embed_type,omitempty:flags:5"`
+	EmbedWidth    *int32             `tl:"embed_width,omitempty:flags:6"`
+	EmbedHeight   *int32             `tl:"embed_height,omitempty:flags:6"`
+	Duration      *int32             `tl:"duration,omitempty:flags:7"`
+	Author        *string            `tl:"author,omitempty:flags:8"`
+	Document      Document           `tl:"document,omitempty:flags:9"`
+	CachedPage    Page               `tl:"cached_page,omitempty:flags:10"`
+	Attributes    []WebPageAttribute `tl:"attributes,omitempty:flags:12"`
 }
 
 func (*WebPagePredict) CRC() uint32 {
@@ -14525,7 +14525,7 @@ func (*WebPagePredict) _WebPage() {}
 
 type WebPageNotModifiedPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	CachedPageViews *int32   `tl:",omitempty:flags:0"`
+	CachedPageViews *int32   `tl:"cached_page_views,omitempty:flags:0"`
 }
 
 func (*WebPageNotModifiedPredict) CRC() uint32 {
@@ -14534,7 +14534,7 @@ func (*WebPageNotModifiedPredict) CRC() uint32 {
 func (*WebPageNotModifiedPredict) _WebPage() {}
 
 type WebPageAttribute interface {
-	tl.Object
+	tl.TLObject
 	_WebPageAttribute()
 }
 
@@ -14546,8 +14546,8 @@ var (
 
 type WebPageAttributeThemePredict struct {
 	_         struct{}      `tl:"flags,bitflag"`
-	Documents []Document    `tl:",omitempty:flags:0"`
-	Settings  ThemeSettings `tl:",omitempty:flags:1"`
+	Documents []Document    `tl:"documents,omitempty:flags:0"`
+	Settings  ThemeSettings `tl:"settings,omitempty:flags:1"`
 }
 
 func (*WebPageAttributeThemePredict) CRC() uint32 {
@@ -14556,10 +14556,10 @@ func (*WebPageAttributeThemePredict) CRC() uint32 {
 func (*WebPageAttributeThemePredict) _WebPageAttribute() {}
 
 type WebPageAttributeStoryPredict struct {
-	_     struct{} `tl:"flags,bitflag"`
-	Peer  Peer
-	ID    int32
-	Story StoryItem `tl:",omitempty:flags:0"`
+	_     struct{}  `tl:"flags,bitflag"`
+	Peer  Peer      `tl:"peer"`
+	ID    int32     `tl:"id"`
+	Story StoryItem `tl:"story,omitempty:flags:0"`
 }
 
 func (*WebPageAttributeStoryPredict) CRC() uint32 {
@@ -14568,10 +14568,10 @@ func (*WebPageAttributeStoryPredict) CRC() uint32 {
 func (*WebPageAttributeStoryPredict) _WebPageAttribute() {}
 
 type WebPageAttributeStickerSetPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Emojis    bool     `tl:",omitempty:flags:0,implicit"`
-	TextColor bool     `tl:",omitempty:flags:1,implicit"`
-	Stickers  []Document
+	_         struct{}   `tl:"flags,bitflag"`
+	Emojis    bool       `tl:"emojis,omitempty:flags:0,implicit"`
+	TextColor bool       `tl:"text_color,omitempty:flags:1,implicit"`
+	Stickers  []Document `tl:"stickers"`
 }
 
 func (*WebPageAttributeStickerSetPredict) CRC() uint32 {
@@ -14580,7 +14580,7 @@ func (*WebPageAttributeStickerSetPredict) CRC() uint32 {
 func (*WebPageAttributeStickerSetPredict) _WebPageAttribute() {}
 
 type WebViewMessageSent interface {
-	tl.Object
+	tl.TLObject
 	_WebViewMessageSent()
 }
 
@@ -14590,7 +14590,7 @@ var (
 
 type WebViewMessageSentPredict struct {
 	_     struct{}                `tl:"flags,bitflag"`
-	MsgID InputBotInlineMessageID `tl:",omitempty:flags:0"`
+	MsgID InputBotInlineMessageID `tl:"msg_id,omitempty:flags:0"`
 }
 
 func (*WebViewMessageSentPredict) CRC() uint32 {
@@ -14599,7 +14599,7 @@ func (*WebViewMessageSentPredict) CRC() uint32 {
 func (*WebViewMessageSentPredict) _WebViewMessageSent() {}
 
 type WebViewResult interface {
-	tl.Object
+	tl.TLObject
 	_WebViewResult()
 }
 
@@ -14609,9 +14609,9 @@ var (
 
 type WebViewResultURLPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Fullsize bool     `tl:",omitempty:flags:1,implicit"`
-	QueryID  *int64   `tl:",omitempty:flags:0"`
-	URL      string
+	Fullsize bool     `tl:"fullsize,omitempty:flags:1,implicit"`
+	QueryID  *int64   `tl:"query_id,omitempty:flags:0"`
+	URL      string   `tl:"url"`
 }
 
 func (*WebViewResultURLPredict) CRC() uint32 {
@@ -14620,7 +14620,7 @@ func (*WebViewResultURLPredict) CRC() uint32 {
 func (*WebViewResultURLPredict) _WebViewResult() {}
 
 type AccountAuthorizationForm interface {
-	tl.Object
+	tl.TLObject
 	_AccountAuthorizationForm()
 }
 
@@ -14629,12 +14629,12 @@ var (
 )
 
 type AccountAuthorizationFormPredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	RequiredTypes    []SecureRequiredType
-	Values           []SecureValue
-	Errors           []SecureValueError
-	Users            []User
-	PrivacyPolicyURL *string `tl:",omitempty:flags:0"`
+	_                struct{}             `tl:"flags,bitflag"`
+	RequiredTypes    []SecureRequiredType `tl:"required_types"`
+	Values           []SecureValue        `tl:"values"`
+	Errors           []SecureValueError   `tl:"errors"`
+	Users            []User               `tl:"users"`
+	PrivacyPolicyURL *string              `tl:"privacy_policy_url,omitempty:flags:0"`
 }
 
 func (*AccountAuthorizationFormPredict) CRC() uint32 {
@@ -14643,7 +14643,7 @@ func (*AccountAuthorizationFormPredict) CRC() uint32 {
 func (*AccountAuthorizationFormPredict) _AccountAuthorizationForm() {}
 
 type AccountAuthorizations interface {
-	tl.Object
+	tl.TLObject
 	_AccountAuthorizations()
 }
 
@@ -14652,8 +14652,8 @@ var (
 )
 
 type AccountAuthorizationsPredict struct {
-	AuthorizationTTLDays int32
-	Authorizations       []Authorization
+	AuthorizationTTLDays int32           `tl:"authorization_ttl_days"`
+	Authorizations       []Authorization `tl:"authorizations"`
 }
 
 func (*AccountAuthorizationsPredict) CRC() uint32 {
@@ -14662,7 +14662,7 @@ func (*AccountAuthorizationsPredict) CRC() uint32 {
 func (*AccountAuthorizationsPredict) _AccountAuthorizations() {}
 
 type AccountAutoDownloadSettings interface {
-	tl.Object
+	tl.TLObject
 	_AccountAutoDownloadSettings()
 }
 
@@ -14671,9 +14671,9 @@ var (
 )
 
 type AccountAutoDownloadSettingsPredict struct {
-	Low    AutoDownloadSettings
-	Medium AutoDownloadSettings
-	High   AutoDownloadSettings
+	Low    AutoDownloadSettings `tl:"low"`
+	Medium AutoDownloadSettings `tl:"medium"`
+	High   AutoDownloadSettings `tl:"high"`
 }
 
 func (*AccountAutoDownloadSettingsPredict) CRC() uint32 {
@@ -14682,7 +14682,7 @@ func (*AccountAutoDownloadSettingsPredict) CRC() uint32 {
 func (*AccountAutoDownloadSettingsPredict) _AccountAutoDownloadSettings() {}
 
 type AccountAutoSaveSettings interface {
-	tl.Object
+	tl.TLObject
 	_AccountAutoSaveSettings()
 }
 
@@ -14691,12 +14691,12 @@ var (
 )
 
 type AccountAutoSaveSettingsPredict struct {
-	UsersSettings      AutoSaveSettings
-	ChatsSettings      AutoSaveSettings
-	BroadcastsSettings AutoSaveSettings
-	Exceptions         []AutoSaveException
-	Chats              []Chat
-	Users              []User
+	UsersSettings      AutoSaveSettings    `tl:"users_settings"`
+	ChatsSettings      AutoSaveSettings    `tl:"chats_settings"`
+	BroadcastsSettings AutoSaveSettings    `tl:"broadcasts_settings"`
+	Exceptions         []AutoSaveException `tl:"exceptions"`
+	Chats              []Chat              `tl:"chats"`
+	Users              []User              `tl:"users"`
 }
 
 func (*AccountAutoSaveSettingsPredict) CRC() uint32 {
@@ -14705,7 +14705,7 @@ func (*AccountAutoSaveSettingsPredict) CRC() uint32 {
 func (*AccountAutoSaveSettingsPredict) _AccountAutoSaveSettings() {}
 
 type AccountBusinessChatLinks interface {
-	tl.Object
+	tl.TLObject
 	_AccountBusinessChatLinks()
 }
 
@@ -14714,9 +14714,9 @@ var (
 )
 
 type AccountBusinessChatLinksPredict struct {
-	Links []BusinessChatLink
-	Chats []Chat
-	Users []User
+	Links []BusinessChatLink `tl:"links"`
+	Chats []Chat             `tl:"chats"`
+	Users []User             `tl:"users"`
 }
 
 func (*AccountBusinessChatLinksPredict) CRC() uint32 {
@@ -14725,7 +14725,7 @@ func (*AccountBusinessChatLinksPredict) CRC() uint32 {
 func (*AccountBusinessChatLinksPredict) _AccountBusinessChatLinks() {}
 
 type AccountConnectedBots interface {
-	tl.Object
+	tl.TLObject
 	_AccountConnectedBots()
 }
 
@@ -14734,8 +14734,8 @@ var (
 )
 
 type AccountConnectedBotsPredict struct {
-	ConnectedBots []ConnectedBot
-	Users         []User
+	ConnectedBots []ConnectedBot `tl:"connected_bots"`
+	Users         []User         `tl:"users"`
 }
 
 func (*AccountConnectedBotsPredict) CRC() uint32 {
@@ -14744,7 +14744,7 @@ func (*AccountConnectedBotsPredict) CRC() uint32 {
 func (*AccountConnectedBotsPredict) _AccountConnectedBots() {}
 
 type AccountContentSettings interface {
-	tl.Object
+	tl.TLObject
 	_AccountContentSettings()
 }
 
@@ -14754,8 +14754,8 @@ var (
 
 type AccountContentSettingsPredict struct {
 	_                  struct{} `tl:"flags,bitflag"`
-	SensitiveEnabled   bool     `tl:",omitempty:flags:0,implicit"`
-	SensitiveCanChange bool     `tl:",omitempty:flags:1,implicit"`
+	SensitiveEnabled   bool     `tl:"sensitive_enabled,omitempty:flags:0,implicit"`
+	SensitiveCanChange bool     `tl:"sensitive_can_change,omitempty:flags:1,implicit"`
 }
 
 func (*AccountContentSettingsPredict) CRC() uint32 {
@@ -14764,7 +14764,7 @@ func (*AccountContentSettingsPredict) CRC() uint32 {
 func (*AccountContentSettingsPredict) _AccountContentSettings() {}
 
 type AccountEmailVerified interface {
-	tl.Object
+	tl.TLObject
 	_AccountEmailVerified()
 }
 
@@ -14774,7 +14774,7 @@ var (
 )
 
 type AccountEmailVerifiedPredict struct {
-	Email string
+	Email string `tl:"email"`
 }
 
 func (*AccountEmailVerifiedPredict) CRC() uint32 {
@@ -14783,8 +14783,8 @@ func (*AccountEmailVerifiedPredict) CRC() uint32 {
 func (*AccountEmailVerifiedPredict) _AccountEmailVerified() {}
 
 type AccountEmailVerifiedLoginPredict struct {
-	Email    string
-	SentCode AuthSentCode
+	Email    string       `tl:"email"`
+	SentCode AuthSentCode `tl:"sent_code"`
 }
 
 func (*AccountEmailVerifiedLoginPredict) CRC() uint32 {
@@ -14793,7 +14793,7 @@ func (*AccountEmailVerifiedLoginPredict) CRC() uint32 {
 func (*AccountEmailVerifiedLoginPredict) _AccountEmailVerified() {}
 
 type AccountEmojiStatuses interface {
-	tl.Object
+	tl.TLObject
 	_AccountEmojiStatuses()
 }
 
@@ -14810,8 +14810,8 @@ func (*AccountEmojiStatusesNotModifiedPredict) CRC() uint32 {
 func (*AccountEmojiStatusesNotModifiedPredict) _AccountEmojiStatuses() {}
 
 type AccountEmojiStatusesPredict struct {
-	Hash     int64
-	Statuses []EmojiStatus
+	Hash     int64         `tl:"hash"`
+	Statuses []EmojiStatus `tl:"statuses"`
 }
 
 func (*AccountEmojiStatusesPredict) CRC() uint32 {
@@ -14820,7 +14820,7 @@ func (*AccountEmojiStatusesPredict) CRC() uint32 {
 func (*AccountEmojiStatusesPredict) _AccountEmojiStatuses() {}
 
 type AccountPassword interface {
-	tl.Object
+	tl.TLObject
 	_AccountPassword()
 }
 
@@ -14829,20 +14829,20 @@ var (
 )
 
 type AccountPasswordPredict struct {
-	_                       struct{}        `tl:"flags,bitflag"`
-	HasRecovery             bool            `tl:",omitempty:flags:0,implicit"`
-	HasSecureValues         bool            `tl:",omitempty:flags:1,implicit"`
-	HasPassword             bool            `tl:",omitempty:flags:2,implicit"`
-	CurrentAlgo             PasswordKdfAlgo `tl:",omitempty:flags:2"`
-	SRPB                    *[]byte         `tl:",omitempty:flags:2"`
-	SRPID                   *int64          `tl:",omitempty:flags:2"`
-	Hint                    *string         `tl:",omitempty:flags:3"`
-	EmailUnconfirmedPattern *string         `tl:",omitempty:flags:4"`
-	NewAlgo                 PasswordKdfAlgo
-	NewSecureAlgo           SecurePasswordKdfAlgo
-	SecureRandom            []byte
-	PendingResetDate        *int32  `tl:",omitempty:flags:5"`
-	LoginEmailPattern       *string `tl:",omitempty:flags:6"`
+	_                       struct{}              `tl:"flags,bitflag"`
+	HasRecovery             bool                  `tl:"has_recovery,omitempty:flags:0,implicit"`
+	HasSecureValues         bool                  `tl:"has_secure_values,omitempty:flags:1,implicit"`
+	HasPassword             bool                  `tl:"has_password,omitempty:flags:2,implicit"`
+	CurrentAlgo             PasswordKdfAlgo       `tl:"current_algo,omitempty:flags:2"`
+	SRPB                    *[]byte               `tl:"srp_B,omitempty:flags:2"`
+	SRPID                   *int64                `tl:"srp_id,omitempty:flags:2"`
+	Hint                    *string               `tl:"hint,omitempty:flags:3"`
+	EmailUnconfirmedPattern *string               `tl:"email_unconfirmed_pattern,omitempty:flags:4"`
+	NewAlgo                 PasswordKdfAlgo       `tl:"new_algo"`
+	NewSecureAlgo           SecurePasswordKdfAlgo `tl:"new_secure_algo"`
+	SecureRandom            []byte                `tl:"secure_random"`
+	PendingResetDate        *int32                `tl:"pending_reset_date,omitempty:flags:5"`
+	LoginEmailPattern       *string               `tl:"login_email_pattern,omitempty:flags:6"`
 }
 
 func (*AccountPasswordPredict) CRC() uint32 {
@@ -14851,7 +14851,7 @@ func (*AccountPasswordPredict) CRC() uint32 {
 func (*AccountPasswordPredict) _AccountPassword() {}
 
 type AccountPasswordInputSettings interface {
-	tl.Object
+	tl.TLObject
 	_AccountPasswordInputSettings()
 }
 
@@ -14861,11 +14861,11 @@ var (
 
 type AccountPasswordInputSettingsPredict struct {
 	_                 struct{}             `tl:"flags,bitflag"`
-	NewAlgo           PasswordKdfAlgo      `tl:",omitempty:flags:0"`
-	NewPasswordHash   *[]byte              `tl:",omitempty:flags:0"`
-	Hint              *string              `tl:",omitempty:flags:0"`
-	Email             *string              `tl:",omitempty:flags:1"`
-	NewSecureSettings SecureSecretSettings `tl:",omitempty:flags:2"`
+	NewAlgo           PasswordKdfAlgo      `tl:"new_algo,omitempty:flags:0"`
+	NewPasswordHash   *[]byte              `tl:"new_password_hash,omitempty:flags:0"`
+	Hint              *string              `tl:"hint,omitempty:flags:0"`
+	Email             *string              `tl:"email,omitempty:flags:1"`
+	NewSecureSettings SecureSecretSettings `tl:"new_secure_settings,omitempty:flags:2"`
 }
 
 func (*AccountPasswordInputSettingsPredict) CRC() uint32 {
@@ -14874,7 +14874,7 @@ func (*AccountPasswordInputSettingsPredict) CRC() uint32 {
 func (*AccountPasswordInputSettingsPredict) _AccountPasswordInputSettings() {}
 
 type AccountPasswordSettings interface {
-	tl.Object
+	tl.TLObject
 	_AccountPasswordSettings()
 }
 
@@ -14884,8 +14884,8 @@ var (
 
 type AccountPasswordSettingsPredict struct {
 	_              struct{}             `tl:"flags,bitflag"`
-	Email          *string              `tl:",omitempty:flags:0"`
-	SecureSettings SecureSecretSettings `tl:",omitempty:flags:1"`
+	Email          *string              `tl:"email,omitempty:flags:0"`
+	SecureSettings SecureSecretSettings `tl:"secure_settings,omitempty:flags:1"`
 }
 
 func (*AccountPasswordSettingsPredict) CRC() uint32 {
@@ -14894,7 +14894,7 @@ func (*AccountPasswordSettingsPredict) CRC() uint32 {
 func (*AccountPasswordSettingsPredict) _AccountPasswordSettings() {}
 
 type AccountPrivacyRules interface {
-	tl.Object
+	tl.TLObject
 	_AccountPrivacyRules()
 }
 
@@ -14903,9 +14903,9 @@ var (
 )
 
 type AccountPrivacyRulesPredict struct {
-	Rules []PrivacyRule
-	Chats []Chat
-	Users []User
+	Rules []PrivacyRule `tl:"rules"`
+	Chats []Chat        `tl:"chats"`
+	Users []User        `tl:"users"`
 }
 
 func (*AccountPrivacyRulesPredict) CRC() uint32 {
@@ -14914,7 +14914,7 @@ func (*AccountPrivacyRulesPredict) CRC() uint32 {
 func (*AccountPrivacyRulesPredict) _AccountPrivacyRules() {}
 
 type AccountResetPasswordResult interface {
-	tl.Object
+	tl.TLObject
 	_AccountResetPasswordResult()
 }
 
@@ -14925,7 +14925,7 @@ var (
 )
 
 type AccountResetPasswordFailedWaitPredict struct {
-	RetryDate int32
+	RetryDate int32 `tl:"retry_date"`
 }
 
 func (*AccountResetPasswordFailedWaitPredict) CRC() uint32 {
@@ -14934,7 +14934,7 @@ func (*AccountResetPasswordFailedWaitPredict) CRC() uint32 {
 func (*AccountResetPasswordFailedWaitPredict) _AccountResetPasswordResult() {}
 
 type AccountResetPasswordRequestedWaitPredict struct {
-	UntilDate int32
+	UntilDate int32 `tl:"until_date"`
 }
 
 func (*AccountResetPasswordRequestedWaitPredict) CRC() uint32 {
@@ -14950,7 +14950,7 @@ func (*AccountResetPasswordOkPredict) CRC() uint32 {
 func (*AccountResetPasswordOkPredict) _AccountResetPasswordResult() {}
 
 type AccountResolvedBusinessChatLinks interface {
-	tl.Object
+	tl.TLObject
 	_AccountResolvedBusinessChatLinks()
 }
 
@@ -14959,12 +14959,12 @@ var (
 )
 
 type AccountResolvedBusinessChatLinksPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Peer     Peer
-	Message  string
-	Entities []MessageEntity `tl:",omitempty:flags:0"`
-	Chats    []Chat
-	Users    []User
+	_        struct{}        `tl:"flags,bitflag"`
+	Peer     Peer            `tl:"peer"`
+	Message  string          `tl:"message"`
+	Entities []MessageEntity `tl:"entities,omitempty:flags:0"`
+	Chats    []Chat          `tl:"chats"`
+	Users    []User          `tl:"users"`
 }
 
 func (*AccountResolvedBusinessChatLinksPredict) CRC() uint32 {
@@ -14973,7 +14973,7 @@ func (*AccountResolvedBusinessChatLinksPredict) CRC() uint32 {
 func (*AccountResolvedBusinessChatLinksPredict) _AccountResolvedBusinessChatLinks() {}
 
 type AccountSavedRingtone interface {
-	tl.Object
+	tl.TLObject
 	_AccountSavedRingtone()
 }
 
@@ -14990,7 +14990,7 @@ func (*AccountSavedRingtonePredict) CRC() uint32 {
 func (*AccountSavedRingtonePredict) _AccountSavedRingtone() {}
 
 type AccountSavedRingtoneConvertedPredict struct {
-	Document Document
+	Document Document `tl:"document"`
 }
 
 func (*AccountSavedRingtoneConvertedPredict) CRC() uint32 {
@@ -14999,7 +14999,7 @@ func (*AccountSavedRingtoneConvertedPredict) CRC() uint32 {
 func (*AccountSavedRingtoneConvertedPredict) _AccountSavedRingtone() {}
 
 type AccountSavedRingtones interface {
-	tl.Object
+	tl.TLObject
 	_AccountSavedRingtones()
 }
 
@@ -15016,8 +15016,8 @@ func (*AccountSavedRingtonesNotModifiedPredict) CRC() uint32 {
 func (*AccountSavedRingtonesNotModifiedPredict) _AccountSavedRingtones() {}
 
 type AccountSavedRingtonesPredict struct {
-	Hash      int64
-	Ringtones []Document
+	Hash      int64      `tl:"hash"`
+	Ringtones []Document `tl:"ringtones"`
 }
 
 func (*AccountSavedRingtonesPredict) CRC() uint32 {
@@ -15026,7 +15026,7 @@ func (*AccountSavedRingtonesPredict) CRC() uint32 {
 func (*AccountSavedRingtonesPredict) _AccountSavedRingtones() {}
 
 type AccountSentEmailCode interface {
-	tl.Object
+	tl.TLObject
 	_AccountSentEmailCode()
 }
 
@@ -15035,8 +15035,8 @@ var (
 )
 
 type AccountSentEmailCodePredict struct {
-	EmailPattern string
-	Length       int32
+	EmailPattern string `tl:"email_pattern"`
+	Length       int32  `tl:"length"`
 }
 
 func (*AccountSentEmailCodePredict) CRC() uint32 {
@@ -15045,7 +15045,7 @@ func (*AccountSentEmailCodePredict) CRC() uint32 {
 func (*AccountSentEmailCodePredict) _AccountSentEmailCode() {}
 
 type AccountTakeout interface {
-	tl.Object
+	tl.TLObject
 	_AccountTakeout()
 }
 
@@ -15054,7 +15054,7 @@ var (
 )
 
 type AccountTakeoutPredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*AccountTakeoutPredict) CRC() uint32 {
@@ -15063,7 +15063,7 @@ func (*AccountTakeoutPredict) CRC() uint32 {
 func (*AccountTakeoutPredict) _AccountTakeout() {}
 
 type AccountThemes interface {
-	tl.Object
+	tl.TLObject
 	_AccountThemes()
 }
 
@@ -15080,8 +15080,8 @@ func (*AccountThemesNotModifiedPredict) CRC() uint32 {
 func (*AccountThemesNotModifiedPredict) _AccountThemes() {}
 
 type AccountThemesPredict struct {
-	Hash   int64
-	Themes []Theme
+	Hash   int64   `tl:"hash"`
+	Themes []Theme `tl:"themes"`
 }
 
 func (*AccountThemesPredict) CRC() uint32 {
@@ -15090,7 +15090,7 @@ func (*AccountThemesPredict) CRC() uint32 {
 func (*AccountThemesPredict) _AccountThemes() {}
 
 type AccountTmpPassword interface {
-	tl.Object
+	tl.TLObject
 	_AccountTmpPassword()
 }
 
@@ -15099,8 +15099,8 @@ var (
 )
 
 type AccountTmpPasswordPredict struct {
-	TmpPassword []byte
-	ValidUntil  int32
+	TmpPassword []byte `tl:"tmp_password"`
+	ValidUntil  int32  `tl:"valid_until"`
 }
 
 func (*AccountTmpPasswordPredict) CRC() uint32 {
@@ -15109,7 +15109,7 @@ func (*AccountTmpPasswordPredict) CRC() uint32 {
 func (*AccountTmpPasswordPredict) _AccountTmpPassword() {}
 
 type AccountWallPapers interface {
-	tl.Object
+	tl.TLObject
 	_AccountWallPapers()
 }
 
@@ -15126,8 +15126,8 @@ func (*AccountWallPapersNotModifiedPredict) CRC() uint32 {
 func (*AccountWallPapersNotModifiedPredict) _AccountWallPapers() {}
 
 type AccountWallPapersPredict struct {
-	Hash       int64
-	Wallpapers []WallPaper
+	Hash       int64       `tl:"hash"`
+	Wallpapers []WallPaper `tl:"wallpapers"`
 }
 
 func (*AccountWallPapersPredict) CRC() uint32 {
@@ -15136,7 +15136,7 @@ func (*AccountWallPapersPredict) CRC() uint32 {
 func (*AccountWallPapersPredict) _AccountWallPapers() {}
 
 type AccountWebAuthorizations interface {
-	tl.Object
+	tl.TLObject
 	_AccountWebAuthorizations()
 }
 
@@ -15145,8 +15145,8 @@ var (
 )
 
 type AccountWebAuthorizationsPredict struct {
-	Authorizations []WebAuthorization
-	Users          []User
+	Authorizations []WebAuthorization `tl:"authorizations"`
+	Users          []User             `tl:"users"`
 }
 
 func (*AccountWebAuthorizationsPredict) CRC() uint32 {
@@ -15155,7 +15155,7 @@ func (*AccountWebAuthorizationsPredict) CRC() uint32 {
 func (*AccountWebAuthorizationsPredict) _AccountWebAuthorizations() {}
 
 type AuthAuthorization interface {
-	tl.Object
+	tl.TLObject
 	_AuthAuthorization()
 }
 
@@ -15166,11 +15166,11 @@ var (
 
 type AuthAuthorizationPredict struct {
 	_                     struct{} `tl:"flags,bitflag"`
-	SetupPasswordRequired bool     `tl:",omitempty:flags:1,implicit"`
-	OtherwiseReloginDays  *int32   `tl:",omitempty:flags:1"`
-	TmpSessions           *int32   `tl:",omitempty:flags:0"`
-	FutureAuthToken       *[]byte  `tl:",omitempty:flags:2"`
-	User                  User
+	SetupPasswordRequired bool     `tl:"setup_password_required,omitempty:flags:1,implicit"`
+	OtherwiseReloginDays  *int32   `tl:"otherwise_relogin_days,omitempty:flags:1"`
+	TmpSessions           *int32   `tl:"tmp_sessions,omitempty:flags:0"`
+	FutureAuthToken       *[]byte  `tl:"future_auth_token,omitempty:flags:2"`
+	User                  User     `tl:"user"`
 }
 
 func (*AuthAuthorizationPredict) CRC() uint32 {
@@ -15180,7 +15180,7 @@ func (*AuthAuthorizationPredict) _AuthAuthorization() {}
 
 type AuthAuthorizationSignUpRequiredPredict struct {
 	_              struct{}           `tl:"flags,bitflag"`
-	TermsOfService HelpTermsOfService `tl:",omitempty:flags:0"`
+	TermsOfService HelpTermsOfService `tl:"terms_of_service,omitempty:flags:0"`
 }
 
 func (*AuthAuthorizationSignUpRequiredPredict) CRC() uint32 {
@@ -15189,7 +15189,7 @@ func (*AuthAuthorizationSignUpRequiredPredict) CRC() uint32 {
 func (*AuthAuthorizationSignUpRequiredPredict) _AuthAuthorization() {}
 
 type AuthExportedAuthorization interface {
-	tl.Object
+	tl.TLObject
 	_AuthExportedAuthorization()
 }
 
@@ -15198,8 +15198,8 @@ var (
 )
 
 type AuthExportedAuthorizationPredict struct {
-	ID    int64
-	Bytes []byte
+	ID    int64  `tl:"id"`
+	Bytes []byte `tl:"bytes"`
 }
 
 func (*AuthExportedAuthorizationPredict) CRC() uint32 {
@@ -15208,7 +15208,7 @@ func (*AuthExportedAuthorizationPredict) CRC() uint32 {
 func (*AuthExportedAuthorizationPredict) _AuthExportedAuthorization() {}
 
 type AuthLoggedOut interface {
-	tl.Object
+	tl.TLObject
 	_AuthLoggedOut()
 }
 
@@ -15218,7 +15218,7 @@ var (
 
 type AuthLoggedOutPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	FutureAuthToken *[]byte  `tl:",omitempty:flags:0"`
+	FutureAuthToken *[]byte  `tl:"future_auth_token,omitempty:flags:0"`
 }
 
 func (*AuthLoggedOutPredict) CRC() uint32 {
@@ -15227,7 +15227,7 @@ func (*AuthLoggedOutPredict) CRC() uint32 {
 func (*AuthLoggedOutPredict) _AuthLoggedOut() {}
 
 type AuthLoginToken interface {
-	tl.Object
+	tl.TLObject
 	_AuthLoginToken()
 }
 
@@ -15238,8 +15238,8 @@ var (
 )
 
 type AuthLoginTokenPredict struct {
-	Expires int32
-	Token   []byte
+	Expires int32  `tl:"expires"`
+	Token   []byte `tl:"token"`
 }
 
 func (*AuthLoginTokenPredict) CRC() uint32 {
@@ -15248,8 +15248,8 @@ func (*AuthLoginTokenPredict) CRC() uint32 {
 func (*AuthLoginTokenPredict) _AuthLoginToken() {}
 
 type AuthLoginTokenMigrateToPredict struct {
-	DcID  int32
-	Token []byte
+	DcID  int32  `tl:"dc_id"`
+	Token []byte `tl:"token"`
 }
 
 func (*AuthLoginTokenMigrateToPredict) CRC() uint32 {
@@ -15258,7 +15258,7 @@ func (*AuthLoginTokenMigrateToPredict) CRC() uint32 {
 func (*AuthLoginTokenMigrateToPredict) _AuthLoginToken() {}
 
 type AuthLoginTokenSuccessPredict struct {
-	Authorization AuthAuthorization
+	Authorization AuthAuthorization `tl:"authorization"`
 }
 
 func (*AuthLoginTokenSuccessPredict) CRC() uint32 {
@@ -15267,7 +15267,7 @@ func (*AuthLoginTokenSuccessPredict) CRC() uint32 {
 func (*AuthLoginTokenSuccessPredict) _AuthLoginToken() {}
 
 type AuthPasswordRecovery interface {
-	tl.Object
+	tl.TLObject
 	_AuthPasswordRecovery()
 }
 
@@ -15276,7 +15276,7 @@ var (
 )
 
 type AuthPasswordRecoveryPredict struct {
-	EmailPattern string
+	EmailPattern string `tl:"email_pattern"`
 }
 
 func (*AuthPasswordRecoveryPredict) CRC() uint32 {
@@ -15285,7 +15285,7 @@ func (*AuthPasswordRecoveryPredict) CRC() uint32 {
 func (*AuthPasswordRecoveryPredict) _AuthPasswordRecovery() {}
 
 type AuthSentCode interface {
-	tl.Object
+	tl.TLObject
 	_AuthSentCode()
 }
 
@@ -15295,11 +15295,11 @@ var (
 )
 
 type AuthSentCodePredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Type          AuthSentCodeType
-	PhoneCodeHash string
-	NextType      AuthCodeType `tl:",omitempty:flags:1"`
-	Timeout       *int32       `tl:",omitempty:flags:2"`
+	_             struct{}         `tl:"flags,bitflag"`
+	Type          AuthSentCodeType `tl:"type"`
+	PhoneCodeHash string           `tl:"phone_code_hash"`
+	NextType      AuthCodeType     `tl:"next_type,omitempty:flags:1"`
+	Timeout       *int32           `tl:"timeout,omitempty:flags:2"`
 }
 
 func (*AuthSentCodePredict) CRC() uint32 {
@@ -15308,7 +15308,7 @@ func (*AuthSentCodePredict) CRC() uint32 {
 func (*AuthSentCodePredict) _AuthSentCode() {}
 
 type AuthSentCodeSuccessPredict struct {
-	Authorization AuthAuthorization
+	Authorization AuthAuthorization `tl:"authorization"`
 }
 
 func (*AuthSentCodeSuccessPredict) CRC() uint32 {
@@ -15317,7 +15317,7 @@ func (*AuthSentCodeSuccessPredict) CRC() uint32 {
 func (*AuthSentCodeSuccessPredict) _AuthSentCode() {}
 
 type AuthSentCodeType interface {
-	tl.Object
+	tl.TLObject
 	_AuthSentCodeType()
 }
 
@@ -15336,7 +15336,7 @@ var (
 )
 
 type AuthSentCodeTypeAppPredict struct {
-	Length int32
+	Length int32 `tl:"length"`
 }
 
 func (*AuthSentCodeTypeAppPredict) CRC() uint32 {
@@ -15345,7 +15345,7 @@ func (*AuthSentCodeTypeAppPredict) CRC() uint32 {
 func (*AuthSentCodeTypeAppPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeSmsPredict struct {
-	Length int32
+	Length int32 `tl:"length"`
 }
 
 func (*AuthSentCodeTypeSmsPredict) CRC() uint32 {
@@ -15354,7 +15354,7 @@ func (*AuthSentCodeTypeSmsPredict) CRC() uint32 {
 func (*AuthSentCodeTypeSmsPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeCallPredict struct {
-	Length int32
+	Length int32 `tl:"length"`
 }
 
 func (*AuthSentCodeTypeCallPredict) CRC() uint32 {
@@ -15363,7 +15363,7 @@ func (*AuthSentCodeTypeCallPredict) CRC() uint32 {
 func (*AuthSentCodeTypeCallPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeFlashCallPredict struct {
-	Pattern string
+	Pattern string `tl:"pattern"`
 }
 
 func (*AuthSentCodeTypeFlashCallPredict) CRC() uint32 {
@@ -15372,8 +15372,8 @@ func (*AuthSentCodeTypeFlashCallPredict) CRC() uint32 {
 func (*AuthSentCodeTypeFlashCallPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeMissedCallPredict struct {
-	Prefix string
-	Length int32
+	Prefix string `tl:"prefix"`
+	Length int32  `tl:"length"`
 }
 
 func (*AuthSentCodeTypeMissedCallPredict) CRC() uint32 {
@@ -15383,12 +15383,12 @@ func (*AuthSentCodeTypeMissedCallPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeEmailCodePredict struct {
 	_                    struct{} `tl:"flags,bitflag"`
-	AppleSigninAllowed   bool     `tl:",omitempty:flags:0,implicit"`
-	GoogleSigninAllowed  bool     `tl:",omitempty:flags:1,implicit"`
-	EmailPattern         string
-	Length               int32
-	ResetAvailablePeriod *int32 `tl:",omitempty:flags:3"`
-	ResetPendingDate     *int32 `tl:",omitempty:flags:4"`
+	AppleSigninAllowed   bool     `tl:"apple_signin_allowed,omitempty:flags:0,implicit"`
+	GoogleSigninAllowed  bool     `tl:"google_signin_allowed,omitempty:flags:1,implicit"`
+	EmailPattern         string   `tl:"email_pattern"`
+	Length               int32    `tl:"length"`
+	ResetAvailablePeriod *int32   `tl:"reset_available_period,omitempty:flags:3"`
+	ResetPendingDate     *int32   `tl:"reset_pending_date,omitempty:flags:4"`
 }
 
 func (*AuthSentCodeTypeEmailCodePredict) CRC() uint32 {
@@ -15398,8 +15398,8 @@ func (*AuthSentCodeTypeEmailCodePredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeSetUpEmailRequiredPredict struct {
 	_                   struct{} `tl:"flags,bitflag"`
-	AppleSigninAllowed  bool     `tl:",omitempty:flags:0,implicit"`
-	GoogleSigninAllowed bool     `tl:",omitempty:flags:1,implicit"`
+	AppleSigninAllowed  bool     `tl:"apple_signin_allowed,omitempty:flags:0,implicit"`
+	GoogleSigninAllowed bool     `tl:"google_signin_allowed,omitempty:flags:1,implicit"`
 }
 
 func (*AuthSentCodeTypeSetUpEmailRequiredPredict) CRC() uint32 {
@@ -15408,8 +15408,8 @@ func (*AuthSentCodeTypeSetUpEmailRequiredPredict) CRC() uint32 {
 func (*AuthSentCodeTypeSetUpEmailRequiredPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeFragmentSmsPredict struct {
-	URL    string
-	Length int32
+	URL    string `tl:"url"`
+	Length int32  `tl:"length"`
 }
 
 func (*AuthSentCodeTypeFragmentSmsPredict) CRC() uint32 {
@@ -15419,12 +15419,12 @@ func (*AuthSentCodeTypeFragmentSmsPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeFirebaseSmsPredict struct {
 	_                      struct{} `tl:"flags,bitflag"`
-	Nonce                  *[]byte  `tl:",omitempty:flags:0"`
-	PlayIntegrityProjectID *int64   `tl:",omitempty:flags:2"`
-	PlayIntegrityNonce     *[]byte  `tl:",omitempty:flags:2"`
-	Receipt                *string  `tl:",omitempty:flags:1"`
-	PushTimeout            *int32   `tl:",omitempty:flags:1"`
-	Length                 int32
+	Nonce                  *[]byte  `tl:"nonce,omitempty:flags:0"`
+	PlayIntegrityProjectID *int64   `tl:"play_integrity_project_id,omitempty:flags:2"`
+	PlayIntegrityNonce     *[]byte  `tl:"play_integrity_nonce,omitempty:flags:2"`
+	Receipt                *string  `tl:"receipt,omitempty:flags:1"`
+	PushTimeout            *int32   `tl:"push_timeout,omitempty:flags:1"`
+	Length                 int32    `tl:"length"`
 }
 
 func (*AuthSentCodeTypeFirebaseSmsPredict) CRC() uint32 {
@@ -15434,7 +15434,7 @@ func (*AuthSentCodeTypeFirebaseSmsPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeSmsWordPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Beginning *string  `tl:",omitempty:flags:0"`
+	Beginning *string  `tl:"beginning,omitempty:flags:0"`
 }
 
 func (*AuthSentCodeTypeSmsWordPredict) CRC() uint32 {
@@ -15444,7 +15444,7 @@ func (*AuthSentCodeTypeSmsWordPredict) _AuthSentCodeType() {}
 
 type AuthSentCodeTypeSmsPhrasePredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Beginning *string  `tl:",omitempty:flags:0"`
+	Beginning *string  `tl:"beginning,omitempty:flags:0"`
 }
 
 func (*AuthSentCodeTypeSmsPhrasePredict) CRC() uint32 {
@@ -15453,7 +15453,7 @@ func (*AuthSentCodeTypeSmsPhrasePredict) CRC() uint32 {
 func (*AuthSentCodeTypeSmsPhrasePredict) _AuthSentCodeType() {}
 
 type BotsBotInfo interface {
-	tl.Object
+	tl.TLObject
 	_BotsBotInfo()
 }
 
@@ -15462,9 +15462,9 @@ var (
 )
 
 type BotsBotInfoPredict struct {
-	Name        string
-	About       string
-	Description string
+	Name        string `tl:"name"`
+	About       string `tl:"about"`
+	Description string `tl:"description"`
 }
 
 func (*BotsBotInfoPredict) CRC() uint32 {
@@ -15473,7 +15473,7 @@ func (*BotsBotInfoPredict) CRC() uint32 {
 func (*BotsBotInfoPredict) _BotsBotInfo() {}
 
 type BotsPopularAppBots interface {
-	tl.Object
+	tl.TLObject
 	_BotsPopularAppBots()
 }
 
@@ -15483,8 +15483,8 @@ var (
 
 type BotsPopularAppBotsPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	NextOffset *string  `tl:",omitempty:flags:0"`
-	Users      []User
+	NextOffset *string  `tl:"next_offset,omitempty:flags:0"`
+	Users      []User   `tl:"users"`
 }
 
 func (*BotsPopularAppBotsPredict) CRC() uint32 {
@@ -15493,7 +15493,7 @@ func (*BotsPopularAppBotsPredict) CRC() uint32 {
 func (*BotsPopularAppBotsPredict) _BotsPopularAppBots() {}
 
 type BotsPreviewInfo interface {
-	tl.Object
+	tl.TLObject
 	_BotsPreviewInfo()
 }
 
@@ -15502,8 +15502,8 @@ var (
 )
 
 type BotsPreviewInfoPredict struct {
-	Media     []BotPreviewMedia
-	LangCodes []string
+	Media     []BotPreviewMedia `tl:"media"`
+	LangCodes []string          `tl:"lang_codes"`
 }
 
 func (*BotsPreviewInfoPredict) CRC() uint32 {
@@ -15512,7 +15512,7 @@ func (*BotsPreviewInfoPredict) CRC() uint32 {
 func (*BotsPreviewInfoPredict) _BotsPreviewInfo() {}
 
 type ChannelsAdminLogResults interface {
-	tl.Object
+	tl.TLObject
 	_ChannelsAdminLogResults()
 }
 
@@ -15521,9 +15521,9 @@ var (
 )
 
 type ChannelsAdminLogResultsPredict struct {
-	Events []ChannelAdminLogEvent
-	Chats  []Chat
-	Users  []User
+	Events []ChannelAdminLogEvent `tl:"events"`
+	Chats  []Chat                 `tl:"chats"`
+	Users  []User                 `tl:"users"`
 }
 
 func (*ChannelsAdminLogResultsPredict) CRC() uint32 {
@@ -15532,7 +15532,7 @@ func (*ChannelsAdminLogResultsPredict) CRC() uint32 {
 func (*ChannelsAdminLogResultsPredict) _ChannelsAdminLogResults() {}
 
 type ChannelsChannelParticipant interface {
-	tl.Object
+	tl.TLObject
 	_ChannelsChannelParticipant()
 }
 
@@ -15541,9 +15541,9 @@ var (
 )
 
 type ChannelsChannelParticipantPredict struct {
-	Participant ChannelParticipant
-	Chats       []Chat
-	Users       []User
+	Participant ChannelParticipant `tl:"participant"`
+	Chats       []Chat             `tl:"chats"`
+	Users       []User             `tl:"users"`
 }
 
 func (*ChannelsChannelParticipantPredict) CRC() uint32 {
@@ -15552,7 +15552,7 @@ func (*ChannelsChannelParticipantPredict) CRC() uint32 {
 func (*ChannelsChannelParticipantPredict) _ChannelsChannelParticipant() {}
 
 type ChannelsChannelParticipants interface {
-	tl.Object
+	tl.TLObject
 	_ChannelsChannelParticipants()
 }
 
@@ -15562,10 +15562,10 @@ var (
 )
 
 type ChannelsChannelParticipantsPredict struct {
-	Count        int32
-	Participants []ChannelParticipant
-	Chats        []Chat
-	Users        []User
+	Count        int32                `tl:"count"`
+	Participants []ChannelParticipant `tl:"participants"`
+	Chats        []Chat               `tl:"chats"`
+	Users        []User               `tl:"users"`
 }
 
 func (*ChannelsChannelParticipantsPredict) CRC() uint32 {
@@ -15581,7 +15581,7 @@ func (*ChannelsChannelParticipantsNotModifiedPredict) CRC() uint32 {
 func (*ChannelsChannelParticipantsNotModifiedPredict) _ChannelsChannelParticipants() {}
 
 type ChannelsSendAsPeers interface {
-	tl.Object
+	tl.TLObject
 	_ChannelsSendAsPeers()
 }
 
@@ -15590,9 +15590,9 @@ var (
 )
 
 type ChannelsSendAsPeersPredict struct {
-	Peers []SendAsPeer
-	Chats []Chat
-	Users []User
+	Peers []SendAsPeer `tl:"peers"`
+	Chats []Chat       `tl:"chats"`
+	Users []User       `tl:"users"`
 }
 
 func (*ChannelsSendAsPeersPredict) CRC() uint32 {
@@ -15601,7 +15601,7 @@ func (*ChannelsSendAsPeersPredict) CRC() uint32 {
 func (*ChannelsSendAsPeersPredict) _ChannelsSendAsPeers() {}
 
 type ChannelsSponsoredMessageReportResult interface {
-	tl.Object
+	tl.TLObject
 	_ChannelsSponsoredMessageReportResult()
 }
 
@@ -15612,8 +15612,8 @@ var (
 )
 
 type ChannelsSponsoredMessageReportResultChooseOptionPredict struct {
-	Title   string
-	Options []SponsoredMessageReportOption
+	Title   string                         `tl:"title"`
+	Options []SponsoredMessageReportOption `tl:"options"`
 }
 
 func (*ChannelsSponsoredMessageReportResultChooseOptionPredict) CRC() uint32 {
@@ -15638,7 +15638,7 @@ func (*ChannelsSponsoredMessageReportResultReportedPredict) CRC() uint32 {
 func (*ChannelsSponsoredMessageReportResultReportedPredict) _ChannelsSponsoredMessageReportResult() {}
 
 type ChatlistsChatlistInvite interface {
-	tl.Object
+	tl.TLObject
 	_ChatlistsChatlistInvite()
 }
 
@@ -15648,11 +15648,11 @@ var (
 )
 
 type ChatlistsChatlistInviteAlreadyPredict struct {
-	FilterID     int32
-	MissingPeers []Peer
-	AlreadyPeers []Peer
-	Chats        []Chat
-	Users        []User
+	FilterID     int32  `tl:"filter_id"`
+	MissingPeers []Peer `tl:"missing_peers"`
+	AlreadyPeers []Peer `tl:"already_peers"`
+	Chats        []Chat `tl:"chats"`
+	Users        []User `tl:"users"`
 }
 
 func (*ChatlistsChatlistInviteAlreadyPredict) CRC() uint32 {
@@ -15662,11 +15662,11 @@ func (*ChatlistsChatlistInviteAlreadyPredict) _ChatlistsChatlistInvite() {}
 
 type ChatlistsChatlistInvitePredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Title    string
-	Emoticon *string `tl:",omitempty:flags:0"`
-	Peers    []Peer
-	Chats    []Chat
-	Users    []User
+	Title    string   `tl:"title"`
+	Emoticon *string  `tl:"emoticon,omitempty:flags:0"`
+	Peers    []Peer   `tl:"peers"`
+	Chats    []Chat   `tl:"chats"`
+	Users    []User   `tl:"users"`
 }
 
 func (*ChatlistsChatlistInvitePredict) CRC() uint32 {
@@ -15675,7 +15675,7 @@ func (*ChatlistsChatlistInvitePredict) CRC() uint32 {
 func (*ChatlistsChatlistInvitePredict) _ChatlistsChatlistInvite() {}
 
 type ChatlistsChatlistUpdates interface {
-	tl.Object
+	tl.TLObject
 	_ChatlistsChatlistUpdates()
 }
 
@@ -15684,9 +15684,9 @@ var (
 )
 
 type ChatlistsChatlistUpdatesPredict struct {
-	MissingPeers []Peer
-	Chats        []Chat
-	Users        []User
+	MissingPeers []Peer `tl:"missing_peers"`
+	Chats        []Chat `tl:"chats"`
+	Users        []User `tl:"users"`
 }
 
 func (*ChatlistsChatlistUpdatesPredict) CRC() uint32 {
@@ -15695,7 +15695,7 @@ func (*ChatlistsChatlistUpdatesPredict) CRC() uint32 {
 func (*ChatlistsChatlistUpdatesPredict) _ChatlistsChatlistUpdates() {}
 
 type ChatlistsExportedChatlistInvite interface {
-	tl.Object
+	tl.TLObject
 	_ChatlistsExportedChatlistInvite()
 }
 
@@ -15704,8 +15704,8 @@ var (
 )
 
 type ChatlistsExportedChatlistInvitePredict struct {
-	Filter DialogFilter
-	Invite ExportedChatlistInvite
+	Filter DialogFilter           `tl:"filter"`
+	Invite ExportedChatlistInvite `tl:"invite"`
 }
 
 func (*ChatlistsExportedChatlistInvitePredict) CRC() uint32 {
@@ -15714,7 +15714,7 @@ func (*ChatlistsExportedChatlistInvitePredict) CRC() uint32 {
 func (*ChatlistsExportedChatlistInvitePredict) _ChatlistsExportedChatlistInvite() {}
 
 type ChatlistsExportedInvites interface {
-	tl.Object
+	tl.TLObject
 	_ChatlistsExportedInvites()
 }
 
@@ -15723,9 +15723,9 @@ var (
 )
 
 type ChatlistsExportedInvitesPredict struct {
-	Invites []ExportedChatlistInvite
-	Chats   []Chat
-	Users   []User
+	Invites []ExportedChatlistInvite `tl:"invites"`
+	Chats   []Chat                   `tl:"chats"`
+	Users   []User                   `tl:"users"`
 }
 
 func (*ChatlistsExportedInvitesPredict) CRC() uint32 {
@@ -15734,7 +15734,7 @@ func (*ChatlistsExportedInvitesPredict) CRC() uint32 {
 func (*ChatlistsExportedInvitesPredict) _ChatlistsExportedInvites() {}
 
 type ContactsBlocked interface {
-	tl.Object
+	tl.TLObject
 	_ContactsBlocked()
 }
 
@@ -15744,9 +15744,9 @@ var (
 )
 
 type ContactsBlockedPredict struct {
-	Blocked []PeerBlocked
-	Chats   []Chat
-	Users   []User
+	Blocked []PeerBlocked `tl:"blocked"`
+	Chats   []Chat        `tl:"chats"`
+	Users   []User        `tl:"users"`
 }
 
 func (*ContactsBlockedPredict) CRC() uint32 {
@@ -15755,10 +15755,10 @@ func (*ContactsBlockedPredict) CRC() uint32 {
 func (*ContactsBlockedPredict) _ContactsBlocked() {}
 
 type ContactsBlockedSlicePredict struct {
-	Count   int32
-	Blocked []PeerBlocked
-	Chats   []Chat
-	Users   []User
+	Count   int32         `tl:"count"`
+	Blocked []PeerBlocked `tl:"blocked"`
+	Chats   []Chat        `tl:"chats"`
+	Users   []User        `tl:"users"`
 }
 
 func (*ContactsBlockedSlicePredict) CRC() uint32 {
@@ -15767,7 +15767,7 @@ func (*ContactsBlockedSlicePredict) CRC() uint32 {
 func (*ContactsBlockedSlicePredict) _ContactsBlocked() {}
 
 type ContactsContactBirthdays interface {
-	tl.Object
+	tl.TLObject
 	_ContactsContactBirthdays()
 }
 
@@ -15776,8 +15776,8 @@ var (
 )
 
 type ContactsContactBirthdaysPredict struct {
-	Contacts []ContactBirthday
-	Users    []User
+	Contacts []ContactBirthday `tl:"contacts"`
+	Users    []User            `tl:"users"`
 }
 
 func (*ContactsContactBirthdaysPredict) CRC() uint32 {
@@ -15786,7 +15786,7 @@ func (*ContactsContactBirthdaysPredict) CRC() uint32 {
 func (*ContactsContactBirthdaysPredict) _ContactsContactBirthdays() {}
 
 type ContactsContacts interface {
-	tl.Object
+	tl.TLObject
 	_ContactsContacts()
 }
 
@@ -15803,9 +15803,9 @@ func (*ContactsContactsNotModifiedPredict) CRC() uint32 {
 func (*ContactsContactsNotModifiedPredict) _ContactsContacts() {}
 
 type ContactsContactsPredict struct {
-	Contacts   []Contact
-	SavedCount int32
-	Users      []User
+	Contacts   []Contact `tl:"contacts"`
+	SavedCount int32     `tl:"saved_count"`
+	Users      []User    `tl:"users"`
 }
 
 func (*ContactsContactsPredict) CRC() uint32 {
@@ -15814,7 +15814,7 @@ func (*ContactsContactsPredict) CRC() uint32 {
 func (*ContactsContactsPredict) _ContactsContacts() {}
 
 type ContactsFound interface {
-	tl.Object
+	tl.TLObject
 	_ContactsFound()
 }
 
@@ -15823,10 +15823,10 @@ var (
 )
 
 type ContactsFoundPredict struct {
-	MyResults []Peer
-	Results   []Peer
-	Chats     []Chat
-	Users     []User
+	MyResults []Peer `tl:"my_results"`
+	Results   []Peer `tl:"results"`
+	Chats     []Chat `tl:"chats"`
+	Users     []User `tl:"users"`
 }
 
 func (*ContactsFoundPredict) CRC() uint32 {
@@ -15835,7 +15835,7 @@ func (*ContactsFoundPredict) CRC() uint32 {
 func (*ContactsFoundPredict) _ContactsFound() {}
 
 type ContactsImportedContacts interface {
-	tl.Object
+	tl.TLObject
 	_ContactsImportedContacts()
 }
 
@@ -15844,10 +15844,10 @@ var (
 )
 
 type ContactsImportedContactsPredict struct {
-	Imported       []ImportedContact
-	PopularInvites []PopularContact
-	RetryContacts  []int64
-	Users          []User
+	Imported       []ImportedContact `tl:"imported"`
+	PopularInvites []PopularContact  `tl:"popular_invites"`
+	RetryContacts  []int64           `tl:"retry_contacts"`
+	Users          []User            `tl:"users"`
 }
 
 func (*ContactsImportedContactsPredict) CRC() uint32 {
@@ -15856,7 +15856,7 @@ func (*ContactsImportedContactsPredict) CRC() uint32 {
 func (*ContactsImportedContactsPredict) _ContactsImportedContacts() {}
 
 type ContactsResolvedPeer interface {
-	tl.Object
+	tl.TLObject
 	_ContactsResolvedPeer()
 }
 
@@ -15865,9 +15865,9 @@ var (
 )
 
 type ContactsResolvedPeerPredict struct {
-	Peer  Peer
-	Chats []Chat
-	Users []User
+	Peer  Peer   `tl:"peer"`
+	Chats []Chat `tl:"chats"`
+	Users []User `tl:"users"`
 }
 
 func (*ContactsResolvedPeerPredict) CRC() uint32 {
@@ -15876,7 +15876,7 @@ func (*ContactsResolvedPeerPredict) CRC() uint32 {
 func (*ContactsResolvedPeerPredict) _ContactsResolvedPeer() {}
 
 type ContactsTopPeers interface {
-	tl.Object
+	tl.TLObject
 	_ContactsTopPeers()
 }
 
@@ -15894,9 +15894,9 @@ func (*ContactsTopPeersNotModifiedPredict) CRC() uint32 {
 func (*ContactsTopPeersNotModifiedPredict) _ContactsTopPeers() {}
 
 type ContactsTopPeersPredict struct {
-	Categories []TopPeerCategoryPeers
-	Chats      []Chat
-	Users      []User
+	Categories []TopPeerCategoryPeers `tl:"categories"`
+	Chats      []Chat                 `tl:"chats"`
+	Users      []User                 `tl:"users"`
 }
 
 func (*ContactsTopPeersPredict) CRC() uint32 {
@@ -15912,7 +15912,7 @@ func (*ContactsTopPeersDisabledPredict) CRC() uint32 {
 func (*ContactsTopPeersDisabledPredict) _ContactsTopPeers() {}
 
 type FragmentCollectibleInfo interface {
-	tl.Object
+	tl.TLObject
 	_FragmentCollectibleInfo()
 }
 
@@ -15921,12 +15921,12 @@ var (
 )
 
 type FragmentCollectibleInfoPredict struct {
-	PurchaseDate   int32
-	Currency       string
-	Amount         int64
-	CryptoCurrency string
-	CryptoAmount   int64
-	URL            string
+	PurchaseDate   int32  `tl:"purchase_date"`
+	Currency       string `tl:"currency"`
+	Amount         int64  `tl:"amount"`
+	CryptoCurrency string `tl:"crypto_currency"`
+	CryptoAmount   int64  `tl:"crypto_amount"`
+	URL            string `tl:"url"`
 }
 
 func (*FragmentCollectibleInfoPredict) CRC() uint32 {
@@ -15935,7 +15935,7 @@ func (*FragmentCollectibleInfoPredict) CRC() uint32 {
 func (*FragmentCollectibleInfoPredict) _FragmentCollectibleInfo() {}
 
 type HelpAppConfig interface {
-	tl.Object
+	tl.TLObject
 	_HelpAppConfig()
 }
 
@@ -15952,8 +15952,8 @@ func (*HelpAppConfigNotModifiedPredict) CRC() uint32 {
 func (*HelpAppConfigNotModifiedPredict) _HelpAppConfig() {}
 
 type HelpAppConfigPredict struct {
-	Hash   int32
-	Config JSONValue
+	Hash   int32     `tl:"hash"`
+	Config JSONValue `tl:"config"`
 }
 
 func (*HelpAppConfigPredict) CRC() uint32 {
@@ -15962,7 +15962,7 @@ func (*HelpAppConfigPredict) CRC() uint32 {
 func (*HelpAppConfigPredict) _HelpAppConfig() {}
 
 type HelpAppUpdate interface {
-	tl.Object
+	tl.TLObject
 	_HelpAppUpdate()
 }
 
@@ -15972,15 +15972,15 @@ var (
 )
 
 type HelpAppUpdatePredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	CanNotSkip bool     `tl:",omitempty:flags:0,implicit"`
-	ID         int32
-	Version    string
-	Text       string
-	Entities   []MessageEntity
-	Document   Document `tl:",omitempty:flags:1"`
-	URL        *string  `tl:",omitempty:flags:2"`
-	Sticker    Document `tl:",omitempty:flags:3"`
+	_          struct{}        `tl:"flags,bitflag"`
+	CanNotSkip bool            `tl:"can_not_skip,omitempty:flags:0,implicit"`
+	ID         int32           `tl:"id"`
+	Version    string          `tl:"version"`
+	Text       string          `tl:"text"`
+	Entities   []MessageEntity `tl:"entities"`
+	Document   Document        `tl:"document,omitempty:flags:1"`
+	URL        *string         `tl:"url,omitempty:flags:2"`
+	Sticker    Document        `tl:"sticker,omitempty:flags:3"`
 }
 
 func (*HelpAppUpdatePredict) CRC() uint32 {
@@ -15996,7 +15996,7 @@ func (*HelpNoAppUpdatePredict) CRC() uint32 {
 func (*HelpNoAppUpdatePredict) _HelpAppUpdate() {}
 
 type HelpCountriesList interface {
-	tl.Object
+	tl.TLObject
 	_HelpCountriesList()
 }
 
@@ -16013,8 +16013,8 @@ func (*HelpCountriesListNotModifiedPredict) CRC() uint32 {
 func (*HelpCountriesListNotModifiedPredict) _HelpCountriesList() {}
 
 type HelpCountriesListPredict struct {
-	Countries []HelpCountry
-	Hash      int32
+	Countries []HelpCountry `tl:"countries"`
+	Hash      int32         `tl:"hash"`
 }
 
 func (*HelpCountriesListPredict) CRC() uint32 {
@@ -16023,7 +16023,7 @@ func (*HelpCountriesListPredict) CRC() uint32 {
 func (*HelpCountriesListPredict) _HelpCountriesList() {}
 
 type HelpCountry interface {
-	tl.Object
+	tl.TLObject
 	_HelpCountry()
 }
 
@@ -16032,12 +16032,12 @@ var (
 )
 
 type HelpCountryPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Hidden       bool     `tl:",omitempty:flags:0,implicit"`
-	Iso2         string
-	DefaultName  string
-	Name         *string `tl:",omitempty:flags:1"`
-	CountryCodes []HelpCountryCode
+	_            struct{}          `tl:"flags,bitflag"`
+	Hidden       bool              `tl:"hidden,omitempty:flags:0,implicit"`
+	Iso2         string            `tl:"iso2"`
+	DefaultName  string            `tl:"default_name"`
+	Name         *string           `tl:"name,omitempty:flags:1"`
+	CountryCodes []HelpCountryCode `tl:"country_codes"`
 }
 
 func (*HelpCountryPredict) CRC() uint32 {
@@ -16046,7 +16046,7 @@ func (*HelpCountryPredict) CRC() uint32 {
 func (*HelpCountryPredict) _HelpCountry() {}
 
 type HelpCountryCode interface {
-	tl.Object
+	tl.TLObject
 	_HelpCountryCode()
 }
 
@@ -16056,9 +16056,9 @@ var (
 
 type HelpCountryCodePredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	CountryCode string
-	Prefixes    []string `tl:",omitempty:flags:0"`
-	Patterns    []string `tl:",omitempty:flags:1"`
+	CountryCode string   `tl:"country_code"`
+	Prefixes    []string `tl:"prefixes,omitempty:flags:0"`
+	Patterns    []string `tl:"patterns,omitempty:flags:1"`
 }
 
 func (*HelpCountryCodePredict) CRC() uint32 {
@@ -16067,7 +16067,7 @@ func (*HelpCountryCodePredict) CRC() uint32 {
 func (*HelpCountryCodePredict) _HelpCountryCode() {}
 
 type HelpDeepLinkInfo interface {
-	tl.Object
+	tl.TLObject
 	_HelpDeepLinkInfo()
 }
 
@@ -16084,10 +16084,10 @@ func (*HelpDeepLinkInfoEmptyPredict) CRC() uint32 {
 func (*HelpDeepLinkInfoEmptyPredict) _HelpDeepLinkInfo() {}
 
 type HelpDeepLinkInfoPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	UpdateApp bool     `tl:",omitempty:flags:0,implicit"`
-	Message   string
-	Entities  []MessageEntity `tl:",omitempty:flags:1"`
+	_         struct{}        `tl:"flags,bitflag"`
+	UpdateApp bool            `tl:"update_app,omitempty:flags:0,implicit"`
+	Message   string          `tl:"message"`
+	Entities  []MessageEntity `tl:"entities,omitempty:flags:1"`
 }
 
 func (*HelpDeepLinkInfoPredict) CRC() uint32 {
@@ -16096,7 +16096,7 @@ func (*HelpDeepLinkInfoPredict) CRC() uint32 {
 func (*HelpDeepLinkInfoPredict) _HelpDeepLinkInfo() {}
 
 type HelpInviteText interface {
-	tl.Object
+	tl.TLObject
 	_HelpInviteText()
 }
 
@@ -16105,7 +16105,7 @@ var (
 )
 
 type HelpInviteTextPredict struct {
-	Message string
+	Message string `tl:"message"`
 }
 
 func (*HelpInviteTextPredict) CRC() uint32 {
@@ -16114,7 +16114,7 @@ func (*HelpInviteTextPredict) CRC() uint32 {
 func (*HelpInviteTextPredict) _HelpInviteText() {}
 
 type HelpPassportConfig interface {
-	tl.Object
+	tl.TLObject
 	_HelpPassportConfig()
 }
 
@@ -16131,8 +16131,8 @@ func (*HelpPassportConfigNotModifiedPredict) CRC() uint32 {
 func (*HelpPassportConfigNotModifiedPredict) _HelpPassportConfig() {}
 
 type HelpPassportConfigPredict struct {
-	Hash           int32
-	CountriesLangs DataJSON
+	Hash           int32    `tl:"hash"`
+	CountriesLangs DataJSON `tl:"countries_langs"`
 }
 
 func (*HelpPassportConfigPredict) CRC() uint32 {
@@ -16141,7 +16141,7 @@ func (*HelpPassportConfigPredict) CRC() uint32 {
 func (*HelpPassportConfigPredict) _HelpPassportConfig() {}
 
 type HelpPeerColorOption interface {
-	tl.Object
+	tl.TLObject
 	_HelpPeerColorOption()
 }
 
@@ -16150,13 +16150,13 @@ var (
 )
 
 type HelpPeerColorOptionPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	Hidden          bool     `tl:",omitempty:flags:0,implicit"`
-	ColorID         int32
-	Colors          HelpPeerColorSet `tl:",omitempty:flags:1"`
-	DarkColors      HelpPeerColorSet `tl:",omitempty:flags:2"`
-	ChannelMinLevel *int32           `tl:",omitempty:flags:3"`
-	GroupMinLevel   *int32           `tl:",omitempty:flags:4"`
+	_               struct{}         `tl:"flags,bitflag"`
+	Hidden          bool             `tl:"hidden,omitempty:flags:0,implicit"`
+	ColorID         int32            `tl:"color_id"`
+	Colors          HelpPeerColorSet `tl:"colors,omitempty:flags:1"`
+	DarkColors      HelpPeerColorSet `tl:"dark_colors,omitempty:flags:2"`
+	ChannelMinLevel *int32           `tl:"channel_min_level,omitempty:flags:3"`
+	GroupMinLevel   *int32           `tl:"group_min_level,omitempty:flags:4"`
 }
 
 func (*HelpPeerColorOptionPredict) CRC() uint32 {
@@ -16165,7 +16165,7 @@ func (*HelpPeerColorOptionPredict) CRC() uint32 {
 func (*HelpPeerColorOptionPredict) _HelpPeerColorOption() {}
 
 type HelpPeerColorSet interface {
-	tl.Object
+	tl.TLObject
 	_HelpPeerColorSet()
 }
 
@@ -16175,7 +16175,7 @@ var (
 )
 
 type HelpPeerColorSetPredict struct {
-	Colors []int32
+	Colors []int32 `tl:"colors"`
 }
 
 func (*HelpPeerColorSetPredict) CRC() uint32 {
@@ -16184,9 +16184,9 @@ func (*HelpPeerColorSetPredict) CRC() uint32 {
 func (*HelpPeerColorSetPredict) _HelpPeerColorSet() {}
 
 type HelpPeerColorProfileSetPredict struct {
-	PaletteColors []int32
-	BgColors      []int32
-	StoryColors   []int32
+	PaletteColors []int32 `tl:"palette_colors"`
+	BgColors      []int32 `tl:"bg_colors"`
+	StoryColors   []int32 `tl:"story_colors"`
 }
 
 func (*HelpPeerColorProfileSetPredict) CRC() uint32 {
@@ -16195,7 +16195,7 @@ func (*HelpPeerColorProfileSetPredict) CRC() uint32 {
 func (*HelpPeerColorProfileSetPredict) _HelpPeerColorSet() {}
 
 type HelpPeerColors interface {
-	tl.Object
+	tl.TLObject
 	_HelpPeerColors()
 }
 
@@ -16212,8 +16212,8 @@ func (*HelpPeerColorsNotModifiedPredict) CRC() uint32 {
 func (*HelpPeerColorsNotModifiedPredict) _HelpPeerColors() {}
 
 type HelpPeerColorsPredict struct {
-	Hash   int32
-	Colors []HelpPeerColorOption
+	Hash   int32                 `tl:"hash"`
+	Colors []HelpPeerColorOption `tl:"colors"`
 }
 
 func (*HelpPeerColorsPredict) CRC() uint32 {
@@ -16222,7 +16222,7 @@ func (*HelpPeerColorsPredict) CRC() uint32 {
 func (*HelpPeerColorsPredict) _HelpPeerColors() {}
 
 type HelpPremiumPromo interface {
-	tl.Object
+	tl.TLObject
 	_HelpPremiumPromo()
 }
 
@@ -16231,12 +16231,12 @@ var (
 )
 
 type HelpPremiumPromoPredict struct {
-	StatusText     string
-	StatusEntities []MessageEntity
-	VideoSections  []string
-	Videos         []Document
-	PeriodOptions  []PremiumSubscriptionOption
-	Users          []User
+	StatusText     string                      `tl:"status_text"`
+	StatusEntities []MessageEntity             `tl:"status_entities"`
+	VideoSections  []string                    `tl:"video_sections"`
+	Videos         []Document                  `tl:"videos"`
+	PeriodOptions  []PremiumSubscriptionOption `tl:"period_options"`
+	Users          []User                      `tl:"users"`
 }
 
 func (*HelpPremiumPromoPredict) CRC() uint32 {
@@ -16245,7 +16245,7 @@ func (*HelpPremiumPromoPredict) CRC() uint32 {
 func (*HelpPremiumPromoPredict) _HelpPremiumPromo() {}
 
 type HelpPromoData interface {
-	tl.Object
+	tl.TLObject
 	_HelpPromoData()
 }
 
@@ -16255,7 +16255,7 @@ var (
 )
 
 type HelpPromoDataEmptyPredict struct {
-	Expires int32
+	Expires int32 `tl:"expires"`
 }
 
 func (*HelpPromoDataEmptyPredict) CRC() uint32 {
@@ -16265,13 +16265,13 @@ func (*HelpPromoDataEmptyPredict) _HelpPromoData() {}
 
 type HelpPromoDataPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Proxy      bool     `tl:",omitempty:flags:0,implicit"`
-	Expires    int32
-	Peer       Peer
-	Chats      []Chat
-	Users      []User
-	PsaType    *string `tl:",omitempty:flags:1"`
-	PsaMessage *string `tl:",omitempty:flags:2"`
+	Proxy      bool     `tl:"proxy,omitempty:flags:0,implicit"`
+	Expires    int32    `tl:"expires"`
+	Peer       Peer     `tl:"peer"`
+	Chats      []Chat   `tl:"chats"`
+	Users      []User   `tl:"users"`
+	PsaType    *string  `tl:"psa_type,omitempty:flags:1"`
+	PsaMessage *string  `tl:"psa_message,omitempty:flags:2"`
 }
 
 func (*HelpPromoDataPredict) CRC() uint32 {
@@ -16280,7 +16280,7 @@ func (*HelpPromoDataPredict) CRC() uint32 {
 func (*HelpPromoDataPredict) _HelpPromoData() {}
 
 type HelpRecentMeUrls interface {
-	tl.Object
+	tl.TLObject
 	_HelpRecentMeUrls()
 }
 
@@ -16289,9 +16289,9 @@ var (
 )
 
 type HelpRecentMeUrlsPredict struct {
-	Urls  []RecentMeURL
-	Chats []Chat
-	Users []User
+	Urls  []RecentMeURL `tl:"urls"`
+	Chats []Chat        `tl:"chats"`
+	Users []User        `tl:"users"`
 }
 
 func (*HelpRecentMeUrlsPredict) CRC() uint32 {
@@ -16300,7 +16300,7 @@ func (*HelpRecentMeUrlsPredict) CRC() uint32 {
 func (*HelpRecentMeUrlsPredict) _HelpRecentMeUrls() {}
 
 type HelpSupport interface {
-	tl.Object
+	tl.TLObject
 	_HelpSupport()
 }
 
@@ -16309,8 +16309,8 @@ var (
 )
 
 type HelpSupportPredict struct {
-	PhoneNumber string
-	User        User
+	PhoneNumber string `tl:"phone_number"`
+	User        User   `tl:"user"`
 }
 
 func (*HelpSupportPredict) CRC() uint32 {
@@ -16319,7 +16319,7 @@ func (*HelpSupportPredict) CRC() uint32 {
 func (*HelpSupportPredict) _HelpSupport() {}
 
 type HelpSupportName interface {
-	tl.Object
+	tl.TLObject
 	_HelpSupportName()
 }
 
@@ -16328,7 +16328,7 @@ var (
 )
 
 type HelpSupportNamePredict struct {
-	Name string
+	Name string `tl:"name"`
 }
 
 func (*HelpSupportNamePredict) CRC() uint32 {
@@ -16337,7 +16337,7 @@ func (*HelpSupportNamePredict) CRC() uint32 {
 func (*HelpSupportNamePredict) _HelpSupportName() {}
 
 type HelpTermsOfService interface {
-	tl.Object
+	tl.TLObject
 	_HelpTermsOfService()
 }
 
@@ -16346,12 +16346,12 @@ var (
 )
 
 type HelpTermsOfServicePredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Popup         bool     `tl:",omitempty:flags:0,implicit"`
-	ID            DataJSON
-	Text          string
-	Entities      []MessageEntity
-	MinAgeConfirm *int32 `tl:",omitempty:flags:1"`
+	_             struct{}        `tl:"flags,bitflag"`
+	Popup         bool            `tl:"popup,omitempty:flags:0,implicit"`
+	ID            DataJSON        `tl:"id"`
+	Text          string          `tl:"text"`
+	Entities      []MessageEntity `tl:"entities"`
+	MinAgeConfirm *int32          `tl:"min_age_confirm,omitempty:flags:1"`
 }
 
 func (*HelpTermsOfServicePredict) CRC() uint32 {
@@ -16360,7 +16360,7 @@ func (*HelpTermsOfServicePredict) CRC() uint32 {
 func (*HelpTermsOfServicePredict) _HelpTermsOfService() {}
 
 type HelpTermsOfServiceUpdate interface {
-	tl.Object
+	tl.TLObject
 	_HelpTermsOfServiceUpdate()
 }
 
@@ -16370,7 +16370,7 @@ var (
 )
 
 type HelpTermsOfServiceUpdateEmptyPredict struct {
-	Expires int32
+	Expires int32 `tl:"expires"`
 }
 
 func (*HelpTermsOfServiceUpdateEmptyPredict) CRC() uint32 {
@@ -16379,8 +16379,8 @@ func (*HelpTermsOfServiceUpdateEmptyPredict) CRC() uint32 {
 func (*HelpTermsOfServiceUpdateEmptyPredict) _HelpTermsOfServiceUpdate() {}
 
 type HelpTermsOfServiceUpdatePredict struct {
-	Expires        int32
-	TermsOfService HelpTermsOfService
+	Expires        int32              `tl:"expires"`
+	TermsOfService HelpTermsOfService `tl:"terms_of_service"`
 }
 
 func (*HelpTermsOfServiceUpdatePredict) CRC() uint32 {
@@ -16389,7 +16389,7 @@ func (*HelpTermsOfServiceUpdatePredict) CRC() uint32 {
 func (*HelpTermsOfServiceUpdatePredict) _HelpTermsOfServiceUpdate() {}
 
 type HelpTimezonesList interface {
-	tl.Object
+	tl.TLObject
 	_HelpTimezonesList()
 }
 
@@ -16406,8 +16406,8 @@ func (*HelpTimezonesListNotModifiedPredict) CRC() uint32 {
 func (*HelpTimezonesListNotModifiedPredict) _HelpTimezonesList() {}
 
 type HelpTimezonesListPredict struct {
-	Timezones []Timezone
-	Hash      int32
+	Timezones []Timezone `tl:"timezones"`
+	Hash      int32      `tl:"hash"`
 }
 
 func (*HelpTimezonesListPredict) CRC() uint32 {
@@ -16416,7 +16416,7 @@ func (*HelpTimezonesListPredict) CRC() uint32 {
 func (*HelpTimezonesListPredict) _HelpTimezonesList() {}
 
 type HelpUserInfo interface {
-	tl.Object
+	tl.TLObject
 	_HelpUserInfo()
 }
 
@@ -16433,10 +16433,10 @@ func (*HelpUserInfoEmptyPredict) CRC() uint32 {
 func (*HelpUserInfoEmptyPredict) _HelpUserInfo() {}
 
 type HelpUserInfoPredict struct {
-	Message  string
-	Entities []MessageEntity
-	Author   string
-	Date     int32
+	Message  string          `tl:"message"`
+	Entities []MessageEntity `tl:"entities"`
+	Author   string          `tl:"author"`
+	Date     int32           `tl:"date"`
 }
 
 func (*HelpUserInfoPredict) CRC() uint32 {
@@ -16445,7 +16445,7 @@ func (*HelpUserInfoPredict) CRC() uint32 {
 func (*HelpUserInfoPredict) _HelpUserInfo() {}
 
 type MessagesAffectedFoundMessages interface {
-	tl.Object
+	tl.TLObject
 	_MessagesAffectedFoundMessages()
 }
 
@@ -16454,10 +16454,10 @@ var (
 )
 
 type MessagesAffectedFoundMessagesPredict struct {
-	Pts      int32
-	PtsCount int32
-	Offset   int32
-	Messages []int32
+	Pts      int32   `tl:"pts"`
+	PtsCount int32   `tl:"pts_count"`
+	Offset   int32   `tl:"offset"`
+	Messages []int32 `tl:"messages"`
 }
 
 func (*MessagesAffectedFoundMessagesPredict) CRC() uint32 {
@@ -16466,7 +16466,7 @@ func (*MessagesAffectedFoundMessagesPredict) CRC() uint32 {
 func (*MessagesAffectedFoundMessagesPredict) _MessagesAffectedFoundMessages() {}
 
 type MessagesAffectedHistory interface {
-	tl.Object
+	tl.TLObject
 	_MessagesAffectedHistory()
 }
 
@@ -16475,9 +16475,9 @@ var (
 )
 
 type MessagesAffectedHistoryPredict struct {
-	Pts      int32
-	PtsCount int32
-	Offset   int32
+	Pts      int32 `tl:"pts"`
+	PtsCount int32 `tl:"pts_count"`
+	Offset   int32 `tl:"offset"`
 }
 
 func (*MessagesAffectedHistoryPredict) CRC() uint32 {
@@ -16486,7 +16486,7 @@ func (*MessagesAffectedHistoryPredict) CRC() uint32 {
 func (*MessagesAffectedHistoryPredict) _MessagesAffectedHistory() {}
 
 type MessagesAffectedMessages interface {
-	tl.Object
+	tl.TLObject
 	_MessagesAffectedMessages()
 }
 
@@ -16495,8 +16495,8 @@ var (
 )
 
 type MessagesAffectedMessagesPredict struct {
-	Pts      int32
-	PtsCount int32
+	Pts      int32 `tl:"pts"`
+	PtsCount int32 `tl:"pts_count"`
 }
 
 func (*MessagesAffectedMessagesPredict) CRC() uint32 {
@@ -16505,7 +16505,7 @@ func (*MessagesAffectedMessagesPredict) CRC() uint32 {
 func (*MessagesAffectedMessagesPredict) _MessagesAffectedMessages() {}
 
 type MessagesAllStickers interface {
-	tl.Object
+	tl.TLObject
 	_MessagesAllStickers()
 }
 
@@ -16522,8 +16522,8 @@ func (*MessagesAllStickersNotModifiedPredict) CRC() uint32 {
 func (*MessagesAllStickersNotModifiedPredict) _MessagesAllStickers() {}
 
 type MessagesAllStickersPredict struct {
-	Hash int64
-	Sets []StickerSet
+	Hash int64        `tl:"hash"`
+	Sets []StickerSet `tl:"sets"`
 }
 
 func (*MessagesAllStickersPredict) CRC() uint32 {
@@ -16532,7 +16532,7 @@ func (*MessagesAllStickersPredict) CRC() uint32 {
 func (*MessagesAllStickersPredict) _MessagesAllStickers() {}
 
 type MessagesArchivedStickers interface {
-	tl.Object
+	tl.TLObject
 	_MessagesArchivedStickers()
 }
 
@@ -16541,8 +16541,8 @@ var (
 )
 
 type MessagesArchivedStickersPredict struct {
-	Count int32
-	Sets  []StickerSetCovered
+	Count int32               `tl:"count"`
+	Sets  []StickerSetCovered `tl:"sets"`
 }
 
 func (*MessagesArchivedStickersPredict) CRC() uint32 {
@@ -16551,7 +16551,7 @@ func (*MessagesArchivedStickersPredict) CRC() uint32 {
 func (*MessagesArchivedStickersPredict) _MessagesArchivedStickers() {}
 
 type MessagesAvailableEffects interface {
-	tl.Object
+	tl.TLObject
 	_MessagesAvailableEffects()
 }
 
@@ -16568,9 +16568,9 @@ func (*MessagesAvailableEffectsNotModifiedPredict) CRC() uint32 {
 func (*MessagesAvailableEffectsNotModifiedPredict) _MessagesAvailableEffects() {}
 
 type MessagesAvailableEffectsPredict struct {
-	Hash      int32
-	Effects   []AvailableEffect
-	Documents []Document
+	Hash      int32             `tl:"hash"`
+	Effects   []AvailableEffect `tl:"effects"`
+	Documents []Document        `tl:"documents"`
 }
 
 func (*MessagesAvailableEffectsPredict) CRC() uint32 {
@@ -16579,7 +16579,7 @@ func (*MessagesAvailableEffectsPredict) CRC() uint32 {
 func (*MessagesAvailableEffectsPredict) _MessagesAvailableEffects() {}
 
 type MessagesAvailableReactions interface {
-	tl.Object
+	tl.TLObject
 	_MessagesAvailableReactions()
 }
 
@@ -16596,8 +16596,8 @@ func (*MessagesAvailableReactionsNotModifiedPredict) CRC() uint32 {
 func (*MessagesAvailableReactionsNotModifiedPredict) _MessagesAvailableReactions() {}
 
 type MessagesAvailableReactionsPredict struct {
-	Hash      int32
-	Reactions []AvailableReaction
+	Hash      int32               `tl:"hash"`
+	Reactions []AvailableReaction `tl:"reactions"`
 }
 
 func (*MessagesAvailableReactionsPredict) CRC() uint32 {
@@ -16606,7 +16606,7 @@ func (*MessagesAvailableReactionsPredict) CRC() uint32 {
 func (*MessagesAvailableReactionsPredict) _MessagesAvailableReactions() {}
 
 type MessagesBotApp interface {
-	tl.Object
+	tl.TLObject
 	_MessagesBotApp()
 }
 
@@ -16616,10 +16616,10 @@ var (
 
 type MessagesBotAppPredict struct {
 	_                  struct{} `tl:"flags,bitflag"`
-	Inactive           bool     `tl:",omitempty:flags:0,implicit"`
-	RequestWriteAccess bool     `tl:",omitempty:flags:1,implicit"`
-	HasSettings        bool     `tl:",omitempty:flags:2,implicit"`
-	App                BotApp
+	Inactive           bool     `tl:"inactive,omitempty:flags:0,implicit"`
+	RequestWriteAccess bool     `tl:"request_write_access,omitempty:flags:1,implicit"`
+	HasSettings        bool     `tl:"has_settings,omitempty:flags:2,implicit"`
+	App                BotApp   `tl:"app"`
 }
 
 func (*MessagesBotAppPredict) CRC() uint32 {
@@ -16628,7 +16628,7 @@ func (*MessagesBotAppPredict) CRC() uint32 {
 func (*MessagesBotAppPredict) _MessagesBotApp() {}
 
 type MessagesBotCallbackAnswer interface {
-	tl.Object
+	tl.TLObject
 	_MessagesBotCallbackAnswer()
 }
 
@@ -16638,12 +16638,12 @@ var (
 
 type MessagesBotCallbackAnswerPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Alert     bool     `tl:",omitempty:flags:1,implicit"`
-	HasURL    bool     `tl:",omitempty:flags:3,implicit"`
-	NativeUi  bool     `tl:",omitempty:flags:4,implicit"`
-	Message   *string  `tl:",omitempty:flags:0"`
-	URL       *string  `tl:",omitempty:flags:2"`
-	CacheTime int32
+	Alert     bool     `tl:"alert,omitempty:flags:1,implicit"`
+	HasURL    bool     `tl:"has_url,omitempty:flags:3,implicit"`
+	NativeUi  bool     `tl:"native_ui,omitempty:flags:4,implicit"`
+	Message   *string  `tl:"message,omitempty:flags:0"`
+	URL       *string  `tl:"url,omitempty:flags:2"`
+	CacheTime int32    `tl:"cache_time"`
 }
 
 func (*MessagesBotCallbackAnswerPredict) CRC() uint32 {
@@ -16652,7 +16652,7 @@ func (*MessagesBotCallbackAnswerPredict) CRC() uint32 {
 func (*MessagesBotCallbackAnswerPredict) _MessagesBotCallbackAnswer() {}
 
 type MessagesBotResults interface {
-	tl.Object
+	tl.TLObject
 	_MessagesBotResults()
 }
 
@@ -16661,15 +16661,15 @@ var (
 )
 
 type MessagesBotResultsPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Gallery       bool     `tl:",omitempty:flags:0,implicit"`
-	QueryID       int64
-	NextOffset    *string           `tl:",omitempty:flags:1"`
-	SwitchPm      InlineBotSwitchPm `tl:",omitempty:flags:2"`
-	SwitchWebview InlineBotWebView  `tl:",omitempty:flags:3"`
-	Results       []BotInlineResult
-	CacheTime     int32
-	Users         []User
+	_             struct{}          `tl:"flags,bitflag"`
+	Gallery       bool              `tl:"gallery,omitempty:flags:0,implicit"`
+	QueryID       int64             `tl:"query_id"`
+	NextOffset    *string           `tl:"next_offset,omitempty:flags:1"`
+	SwitchPm      InlineBotSwitchPm `tl:"switch_pm,omitempty:flags:2"`
+	SwitchWebview InlineBotWebView  `tl:"switch_webview,omitempty:flags:3"`
+	Results       []BotInlineResult `tl:"results"`
+	CacheTime     int32             `tl:"cache_time"`
+	Users         []User            `tl:"users"`
 }
 
 func (*MessagesBotResultsPredict) CRC() uint32 {
@@ -16678,7 +16678,7 @@ func (*MessagesBotResultsPredict) CRC() uint32 {
 func (*MessagesBotResultsPredict) _MessagesBotResults() {}
 
 type MessagesChatAdminsWithInvites interface {
-	tl.Object
+	tl.TLObject
 	_MessagesChatAdminsWithInvites()
 }
 
@@ -16687,8 +16687,8 @@ var (
 )
 
 type MessagesChatAdminsWithInvitesPredict struct {
-	Admins []ChatAdminWithInvites
-	Users  []User
+	Admins []ChatAdminWithInvites `tl:"admins"`
+	Users  []User                 `tl:"users"`
 }
 
 func (*MessagesChatAdminsWithInvitesPredict) CRC() uint32 {
@@ -16697,7 +16697,7 @@ func (*MessagesChatAdminsWithInvitesPredict) CRC() uint32 {
 func (*MessagesChatAdminsWithInvitesPredict) _MessagesChatAdminsWithInvites() {}
 
 type MessagesChatFull interface {
-	tl.Object
+	tl.TLObject
 	_MessagesChatFull()
 }
 
@@ -16706,9 +16706,9 @@ var (
 )
 
 type MessagesChatFullPredict struct {
-	FullChat ChatFull
-	Chats    []Chat
-	Users    []User
+	FullChat ChatFull `tl:"full_chat"`
+	Chats    []Chat   `tl:"chats"`
+	Users    []User   `tl:"users"`
 }
 
 func (*MessagesChatFullPredict) CRC() uint32 {
@@ -16717,7 +16717,7 @@ func (*MessagesChatFullPredict) CRC() uint32 {
 func (*MessagesChatFullPredict) _MessagesChatFull() {}
 
 type MessagesChatInviteImporters interface {
-	tl.Object
+	tl.TLObject
 	_MessagesChatInviteImporters()
 }
 
@@ -16726,9 +16726,9 @@ var (
 )
 
 type MessagesChatInviteImportersPredict struct {
-	Count     int32
-	Importers []ChatInviteImporter
-	Users     []User
+	Count     int32                `tl:"count"`
+	Importers []ChatInviteImporter `tl:"importers"`
+	Users     []User               `tl:"users"`
 }
 
 func (*MessagesChatInviteImportersPredict) CRC() uint32 {
@@ -16737,7 +16737,7 @@ func (*MessagesChatInviteImportersPredict) CRC() uint32 {
 func (*MessagesChatInviteImportersPredict) _MessagesChatInviteImporters() {}
 
 type MessagesChats interface {
-	tl.Object
+	tl.TLObject
 	_MessagesChats()
 }
 
@@ -16747,7 +16747,7 @@ var (
 )
 
 type MessagesChatsPredict struct {
-	Chats []Chat
+	Chats []Chat `tl:"chats"`
 }
 
 func (*MessagesChatsPredict) CRC() uint32 {
@@ -16756,8 +16756,8 @@ func (*MessagesChatsPredict) CRC() uint32 {
 func (*MessagesChatsPredict) _MessagesChats() {}
 
 type MessagesChatsSlicePredict struct {
-	Count int32
-	Chats []Chat
+	Count int32  `tl:"count"`
+	Chats []Chat `tl:"chats"`
 }
 
 func (*MessagesChatsSlicePredict) CRC() uint32 {
@@ -16766,7 +16766,7 @@ func (*MessagesChatsSlicePredict) CRC() uint32 {
 func (*MessagesChatsSlicePredict) _MessagesChats() {}
 
 type MessagesCheckedHistoryImportPeer interface {
-	tl.Object
+	tl.TLObject
 	_MessagesCheckedHistoryImportPeer()
 }
 
@@ -16775,7 +16775,7 @@ var (
 )
 
 type MessagesCheckedHistoryImportPeerPredict struct {
-	ConfirmText string
+	ConfirmText string `tl:"confirm_text"`
 }
 
 func (*MessagesCheckedHistoryImportPeerPredict) CRC() uint32 {
@@ -16784,7 +16784,7 @@ func (*MessagesCheckedHistoryImportPeerPredict) CRC() uint32 {
 func (*MessagesCheckedHistoryImportPeerPredict) _MessagesCheckedHistoryImportPeer() {}
 
 type MessagesDhConfig interface {
-	tl.Object
+	tl.TLObject
 	_MessagesDhConfig()
 }
 
@@ -16794,7 +16794,7 @@ var (
 )
 
 type MessagesDhConfigNotModifiedPredict struct {
-	Random []byte
+	Random []byte `tl:"random"`
 }
 
 func (*MessagesDhConfigNotModifiedPredict) CRC() uint32 {
@@ -16803,10 +16803,10 @@ func (*MessagesDhConfigNotModifiedPredict) CRC() uint32 {
 func (*MessagesDhConfigNotModifiedPredict) _MessagesDhConfig() {}
 
 type MessagesDhConfigPredict struct {
-	G       int32
-	P       []byte
-	Version int32
-	Random  []byte
+	G       int32  `tl:"g"`
+	P       []byte `tl:"p"`
+	Version int32  `tl:"version"`
+	Random  []byte `tl:"random"`
 }
 
 func (*MessagesDhConfigPredict) CRC() uint32 {
@@ -16815,7 +16815,7 @@ func (*MessagesDhConfigPredict) CRC() uint32 {
 func (*MessagesDhConfigPredict) _MessagesDhConfig() {}
 
 type MessagesDialogFilters interface {
-	tl.Object
+	tl.TLObject
 	_MessagesDialogFilters()
 }
 
@@ -16824,9 +16824,9 @@ var (
 )
 
 type MessagesDialogFiltersPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	TagsEnabled bool     `tl:",omitempty:flags:0,implicit"`
-	Filters     []DialogFilter
+	_           struct{}       `tl:"flags,bitflag"`
+	TagsEnabled bool           `tl:"tags_enabled,omitempty:flags:0,implicit"`
+	Filters     []DialogFilter `tl:"filters"`
 }
 
 func (*MessagesDialogFiltersPredict) CRC() uint32 {
@@ -16835,7 +16835,7 @@ func (*MessagesDialogFiltersPredict) CRC() uint32 {
 func (*MessagesDialogFiltersPredict) _MessagesDialogFilters() {}
 
 type MessagesDialogs interface {
-	tl.Object
+	tl.TLObject
 	_MessagesDialogs()
 }
 
@@ -16846,10 +16846,10 @@ var (
 )
 
 type MessagesDialogsPredict struct {
-	Dialogs  []Dialog
-	Messages []Message
-	Chats    []Chat
-	Users    []User
+	Dialogs  []Dialog  `tl:"dialogs"`
+	Messages []Message `tl:"messages"`
+	Chats    []Chat    `tl:"chats"`
+	Users    []User    `tl:"users"`
 }
 
 func (*MessagesDialogsPredict) CRC() uint32 {
@@ -16858,11 +16858,11 @@ func (*MessagesDialogsPredict) CRC() uint32 {
 func (*MessagesDialogsPredict) _MessagesDialogs() {}
 
 type MessagesDialogsSlicePredict struct {
-	Count    int32
-	Dialogs  []Dialog
-	Messages []Message
-	Chats    []Chat
-	Users    []User
+	Count    int32     `tl:"count"`
+	Dialogs  []Dialog  `tl:"dialogs"`
+	Messages []Message `tl:"messages"`
+	Chats    []Chat    `tl:"chats"`
+	Users    []User    `tl:"users"`
 }
 
 func (*MessagesDialogsSlicePredict) CRC() uint32 {
@@ -16871,7 +16871,7 @@ func (*MessagesDialogsSlicePredict) CRC() uint32 {
 func (*MessagesDialogsSlicePredict) _MessagesDialogs() {}
 
 type MessagesDialogsNotModifiedPredict struct {
-	Count int32
+	Count int32 `tl:"count"`
 }
 
 func (*MessagesDialogsNotModifiedPredict) CRC() uint32 {
@@ -16880,7 +16880,7 @@ func (*MessagesDialogsNotModifiedPredict) CRC() uint32 {
 func (*MessagesDialogsNotModifiedPredict) _MessagesDialogs() {}
 
 type MessagesDiscussionMessage interface {
-	tl.Object
+	tl.TLObject
 	_MessagesDiscussionMessage()
 }
 
@@ -16889,14 +16889,14 @@ var (
 )
 
 type MessagesDiscussionMessagePredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	Messages        []Message
-	MaxID           *int32 `tl:",omitempty:flags:0"`
-	ReadInboxMaxID  *int32 `tl:",omitempty:flags:1"`
-	ReadOutboxMaxID *int32 `tl:",omitempty:flags:2"`
-	UnreadCount     int32
-	Chats           []Chat
-	Users           []User
+	_               struct{}  `tl:"flags,bitflag"`
+	Messages        []Message `tl:"messages"`
+	MaxID           *int32    `tl:"max_id,omitempty:flags:0"`
+	ReadInboxMaxID  *int32    `tl:"read_inbox_max_id,omitempty:flags:1"`
+	ReadOutboxMaxID *int32    `tl:"read_outbox_max_id,omitempty:flags:2"`
+	UnreadCount     int32     `tl:"unread_count"`
+	Chats           []Chat    `tl:"chats"`
+	Users           []User    `tl:"users"`
 }
 
 func (*MessagesDiscussionMessagePredict) CRC() uint32 {
@@ -16905,7 +16905,7 @@ func (*MessagesDiscussionMessagePredict) CRC() uint32 {
 func (*MessagesDiscussionMessagePredict) _MessagesDiscussionMessage() {}
 
 type MessagesEmojiGroups interface {
-	tl.Object
+	tl.TLObject
 	_MessagesEmojiGroups()
 }
 
@@ -16922,8 +16922,8 @@ func (*MessagesEmojiGroupsNotModifiedPredict) CRC() uint32 {
 func (*MessagesEmojiGroupsNotModifiedPredict) _MessagesEmojiGroups() {}
 
 type MessagesEmojiGroupsPredict struct {
-	Hash   int32
-	Groups []EmojiGroup
+	Hash   int32        `tl:"hash"`
+	Groups []EmojiGroup `tl:"groups"`
 }
 
 func (*MessagesEmojiGroupsPredict) CRC() uint32 {
@@ -16932,7 +16932,7 @@ func (*MessagesEmojiGroupsPredict) CRC() uint32 {
 func (*MessagesEmojiGroupsPredict) _MessagesEmojiGroups() {}
 
 type MessagesExportedChatInvite interface {
-	tl.Object
+	tl.TLObject
 	_MessagesExportedChatInvite()
 }
 
@@ -16942,8 +16942,8 @@ var (
 )
 
 type MessagesExportedChatInvitePredict struct {
-	Invite ExportedChatInvite
-	Users  []User
+	Invite ExportedChatInvite `tl:"invite"`
+	Users  []User             `tl:"users"`
 }
 
 func (*MessagesExportedChatInvitePredict) CRC() uint32 {
@@ -16952,9 +16952,9 @@ func (*MessagesExportedChatInvitePredict) CRC() uint32 {
 func (*MessagesExportedChatInvitePredict) _MessagesExportedChatInvite() {}
 
 type MessagesExportedChatInviteReplacedPredict struct {
-	Invite    ExportedChatInvite
-	NewInvite ExportedChatInvite
-	Users     []User
+	Invite    ExportedChatInvite `tl:"invite"`
+	NewInvite ExportedChatInvite `tl:"new_invite"`
+	Users     []User             `tl:"users"`
 }
 
 func (*MessagesExportedChatInviteReplacedPredict) CRC() uint32 {
@@ -16963,7 +16963,7 @@ func (*MessagesExportedChatInviteReplacedPredict) CRC() uint32 {
 func (*MessagesExportedChatInviteReplacedPredict) _MessagesExportedChatInvite() {}
 
 type MessagesExportedChatInvites interface {
-	tl.Object
+	tl.TLObject
 	_MessagesExportedChatInvites()
 }
 
@@ -16972,9 +16972,9 @@ var (
 )
 
 type MessagesExportedChatInvitesPredict struct {
-	Count   int32
-	Invites []ExportedChatInvite
-	Users   []User
+	Count   int32                `tl:"count"`
+	Invites []ExportedChatInvite `tl:"invites"`
+	Users   []User               `tl:"users"`
 }
 
 func (*MessagesExportedChatInvitesPredict) CRC() uint32 {
@@ -16983,7 +16983,7 @@ func (*MessagesExportedChatInvitesPredict) CRC() uint32 {
 func (*MessagesExportedChatInvitesPredict) _MessagesExportedChatInvites() {}
 
 type MessagesFavedStickers interface {
-	tl.Object
+	tl.TLObject
 	_MessagesFavedStickers()
 }
 
@@ -17000,9 +17000,9 @@ func (*MessagesFavedStickersNotModifiedPredict) CRC() uint32 {
 func (*MessagesFavedStickersNotModifiedPredict) _MessagesFavedStickers() {}
 
 type MessagesFavedStickersPredict struct {
-	Hash     int64
-	Packs    []StickerPack
-	Stickers []Document
+	Hash     int64         `tl:"hash"`
+	Packs    []StickerPack `tl:"packs"`
+	Stickers []Document    `tl:"stickers"`
 }
 
 func (*MessagesFavedStickersPredict) CRC() uint32 {
@@ -17011,7 +17011,7 @@ func (*MessagesFavedStickersPredict) CRC() uint32 {
 func (*MessagesFavedStickersPredict) _MessagesFavedStickers() {}
 
 type MessagesFeaturedStickers interface {
-	tl.Object
+	tl.TLObject
 	_MessagesFeaturedStickers()
 }
 
@@ -17021,7 +17021,7 @@ var (
 )
 
 type MessagesFeaturedStickersNotModifiedPredict struct {
-	Count int32
+	Count int32 `tl:"count"`
 }
 
 func (*MessagesFeaturedStickersNotModifiedPredict) CRC() uint32 {
@@ -17030,12 +17030,12 @@ func (*MessagesFeaturedStickersNotModifiedPredict) CRC() uint32 {
 func (*MessagesFeaturedStickersNotModifiedPredict) _MessagesFeaturedStickers() {}
 
 type MessagesFeaturedStickersPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Premium bool     `tl:",omitempty:flags:0,implicit"`
-	Hash    int64
-	Count   int32
-	Sets    []StickerSetCovered
-	Unread  []int64
+	_       struct{}            `tl:"flags,bitflag"`
+	Premium bool                `tl:"premium,omitempty:flags:0,implicit"`
+	Hash    int64               `tl:"hash"`
+	Count   int32               `tl:"count"`
+	Sets    []StickerSetCovered `tl:"sets"`
+	Unread  []int64             `tl:"unread"`
 }
 
 func (*MessagesFeaturedStickersPredict) CRC() uint32 {
@@ -17044,7 +17044,7 @@ func (*MessagesFeaturedStickersPredict) CRC() uint32 {
 func (*MessagesFeaturedStickersPredict) _MessagesFeaturedStickers() {}
 
 type MessagesForumTopics interface {
-	tl.Object
+	tl.TLObject
 	_MessagesForumTopics()
 }
 
@@ -17053,14 +17053,14 @@ var (
 )
 
 type MessagesForumTopicsPredict struct {
-	_                 struct{} `tl:"flags,bitflag"`
-	OrderByCreateDate bool     `tl:",omitempty:flags:0,implicit"`
-	Count             int32
-	Topics            []ForumTopic
-	Messages          []Message
-	Chats             []Chat
-	Users             []User
-	Pts               int32
+	_                 struct{}     `tl:"flags,bitflag"`
+	OrderByCreateDate bool         `tl:"order_by_create_date,omitempty:flags:0,implicit"`
+	Count             int32        `tl:"count"`
+	Topics            []ForumTopic `tl:"topics"`
+	Messages          []Message    `tl:"messages"`
+	Chats             []Chat       `tl:"chats"`
+	Users             []User       `tl:"users"`
+	Pts               int32        `tl:"pts"`
 }
 
 func (*MessagesForumTopicsPredict) CRC() uint32 {
@@ -17069,7 +17069,7 @@ func (*MessagesForumTopicsPredict) CRC() uint32 {
 func (*MessagesForumTopicsPredict) _MessagesForumTopics() {}
 
 type MessagesFoundStickerSets interface {
-	tl.Object
+	tl.TLObject
 	_MessagesFoundStickerSets()
 }
 
@@ -17086,8 +17086,8 @@ func (*MessagesFoundStickerSetsNotModifiedPredict) CRC() uint32 {
 func (*MessagesFoundStickerSetsNotModifiedPredict) _MessagesFoundStickerSets() {}
 
 type MessagesFoundStickerSetsPredict struct {
-	Hash int64
-	Sets []StickerSetCovered
+	Hash int64               `tl:"hash"`
+	Sets []StickerSetCovered `tl:"sets"`
 }
 
 func (*MessagesFoundStickerSetsPredict) CRC() uint32 {
@@ -17096,7 +17096,7 @@ func (*MessagesFoundStickerSetsPredict) CRC() uint32 {
 func (*MessagesFoundStickerSetsPredict) _MessagesFoundStickerSets() {}
 
 type MessagesHighScores interface {
-	tl.Object
+	tl.TLObject
 	_MessagesHighScores()
 }
 
@@ -17105,8 +17105,8 @@ var (
 )
 
 type MessagesHighScoresPredict struct {
-	Scores []HighScore
-	Users  []User
+	Scores []HighScore `tl:"scores"`
+	Users  []User      `tl:"users"`
 }
 
 func (*MessagesHighScoresPredict) CRC() uint32 {
@@ -17115,7 +17115,7 @@ func (*MessagesHighScoresPredict) CRC() uint32 {
 func (*MessagesHighScoresPredict) _MessagesHighScores() {}
 
 type MessagesHistoryImport interface {
-	tl.Object
+	tl.TLObject
 	_MessagesHistoryImport()
 }
 
@@ -17124,7 +17124,7 @@ var (
 )
 
 type MessagesHistoryImportPredict struct {
-	ID int64
+	ID int64 `tl:"id"`
 }
 
 func (*MessagesHistoryImportPredict) CRC() uint32 {
@@ -17133,7 +17133,7 @@ func (*MessagesHistoryImportPredict) CRC() uint32 {
 func (*MessagesHistoryImportPredict) _MessagesHistoryImport() {}
 
 type MessagesHistoryImportParsed interface {
-	tl.Object
+	tl.TLObject
 	_MessagesHistoryImportParsed()
 }
 
@@ -17143,9 +17143,9 @@ var (
 
 type MessagesHistoryImportParsedPredict struct {
 	_     struct{} `tl:"flags,bitflag"`
-	Pm    bool     `tl:",omitempty:flags:0,implicit"`
-	Group bool     `tl:",omitempty:flags:1,implicit"`
-	Title *string  `tl:",omitempty:flags:2"`
+	Pm    bool     `tl:"pm,omitempty:flags:0,implicit"`
+	Group bool     `tl:"group,omitempty:flags:1,implicit"`
+	Title *string  `tl:"title,omitempty:flags:2"`
 }
 
 func (*MessagesHistoryImportParsedPredict) CRC() uint32 {
@@ -17154,7 +17154,7 @@ func (*MessagesHistoryImportParsedPredict) CRC() uint32 {
 func (*MessagesHistoryImportParsedPredict) _MessagesHistoryImportParsed() {}
 
 type MessagesInactiveChats interface {
-	tl.Object
+	tl.TLObject
 	_MessagesInactiveChats()
 }
 
@@ -17163,9 +17163,9 @@ var (
 )
 
 type MessagesInactiveChatsPredict struct {
-	Dates []int32
-	Chats []Chat
-	Users []User
+	Dates []int32 `tl:"dates"`
+	Chats []Chat  `tl:"chats"`
+	Users []User  `tl:"users"`
 }
 
 func (*MessagesInactiveChatsPredict) CRC() uint32 {
@@ -17174,7 +17174,7 @@ func (*MessagesInactiveChatsPredict) CRC() uint32 {
 func (*MessagesInactiveChatsPredict) _MessagesInactiveChats() {}
 
 type MessagesInvitedUsers interface {
-	tl.Object
+	tl.TLObject
 	_MessagesInvitedUsers()
 }
 
@@ -17183,8 +17183,8 @@ var (
 )
 
 type MessagesInvitedUsersPredict struct {
-	Updates         Updates
-	MissingInvitees []MissingInvitee
+	Updates         Updates          `tl:"updates"`
+	MissingInvitees []MissingInvitee `tl:"missing_invitees"`
 }
 
 func (*MessagesInvitedUsersPredict) CRC() uint32 {
@@ -17193,7 +17193,7 @@ func (*MessagesInvitedUsersPredict) CRC() uint32 {
 func (*MessagesInvitedUsersPredict) _MessagesInvitedUsers() {}
 
 type MessagesMessageEditData interface {
-	tl.Object
+	tl.TLObject
 	_MessagesMessageEditData()
 }
 
@@ -17203,7 +17203,7 @@ var (
 
 type MessagesMessageEditDataPredict struct {
 	_       struct{} `tl:"flags,bitflag"`
-	Caption bool     `tl:",omitempty:flags:0,implicit"`
+	Caption bool     `tl:"caption,omitempty:flags:0,implicit"`
 }
 
 func (*MessagesMessageEditDataPredict) CRC() uint32 {
@@ -17212,7 +17212,7 @@ func (*MessagesMessageEditDataPredict) CRC() uint32 {
 func (*MessagesMessageEditDataPredict) _MessagesMessageEditData() {}
 
 type MessagesMessageReactionsList interface {
-	tl.Object
+	tl.TLObject
 	_MessagesMessageReactionsList()
 }
 
@@ -17221,12 +17221,12 @@ var (
 )
 
 type MessagesMessageReactionsListPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Count      int32
-	Reactions  []MessagePeerReaction
-	Chats      []Chat
-	Users      []User
-	NextOffset *string `tl:",omitempty:flags:0"`
+	_          struct{}              `tl:"flags,bitflag"`
+	Count      int32                 `tl:"count"`
+	Reactions  []MessagePeerReaction `tl:"reactions"`
+	Chats      []Chat                `tl:"chats"`
+	Users      []User                `tl:"users"`
+	NextOffset *string               `tl:"next_offset,omitempty:flags:0"`
 }
 
 func (*MessagesMessageReactionsListPredict) CRC() uint32 {
@@ -17235,7 +17235,7 @@ func (*MessagesMessageReactionsListPredict) CRC() uint32 {
 func (*MessagesMessageReactionsListPredict) _MessagesMessageReactionsList() {}
 
 type MessagesMessageViews interface {
-	tl.Object
+	tl.TLObject
 	_MessagesMessageViews()
 }
 
@@ -17244,9 +17244,9 @@ var (
 )
 
 type MessagesMessageViewsPredict struct {
-	Views []MessageViews
-	Chats []Chat
-	Users []User
+	Views []MessageViews `tl:"views"`
+	Chats []Chat         `tl:"chats"`
+	Users []User         `tl:"users"`
 }
 
 func (*MessagesMessageViewsPredict) CRC() uint32 {
@@ -17255,7 +17255,7 @@ func (*MessagesMessageViewsPredict) CRC() uint32 {
 func (*MessagesMessageViewsPredict) _MessagesMessageViews() {}
 
 type MessagesMessages interface {
-	tl.Object
+	tl.TLObject
 	_MessagesMessages()
 }
 
@@ -17267,9 +17267,9 @@ var (
 )
 
 type MessagesMessagesPredict struct {
-	Messages []Message
-	Chats    []Chat
-	Users    []User
+	Messages []Message `tl:"messages"`
+	Chats    []Chat    `tl:"chats"`
+	Users    []User    `tl:"users"`
 }
 
 func (*MessagesMessagesPredict) CRC() uint32 {
@@ -17278,14 +17278,14 @@ func (*MessagesMessagesPredict) CRC() uint32 {
 func (*MessagesMessagesPredict) _MessagesMessages() {}
 
 type MessagesMessagesSlicePredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	Inexact        bool     `tl:",omitempty:flags:1,implicit"`
-	Count          int32
-	NextRate       *int32 `tl:",omitempty:flags:0"`
-	OffsetIDOffset *int32 `tl:",omitempty:flags:2"`
-	Messages       []Message
-	Chats          []Chat
-	Users          []User
+	_              struct{}  `tl:"flags,bitflag"`
+	Inexact        bool      `tl:"inexact,omitempty:flags:1,implicit"`
+	Count          int32     `tl:"count"`
+	NextRate       *int32    `tl:"next_rate,omitempty:flags:0"`
+	OffsetIDOffset *int32    `tl:"offset_id_offset,omitempty:flags:2"`
+	Messages       []Message `tl:"messages"`
+	Chats          []Chat    `tl:"chats"`
+	Users          []User    `tl:"users"`
 }
 
 func (*MessagesMessagesSlicePredict) CRC() uint32 {
@@ -17294,15 +17294,15 @@ func (*MessagesMessagesSlicePredict) CRC() uint32 {
 func (*MessagesMessagesSlicePredict) _MessagesMessages() {}
 
 type MessagesChannelMessagesPredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	Inexact        bool     `tl:",omitempty:flags:1,implicit"`
-	Pts            int32
-	Count          int32
-	OffsetIDOffset *int32 `tl:",omitempty:flags:2"`
-	Messages       []Message
-	Topics         []ForumTopic
-	Chats          []Chat
-	Users          []User
+	_              struct{}     `tl:"flags,bitflag"`
+	Inexact        bool         `tl:"inexact,omitempty:flags:1,implicit"`
+	Pts            int32        `tl:"pts"`
+	Count          int32        `tl:"count"`
+	OffsetIDOffset *int32       `tl:"offset_id_offset,omitempty:flags:2"`
+	Messages       []Message    `tl:"messages"`
+	Topics         []ForumTopic `tl:"topics"`
+	Chats          []Chat       `tl:"chats"`
+	Users          []User       `tl:"users"`
 }
 
 func (*MessagesChannelMessagesPredict) CRC() uint32 {
@@ -17311,7 +17311,7 @@ func (*MessagesChannelMessagesPredict) CRC() uint32 {
 func (*MessagesChannelMessagesPredict) _MessagesMessages() {}
 
 type MessagesMessagesNotModifiedPredict struct {
-	Count int32
+	Count int32 `tl:"count"`
 }
 
 func (*MessagesMessagesNotModifiedPredict) CRC() uint32 {
@@ -17320,7 +17320,7 @@ func (*MessagesMessagesNotModifiedPredict) CRC() uint32 {
 func (*MessagesMessagesNotModifiedPredict) _MessagesMessages() {}
 
 type MessagesMyStickers interface {
-	tl.Object
+	tl.TLObject
 	_MessagesMyStickers()
 }
 
@@ -17329,8 +17329,8 @@ var (
 )
 
 type MessagesMyStickersPredict struct {
-	Count int32
-	Sets  []StickerSetCovered
+	Count int32               `tl:"count"`
+	Sets  []StickerSetCovered `tl:"sets"`
 }
 
 func (*MessagesMyStickersPredict) CRC() uint32 {
@@ -17339,7 +17339,7 @@ func (*MessagesMyStickersPredict) CRC() uint32 {
 func (*MessagesMyStickersPredict) _MessagesMyStickers() {}
 
 type MessagesPeerDialogs interface {
-	tl.Object
+	tl.TLObject
 	_MessagesPeerDialogs()
 }
 
@@ -17348,11 +17348,11 @@ var (
 )
 
 type MessagesPeerDialogsPredict struct {
-	Dialogs  []Dialog
-	Messages []Message
-	Chats    []Chat
-	Users    []User
-	State    UpdatesState
+	Dialogs  []Dialog     `tl:"dialogs"`
+	Messages []Message    `tl:"messages"`
+	Chats    []Chat       `tl:"chats"`
+	Users    []User       `tl:"users"`
+	State    UpdatesState `tl:"state"`
 }
 
 func (*MessagesPeerDialogsPredict) CRC() uint32 {
@@ -17361,7 +17361,7 @@ func (*MessagesPeerDialogsPredict) CRC() uint32 {
 func (*MessagesPeerDialogsPredict) _MessagesPeerDialogs() {}
 
 type MessagesPeerSettings interface {
-	tl.Object
+	tl.TLObject
 	_MessagesPeerSettings()
 }
 
@@ -17370,9 +17370,9 @@ var (
 )
 
 type MessagesPeerSettingsPredict struct {
-	Settings PeerSettings
-	Chats    []Chat
-	Users    []User
+	Settings PeerSettings `tl:"settings"`
+	Chats    []Chat       `tl:"chats"`
+	Users    []User       `tl:"users"`
 }
 
 func (*MessagesPeerSettingsPredict) CRC() uint32 {
@@ -17381,7 +17381,7 @@ func (*MessagesPeerSettingsPredict) CRC() uint32 {
 func (*MessagesPeerSettingsPredict) _MessagesPeerSettings() {}
 
 type MessagesQuickReplies interface {
-	tl.Object
+	tl.TLObject
 	_MessagesQuickReplies()
 }
 
@@ -17391,10 +17391,10 @@ var (
 )
 
 type MessagesQuickRepliesPredict struct {
-	QuickReplies []QuickReply
-	Messages     []Message
-	Chats        []Chat
-	Users        []User
+	QuickReplies []QuickReply `tl:"quick_replies"`
+	Messages     []Message    `tl:"messages"`
+	Chats        []Chat       `tl:"chats"`
+	Users        []User       `tl:"users"`
 }
 
 func (*MessagesQuickRepliesPredict) CRC() uint32 {
@@ -17410,7 +17410,7 @@ func (*MessagesQuickRepliesNotModifiedPredict) CRC() uint32 {
 func (*MessagesQuickRepliesNotModifiedPredict) _MessagesQuickReplies() {}
 
 type MessagesReactions interface {
-	tl.Object
+	tl.TLObject
 	_MessagesReactions()
 }
 
@@ -17427,8 +17427,8 @@ func (*MessagesReactionsNotModifiedPredict) CRC() uint32 {
 func (*MessagesReactionsNotModifiedPredict) _MessagesReactions() {}
 
 type MessagesReactionsPredict struct {
-	Hash      int64
-	Reactions []Reaction
+	Hash      int64      `tl:"hash"`
+	Reactions []Reaction `tl:"reactions"`
 }
 
 func (*MessagesReactionsPredict) CRC() uint32 {
@@ -17437,7 +17437,7 @@ func (*MessagesReactionsPredict) CRC() uint32 {
 func (*MessagesReactionsPredict) _MessagesReactions() {}
 
 type MessagesRecentStickers interface {
-	tl.Object
+	tl.TLObject
 	_MessagesRecentStickers()
 }
 
@@ -17454,10 +17454,10 @@ func (*MessagesRecentStickersNotModifiedPredict) CRC() uint32 {
 func (*MessagesRecentStickersNotModifiedPredict) _MessagesRecentStickers() {}
 
 type MessagesRecentStickersPredict struct {
-	Hash     int64
-	Packs    []StickerPack
-	Stickers []Document
-	Dates    []int32
+	Hash     int64         `tl:"hash"`
+	Packs    []StickerPack `tl:"packs"`
+	Stickers []Document    `tl:"stickers"`
+	Dates    []int32       `tl:"dates"`
 }
 
 func (*MessagesRecentStickersPredict) CRC() uint32 {
@@ -17466,7 +17466,7 @@ func (*MessagesRecentStickersPredict) CRC() uint32 {
 func (*MessagesRecentStickersPredict) _MessagesRecentStickers() {}
 
 type MessagesSavedDialogs interface {
-	tl.Object
+	tl.TLObject
 	_MessagesSavedDialogs()
 }
 
@@ -17477,10 +17477,10 @@ var (
 )
 
 type MessagesSavedDialogsPredict struct {
-	Dialogs  []SavedDialog
-	Messages []Message
-	Chats    []Chat
-	Users    []User
+	Dialogs  []SavedDialog `tl:"dialogs"`
+	Messages []Message     `tl:"messages"`
+	Chats    []Chat        `tl:"chats"`
+	Users    []User        `tl:"users"`
 }
 
 func (*MessagesSavedDialogsPredict) CRC() uint32 {
@@ -17489,11 +17489,11 @@ func (*MessagesSavedDialogsPredict) CRC() uint32 {
 func (*MessagesSavedDialogsPredict) _MessagesSavedDialogs() {}
 
 type MessagesSavedDialogsSlicePredict struct {
-	Count    int32
-	Dialogs  []SavedDialog
-	Messages []Message
-	Chats    []Chat
-	Users    []User
+	Count    int32         `tl:"count"`
+	Dialogs  []SavedDialog `tl:"dialogs"`
+	Messages []Message     `tl:"messages"`
+	Chats    []Chat        `tl:"chats"`
+	Users    []User        `tl:"users"`
 }
 
 func (*MessagesSavedDialogsSlicePredict) CRC() uint32 {
@@ -17502,7 +17502,7 @@ func (*MessagesSavedDialogsSlicePredict) CRC() uint32 {
 func (*MessagesSavedDialogsSlicePredict) _MessagesSavedDialogs() {}
 
 type MessagesSavedDialogsNotModifiedPredict struct {
-	Count int32
+	Count int32 `tl:"count"`
 }
 
 func (*MessagesSavedDialogsNotModifiedPredict) CRC() uint32 {
@@ -17511,7 +17511,7 @@ func (*MessagesSavedDialogsNotModifiedPredict) CRC() uint32 {
 func (*MessagesSavedDialogsNotModifiedPredict) _MessagesSavedDialogs() {}
 
 type MessagesSavedGifs interface {
-	tl.Object
+	tl.TLObject
 	_MessagesSavedGifs()
 }
 
@@ -17528,8 +17528,8 @@ func (*MessagesSavedGifsNotModifiedPredict) CRC() uint32 {
 func (*MessagesSavedGifsNotModifiedPredict) _MessagesSavedGifs() {}
 
 type MessagesSavedGifsPredict struct {
-	Hash int64
-	Gifs []Document
+	Hash int64      `tl:"hash"`
+	Gifs []Document `tl:"gifs"`
 }
 
 func (*MessagesSavedGifsPredict) CRC() uint32 {
@@ -17538,7 +17538,7 @@ func (*MessagesSavedGifsPredict) CRC() uint32 {
 func (*MessagesSavedGifsPredict) _MessagesSavedGifs() {}
 
 type MessagesSavedReactionTags interface {
-	tl.Object
+	tl.TLObject
 	_MessagesSavedReactionTags()
 }
 
@@ -17555,8 +17555,8 @@ func (*MessagesSavedReactionTagsNotModifiedPredict) CRC() uint32 {
 func (*MessagesSavedReactionTagsNotModifiedPredict) _MessagesSavedReactionTags() {}
 
 type MessagesSavedReactionTagsPredict struct {
-	Tags []SavedReactionTag
-	Hash int64
+	Tags []SavedReactionTag `tl:"tags"`
+	Hash int64              `tl:"hash"`
 }
 
 func (*MessagesSavedReactionTagsPredict) CRC() uint32 {
@@ -17565,7 +17565,7 @@ func (*MessagesSavedReactionTagsPredict) CRC() uint32 {
 func (*MessagesSavedReactionTagsPredict) _MessagesSavedReactionTags() {}
 
 type MessagesSearchCounter interface {
-	tl.Object
+	tl.TLObject
 	_MessagesSearchCounter()
 }
 
@@ -17574,10 +17574,10 @@ var (
 )
 
 type MessagesSearchCounterPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Inexact bool     `tl:",omitempty:flags:1,implicit"`
-	Filter  MessagesFilter
-	Count   int32
+	_       struct{}       `tl:"flags,bitflag"`
+	Inexact bool           `tl:"inexact,omitempty:flags:1,implicit"`
+	Filter  MessagesFilter `tl:"filter"`
+	Count   int32          `tl:"count"`
 }
 
 func (*MessagesSearchCounterPredict) CRC() uint32 {
@@ -17586,7 +17586,7 @@ func (*MessagesSearchCounterPredict) CRC() uint32 {
 func (*MessagesSearchCounterPredict) _MessagesSearchCounter() {}
 
 type MessagesSearchResultsCalendar interface {
-	tl.Object
+	tl.TLObject
 	_MessagesSearchResultsCalendar()
 }
 
@@ -17595,16 +17595,16 @@ var (
 )
 
 type MessagesSearchResultsCalendarPredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	Inexact        bool     `tl:",omitempty:flags:0,implicit"`
-	Count          int32
-	MinDate        int32
-	MinMsgID       int32
-	OffsetIDOffset *int32 `tl:",omitempty:flags:1"`
-	Periods        []SearchResultsCalendarPeriod
-	Messages       []Message
-	Chats          []Chat
-	Users          []User
+	_              struct{}                      `tl:"flags,bitflag"`
+	Inexact        bool                          `tl:"inexact,omitempty:flags:0,implicit"`
+	Count          int32                         `tl:"count"`
+	MinDate        int32                         `tl:"min_date"`
+	MinMsgID       int32                         `tl:"min_msg_id"`
+	OffsetIDOffset *int32                        `tl:"offset_id_offset,omitempty:flags:1"`
+	Periods        []SearchResultsCalendarPeriod `tl:"periods"`
+	Messages       []Message                     `tl:"messages"`
+	Chats          []Chat                        `tl:"chats"`
+	Users          []User                        `tl:"users"`
 }
 
 func (*MessagesSearchResultsCalendarPredict) CRC() uint32 {
@@ -17613,7 +17613,7 @@ func (*MessagesSearchResultsCalendarPredict) CRC() uint32 {
 func (*MessagesSearchResultsCalendarPredict) _MessagesSearchResultsCalendar() {}
 
 type MessagesSearchResultsPositions interface {
-	tl.Object
+	tl.TLObject
 	_MessagesSearchResultsPositions()
 }
 
@@ -17622,8 +17622,8 @@ var (
 )
 
 type MessagesSearchResultsPositionsPredict struct {
-	Count     int32
-	Positions []SearchResultsPosition
+	Count     int32                   `tl:"count"`
+	Positions []SearchResultsPosition `tl:"positions"`
 }
 
 func (*MessagesSearchResultsPositionsPredict) CRC() uint32 {
@@ -17632,7 +17632,7 @@ func (*MessagesSearchResultsPositionsPredict) CRC() uint32 {
 func (*MessagesSearchResultsPositionsPredict) _MessagesSearchResultsPositions() {}
 
 type MessagesSentEncryptedMessage interface {
-	tl.Object
+	tl.TLObject
 	_MessagesSentEncryptedMessage()
 }
 
@@ -17642,7 +17642,7 @@ var (
 )
 
 type MessagesSentEncryptedMessagePredict struct {
-	Date int32
+	Date int32 `tl:"date"`
 }
 
 func (*MessagesSentEncryptedMessagePredict) CRC() uint32 {
@@ -17651,8 +17651,8 @@ func (*MessagesSentEncryptedMessagePredict) CRC() uint32 {
 func (*MessagesSentEncryptedMessagePredict) _MessagesSentEncryptedMessage() {}
 
 type MessagesSentEncryptedFilePredict struct {
-	Date int32
-	File EncryptedFile
+	Date int32         `tl:"date"`
+	File EncryptedFile `tl:"file"`
 }
 
 func (*MessagesSentEncryptedFilePredict) CRC() uint32 {
@@ -17661,7 +17661,7 @@ func (*MessagesSentEncryptedFilePredict) CRC() uint32 {
 func (*MessagesSentEncryptedFilePredict) _MessagesSentEncryptedMessage() {}
 
 type MessagesSponsoredMessages interface {
-	tl.Object
+	tl.TLObject
 	_MessagesSponsoredMessages()
 }
 
@@ -17671,11 +17671,11 @@ var (
 )
 
 type MessagesSponsoredMessagesPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	PostsBetween *int32   `tl:",omitempty:flags:0"`
-	Messages     []SponsoredMessage
-	Chats        []Chat
-	Users        []User
+	_            struct{}           `tl:"flags,bitflag"`
+	PostsBetween *int32             `tl:"posts_between,omitempty:flags:0"`
+	Messages     []SponsoredMessage `tl:"messages"`
+	Chats        []Chat             `tl:"chats"`
+	Users        []User             `tl:"users"`
 }
 
 func (*MessagesSponsoredMessagesPredict) CRC() uint32 {
@@ -17691,7 +17691,7 @@ func (*MessagesSponsoredMessagesEmptyPredict) CRC() uint32 {
 func (*MessagesSponsoredMessagesEmptyPredict) _MessagesSponsoredMessages() {}
 
 type MessagesStickerSet interface {
-	tl.Object
+	tl.TLObject
 	_MessagesStickerSet()
 }
 
@@ -17701,10 +17701,10 @@ var (
 )
 
 type MessagesStickerSetPredict struct {
-	Set       StickerSet
-	Packs     []StickerPack
-	Keywords  []StickerKeyword
-	Documents []Document
+	Set       StickerSet       `tl:"set"`
+	Packs     []StickerPack    `tl:"packs"`
+	Keywords  []StickerKeyword `tl:"keywords"`
+	Documents []Document       `tl:"documents"`
 }
 
 func (*MessagesStickerSetPredict) CRC() uint32 {
@@ -17720,7 +17720,7 @@ func (*MessagesStickerSetNotModifiedPredict) CRC() uint32 {
 func (*MessagesStickerSetNotModifiedPredict) _MessagesStickerSet() {}
 
 type MessagesStickerSetInstallResult interface {
-	tl.Object
+	tl.TLObject
 	_MessagesStickerSetInstallResult()
 }
 
@@ -17737,7 +17737,7 @@ func (*MessagesStickerSetInstallResultSuccessPredict) CRC() uint32 {
 func (*MessagesStickerSetInstallResultSuccessPredict) _MessagesStickerSetInstallResult() {}
 
 type MessagesStickerSetInstallResultArchivePredict struct {
-	Sets []StickerSetCovered
+	Sets []StickerSetCovered `tl:"sets"`
 }
 
 func (*MessagesStickerSetInstallResultArchivePredict) CRC() uint32 {
@@ -17746,7 +17746,7 @@ func (*MessagesStickerSetInstallResultArchivePredict) CRC() uint32 {
 func (*MessagesStickerSetInstallResultArchivePredict) _MessagesStickerSetInstallResult() {}
 
 type MessagesStickers interface {
-	tl.Object
+	tl.TLObject
 	_MessagesStickers()
 }
 
@@ -17763,8 +17763,8 @@ func (*MessagesStickersNotModifiedPredict) CRC() uint32 {
 func (*MessagesStickersNotModifiedPredict) _MessagesStickers() {}
 
 type MessagesStickersPredict struct {
-	Hash     int64
-	Stickers []Document
+	Hash     int64      `tl:"hash"`
+	Stickers []Document `tl:"stickers"`
 }
 
 func (*MessagesStickersPredict) CRC() uint32 {
@@ -17773,7 +17773,7 @@ func (*MessagesStickersPredict) CRC() uint32 {
 func (*MessagesStickersPredict) _MessagesStickers() {}
 
 type MessagesTranscribedAudio interface {
-	tl.Object
+	tl.TLObject
 	_MessagesTranscribedAudio()
 }
 
@@ -17783,11 +17783,11 @@ var (
 
 type MessagesTranscribedAudioPredict struct {
 	_                     struct{} `tl:"flags,bitflag"`
-	Pending               bool     `tl:",omitempty:flags:0,implicit"`
-	TranscriptionID       int64
-	Text                  string
-	TrialRemainsNum       *int32 `tl:",omitempty:flags:1"`
-	TrialRemainsUntilDate *int32 `tl:",omitempty:flags:1"`
+	Pending               bool     `tl:"pending,omitempty:flags:0,implicit"`
+	TranscriptionID       int64    `tl:"transcription_id"`
+	Text                  string   `tl:"text"`
+	TrialRemainsNum       *int32   `tl:"trial_remains_num,omitempty:flags:1"`
+	TrialRemainsUntilDate *int32   `tl:"trial_remains_until_date,omitempty:flags:1"`
 }
 
 func (*MessagesTranscribedAudioPredict) CRC() uint32 {
@@ -17796,7 +17796,7 @@ func (*MessagesTranscribedAudioPredict) CRC() uint32 {
 func (*MessagesTranscribedAudioPredict) _MessagesTranscribedAudio() {}
 
 type MessagesTranslatedText interface {
-	tl.Object
+	tl.TLObject
 	_MessagesTranslatedText()
 }
 
@@ -17805,7 +17805,7 @@ var (
 )
 
 type MessagesTranslateResultPredict struct {
-	Result []TextWithEntities
+	Result []TextWithEntities `tl:"result"`
 }
 
 func (*MessagesTranslateResultPredict) CRC() uint32 {
@@ -17814,7 +17814,7 @@ func (*MessagesTranslateResultPredict) CRC() uint32 {
 func (*MessagesTranslateResultPredict) _MessagesTranslatedText() {}
 
 type MessagesVotesList interface {
-	tl.Object
+	tl.TLObject
 	_MessagesVotesList()
 }
 
@@ -17823,12 +17823,12 @@ var (
 )
 
 type MessagesVotesListPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Count      int32
-	Votes      []MessagePeerVote
-	Chats      []Chat
-	Users      []User
-	NextOffset *string `tl:",omitempty:flags:0"`
+	_          struct{}          `tl:"flags,bitflag"`
+	Count      int32             `tl:"count"`
+	Votes      []MessagePeerVote `tl:"votes"`
+	Chats      []Chat            `tl:"chats"`
+	Users      []User            `tl:"users"`
+	NextOffset *string           `tl:"next_offset,omitempty:flags:0"`
 }
 
 func (*MessagesVotesListPredict) CRC() uint32 {
@@ -17837,7 +17837,7 @@ func (*MessagesVotesListPredict) CRC() uint32 {
 func (*MessagesVotesListPredict) _MessagesVotesList() {}
 
 type MessagesWebPage interface {
-	tl.Object
+	tl.TLObject
 	_MessagesWebPage()
 }
 
@@ -17846,9 +17846,9 @@ var (
 )
 
 type MessagesWebPagePredict struct {
-	Webpage WebPage
-	Chats   []Chat
-	Users   []User
+	Webpage WebPage `tl:"webpage"`
+	Chats   []Chat  `tl:"chats"`
+	Users   []User  `tl:"users"`
 }
 
 func (*MessagesWebPagePredict) CRC() uint32 {
@@ -17857,7 +17857,7 @@ func (*MessagesWebPagePredict) CRC() uint32 {
 func (*MessagesWebPagePredict) _MessagesWebPage() {}
 
 type PaymentsBankCardData interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsBankCardData()
 }
 
@@ -17866,8 +17866,8 @@ var (
 )
 
 type PaymentsBankCardDataPredict struct {
-	Title    string
-	OpenUrls []BankCardOpenURL
+	Title    string            `tl:"title"`
+	OpenUrls []BankCardOpenURL `tl:"open_urls"`
 }
 
 func (*PaymentsBankCardDataPredict) CRC() uint32 {
@@ -17876,7 +17876,7 @@ func (*PaymentsBankCardDataPredict) CRC() uint32 {
 func (*PaymentsBankCardDataPredict) _PaymentsBankCardData() {}
 
 type PaymentsCheckedGiftCode interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsCheckedGiftCode()
 }
 
@@ -17886,15 +17886,15 @@ var (
 
 type PaymentsCheckedGiftCodePredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	ViaGiveaway   bool     `tl:",omitempty:flags:2,implicit"`
-	FromID        Peer     `tl:",omitempty:flags:4"`
-	GiveawayMsgID *int32   `tl:",omitempty:flags:3"`
-	ToID          *int64   `tl:",omitempty:flags:0"`
-	Date          int32
-	Months        int32
-	UsedDate      *int32 `tl:",omitempty:flags:1"`
-	Chats         []Chat
-	Users         []User
+	ViaGiveaway   bool     `tl:"via_giveaway,omitempty:flags:2,implicit"`
+	FromID        Peer     `tl:"from_id,omitempty:flags:4"`
+	GiveawayMsgID *int32   `tl:"giveaway_msg_id,omitempty:flags:3"`
+	ToID          *int64   `tl:"to_id,omitempty:flags:0"`
+	Date          int32    `tl:"date"`
+	Months        int32    `tl:"months"`
+	UsedDate      *int32   `tl:"used_date,omitempty:flags:1"`
+	Chats         []Chat   `tl:"chats"`
+	Users         []User   `tl:"users"`
 }
 
 func (*PaymentsCheckedGiftCodePredict) CRC() uint32 {
@@ -17903,7 +17903,7 @@ func (*PaymentsCheckedGiftCodePredict) CRC() uint32 {
 func (*PaymentsCheckedGiftCodePredict) _PaymentsCheckedGiftCode() {}
 
 type PaymentsExportedInvoice interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsExportedInvoice()
 }
 
@@ -17912,7 +17912,7 @@ var (
 )
 
 type PaymentsExportedInvoicePredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*PaymentsExportedInvoicePredict) CRC() uint32 {
@@ -17921,7 +17921,7 @@ func (*PaymentsExportedInvoicePredict) CRC() uint32 {
 func (*PaymentsExportedInvoicePredict) _PaymentsExportedInvoice() {}
 
 type PaymentsGiveawayInfo interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsGiveawayInfo()
 }
 
@@ -17932,12 +17932,12 @@ var (
 
 type PaymentsGiveawayInfoPredict struct {
 	_                     struct{} `tl:"flags,bitflag"`
-	Participating         bool     `tl:",omitempty:flags:0,implicit"`
-	PreparingResults      bool     `tl:",omitempty:flags:3,implicit"`
-	StartDate             int32
-	JoinedTooEarlyDate    *int32  `tl:",omitempty:flags:1"`
-	AdminDisallowedChatID *int64  `tl:",omitempty:flags:2"`
-	DisallowedCountry     *string `tl:",omitempty:flags:4"`
+	Participating         bool     `tl:"participating,omitempty:flags:0,implicit"`
+	PreparingResults      bool     `tl:"preparing_results,omitempty:flags:3,implicit"`
+	StartDate             int32    `tl:"start_date"`
+	JoinedTooEarlyDate    *int32   `tl:"joined_too_early_date,omitempty:flags:1"`
+	AdminDisallowedChatID *int64   `tl:"admin_disallowed_chat_id,omitempty:flags:2"`
+	DisallowedCountry     *string  `tl:"disallowed_country,omitempty:flags:4"`
 }
 
 func (*PaymentsGiveawayInfoPredict) CRC() uint32 {
@@ -17947,13 +17947,13 @@ func (*PaymentsGiveawayInfoPredict) _PaymentsGiveawayInfo() {}
 
 type PaymentsGiveawayInfoResultsPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	Winner         bool     `tl:",omitempty:flags:0,implicit"`
-	Refunded       bool     `tl:",omitempty:flags:1,implicit"`
-	StartDate      int32
-	GiftCodeSlug   *string `tl:",omitempty:flags:0"`
-	FinishDate     int32
-	WinnersCount   int32
-	ActivatedCount int32
+	Winner         bool     `tl:"winner,omitempty:flags:0,implicit"`
+	Refunded       bool     `tl:"refunded,omitempty:flags:1,implicit"`
+	StartDate      int32    `tl:"start_date"`
+	GiftCodeSlug   *string  `tl:"gift_code_slug,omitempty:flags:0"`
+	FinishDate     int32    `tl:"finish_date"`
+	WinnersCount   int32    `tl:"winners_count"`
+	ActivatedCount int32    `tl:"activated_count"`
 }
 
 func (*PaymentsGiveawayInfoResultsPredict) CRC() uint32 {
@@ -17962,7 +17962,7 @@ func (*PaymentsGiveawayInfoResultsPredict) CRC() uint32 {
 func (*PaymentsGiveawayInfoResultsPredict) _PaymentsGiveawayInfo() {}
 
 type PaymentsPaymentForm interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsPaymentForm()
 }
 
@@ -17972,23 +17972,23 @@ var (
 )
 
 type PaymentsPaymentFormPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	CanSaveCredentials bool     `tl:",omitempty:flags:2,implicit"`
-	PasswordMissing    bool     `tl:",omitempty:flags:3,implicit"`
-	FormID             int64
-	BotID              int64
-	Title              string
-	Description        string
-	Photo              WebDocument `tl:",omitempty:flags:5"`
-	Invoice            Invoice
-	ProviderID         int64
-	URL                string
-	NativeProvider     *string                   `tl:",omitempty:flags:4"`
-	NativeParams       DataJSON                  `tl:",omitempty:flags:4"`
-	AdditionalMethods  []PaymentFormMethod       `tl:",omitempty:flags:6"`
-	SavedInfo          PaymentRequestedInfo      `tl:",omitempty:flags:0"`
-	SavedCredentials   []PaymentSavedCredentials `tl:",omitempty:flags:1"`
-	Users              []User
+	_                  struct{}                  `tl:"flags,bitflag"`
+	CanSaveCredentials bool                      `tl:"can_save_credentials,omitempty:flags:2,implicit"`
+	PasswordMissing    bool                      `tl:"password_missing,omitempty:flags:3,implicit"`
+	FormID             int64                     `tl:"form_id"`
+	BotID              int64                     `tl:"bot_id"`
+	Title              string                    `tl:"title"`
+	Description        string                    `tl:"description"`
+	Photo              WebDocument               `tl:"photo,omitempty:flags:5"`
+	Invoice            Invoice                   `tl:"invoice"`
+	ProviderID         int64                     `tl:"provider_id"`
+	URL                string                    `tl:"url"`
+	NativeProvider     *string                   `tl:"native_provider,omitempty:flags:4"`
+	NativeParams       DataJSON                  `tl:"native_params,omitempty:flags:4"`
+	AdditionalMethods  []PaymentFormMethod       `tl:"additional_methods,omitempty:flags:6"`
+	SavedInfo          PaymentRequestedInfo      `tl:"saved_info,omitempty:flags:0"`
+	SavedCredentials   []PaymentSavedCredentials `tl:"saved_credentials,omitempty:flags:1"`
+	Users              []User                    `tl:"users"`
 }
 
 func (*PaymentsPaymentFormPredict) CRC() uint32 {
@@ -17997,14 +17997,14 @@ func (*PaymentsPaymentFormPredict) CRC() uint32 {
 func (*PaymentsPaymentFormPredict) _PaymentsPaymentForm() {}
 
 type PaymentsPaymentFormStarsPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	FormID      int64
-	BotID       int64
-	Title       string
-	Description string
-	Photo       WebDocument `tl:",omitempty:flags:5"`
-	Invoice     Invoice
-	Users       []User
+	_           struct{}    `tl:"flags,bitflag"`
+	FormID      int64       `tl:"form_id"`
+	BotID       int64       `tl:"bot_id"`
+	Title       string      `tl:"title"`
+	Description string      `tl:"description"`
+	Photo       WebDocument `tl:"photo,omitempty:flags:5"`
+	Invoice     Invoice     `tl:"invoice"`
+	Users       []User      `tl:"users"`
 }
 
 func (*PaymentsPaymentFormStarsPredict) CRC() uint32 {
@@ -18013,7 +18013,7 @@ func (*PaymentsPaymentFormStarsPredict) CRC() uint32 {
 func (*PaymentsPaymentFormStarsPredict) _PaymentsPaymentForm() {}
 
 type PaymentsPaymentReceipt interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsPaymentReceipt()
 }
 
@@ -18023,21 +18023,21 @@ var (
 )
 
 type PaymentsPaymentReceiptPredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	Date             int32
-	BotID            int64
-	ProviderID       int64
-	Title            string
-	Description      string
-	Photo            WebDocument `tl:",omitempty:flags:2"`
-	Invoice          Invoice
-	Info             PaymentRequestedInfo `tl:",omitempty:flags:0"`
-	Shipping         ShippingOption       `tl:",omitempty:flags:1"`
-	TipAmount        *int64               `tl:",omitempty:flags:3"`
-	Currency         string
-	TotalAmount      int64
-	CredentialsTitle string
-	Users            []User
+	_                struct{}             `tl:"flags,bitflag"`
+	Date             int32                `tl:"date"`
+	BotID            int64                `tl:"bot_id"`
+	ProviderID       int64                `tl:"provider_id"`
+	Title            string               `tl:"title"`
+	Description      string               `tl:"description"`
+	Photo            WebDocument          `tl:"photo,omitempty:flags:2"`
+	Invoice          Invoice              `tl:"invoice"`
+	Info             PaymentRequestedInfo `tl:"info,omitempty:flags:0"`
+	Shipping         ShippingOption       `tl:"shipping,omitempty:flags:1"`
+	TipAmount        *int64               `tl:"tip_amount,omitempty:flags:3"`
+	Currency         string               `tl:"currency"`
+	TotalAmount      int64                `tl:"total_amount"`
+	CredentialsTitle string               `tl:"credentials_title"`
+	Users            []User               `tl:"users"`
 }
 
 func (*PaymentsPaymentReceiptPredict) CRC() uint32 {
@@ -18046,17 +18046,17 @@ func (*PaymentsPaymentReceiptPredict) CRC() uint32 {
 func (*PaymentsPaymentReceiptPredict) _PaymentsPaymentReceipt() {}
 
 type PaymentsPaymentReceiptStarsPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Date          int32
-	BotID         int64
-	Title         string
-	Description   string
-	Photo         WebDocument `tl:",omitempty:flags:2"`
-	Invoice       Invoice
-	Currency      string
-	TotalAmount   int64
-	TransactionID string
-	Users         []User
+	_             struct{}    `tl:"flags,bitflag"`
+	Date          int32       `tl:"date"`
+	BotID         int64       `tl:"bot_id"`
+	Title         string      `tl:"title"`
+	Description   string      `tl:"description"`
+	Photo         WebDocument `tl:"photo,omitempty:flags:2"`
+	Invoice       Invoice     `tl:"invoice"`
+	Currency      string      `tl:"currency"`
+	TotalAmount   int64       `tl:"total_amount"`
+	TransactionID string      `tl:"transaction_id"`
+	Users         []User      `tl:"users"`
 }
 
 func (*PaymentsPaymentReceiptStarsPredict) CRC() uint32 {
@@ -18065,7 +18065,7 @@ func (*PaymentsPaymentReceiptStarsPredict) CRC() uint32 {
 func (*PaymentsPaymentReceiptStarsPredict) _PaymentsPaymentReceipt() {}
 
 type PaymentsPaymentResult interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsPaymentResult()
 }
 
@@ -18075,7 +18075,7 @@ var (
 )
 
 type PaymentsPaymentResultPredict struct {
-	Updates Updates
+	Updates Updates `tl:"updates"`
 }
 
 func (*PaymentsPaymentResultPredict) CRC() uint32 {
@@ -18084,7 +18084,7 @@ func (*PaymentsPaymentResultPredict) CRC() uint32 {
 func (*PaymentsPaymentResultPredict) _PaymentsPaymentResult() {}
 
 type PaymentsPaymentVerificationNeededPredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*PaymentsPaymentVerificationNeededPredict) CRC() uint32 {
@@ -18093,7 +18093,7 @@ func (*PaymentsPaymentVerificationNeededPredict) CRC() uint32 {
 func (*PaymentsPaymentVerificationNeededPredict) _PaymentsPaymentResult() {}
 
 type PaymentsSavedInfo interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsSavedInfo()
 }
 
@@ -18103,8 +18103,8 @@ var (
 
 type PaymentsSavedInfoPredict struct {
 	_                   struct{}             `tl:"flags,bitflag"`
-	HasSavedCredentials bool                 `tl:",omitempty:flags:1,implicit"`
-	SavedInfo           PaymentRequestedInfo `tl:",omitempty:flags:0"`
+	HasSavedCredentials bool                 `tl:"has_saved_credentials,omitempty:flags:1,implicit"`
+	SavedInfo           PaymentRequestedInfo `tl:"saved_info,omitempty:flags:0"`
 }
 
 func (*PaymentsSavedInfoPredict) CRC() uint32 {
@@ -18113,7 +18113,7 @@ func (*PaymentsSavedInfoPredict) CRC() uint32 {
 func (*PaymentsSavedInfoPredict) _PaymentsSavedInfo() {}
 
 type PaymentsStarsRevenueAdsAccountURL interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsStarsRevenueAdsAccountURL()
 }
 
@@ -18122,7 +18122,7 @@ var (
 )
 
 type PaymentsStarsRevenueAdsAccountURLPredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*PaymentsStarsRevenueAdsAccountURLPredict) CRC() uint32 {
@@ -18131,7 +18131,7 @@ func (*PaymentsStarsRevenueAdsAccountURLPredict) CRC() uint32 {
 func (*PaymentsStarsRevenueAdsAccountURLPredict) _PaymentsStarsRevenueAdsAccountURL() {}
 
 type PaymentsStarsRevenueStats interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsStarsRevenueStats()
 }
 
@@ -18140,9 +18140,9 @@ var (
 )
 
 type PaymentsStarsRevenueStatsPredict struct {
-	RevenueGraph StatsGraph
-	Status       StarsRevenueStatus
-	UsdRate      float64
+	RevenueGraph StatsGraph         `tl:"revenue_graph"`
+	Status       StarsRevenueStatus `tl:"status"`
+	UsdRate      float64            `tl:"usd_rate"`
 }
 
 func (*PaymentsStarsRevenueStatsPredict) CRC() uint32 {
@@ -18151,7 +18151,7 @@ func (*PaymentsStarsRevenueStatsPredict) CRC() uint32 {
 func (*PaymentsStarsRevenueStatsPredict) _PaymentsStarsRevenueStats() {}
 
 type PaymentsStarsRevenueWithdrawalURL interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsStarsRevenueWithdrawalURL()
 }
 
@@ -18160,7 +18160,7 @@ var (
 )
 
 type PaymentsStarsRevenueWithdrawalURLPredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*PaymentsStarsRevenueWithdrawalURLPredict) CRC() uint32 {
@@ -18169,7 +18169,7 @@ func (*PaymentsStarsRevenueWithdrawalURLPredict) CRC() uint32 {
 func (*PaymentsStarsRevenueWithdrawalURLPredict) _PaymentsStarsRevenueWithdrawalURL() {}
 
 type PaymentsStarsStatus interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsStarsStatus()
 }
 
@@ -18178,12 +18178,12 @@ var (
 )
 
 type PaymentsStarsStatusPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Balance    int64
-	History    []StarsTransaction
-	NextOffset *string `tl:",omitempty:flags:0"`
-	Chats      []Chat
-	Users      []User
+	_          struct{}           `tl:"flags,bitflag"`
+	Balance    int64              `tl:"balance"`
+	History    []StarsTransaction `tl:"history"`
+	NextOffset *string            `tl:"next_offset,omitempty:flags:0"`
+	Chats      []Chat             `tl:"chats"`
+	Users      []User             `tl:"users"`
 }
 
 func (*PaymentsStarsStatusPredict) CRC() uint32 {
@@ -18192,7 +18192,7 @@ func (*PaymentsStarsStatusPredict) CRC() uint32 {
 func (*PaymentsStarsStatusPredict) _PaymentsStarsStatus() {}
 
 type PaymentsValidatedRequestedInfo interface {
-	tl.Object
+	tl.TLObject
 	_PaymentsValidatedRequestedInfo()
 }
 
@@ -18202,8 +18202,8 @@ var (
 
 type PaymentsValidatedRequestedInfoPredict struct {
 	_               struct{}         `tl:"flags,bitflag"`
-	ID              *string          `tl:",omitempty:flags:0"`
-	ShippingOptions []ShippingOption `tl:",omitempty:flags:1"`
+	ID              *string          `tl:"id,omitempty:flags:0"`
+	ShippingOptions []ShippingOption `tl:"shipping_options,omitempty:flags:1"`
 }
 
 func (*PaymentsValidatedRequestedInfoPredict) CRC() uint32 {
@@ -18212,7 +18212,7 @@ func (*PaymentsValidatedRequestedInfoPredict) CRC() uint32 {
 func (*PaymentsValidatedRequestedInfoPredict) _PaymentsValidatedRequestedInfo() {}
 
 type PhoneExportedGroupCallInvite interface {
-	tl.Object
+	tl.TLObject
 	_PhoneExportedGroupCallInvite()
 }
 
@@ -18221,7 +18221,7 @@ var (
 )
 
 type PhoneExportedGroupCallInvitePredict struct {
-	Link string
+	Link string `tl:"link"`
 }
 
 func (*PhoneExportedGroupCallInvitePredict) CRC() uint32 {
@@ -18230,7 +18230,7 @@ func (*PhoneExportedGroupCallInvitePredict) CRC() uint32 {
 func (*PhoneExportedGroupCallInvitePredict) _PhoneExportedGroupCallInvite() {}
 
 type PhoneGroupCall interface {
-	tl.Object
+	tl.TLObject
 	_PhoneGroupCall()
 }
 
@@ -18239,11 +18239,11 @@ var (
 )
 
 type PhoneGroupCallPredict struct {
-	Call                   GroupCall
-	Participants           []GroupCallParticipant
-	ParticipantsNextOffset string
-	Chats                  []Chat
-	Users                  []User
+	Call                   GroupCall              `tl:"call"`
+	Participants           []GroupCallParticipant `tl:"participants"`
+	ParticipantsNextOffset string                 `tl:"participants_next_offset"`
+	Chats                  []Chat                 `tl:"chats"`
+	Users                  []User                 `tl:"users"`
 }
 
 func (*PhoneGroupCallPredict) CRC() uint32 {
@@ -18252,7 +18252,7 @@ func (*PhoneGroupCallPredict) CRC() uint32 {
 func (*PhoneGroupCallPredict) _PhoneGroupCall() {}
 
 type PhoneGroupCallStreamChannels interface {
-	tl.Object
+	tl.TLObject
 	_PhoneGroupCallStreamChannels()
 }
 
@@ -18261,7 +18261,7 @@ var (
 )
 
 type PhoneGroupCallStreamChannelsPredict struct {
-	Channels []GroupCallStreamChannel
+	Channels []GroupCallStreamChannel `tl:"channels"`
 }
 
 func (*PhoneGroupCallStreamChannelsPredict) CRC() uint32 {
@@ -18270,7 +18270,7 @@ func (*PhoneGroupCallStreamChannelsPredict) CRC() uint32 {
 func (*PhoneGroupCallStreamChannelsPredict) _PhoneGroupCallStreamChannels() {}
 
 type PhoneGroupCallStreamRtmpURL interface {
-	tl.Object
+	tl.TLObject
 	_PhoneGroupCallStreamRtmpURL()
 }
 
@@ -18279,8 +18279,8 @@ var (
 )
 
 type PhoneGroupCallStreamRtmpURLPredict struct {
-	URL string
-	Key string
+	URL string `tl:"url"`
+	Key string `tl:"key"`
 }
 
 func (*PhoneGroupCallStreamRtmpURLPredict) CRC() uint32 {
@@ -18289,7 +18289,7 @@ func (*PhoneGroupCallStreamRtmpURLPredict) CRC() uint32 {
 func (*PhoneGroupCallStreamRtmpURLPredict) _PhoneGroupCallStreamRtmpURL() {}
 
 type PhoneGroupParticipants interface {
-	tl.Object
+	tl.TLObject
 	_PhoneGroupParticipants()
 }
 
@@ -18298,12 +18298,12 @@ var (
 )
 
 type PhoneGroupParticipantsPredict struct {
-	Count        int32
-	Participants []GroupCallParticipant
-	NextOffset   string
-	Chats        []Chat
-	Users        []User
-	Version      int32
+	Count        int32                  `tl:"count"`
+	Participants []GroupCallParticipant `tl:"participants"`
+	NextOffset   string                 `tl:"next_offset"`
+	Chats        []Chat                 `tl:"chats"`
+	Users        []User                 `tl:"users"`
+	Version      int32                  `tl:"version"`
 }
 
 func (*PhoneGroupParticipantsPredict) CRC() uint32 {
@@ -18312,7 +18312,7 @@ func (*PhoneGroupParticipantsPredict) CRC() uint32 {
 func (*PhoneGroupParticipantsPredict) _PhoneGroupParticipants() {}
 
 type PhoneJoinAsPeers interface {
-	tl.Object
+	tl.TLObject
 	_PhoneJoinAsPeers()
 }
 
@@ -18321,9 +18321,9 @@ var (
 )
 
 type PhoneJoinAsPeersPredict struct {
-	Peers []Peer
-	Chats []Chat
-	Users []User
+	Peers []Peer `tl:"peers"`
+	Chats []Chat `tl:"chats"`
+	Users []User `tl:"users"`
 }
 
 func (*PhoneJoinAsPeersPredict) CRC() uint32 {
@@ -18332,7 +18332,7 @@ func (*PhoneJoinAsPeersPredict) CRC() uint32 {
 func (*PhoneJoinAsPeersPredict) _PhoneJoinAsPeers() {}
 
 type PhonePhoneCall interface {
-	tl.Object
+	tl.TLObject
 	_PhonePhoneCall()
 }
 
@@ -18341,8 +18341,8 @@ var (
 )
 
 type PhonePhoneCallPredict struct {
-	PhoneCall PhoneCall
-	Users     []User
+	PhoneCall PhoneCall `tl:"phone_call"`
+	Users     []User    `tl:"users"`
 }
 
 func (*PhonePhoneCallPredict) CRC() uint32 {
@@ -18351,7 +18351,7 @@ func (*PhonePhoneCallPredict) CRC() uint32 {
 func (*PhonePhoneCallPredict) _PhonePhoneCall() {}
 
 type PhotosPhoto interface {
-	tl.Object
+	tl.TLObject
 	_PhotosPhoto()
 }
 
@@ -18360,8 +18360,8 @@ var (
 )
 
 type PhotosPhotoPredict struct {
-	Photo Photo
-	Users []User
+	Photo Photo  `tl:"photo"`
+	Users []User `tl:"users"`
 }
 
 func (*PhotosPhotoPredict) CRC() uint32 {
@@ -18370,7 +18370,7 @@ func (*PhotosPhotoPredict) CRC() uint32 {
 func (*PhotosPhotoPredict) _PhotosPhoto() {}
 
 type PhotosPhotos interface {
-	tl.Object
+	tl.TLObject
 	_PhotosPhotos()
 }
 
@@ -18380,8 +18380,8 @@ var (
 )
 
 type PhotosPhotosPredict struct {
-	Photos []Photo
-	Users  []User
+	Photos []Photo `tl:"photos"`
+	Users  []User  `tl:"users"`
 }
 
 func (*PhotosPhotosPredict) CRC() uint32 {
@@ -18390,9 +18390,9 @@ func (*PhotosPhotosPredict) CRC() uint32 {
 func (*PhotosPhotosPredict) _PhotosPhotos() {}
 
 type PhotosPhotosSlicePredict struct {
-	Count  int32
-	Photos []Photo
-	Users  []User
+	Count  int32   `tl:"count"`
+	Photos []Photo `tl:"photos"`
+	Users  []User  `tl:"users"`
 }
 
 func (*PhotosPhotosSlicePredict) CRC() uint32 {
@@ -18401,7 +18401,7 @@ func (*PhotosPhotosSlicePredict) CRC() uint32 {
 func (*PhotosPhotosSlicePredict) _PhotosPhotos() {}
 
 type PremiumBoostsList interface {
-	tl.Object
+	tl.TLObject
 	_PremiumBoostsList()
 }
 
@@ -18411,10 +18411,10 @@ var (
 
 type PremiumBoostsListPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	Count      int32
-	Boosts     []Boost
-	NextOffset *string `tl:",omitempty:flags:0"`
-	Users      []User
+	Count      int32    `tl:"count"`
+	Boosts     []Boost  `tl:"boosts"`
+	NextOffset *string  `tl:"next_offset,omitempty:flags:0"`
+	Users      []User   `tl:"users"`
 }
 
 func (*PremiumBoostsListPredict) CRC() uint32 {
@@ -18423,7 +18423,7 @@ func (*PremiumBoostsListPredict) CRC() uint32 {
 func (*PremiumBoostsListPredict) _PremiumBoostsList() {}
 
 type PremiumBoostsStatus interface {
-	tl.Object
+	tl.TLObject
 	_PremiumBoostsStatus()
 }
 
@@ -18432,17 +18432,17 @@ var (
 )
 
 type PremiumBoostsStatusPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	MyBoost            bool     `tl:",omitempty:flags:2,implicit"`
-	Level              int32
-	CurrentLevelBoosts int32
-	Boosts             int32
-	GiftBoosts         *int32            `tl:",omitempty:flags:4"`
-	NextLevelBoosts    *int32            `tl:",omitempty:flags:0"`
-	PremiumAudience    StatsPercentValue `tl:",omitempty:flags:1"`
-	BoostURL           string
-	PrepaidGiveaways   []PrepaidGiveaway `tl:",omitempty:flags:3"`
-	MyBoostSlots       []int32           `tl:",omitempty:flags:2"`
+	_                  struct{}          `tl:"flags,bitflag"`
+	MyBoost            bool              `tl:"my_boost,omitempty:flags:2,implicit"`
+	Level              int32             `tl:"level"`
+	CurrentLevelBoosts int32             `tl:"current_level_boosts"`
+	Boosts             int32             `tl:"boosts"`
+	GiftBoosts         *int32            `tl:"gift_boosts,omitempty:flags:4"`
+	NextLevelBoosts    *int32            `tl:"next_level_boosts,omitempty:flags:0"`
+	PremiumAudience    StatsPercentValue `tl:"premium_audience,omitempty:flags:1"`
+	BoostURL           string            `tl:"boost_url"`
+	PrepaidGiveaways   []PrepaidGiveaway `tl:"prepaid_giveaways,omitempty:flags:3"`
+	MyBoostSlots       []int32           `tl:"my_boost_slots,omitempty:flags:2"`
 }
 
 func (*PremiumBoostsStatusPredict) CRC() uint32 {
@@ -18451,7 +18451,7 @@ func (*PremiumBoostsStatusPredict) CRC() uint32 {
 func (*PremiumBoostsStatusPredict) _PremiumBoostsStatus() {}
 
 type PremiumMyBoosts interface {
-	tl.Object
+	tl.TLObject
 	_PremiumMyBoosts()
 }
 
@@ -18460,9 +18460,9 @@ var (
 )
 
 type PremiumMyBoostsPredict struct {
-	MyBoosts []MyBoost
-	Chats    []Chat
-	Users    []User
+	MyBoosts []MyBoost `tl:"my_boosts"`
+	Chats    []Chat    `tl:"chats"`
+	Users    []User    `tl:"users"`
 }
 
 func (*PremiumMyBoostsPredict) CRC() uint32 {
@@ -18471,7 +18471,7 @@ func (*PremiumMyBoostsPredict) CRC() uint32 {
 func (*PremiumMyBoostsPredict) _PremiumMyBoosts() {}
 
 type SmsjobsEligibilityToJoin interface {
-	tl.Object
+	tl.TLObject
 	_SmsjobsEligibilityToJoin()
 }
 
@@ -18480,8 +18480,8 @@ var (
 )
 
 type SmsjobsEligibleToJoinPredict struct {
-	TermsURL       string
-	MonthlySentSms int32
+	TermsURL       string `tl:"terms_url"`
+	MonthlySentSms int32  `tl:"monthly_sent_sms"`
 }
 
 func (*SmsjobsEligibleToJoinPredict) CRC() uint32 {
@@ -18490,7 +18490,7 @@ func (*SmsjobsEligibleToJoinPredict) CRC() uint32 {
 func (*SmsjobsEligibleToJoinPredict) _SmsjobsEligibilityToJoin() {}
 
 type SmsjobsStatus interface {
-	tl.Object
+	tl.TLObject
 	_SmsjobsStatus()
 }
 
@@ -18500,14 +18500,14 @@ var (
 
 type SmsjobsStatusPredict struct {
 	_                  struct{} `tl:"flags,bitflag"`
-	AllowInternational bool     `tl:",omitempty:flags:0,implicit"`
-	RecentSent         int32
-	RecentSince        int32
-	RecentRemains      int32
-	TotalSent          int32
-	TotalSince         int32
-	LastGiftSlug       *string `tl:",omitempty:flags:1"`
-	TermsURL           string
+	AllowInternational bool     `tl:"allow_international,omitempty:flags:0,implicit"`
+	RecentSent         int32    `tl:"recent_sent"`
+	RecentSince        int32    `tl:"recent_since"`
+	RecentRemains      int32    `tl:"recent_remains"`
+	TotalSent          int32    `tl:"total_sent"`
+	TotalSince         int32    `tl:"total_since"`
+	LastGiftSlug       *string  `tl:"last_gift_slug,omitempty:flags:1"`
+	TermsURL           string   `tl:"terms_url"`
 }
 
 func (*SmsjobsStatusPredict) CRC() uint32 {
@@ -18516,7 +18516,7 @@ func (*SmsjobsStatusPredict) CRC() uint32 {
 func (*SmsjobsStatusPredict) _SmsjobsStatus() {}
 
 type StatsBroadcastRevenueStats interface {
-	tl.Object
+	tl.TLObject
 	_StatsBroadcastRevenueStats()
 }
 
@@ -18525,10 +18525,10 @@ var (
 )
 
 type StatsBroadcastRevenueStatsPredict struct {
-	TopHoursGraph StatsGraph
-	RevenueGraph  StatsGraph
-	Balances      BroadcastRevenueBalances
-	UsdRate       float64
+	TopHoursGraph StatsGraph               `tl:"top_hours_graph"`
+	RevenueGraph  StatsGraph               `tl:"revenue_graph"`
+	Balances      BroadcastRevenueBalances `tl:"balances"`
+	UsdRate       float64                  `tl:"usd_rate"`
 }
 
 func (*StatsBroadcastRevenueStatsPredict) CRC() uint32 {
@@ -18537,7 +18537,7 @@ func (*StatsBroadcastRevenueStatsPredict) CRC() uint32 {
 func (*StatsBroadcastRevenueStatsPredict) _StatsBroadcastRevenueStats() {}
 
 type StatsBroadcastRevenueTransactions interface {
-	tl.Object
+	tl.TLObject
 	_StatsBroadcastRevenueTransactions()
 }
 
@@ -18546,8 +18546,8 @@ var (
 )
 
 type StatsBroadcastRevenueTransactionsPredict struct {
-	Count        int32
-	Transactions []BroadcastRevenueTransaction
+	Count        int32                         `tl:"count"`
+	Transactions []BroadcastRevenueTransaction `tl:"transactions"`
 }
 
 func (*StatsBroadcastRevenueTransactionsPredict) CRC() uint32 {
@@ -18556,7 +18556,7 @@ func (*StatsBroadcastRevenueTransactionsPredict) CRC() uint32 {
 func (*StatsBroadcastRevenueTransactionsPredict) _StatsBroadcastRevenueTransactions() {}
 
 type StatsBroadcastRevenueWithdrawalURL interface {
-	tl.Object
+	tl.TLObject
 	_StatsBroadcastRevenueWithdrawalURL()
 }
 
@@ -18565,7 +18565,7 @@ var (
 )
 
 type StatsBroadcastRevenueWithdrawalURLPredict struct {
-	URL string
+	URL string `tl:"url"`
 }
 
 func (*StatsBroadcastRevenueWithdrawalURLPredict) CRC() uint32 {
@@ -18574,7 +18574,7 @@ func (*StatsBroadcastRevenueWithdrawalURLPredict) CRC() uint32 {
 func (*StatsBroadcastRevenueWithdrawalURLPredict) _StatsBroadcastRevenueWithdrawalURL() {}
 
 type StatsBroadcastStats interface {
-	tl.Object
+	tl.TLObject
 	_StatsBroadcastStats()
 }
 
@@ -18583,28 +18583,28 @@ var (
 )
 
 type StatsBroadcastStatsPredict struct {
-	Period                       StatsDateRangeDays
-	Followers                    StatsAbsValueAndPrev
-	ViewsPerPost                 StatsAbsValueAndPrev
-	SharesPerPost                StatsAbsValueAndPrev
-	ReactionsPerPost             StatsAbsValueAndPrev
-	ViewsPerStory                StatsAbsValueAndPrev
-	SharesPerStory               StatsAbsValueAndPrev
-	ReactionsPerStory            StatsAbsValueAndPrev
-	EnabledNotifications         StatsPercentValue
-	GrowthGraph                  StatsGraph
-	FollowersGraph               StatsGraph
-	MuteGraph                    StatsGraph
-	TopHoursGraph                StatsGraph
-	InteractionsGraph            StatsGraph
-	IvInteractionsGraph          StatsGraph
-	ViewsBySourceGraph           StatsGraph
-	NewFollowersBySourceGraph    StatsGraph
-	LanguagesGraph               StatsGraph
-	ReactionsByEmotionGraph      StatsGraph
-	StoryInteractionsGraph       StatsGraph
-	StoryReactionsByEmotionGraph StatsGraph
-	RecentPostsInteractions      []PostInteractionCounters
+	Period                       StatsDateRangeDays        `tl:"period"`
+	Followers                    StatsAbsValueAndPrev      `tl:"followers"`
+	ViewsPerPost                 StatsAbsValueAndPrev      `tl:"views_per_post"`
+	SharesPerPost                StatsAbsValueAndPrev      `tl:"shares_per_post"`
+	ReactionsPerPost             StatsAbsValueAndPrev      `tl:"reactions_per_post"`
+	ViewsPerStory                StatsAbsValueAndPrev      `tl:"views_per_story"`
+	SharesPerStory               StatsAbsValueAndPrev      `tl:"shares_per_story"`
+	ReactionsPerStory            StatsAbsValueAndPrev      `tl:"reactions_per_story"`
+	EnabledNotifications         StatsPercentValue         `tl:"enabled_notifications"`
+	GrowthGraph                  StatsGraph                `tl:"growth_graph"`
+	FollowersGraph               StatsGraph                `tl:"followers_graph"`
+	MuteGraph                    StatsGraph                `tl:"mute_graph"`
+	TopHoursGraph                StatsGraph                `tl:"top_hours_graph"`
+	InteractionsGraph            StatsGraph                `tl:"interactions_graph"`
+	IvInteractionsGraph          StatsGraph                `tl:"iv_interactions_graph"`
+	ViewsBySourceGraph           StatsGraph                `tl:"views_by_source_graph"`
+	NewFollowersBySourceGraph    StatsGraph                `tl:"new_followers_by_source_graph"`
+	LanguagesGraph               StatsGraph                `tl:"languages_graph"`
+	ReactionsByEmotionGraph      StatsGraph                `tl:"reactions_by_emotion_graph"`
+	StoryInteractionsGraph       StatsGraph                `tl:"story_interactions_graph"`
+	StoryReactionsByEmotionGraph StatsGraph                `tl:"story_reactions_by_emotion_graph"`
+	RecentPostsInteractions      []PostInteractionCounters `tl:"recent_posts_interactions"`
 }
 
 func (*StatsBroadcastStatsPredict) CRC() uint32 {
@@ -18613,7 +18613,7 @@ func (*StatsBroadcastStatsPredict) CRC() uint32 {
 func (*StatsBroadcastStatsPredict) _StatsBroadcastStats() {}
 
 type StatsMegagroupStats interface {
-	tl.Object
+	tl.TLObject
 	_StatsMegagroupStats()
 }
 
@@ -18622,23 +18622,23 @@ var (
 )
 
 type StatsMegagroupStatsPredict struct {
-	Period                  StatsDateRangeDays
-	Members                 StatsAbsValueAndPrev
-	Messages                StatsAbsValueAndPrev
-	Viewers                 StatsAbsValueAndPrev
-	Posters                 StatsAbsValueAndPrev
-	GrowthGraph             StatsGraph
-	MembersGraph            StatsGraph
-	NewMembersBySourceGraph StatsGraph
-	LanguagesGraph          StatsGraph
-	MessagesGraph           StatsGraph
-	ActionsGraph            StatsGraph
-	TopHoursGraph           StatsGraph
-	WeekdaysGraph           StatsGraph
-	TopPosters              []StatsGroupTopPoster
-	TopAdmins               []StatsGroupTopAdmin
-	TopInviters             []StatsGroupTopInviter
-	Users                   []User
+	Period                  StatsDateRangeDays     `tl:"period"`
+	Members                 StatsAbsValueAndPrev   `tl:"members"`
+	Messages                StatsAbsValueAndPrev   `tl:"messages"`
+	Viewers                 StatsAbsValueAndPrev   `tl:"viewers"`
+	Posters                 StatsAbsValueAndPrev   `tl:"posters"`
+	GrowthGraph             StatsGraph             `tl:"growth_graph"`
+	MembersGraph            StatsGraph             `tl:"members_graph"`
+	NewMembersBySourceGraph StatsGraph             `tl:"new_members_by_source_graph"`
+	LanguagesGraph          StatsGraph             `tl:"languages_graph"`
+	MessagesGraph           StatsGraph             `tl:"messages_graph"`
+	ActionsGraph            StatsGraph             `tl:"actions_graph"`
+	TopHoursGraph           StatsGraph             `tl:"top_hours_graph"`
+	WeekdaysGraph           StatsGraph             `tl:"weekdays_graph"`
+	TopPosters              []StatsGroupTopPoster  `tl:"top_posters"`
+	TopAdmins               []StatsGroupTopAdmin   `tl:"top_admins"`
+	TopInviters             []StatsGroupTopInviter `tl:"top_inviters"`
+	Users                   []User                 `tl:"users"`
 }
 
 func (*StatsMegagroupStatsPredict) CRC() uint32 {
@@ -18647,7 +18647,7 @@ func (*StatsMegagroupStatsPredict) CRC() uint32 {
 func (*StatsMegagroupStatsPredict) _StatsMegagroupStats() {}
 
 type StatsMessageStats interface {
-	tl.Object
+	tl.TLObject
 	_StatsMessageStats()
 }
 
@@ -18656,8 +18656,8 @@ var (
 )
 
 type StatsMessageStatsPredict struct {
-	ViewsGraph              StatsGraph
-	ReactionsByEmotionGraph StatsGraph
+	ViewsGraph              StatsGraph `tl:"views_graph"`
+	ReactionsByEmotionGraph StatsGraph `tl:"reactions_by_emotion_graph"`
 }
 
 func (*StatsMessageStatsPredict) CRC() uint32 {
@@ -18666,7 +18666,7 @@ func (*StatsMessageStatsPredict) CRC() uint32 {
 func (*StatsMessageStatsPredict) _StatsMessageStats() {}
 
 type StatsPublicForwards interface {
-	tl.Object
+	tl.TLObject
 	_StatsPublicForwards()
 }
 
@@ -18675,12 +18675,12 @@ var (
 )
 
 type StatsPublicForwardsPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Count      int32
-	Forwards   []PublicForward
-	NextOffset *string `tl:",omitempty:flags:0"`
-	Chats      []Chat
-	Users      []User
+	_          struct{}        `tl:"flags,bitflag"`
+	Count      int32           `tl:"count"`
+	Forwards   []PublicForward `tl:"forwards"`
+	NextOffset *string         `tl:"next_offset,omitempty:flags:0"`
+	Chats      []Chat          `tl:"chats"`
+	Users      []User          `tl:"users"`
 }
 
 func (*StatsPublicForwardsPredict) CRC() uint32 {
@@ -18689,7 +18689,7 @@ func (*StatsPublicForwardsPredict) CRC() uint32 {
 func (*StatsPublicForwardsPredict) _StatsPublicForwards() {}
 
 type StatsStoryStats interface {
-	tl.Object
+	tl.TLObject
 	_StatsStoryStats()
 }
 
@@ -18698,8 +18698,8 @@ var (
 )
 
 type StatsStoryStatsPredict struct {
-	ViewsGraph              StatsGraph
-	ReactionsByEmotionGraph StatsGraph
+	ViewsGraph              StatsGraph `tl:"views_graph"`
+	ReactionsByEmotionGraph StatsGraph `tl:"reactions_by_emotion_graph"`
 }
 
 func (*StatsStoryStatsPredict) CRC() uint32 {
@@ -18708,7 +18708,7 @@ func (*StatsStoryStatsPredict) CRC() uint32 {
 func (*StatsStoryStatsPredict) _StatsStoryStats() {}
 
 type StickersSuggestedShortName interface {
-	tl.Object
+	tl.TLObject
 	_StickersSuggestedShortName()
 }
 
@@ -18717,7 +18717,7 @@ var (
 )
 
 type StickersSuggestedShortNamePredict struct {
-	ShortName string
+	ShortName string `tl:"short_name"`
 }
 
 func (*StickersSuggestedShortNamePredict) CRC() uint32 {
@@ -18726,7 +18726,7 @@ func (*StickersSuggestedShortNamePredict) CRC() uint32 {
 func (*StickersSuggestedShortNamePredict) _StickersSuggestedShortName() {}
 
 type StoriesAllStories interface {
-	tl.Object
+	tl.TLObject
 	_StoriesAllStories()
 }
 
@@ -18736,9 +18736,9 @@ var (
 )
 
 type StoriesAllStoriesNotModifiedPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	State       string
-	StealthMode StoriesStealthMode
+	_           struct{}           `tl:"flags,bitflag"`
+	State       string             `tl:"state"`
+	StealthMode StoriesStealthMode `tl:"stealth_mode"`
 }
 
 func (*StoriesAllStoriesNotModifiedPredict) CRC() uint32 {
@@ -18747,14 +18747,14 @@ func (*StoriesAllStoriesNotModifiedPredict) CRC() uint32 {
 func (*StoriesAllStoriesNotModifiedPredict) _StoriesAllStories() {}
 
 type StoriesAllStoriesPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	HasMore     bool     `tl:",omitempty:flags:0,implicit"`
-	Count       int32
-	State       string
-	PeerStories []PeerStories
-	Chats       []Chat
-	Users       []User
-	StealthMode StoriesStealthMode
+	_           struct{}           `tl:"flags,bitflag"`
+	HasMore     bool               `tl:"has_more,omitempty:flags:0,implicit"`
+	Count       int32              `tl:"count"`
+	State       string             `tl:"state"`
+	PeerStories []PeerStories      `tl:"peer_stories"`
+	Chats       []Chat             `tl:"chats"`
+	Users       []User             `tl:"users"`
+	StealthMode StoriesStealthMode `tl:"stealth_mode"`
 }
 
 func (*StoriesAllStoriesPredict) CRC() uint32 {
@@ -18763,7 +18763,7 @@ func (*StoriesAllStoriesPredict) CRC() uint32 {
 func (*StoriesAllStoriesPredict) _StoriesAllStories() {}
 
 type StoriesFoundStories interface {
-	tl.Object
+	tl.TLObject
 	_StoriesFoundStories()
 }
 
@@ -18772,12 +18772,12 @@ var (
 )
 
 type StoriesFoundStoriesPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Count      int32
-	Stories    []FoundStory
-	NextOffset *string `tl:",omitempty:flags:0"`
-	Chats      []Chat
-	Users      []User
+	_          struct{}     `tl:"flags,bitflag"`
+	Count      int32        `tl:"count"`
+	Stories    []FoundStory `tl:"stories"`
+	NextOffset *string      `tl:"next_offset,omitempty:flags:0"`
+	Chats      []Chat       `tl:"chats"`
+	Users      []User       `tl:"users"`
 }
 
 func (*StoriesFoundStoriesPredict) CRC() uint32 {
@@ -18786,7 +18786,7 @@ func (*StoriesFoundStoriesPredict) CRC() uint32 {
 func (*StoriesFoundStoriesPredict) _StoriesFoundStories() {}
 
 type StoriesPeerStories interface {
-	tl.Object
+	tl.TLObject
 	_StoriesPeerStories()
 }
 
@@ -18795,9 +18795,9 @@ var (
 )
 
 type StoriesPeerStoriesPredict struct {
-	Stories PeerStories
-	Chats   []Chat
-	Users   []User
+	Stories PeerStories `tl:"stories"`
+	Chats   []Chat      `tl:"chats"`
+	Users   []User      `tl:"users"`
 }
 
 func (*StoriesPeerStoriesPredict) CRC() uint32 {
@@ -18806,7 +18806,7 @@ func (*StoriesPeerStoriesPredict) CRC() uint32 {
 func (*StoriesPeerStoriesPredict) _StoriesPeerStories() {}
 
 type StoriesStories interface {
-	tl.Object
+	tl.TLObject
 	_StoriesStories()
 }
 
@@ -18815,12 +18815,12 @@ var (
 )
 
 type StoriesStoriesPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Count       int32
-	Stories     []StoryItem
-	PinnedToTop []int32 `tl:",omitempty:flags:0"`
-	Chats       []Chat
-	Users       []User
+	_           struct{}    `tl:"flags,bitflag"`
+	Count       int32       `tl:"count"`
+	Stories     []StoryItem `tl:"stories"`
+	PinnedToTop []int32     `tl:"pinned_to_top,omitempty:flags:0"`
+	Chats       []Chat      `tl:"chats"`
+	Users       []User      `tl:"users"`
 }
 
 func (*StoriesStoriesPredict) CRC() uint32 {
@@ -18829,7 +18829,7 @@ func (*StoriesStoriesPredict) CRC() uint32 {
 func (*StoriesStoriesPredict) _StoriesStories() {}
 
 type StoriesStoryReactionsList interface {
-	tl.Object
+	tl.TLObject
 	_StoriesStoryReactionsList()
 }
 
@@ -18838,12 +18838,12 @@ var (
 )
 
 type StoriesStoryReactionsListPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Count      int32
-	Reactions  []StoryReaction
-	Chats      []Chat
-	Users      []User
-	NextOffset *string `tl:",omitempty:flags:0"`
+	_          struct{}        `tl:"flags,bitflag"`
+	Count      int32           `tl:"count"`
+	Reactions  []StoryReaction `tl:"reactions"`
+	Chats      []Chat          `tl:"chats"`
+	Users      []User          `tl:"users"`
+	NextOffset *string         `tl:"next_offset,omitempty:flags:0"`
 }
 
 func (*StoriesStoryReactionsListPredict) CRC() uint32 {
@@ -18852,7 +18852,7 @@ func (*StoriesStoryReactionsListPredict) CRC() uint32 {
 func (*StoriesStoryReactionsListPredict) _StoriesStoryReactionsList() {}
 
 type StoriesStoryViews interface {
-	tl.Object
+	tl.TLObject
 	_StoriesStoryViews()
 }
 
@@ -18861,8 +18861,8 @@ var (
 )
 
 type StoriesStoryViewsPredict struct {
-	Views []StoryViews
-	Users []User
+	Views []StoryViews `tl:"views"`
+	Users []User       `tl:"users"`
 }
 
 func (*StoriesStoryViewsPredict) CRC() uint32 {
@@ -18871,7 +18871,7 @@ func (*StoriesStoryViewsPredict) CRC() uint32 {
 func (*StoriesStoryViewsPredict) _StoriesStoryViews() {}
 
 type StoriesStoryViewsList interface {
-	tl.Object
+	tl.TLObject
 	_StoriesStoryViewsList()
 }
 
@@ -18880,15 +18880,15 @@ var (
 )
 
 type StoriesStoryViewsListPredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	Count          int32
-	ViewsCount     int32
-	ForwardsCount  int32
-	ReactionsCount int32
-	Views          []StoryView
-	Chats          []Chat
-	Users          []User
-	NextOffset     *string `tl:",omitempty:flags:0"`
+	_              struct{}    `tl:"flags,bitflag"`
+	Count          int32       `tl:"count"`
+	ViewsCount     int32       `tl:"views_count"`
+	ForwardsCount  int32       `tl:"forwards_count"`
+	ReactionsCount int32       `tl:"reactions_count"`
+	Views          []StoryView `tl:"views"`
+	Chats          []Chat      `tl:"chats"`
+	Users          []User      `tl:"users"`
+	NextOffset     *string     `tl:"next_offset,omitempty:flags:0"`
 }
 
 func (*StoriesStoryViewsListPredict) CRC() uint32 {
@@ -18897,7 +18897,7 @@ func (*StoriesStoryViewsListPredict) CRC() uint32 {
 func (*StoriesStoryViewsListPredict) _StoriesStoryViewsList() {}
 
 type UpdatesChannelDifference interface {
-	tl.Object
+	tl.TLObject
 	_UpdatesChannelDifference()
 }
 
@@ -18909,9 +18909,9 @@ var (
 
 type UpdatesChannelDifferenceEmptyPredict struct {
 	_       struct{} `tl:"flags,bitflag"`
-	Final   bool     `tl:",omitempty:flags:0,implicit"`
-	Pts     int32
-	Timeout *int32 `tl:",omitempty:flags:1"`
+	Final   bool     `tl:"final,omitempty:flags:0,implicit"`
+	Pts     int32    `tl:"pts"`
+	Timeout *int32   `tl:"timeout,omitempty:flags:1"`
 }
 
 func (*UpdatesChannelDifferenceEmptyPredict) CRC() uint32 {
@@ -18920,13 +18920,13 @@ func (*UpdatesChannelDifferenceEmptyPredict) CRC() uint32 {
 func (*UpdatesChannelDifferenceEmptyPredict) _UpdatesChannelDifference() {}
 
 type UpdatesChannelDifferenceTooLongPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Final    bool     `tl:",omitempty:flags:0,implicit"`
-	Timeout  *int32   `tl:",omitempty:flags:1"`
-	Dialog   Dialog
-	Messages []Message
-	Chats    []Chat
-	Users    []User
+	_        struct{}  `tl:"flags,bitflag"`
+	Final    bool      `tl:"final,omitempty:flags:0,implicit"`
+	Timeout  *int32    `tl:"timeout,omitempty:flags:1"`
+	Dialog   Dialog    `tl:"dialog"`
+	Messages []Message `tl:"messages"`
+	Chats    []Chat    `tl:"chats"`
+	Users    []User    `tl:"users"`
 }
 
 func (*UpdatesChannelDifferenceTooLongPredict) CRC() uint32 {
@@ -18935,14 +18935,14 @@ func (*UpdatesChannelDifferenceTooLongPredict) CRC() uint32 {
 func (*UpdatesChannelDifferenceTooLongPredict) _UpdatesChannelDifference() {}
 
 type UpdatesChannelDifferencePredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Final        bool     `tl:",omitempty:flags:0,implicit"`
-	Pts          int32
-	Timeout      *int32 `tl:",omitempty:flags:1"`
-	NewMessages  []Message
-	OtherUpdates []Update
-	Chats        []Chat
-	Users        []User
+	_            struct{}  `tl:"flags,bitflag"`
+	Final        bool      `tl:"final,omitempty:flags:0,implicit"`
+	Pts          int32     `tl:"pts"`
+	Timeout      *int32    `tl:"timeout,omitempty:flags:1"`
+	NewMessages  []Message `tl:"new_messages"`
+	OtherUpdates []Update  `tl:"other_updates"`
+	Chats        []Chat    `tl:"chats"`
+	Users        []User    `tl:"users"`
 }
 
 func (*UpdatesChannelDifferencePredict) CRC() uint32 {
@@ -18951,7 +18951,7 @@ func (*UpdatesChannelDifferencePredict) CRC() uint32 {
 func (*UpdatesChannelDifferencePredict) _UpdatesChannelDifference() {}
 
 type UpdatesDifference interface {
-	tl.Object
+	tl.TLObject
 	_UpdatesDifference()
 }
 
@@ -18963,8 +18963,8 @@ var (
 )
 
 type UpdatesDifferenceEmptyPredict struct {
-	Date int32
-	Seq  int32
+	Date int32 `tl:"date"`
+	Seq  int32 `tl:"seq"`
 }
 
 func (*UpdatesDifferenceEmptyPredict) CRC() uint32 {
@@ -18973,12 +18973,12 @@ func (*UpdatesDifferenceEmptyPredict) CRC() uint32 {
 func (*UpdatesDifferenceEmptyPredict) _UpdatesDifference() {}
 
 type UpdatesDifferencePredict struct {
-	NewMessages          []Message
-	NewEncryptedMessages []EncryptedMessage
-	OtherUpdates         []Update
-	Chats                []Chat
-	Users                []User
-	State                UpdatesState
+	NewMessages          []Message          `tl:"new_messages"`
+	NewEncryptedMessages []EncryptedMessage `tl:"new_encrypted_messages"`
+	OtherUpdates         []Update           `tl:"other_updates"`
+	Chats                []Chat             `tl:"chats"`
+	Users                []User             `tl:"users"`
+	State                UpdatesState       `tl:"state"`
 }
 
 func (*UpdatesDifferencePredict) CRC() uint32 {
@@ -18987,12 +18987,12 @@ func (*UpdatesDifferencePredict) CRC() uint32 {
 func (*UpdatesDifferencePredict) _UpdatesDifference() {}
 
 type UpdatesDifferenceSlicePredict struct {
-	NewMessages          []Message
-	NewEncryptedMessages []EncryptedMessage
-	OtherUpdates         []Update
-	Chats                []Chat
-	Users                []User
-	IntermediateState    UpdatesState
+	NewMessages          []Message          `tl:"new_messages"`
+	NewEncryptedMessages []EncryptedMessage `tl:"new_encrypted_messages"`
+	OtherUpdates         []Update           `tl:"other_updates"`
+	Chats                []Chat             `tl:"chats"`
+	Users                []User             `tl:"users"`
+	IntermediateState    UpdatesState       `tl:"intermediate_state"`
 }
 
 func (*UpdatesDifferenceSlicePredict) CRC() uint32 {
@@ -19001,7 +19001,7 @@ func (*UpdatesDifferenceSlicePredict) CRC() uint32 {
 func (*UpdatesDifferenceSlicePredict) _UpdatesDifference() {}
 
 type UpdatesDifferenceTooLongPredict struct {
-	Pts int32
+	Pts int32 `tl:"pts"`
 }
 
 func (*UpdatesDifferenceTooLongPredict) CRC() uint32 {
@@ -19010,7 +19010,7 @@ func (*UpdatesDifferenceTooLongPredict) CRC() uint32 {
 func (*UpdatesDifferenceTooLongPredict) _UpdatesDifference() {}
 
 type UpdatesState interface {
-	tl.Object
+	tl.TLObject
 	_UpdatesState()
 }
 
@@ -19019,11 +19019,11 @@ var (
 )
 
 type UpdatesStatePredict struct {
-	Pts         int32
-	Qts         int32
-	Date        int32
-	Seq         int32
-	UnreadCount int32
+	Pts         int32 `tl:"pts"`
+	Qts         int32 `tl:"qts"`
+	Date        int32 `tl:"date"`
+	Seq         int32 `tl:"seq"`
+	UnreadCount int32 `tl:"unread_count"`
 }
 
 func (*UpdatesStatePredict) CRC() uint32 {
@@ -19032,7 +19032,7 @@ func (*UpdatesStatePredict) CRC() uint32 {
 func (*UpdatesStatePredict) _UpdatesState() {}
 
 type UploadCdnFile interface {
-	tl.Object
+	tl.TLObject
 	_UploadCdnFile()
 }
 
@@ -19042,7 +19042,7 @@ var (
 )
 
 type UploadCdnFileReuploadNeededPredict struct {
-	RequestToken []byte
+	RequestToken []byte `tl:"request_token"`
 }
 
 func (*UploadCdnFileReuploadNeededPredict) CRC() uint32 {
@@ -19051,7 +19051,7 @@ func (*UploadCdnFileReuploadNeededPredict) CRC() uint32 {
 func (*UploadCdnFileReuploadNeededPredict) _UploadCdnFile() {}
 
 type UploadCdnFilePredict struct {
-	Bytes []byte
+	Bytes []byte `tl:"bytes"`
 }
 
 func (*UploadCdnFilePredict) CRC() uint32 {
@@ -19060,7 +19060,7 @@ func (*UploadCdnFilePredict) CRC() uint32 {
 func (*UploadCdnFilePredict) _UploadCdnFile() {}
 
 type UploadFile interface {
-	tl.Object
+	tl.TLObject
 	_UploadFile()
 }
 
@@ -19070,9 +19070,9 @@ var (
 )
 
 type UploadFilePredict struct {
-	Type  StorageFileType
-	Mtime int32
-	Bytes []byte
+	Type  StorageFileType `tl:"type"`
+	Mtime int32           `tl:"mtime"`
+	Bytes []byte          `tl:"bytes"`
 }
 
 func (*UploadFilePredict) CRC() uint32 {
@@ -19081,11 +19081,11 @@ func (*UploadFilePredict) CRC() uint32 {
 func (*UploadFilePredict) _UploadFile() {}
 
 type UploadFileCdnRedirectPredict struct {
-	DcID          int32
-	FileToken     []byte
-	EncryptionKey []byte
-	EncryptionIv  []byte
-	FileHashes    []FileHash
+	DcID          int32      `tl:"dc_id"`
+	FileToken     []byte     `tl:"file_token"`
+	EncryptionKey []byte     `tl:"encryption_key"`
+	EncryptionIv  []byte     `tl:"encryption_iv"`
+	FileHashes    []FileHash `tl:"file_hashes"`
 }
 
 func (*UploadFileCdnRedirectPredict) CRC() uint32 {
@@ -19094,7 +19094,7 @@ func (*UploadFileCdnRedirectPredict) CRC() uint32 {
 func (*UploadFileCdnRedirectPredict) _UploadFile() {}
 
 type UploadWebFile interface {
-	tl.Object
+	tl.TLObject
 	_UploadWebFile()
 }
 
@@ -19103,11 +19103,11 @@ var (
 )
 
 type UploadWebFilePredict struct {
-	Size     int32
-	MimeType string
-	FileType StorageFileType
-	Mtime    int32
-	Bytes    []byte
+	Size     int32           `tl:"size"`
+	MimeType string          `tl:"mime_type"`
+	FileType StorageFileType `tl:"file_type"`
+	Mtime    int32           `tl:"mtime"`
+	Bytes    []byte          `tl:"bytes"`
 }
 
 func (*UploadWebFilePredict) CRC() uint32 {
@@ -19116,7 +19116,7 @@ func (*UploadWebFilePredict) CRC() uint32 {
 func (*UploadWebFilePredict) _UploadWebFile() {}
 
 type UsersUserFull interface {
-	tl.Object
+	tl.TLObject
 	_UsersUserFull()
 }
 
@@ -19125,9 +19125,9 @@ var (
 )
 
 type UsersUserFullPredict struct {
-	FullUser UserFull
-	Chats    []Chat
-	Users    []User
+	FullUser UserFull `tl:"full_user"`
+	Chats    []Chat   `tl:"chats"`
+	Users    []User   `tl:"users"`
 }
 
 func (*UsersUserFullPredict) CRC() uint32 {
@@ -19320,164 +19320,164 @@ func request[IN any, OUT any](ctx context.Context, m Requester, in *IN, out *OUT
 	return nil
 }
 
-type InvokeAfterMsgRequestPredict[X any] struct {
-	MsgID int64
-	Query X
+type InvokeAfterMsgRequestPredict[X tl.TLObject] struct {
+	MsgID int64 `tl:"msg_id"`
+	Query X     `tl:"query"`
 }
 
 func (*InvokeAfterMsgRequestPredict[X]) CRC() uint32 {
 	return 0xcb9f372d
 }
 
-func InvokeAfterMsg[X any](ctx context.Context, m Requester, i InvokeAfterMsgRequestPredict[X]) (X, error) {
+func InvokeAfterMsg[X tl.TLObject](ctx context.Context, m Requester, i InvokeAfterMsgRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeAfterMsgsRequestPredict[X any] struct {
-	MsgIds []int64
-	Query  X
+type InvokeAfterMsgsRequestPredict[X tl.TLObject] struct {
+	MsgIds []int64 `tl:"msg_ids"`
+	Query  X       `tl:"query"`
 }
 
 func (*InvokeAfterMsgsRequestPredict[X]) CRC() uint32 {
 	return 0x3dc4b4f0
 }
 
-func InvokeAfterMsgs[X any](ctx context.Context, m Requester, i InvokeAfterMsgsRequestPredict[X]) (X, error) {
+func InvokeAfterMsgs[X tl.TLObject](ctx context.Context, m Requester, i InvokeAfterMsgsRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InitConnectionRequestPredict[X any] struct {
-	_              struct{} `tl:"flags,bitflag"`
-	APIID          int32
-	DeviceModel    string
-	SystemVersion  string
-	AppVersion     string
-	SystemLangCode string
-	LangPack       string
-	LangCode       string
-	Proxy          InputClientProxy `tl:",omitempty:flags:0"`
-	Params         JSONValue        `tl:",omitempty:flags:1"`
-	Query          X
+type InitConnectionRequestPredict[X tl.TLObject] struct {
+	_              struct{}         `tl:"flags,bitflag"`
+	APIID          int32            `tl:"api_id"`
+	DeviceModel    string           `tl:"device_model"`
+	SystemVersion  string           `tl:"system_version"`
+	AppVersion     string           `tl:"app_version"`
+	SystemLangCode string           `tl:"system_lang_code"`
+	LangPack       string           `tl:"lang_pack"`
+	LangCode       string           `tl:"lang_code"`
+	Proxy          InputClientProxy `tl:"proxy,omitempty:flags:0"`
+	Params         JSONValue        `tl:"params,omitempty:flags:1"`
+	Query          X                `tl:"query"`
 }
 
 func (*InitConnectionRequestPredict[X]) CRC() uint32 {
 	return 0xc1cd5ea9
 }
 
-func InitConnection[X any](ctx context.Context, m Requester, i InitConnectionRequestPredict[X]) (X, error) {
+func InitConnection[X tl.TLObject](ctx context.Context, m Requester, i InitConnectionRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithLayerRequestPredict[X any] struct {
-	Layer int32
-	Query X
+type InvokeWithLayerRequestPredict[X tl.TLObject] struct {
+	Layer int32 `tl:"layer"`
+	Query X     `tl:"query"`
 }
 
 func (*InvokeWithLayerRequestPredict[X]) CRC() uint32 {
 	return 0xda9b0d0d
 }
 
-func InvokeWithLayer[X any](ctx context.Context, m Requester, i InvokeWithLayerRequestPredict[X]) (X, error) {
+func InvokeWithLayer[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithLayerRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithoutUpdatesRequestPredict[X any] struct {
-	Query X
+type InvokeWithoutUpdatesRequestPredict[X tl.TLObject] struct {
+	Query X `tl:"query"`
 }
 
 func (*InvokeWithoutUpdatesRequestPredict[X]) CRC() uint32 {
 	return 0xbf9459b7
 }
 
-func InvokeWithoutUpdates[X any](ctx context.Context, m Requester, i InvokeWithoutUpdatesRequestPredict[X]) (X, error) {
+func InvokeWithoutUpdates[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithoutUpdatesRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithMessagesRangeRequestPredict[X any] struct {
-	Range MessageRange
-	Query X
+type InvokeWithMessagesRangeRequestPredict[X tl.TLObject] struct {
+	Range MessageRange `tl:"range"`
+	Query X            `tl:"query"`
 }
 
 func (*InvokeWithMessagesRangeRequestPredict[X]) CRC() uint32 {
 	return 0x365275f2
 }
 
-func InvokeWithMessagesRange[X any](ctx context.Context, m Requester, i InvokeWithMessagesRangeRequestPredict[X]) (X, error) {
+func InvokeWithMessagesRange[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithMessagesRangeRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithTakeoutRequestPredict[X any] struct {
-	TakeoutID int64
-	Query     X
+type InvokeWithTakeoutRequestPredict[X tl.TLObject] struct {
+	TakeoutID int64 `tl:"takeout_id"`
+	Query     X     `tl:"query"`
 }
 
 func (*InvokeWithTakeoutRequestPredict[X]) CRC() uint32 {
 	return 0xaca9fd2e
 }
 
-func InvokeWithTakeout[X any](ctx context.Context, m Requester, i InvokeWithTakeoutRequestPredict[X]) (X, error) {
+func InvokeWithTakeout[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithTakeoutRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithBusinessConnectionRequestPredict[X any] struct {
-	ConnectionID string
-	Query        X
+type InvokeWithBusinessConnectionRequestPredict[X tl.TLObject] struct {
+	ConnectionID string `tl:"connection_id"`
+	Query        X      `tl:"query"`
 }
 
 func (*InvokeWithBusinessConnectionRequestPredict[X]) CRC() uint32 {
 	return 0xdd289f8e
 }
 
-func InvokeWithBusinessConnection[X any](ctx context.Context, m Requester, i InvokeWithBusinessConnectionRequestPredict[X]) (X, error) {
+func InvokeWithBusinessConnection[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithBusinessConnectionRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithGooglePlayIntegrityRequestPredict[X any] struct {
-	Nonce string
-	Token string
-	Query X
+type InvokeWithGooglePlayIntegrityRequestPredict[X tl.TLObject] struct {
+	Nonce string `tl:"nonce"`
+	Token string `tl:"token"`
+	Query X      `tl:"query"`
 }
 
 func (*InvokeWithGooglePlayIntegrityRequestPredict[X]) CRC() uint32 {
 	return 0x1df92984
 }
 
-func InvokeWithGooglePlayIntegrity[X any](ctx context.Context, m Requester, i InvokeWithGooglePlayIntegrityRequestPredict[X]) (X, error) {
+func InvokeWithGooglePlayIntegrity[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithGooglePlayIntegrityRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithApnsSecretRequestPredict[X any] struct {
-	Nonce  string
-	Secret string
-	Query  X
+type InvokeWithApnsSecretRequestPredict[X tl.TLObject] struct {
+	Nonce  string `tl:"nonce"`
+	Secret string `tl:"secret"`
+	Query  X      `tl:"query"`
 }
 
 func (*InvokeWithApnsSecretRequestPredict[X]) CRC() uint32 {
 	return 0xdae54f8
 }
 
-func InvokeWithApnsSecret[X any](ctx context.Context, m Requester, i InvokeWithApnsSecretRequestPredict[X]) (X, error) {
+func InvokeWithApnsSecret[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithApnsSecretRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
 type AccountRegisterDeviceRequestPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	NoMuted    bool     `tl:",omitempty:flags:0,implicit"`
-	TokenType  int32
-	Token      string
-	AppSandbox bool
-	Secret     []byte
-	OtherUids  []int64
+	NoMuted    bool     `tl:"no_muted,omitempty:flags:0,implicit"`
+	TokenType  int32    `tl:"token_type"`
+	Token      string   `tl:"token"`
+	AppSandbox bool     `tl:"app_sandbox"`
+	Secret     []byte   `tl:"secret"`
+	OtherUids  []int64  `tl:"other_uids"`
 }
 
 func (*AccountRegisterDeviceRequestPredict) CRC() uint32 {
@@ -19490,9 +19490,9 @@ func AccountRegisterDevice(ctx context.Context, m Requester, i AccountRegisterDe
 }
 
 type AccountUnregisterDeviceRequestPredict struct {
-	TokenType int32
-	Token     string
-	OtherUids []int64
+	TokenType int32   `tl:"token_type"`
+	Token     string  `tl:"token"`
+	OtherUids []int64 `tl:"other_uids"`
 }
 
 func (*AccountUnregisterDeviceRequestPredict) CRC() uint32 {
@@ -19505,8 +19505,8 @@ func AccountUnregisterDevice(ctx context.Context, m Requester, i AccountUnregist
 }
 
 type AccountUpdateNotifySettingsRequestPredict struct {
-	Peer     InputNotifyPeer
-	Settings InputPeerNotifySettings
+	Peer     InputNotifyPeer         `tl:"peer"`
+	Settings InputPeerNotifySettings `tl:"settings"`
 }
 
 func (*AccountUpdateNotifySettingsRequestPredict) CRC() uint32 {
@@ -19519,7 +19519,7 @@ func AccountUpdateNotifySettings(ctx context.Context, m Requester, i AccountUpda
 }
 
 type AccountGetNotifySettingsRequestPredict struct {
-	Peer InputNotifyPeer
+	Peer InputNotifyPeer `tl:"peer"`
 }
 
 func (*AccountGetNotifySettingsRequestPredict) CRC() uint32 {
@@ -19544,9 +19544,9 @@ func AccountResetNotifySettings(ctx context.Context, m Requester, i AccountReset
 
 type AccountUpdateProfileRequestPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	FirstName *string  `tl:",omitempty:flags:0"`
-	LastName  *string  `tl:",omitempty:flags:1"`
-	About     *string  `tl:",omitempty:flags:2"`
+	FirstName *string  `tl:"first_name,omitempty:flags:0"`
+	LastName  *string  `tl:"last_name,omitempty:flags:1"`
+	About     *string  `tl:"about,omitempty:flags:2"`
 }
 
 func (*AccountUpdateProfileRequestPredict) CRC() uint32 {
@@ -19559,7 +19559,7 @@ func AccountUpdateProfile(ctx context.Context, m Requester, i AccountUpdateProfi
 }
 
 type AccountUpdateStatusRequestPredict struct {
-	Offline bool
+	Offline bool `tl:"offline"`
 }
 
 func (*AccountUpdateStatusRequestPredict) CRC() uint32 {
@@ -19572,7 +19572,7 @@ func AccountUpdateStatus(ctx context.Context, m Requester, i AccountUpdateStatus
 }
 
 type AccountGetWallPapersRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetWallPapersRequestPredict) CRC() uint32 {
@@ -19585,9 +19585,9 @@ func AccountGetWallPapers(ctx context.Context, m Requester, i AccountGetWallPape
 }
 
 type AccountReportPeerRequestPredict struct {
-	Peer    InputPeer
-	Reason  ReportReason
-	Message string
+	Peer    InputPeer    `tl:"peer"`
+	Reason  ReportReason `tl:"reason"`
+	Message string       `tl:"message"`
 }
 
 func (*AccountReportPeerRequestPredict) CRC() uint32 {
@@ -19600,7 +19600,7 @@ func AccountReportPeer(ctx context.Context, m Requester, i AccountReportPeerRequ
 }
 
 type AccountCheckUsernameRequestPredict struct {
-	Username string
+	Username string `tl:"username"`
 }
 
 func (*AccountCheckUsernameRequestPredict) CRC() uint32 {
@@ -19613,7 +19613,7 @@ func AccountCheckUsername(ctx context.Context, m Requester, i AccountCheckUserna
 }
 
 type AccountUpdateUsernameRequestPredict struct {
-	Username string
+	Username string `tl:"username"`
 }
 
 func (*AccountUpdateUsernameRequestPredict) CRC() uint32 {
@@ -19626,7 +19626,7 @@ func AccountUpdateUsername(ctx context.Context, m Requester, i AccountUpdateUser
 }
 
 type AccountGetPrivacyRequestPredict struct {
-	Key InputPrivacyKey
+	Key InputPrivacyKey `tl:"key"`
 }
 
 func (*AccountGetPrivacyRequestPredict) CRC() uint32 {
@@ -19639,8 +19639,8 @@ func AccountGetPrivacy(ctx context.Context, m Requester, i AccountGetPrivacyRequ
 }
 
 type AccountSetPrivacyRequestPredict struct {
-	Key   InputPrivacyKey
-	Rules []InputPrivacyRule
+	Key   InputPrivacyKey    `tl:"key"`
+	Rules []InputPrivacyRule `tl:"rules"`
 }
 
 func (*AccountSetPrivacyRequestPredict) CRC() uint32 {
@@ -19653,9 +19653,9 @@ func AccountSetPrivacy(ctx context.Context, m Requester, i AccountSetPrivacyRequ
 }
 
 type AccountDeleteAccountRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Reason   string
-	Password InputCheckPasswordSRP `tl:",omitempty:flags:0"`
+	_        struct{}              `tl:"flags,bitflag"`
+	Reason   string                `tl:"reason"`
+	Password InputCheckPasswordSRP `tl:"password,omitempty:flags:0"`
 }
 
 func (*AccountDeleteAccountRequestPredict) CRC() uint32 {
@@ -19679,7 +19679,7 @@ func AccountGetAccountTTL(ctx context.Context, m Requester, i AccountGetAccountT
 }
 
 type AccountSetAccountTTLRequestPredict struct {
-	TTL AccountDaysTTL
+	TTL AccountDaysTTL `tl:"ttl"`
 }
 
 func (*AccountSetAccountTTLRequestPredict) CRC() uint32 {
@@ -19692,8 +19692,8 @@ func AccountSetAccountTTL(ctx context.Context, m Requester, i AccountSetAccountT
 }
 
 type AccountSendChangePhoneCodeRequestPredict struct {
-	PhoneNumber string
-	Settings    CodeSettings
+	PhoneNumber string       `tl:"phone_number"`
+	Settings    CodeSettings `tl:"settings"`
 }
 
 func (*AccountSendChangePhoneCodeRequestPredict) CRC() uint32 {
@@ -19706,9 +19706,9 @@ func AccountSendChangePhoneCode(ctx context.Context, m Requester, i AccountSendC
 }
 
 type AccountChangePhoneRequestPredict struct {
-	PhoneNumber   string
-	PhoneCodeHash string
-	PhoneCode     string
+	PhoneNumber   string `tl:"phone_number"`
+	PhoneCodeHash string `tl:"phone_code_hash"`
+	PhoneCode     string `tl:"phone_code"`
 }
 
 func (*AccountChangePhoneRequestPredict) CRC() uint32 {
@@ -19721,7 +19721,7 @@ func AccountChangePhone(ctx context.Context, m Requester, i AccountChangePhoneRe
 }
 
 type AccountUpdateDeviceLockedRequestPredict struct {
-	Period int32
+	Period int32 `tl:"period"`
 }
 
 func (*AccountUpdateDeviceLockedRequestPredict) CRC() uint32 {
@@ -19745,7 +19745,7 @@ func AccountGetAuthorizations(ctx context.Context, m Requester, i AccountGetAuth
 }
 
 type AccountResetAuthorizationRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountResetAuthorizationRequestPredict) CRC() uint32 {
@@ -19769,7 +19769,7 @@ func AccountGetPassword(ctx context.Context, m Requester, i AccountGetPasswordRe
 }
 
 type AccountGetPasswordSettingsRequestPredict struct {
-	Password InputCheckPasswordSRP
+	Password InputCheckPasswordSRP `tl:"password"`
 }
 
 func (*AccountGetPasswordSettingsRequestPredict) CRC() uint32 {
@@ -19782,8 +19782,8 @@ func AccountGetPasswordSettings(ctx context.Context, m Requester, i AccountGetPa
 }
 
 type AccountUpdatePasswordSettingsRequestPredict struct {
-	Password    InputCheckPasswordSRP
-	NewSettings AccountPasswordInputSettings
+	Password    InputCheckPasswordSRP        `tl:"password"`
+	NewSettings AccountPasswordInputSettings `tl:"new_settings"`
 }
 
 func (*AccountUpdatePasswordSettingsRequestPredict) CRC() uint32 {
@@ -19796,8 +19796,8 @@ func AccountUpdatePasswordSettings(ctx context.Context, m Requester, i AccountUp
 }
 
 type AccountSendConfirmPhoneCodeRequestPredict struct {
-	Hash     string
-	Settings CodeSettings
+	Hash     string       `tl:"hash"`
+	Settings CodeSettings `tl:"settings"`
 }
 
 func (*AccountSendConfirmPhoneCodeRequestPredict) CRC() uint32 {
@@ -19810,8 +19810,8 @@ func AccountSendConfirmPhoneCode(ctx context.Context, m Requester, i AccountSend
 }
 
 type AccountConfirmPhoneRequestPredict struct {
-	PhoneCodeHash string
-	PhoneCode     string
+	PhoneCodeHash string `tl:"phone_code_hash"`
+	PhoneCode     string `tl:"phone_code"`
 }
 
 func (*AccountConfirmPhoneRequestPredict) CRC() uint32 {
@@ -19824,8 +19824,8 @@ func AccountConfirmPhone(ctx context.Context, m Requester, i AccountConfirmPhone
 }
 
 type AccountGetTmpPasswordRequestPredict struct {
-	Password InputCheckPasswordSRP
-	Period   int32
+	Password InputCheckPasswordSRP `tl:"password"`
+	Period   int32                 `tl:"period"`
 }
 
 func (*AccountGetTmpPasswordRequestPredict) CRC() uint32 {
@@ -19849,7 +19849,7 @@ func AccountGetWebAuthorizations(ctx context.Context, m Requester, i AccountGetW
 }
 
 type AccountResetWebAuthorizationRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountResetWebAuthorizationRequestPredict) CRC() uint32 {
@@ -19884,7 +19884,7 @@ func AccountGetAllSecureValues(ctx context.Context, m Requester, i AccountGetAll
 }
 
 type AccountGetSecureValueRequestPredict struct {
-	Types []SecureValueType
+	Types []SecureValueType `tl:"types"`
 }
 
 func (*AccountGetSecureValueRequestPredict) CRC() uint32 {
@@ -19897,8 +19897,8 @@ func AccountGetSecureValue(ctx context.Context, m Requester, i AccountGetSecureV
 }
 
 type AccountSaveSecureValueRequestPredict struct {
-	Value          InputSecureValue
-	SecureSecretID int64
+	Value          InputSecureValue `tl:"value"`
+	SecureSecretID int64            `tl:"secure_secret_id"`
 }
 
 func (*AccountSaveSecureValueRequestPredict) CRC() uint32 {
@@ -19911,7 +19911,7 @@ func AccountSaveSecureValue(ctx context.Context, m Requester, i AccountSaveSecur
 }
 
 type AccountDeleteSecureValueRequestPredict struct {
-	Types []SecureValueType
+	Types []SecureValueType `tl:"types"`
 }
 
 func (*AccountDeleteSecureValueRequestPredict) CRC() uint32 {
@@ -19924,9 +19924,9 @@ func AccountDeleteSecureValue(ctx context.Context, m Requester, i AccountDeleteS
 }
 
 type AccountGetAuthorizationFormRequestPredict struct {
-	BotID     int64
-	Scope     string
-	PublicKey string
+	BotID     int64  `tl:"bot_id"`
+	Scope     string `tl:"scope"`
+	PublicKey string `tl:"public_key"`
 }
 
 func (*AccountGetAuthorizationFormRequestPredict) CRC() uint32 {
@@ -19939,11 +19939,11 @@ func AccountGetAuthorizationForm(ctx context.Context, m Requester, i AccountGetA
 }
 
 type AccountAcceptAuthorizationRequestPredict struct {
-	BotID       int64
-	Scope       string
-	PublicKey   string
-	ValueHashes []SecureValueHash
-	Credentials SecureCredentialsEncrypted
+	BotID       int64                      `tl:"bot_id"`
+	Scope       string                     `tl:"scope"`
+	PublicKey   string                     `tl:"public_key"`
+	ValueHashes []SecureValueHash          `tl:"value_hashes"`
+	Credentials SecureCredentialsEncrypted `tl:"credentials"`
 }
 
 func (*AccountAcceptAuthorizationRequestPredict) CRC() uint32 {
@@ -19956,8 +19956,8 @@ func AccountAcceptAuthorization(ctx context.Context, m Requester, i AccountAccep
 }
 
 type AccountSendVerifyPhoneCodeRequestPredict struct {
-	PhoneNumber string
-	Settings    CodeSettings
+	PhoneNumber string       `tl:"phone_number"`
+	Settings    CodeSettings `tl:"settings"`
 }
 
 func (*AccountSendVerifyPhoneCodeRequestPredict) CRC() uint32 {
@@ -19970,9 +19970,9 @@ func AccountSendVerifyPhoneCode(ctx context.Context, m Requester, i AccountSendV
 }
 
 type AccountVerifyPhoneRequestPredict struct {
-	PhoneNumber   string
-	PhoneCodeHash string
-	PhoneCode     string
+	PhoneNumber   string `tl:"phone_number"`
+	PhoneCodeHash string `tl:"phone_code_hash"`
+	PhoneCode     string `tl:"phone_code"`
 }
 
 func (*AccountVerifyPhoneRequestPredict) CRC() uint32 {
@@ -19985,8 +19985,8 @@ func AccountVerifyPhone(ctx context.Context, m Requester, i AccountVerifyPhoneRe
 }
 
 type AccountSendVerifyEmailCodeRequestPredict struct {
-	Purpose EmailVerifyPurpose
-	Email   string
+	Purpose EmailVerifyPurpose `tl:"purpose"`
+	Email   string             `tl:"email"`
 }
 
 func (*AccountSendVerifyEmailCodeRequestPredict) CRC() uint32 {
@@ -19999,8 +19999,8 @@ func AccountSendVerifyEmailCode(ctx context.Context, m Requester, i AccountSendV
 }
 
 type AccountVerifyEmailRequestPredict struct {
-	Purpose      EmailVerifyPurpose
-	Verification EmailVerification
+	Purpose      EmailVerifyPurpose `tl:"purpose"`
+	Verification EmailVerification  `tl:"verification"`
 }
 
 func (*AccountVerifyEmailRequestPredict) CRC() uint32 {
@@ -20014,13 +20014,13 @@ func AccountVerifyEmail(ctx context.Context, m Requester, i AccountVerifyEmailRe
 
 type AccountInitTakeoutSessionRequestPredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	Contacts          bool     `tl:",omitempty:flags:0,implicit"`
-	MessageUsers      bool     `tl:",omitempty:flags:1,implicit"`
-	MessageChats      bool     `tl:",omitempty:flags:2,implicit"`
-	MessageMegagroups bool     `tl:",omitempty:flags:3,implicit"`
-	MessageChannels   bool     `tl:",omitempty:flags:4,implicit"`
-	Files             bool     `tl:",omitempty:flags:5,implicit"`
-	FileMaxSize       *int64   `tl:",omitempty:flags:5"`
+	Contacts          bool     `tl:"contacts,omitempty:flags:0,implicit"`
+	MessageUsers      bool     `tl:"message_users,omitempty:flags:1,implicit"`
+	MessageChats      bool     `tl:"message_chats,omitempty:flags:2,implicit"`
+	MessageMegagroups bool     `tl:"message_megagroups,omitempty:flags:3,implicit"`
+	MessageChannels   bool     `tl:"message_channels,omitempty:flags:4,implicit"`
+	Files             bool     `tl:"files,omitempty:flags:5,implicit"`
+	FileMaxSize       *int64   `tl:"file_max_size,omitempty:flags:5"`
 }
 
 func (*AccountInitTakeoutSessionRequestPredict) CRC() uint32 {
@@ -20034,7 +20034,7 @@ func AccountInitTakeoutSession(ctx context.Context, m Requester, i AccountInitTa
 
 type AccountFinishTakeoutSessionRequestPredict struct {
 	_       struct{} `tl:"flags,bitflag"`
-	Success bool     `tl:",omitempty:flags:0,implicit"`
+	Success bool     `tl:"success,omitempty:flags:0,implicit"`
 }
 
 func (*AccountFinishTakeoutSessionRequestPredict) CRC() uint32 {
@@ -20047,7 +20047,7 @@ func AccountFinishTakeoutSession(ctx context.Context, m Requester, i AccountFini
 }
 
 type AccountConfirmPasswordEmailRequestPredict struct {
-	Code string
+	Code string `tl:"code"`
 }
 
 func (*AccountConfirmPasswordEmailRequestPredict) CRC() uint32 {
@@ -20093,7 +20093,7 @@ func AccountGetContactSignUpNotification(ctx context.Context, m Requester, i Acc
 }
 
 type AccountSetContactSignUpNotificationRequestPredict struct {
-	Silent bool
+	Silent bool `tl:"silent"`
 }
 
 func (*AccountSetContactSignUpNotificationRequestPredict) CRC() uint32 {
@@ -20107,9 +20107,9 @@ func AccountSetContactSignUpNotification(ctx context.Context, m Requester, i Acc
 
 type AccountGetNotifyExceptionsRequestPredict struct {
 	_              struct{}        `tl:"flags,bitflag"`
-	CompareSound   bool            `tl:",omitempty:flags:1,implicit"`
-	CompareStories bool            `tl:",omitempty:flags:2,implicit"`
-	Peer           InputNotifyPeer `tl:",omitempty:flags:0"`
+	CompareSound   bool            `tl:"compare_sound,omitempty:flags:1,implicit"`
+	CompareStories bool            `tl:"compare_stories,omitempty:flags:2,implicit"`
+	Peer           InputNotifyPeer `tl:"peer,omitempty:flags:0"`
 }
 
 func (*AccountGetNotifyExceptionsRequestPredict) CRC() uint32 {
@@ -20122,7 +20122,7 @@ func AccountGetNotifyExceptions(ctx context.Context, m Requester, i AccountGetNo
 }
 
 type AccountGetWallPaperRequestPredict struct {
-	Wallpaper InputWallPaper
+	Wallpaper InputWallPaper `tl:"wallpaper"`
 }
 
 func (*AccountGetWallPaperRequestPredict) CRC() uint32 {
@@ -20135,11 +20135,11 @@ func AccountGetWallPaper(ctx context.Context, m Requester, i AccountGetWallPaper
 }
 
 type AccountUploadWallPaperRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	ForChat  bool     `tl:",omitempty:flags:0,implicit"`
-	File     InputFile
-	MimeType string
-	Settings WallPaperSettings
+	_        struct{}          `tl:"flags,bitflag"`
+	ForChat  bool              `tl:"for_chat,omitempty:flags:0,implicit"`
+	File     InputFile         `tl:"file"`
+	MimeType string            `tl:"mime_type"`
+	Settings WallPaperSettings `tl:"settings"`
 }
 
 func (*AccountUploadWallPaperRequestPredict) CRC() uint32 {
@@ -20152,9 +20152,9 @@ func AccountUploadWallPaper(ctx context.Context, m Requester, i AccountUploadWal
 }
 
 type AccountSaveWallPaperRequestPredict struct {
-	Wallpaper InputWallPaper
-	Unsave    bool
-	Settings  WallPaperSettings
+	Wallpaper InputWallPaper    `tl:"wallpaper"`
+	Unsave    bool              `tl:"unsave"`
+	Settings  WallPaperSettings `tl:"settings"`
 }
 
 func (*AccountSaveWallPaperRequestPredict) CRC() uint32 {
@@ -20167,8 +20167,8 @@ func AccountSaveWallPaper(ctx context.Context, m Requester, i AccountSaveWallPap
 }
 
 type AccountInstallWallPaperRequestPredict struct {
-	Wallpaper InputWallPaper
-	Settings  WallPaperSettings
+	Wallpaper InputWallPaper    `tl:"wallpaper"`
+	Settings  WallPaperSettings `tl:"settings"`
 }
 
 func (*AccountInstallWallPaperRequestPredict) CRC() uint32 {
@@ -20203,10 +20203,10 @@ func AccountGetAutoDownloadSettings(ctx context.Context, m Requester, i AccountG
 }
 
 type AccountSaveAutoDownloadSettingsRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Low      bool     `tl:",omitempty:flags:0,implicit"`
-	High     bool     `tl:",omitempty:flags:1,implicit"`
-	Settings AutoDownloadSettings
+	_        struct{}             `tl:"flags,bitflag"`
+	Low      bool                 `tl:"low,omitempty:flags:0,implicit"`
+	High     bool                 `tl:"high,omitempty:flags:1,implicit"`
+	Settings AutoDownloadSettings `tl:"settings"`
 }
 
 func (*AccountSaveAutoDownloadSettingsRequestPredict) CRC() uint32 {
@@ -20219,11 +20219,11 @@ func AccountSaveAutoDownloadSettings(ctx context.Context, m Requester, i Account
 }
 
 type AccountUploadThemeRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	File     InputFile
-	Thumb    InputFile `tl:",omitempty:flags:0"`
-	FileName string
-	MimeType string
+	_        struct{}  `tl:"flags,bitflag"`
+	File     InputFile `tl:"file"`
+	Thumb    InputFile `tl:"thumb,omitempty:flags:0"`
+	FileName string    `tl:"file_name"`
+	MimeType string    `tl:"mime_type"`
 }
 
 func (*AccountUploadThemeRequestPredict) CRC() uint32 {
@@ -20236,11 +20236,11 @@ func AccountUploadTheme(ctx context.Context, m Requester, i AccountUploadThemeRe
 }
 
 type AccountCreateThemeRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Slug     string
-	Title    string
-	Document InputDocument        `tl:",omitempty:flags:2"`
-	Settings []InputThemeSettings `tl:",omitempty:flags:3"`
+	_        struct{}             `tl:"flags,bitflag"`
+	Slug     string               `tl:"slug"`
+	Title    string               `tl:"title"`
+	Document InputDocument        `tl:"document,omitempty:flags:2"`
+	Settings []InputThemeSettings `tl:"settings,omitempty:flags:3"`
 }
 
 func (*AccountCreateThemeRequestPredict) CRC() uint32 {
@@ -20253,13 +20253,13 @@ func AccountCreateTheme(ctx context.Context, m Requester, i AccountCreateThemeRe
 }
 
 type AccountUpdateThemeRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Format   string
-	Theme    InputTheme
-	Slug     *string              `tl:",omitempty:flags:0"`
-	Title    *string              `tl:",omitempty:flags:1"`
-	Document InputDocument        `tl:",omitempty:flags:2"`
-	Settings []InputThemeSettings `tl:",omitempty:flags:3"`
+	_        struct{}             `tl:"flags,bitflag"`
+	Format   string               `tl:"format"`
+	Theme    InputTheme           `tl:"theme"`
+	Slug     *string              `tl:"slug,omitempty:flags:0"`
+	Title    *string              `tl:"title,omitempty:flags:1"`
+	Document InputDocument        `tl:"document,omitempty:flags:2"`
+	Settings []InputThemeSettings `tl:"settings,omitempty:flags:3"`
 }
 
 func (*AccountUpdateThemeRequestPredict) CRC() uint32 {
@@ -20272,8 +20272,8 @@ func AccountUpdateTheme(ctx context.Context, m Requester, i AccountUpdateThemeRe
 }
 
 type AccountSaveThemeRequestPredict struct {
-	Theme  InputTheme
-	Unsave bool
+	Theme  InputTheme `tl:"theme"`
+	Unsave bool       `tl:"unsave"`
 }
 
 func (*AccountSaveThemeRequestPredict) CRC() uint32 {
@@ -20287,10 +20287,10 @@ func AccountSaveTheme(ctx context.Context, m Requester, i AccountSaveThemeReques
 
 type AccountInstallThemeRequestPredict struct {
 	_         struct{}   `tl:"flags,bitflag"`
-	Dark      bool       `tl:",omitempty:flags:0,implicit"`
-	Theme     InputTheme `tl:",omitempty:flags:1"`
-	Format    *string    `tl:",omitempty:flags:2"`
-	BaseTheme BaseTheme  `tl:",omitempty:flags:3"`
+	Dark      bool       `tl:"dark,omitempty:flags:0,implicit"`
+	Theme     InputTheme `tl:"theme,omitempty:flags:1"`
+	Format    *string    `tl:"format,omitempty:flags:2"`
+	BaseTheme BaseTheme  `tl:"base_theme,omitempty:flags:3"`
 }
 
 func (*AccountInstallThemeRequestPredict) CRC() uint32 {
@@ -20303,8 +20303,8 @@ func AccountInstallTheme(ctx context.Context, m Requester, i AccountInstallTheme
 }
 
 type AccountGetThemeRequestPredict struct {
-	Format string
-	Theme  InputTheme
+	Format string     `tl:"format"`
+	Theme  InputTheme `tl:"theme"`
 }
 
 func (*AccountGetThemeRequestPredict) CRC() uint32 {
@@ -20317,8 +20317,8 @@ func AccountGetTheme(ctx context.Context, m Requester, i AccountGetThemeRequestP
 }
 
 type AccountGetThemesRequestPredict struct {
-	Format string
-	Hash   int64
+	Format string `tl:"format"`
+	Hash   int64  `tl:"hash"`
 }
 
 func (*AccountGetThemesRequestPredict) CRC() uint32 {
@@ -20332,7 +20332,7 @@ func AccountGetThemes(ctx context.Context, m Requester, i AccountGetThemesReques
 
 type AccountSetContentSettingsRequestPredict struct {
 	_                struct{} `tl:"flags,bitflag"`
-	SensitiveEnabled bool     `tl:",omitempty:flags:0,implicit"`
+	SensitiveEnabled bool     `tl:"sensitive_enabled,omitempty:flags:0,implicit"`
 }
 
 func (*AccountSetContentSettingsRequestPredict) CRC() uint32 {
@@ -20356,7 +20356,7 @@ func AccountGetContentSettings(ctx context.Context, m Requester, i AccountGetCon
 }
 
 type AccountGetMultiWallPapersRequestPredict struct {
-	Wallpapers []InputWallPaper
+	Wallpapers []InputWallPaper `tl:"wallpapers"`
 }
 
 func (*AccountGetMultiWallPapersRequestPredict) CRC() uint32 {
@@ -20380,7 +20380,7 @@ func AccountGetGlobalPrivacySettings(ctx context.Context, m Requester, i Account
 }
 
 type AccountSetGlobalPrivacySettingsRequestPredict struct {
-	Settings GlobalPrivacySettings
+	Settings GlobalPrivacySettings `tl:"settings"`
 }
 
 func (*AccountSetGlobalPrivacySettingsRequestPredict) CRC() uint32 {
@@ -20393,10 +20393,10 @@ func AccountSetGlobalPrivacySettings(ctx context.Context, m Requester, i Account
 }
 
 type AccountReportProfilePhotoRequestPredict struct {
-	Peer    InputPeer
-	PhotoID InputPhoto
-	Reason  ReportReason
-	Message string
+	Peer    InputPeer    `tl:"peer"`
+	PhotoID InputPhoto   `tl:"photo_id"`
+	Reason  ReportReason `tl:"reason"`
+	Message string       `tl:"message"`
 }
 
 func (*AccountReportProfilePhotoRequestPredict) CRC() uint32 {
@@ -20431,7 +20431,7 @@ func AccountDeclinePasswordReset(ctx context.Context, m Requester, i AccountDecl
 }
 
 type AccountGetChatThemesRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetChatThemesRequestPredict) CRC() uint32 {
@@ -20444,7 +20444,7 @@ func AccountGetChatThemes(ctx context.Context, m Requester, i AccountGetChatThem
 }
 
 type AccountSetAuthorizationTTLRequestPredict struct {
-	AuthorizationTTLDays int32
+	AuthorizationTTLDays int32 `tl:"authorization_ttl_days"`
 }
 
 func (*AccountSetAuthorizationTTLRequestPredict) CRC() uint32 {
@@ -20458,10 +20458,10 @@ func AccountSetAuthorizationTTL(ctx context.Context, m Requester, i AccountSetAu
 
 type AccountChangeAuthorizationSettingsRequestPredict struct {
 	_                         struct{} `tl:"flags,bitflag"`
-	Confirmed                 bool     `tl:",omitempty:flags:3,implicit"`
-	Hash                      int64
-	EncryptedRequestsDisabled *bool `tl:",omitempty:flags:0"`
-	CallRequestsDisabled      *bool `tl:",omitempty:flags:1"`
+	Confirmed                 bool     `tl:"confirmed,omitempty:flags:3,implicit"`
+	Hash                      int64    `tl:"hash"`
+	EncryptedRequestsDisabled *bool    `tl:"encrypted_requests_disabled,omitempty:flags:0"`
+	CallRequestsDisabled      *bool    `tl:"call_requests_disabled,omitempty:flags:1"`
 }
 
 func (*AccountChangeAuthorizationSettingsRequestPredict) CRC() uint32 {
@@ -20474,7 +20474,7 @@ func AccountChangeAuthorizationSettings(ctx context.Context, m Requester, i Acco
 }
 
 type AccountGetSavedRingtonesRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetSavedRingtonesRequestPredict) CRC() uint32 {
@@ -20487,8 +20487,8 @@ func AccountGetSavedRingtones(ctx context.Context, m Requester, i AccountGetSave
 }
 
 type AccountSaveRingtoneRequestPredict struct {
-	ID     InputDocument
-	Unsave bool
+	ID     InputDocument `tl:"id"`
+	Unsave bool          `tl:"unsave"`
 }
 
 func (*AccountSaveRingtoneRequestPredict) CRC() uint32 {
@@ -20501,9 +20501,9 @@ func AccountSaveRingtone(ctx context.Context, m Requester, i AccountSaveRingtone
 }
 
 type AccountUploadRingtoneRequestPredict struct {
-	File     InputFile
-	FileName string
-	MimeType string
+	File     InputFile `tl:"file"`
+	FileName string    `tl:"file_name"`
+	MimeType string    `tl:"mime_type"`
 }
 
 func (*AccountUploadRingtoneRequestPredict) CRC() uint32 {
@@ -20516,7 +20516,7 @@ func AccountUploadRingtone(ctx context.Context, m Requester, i AccountUploadRing
 }
 
 type AccountUpdateEmojiStatusRequestPredict struct {
-	EmojiStatus EmojiStatus
+	EmojiStatus EmojiStatus `tl:"emoji_status"`
 }
 
 func (*AccountUpdateEmojiStatusRequestPredict) CRC() uint32 {
@@ -20529,7 +20529,7 @@ func AccountUpdateEmojiStatus(ctx context.Context, m Requester, i AccountUpdateE
 }
 
 type AccountGetDefaultEmojiStatusesRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetDefaultEmojiStatusesRequestPredict) CRC() uint32 {
@@ -20542,7 +20542,7 @@ func AccountGetDefaultEmojiStatuses(ctx context.Context, m Requester, i AccountG
 }
 
 type AccountGetRecentEmojiStatusesRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetRecentEmojiStatusesRequestPredict) CRC() uint32 {
@@ -20566,7 +20566,7 @@ func AccountClearRecentEmojiStatuses(ctx context.Context, m Requester, i Account
 }
 
 type AccountReorderUsernamesRequestPredict struct {
-	Order []string
+	Order []string `tl:"order"`
 }
 
 func (*AccountReorderUsernamesRequestPredict) CRC() uint32 {
@@ -20579,8 +20579,8 @@ func AccountReorderUsernames(ctx context.Context, m Requester, i AccountReorderU
 }
 
 type AccountToggleUsernameRequestPredict struct {
-	Username string
-	Active   bool
+	Username string `tl:"username"`
+	Active   bool   `tl:"active"`
 }
 
 func (*AccountToggleUsernameRequestPredict) CRC() uint32 {
@@ -20593,7 +20593,7 @@ func AccountToggleUsername(ctx context.Context, m Requester, i AccountToggleUser
 }
 
 type AccountGetDefaultProfilePhotoEmojisRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetDefaultProfilePhotoEmojisRequestPredict) CRC() uint32 {
@@ -20606,7 +20606,7 @@ func AccountGetDefaultProfilePhotoEmojis(ctx context.Context, m Requester, i Acc
 }
 
 type AccountGetDefaultGroupPhotoEmojisRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetDefaultGroupPhotoEmojisRequestPredict) CRC() uint32 {
@@ -20630,12 +20630,12 @@ func AccountGetAutoSaveSettings(ctx context.Context, m Requester, i AccountGetAu
 }
 
 type AccountSaveAutoSaveSettingsRequestPredict struct {
-	_          struct{}  `tl:"flags,bitflag"`
-	Users      bool      `tl:",omitempty:flags:0,implicit"`
-	Chats      bool      `tl:",omitempty:flags:1,implicit"`
-	Broadcasts bool      `tl:",omitempty:flags:2,implicit"`
-	Peer       InputPeer `tl:",omitempty:flags:3"`
-	Settings   AutoSaveSettings
+	_          struct{}         `tl:"flags,bitflag"`
+	Users      bool             `tl:"users,omitempty:flags:0,implicit"`
+	Chats      bool             `tl:"chats,omitempty:flags:1,implicit"`
+	Broadcasts bool             `tl:"broadcasts,omitempty:flags:2,implicit"`
+	Peer       InputPeer        `tl:"peer,omitempty:flags:3"`
+	Settings   AutoSaveSettings `tl:"settings"`
 }
 
 func (*AccountSaveAutoSaveSettingsRequestPredict) CRC() uint32 {
@@ -20659,7 +20659,7 @@ func AccountDeleteAutoSaveExceptions(ctx context.Context, m Requester, i Account
 }
 
 type AccountInvalidateSignInCodesRequestPredict struct {
-	Codes []string
+	Codes []string `tl:"codes"`
 }
 
 func (*AccountInvalidateSignInCodesRequestPredict) CRC() uint32 {
@@ -20673,9 +20673,9 @@ func AccountInvalidateSignInCodes(ctx context.Context, m Requester, i AccountInv
 
 type AccountUpdateColorRequestPredict struct {
 	_                 struct{} `tl:"flags,bitflag"`
-	ForProfile        bool     `tl:",omitempty:flags:1,implicit"`
-	Color             *int32   `tl:",omitempty:flags:2"`
-	BackgroundEmojiID *int64   `tl:",omitempty:flags:0"`
+	ForProfile        bool     `tl:"for_profile,omitempty:flags:1,implicit"`
+	Color             *int32   `tl:"color,omitempty:flags:2"`
+	BackgroundEmojiID *int64   `tl:"background_emoji_id,omitempty:flags:0"`
 }
 
 func (*AccountUpdateColorRequestPredict) CRC() uint32 {
@@ -20688,7 +20688,7 @@ func AccountUpdateColor(ctx context.Context, m Requester, i AccountUpdateColorRe
 }
 
 type AccountGetDefaultBackgroundEmojisRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetDefaultBackgroundEmojisRequestPredict) CRC() uint32 {
@@ -20701,7 +20701,7 @@ func AccountGetDefaultBackgroundEmojis(ctx context.Context, m Requester, i Accou
 }
 
 type AccountGetChannelDefaultEmojiStatusesRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetChannelDefaultEmojiStatusesRequestPredict) CRC() uint32 {
@@ -20714,7 +20714,7 @@ func AccountGetChannelDefaultEmojiStatuses(ctx context.Context, m Requester, i A
 }
 
 type AccountGetChannelRestrictedStatusEmojisRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*AccountGetChannelRestrictedStatusEmojisRequestPredict) CRC() uint32 {
@@ -20728,7 +20728,7 @@ func AccountGetChannelRestrictedStatusEmojis(ctx context.Context, m Requester, i
 
 type AccountUpdateBusinessWorkHoursRequestPredict struct {
 	_                 struct{}          `tl:"flags,bitflag"`
-	BusinessWorkHours BusinessWorkHours `tl:",omitempty:flags:0"`
+	BusinessWorkHours BusinessWorkHours `tl:"business_work_hours,omitempty:flags:0"`
 }
 
 func (*AccountUpdateBusinessWorkHoursRequestPredict) CRC() uint32 {
@@ -20742,8 +20742,8 @@ func AccountUpdateBusinessWorkHours(ctx context.Context, m Requester, i AccountU
 
 type AccountUpdateBusinessLocationRequestPredict struct {
 	_        struct{}      `tl:"flags,bitflag"`
-	GeoPoint InputGeoPoint `tl:",omitempty:flags:1"`
-	Address  *string       `tl:",omitempty:flags:0"`
+	GeoPoint InputGeoPoint `tl:"geo_point,omitempty:flags:1"`
+	Address  *string       `tl:"address,omitempty:flags:0"`
 }
 
 func (*AccountUpdateBusinessLocationRequestPredict) CRC() uint32 {
@@ -20757,7 +20757,7 @@ func AccountUpdateBusinessLocation(ctx context.Context, m Requester, i AccountUp
 
 type AccountUpdateBusinessGreetingMessageRequestPredict struct {
 	_       struct{}                     `tl:"flags,bitflag"`
-	Message InputBusinessGreetingMessage `tl:",omitempty:flags:0"`
+	Message InputBusinessGreetingMessage `tl:"message,omitempty:flags:0"`
 }
 
 func (*AccountUpdateBusinessGreetingMessageRequestPredict) CRC() uint32 {
@@ -20771,7 +20771,7 @@ func AccountUpdateBusinessGreetingMessage(ctx context.Context, m Requester, i Ac
 
 type AccountUpdateBusinessAwayMessageRequestPredict struct {
 	_       struct{}                 `tl:"flags,bitflag"`
-	Message InputBusinessAwayMessage `tl:",omitempty:flags:0"`
+	Message InputBusinessAwayMessage `tl:"message,omitempty:flags:0"`
 }
 
 func (*AccountUpdateBusinessAwayMessageRequestPredict) CRC() uint32 {
@@ -20784,11 +20784,11 @@ func AccountUpdateBusinessAwayMessage(ctx context.Context, m Requester, i Accoun
 }
 
 type AccountUpdateConnectedBotRequestPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	CanReply   bool     `tl:",omitempty:flags:0,implicit"`
-	Deleted    bool     `tl:",omitempty:flags:1,implicit"`
-	Bot        InputUser
-	Recipients InputBusinessBotRecipients
+	_          struct{}                   `tl:"flags,bitflag"`
+	CanReply   bool                       `tl:"can_reply,omitempty:flags:0,implicit"`
+	Deleted    bool                       `tl:"deleted,omitempty:flags:1,implicit"`
+	Bot        InputUser                  `tl:"bot"`
+	Recipients InputBusinessBotRecipients `tl:"recipients"`
 }
 
 func (*AccountUpdateConnectedBotRequestPredict) CRC() uint32 {
@@ -20812,7 +20812,7 @@ func AccountGetConnectedBots(ctx context.Context, m Requester, i AccountGetConne
 }
 
 type AccountGetBotBusinessConnectionRequestPredict struct {
-	ConnectionID string
+	ConnectionID string `tl:"connection_id"`
 }
 
 func (*AccountGetBotBusinessConnectionRequestPredict) CRC() uint32 {
@@ -20826,7 +20826,7 @@ func AccountGetBotBusinessConnection(ctx context.Context, m Requester, i Account
 
 type AccountUpdateBusinessIntroRequestPredict struct {
 	_     struct{}           `tl:"flags,bitflag"`
-	Intro InputBusinessIntro `tl:",omitempty:flags:0"`
+	Intro InputBusinessIntro `tl:"intro,omitempty:flags:0"`
 }
 
 func (*AccountUpdateBusinessIntroRequestPredict) CRC() uint32 {
@@ -20839,8 +20839,8 @@ func AccountUpdateBusinessIntro(ctx context.Context, m Requester, i AccountUpdat
 }
 
 type AccountToggleConnectedBotPausedRequestPredict struct {
-	Peer   InputPeer
-	Paused bool
+	Peer   InputPeer `tl:"peer"`
+	Paused bool      `tl:"paused"`
 }
 
 func (*AccountToggleConnectedBotPausedRequestPredict) CRC() uint32 {
@@ -20853,7 +20853,7 @@ func AccountToggleConnectedBotPaused(ctx context.Context, m Requester, i Account
 }
 
 type AccountDisablePeerConnectedBotRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*AccountDisablePeerConnectedBotRequestPredict) CRC() uint32 {
@@ -20867,7 +20867,7 @@ func AccountDisablePeerConnectedBot(ctx context.Context, m Requester, i AccountD
 
 type AccountUpdateBirthdayRequestPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Birthday Birthday `tl:",omitempty:flags:0"`
+	Birthday Birthday `tl:"birthday,omitempty:flags:0"`
 }
 
 func (*AccountUpdateBirthdayRequestPredict) CRC() uint32 {
@@ -20880,7 +20880,7 @@ func AccountUpdateBirthday(ctx context.Context, m Requester, i AccountUpdateBirt
 }
 
 type AccountCreateBusinessChatLinkRequestPredict struct {
-	Link InputBusinessChatLink
+	Link InputBusinessChatLink `tl:"link"`
 }
 
 func (*AccountCreateBusinessChatLinkRequestPredict) CRC() uint32 {
@@ -20893,8 +20893,8 @@ func AccountCreateBusinessChatLink(ctx context.Context, m Requester, i AccountCr
 }
 
 type AccountEditBusinessChatLinkRequestPredict struct {
-	Slug string
-	Link InputBusinessChatLink
+	Slug string                `tl:"slug"`
+	Link InputBusinessChatLink `tl:"link"`
 }
 
 func (*AccountEditBusinessChatLinkRequestPredict) CRC() uint32 {
@@ -20907,7 +20907,7 @@ func AccountEditBusinessChatLink(ctx context.Context, m Requester, i AccountEdit
 }
 
 type AccountDeleteBusinessChatLinkRequestPredict struct {
-	Slug string
+	Slug string `tl:"slug"`
 }
 
 func (*AccountDeleteBusinessChatLinkRequestPredict) CRC() uint32 {
@@ -20931,7 +20931,7 @@ func AccountGetBusinessChatLinks(ctx context.Context, m Requester, i AccountGetB
 }
 
 type AccountResolveBusinessChatLinkRequestPredict struct {
-	Slug string
+	Slug string `tl:"slug"`
 }
 
 func (*AccountResolveBusinessChatLinkRequestPredict) CRC() uint32 {
@@ -20944,7 +20944,7 @@ func AccountResolveBusinessChatLink(ctx context.Context, m Requester, i AccountR
 }
 
 type AccountUpdatePersonalChannelRequestPredict struct {
-	Channel InputChannel
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*AccountUpdatePersonalChannelRequestPredict) CRC() uint32 {
@@ -20957,7 +20957,7 @@ func AccountUpdatePersonalChannel(ctx context.Context, m Requester, i AccountUpd
 }
 
 type AccountToggleSponsoredMessagesRequestPredict struct {
-	Enabled bool
+	Enabled bool `tl:"enabled"`
 }
 
 func (*AccountToggleSponsoredMessagesRequestPredict) CRC() uint32 {
@@ -20981,7 +20981,7 @@ func AccountGetReactionsNotifySettings(ctx context.Context, m Requester, i Accou
 }
 
 type AccountSetReactionsNotifySettingsRequestPredict struct {
-	Settings ReactionsNotifySettings
+	Settings ReactionsNotifySettings `tl:"settings"`
 }
 
 func (*AccountSetReactionsNotifySettingsRequestPredict) CRC() uint32 {
@@ -20994,10 +20994,10 @@ func AccountSetReactionsNotifySettings(ctx context.Context, m Requester, i Accou
 }
 
 type AuthSendCodeRequestPredict struct {
-	PhoneNumber string
-	APIID       int32
-	APIHash     string
-	Settings    CodeSettings
+	PhoneNumber string       `tl:"phone_number"`
+	APIID       int32        `tl:"api_id"`
+	APIHash     string       `tl:"api_hash"`
+	Settings    CodeSettings `tl:"settings"`
 }
 
 func (*AuthSendCodeRequestPredict) CRC() uint32 {
@@ -21011,11 +21011,11 @@ func AuthSendCode(ctx context.Context, m Requester, i AuthSendCodeRequestPredict
 
 type AuthSignUpRequestPredict struct {
 	_                     struct{} `tl:"flags,bitflag"`
-	NoJoinedNotifications bool     `tl:",omitempty:flags:0,implicit"`
-	PhoneNumber           string
-	PhoneCodeHash         string
-	FirstName             string
-	LastName              string
+	NoJoinedNotifications bool     `tl:"no_joined_notifications,omitempty:flags:0,implicit"`
+	PhoneNumber           string   `tl:"phone_number"`
+	PhoneCodeHash         string   `tl:"phone_code_hash"`
+	FirstName             string   `tl:"first_name"`
+	LastName              string   `tl:"last_name"`
 }
 
 func (*AuthSignUpRequestPredict) CRC() uint32 {
@@ -21028,11 +21028,11 @@ func AuthSignUp(ctx context.Context, m Requester, i AuthSignUpRequestPredict) (A
 }
 
 type AuthSignInRequestPredict struct {
-	_                 struct{} `tl:"flags,bitflag"`
-	PhoneNumber       string
-	PhoneCodeHash     string
-	PhoneCode         *string           `tl:",omitempty:flags:0"`
-	EmailVerification EmailVerification `tl:",omitempty:flags:1"`
+	_                 struct{}          `tl:"flags,bitflag"`
+	PhoneNumber       string            `tl:"phone_number"`
+	PhoneCodeHash     string            `tl:"phone_code_hash"`
+	PhoneCode         *string           `tl:"phone_code,omitempty:flags:0"`
+	EmailVerification EmailVerification `tl:"email_verification,omitempty:flags:1"`
 }
 
 func (*AuthSignInRequestPredict) CRC() uint32 {
@@ -21067,7 +21067,7 @@ func AuthResetAuthorizations(ctx context.Context, m Requester, i AuthResetAuthor
 }
 
 type AuthExportAuthorizationRequestPredict struct {
-	DcID int32
+	DcID int32 `tl:"dc_id"`
 }
 
 func (*AuthExportAuthorizationRequestPredict) CRC() uint32 {
@@ -21080,8 +21080,8 @@ func AuthExportAuthorization(ctx context.Context, m Requester, i AuthExportAutho
 }
 
 type AuthImportAuthorizationRequestPredict struct {
-	ID    int64
-	Bytes []byte
+	ID    int64  `tl:"id"`
+	Bytes []byte `tl:"bytes"`
 }
 
 func (*AuthImportAuthorizationRequestPredict) CRC() uint32 {
@@ -21094,10 +21094,10 @@ func AuthImportAuthorization(ctx context.Context, m Requester, i AuthImportAutho
 }
 
 type AuthBindTempAuthKeyRequestPredict struct {
-	PermAuthKeyID    int64
-	Nonce            int64
-	ExpiresAt        int32
-	EncryptedMessage []byte
+	PermAuthKeyID    int64  `tl:"perm_auth_key_id"`
+	Nonce            int64  `tl:"nonce"`
+	ExpiresAt        int32  `tl:"expires_at"`
+	EncryptedMessage []byte `tl:"encrypted_message"`
 }
 
 func (*AuthBindTempAuthKeyRequestPredict) CRC() uint32 {
@@ -21110,10 +21110,10 @@ func AuthBindTempAuthKey(ctx context.Context, m Requester, i AuthBindTempAuthKey
 }
 
 type AuthImportBotAuthorizationRequestPredict struct {
-	Flags        int32
-	APIID        int32
-	APIHash      string
-	BotAuthToken string
+	Flags        int32  `tl:"flags"`
+	APIID        int32  `tl:"api_id"`
+	APIHash      string `tl:"api_hash"`
+	BotAuthToken string `tl:"bot_auth_token"`
 }
 
 func (*AuthImportBotAuthorizationRequestPredict) CRC() uint32 {
@@ -21126,7 +21126,7 @@ func AuthImportBotAuthorization(ctx context.Context, m Requester, i AuthImportBo
 }
 
 type AuthCheckPasswordRequestPredict struct {
-	Password InputCheckPasswordSRP
+	Password InputCheckPasswordSRP `tl:"password"`
 }
 
 func (*AuthCheckPasswordRequestPredict) CRC() uint32 {
@@ -21150,9 +21150,9 @@ func AuthRequestPasswordRecovery(ctx context.Context, m Requester, i AuthRequest
 }
 
 type AuthRecoverPasswordRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Code        string
-	NewSettings AccountPasswordInputSettings `tl:",omitempty:flags:0"`
+	_           struct{}                     `tl:"flags,bitflag"`
+	Code        string                       `tl:"code"`
+	NewSettings AccountPasswordInputSettings `tl:"new_settings,omitempty:flags:0"`
 }
 
 func (*AuthRecoverPasswordRequestPredict) CRC() uint32 {
@@ -21166,9 +21166,9 @@ func AuthRecoverPassword(ctx context.Context, m Requester, i AuthRecoverPassword
 
 type AuthResendCodeRequestPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	PhoneNumber   string
-	PhoneCodeHash string
-	Reason        *string `tl:",omitempty:flags:0"`
+	PhoneNumber   string   `tl:"phone_number"`
+	PhoneCodeHash string   `tl:"phone_code_hash"`
+	Reason        *string  `tl:"reason,omitempty:flags:0"`
 }
 
 func (*AuthResendCodeRequestPredict) CRC() uint32 {
@@ -21181,8 +21181,8 @@ func AuthResendCode(ctx context.Context, m Requester, i AuthResendCodeRequestPre
 }
 
 type AuthCancelCodeRequestPredict struct {
-	PhoneNumber   string
-	PhoneCodeHash string
+	PhoneNumber   string `tl:"phone_number"`
+	PhoneCodeHash string `tl:"phone_code_hash"`
 }
 
 func (*AuthCancelCodeRequestPredict) CRC() uint32 {
@@ -21195,7 +21195,7 @@ func AuthCancelCode(ctx context.Context, m Requester, i AuthCancelCodeRequestPre
 }
 
 type AuthDropTempAuthKeysRequestPredict struct {
-	ExceptAuthKeys []int64
+	ExceptAuthKeys []int64 `tl:"except_auth_keys"`
 }
 
 func (*AuthDropTempAuthKeysRequestPredict) CRC() uint32 {
@@ -21208,9 +21208,9 @@ func AuthDropTempAuthKeys(ctx context.Context, m Requester, i AuthDropTempAuthKe
 }
 
 type AuthExportLoginTokenRequestPredict struct {
-	APIID     int32
-	APIHash   string
-	ExceptIds []int64
+	APIID     int32   `tl:"api_id"`
+	APIHash   string  `tl:"api_hash"`
+	ExceptIds []int64 `tl:"except_ids"`
 }
 
 func (*AuthExportLoginTokenRequestPredict) CRC() uint32 {
@@ -21223,7 +21223,7 @@ func AuthExportLoginToken(ctx context.Context, m Requester, i AuthExportLoginTok
 }
 
 type AuthImportLoginTokenRequestPredict struct {
-	Token []byte
+	Token []byte `tl:"token"`
 }
 
 func (*AuthImportLoginTokenRequestPredict) CRC() uint32 {
@@ -21236,7 +21236,7 @@ func AuthImportLoginToken(ctx context.Context, m Requester, i AuthImportLoginTok
 }
 
 type AuthAcceptLoginTokenRequestPredict struct {
-	Token []byte
+	Token []byte `tl:"token"`
 }
 
 func (*AuthAcceptLoginTokenRequestPredict) CRC() uint32 {
@@ -21249,7 +21249,7 @@ func AuthAcceptLoginToken(ctx context.Context, m Requester, i AuthAcceptLoginTok
 }
 
 type AuthCheckRecoveryPasswordRequestPredict struct {
-	Code string
+	Code string `tl:"code"`
 }
 
 func (*AuthCheckRecoveryPasswordRequestPredict) CRC() uint32 {
@@ -21262,9 +21262,9 @@ func AuthCheckRecoveryPassword(ctx context.Context, m Requester, i AuthCheckReco
 }
 
 type AuthImportWebTokenAuthorizationRequestPredict struct {
-	APIID        int32
-	APIHash      string
-	WebAuthToken string
+	APIID        int32  `tl:"api_id"`
+	APIHash      string `tl:"api_hash"`
+	WebAuthToken string `tl:"web_auth_token"`
 }
 
 func (*AuthImportWebTokenAuthorizationRequestPredict) CRC() uint32 {
@@ -21278,11 +21278,11 @@ func AuthImportWebTokenAuthorization(ctx context.Context, m Requester, i AuthImp
 
 type AuthRequestFirebaseSmsRequestPredict struct {
 	_                  struct{} `tl:"flags,bitflag"`
-	PhoneNumber        string
-	PhoneCodeHash      string
-	SafetyNetToken     *string `tl:",omitempty:flags:0"`
-	PlayIntegrityToken *string `tl:",omitempty:flags:2"`
-	IosPushSecret      *string `tl:",omitempty:flags:1"`
+	PhoneNumber        string   `tl:"phone_number"`
+	PhoneCodeHash      string   `tl:"phone_code_hash"`
+	SafetyNetToken     *string  `tl:"safety_net_token,omitempty:flags:0"`
+	PlayIntegrityToken *string  `tl:"play_integrity_token,omitempty:flags:2"`
+	IosPushSecret      *string  `tl:"ios_push_secret,omitempty:flags:1"`
 }
 
 func (*AuthRequestFirebaseSmsRequestPredict) CRC() uint32 {
@@ -21295,8 +21295,8 @@ func AuthRequestFirebaseSms(ctx context.Context, m Requester, i AuthRequestFireb
 }
 
 type AuthResetLoginEmailRequestPredict struct {
-	PhoneNumber   string
-	PhoneCodeHash string
+	PhoneNumber   string `tl:"phone_number"`
+	PhoneCodeHash string `tl:"phone_code_hash"`
 }
 
 func (*AuthResetLoginEmailRequestPredict) CRC() uint32 {
@@ -21309,9 +21309,9 @@ func AuthResetLoginEmail(ctx context.Context, m Requester, i AuthResetLoginEmail
 }
 
 type AuthReportMissingCodeRequestPredict struct {
-	PhoneNumber   string
-	PhoneCodeHash string
-	Mnc           string
+	PhoneNumber   string `tl:"phone_number"`
+	PhoneCodeHash string `tl:"phone_code_hash"`
+	Mnc           string `tl:"mnc"`
 }
 
 func (*AuthReportMissingCodeRequestPredict) CRC() uint32 {
@@ -21324,8 +21324,8 @@ func AuthReportMissingCode(ctx context.Context, m Requester, i AuthReportMissing
 }
 
 type BotsSendCustomRequestRequestPredict struct {
-	CustomMethod string
-	Params       DataJSON
+	CustomMethod string   `tl:"custom_method"`
+	Params       DataJSON `tl:"params"`
 }
 
 func (*BotsSendCustomRequestRequestPredict) CRC() uint32 {
@@ -21338,8 +21338,8 @@ func BotsSendCustomRequest(ctx context.Context, m Requester, i BotsSendCustomReq
 }
 
 type BotsAnswerWebhookJSONQueryRequestPredict struct {
-	QueryID int64
-	Data    DataJSON
+	QueryID int64    `tl:"query_id"`
+	Data    DataJSON `tl:"data"`
 }
 
 func (*BotsAnswerWebhookJSONQueryRequestPredict) CRC() uint32 {
@@ -21352,9 +21352,9 @@ func BotsAnswerWebhookJSONQuery(ctx context.Context, m Requester, i BotsAnswerWe
 }
 
 type BotsSetBotCommandsRequestPredict struct {
-	Scope    BotCommandScope
-	LangCode string
-	Commands []BotCommand
+	Scope    BotCommandScope `tl:"scope"`
+	LangCode string          `tl:"lang_code"`
+	Commands []BotCommand    `tl:"commands"`
 }
 
 func (*BotsSetBotCommandsRequestPredict) CRC() uint32 {
@@ -21367,8 +21367,8 @@ func BotsSetBotCommands(ctx context.Context, m Requester, i BotsSetBotCommandsRe
 }
 
 type BotsResetBotCommandsRequestPredict struct {
-	Scope    BotCommandScope
-	LangCode string
+	Scope    BotCommandScope `tl:"scope"`
+	LangCode string          `tl:"lang_code"`
 }
 
 func (*BotsResetBotCommandsRequestPredict) CRC() uint32 {
@@ -21381,8 +21381,8 @@ func BotsResetBotCommands(ctx context.Context, m Requester, i BotsResetBotComman
 }
 
 type BotsGetBotCommandsRequestPredict struct {
-	Scope    BotCommandScope
-	LangCode string
+	Scope    BotCommandScope `tl:"scope"`
+	LangCode string          `tl:"lang_code"`
 }
 
 func (*BotsGetBotCommandsRequestPredict) CRC() uint32 {
@@ -21395,8 +21395,8 @@ func BotsGetBotCommands(ctx context.Context, m Requester, i BotsGetBotCommandsRe
 }
 
 type BotsSetBotMenuButtonRequestPredict struct {
-	UserID InputUser
-	Button BotMenuButton
+	UserID InputUser     `tl:"user_id"`
+	Button BotMenuButton `tl:"button"`
 }
 
 func (*BotsSetBotMenuButtonRequestPredict) CRC() uint32 {
@@ -21409,7 +21409,7 @@ func BotsSetBotMenuButton(ctx context.Context, m Requester, i BotsSetBotMenuButt
 }
 
 type BotsGetBotMenuButtonRequestPredict struct {
-	UserID InputUser
+	UserID InputUser `tl:"user_id"`
 }
 
 func (*BotsGetBotMenuButtonRequestPredict) CRC() uint32 {
@@ -21422,7 +21422,7 @@ func BotsGetBotMenuButton(ctx context.Context, m Requester, i BotsGetBotMenuButt
 }
 
 type BotsSetBotBroadcastDefaultAdminRightsRequestPredict struct {
-	AdminRights ChatAdminRights
+	AdminRights ChatAdminRights `tl:"admin_rights"`
 }
 
 func (*BotsSetBotBroadcastDefaultAdminRightsRequestPredict) CRC() uint32 {
@@ -21435,7 +21435,7 @@ func BotsSetBotBroadcastDefaultAdminRights(ctx context.Context, m Requester, i B
 }
 
 type BotsSetBotGroupDefaultAdminRightsRequestPredict struct {
-	AdminRights ChatAdminRights
+	AdminRights ChatAdminRights `tl:"admin_rights"`
 }
 
 func (*BotsSetBotGroupDefaultAdminRightsRequestPredict) CRC() uint32 {
@@ -21449,11 +21449,11 @@ func BotsSetBotGroupDefaultAdminRights(ctx context.Context, m Requester, i BotsS
 
 type BotsSetBotInfoRequestPredict struct {
 	_           struct{}  `tl:"flags,bitflag"`
-	Bot         InputUser `tl:",omitempty:flags:2"`
-	LangCode    string
-	Name        *string `tl:",omitempty:flags:3"`
-	About       *string `tl:",omitempty:flags:0"`
-	Description *string `tl:",omitempty:flags:1"`
+	Bot         InputUser `tl:"bot,omitempty:flags:2"`
+	LangCode    string    `tl:"lang_code"`
+	Name        *string   `tl:"name,omitempty:flags:3"`
+	About       *string   `tl:"about,omitempty:flags:0"`
+	Description *string   `tl:"description,omitempty:flags:1"`
 }
 
 func (*BotsSetBotInfoRequestPredict) CRC() uint32 {
@@ -21467,8 +21467,8 @@ func BotsSetBotInfo(ctx context.Context, m Requester, i BotsSetBotInfoRequestPre
 
 type BotsGetBotInfoRequestPredict struct {
 	_        struct{}  `tl:"flags,bitflag"`
-	Bot      InputUser `tl:",omitempty:flags:0"`
-	LangCode string
+	Bot      InputUser `tl:"bot,omitempty:flags:0"`
+	LangCode string    `tl:"lang_code"`
 }
 
 func (*BotsGetBotInfoRequestPredict) CRC() uint32 {
@@ -21481,8 +21481,8 @@ func BotsGetBotInfo(ctx context.Context, m Requester, i BotsGetBotInfoRequestPre
 }
 
 type BotsReorderUsernamesRequestPredict struct {
-	Bot   InputUser
-	Order []string
+	Bot   InputUser `tl:"bot"`
+	Order []string  `tl:"order"`
 }
 
 func (*BotsReorderUsernamesRequestPredict) CRC() uint32 {
@@ -21495,9 +21495,9 @@ func BotsReorderUsernames(ctx context.Context, m Requester, i BotsReorderUsernam
 }
 
 type BotsToggleUsernameRequestPredict struct {
-	Bot      InputUser
-	Username string
-	Active   bool
+	Bot      InputUser `tl:"bot"`
+	Username string    `tl:"username"`
+	Active   bool      `tl:"active"`
 }
 
 func (*BotsToggleUsernameRequestPredict) CRC() uint32 {
@@ -21510,7 +21510,7 @@ func BotsToggleUsername(ctx context.Context, m Requester, i BotsToggleUsernameRe
 }
 
 type BotsCanSendMessageRequestPredict struct {
-	Bot InputUser
+	Bot InputUser `tl:"bot"`
 }
 
 func (*BotsCanSendMessageRequestPredict) CRC() uint32 {
@@ -21523,7 +21523,7 @@ func BotsCanSendMessage(ctx context.Context, m Requester, i BotsCanSendMessageRe
 }
 
 type BotsAllowSendMessageRequestPredict struct {
-	Bot InputUser
+	Bot InputUser `tl:"bot"`
 }
 
 func (*BotsAllowSendMessageRequestPredict) CRC() uint32 {
@@ -21536,9 +21536,9 @@ func BotsAllowSendMessage(ctx context.Context, m Requester, i BotsAllowSendMessa
 }
 
 type BotsInvokeWebViewCustomMethodRequestPredict struct {
-	Bot          InputUser
-	CustomMethod string
-	Params       DataJSON
+	Bot          InputUser `tl:"bot"`
+	CustomMethod string    `tl:"custom_method"`
+	Params       DataJSON  `tl:"params"`
 }
 
 func (*BotsInvokeWebViewCustomMethodRequestPredict) CRC() uint32 {
@@ -21551,8 +21551,8 @@ func BotsInvokeWebViewCustomMethod(ctx context.Context, m Requester, i BotsInvok
 }
 
 type BotsGetPopularAppBotsRequestPredict struct {
-	Offset string
-	Limit  int32
+	Offset string `tl:"offset"`
+	Limit  int32  `tl:"limit"`
 }
 
 func (*BotsGetPopularAppBotsRequestPredict) CRC() uint32 {
@@ -21565,9 +21565,9 @@ func BotsGetPopularAppBots(ctx context.Context, m Requester, i BotsGetPopularApp
 }
 
 type BotsAddPreviewMediaRequestPredict struct {
-	Bot      InputUser
-	LangCode string
-	Media    InputMedia
+	Bot      InputUser  `tl:"bot"`
+	LangCode string     `tl:"lang_code"`
+	Media    InputMedia `tl:"media"`
 }
 
 func (*BotsAddPreviewMediaRequestPredict) CRC() uint32 {
@@ -21580,10 +21580,10 @@ func BotsAddPreviewMedia(ctx context.Context, m Requester, i BotsAddPreviewMedia
 }
 
 type BotsEditPreviewMediaRequestPredict struct {
-	Bot      InputUser
-	LangCode string
-	Media    InputMedia
-	NewMedia InputMedia
+	Bot      InputUser  `tl:"bot"`
+	LangCode string     `tl:"lang_code"`
+	Media    InputMedia `tl:"media"`
+	NewMedia InputMedia `tl:"new_media"`
 }
 
 func (*BotsEditPreviewMediaRequestPredict) CRC() uint32 {
@@ -21596,9 +21596,9 @@ func BotsEditPreviewMedia(ctx context.Context, m Requester, i BotsEditPreviewMed
 }
 
 type BotsDeletePreviewMediaRequestPredict struct {
-	Bot      InputUser
-	LangCode string
-	Media    []InputMedia
+	Bot      InputUser    `tl:"bot"`
+	LangCode string       `tl:"lang_code"`
+	Media    []InputMedia `tl:"media"`
 }
 
 func (*BotsDeletePreviewMediaRequestPredict) CRC() uint32 {
@@ -21611,9 +21611,9 @@ func BotsDeletePreviewMedia(ctx context.Context, m Requester, i BotsDeletePrevie
 }
 
 type BotsReorderPreviewMediasRequestPredict struct {
-	Bot      InputUser
-	LangCode string
-	Order    []InputMedia
+	Bot      InputUser    `tl:"bot"`
+	LangCode string       `tl:"lang_code"`
+	Order    []InputMedia `tl:"order"`
 }
 
 func (*BotsReorderPreviewMediasRequestPredict) CRC() uint32 {
@@ -21626,8 +21626,8 @@ func BotsReorderPreviewMedias(ctx context.Context, m Requester, i BotsReorderPre
 }
 
 type BotsGetPreviewInfoRequestPredict struct {
-	Bot      InputUser
-	LangCode string
+	Bot      InputUser `tl:"bot"`
+	LangCode string    `tl:"lang_code"`
 }
 
 func (*BotsGetPreviewInfoRequestPredict) CRC() uint32 {
@@ -21640,7 +21640,7 @@ func BotsGetPreviewInfo(ctx context.Context, m Requester, i BotsGetPreviewInfoRe
 }
 
 type BotsGetPreviewMediasRequestPredict struct {
-	Bot InputUser
+	Bot InputUser `tl:"bot"`
 }
 
 func (*BotsGetPreviewMediasRequestPredict) CRC() uint32 {
@@ -21653,8 +21653,8 @@ func BotsGetPreviewMedias(ctx context.Context, m Requester, i BotsGetPreviewMedi
 }
 
 type ChannelsReadHistoryRequestPredict struct {
-	Channel InputChannel
-	MaxID   int32
+	Channel InputChannel `tl:"channel"`
+	MaxID   int32        `tl:"max_id"`
 }
 
 func (*ChannelsReadHistoryRequestPredict) CRC() uint32 {
@@ -21667,8 +21667,8 @@ func ChannelsReadHistory(ctx context.Context, m Requester, i ChannelsReadHistory
 }
 
 type ChannelsDeleteMessagesRequestPredict struct {
-	Channel InputChannel
-	ID      []int32
+	Channel InputChannel `tl:"channel"`
+	ID      []int32      `tl:"id"`
 }
 
 func (*ChannelsDeleteMessagesRequestPredict) CRC() uint32 {
@@ -21681,9 +21681,9 @@ func ChannelsDeleteMessages(ctx context.Context, m Requester, i ChannelsDeleteMe
 }
 
 type ChannelsReportSpamRequestPredict struct {
-	Channel     InputChannel
-	Participant InputPeer
-	ID          []int32
+	Channel     InputChannel `tl:"channel"`
+	Participant InputPeer    `tl:"participant"`
+	ID          []int32      `tl:"id"`
 }
 
 func (*ChannelsReportSpamRequestPredict) CRC() uint32 {
@@ -21696,8 +21696,8 @@ func ChannelsReportSpam(ctx context.Context, m Requester, i ChannelsReportSpamRe
 }
 
 type ChannelsGetMessagesRequestPredict struct {
-	Channel InputChannel
-	ID      []InputMessage
+	Channel InputChannel   `tl:"channel"`
+	ID      []InputMessage `tl:"id"`
 }
 
 func (*ChannelsGetMessagesRequestPredict) CRC() uint32 {
@@ -21710,11 +21710,11 @@ func ChannelsGetMessages(ctx context.Context, m Requester, i ChannelsGetMessages
 }
 
 type ChannelsGetParticipantsRequestPredict struct {
-	Channel InputChannel
-	Filter  ChannelParticipantsFilter
-	Offset  int32
-	Limit   int32
-	Hash    int64
+	Channel InputChannel              `tl:"channel"`
+	Filter  ChannelParticipantsFilter `tl:"filter"`
+	Offset  int32                     `tl:"offset"`
+	Limit   int32                     `tl:"limit"`
+	Hash    int64                     `tl:"hash"`
 }
 
 func (*ChannelsGetParticipantsRequestPredict) CRC() uint32 {
@@ -21727,8 +21727,8 @@ func ChannelsGetParticipants(ctx context.Context, m Requester, i ChannelsGetPart
 }
 
 type ChannelsGetParticipantRequestPredict struct {
-	Channel     InputChannel
-	Participant InputPeer
+	Channel     InputChannel `tl:"channel"`
+	Participant InputPeer    `tl:"participant"`
 }
 
 func (*ChannelsGetParticipantRequestPredict) CRC() uint32 {
@@ -21741,7 +21741,7 @@ func ChannelsGetParticipant(ctx context.Context, m Requester, i ChannelsGetParti
 }
 
 type ChannelsGetChannelsRequestPredict struct {
-	ID []InputChannel
+	ID []InputChannel `tl:"id"`
 }
 
 func (*ChannelsGetChannelsRequestPredict) CRC() uint32 {
@@ -21754,7 +21754,7 @@ func ChannelsGetChannels(ctx context.Context, m Requester, i ChannelsGetChannels
 }
 
 type ChannelsGetFullChannelRequestPredict struct {
-	Channel InputChannel
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*ChannelsGetFullChannelRequestPredict) CRC() uint32 {
@@ -21767,16 +21767,16 @@ func ChannelsGetFullChannel(ctx context.Context, m Requester, i ChannelsGetFullC
 }
 
 type ChannelsCreateChannelRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Broadcast bool     `tl:",omitempty:flags:0,implicit"`
-	Megagroup bool     `tl:",omitempty:flags:1,implicit"`
-	ForImport bool     `tl:",omitempty:flags:3,implicit"`
-	Forum     bool     `tl:",omitempty:flags:5,implicit"`
-	Title     string
-	About     string
-	GeoPoint  InputGeoPoint `tl:",omitempty:flags:2"`
-	Address   *string       `tl:",omitempty:flags:2"`
-	TTLPeriod *int32        `tl:",omitempty:flags:4"`
+	_         struct{}      `tl:"flags,bitflag"`
+	Broadcast bool          `tl:"broadcast,omitempty:flags:0,implicit"`
+	Megagroup bool          `tl:"megagroup,omitempty:flags:1,implicit"`
+	ForImport bool          `tl:"for_import,omitempty:flags:3,implicit"`
+	Forum     bool          `tl:"forum,omitempty:flags:5,implicit"`
+	Title     string        `tl:"title"`
+	About     string        `tl:"about"`
+	GeoPoint  InputGeoPoint `tl:"geo_point,omitempty:flags:2"`
+	Address   *string       `tl:"address,omitempty:flags:2"`
+	TTLPeriod *int32        `tl:"ttl_period,omitempty:flags:4"`
 }
 
 func (*ChannelsCreateChannelRequestPredict) CRC() uint32 {
@@ -21789,10 +21789,10 @@ func ChannelsCreateChannel(ctx context.Context, m Requester, i ChannelsCreateCha
 }
 
 type ChannelsEditAdminRequestPredict struct {
-	Channel     InputChannel
-	UserID      InputUser
-	AdminRights ChatAdminRights
-	Rank        string
+	Channel     InputChannel    `tl:"channel"`
+	UserID      InputUser       `tl:"user_id"`
+	AdminRights ChatAdminRights `tl:"admin_rights"`
+	Rank        string          `tl:"rank"`
 }
 
 func (*ChannelsEditAdminRequestPredict) CRC() uint32 {
@@ -21805,8 +21805,8 @@ func ChannelsEditAdmin(ctx context.Context, m Requester, i ChannelsEditAdminRequ
 }
 
 type ChannelsEditTitleRequestPredict struct {
-	Channel InputChannel
-	Title   string
+	Channel InputChannel `tl:"channel"`
+	Title   string       `tl:"title"`
 }
 
 func (*ChannelsEditTitleRequestPredict) CRC() uint32 {
@@ -21819,8 +21819,8 @@ func ChannelsEditTitle(ctx context.Context, m Requester, i ChannelsEditTitleRequ
 }
 
 type ChannelsEditPhotoRequestPredict struct {
-	Channel InputChannel
-	Photo   InputChatPhoto
+	Channel InputChannel   `tl:"channel"`
+	Photo   InputChatPhoto `tl:"photo"`
 }
 
 func (*ChannelsEditPhotoRequestPredict) CRC() uint32 {
@@ -21833,8 +21833,8 @@ func ChannelsEditPhoto(ctx context.Context, m Requester, i ChannelsEditPhotoRequ
 }
 
 type ChannelsCheckUsernameRequestPredict struct {
-	Channel  InputChannel
-	Username string
+	Channel  InputChannel `tl:"channel"`
+	Username string       `tl:"username"`
 }
 
 func (*ChannelsCheckUsernameRequestPredict) CRC() uint32 {
@@ -21847,8 +21847,8 @@ func ChannelsCheckUsername(ctx context.Context, m Requester, i ChannelsCheckUser
 }
 
 type ChannelsUpdateUsernameRequestPredict struct {
-	Channel  InputChannel
-	Username string
+	Channel  InputChannel `tl:"channel"`
+	Username string       `tl:"username"`
 }
 
 func (*ChannelsUpdateUsernameRequestPredict) CRC() uint32 {
@@ -21861,7 +21861,7 @@ func ChannelsUpdateUsername(ctx context.Context, m Requester, i ChannelsUpdateUs
 }
 
 type ChannelsJoinChannelRequestPredict struct {
-	Channel InputChannel
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*ChannelsJoinChannelRequestPredict) CRC() uint32 {
@@ -21874,7 +21874,7 @@ func ChannelsJoinChannel(ctx context.Context, m Requester, i ChannelsJoinChannel
 }
 
 type ChannelsLeaveChannelRequestPredict struct {
-	Channel InputChannel
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*ChannelsLeaveChannelRequestPredict) CRC() uint32 {
@@ -21887,8 +21887,8 @@ func ChannelsLeaveChannel(ctx context.Context, m Requester, i ChannelsLeaveChann
 }
 
 type ChannelsInviteToChannelRequestPredict struct {
-	Channel InputChannel
-	Users   []InputUser
+	Channel InputChannel `tl:"channel"`
+	Users   []InputUser  `tl:"users"`
 }
 
 func (*ChannelsInviteToChannelRequestPredict) CRC() uint32 {
@@ -21901,7 +21901,7 @@ func ChannelsInviteToChannel(ctx context.Context, m Requester, i ChannelsInviteT
 }
 
 type ChannelsDeleteChannelRequestPredict struct {
-	Channel InputChannel
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*ChannelsDeleteChannelRequestPredict) CRC() uint32 {
@@ -21914,11 +21914,11 @@ func ChannelsDeleteChannel(ctx context.Context, m Requester, i ChannelsDeleteCha
 }
 
 type ChannelsExportMessageLinkRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Grouped bool     `tl:",omitempty:flags:0,implicit"`
-	Thread  bool     `tl:",omitempty:flags:1,implicit"`
-	Channel InputChannel
-	ID      int32
+	_       struct{}     `tl:"flags,bitflag"`
+	Grouped bool         `tl:"grouped,omitempty:flags:0,implicit"`
+	Thread  bool         `tl:"thread,omitempty:flags:1,implicit"`
+	Channel InputChannel `tl:"channel"`
+	ID      int32        `tl:"id"`
 }
 
 func (*ChannelsExportMessageLinkRequestPredict) CRC() uint32 {
@@ -21931,8 +21931,8 @@ func ChannelsExportMessageLink(ctx context.Context, m Requester, i ChannelsExpor
 }
 
 type ChannelsToggleSignaturesRequestPredict struct {
-	Channel InputChannel
-	Enabled bool
+	Channel InputChannel `tl:"channel"`
+	Enabled bool         `tl:"enabled"`
 }
 
 func (*ChannelsToggleSignaturesRequestPredict) CRC() uint32 {
@@ -21946,9 +21946,9 @@ func ChannelsToggleSignatures(ctx context.Context, m Requester, i ChannelsToggle
 
 type ChannelsGetAdminedPublicChannelsRequestPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	ByLocation  bool     `tl:",omitempty:flags:0,implicit"`
-	CheckLimit  bool     `tl:",omitempty:flags:1,implicit"`
-	ForPersonal bool     `tl:",omitempty:flags:2,implicit"`
+	ByLocation  bool     `tl:"by_location,omitempty:flags:0,implicit"`
+	CheckLimit  bool     `tl:"check_limit,omitempty:flags:1,implicit"`
+	ForPersonal bool     `tl:"for_personal,omitempty:flags:2,implicit"`
 }
 
 func (*ChannelsGetAdminedPublicChannelsRequestPredict) CRC() uint32 {
@@ -21961,9 +21961,9 @@ func ChannelsGetAdminedPublicChannels(ctx context.Context, m Requester, i Channe
 }
 
 type ChannelsEditBannedRequestPredict struct {
-	Channel      InputChannel
-	Participant  InputPeer
-	BannedRights ChatBannedRights
+	Channel      InputChannel     `tl:"channel"`
+	Participant  InputPeer        `tl:"participant"`
+	BannedRights ChatBannedRights `tl:"banned_rights"`
 }
 
 func (*ChannelsEditBannedRequestPredict) CRC() uint32 {
@@ -21976,14 +21976,14 @@ func ChannelsEditBanned(ctx context.Context, m Requester, i ChannelsEditBannedRe
 }
 
 type ChannelsGetAdminLogRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Channel      InputChannel
-	Q            string
-	EventsFilter ChannelAdminLogEventsFilter `tl:",omitempty:flags:0"`
-	Admins       []InputUser                 `tl:",omitempty:flags:1"`
-	MaxID        int64
-	MinID        int64
-	Limit        int32
+	_            struct{}                    `tl:"flags,bitflag"`
+	Channel      InputChannel                `tl:"channel"`
+	Q            string                      `tl:"q"`
+	EventsFilter ChannelAdminLogEventsFilter `tl:"events_filter,omitempty:flags:0"`
+	Admins       []InputUser                 `tl:"admins,omitempty:flags:1"`
+	MaxID        int64                       `tl:"max_id"`
+	MinID        int64                       `tl:"min_id"`
+	Limit        int32                       `tl:"limit"`
 }
 
 func (*ChannelsGetAdminLogRequestPredict) CRC() uint32 {
@@ -21996,8 +21996,8 @@ func ChannelsGetAdminLog(ctx context.Context, m Requester, i ChannelsGetAdminLog
 }
 
 type ChannelsSetStickersRequestPredict struct {
-	Channel    InputChannel
-	Stickerset InputStickerSet
+	Channel    InputChannel    `tl:"channel"`
+	Stickerset InputStickerSet `tl:"stickerset"`
 }
 
 func (*ChannelsSetStickersRequestPredict) CRC() uint32 {
@@ -22010,8 +22010,8 @@ func ChannelsSetStickers(ctx context.Context, m Requester, i ChannelsSetStickers
 }
 
 type ChannelsReadMessageContentsRequestPredict struct {
-	Channel InputChannel
-	ID      []int32
+	Channel InputChannel `tl:"channel"`
+	ID      []int32      `tl:"id"`
 }
 
 func (*ChannelsReadMessageContentsRequestPredict) CRC() uint32 {
@@ -22024,10 +22024,10 @@ func ChannelsReadMessageContents(ctx context.Context, m Requester, i ChannelsRea
 }
 
 type ChannelsDeleteHistoryRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	ForEveryone bool     `tl:",omitempty:flags:0,implicit"`
-	Channel     InputChannel
-	MaxID       int32
+	_           struct{}     `tl:"flags,bitflag"`
+	ForEveryone bool         `tl:"for_everyone,omitempty:flags:0,implicit"`
+	Channel     InputChannel `tl:"channel"`
+	MaxID       int32        `tl:"max_id"`
 }
 
 func (*ChannelsDeleteHistoryRequestPredict) CRC() uint32 {
@@ -22040,8 +22040,8 @@ func ChannelsDeleteHistory(ctx context.Context, m Requester, i ChannelsDeleteHis
 }
 
 type ChannelsTogglePreHistoryHiddenRequestPredict struct {
-	Channel InputChannel
-	Enabled bool
+	Channel InputChannel `tl:"channel"`
+	Enabled bool         `tl:"enabled"`
 }
 
 func (*ChannelsTogglePreHistoryHiddenRequestPredict) CRC() uint32 {
@@ -22054,7 +22054,7 @@ func ChannelsTogglePreHistoryHidden(ctx context.Context, m Requester, i Channels
 }
 
 type ChannelsGetLeftChannelsRequestPredict struct {
-	Offset int32
+	Offset int32 `tl:"offset"`
 }
 
 func (*ChannelsGetLeftChannelsRequestPredict) CRC() uint32 {
@@ -22078,8 +22078,8 @@ func ChannelsGetGroupsForDiscussion(ctx context.Context, m Requester, i Channels
 }
 
 type ChannelsSetDiscussionGroupRequestPredict struct {
-	Broadcast InputChannel
-	Group     InputChannel
+	Broadcast InputChannel `tl:"broadcast"`
+	Group     InputChannel `tl:"group"`
 }
 
 func (*ChannelsSetDiscussionGroupRequestPredict) CRC() uint32 {
@@ -22092,9 +22092,9 @@ func ChannelsSetDiscussionGroup(ctx context.Context, m Requester, i ChannelsSetD
 }
 
 type ChannelsEditCreatorRequestPredict struct {
-	Channel  InputChannel
-	UserID   InputUser
-	Password InputCheckPasswordSRP
+	Channel  InputChannel          `tl:"channel"`
+	UserID   InputUser             `tl:"user_id"`
+	Password InputCheckPasswordSRP `tl:"password"`
 }
 
 func (*ChannelsEditCreatorRequestPredict) CRC() uint32 {
@@ -22107,9 +22107,9 @@ func ChannelsEditCreator(ctx context.Context, m Requester, i ChannelsEditCreator
 }
 
 type ChannelsEditLocationRequestPredict struct {
-	Channel  InputChannel
-	GeoPoint InputGeoPoint
-	Address  string
+	Channel  InputChannel  `tl:"channel"`
+	GeoPoint InputGeoPoint `tl:"geo_point"`
+	Address  string        `tl:"address"`
 }
 
 func (*ChannelsEditLocationRequestPredict) CRC() uint32 {
@@ -22122,8 +22122,8 @@ func ChannelsEditLocation(ctx context.Context, m Requester, i ChannelsEditLocati
 }
 
 type ChannelsToggleSlowModeRequestPredict struct {
-	Channel InputChannel
-	Seconds int32
+	Channel InputChannel `tl:"channel"`
+	Seconds int32        `tl:"seconds"`
 }
 
 func (*ChannelsToggleSlowModeRequestPredict) CRC() uint32 {
@@ -22147,7 +22147,7 @@ func ChannelsGetInactiveChannels(ctx context.Context, m Requester, i ChannelsGet
 }
 
 type ChannelsConvertToGigagroupRequestPredict struct {
-	Channel InputChannel
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*ChannelsConvertToGigagroupRequestPredict) CRC() uint32 {
@@ -22160,8 +22160,8 @@ func ChannelsConvertToGigagroup(ctx context.Context, m Requester, i ChannelsConv
 }
 
 type ChannelsViewSponsoredMessageRequestPredict struct {
-	Channel  InputChannel
-	RandomID []byte
+	Channel  InputChannel `tl:"channel"`
+	RandomID []byte       `tl:"random_id"`
 }
 
 func (*ChannelsViewSponsoredMessageRequestPredict) CRC() uint32 {
@@ -22174,7 +22174,7 @@ func ChannelsViewSponsoredMessage(ctx context.Context, m Requester, i ChannelsVi
 }
 
 type ChannelsGetSponsoredMessagesRequestPredict struct {
-	Channel InputChannel
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*ChannelsGetSponsoredMessagesRequestPredict) CRC() uint32 {
@@ -22187,7 +22187,7 @@ func ChannelsGetSponsoredMessages(ctx context.Context, m Requester, i ChannelsGe
 }
 
 type ChannelsGetSendAsRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*ChannelsGetSendAsRequestPredict) CRC() uint32 {
@@ -22200,8 +22200,8 @@ func ChannelsGetSendAs(ctx context.Context, m Requester, i ChannelsGetSendAsRequ
 }
 
 type ChannelsDeleteParticipantHistoryRequestPredict struct {
-	Channel     InputChannel
-	Participant InputPeer
+	Channel     InputChannel `tl:"channel"`
+	Participant InputPeer    `tl:"participant"`
 }
 
 func (*ChannelsDeleteParticipantHistoryRequestPredict) CRC() uint32 {
@@ -22214,8 +22214,8 @@ func ChannelsDeleteParticipantHistory(ctx context.Context, m Requester, i Channe
 }
 
 type ChannelsToggleJoinToSendRequestPredict struct {
-	Channel InputChannel
-	Enabled bool
+	Channel InputChannel `tl:"channel"`
+	Enabled bool         `tl:"enabled"`
 }
 
 func (*ChannelsToggleJoinToSendRequestPredict) CRC() uint32 {
@@ -22228,8 +22228,8 @@ func ChannelsToggleJoinToSend(ctx context.Context, m Requester, i ChannelsToggle
 }
 
 type ChannelsToggleJoinRequestRequestPredict struct {
-	Channel InputChannel
-	Enabled bool
+	Channel InputChannel `tl:"channel"`
+	Enabled bool         `tl:"enabled"`
 }
 
 func (*ChannelsToggleJoinRequestRequestPredict) CRC() uint32 {
@@ -22242,8 +22242,8 @@ func ChannelsToggleJoinRequest(ctx context.Context, m Requester, i ChannelsToggl
 }
 
 type ChannelsReorderUsernamesRequestPredict struct {
-	Channel InputChannel
-	Order   []string
+	Channel InputChannel `tl:"channel"`
+	Order   []string     `tl:"order"`
 }
 
 func (*ChannelsReorderUsernamesRequestPredict) CRC() uint32 {
@@ -22256,9 +22256,9 @@ func ChannelsReorderUsernames(ctx context.Context, m Requester, i ChannelsReorde
 }
 
 type ChannelsToggleUsernameRequestPredict struct {
-	Channel  InputChannel
-	Username string
-	Active   bool
+	Channel  InputChannel `tl:"channel"`
+	Username string       `tl:"username"`
+	Active   bool         `tl:"active"`
 }
 
 func (*ChannelsToggleUsernameRequestPredict) CRC() uint32 {
@@ -22271,7 +22271,7 @@ func ChannelsToggleUsername(ctx context.Context, m Requester, i ChannelsToggleUs
 }
 
 type ChannelsDeactivateAllUsernamesRequestPredict struct {
-	Channel InputChannel
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*ChannelsDeactivateAllUsernamesRequestPredict) CRC() uint32 {
@@ -22284,8 +22284,8 @@ func ChannelsDeactivateAllUsernames(ctx context.Context, m Requester, i Channels
 }
 
 type ChannelsToggleForumRequestPredict struct {
-	Channel InputChannel
-	Enabled bool
+	Channel InputChannel `tl:"channel"`
+	Enabled bool         `tl:"enabled"`
 }
 
 func (*ChannelsToggleForumRequestPredict) CRC() uint32 {
@@ -22298,13 +22298,13 @@ func ChannelsToggleForum(ctx context.Context, m Requester, i ChannelsToggleForum
 }
 
 type ChannelsCreateForumTopicRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Channel     InputChannel
-	Title       string
-	IconColor   *int32 `tl:",omitempty:flags:0"`
-	IconEmojiID *int64 `tl:",omitempty:flags:3"`
-	RandomID    int64
-	SendAs      InputPeer `tl:",omitempty:flags:2"`
+	_           struct{}     `tl:"flags,bitflag"`
+	Channel     InputChannel `tl:"channel"`
+	Title       string       `tl:"title"`
+	IconColor   *int32       `tl:"icon_color,omitempty:flags:0"`
+	IconEmojiID *int64       `tl:"icon_emoji_id,omitempty:flags:3"`
+	RandomID    int64        `tl:"random_id"`
+	SendAs      InputPeer    `tl:"send_as,omitempty:flags:2"`
 }
 
 func (*ChannelsCreateForumTopicRequestPredict) CRC() uint32 {
@@ -22317,13 +22317,13 @@ func ChannelsCreateForumTopic(ctx context.Context, m Requester, i ChannelsCreate
 }
 
 type ChannelsGetForumTopicsRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Channel     InputChannel
-	Q           *string `tl:",omitempty:flags:0"`
-	OffsetDate  int32
-	OffsetID    int32
-	OffsetTopic int32
-	Limit       int32
+	_           struct{}     `tl:"flags,bitflag"`
+	Channel     InputChannel `tl:"channel"`
+	Q           *string      `tl:"q,omitempty:flags:0"`
+	OffsetDate  int32        `tl:"offset_date"`
+	OffsetID    int32        `tl:"offset_id"`
+	OffsetTopic int32        `tl:"offset_topic"`
+	Limit       int32        `tl:"limit"`
 }
 
 func (*ChannelsGetForumTopicsRequestPredict) CRC() uint32 {
@@ -22336,8 +22336,8 @@ func ChannelsGetForumTopics(ctx context.Context, m Requester, i ChannelsGetForum
 }
 
 type ChannelsGetForumTopicsByIDRequestPredict struct {
-	Channel InputChannel
-	Topics  []int32
+	Channel InputChannel `tl:"channel"`
+	Topics  []int32      `tl:"topics"`
 }
 
 func (*ChannelsGetForumTopicsByIDRequestPredict) CRC() uint32 {
@@ -22350,13 +22350,13 @@ func ChannelsGetForumTopicsByID(ctx context.Context, m Requester, i ChannelsGetF
 }
 
 type ChannelsEditForumTopicRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Channel     InputChannel
-	TopicID     int32
-	Title       *string `tl:",omitempty:flags:0"`
-	IconEmojiID *int64  `tl:",omitempty:flags:1"`
-	Closed      *bool   `tl:",omitempty:flags:2"`
-	Hidden      *bool   `tl:",omitempty:flags:3"`
+	_           struct{}     `tl:"flags,bitflag"`
+	Channel     InputChannel `tl:"channel"`
+	TopicID     int32        `tl:"topic_id"`
+	Title       *string      `tl:"title,omitempty:flags:0"`
+	IconEmojiID *int64       `tl:"icon_emoji_id,omitempty:flags:1"`
+	Closed      *bool        `tl:"closed,omitempty:flags:2"`
+	Hidden      *bool        `tl:"hidden,omitempty:flags:3"`
 }
 
 func (*ChannelsEditForumTopicRequestPredict) CRC() uint32 {
@@ -22369,9 +22369,9 @@ func ChannelsEditForumTopic(ctx context.Context, m Requester, i ChannelsEditForu
 }
 
 type ChannelsUpdatePinnedForumTopicRequestPredict struct {
-	Channel InputChannel
-	TopicID int32
-	Pinned  bool
+	Channel InputChannel `tl:"channel"`
+	TopicID int32        `tl:"topic_id"`
+	Pinned  bool         `tl:"pinned"`
 }
 
 func (*ChannelsUpdatePinnedForumTopicRequestPredict) CRC() uint32 {
@@ -22384,8 +22384,8 @@ func ChannelsUpdatePinnedForumTopic(ctx context.Context, m Requester, i Channels
 }
 
 type ChannelsDeleteTopicHistoryRequestPredict struct {
-	Channel  InputChannel
-	TopMsgID int32
+	Channel  InputChannel `tl:"channel"`
+	TopMsgID int32        `tl:"top_msg_id"`
 }
 
 func (*ChannelsDeleteTopicHistoryRequestPredict) CRC() uint32 {
@@ -22398,10 +22398,10 @@ func ChannelsDeleteTopicHistory(ctx context.Context, m Requester, i ChannelsDele
 }
 
 type ChannelsReorderPinnedForumTopicsRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Force   bool     `tl:",omitempty:flags:0,implicit"`
-	Channel InputChannel
-	Order   []int32
+	_       struct{}     `tl:"flags,bitflag"`
+	Force   bool         `tl:"force,omitempty:flags:0,implicit"`
+	Channel InputChannel `tl:"channel"`
+	Order   []int32      `tl:"order"`
 }
 
 func (*ChannelsReorderPinnedForumTopicsRequestPredict) CRC() uint32 {
@@ -22414,8 +22414,8 @@ func ChannelsReorderPinnedForumTopics(ctx context.Context, m Requester, i Channe
 }
 
 type ChannelsToggleAntiSpamRequestPredict struct {
-	Channel InputChannel
-	Enabled bool
+	Channel InputChannel `tl:"channel"`
+	Enabled bool         `tl:"enabled"`
 }
 
 func (*ChannelsToggleAntiSpamRequestPredict) CRC() uint32 {
@@ -22428,8 +22428,8 @@ func ChannelsToggleAntiSpam(ctx context.Context, m Requester, i ChannelsToggleAn
 }
 
 type ChannelsReportAntiSpamFalsePositiveRequestPredict struct {
-	Channel InputChannel
-	MsgID   int32
+	Channel InputChannel `tl:"channel"`
+	MsgID   int32        `tl:"msg_id"`
 }
 
 func (*ChannelsReportAntiSpamFalsePositiveRequestPredict) CRC() uint32 {
@@ -22442,8 +22442,8 @@ func ChannelsReportAntiSpamFalsePositive(ctx context.Context, m Requester, i Cha
 }
 
 type ChannelsToggleParticipantsHiddenRequestPredict struct {
-	Channel InputChannel
-	Enabled bool
+	Channel InputChannel `tl:"channel"`
+	Enabled bool         `tl:"enabled"`
 }
 
 func (*ChannelsToggleParticipantsHiddenRequestPredict) CRC() uint32 {
@@ -22456,8 +22456,8 @@ func ChannelsToggleParticipantsHidden(ctx context.Context, m Requester, i Channe
 }
 
 type ChannelsClickSponsoredMessageRequestPredict struct {
-	Channel  InputChannel
-	RandomID []byte
+	Channel  InputChannel `tl:"channel"`
+	RandomID []byte       `tl:"random_id"`
 }
 
 func (*ChannelsClickSponsoredMessageRequestPredict) CRC() uint32 {
@@ -22470,11 +22470,11 @@ func ChannelsClickSponsoredMessage(ctx context.Context, m Requester, i ChannelsC
 }
 
 type ChannelsUpdateColorRequestPredict struct {
-	_                 struct{} `tl:"flags,bitflag"`
-	ForProfile        bool     `tl:",omitempty:flags:1,implicit"`
-	Channel           InputChannel
-	Color             *int32 `tl:",omitempty:flags:2"`
-	BackgroundEmojiID *int64 `tl:",omitempty:flags:0"`
+	_                 struct{}     `tl:"flags,bitflag"`
+	ForProfile        bool         `tl:"for_profile,omitempty:flags:1,implicit"`
+	Channel           InputChannel `tl:"channel"`
+	Color             *int32       `tl:"color,omitempty:flags:2"`
+	BackgroundEmojiID *int64       `tl:"background_emoji_id,omitempty:flags:0"`
 }
 
 func (*ChannelsUpdateColorRequestPredict) CRC() uint32 {
@@ -22487,8 +22487,8 @@ func ChannelsUpdateColor(ctx context.Context, m Requester, i ChannelsUpdateColor
 }
 
 type ChannelsToggleViewForumAsMessagesRequestPredict struct {
-	Channel InputChannel
-	Enabled bool
+	Channel InputChannel `tl:"channel"`
+	Enabled bool         `tl:"enabled"`
 }
 
 func (*ChannelsToggleViewForumAsMessagesRequestPredict) CRC() uint32 {
@@ -22502,7 +22502,7 @@ func ChannelsToggleViewForumAsMessages(ctx context.Context, m Requester, i Chann
 
 type ChannelsGetChannelRecommendationsRequestPredict struct {
 	_       struct{}     `tl:"flags,bitflag"`
-	Channel InputChannel `tl:",omitempty:flags:0"`
+	Channel InputChannel `tl:"channel,omitempty:flags:0"`
 }
 
 func (*ChannelsGetChannelRecommendationsRequestPredict) CRC() uint32 {
@@ -22515,8 +22515,8 @@ func ChannelsGetChannelRecommendations(ctx context.Context, m Requester, i Chann
 }
 
 type ChannelsUpdateEmojiStatusRequestPredict struct {
-	Channel     InputChannel
-	EmojiStatus EmojiStatus
+	Channel     InputChannel `tl:"channel"`
+	EmojiStatus EmojiStatus  `tl:"emoji_status"`
 }
 
 func (*ChannelsUpdateEmojiStatusRequestPredict) CRC() uint32 {
@@ -22529,8 +22529,8 @@ func ChannelsUpdateEmojiStatus(ctx context.Context, m Requester, i ChannelsUpdat
 }
 
 type ChannelsSetBoostsToUnblockRestrictionsRequestPredict struct {
-	Channel InputChannel
-	Boosts  int32
+	Channel InputChannel `tl:"channel"`
+	Boosts  int32        `tl:"boosts"`
 }
 
 func (*ChannelsSetBoostsToUnblockRestrictionsRequestPredict) CRC() uint32 {
@@ -22543,8 +22543,8 @@ func ChannelsSetBoostsToUnblockRestrictions(ctx context.Context, m Requester, i 
 }
 
 type ChannelsSetEmojiStickersRequestPredict struct {
-	Channel    InputChannel
-	Stickerset InputStickerSet
+	Channel    InputChannel    `tl:"channel"`
+	Stickerset InputStickerSet `tl:"stickerset"`
 }
 
 func (*ChannelsSetEmojiStickersRequestPredict) CRC() uint32 {
@@ -22557,9 +22557,9 @@ func ChannelsSetEmojiStickers(ctx context.Context, m Requester, i ChannelsSetEmo
 }
 
 type ChannelsReportSponsoredMessageRequestPredict struct {
-	Channel  InputChannel
-	RandomID []byte
-	Option   []byte
+	Channel  InputChannel `tl:"channel"`
+	RandomID []byte       `tl:"random_id"`
+	Option   []byte       `tl:"option"`
 }
 
 func (*ChannelsReportSponsoredMessageRequestPredict) CRC() uint32 {
@@ -22572,8 +22572,8 @@ func ChannelsReportSponsoredMessage(ctx context.Context, m Requester, i Channels
 }
 
 type ChannelsRestrictSponsoredMessagesRequestPredict struct {
-	Channel    InputChannel
-	Restricted bool
+	Channel    InputChannel `tl:"channel"`
+	Restricted bool         `tl:"restricted"`
 }
 
 func (*ChannelsRestrictSponsoredMessagesRequestPredict) CRC() uint32 {
@@ -22586,11 +22586,11 @@ func ChannelsRestrictSponsoredMessages(ctx context.Context, m Requester, i Chann
 }
 
 type ChannelsSearchPostsRequestPredict struct {
-	Hashtag    string
-	OffsetRate int32
-	OffsetPeer InputPeer
-	OffsetID   int32
-	Limit      int32
+	Hashtag    string    `tl:"hashtag"`
+	OffsetRate int32     `tl:"offset_rate"`
+	OffsetPeer InputPeer `tl:"offset_peer"`
+	OffsetID   int32     `tl:"offset_id"`
+	Limit      int32     `tl:"limit"`
 }
 
 func (*ChannelsSearchPostsRequestPredict) CRC() uint32 {
@@ -22603,9 +22603,9 @@ func ChannelsSearchPosts(ctx context.Context, m Requester, i ChannelsSearchPosts
 }
 
 type ChatlistsExportChatlistInviteRequestPredict struct {
-	Chatlist InputChatlist
-	Title    string
-	Peers    []InputPeer
+	Chatlist InputChatlist `tl:"chatlist"`
+	Title    string        `tl:"title"`
+	Peers    []InputPeer   `tl:"peers"`
 }
 
 func (*ChatlistsExportChatlistInviteRequestPredict) CRC() uint32 {
@@ -22618,8 +22618,8 @@ func ChatlistsExportChatlistInvite(ctx context.Context, m Requester, i Chatlists
 }
 
 type ChatlistsDeleteExportedInviteRequestPredict struct {
-	Chatlist InputChatlist
-	Slug     string
+	Chatlist InputChatlist `tl:"chatlist"`
+	Slug     string        `tl:"slug"`
 }
 
 func (*ChatlistsDeleteExportedInviteRequestPredict) CRC() uint32 {
@@ -22632,11 +22632,11 @@ func ChatlistsDeleteExportedInvite(ctx context.Context, m Requester, i Chatlists
 }
 
 type ChatlistsEditExportedInviteRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Chatlist InputChatlist
-	Slug     string
-	Title    *string     `tl:",omitempty:flags:1"`
-	Peers    []InputPeer `tl:",omitempty:flags:2"`
+	_        struct{}      `tl:"flags,bitflag"`
+	Chatlist InputChatlist `tl:"chatlist"`
+	Slug     string        `tl:"slug"`
+	Title    *string       `tl:"title,omitempty:flags:1"`
+	Peers    []InputPeer   `tl:"peers,omitempty:flags:2"`
 }
 
 func (*ChatlistsEditExportedInviteRequestPredict) CRC() uint32 {
@@ -22649,7 +22649,7 @@ func ChatlistsEditExportedInvite(ctx context.Context, m Requester, i ChatlistsEd
 }
 
 type ChatlistsGetExportedInvitesRequestPredict struct {
-	Chatlist InputChatlist
+	Chatlist InputChatlist `tl:"chatlist"`
 }
 
 func (*ChatlistsGetExportedInvitesRequestPredict) CRC() uint32 {
@@ -22662,7 +22662,7 @@ func ChatlistsGetExportedInvites(ctx context.Context, m Requester, i ChatlistsGe
 }
 
 type ChatlistsCheckChatlistInviteRequestPredict struct {
-	Slug string
+	Slug string `tl:"slug"`
 }
 
 func (*ChatlistsCheckChatlistInviteRequestPredict) CRC() uint32 {
@@ -22675,8 +22675,8 @@ func ChatlistsCheckChatlistInvite(ctx context.Context, m Requester, i ChatlistsC
 }
 
 type ChatlistsJoinChatlistInviteRequestPredict struct {
-	Slug  string
-	Peers []InputPeer
+	Slug  string      `tl:"slug"`
+	Peers []InputPeer `tl:"peers"`
 }
 
 func (*ChatlistsJoinChatlistInviteRequestPredict) CRC() uint32 {
@@ -22689,7 +22689,7 @@ func ChatlistsJoinChatlistInvite(ctx context.Context, m Requester, i ChatlistsJo
 }
 
 type ChatlistsGetChatlistUpdatesRequestPredict struct {
-	Chatlist InputChatlist
+	Chatlist InputChatlist `tl:"chatlist"`
 }
 
 func (*ChatlistsGetChatlistUpdatesRequestPredict) CRC() uint32 {
@@ -22702,8 +22702,8 @@ func ChatlistsGetChatlistUpdates(ctx context.Context, m Requester, i ChatlistsGe
 }
 
 type ChatlistsJoinChatlistUpdatesRequestPredict struct {
-	Chatlist InputChatlist
-	Peers    []InputPeer
+	Chatlist InputChatlist `tl:"chatlist"`
+	Peers    []InputPeer   `tl:"peers"`
 }
 
 func (*ChatlistsJoinChatlistUpdatesRequestPredict) CRC() uint32 {
@@ -22716,7 +22716,7 @@ func ChatlistsJoinChatlistUpdates(ctx context.Context, m Requester, i ChatlistsJ
 }
 
 type ChatlistsHideChatlistUpdatesRequestPredict struct {
-	Chatlist InputChatlist
+	Chatlist InputChatlist `tl:"chatlist"`
 }
 
 func (*ChatlistsHideChatlistUpdatesRequestPredict) CRC() uint32 {
@@ -22729,7 +22729,7 @@ func ChatlistsHideChatlistUpdates(ctx context.Context, m Requester, i ChatlistsH
 }
 
 type ChatlistsGetLeaveChatlistSuggestionsRequestPredict struct {
-	Chatlist InputChatlist
+	Chatlist InputChatlist `tl:"chatlist"`
 }
 
 func (*ChatlistsGetLeaveChatlistSuggestionsRequestPredict) CRC() uint32 {
@@ -22742,8 +22742,8 @@ func ChatlistsGetLeaveChatlistSuggestions(ctx context.Context, m Requester, i Ch
 }
 
 type ChatlistsLeaveChatlistRequestPredict struct {
-	Chatlist InputChatlist
-	Peers    []InputPeer
+	Chatlist InputChatlist `tl:"chatlist"`
+	Peers    []InputPeer   `tl:"peers"`
 }
 
 func (*ChatlistsLeaveChatlistRequestPredict) CRC() uint32 {
@@ -22756,7 +22756,7 @@ func ChatlistsLeaveChatlist(ctx context.Context, m Requester, i ChatlistsLeaveCh
 }
 
 type ContactsGetContactIDsRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*ContactsGetContactIDsRequestPredict) CRC() uint32 {
@@ -22780,7 +22780,7 @@ func ContactsGetStatuses(ctx context.Context, m Requester, i ContactsGetStatuses
 }
 
 type ContactsGetContactsRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*ContactsGetContactsRequestPredict) CRC() uint32 {
@@ -22793,7 +22793,7 @@ func ContactsGetContacts(ctx context.Context, m Requester, i ContactsGetContacts
 }
 
 type ContactsImportContactsRequestPredict struct {
-	Contacts []InputContact
+	Contacts []InputContact `tl:"contacts"`
 }
 
 func (*ContactsImportContactsRequestPredict) CRC() uint32 {
@@ -22806,7 +22806,7 @@ func ContactsImportContacts(ctx context.Context, m Requester, i ContactsImportCo
 }
 
 type ContactsDeleteContactsRequestPredict struct {
-	ID []InputUser
+	ID []InputUser `tl:"id"`
 }
 
 func (*ContactsDeleteContactsRequestPredict) CRC() uint32 {
@@ -22819,7 +22819,7 @@ func ContactsDeleteContacts(ctx context.Context, m Requester, i ContactsDeleteCo
 }
 
 type ContactsDeleteByPhonesRequestPredict struct {
-	Phones []string
+	Phones []string `tl:"phones"`
 }
 
 func (*ContactsDeleteByPhonesRequestPredict) CRC() uint32 {
@@ -22832,9 +22832,9 @@ func ContactsDeleteByPhones(ctx context.Context, m Requester, i ContactsDeleteBy
 }
 
 type ContactsBlockRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	MyStoriesFrom bool     `tl:",omitempty:flags:0,implicit"`
-	ID            InputPeer
+	_             struct{}  `tl:"flags,bitflag"`
+	MyStoriesFrom bool      `tl:"my_stories_from,omitempty:flags:0,implicit"`
+	ID            InputPeer `tl:"id"`
 }
 
 func (*ContactsBlockRequestPredict) CRC() uint32 {
@@ -22847,9 +22847,9 @@ func ContactsBlock(ctx context.Context, m Requester, i ContactsBlockRequestPredi
 }
 
 type ContactsUnblockRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	MyStoriesFrom bool     `tl:",omitempty:flags:0,implicit"`
-	ID            InputPeer
+	_             struct{}  `tl:"flags,bitflag"`
+	MyStoriesFrom bool      `tl:"my_stories_from,omitempty:flags:0,implicit"`
+	ID            InputPeer `tl:"id"`
 }
 
 func (*ContactsUnblockRequestPredict) CRC() uint32 {
@@ -22863,9 +22863,9 @@ func ContactsUnblock(ctx context.Context, m Requester, i ContactsUnblockRequestP
 
 type ContactsGetBlockedRequestPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	MyStoriesFrom bool     `tl:",omitempty:flags:0,implicit"`
-	Offset        int32
-	Limit         int32
+	MyStoriesFrom bool     `tl:"my_stories_from,omitempty:flags:0,implicit"`
+	Offset        int32    `tl:"offset"`
+	Limit         int32    `tl:"limit"`
 }
 
 func (*ContactsGetBlockedRequestPredict) CRC() uint32 {
@@ -22878,8 +22878,8 @@ func ContactsGetBlocked(ctx context.Context, m Requester, i ContactsGetBlockedRe
 }
 
 type ContactsSearchRequestPredict struct {
-	Q     string
-	Limit int32
+	Q     string `tl:"q"`
+	Limit int32  `tl:"limit"`
 }
 
 func (*ContactsSearchRequestPredict) CRC() uint32 {
@@ -22892,7 +22892,7 @@ func ContactsSearch(ctx context.Context, m Requester, i ContactsSearchRequestPre
 }
 
 type ContactsResolveUsernameRequestPredict struct {
-	Username string
+	Username string `tl:"username"`
 }
 
 func (*ContactsResolveUsernameRequestPredict) CRC() uint32 {
@@ -22906,18 +22906,18 @@ func ContactsResolveUsername(ctx context.Context, m Requester, i ContactsResolve
 
 type ContactsGetTopPeersRequestPredict struct {
 	_              struct{} `tl:"flags,bitflag"`
-	Correspondents bool     `tl:",omitempty:flags:0,implicit"`
-	BotsPm         bool     `tl:",omitempty:flags:1,implicit"`
-	BotsInline     bool     `tl:",omitempty:flags:2,implicit"`
-	PhoneCalls     bool     `tl:",omitempty:flags:3,implicit"`
-	ForwardUsers   bool     `tl:",omitempty:flags:4,implicit"`
-	ForwardChats   bool     `tl:",omitempty:flags:5,implicit"`
-	Groups         bool     `tl:",omitempty:flags:10,implicit"`
-	Channels       bool     `tl:",omitempty:flags:15,implicit"`
-	BotsApp        bool     `tl:",omitempty:flags:16,implicit"`
-	Offset         int32
-	Limit          int32
-	Hash           int64
+	Correspondents bool     `tl:"correspondents,omitempty:flags:0,implicit"`
+	BotsPm         bool     `tl:"bots_pm,omitempty:flags:1,implicit"`
+	BotsInline     bool     `tl:"bots_inline,omitempty:flags:2,implicit"`
+	PhoneCalls     bool     `tl:"phone_calls,omitempty:flags:3,implicit"`
+	ForwardUsers   bool     `tl:"forward_users,omitempty:flags:4,implicit"`
+	ForwardChats   bool     `tl:"forward_chats,omitempty:flags:5,implicit"`
+	Groups         bool     `tl:"groups,omitempty:flags:10,implicit"`
+	Channels       bool     `tl:"channels,omitempty:flags:15,implicit"`
+	BotsApp        bool     `tl:"bots_app,omitempty:flags:16,implicit"`
+	Offset         int32    `tl:"offset"`
+	Limit          int32    `tl:"limit"`
+	Hash           int64    `tl:"hash"`
 }
 
 func (*ContactsGetTopPeersRequestPredict) CRC() uint32 {
@@ -22930,8 +22930,8 @@ func ContactsGetTopPeers(ctx context.Context, m Requester, i ContactsGetTopPeers
 }
 
 type ContactsResetTopPeerRatingRequestPredict struct {
-	Category TopPeerCategory
-	Peer     InputPeer
+	Category TopPeerCategory `tl:"category"`
+	Peer     InputPeer       `tl:"peer"`
 }
 
 func (*ContactsResetTopPeerRatingRequestPredict) CRC() uint32 {
@@ -22966,7 +22966,7 @@ func ContactsGetSaved(ctx context.Context, m Requester, i ContactsGetSavedReques
 }
 
 type ContactsToggleTopPeersRequestPredict struct {
-	Enabled bool
+	Enabled bool `tl:"enabled"`
 }
 
 func (*ContactsToggleTopPeersRequestPredict) CRC() uint32 {
@@ -22979,12 +22979,12 @@ func ContactsToggleTopPeers(ctx context.Context, m Requester, i ContactsToggleTo
 }
 
 type ContactsAddContactRequestPredict struct {
-	_                        struct{} `tl:"flags,bitflag"`
-	AddPhonePrivacyException bool     `tl:",omitempty:flags:0,implicit"`
-	ID                       InputUser
-	FirstName                string
-	LastName                 string
-	Phone                    string
+	_                        struct{}  `tl:"flags,bitflag"`
+	AddPhonePrivacyException bool      `tl:"add_phone_privacy_exception,omitempty:flags:0,implicit"`
+	ID                       InputUser `tl:"id"`
+	FirstName                string    `tl:"first_name"`
+	LastName                 string    `tl:"last_name"`
+	Phone                    string    `tl:"phone"`
 }
 
 func (*ContactsAddContactRequestPredict) CRC() uint32 {
@@ -22997,7 +22997,7 @@ func ContactsAddContact(ctx context.Context, m Requester, i ContactsAddContactRe
 }
 
 type ContactsAcceptContactRequestPredict struct {
-	ID InputUser
+	ID InputUser `tl:"id"`
 }
 
 func (*ContactsAcceptContactRequestPredict) CRC() uint32 {
@@ -23010,10 +23010,10 @@ func ContactsAcceptContact(ctx context.Context, m Requester, i ContactsAcceptCon
 }
 
 type ContactsGetLocatedRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Background  bool     `tl:",omitempty:flags:1,implicit"`
-	GeoPoint    InputGeoPoint
-	SelfExpires *int32 `tl:",omitempty:flags:0"`
+	_           struct{}      `tl:"flags,bitflag"`
+	Background  bool          `tl:"background,omitempty:flags:1,implicit"`
+	GeoPoint    InputGeoPoint `tl:"geo_point"`
+	SelfExpires *int32        `tl:"self_expires,omitempty:flags:0"`
 }
 
 func (*ContactsGetLocatedRequestPredict) CRC() uint32 {
@@ -23027,10 +23027,10 @@ func ContactsGetLocated(ctx context.Context, m Requester, i ContactsGetLocatedRe
 
 type ContactsBlockFromRepliesRequestPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	DeleteMessage bool     `tl:",omitempty:flags:0,implicit"`
-	DeleteHistory bool     `tl:",omitempty:flags:1,implicit"`
-	ReportSpam    bool     `tl:",omitempty:flags:2,implicit"`
-	MsgID         int32
+	DeleteMessage bool     `tl:"delete_message,omitempty:flags:0,implicit"`
+	DeleteHistory bool     `tl:"delete_history,omitempty:flags:1,implicit"`
+	ReportSpam    bool     `tl:"report_spam,omitempty:flags:2,implicit"`
+	MsgID         int32    `tl:"msg_id"`
 }
 
 func (*ContactsBlockFromRepliesRequestPredict) CRC() uint32 {
@@ -23043,7 +23043,7 @@ func ContactsBlockFromReplies(ctx context.Context, m Requester, i ContactsBlockF
 }
 
 type ContactsResolvePhoneRequestPredict struct {
-	Phone string
+	Phone string `tl:"phone"`
 }
 
 func (*ContactsResolvePhoneRequestPredict) CRC() uint32 {
@@ -23067,7 +23067,7 @@ func ContactsExportContactToken(ctx context.Context, m Requester, i ContactsExpo
 }
 
 type ContactsImportContactTokenRequestPredict struct {
-	Token string
+	Token string `tl:"token"`
 }
 
 func (*ContactsImportContactTokenRequestPredict) CRC() uint32 {
@@ -23080,7 +23080,7 @@ func ContactsImportContactToken(ctx context.Context, m Requester, i ContactsImpo
 }
 
 type ContactsEditCloseFriendsRequestPredict struct {
-	ID []int64
+	ID []int64 `tl:"id"`
 }
 
 func (*ContactsEditCloseFriendsRequestPredict) CRC() uint32 {
@@ -23093,10 +23093,10 @@ func ContactsEditCloseFriends(ctx context.Context, m Requester, i ContactsEditCl
 }
 
 type ContactsSetBlockedRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	MyStoriesFrom bool     `tl:",omitempty:flags:0,implicit"`
-	ID            []InputPeer
-	Limit         int32
+	_             struct{}    `tl:"flags,bitflag"`
+	MyStoriesFrom bool        `tl:"my_stories_from,omitempty:flags:0,implicit"`
+	ID            []InputPeer `tl:"id"`
+	Limit         int32       `tl:"limit"`
 }
 
 func (*ContactsSetBlockedRequestPredict) CRC() uint32 {
@@ -23120,7 +23120,7 @@ func ContactsGetBirthdays(ctx context.Context, m Requester, i ContactsGetBirthda
 }
 
 type FoldersEditPeerFoldersRequestPredict struct {
-	FolderPeers []InputFolderPeer
+	FolderPeers []InputFolderPeer `tl:"folder_peers"`
 }
 
 func (*FoldersEditPeerFoldersRequestPredict) CRC() uint32 {
@@ -23133,7 +23133,7 @@ func FoldersEditPeerFolders(ctx context.Context, m Requester, i FoldersEditPeerF
 }
 
 type FragmentGetCollectibleInfoRequestPredict struct {
-	Collectible InputCollectible
+	Collectible InputCollectible `tl:"collectible"`
 }
 
 func (*FragmentGetCollectibleInfoRequestPredict) CRC() uint32 {
@@ -23168,7 +23168,7 @@ func HelpGetNearestDc(ctx context.Context, m Requester, i HelpGetNearestDcReques
 }
 
 type HelpGetAppUpdateRequestPredict struct {
-	Source string
+	Source string `tl:"source"`
 }
 
 func (*HelpGetAppUpdateRequestPredict) CRC() uint32 {
@@ -23203,8 +23203,8 @@ func HelpGetSupport(ctx context.Context, m Requester, i HelpGetSupportRequestPre
 }
 
 type HelpSetBotUpdatesStatusRequestPredict struct {
-	PendingUpdatesCount int32
-	Message             string
+	PendingUpdatesCount int32  `tl:"pending_updates_count"`
+	Message             string `tl:"message"`
 }
 
 func (*HelpSetBotUpdatesStatusRequestPredict) CRC() uint32 {
@@ -23228,7 +23228,7 @@ func HelpGetCdnConfig(ctx context.Context, m Requester, i HelpGetCdnConfigReques
 }
 
 type HelpGetRecentMeUrlsRequestPredict struct {
-	Referer string
+	Referer string `tl:"referer"`
 }
 
 func (*HelpGetRecentMeUrlsRequestPredict) CRC() uint32 {
@@ -23252,7 +23252,7 @@ func HelpGetTermsOfServiceUpdate(ctx context.Context, m Requester, i HelpGetTerm
 }
 
 type HelpAcceptTermsOfServiceRequestPredict struct {
-	ID DataJSON
+	ID DataJSON `tl:"id"`
 }
 
 func (*HelpAcceptTermsOfServiceRequestPredict) CRC() uint32 {
@@ -23265,7 +23265,7 @@ func HelpAcceptTermsOfService(ctx context.Context, m Requester, i HelpAcceptTerm
 }
 
 type HelpGetDeepLinkInfoRequestPredict struct {
-	Path string
+	Path string `tl:"path"`
 }
 
 func (*HelpGetDeepLinkInfoRequestPredict) CRC() uint32 {
@@ -23278,7 +23278,7 @@ func HelpGetDeepLinkInfo(ctx context.Context, m Requester, i HelpGetDeepLinkInfo
 }
 
 type HelpGetAppConfigRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*HelpGetAppConfigRequestPredict) CRC() uint32 {
@@ -23291,7 +23291,7 @@ func HelpGetAppConfig(ctx context.Context, m Requester, i HelpGetAppConfigReques
 }
 
 type HelpSaveAppLogRequestPredict struct {
-	Events []InputAppEvent
+	Events []InputAppEvent `tl:"events"`
 }
 
 func (*HelpSaveAppLogRequestPredict) CRC() uint32 {
@@ -23304,7 +23304,7 @@ func HelpSaveAppLog(ctx context.Context, m Requester, i HelpSaveAppLogRequestPre
 }
 
 type HelpGetPassportConfigRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*HelpGetPassportConfigRequestPredict) CRC() uint32 {
@@ -23328,7 +23328,7 @@ func HelpGetSupportName(ctx context.Context, m Requester, i HelpGetSupportNameRe
 }
 
 type HelpGetUserInfoRequestPredict struct {
-	UserID InputUser
+	UserID InputUser `tl:"user_id"`
 }
 
 func (*HelpGetUserInfoRequestPredict) CRC() uint32 {
@@ -23341,9 +23341,9 @@ func HelpGetUserInfo(ctx context.Context, m Requester, i HelpGetUserInfoRequestP
 }
 
 type HelpEditUserInfoRequestPredict struct {
-	UserID   InputUser
-	Message  string
-	Entities []MessageEntity
+	UserID   InputUser       `tl:"user_id"`
+	Message  string          `tl:"message"`
+	Entities []MessageEntity `tl:"entities"`
 }
 
 func (*HelpEditUserInfoRequestPredict) CRC() uint32 {
@@ -23367,7 +23367,7 @@ func HelpGetPromoData(ctx context.Context, m Requester, i HelpGetPromoDataReques
 }
 
 type HelpHidePromoDataRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*HelpHidePromoDataRequestPredict) CRC() uint32 {
@@ -23380,8 +23380,8 @@ func HelpHidePromoData(ctx context.Context, m Requester, i HelpHidePromoDataRequ
 }
 
 type HelpDismissSuggestionRequestPredict struct {
-	Peer       InputPeer
-	Suggestion string
+	Peer       InputPeer `tl:"peer"`
+	Suggestion string    `tl:"suggestion"`
 }
 
 func (*HelpDismissSuggestionRequestPredict) CRC() uint32 {
@@ -23394,8 +23394,8 @@ func HelpDismissSuggestion(ctx context.Context, m Requester, i HelpDismissSugges
 }
 
 type HelpGetCountriesListRequestPredict struct {
-	LangCode string
-	Hash     int32
+	LangCode string `tl:"lang_code"`
+	Hash     int32  `tl:"hash"`
 }
 
 func (*HelpGetCountriesListRequestPredict) CRC() uint32 {
@@ -23419,7 +23419,7 @@ func HelpGetPremiumPromo(ctx context.Context, m Requester, i HelpGetPremiumPromo
 }
 
 type HelpGetPeerColorsRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*HelpGetPeerColorsRequestPredict) CRC() uint32 {
@@ -23432,7 +23432,7 @@ func HelpGetPeerColors(ctx context.Context, m Requester, i HelpGetPeerColorsRequ
 }
 
 type HelpGetPeerProfileColorsRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*HelpGetPeerProfileColorsRequestPredict) CRC() uint32 {
@@ -23445,7 +23445,7 @@ func HelpGetPeerProfileColors(ctx context.Context, m Requester, i HelpGetPeerPro
 }
 
 type HelpGetTimezonesListRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*HelpGetTimezonesListRequestPredict) CRC() uint32 {
@@ -23458,8 +23458,8 @@ func HelpGetTimezonesList(ctx context.Context, m Requester, i HelpGetTimezonesLi
 }
 
 type LangpackGetLangPackRequestPredict struct {
-	LangPack string
-	LangCode string
+	LangPack string `tl:"lang_pack"`
+	LangCode string `tl:"lang_code"`
 }
 
 func (*LangpackGetLangPackRequestPredict) CRC() uint32 {
@@ -23472,9 +23472,9 @@ func LangpackGetLangPack(ctx context.Context, m Requester, i LangpackGetLangPack
 }
 
 type LangpackGetStringsRequestPredict struct {
-	LangPack string
-	LangCode string
-	Keys     []string
+	LangPack string   `tl:"lang_pack"`
+	LangCode string   `tl:"lang_code"`
+	Keys     []string `tl:"keys"`
 }
 
 func (*LangpackGetStringsRequestPredict) CRC() uint32 {
@@ -23487,9 +23487,9 @@ func LangpackGetStrings(ctx context.Context, m Requester, i LangpackGetStringsRe
 }
 
 type LangpackGetDifferenceRequestPredict struct {
-	LangPack    string
-	LangCode    string
-	FromVersion int32
+	LangPack    string `tl:"lang_pack"`
+	LangCode    string `tl:"lang_code"`
+	FromVersion int32  `tl:"from_version"`
 }
 
 func (*LangpackGetDifferenceRequestPredict) CRC() uint32 {
@@ -23502,7 +23502,7 @@ func LangpackGetDifference(ctx context.Context, m Requester, i LangpackGetDiffer
 }
 
 type LangpackGetLanguagesRequestPredict struct {
-	LangPack string
+	LangPack string `tl:"lang_pack"`
 }
 
 func (*LangpackGetLanguagesRequestPredict) CRC() uint32 {
@@ -23515,8 +23515,8 @@ func LangpackGetLanguages(ctx context.Context, m Requester, i LangpackGetLanguag
 }
 
 type LangpackGetLanguageRequestPredict struct {
-	LangPack string
-	LangCode string
+	LangPack string `tl:"lang_pack"`
+	LangCode string `tl:"lang_code"`
 }
 
 func (*LangpackGetLanguageRequestPredict) CRC() uint32 {
@@ -23529,7 +23529,7 @@ func LangpackGetLanguage(ctx context.Context, m Requester, i LangpackGetLanguage
 }
 
 type MessagesGetMessagesRequestPredict struct {
-	ID []InputMessage
+	ID []InputMessage `tl:"id"`
 }
 
 func (*MessagesGetMessagesRequestPredict) CRC() uint32 {
@@ -23542,14 +23542,14 @@ func MessagesGetMessages(ctx context.Context, m Requester, i MessagesGetMessages
 }
 
 type MessagesGetDialogsRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	ExcludePinned bool     `tl:",omitempty:flags:0,implicit"`
-	FolderID      *int32   `tl:",omitempty:flags:1"`
-	OffsetDate    int32
-	OffsetID      int32
-	OffsetPeer    InputPeer
-	Limit         int32
-	Hash          int64
+	_             struct{}  `tl:"flags,bitflag"`
+	ExcludePinned bool      `tl:"exclude_pinned,omitempty:flags:0,implicit"`
+	FolderID      *int32    `tl:"folder_id,omitempty:flags:1"`
+	OffsetDate    int32     `tl:"offset_date"`
+	OffsetID      int32     `tl:"offset_id"`
+	OffsetPeer    InputPeer `tl:"offset_peer"`
+	Limit         int32     `tl:"limit"`
+	Hash          int64     `tl:"hash"`
 }
 
 func (*MessagesGetDialogsRequestPredict) CRC() uint32 {
@@ -23562,14 +23562,14 @@ func MessagesGetDialogs(ctx context.Context, m Requester, i MessagesGetDialogsRe
 }
 
 type MessagesGetHistoryRequestPredict struct {
-	Peer       InputPeer
-	OffsetID   int32
-	OffsetDate int32
-	AddOffset  int32
-	Limit      int32
-	MaxID      int32
-	MinID      int32
-	Hash       int64
+	Peer       InputPeer `tl:"peer"`
+	OffsetID   int32     `tl:"offset_id"`
+	OffsetDate int32     `tl:"offset_date"`
+	AddOffset  int32     `tl:"add_offset"`
+	Limit      int32     `tl:"limit"`
+	MaxID      int32     `tl:"max_id"`
+	MinID      int32     `tl:"min_id"`
+	Hash       int64     `tl:"hash"`
 }
 
 func (*MessagesGetHistoryRequestPredict) CRC() uint32 {
@@ -23582,22 +23582,22 @@ func MessagesGetHistory(ctx context.Context, m Requester, i MessagesGetHistoryRe
 }
 
 type MessagesSearchRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Peer          InputPeer
-	Q             string
-	FromID        InputPeer  `tl:",omitempty:flags:0"`
-	SavedPeerID   InputPeer  `tl:",omitempty:flags:2"`
-	SavedReaction []Reaction `tl:",omitempty:flags:3"`
-	TopMsgID      *int32     `tl:",omitempty:flags:1"`
-	Filter        MessagesFilter
-	MinDate       int32
-	MaxDate       int32
-	OffsetID      int32
-	AddOffset     int32
-	Limit         int32
-	MaxID         int32
-	MinID         int32
-	Hash          int64
+	_             struct{}       `tl:"flags,bitflag"`
+	Peer          InputPeer      `tl:"peer"`
+	Q             string         `tl:"q"`
+	FromID        InputPeer      `tl:"from_id,omitempty:flags:0"`
+	SavedPeerID   InputPeer      `tl:"saved_peer_id,omitempty:flags:2"`
+	SavedReaction []Reaction     `tl:"saved_reaction,omitempty:flags:3"`
+	TopMsgID      *int32         `tl:"top_msg_id,omitempty:flags:1"`
+	Filter        MessagesFilter `tl:"filter"`
+	MinDate       int32          `tl:"min_date"`
+	MaxDate       int32          `tl:"max_date"`
+	OffsetID      int32          `tl:"offset_id"`
+	AddOffset     int32          `tl:"add_offset"`
+	Limit         int32          `tl:"limit"`
+	MaxID         int32          `tl:"max_id"`
+	MinID         int32          `tl:"min_id"`
+	Hash          int64          `tl:"hash"`
 }
 
 func (*MessagesSearchRequestPredict) CRC() uint32 {
@@ -23610,8 +23610,8 @@ func MessagesSearch(ctx context.Context, m Requester, i MessagesSearchRequestPre
 }
 
 type MessagesReadHistoryRequestPredict struct {
-	Peer  InputPeer
-	MaxID int32
+	Peer  InputPeer `tl:"peer"`
+	MaxID int32     `tl:"max_id"`
 }
 
 func (*MessagesReadHistoryRequestPredict) CRC() uint32 {
@@ -23624,13 +23624,13 @@ func MessagesReadHistory(ctx context.Context, m Requester, i MessagesReadHistory
 }
 
 type MessagesDeleteHistoryRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	JustClear bool     `tl:",omitempty:flags:0,implicit"`
-	Revoke    bool     `tl:",omitempty:flags:1,implicit"`
-	Peer      InputPeer
-	MaxID     int32
-	MinDate   *int32 `tl:",omitempty:flags:2"`
-	MaxDate   *int32 `tl:",omitempty:flags:3"`
+	_         struct{}  `tl:"flags,bitflag"`
+	JustClear bool      `tl:"just_clear,omitempty:flags:0,implicit"`
+	Revoke    bool      `tl:"revoke,omitempty:flags:1,implicit"`
+	Peer      InputPeer `tl:"peer"`
+	MaxID     int32     `tl:"max_id"`
+	MinDate   *int32    `tl:"min_date,omitempty:flags:2"`
+	MaxDate   *int32    `tl:"max_date,omitempty:flags:3"`
 }
 
 func (*MessagesDeleteHistoryRequestPredict) CRC() uint32 {
@@ -23644,8 +23644,8 @@ func MessagesDeleteHistory(ctx context.Context, m Requester, i MessagesDeleteHis
 
 type MessagesDeleteMessagesRequestPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Revoke bool     `tl:",omitempty:flags:0,implicit"`
-	ID     []int32
+	Revoke bool     `tl:"revoke,omitempty:flags:0,implicit"`
+	ID     []int32  `tl:"id"`
 }
 
 func (*MessagesDeleteMessagesRequestPredict) CRC() uint32 {
@@ -23658,7 +23658,7 @@ func MessagesDeleteMessages(ctx context.Context, m Requester, i MessagesDeleteMe
 }
 
 type MessagesReceivedMessagesRequestPredict struct {
-	MaxID int32
+	MaxID int32 `tl:"max_id"`
 }
 
 func (*MessagesReceivedMessagesRequestPredict) CRC() uint32 {
@@ -23671,10 +23671,10 @@ func MessagesReceivedMessages(ctx context.Context, m Requester, i MessagesReceiv
 }
 
 type MessagesSetTypingRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Peer     InputPeer
-	TopMsgID *int32 `tl:",omitempty:flags:0"`
-	Action   SendMessageAction
+	_        struct{}          `tl:"flags,bitflag"`
+	Peer     InputPeer         `tl:"peer"`
+	TopMsgID *int32            `tl:"top_msg_id,omitempty:flags:0"`
+	Action   SendMessageAction `tl:"action"`
 }
 
 func (*MessagesSetTypingRequestPredict) CRC() uint32 {
@@ -23687,24 +23687,24 @@ func MessagesSetTyping(ctx context.Context, m Requester, i MessagesSetTypingRequ
 }
 
 type MessagesSendMessageRequestPredict struct {
-	_                      struct{} `tl:"flags,bitflag"`
-	NoWebpage              bool     `tl:",omitempty:flags:1,implicit"`
-	Silent                 bool     `tl:",omitempty:flags:5,implicit"`
-	Background             bool     `tl:",omitempty:flags:6,implicit"`
-	ClearDraft             bool     `tl:",omitempty:flags:7,implicit"`
-	Noforwards             bool     `tl:",omitempty:flags:14,implicit"`
-	UpdateStickersetsOrder bool     `tl:",omitempty:flags:15,implicit"`
-	InvertMedia            bool     `tl:",omitempty:flags:16,implicit"`
-	Peer                   InputPeer
-	ReplyTo                InputReplyTo `tl:",omitempty:flags:0"`
-	Message                string
-	RandomID               int64
-	ReplyMarkup            ReplyMarkup             `tl:",omitempty:flags:2"`
-	Entities               []MessageEntity         `tl:",omitempty:flags:3"`
-	ScheduleDate           *int32                  `tl:",omitempty:flags:10"`
-	SendAs                 InputPeer               `tl:",omitempty:flags:13"`
-	QuickReplyShortcut     InputQuickReplyShortcut `tl:",omitempty:flags:17"`
-	Effect                 *int64                  `tl:",omitempty:flags:18"`
+	_                      struct{}                `tl:"flags,bitflag"`
+	NoWebpage              bool                    `tl:"no_webpage,omitempty:flags:1,implicit"`
+	Silent                 bool                    `tl:"silent,omitempty:flags:5,implicit"`
+	Background             bool                    `tl:"background,omitempty:flags:6,implicit"`
+	ClearDraft             bool                    `tl:"clear_draft,omitempty:flags:7,implicit"`
+	Noforwards             bool                    `tl:"noforwards,omitempty:flags:14,implicit"`
+	UpdateStickersetsOrder bool                    `tl:"update_stickersets_order,omitempty:flags:15,implicit"`
+	InvertMedia            bool                    `tl:"invert_media,omitempty:flags:16,implicit"`
+	Peer                   InputPeer               `tl:"peer"`
+	ReplyTo                InputReplyTo            `tl:"reply_to,omitempty:flags:0"`
+	Message                string                  `tl:"message"`
+	RandomID               int64                   `tl:"random_id"`
+	ReplyMarkup            ReplyMarkup             `tl:"reply_markup,omitempty:flags:2"`
+	Entities               []MessageEntity         `tl:"entities,omitempty:flags:3"`
+	ScheduleDate           *int32                  `tl:"schedule_date,omitempty:flags:10"`
+	SendAs                 InputPeer               `tl:"send_as,omitempty:flags:13"`
+	QuickReplyShortcut     InputQuickReplyShortcut `tl:"quick_reply_shortcut,omitempty:flags:17"`
+	Effect                 *int64                  `tl:"effect,omitempty:flags:18"`
 }
 
 func (*MessagesSendMessageRequestPredict) CRC() uint32 {
@@ -23717,24 +23717,24 @@ func MessagesSendMessage(ctx context.Context, m Requester, i MessagesSendMessage
 }
 
 type MessagesSendMediaRequestPredict struct {
-	_                      struct{} `tl:"flags,bitflag"`
-	Silent                 bool     `tl:",omitempty:flags:5,implicit"`
-	Background             bool     `tl:",omitempty:flags:6,implicit"`
-	ClearDraft             bool     `tl:",omitempty:flags:7,implicit"`
-	Noforwards             bool     `tl:",omitempty:flags:14,implicit"`
-	UpdateStickersetsOrder bool     `tl:",omitempty:flags:15,implicit"`
-	InvertMedia            bool     `tl:",omitempty:flags:16,implicit"`
-	Peer                   InputPeer
-	ReplyTo                InputReplyTo `tl:",omitempty:flags:0"`
-	Media                  InputMedia
-	Message                string
-	RandomID               int64
-	ReplyMarkup            ReplyMarkup             `tl:",omitempty:flags:2"`
-	Entities               []MessageEntity         `tl:",omitempty:flags:3"`
-	ScheduleDate           *int32                  `tl:",omitempty:flags:10"`
-	SendAs                 InputPeer               `tl:",omitempty:flags:13"`
-	QuickReplyShortcut     InputQuickReplyShortcut `tl:",omitempty:flags:17"`
-	Effect                 *int64                  `tl:",omitempty:flags:18"`
+	_                      struct{}                `tl:"flags,bitflag"`
+	Silent                 bool                    `tl:"silent,omitempty:flags:5,implicit"`
+	Background             bool                    `tl:"background,omitempty:flags:6,implicit"`
+	ClearDraft             bool                    `tl:"clear_draft,omitempty:flags:7,implicit"`
+	Noforwards             bool                    `tl:"noforwards,omitempty:flags:14,implicit"`
+	UpdateStickersetsOrder bool                    `tl:"update_stickersets_order,omitempty:flags:15,implicit"`
+	InvertMedia            bool                    `tl:"invert_media,omitempty:flags:16,implicit"`
+	Peer                   InputPeer               `tl:"peer"`
+	ReplyTo                InputReplyTo            `tl:"reply_to,omitempty:flags:0"`
+	Media                  InputMedia              `tl:"media"`
+	Message                string                  `tl:"message"`
+	RandomID               int64                   `tl:"random_id"`
+	ReplyMarkup            ReplyMarkup             `tl:"reply_markup,omitempty:flags:2"`
+	Entities               []MessageEntity         `tl:"entities,omitempty:flags:3"`
+	ScheduleDate           *int32                  `tl:"schedule_date,omitempty:flags:10"`
+	SendAs                 InputPeer               `tl:"send_as,omitempty:flags:13"`
+	QuickReplyShortcut     InputQuickReplyShortcut `tl:"quick_reply_shortcut,omitempty:flags:17"`
+	Effect                 *int64                  `tl:"effect,omitempty:flags:18"`
 }
 
 func (*MessagesSendMediaRequestPredict) CRC() uint32 {
@@ -23747,21 +23747,21 @@ func MessagesSendMedia(ctx context.Context, m Requester, i MessagesSendMediaRequ
 }
 
 type MessagesForwardMessagesRequestPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	Silent             bool     `tl:",omitempty:flags:5,implicit"`
-	Background         bool     `tl:",omitempty:flags:6,implicit"`
-	WithMyScore        bool     `tl:",omitempty:flags:8,implicit"`
-	DropAuthor         bool     `tl:",omitempty:flags:11,implicit"`
-	DropMediaCaptions  bool     `tl:",omitempty:flags:12,implicit"`
-	Noforwards         bool     `tl:",omitempty:flags:14,implicit"`
-	FromPeer           InputPeer
-	ID                 []int32
-	RandomID           []int64
-	ToPeer             InputPeer
-	TopMsgID           *int32                  `tl:",omitempty:flags:9"`
-	ScheduleDate       *int32                  `tl:",omitempty:flags:10"`
-	SendAs             InputPeer               `tl:",omitempty:flags:13"`
-	QuickReplyShortcut InputQuickReplyShortcut `tl:",omitempty:flags:17"`
+	_                  struct{}                `tl:"flags,bitflag"`
+	Silent             bool                    `tl:"silent,omitempty:flags:5,implicit"`
+	Background         bool                    `tl:"background,omitempty:flags:6,implicit"`
+	WithMyScore        bool                    `tl:"with_my_score,omitempty:flags:8,implicit"`
+	DropAuthor         bool                    `tl:"drop_author,omitempty:flags:11,implicit"`
+	DropMediaCaptions  bool                    `tl:"drop_media_captions,omitempty:flags:12,implicit"`
+	Noforwards         bool                    `tl:"noforwards,omitempty:flags:14,implicit"`
+	FromPeer           InputPeer               `tl:"from_peer"`
+	ID                 []int32                 `tl:"id"`
+	RandomID           []int64                 `tl:"random_id"`
+	ToPeer             InputPeer               `tl:"to_peer"`
+	TopMsgID           *int32                  `tl:"top_msg_id,omitempty:flags:9"`
+	ScheduleDate       *int32                  `tl:"schedule_date,omitempty:flags:10"`
+	SendAs             InputPeer               `tl:"send_as,omitempty:flags:13"`
+	QuickReplyShortcut InputQuickReplyShortcut `tl:"quick_reply_shortcut,omitempty:flags:17"`
 }
 
 func (*MessagesForwardMessagesRequestPredict) CRC() uint32 {
@@ -23774,7 +23774,7 @@ func MessagesForwardMessages(ctx context.Context, m Requester, i MessagesForward
 }
 
 type MessagesReportSpamRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*MessagesReportSpamRequestPredict) CRC() uint32 {
@@ -23787,7 +23787,7 @@ func MessagesReportSpam(ctx context.Context, m Requester, i MessagesReportSpamRe
 }
 
 type MessagesGetPeerSettingsRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*MessagesGetPeerSettingsRequestPredict) CRC() uint32 {
@@ -23800,10 +23800,10 @@ func MessagesGetPeerSettings(ctx context.Context, m Requester, i MessagesGetPeer
 }
 
 type MessagesReportRequestPredict struct {
-	Peer    InputPeer
-	ID      []int32
-	Reason  ReportReason
-	Message string
+	Peer    InputPeer    `tl:"peer"`
+	ID      []int32      `tl:"id"`
+	Reason  ReportReason `tl:"reason"`
+	Message string       `tl:"message"`
 }
 
 func (*MessagesReportRequestPredict) CRC() uint32 {
@@ -23816,7 +23816,7 @@ func MessagesReport(ctx context.Context, m Requester, i MessagesReportRequestPre
 }
 
 type MessagesGetChatsRequestPredict struct {
-	ID []int64
+	ID []int64 `tl:"id"`
 }
 
 func (*MessagesGetChatsRequestPredict) CRC() uint32 {
@@ -23829,7 +23829,7 @@ func MessagesGetChats(ctx context.Context, m Requester, i MessagesGetChatsReques
 }
 
 type MessagesGetFullChatRequestPredict struct {
-	ChatID int64
+	ChatID int64 `tl:"chat_id"`
 }
 
 func (*MessagesGetFullChatRequestPredict) CRC() uint32 {
@@ -23842,8 +23842,8 @@ func MessagesGetFullChat(ctx context.Context, m Requester, i MessagesGetFullChat
 }
 
 type MessagesEditChatTitleRequestPredict struct {
-	ChatID int64
-	Title  string
+	ChatID int64  `tl:"chat_id"`
+	Title  string `tl:"title"`
 }
 
 func (*MessagesEditChatTitleRequestPredict) CRC() uint32 {
@@ -23856,8 +23856,8 @@ func MessagesEditChatTitle(ctx context.Context, m Requester, i MessagesEditChatT
 }
 
 type MessagesEditChatPhotoRequestPredict struct {
-	ChatID int64
-	Photo  InputChatPhoto
+	ChatID int64          `tl:"chat_id"`
+	Photo  InputChatPhoto `tl:"photo"`
 }
 
 func (*MessagesEditChatPhotoRequestPredict) CRC() uint32 {
@@ -23870,9 +23870,9 @@ func MessagesEditChatPhoto(ctx context.Context, m Requester, i MessagesEditChatP
 }
 
 type MessagesAddChatUserRequestPredict struct {
-	ChatID   int64
-	UserID   InputUser
-	FwdLimit int32
+	ChatID   int64     `tl:"chat_id"`
+	UserID   InputUser `tl:"user_id"`
+	FwdLimit int32     `tl:"fwd_limit"`
 }
 
 func (*MessagesAddChatUserRequestPredict) CRC() uint32 {
@@ -23885,10 +23885,10 @@ func MessagesAddChatUser(ctx context.Context, m Requester, i MessagesAddChatUser
 }
 
 type MessagesDeleteChatUserRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	RevokeHistory bool     `tl:",omitempty:flags:0,implicit"`
-	ChatID        int64
-	UserID        InputUser
+	_             struct{}  `tl:"flags,bitflag"`
+	RevokeHistory bool      `tl:"revoke_history,omitempty:flags:0,implicit"`
+	ChatID        int64     `tl:"chat_id"`
+	UserID        InputUser `tl:"user_id"`
 }
 
 func (*MessagesDeleteChatUserRequestPredict) CRC() uint32 {
@@ -23901,10 +23901,10 @@ func MessagesDeleteChatUser(ctx context.Context, m Requester, i MessagesDeleteCh
 }
 
 type MessagesCreateChatRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Users     []InputUser
-	Title     string
-	TTLPeriod *int32 `tl:",omitempty:flags:0"`
+	_         struct{}    `tl:"flags,bitflag"`
+	Users     []InputUser `tl:"users"`
+	Title     string      `tl:"title"`
+	TTLPeriod *int32      `tl:"ttl_period,omitempty:flags:0"`
 }
 
 func (*MessagesCreateChatRequestPredict) CRC() uint32 {
@@ -23917,8 +23917,8 @@ func MessagesCreateChat(ctx context.Context, m Requester, i MessagesCreateChatRe
 }
 
 type MessagesGetDhConfigRequestPredict struct {
-	Version      int32
-	RandomLength int32
+	Version      int32 `tl:"version"`
+	RandomLength int32 `tl:"random_length"`
 }
 
 func (*MessagesGetDhConfigRequestPredict) CRC() uint32 {
@@ -23931,9 +23931,9 @@ func MessagesGetDhConfig(ctx context.Context, m Requester, i MessagesGetDhConfig
 }
 
 type MessagesRequestEncryptionRequestPredict struct {
-	UserID   InputUser
-	RandomID int32
-	GA       []byte
+	UserID   InputUser `tl:"user_id"`
+	RandomID int32     `tl:"random_id"`
+	GA       []byte    `tl:"g_a"`
 }
 
 func (*MessagesRequestEncryptionRequestPredict) CRC() uint32 {
@@ -23946,9 +23946,9 @@ func MessagesRequestEncryption(ctx context.Context, m Requester, i MessagesReque
 }
 
 type MessagesAcceptEncryptionRequestPredict struct {
-	Peer           InputEncryptedChat
-	GB             []byte
-	KeyFingerprint int64
+	Peer           InputEncryptedChat `tl:"peer"`
+	GB             []byte             `tl:"g_b"`
+	KeyFingerprint int64              `tl:"key_fingerprint"`
 }
 
 func (*MessagesAcceptEncryptionRequestPredict) CRC() uint32 {
@@ -23962,8 +23962,8 @@ func MessagesAcceptEncryption(ctx context.Context, m Requester, i MessagesAccept
 
 type MessagesDiscardEncryptionRequestPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	DeleteHistory bool     `tl:",omitempty:flags:0,implicit"`
-	ChatID        int32
+	DeleteHistory bool     `tl:"delete_history,omitempty:flags:0,implicit"`
+	ChatID        int32    `tl:"chat_id"`
 }
 
 func (*MessagesDiscardEncryptionRequestPredict) CRC() uint32 {
@@ -23976,8 +23976,8 @@ func MessagesDiscardEncryption(ctx context.Context, m Requester, i MessagesDisca
 }
 
 type MessagesSetEncryptedTypingRequestPredict struct {
-	Peer   InputEncryptedChat
-	Typing bool
+	Peer   InputEncryptedChat `tl:"peer"`
+	Typing bool               `tl:"typing"`
 }
 
 func (*MessagesSetEncryptedTypingRequestPredict) CRC() uint32 {
@@ -23990,8 +23990,8 @@ func MessagesSetEncryptedTyping(ctx context.Context, m Requester, i MessagesSetE
 }
 
 type MessagesReadEncryptedHistoryRequestPredict struct {
-	Peer    InputEncryptedChat
-	MaxDate int32
+	Peer    InputEncryptedChat `tl:"peer"`
+	MaxDate int32              `tl:"max_date"`
 }
 
 func (*MessagesReadEncryptedHistoryRequestPredict) CRC() uint32 {
@@ -24004,11 +24004,11 @@ func MessagesReadEncryptedHistory(ctx context.Context, m Requester, i MessagesRe
 }
 
 type MessagesSendEncryptedRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Silent   bool     `tl:",omitempty:flags:0,implicit"`
-	Peer     InputEncryptedChat
-	RandomID int64
-	Data     []byte
+	_        struct{}           `tl:"flags,bitflag"`
+	Silent   bool               `tl:"silent,omitempty:flags:0,implicit"`
+	Peer     InputEncryptedChat `tl:"peer"`
+	RandomID int64              `tl:"random_id"`
+	Data     []byte             `tl:"data"`
 }
 
 func (*MessagesSendEncryptedRequestPredict) CRC() uint32 {
@@ -24021,12 +24021,12 @@ func MessagesSendEncrypted(ctx context.Context, m Requester, i MessagesSendEncry
 }
 
 type MessagesSendEncryptedFileRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Silent   bool     `tl:",omitempty:flags:0,implicit"`
-	Peer     InputEncryptedChat
-	RandomID int64
-	Data     []byte
-	File     InputEncryptedFile
+	_        struct{}           `tl:"flags,bitflag"`
+	Silent   bool               `tl:"silent,omitempty:flags:0,implicit"`
+	Peer     InputEncryptedChat `tl:"peer"`
+	RandomID int64              `tl:"random_id"`
+	Data     []byte             `tl:"data"`
+	File     InputEncryptedFile `tl:"file"`
 }
 
 func (*MessagesSendEncryptedFileRequestPredict) CRC() uint32 {
@@ -24039,9 +24039,9 @@ func MessagesSendEncryptedFile(ctx context.Context, m Requester, i MessagesSendE
 }
 
 type MessagesSendEncryptedServiceRequestPredict struct {
-	Peer     InputEncryptedChat
-	RandomID int64
-	Data     []byte
+	Peer     InputEncryptedChat `tl:"peer"`
+	RandomID int64              `tl:"random_id"`
+	Data     []byte             `tl:"data"`
 }
 
 func (*MessagesSendEncryptedServiceRequestPredict) CRC() uint32 {
@@ -24054,7 +24054,7 @@ func MessagesSendEncryptedService(ctx context.Context, m Requester, i MessagesSe
 }
 
 type MessagesReceivedQueueRequestPredict struct {
-	MaxQts int32
+	MaxQts int32 `tl:"max_qts"`
 }
 
 func (*MessagesReceivedQueueRequestPredict) CRC() uint32 {
@@ -24067,7 +24067,7 @@ func MessagesReceivedQueue(ctx context.Context, m Requester, i MessagesReceivedQ
 }
 
 type MessagesReportEncryptedSpamRequestPredict struct {
-	Peer InputEncryptedChat
+	Peer InputEncryptedChat `tl:"peer"`
 }
 
 func (*MessagesReportEncryptedSpamRequestPredict) CRC() uint32 {
@@ -24080,7 +24080,7 @@ func MessagesReportEncryptedSpam(ctx context.Context, m Requester, i MessagesRep
 }
 
 type MessagesReadMessageContentsRequestPredict struct {
-	ID []int32
+	ID []int32 `tl:"id"`
 }
 
 func (*MessagesReadMessageContentsRequestPredict) CRC() uint32 {
@@ -24093,8 +24093,8 @@ func MessagesReadMessageContents(ctx context.Context, m Requester, i MessagesRea
 }
 
 type MessagesGetStickersRequestPredict struct {
-	Emoticon string
-	Hash     int64
+	Emoticon string `tl:"emoticon"`
+	Hash     int64  `tl:"hash"`
 }
 
 func (*MessagesGetStickersRequestPredict) CRC() uint32 {
@@ -24107,7 +24107,7 @@ func MessagesGetStickers(ctx context.Context, m Requester, i MessagesGetStickers
 }
 
 type MessagesGetAllStickersRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetAllStickersRequestPredict) CRC() uint32 {
@@ -24120,9 +24120,9 @@ func MessagesGetAllStickers(ctx context.Context, m Requester, i MessagesGetAllSt
 }
 
 type MessagesGetWebPagePreviewRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Message  string
-	Entities []MessageEntity `tl:",omitempty:flags:3"`
+	_        struct{}        `tl:"flags,bitflag"`
+	Message  string          `tl:"message"`
+	Entities []MessageEntity `tl:"entities,omitempty:flags:3"`
 }
 
 func (*MessagesGetWebPagePreviewRequestPredict) CRC() uint32 {
@@ -24135,13 +24135,13 @@ func MessagesGetWebPagePreview(ctx context.Context, m Requester, i MessagesGetWe
 }
 
 type MessagesExportChatInviteRequestPredict struct {
-	_                     struct{} `tl:"flags,bitflag"`
-	LegacyRevokePermanent bool     `tl:",omitempty:flags:2,implicit"`
-	RequestNeeded         bool     `tl:",omitempty:flags:3,implicit"`
-	Peer                  InputPeer
-	ExpireDate            *int32  `tl:",omitempty:flags:0"`
-	UsageLimit            *int32  `tl:",omitempty:flags:1"`
-	Title                 *string `tl:",omitempty:flags:4"`
+	_                     struct{}  `tl:"flags,bitflag"`
+	LegacyRevokePermanent bool      `tl:"legacy_revoke_permanent,omitempty:flags:2,implicit"`
+	RequestNeeded         bool      `tl:"request_needed,omitempty:flags:3,implicit"`
+	Peer                  InputPeer `tl:"peer"`
+	ExpireDate            *int32    `tl:"expire_date,omitempty:flags:0"`
+	UsageLimit            *int32    `tl:"usage_limit,omitempty:flags:1"`
+	Title                 *string   `tl:"title,omitempty:flags:4"`
 }
 
 func (*MessagesExportChatInviteRequestPredict) CRC() uint32 {
@@ -24154,7 +24154,7 @@ func MessagesExportChatInvite(ctx context.Context, m Requester, i MessagesExport
 }
 
 type MessagesCheckChatInviteRequestPredict struct {
-	Hash string
+	Hash string `tl:"hash"`
 }
 
 func (*MessagesCheckChatInviteRequestPredict) CRC() uint32 {
@@ -24167,7 +24167,7 @@ func MessagesCheckChatInvite(ctx context.Context, m Requester, i MessagesCheckCh
 }
 
 type MessagesImportChatInviteRequestPredict struct {
-	Hash string
+	Hash string `tl:"hash"`
 }
 
 func (*MessagesImportChatInviteRequestPredict) CRC() uint32 {
@@ -24180,8 +24180,8 @@ func MessagesImportChatInvite(ctx context.Context, m Requester, i MessagesImport
 }
 
 type MessagesGetStickerSetRequestPredict struct {
-	Stickerset InputStickerSet
-	Hash       int32
+	Stickerset InputStickerSet `tl:"stickerset"`
+	Hash       int32           `tl:"hash"`
 }
 
 func (*MessagesGetStickerSetRequestPredict) CRC() uint32 {
@@ -24194,8 +24194,8 @@ func MessagesGetStickerSet(ctx context.Context, m Requester, i MessagesGetSticke
 }
 
 type MessagesInstallStickerSetRequestPredict struct {
-	Stickerset InputStickerSet
-	Archived   bool
+	Stickerset InputStickerSet `tl:"stickerset"`
+	Archived   bool            `tl:"archived"`
 }
 
 func (*MessagesInstallStickerSetRequestPredict) CRC() uint32 {
@@ -24208,7 +24208,7 @@ func MessagesInstallStickerSet(ctx context.Context, m Requester, i MessagesInsta
 }
 
 type MessagesUninstallStickerSetRequestPredict struct {
-	Stickerset InputStickerSet
+	Stickerset InputStickerSet `tl:"stickerset"`
 }
 
 func (*MessagesUninstallStickerSetRequestPredict) CRC() uint32 {
@@ -24221,10 +24221,10 @@ func MessagesUninstallStickerSet(ctx context.Context, m Requester, i MessagesUni
 }
 
 type MessagesStartBotRequestPredict struct {
-	Bot        InputUser
-	Peer       InputPeer
-	RandomID   int64
-	StartParam string
+	Bot        InputUser `tl:"bot"`
+	Peer       InputPeer `tl:"peer"`
+	RandomID   int64     `tl:"random_id"`
+	StartParam string    `tl:"start_param"`
 }
 
 func (*MessagesStartBotRequestPredict) CRC() uint32 {
@@ -24237,9 +24237,9 @@ func MessagesStartBot(ctx context.Context, m Requester, i MessagesStartBotReques
 }
 
 type MessagesGetMessagesViewsRequestPredict struct {
-	Peer      InputPeer
-	ID        []int32
-	Increment bool
+	Peer      InputPeer `tl:"peer"`
+	ID        []int32   `tl:"id"`
+	Increment bool      `tl:"increment"`
 }
 
 func (*MessagesGetMessagesViewsRequestPredict) CRC() uint32 {
@@ -24252,9 +24252,9 @@ func MessagesGetMessagesViews(ctx context.Context, m Requester, i MessagesGetMes
 }
 
 type MessagesEditChatAdminRequestPredict struct {
-	ChatID  int64
-	UserID  InputUser
-	IsAdmin bool
+	ChatID  int64     `tl:"chat_id"`
+	UserID  InputUser `tl:"user_id"`
+	IsAdmin bool      `tl:"is_admin"`
 }
 
 func (*MessagesEditChatAdminRequestPredict) CRC() uint32 {
@@ -24267,7 +24267,7 @@ func MessagesEditChatAdmin(ctx context.Context, m Requester, i MessagesEditChatA
 }
 
 type MessagesMigrateChatRequestPredict struct {
-	ChatID int64
+	ChatID int64 `tl:"chat_id"`
 }
 
 func (*MessagesMigrateChatRequestPredict) CRC() uint32 {
@@ -24280,17 +24280,17 @@ func MessagesMigrateChat(ctx context.Context, m Requester, i MessagesMigrateChat
 }
 
 type MessagesSearchGlobalRequestPredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	BroadcastsOnly bool     `tl:",omitempty:flags:1,implicit"`
-	FolderID       *int32   `tl:",omitempty:flags:0"`
-	Q              string
-	Filter         MessagesFilter
-	MinDate        int32
-	MaxDate        int32
-	OffsetRate     int32
-	OffsetPeer     InputPeer
-	OffsetID       int32
-	Limit          int32
+	_              struct{}       `tl:"flags,bitflag"`
+	BroadcastsOnly bool           `tl:"broadcasts_only,omitempty:flags:1,implicit"`
+	FolderID       *int32         `tl:"folder_id,omitempty:flags:0"`
+	Q              string         `tl:"q"`
+	Filter         MessagesFilter `tl:"filter"`
+	MinDate        int32          `tl:"min_date"`
+	MaxDate        int32          `tl:"max_date"`
+	OffsetRate     int32          `tl:"offset_rate"`
+	OffsetPeer     InputPeer      `tl:"offset_peer"`
+	OffsetID       int32          `tl:"offset_id"`
+	Limit          int32          `tl:"limit"`
 }
 
 func (*MessagesSearchGlobalRequestPredict) CRC() uint32 {
@@ -24304,9 +24304,9 @@ func MessagesSearchGlobal(ctx context.Context, m Requester, i MessagesSearchGlob
 
 type MessagesReorderStickerSetsRequestPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Masks  bool     `tl:",omitempty:flags:0,implicit"`
-	Emojis bool     `tl:",omitempty:flags:1,implicit"`
-	Order  []int64
+	Masks  bool     `tl:"masks,omitempty:flags:0,implicit"`
+	Emojis bool     `tl:"emojis,omitempty:flags:1,implicit"`
+	Order  []int64  `tl:"order"`
 }
 
 func (*MessagesReorderStickerSetsRequestPredict) CRC() uint32 {
@@ -24319,9 +24319,9 @@ func MessagesReorderStickerSets(ctx context.Context, m Requester, i MessagesReor
 }
 
 type MessagesGetDocumentByHashRequestPredict struct {
-	SHA256   []byte
-	Size     int64
-	MimeType string
+	SHA256   []byte `tl:"sha256"`
+	Size     int64  `tl:"size"`
+	MimeType string `tl:"mime_type"`
 }
 
 func (*MessagesGetDocumentByHashRequestPredict) CRC() uint32 {
@@ -24334,7 +24334,7 @@ func MessagesGetDocumentByHash(ctx context.Context, m Requester, i MessagesGetDo
 }
 
 type MessagesGetSavedGifsRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetSavedGifsRequestPredict) CRC() uint32 {
@@ -24347,8 +24347,8 @@ func MessagesGetSavedGifs(ctx context.Context, m Requester, i MessagesGetSavedGi
 }
 
 type MessagesSaveGifRequestPredict struct {
-	ID     InputDocument
-	Unsave bool
+	ID     InputDocument `tl:"id"`
+	Unsave bool          `tl:"unsave"`
 }
 
 func (*MessagesSaveGifRequestPredict) CRC() uint32 {
@@ -24361,12 +24361,12 @@ func MessagesSaveGif(ctx context.Context, m Requester, i MessagesSaveGifRequestP
 }
 
 type MessagesGetInlineBotResultsRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Bot      InputUser
-	Peer     InputPeer
-	GeoPoint InputGeoPoint `tl:",omitempty:flags:0"`
-	Query    string
-	Offset   string
+	_        struct{}      `tl:"flags,bitflag"`
+	Bot      InputUser     `tl:"bot"`
+	Peer     InputPeer     `tl:"peer"`
+	GeoPoint InputGeoPoint `tl:"geo_point,omitempty:flags:0"`
+	Query    string        `tl:"query"`
+	Offset   string        `tl:"offset"`
 }
 
 func (*MessagesGetInlineBotResultsRequestPredict) CRC() uint32 {
@@ -24379,15 +24379,15 @@ func MessagesGetInlineBotResults(ctx context.Context, m Requester, i MessagesGet
 }
 
 type MessagesSetInlineBotResultsRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Gallery       bool     `tl:",omitempty:flags:0,implicit"`
-	Private       bool     `tl:",omitempty:flags:1,implicit"`
-	QueryID       int64
-	Results       []InputBotInlineResult
-	CacheTime     int32
-	NextOffset    *string           `tl:",omitempty:flags:2"`
-	SwitchPm      InlineBotSwitchPm `tl:",omitempty:flags:3"`
-	SwitchWebview InlineBotWebView  `tl:",omitempty:flags:4"`
+	_             struct{}               `tl:"flags,bitflag"`
+	Gallery       bool                   `tl:"gallery,omitempty:flags:0,implicit"`
+	Private       bool                   `tl:"private,omitempty:flags:1,implicit"`
+	QueryID       int64                  `tl:"query_id"`
+	Results       []InputBotInlineResult `tl:"results"`
+	CacheTime     int32                  `tl:"cache_time"`
+	NextOffset    *string                `tl:"next_offset,omitempty:flags:2"`
+	SwitchPm      InlineBotSwitchPm      `tl:"switch_pm,omitempty:flags:3"`
+	SwitchWebview InlineBotWebView       `tl:"switch_webview,omitempty:flags:4"`
 }
 
 func (*MessagesSetInlineBotResultsRequestPredict) CRC() uint32 {
@@ -24400,19 +24400,19 @@ func MessagesSetInlineBotResults(ctx context.Context, m Requester, i MessagesSet
 }
 
 type MessagesSendInlineBotResultRequestPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	Silent             bool     `tl:",omitempty:flags:5,implicit"`
-	Background         bool     `tl:",omitempty:flags:6,implicit"`
-	ClearDraft         bool     `tl:",omitempty:flags:7,implicit"`
-	HideVia            bool     `tl:",omitempty:flags:11,implicit"`
-	Peer               InputPeer
-	ReplyTo            InputReplyTo `tl:",omitempty:flags:0"`
-	RandomID           int64
-	QueryID            int64
-	ID                 string
-	ScheduleDate       *int32                  `tl:",omitempty:flags:10"`
-	SendAs             InputPeer               `tl:",omitempty:flags:13"`
-	QuickReplyShortcut InputQuickReplyShortcut `tl:",omitempty:flags:17"`
+	_                  struct{}                `tl:"flags,bitflag"`
+	Silent             bool                    `tl:"silent,omitempty:flags:5,implicit"`
+	Background         bool                    `tl:"background,omitempty:flags:6,implicit"`
+	ClearDraft         bool                    `tl:"clear_draft,omitempty:flags:7,implicit"`
+	HideVia            bool                    `tl:"hide_via,omitempty:flags:11,implicit"`
+	Peer               InputPeer               `tl:"peer"`
+	ReplyTo            InputReplyTo            `tl:"reply_to,omitempty:flags:0"`
+	RandomID           int64                   `tl:"random_id"`
+	QueryID            int64                   `tl:"query_id"`
+	ID                 string                  `tl:"id"`
+	ScheduleDate       *int32                  `tl:"schedule_date,omitempty:flags:10"`
+	SendAs             InputPeer               `tl:"send_as,omitempty:flags:13"`
+	QuickReplyShortcut InputQuickReplyShortcut `tl:"quick_reply_shortcut,omitempty:flags:17"`
 }
 
 func (*MessagesSendInlineBotResultRequestPredict) CRC() uint32 {
@@ -24425,8 +24425,8 @@ func MessagesSendInlineBotResult(ctx context.Context, m Requester, i MessagesSen
 }
 
 type MessagesGetMessageEditDataRequestPredict struct {
-	Peer InputPeer
-	ID   int32
+	Peer InputPeer `tl:"peer"`
+	ID   int32     `tl:"id"`
 }
 
 func (*MessagesGetMessageEditDataRequestPredict) CRC() uint32 {
@@ -24439,17 +24439,17 @@ func MessagesGetMessageEditData(ctx context.Context, m Requester, i MessagesGetM
 }
 
 type MessagesEditMessageRequestPredict struct {
-	_                    struct{} `tl:"flags,bitflag"`
-	NoWebpage            bool     `tl:",omitempty:flags:1,implicit"`
-	InvertMedia          bool     `tl:",omitempty:flags:16,implicit"`
-	Peer                 InputPeer
-	ID                   int32
-	Message              *string         `tl:",omitempty:flags:11"`
-	Media                InputMedia      `tl:",omitempty:flags:14"`
-	ReplyMarkup          ReplyMarkup     `tl:",omitempty:flags:2"`
-	Entities             []MessageEntity `tl:",omitempty:flags:3"`
-	ScheduleDate         *int32          `tl:",omitempty:flags:15"`
-	QuickReplyShortcutID *int32          `tl:",omitempty:flags:17"`
+	_                    struct{}        `tl:"flags,bitflag"`
+	NoWebpage            bool            `tl:"no_webpage,omitempty:flags:1,implicit"`
+	InvertMedia          bool            `tl:"invert_media,omitempty:flags:16,implicit"`
+	Peer                 InputPeer       `tl:"peer"`
+	ID                   int32           `tl:"id"`
+	Message              *string         `tl:"message,omitempty:flags:11"`
+	Media                InputMedia      `tl:"media,omitempty:flags:14"`
+	ReplyMarkup          ReplyMarkup     `tl:"reply_markup,omitempty:flags:2"`
+	Entities             []MessageEntity `tl:"entities,omitempty:flags:3"`
+	ScheduleDate         *int32          `tl:"schedule_date,omitempty:flags:15"`
+	QuickReplyShortcutID *int32          `tl:"quick_reply_shortcut_id,omitempty:flags:17"`
 }
 
 func (*MessagesEditMessageRequestPredict) CRC() uint32 {
@@ -24462,14 +24462,14 @@ func MessagesEditMessage(ctx context.Context, m Requester, i MessagesEditMessage
 }
 
 type MessagesEditInlineBotMessageRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	NoWebpage   bool     `tl:",omitempty:flags:1,implicit"`
-	InvertMedia bool     `tl:",omitempty:flags:16,implicit"`
-	ID          InputBotInlineMessageID
-	Message     *string         `tl:",omitempty:flags:11"`
-	Media       InputMedia      `tl:",omitempty:flags:14"`
-	ReplyMarkup ReplyMarkup     `tl:",omitempty:flags:2"`
-	Entities    []MessageEntity `tl:",omitempty:flags:3"`
+	_           struct{}                `tl:"flags,bitflag"`
+	NoWebpage   bool                    `tl:"no_webpage,omitempty:flags:1,implicit"`
+	InvertMedia bool                    `tl:"invert_media,omitempty:flags:16,implicit"`
+	ID          InputBotInlineMessageID `tl:"id"`
+	Message     *string                 `tl:"message,omitempty:flags:11"`
+	Media       InputMedia              `tl:"media,omitempty:flags:14"`
+	ReplyMarkup ReplyMarkup             `tl:"reply_markup,omitempty:flags:2"`
+	Entities    []MessageEntity         `tl:"entities,omitempty:flags:3"`
 }
 
 func (*MessagesEditInlineBotMessageRequestPredict) CRC() uint32 {
@@ -24482,12 +24482,12 @@ func MessagesEditInlineBotMessage(ctx context.Context, m Requester, i MessagesEd
 }
 
 type MessagesGetBotCallbackAnswerRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Game     bool     `tl:",omitempty:flags:1,implicit"`
-	Peer     InputPeer
-	MsgID    int32
-	Data     *[]byte               `tl:",omitempty:flags:0"`
-	Password InputCheckPasswordSRP `tl:",omitempty:flags:2"`
+	_        struct{}              `tl:"flags,bitflag"`
+	Game     bool                  `tl:"game,omitempty:flags:1,implicit"`
+	Peer     InputPeer             `tl:"peer"`
+	MsgID    int32                 `tl:"msg_id"`
+	Data     *[]byte               `tl:"data,omitempty:flags:0"`
+	Password InputCheckPasswordSRP `tl:"password,omitempty:flags:2"`
 }
 
 func (*MessagesGetBotCallbackAnswerRequestPredict) CRC() uint32 {
@@ -24501,11 +24501,11 @@ func MessagesGetBotCallbackAnswer(ctx context.Context, m Requester, i MessagesGe
 
 type MessagesSetBotCallbackAnswerRequestPredict struct {
 	_         struct{} `tl:"flags,bitflag"`
-	Alert     bool     `tl:",omitempty:flags:1,implicit"`
-	QueryID   int64
-	Message   *string `tl:",omitempty:flags:0"`
-	URL       *string `tl:",omitempty:flags:2"`
-	CacheTime int32
+	Alert     bool     `tl:"alert,omitempty:flags:1,implicit"`
+	QueryID   int64    `tl:"query_id"`
+	Message   *string  `tl:"message,omitempty:flags:0"`
+	URL       *string  `tl:"url,omitempty:flags:2"`
+	CacheTime int32    `tl:"cache_time"`
 }
 
 func (*MessagesSetBotCallbackAnswerRequestPredict) CRC() uint32 {
@@ -24518,7 +24518,7 @@ func MessagesSetBotCallbackAnswer(ctx context.Context, m Requester, i MessagesSe
 }
 
 type MessagesGetPeerDialogsRequestPredict struct {
-	Peers []InputDialogPeer
+	Peers []InputDialogPeer `tl:"peers"`
 }
 
 func (*MessagesGetPeerDialogsRequestPredict) CRC() uint32 {
@@ -24531,15 +24531,15 @@ func MessagesGetPeerDialogs(ctx context.Context, m Requester, i MessagesGetPeerD
 }
 
 type MessagesSaveDraftRequestPredict struct {
-	_           struct{}     `tl:"flags,bitflag"`
-	NoWebpage   bool         `tl:",omitempty:flags:1,implicit"`
-	InvertMedia bool         `tl:",omitempty:flags:6,implicit"`
-	ReplyTo     InputReplyTo `tl:",omitempty:flags:4"`
-	Peer        InputPeer
-	Message     string
-	Entities    []MessageEntity `tl:",omitempty:flags:3"`
-	Media       InputMedia      `tl:",omitempty:flags:5"`
-	Effect      *int64          `tl:",omitempty:flags:7"`
+	_           struct{}        `tl:"flags,bitflag"`
+	NoWebpage   bool            `tl:"no_webpage,omitempty:flags:1,implicit"`
+	InvertMedia bool            `tl:"invert_media,omitempty:flags:6,implicit"`
+	ReplyTo     InputReplyTo    `tl:"reply_to,omitempty:flags:4"`
+	Peer        InputPeer       `tl:"peer"`
+	Message     string          `tl:"message"`
+	Entities    []MessageEntity `tl:"entities,omitempty:flags:3"`
+	Media       InputMedia      `tl:"media,omitempty:flags:5"`
+	Effect      *int64          `tl:"effect,omitempty:flags:7"`
 }
 
 func (*MessagesSaveDraftRequestPredict) CRC() uint32 {
@@ -24563,7 +24563,7 @@ func MessagesGetAllDrafts(ctx context.Context, m Requester, i MessagesGetAllDraf
 }
 
 type MessagesGetFeaturedStickersRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetFeaturedStickersRequestPredict) CRC() uint32 {
@@ -24576,7 +24576,7 @@ func MessagesGetFeaturedStickers(ctx context.Context, m Requester, i MessagesGet
 }
 
 type MessagesReadFeaturedStickersRequestPredict struct {
-	ID []int64
+	ID []int64 `tl:"id"`
 }
 
 func (*MessagesReadFeaturedStickersRequestPredict) CRC() uint32 {
@@ -24590,8 +24590,8 @@ func MessagesReadFeaturedStickers(ctx context.Context, m Requester, i MessagesRe
 
 type MessagesGetRecentStickersRequestPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Attached bool     `tl:",omitempty:flags:0,implicit"`
-	Hash     int64
+	Attached bool     `tl:"attached,omitempty:flags:0,implicit"`
+	Hash     int64    `tl:"hash"`
 }
 
 func (*MessagesGetRecentStickersRequestPredict) CRC() uint32 {
@@ -24604,10 +24604,10 @@ func MessagesGetRecentStickers(ctx context.Context, m Requester, i MessagesGetRe
 }
 
 type MessagesSaveRecentStickerRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Attached bool     `tl:",omitempty:flags:0,implicit"`
-	ID       InputDocument
-	Unsave   bool
+	_        struct{}      `tl:"flags,bitflag"`
+	Attached bool          `tl:"attached,omitempty:flags:0,implicit"`
+	ID       InputDocument `tl:"id"`
+	Unsave   bool          `tl:"unsave"`
 }
 
 func (*MessagesSaveRecentStickerRequestPredict) CRC() uint32 {
@@ -24621,7 +24621,7 @@ func MessagesSaveRecentSticker(ctx context.Context, m Requester, i MessagesSaveR
 
 type MessagesClearRecentStickersRequestPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Attached bool     `tl:",omitempty:flags:0,implicit"`
+	Attached bool     `tl:"attached,omitempty:flags:0,implicit"`
 }
 
 func (*MessagesClearRecentStickersRequestPredict) CRC() uint32 {
@@ -24635,10 +24635,10 @@ func MessagesClearRecentStickers(ctx context.Context, m Requester, i MessagesCle
 
 type MessagesGetArchivedStickersRequestPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Masks    bool     `tl:",omitempty:flags:0,implicit"`
-	Emojis   bool     `tl:",omitempty:flags:1,implicit"`
-	OffsetID int64
-	Limit    int32
+	Masks    bool     `tl:"masks,omitempty:flags:0,implicit"`
+	Emojis   bool     `tl:"emojis,omitempty:flags:1,implicit"`
+	OffsetID int64    `tl:"offset_id"`
+	Limit    int32    `tl:"limit"`
 }
 
 func (*MessagesGetArchivedStickersRequestPredict) CRC() uint32 {
@@ -24651,7 +24651,7 @@ func MessagesGetArchivedStickers(ctx context.Context, m Requester, i MessagesGet
 }
 
 type MessagesGetMaskStickersRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetMaskStickersRequestPredict) CRC() uint32 {
@@ -24664,7 +24664,7 @@ func MessagesGetMaskStickers(ctx context.Context, m Requester, i MessagesGetMask
 }
 
 type MessagesGetAttachedStickersRequestPredict struct {
-	Media InputStickeredMedia
+	Media InputStickeredMedia `tl:"media"`
 }
 
 func (*MessagesGetAttachedStickersRequestPredict) CRC() uint32 {
@@ -24677,13 +24677,13 @@ func MessagesGetAttachedStickers(ctx context.Context, m Requester, i MessagesGet
 }
 
 type MessagesSetGameScoreRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	EditMessage bool     `tl:",omitempty:flags:0,implicit"`
-	Force       bool     `tl:",omitempty:flags:1,implicit"`
-	Peer        InputPeer
-	ID          int32
-	UserID      InputUser
-	Score       int32
+	_           struct{}  `tl:"flags,bitflag"`
+	EditMessage bool      `tl:"edit_message,omitempty:flags:0,implicit"`
+	Force       bool      `tl:"force,omitempty:flags:1,implicit"`
+	Peer        InputPeer `tl:"peer"`
+	ID          int32     `tl:"id"`
+	UserID      InputUser `tl:"user_id"`
+	Score       int32     `tl:"score"`
 }
 
 func (*MessagesSetGameScoreRequestPredict) CRC() uint32 {
@@ -24696,12 +24696,12 @@ func MessagesSetGameScore(ctx context.Context, m Requester, i MessagesSetGameSco
 }
 
 type MessagesSetInlineGameScoreRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	EditMessage bool     `tl:",omitempty:flags:0,implicit"`
-	Force       bool     `tl:",omitempty:flags:1,implicit"`
-	ID          InputBotInlineMessageID
-	UserID      InputUser
-	Score       int32
+	_           struct{}                `tl:"flags,bitflag"`
+	EditMessage bool                    `tl:"edit_message,omitempty:flags:0,implicit"`
+	Force       bool                    `tl:"force,omitempty:flags:1,implicit"`
+	ID          InputBotInlineMessageID `tl:"id"`
+	UserID      InputUser               `tl:"user_id"`
+	Score       int32                   `tl:"score"`
 }
 
 func (*MessagesSetInlineGameScoreRequestPredict) CRC() uint32 {
@@ -24714,9 +24714,9 @@ func MessagesSetInlineGameScore(ctx context.Context, m Requester, i MessagesSetI
 }
 
 type MessagesGetGameHighScoresRequestPredict struct {
-	Peer   InputPeer
-	ID     int32
-	UserID InputUser
+	Peer   InputPeer `tl:"peer"`
+	ID     int32     `tl:"id"`
+	UserID InputUser `tl:"user_id"`
 }
 
 func (*MessagesGetGameHighScoresRequestPredict) CRC() uint32 {
@@ -24729,8 +24729,8 @@ func MessagesGetGameHighScores(ctx context.Context, m Requester, i MessagesGetGa
 }
 
 type MessagesGetInlineGameHighScoresRequestPredict struct {
-	ID     InputBotInlineMessageID
-	UserID InputUser
+	ID     InputBotInlineMessageID `tl:"id"`
+	UserID InputUser               `tl:"user_id"`
 }
 
 func (*MessagesGetInlineGameHighScoresRequestPredict) CRC() uint32 {
@@ -24743,9 +24743,9 @@ func MessagesGetInlineGameHighScores(ctx context.Context, m Requester, i Message
 }
 
 type MessagesGetCommonChatsRequestPredict struct {
-	UserID InputUser
-	MaxID  int64
-	Limit  int32
+	UserID InputUser `tl:"user_id"`
+	MaxID  int64     `tl:"max_id"`
+	Limit  int32     `tl:"limit"`
 }
 
 func (*MessagesGetCommonChatsRequestPredict) CRC() uint32 {
@@ -24758,8 +24758,8 @@ func MessagesGetCommonChats(ctx context.Context, m Requester, i MessagesGetCommo
 }
 
 type MessagesGetWebPageRequestPredict struct {
-	URL  string
-	Hash int32
+	URL  string `tl:"url"`
+	Hash int32  `tl:"hash"`
 }
 
 func (*MessagesGetWebPageRequestPredict) CRC() uint32 {
@@ -24772,9 +24772,9 @@ func MessagesGetWebPage(ctx context.Context, m Requester, i MessagesGetWebPageRe
 }
 
 type MessagesToggleDialogPinRequestPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Pinned bool     `tl:",omitempty:flags:0,implicit"`
-	Peer   InputDialogPeer
+	_      struct{}        `tl:"flags,bitflag"`
+	Pinned bool            `tl:"pinned,omitempty:flags:0,implicit"`
+	Peer   InputDialogPeer `tl:"peer"`
 }
 
 func (*MessagesToggleDialogPinRequestPredict) CRC() uint32 {
@@ -24787,10 +24787,10 @@ func MessagesToggleDialogPin(ctx context.Context, m Requester, i MessagesToggleD
 }
 
 type MessagesReorderPinnedDialogsRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Force    bool     `tl:",omitempty:flags:0,implicit"`
-	FolderID int32
-	Order    []InputDialogPeer
+	_        struct{}          `tl:"flags,bitflag"`
+	Force    bool              `tl:"force,omitempty:flags:0,implicit"`
+	FolderID int32             `tl:"folder_id"`
+	Order    []InputDialogPeer `tl:"order"`
 }
 
 func (*MessagesReorderPinnedDialogsRequestPredict) CRC() uint32 {
@@ -24803,7 +24803,7 @@ func MessagesReorderPinnedDialogs(ctx context.Context, m Requester, i MessagesRe
 }
 
 type MessagesGetPinnedDialogsRequestPredict struct {
-	FolderID int32
+	FolderID int32 `tl:"folder_id"`
 }
 
 func (*MessagesGetPinnedDialogsRequestPredict) CRC() uint32 {
@@ -24816,10 +24816,10 @@ func MessagesGetPinnedDialogs(ctx context.Context, m Requester, i MessagesGetPin
 }
 
 type MessagesSetBotShippingResultsRequestPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	QueryID         int64
-	Error           *string          `tl:",omitempty:flags:0"`
-	ShippingOptions []ShippingOption `tl:",omitempty:flags:1"`
+	_               struct{}         `tl:"flags,bitflag"`
+	QueryID         int64            `tl:"query_id"`
+	Error           *string          `tl:"error,omitempty:flags:0"`
+	ShippingOptions []ShippingOption `tl:"shipping_options,omitempty:flags:1"`
 }
 
 func (*MessagesSetBotShippingResultsRequestPredict) CRC() uint32 {
@@ -24833,9 +24833,9 @@ func MessagesSetBotShippingResults(ctx context.Context, m Requester, i MessagesS
 
 type MessagesSetBotPrecheckoutResultsRequestPredict struct {
 	_       struct{} `tl:"flags,bitflag"`
-	Success bool     `tl:",omitempty:flags:1,implicit"`
-	QueryID int64
-	Error   *string `tl:",omitempty:flags:0"`
+	Success bool     `tl:"success,omitempty:flags:1,implicit"`
+	QueryID int64    `tl:"query_id"`
+	Error   *string  `tl:"error,omitempty:flags:0"`
 }
 
 func (*MessagesSetBotPrecheckoutResultsRequestPredict) CRC() uint32 {
@@ -24848,10 +24848,10 @@ func MessagesSetBotPrecheckoutResults(ctx context.Context, m Requester, i Messag
 }
 
 type MessagesUploadMediaRequestPredict struct {
-	_                    struct{} `tl:"flags,bitflag"`
-	BusinessConnectionID *string  `tl:",omitempty:flags:0"`
-	Peer                 InputPeer
-	Media                InputMedia
+	_                    struct{}   `tl:"flags,bitflag"`
+	BusinessConnectionID *string    `tl:"business_connection_id,omitempty:flags:0"`
+	Peer                 InputPeer  `tl:"peer"`
+	Media                InputMedia `tl:"media"`
 }
 
 func (*MessagesUploadMediaRequestPredict) CRC() uint32 {
@@ -24864,9 +24864,9 @@ func MessagesUploadMedia(ctx context.Context, m Requester, i MessagesUploadMedia
 }
 
 type MessagesSendScreenshotNotificationRequestPredict struct {
-	Peer     InputPeer
-	ReplyTo  InputReplyTo
-	RandomID int64
+	Peer     InputPeer    `tl:"peer"`
+	ReplyTo  InputReplyTo `tl:"reply_to"`
+	RandomID int64        `tl:"random_id"`
 }
 
 func (*MessagesSendScreenshotNotificationRequestPredict) CRC() uint32 {
@@ -24879,7 +24879,7 @@ func MessagesSendScreenshotNotification(ctx context.Context, m Requester, i Mess
 }
 
 type MessagesGetFavedStickersRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetFavedStickersRequestPredict) CRC() uint32 {
@@ -24892,8 +24892,8 @@ func MessagesGetFavedStickers(ctx context.Context, m Requester, i MessagesGetFav
 }
 
 type MessagesFaveStickerRequestPredict struct {
-	ID     InputDocument
-	Unfave bool
+	ID     InputDocument `tl:"id"`
+	Unfave bool          `tl:"unfave"`
 }
 
 func (*MessagesFaveStickerRequestPredict) CRC() uint32 {
@@ -24906,14 +24906,14 @@ func MessagesFaveSticker(ctx context.Context, m Requester, i MessagesFaveSticker
 }
 
 type MessagesGetUnreadMentionsRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Peer      InputPeer
-	TopMsgID  *int32 `tl:",omitempty:flags:0"`
-	OffsetID  int32
-	AddOffset int32
-	Limit     int32
-	MaxID     int32
-	MinID     int32
+	_         struct{}  `tl:"flags,bitflag"`
+	Peer      InputPeer `tl:"peer"`
+	TopMsgID  *int32    `tl:"top_msg_id,omitempty:flags:0"`
+	OffsetID  int32     `tl:"offset_id"`
+	AddOffset int32     `tl:"add_offset"`
+	Limit     int32     `tl:"limit"`
+	MaxID     int32     `tl:"max_id"`
+	MinID     int32     `tl:"min_id"`
 }
 
 func (*MessagesGetUnreadMentionsRequestPredict) CRC() uint32 {
@@ -24926,9 +24926,9 @@ func MessagesGetUnreadMentions(ctx context.Context, m Requester, i MessagesGetUn
 }
 
 type MessagesReadMentionsRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Peer     InputPeer
-	TopMsgID *int32 `tl:",omitempty:flags:0"`
+	_        struct{}  `tl:"flags,bitflag"`
+	Peer     InputPeer `tl:"peer"`
+	TopMsgID *int32    `tl:"top_msg_id,omitempty:flags:0"`
 }
 
 func (*MessagesReadMentionsRequestPredict) CRC() uint32 {
@@ -24941,9 +24941,9 @@ func MessagesReadMentions(ctx context.Context, m Requester, i MessagesReadMentio
 }
 
 type MessagesGetRecentLocationsRequestPredict struct {
-	Peer  InputPeer
-	Limit int32
-	Hash  int64
+	Peer  InputPeer `tl:"peer"`
+	Limit int32     `tl:"limit"`
+	Hash  int64     `tl:"hash"`
 }
 
 func (*MessagesGetRecentLocationsRequestPredict) CRC() uint32 {
@@ -24956,20 +24956,20 @@ func MessagesGetRecentLocations(ctx context.Context, m Requester, i MessagesGetR
 }
 
 type MessagesSendMultiMediaRequestPredict struct {
-	_                      struct{} `tl:"flags,bitflag"`
-	Silent                 bool     `tl:",omitempty:flags:5,implicit"`
-	Background             bool     `tl:",omitempty:flags:6,implicit"`
-	ClearDraft             bool     `tl:",omitempty:flags:7,implicit"`
-	Noforwards             bool     `tl:",omitempty:flags:14,implicit"`
-	UpdateStickersetsOrder bool     `tl:",omitempty:flags:15,implicit"`
-	InvertMedia            bool     `tl:",omitempty:flags:16,implicit"`
-	Peer                   InputPeer
-	ReplyTo                InputReplyTo `tl:",omitempty:flags:0"`
-	MultiMedia             []InputSingleMedia
-	ScheduleDate           *int32                  `tl:",omitempty:flags:10"`
-	SendAs                 InputPeer               `tl:",omitempty:flags:13"`
-	QuickReplyShortcut     InputQuickReplyShortcut `tl:",omitempty:flags:17"`
-	Effect                 *int64                  `tl:",omitempty:flags:18"`
+	_                      struct{}                `tl:"flags,bitflag"`
+	Silent                 bool                    `tl:"silent,omitempty:flags:5,implicit"`
+	Background             bool                    `tl:"background,omitempty:flags:6,implicit"`
+	ClearDraft             bool                    `tl:"clear_draft,omitempty:flags:7,implicit"`
+	Noforwards             bool                    `tl:"noforwards,omitempty:flags:14,implicit"`
+	UpdateStickersetsOrder bool                    `tl:"update_stickersets_order,omitempty:flags:15,implicit"`
+	InvertMedia            bool                    `tl:"invert_media,omitempty:flags:16,implicit"`
+	Peer                   InputPeer               `tl:"peer"`
+	ReplyTo                InputReplyTo            `tl:"reply_to,omitempty:flags:0"`
+	MultiMedia             []InputSingleMedia      `tl:"multi_media"`
+	ScheduleDate           *int32                  `tl:"schedule_date,omitempty:flags:10"`
+	SendAs                 InputPeer               `tl:"send_as,omitempty:flags:13"`
+	QuickReplyShortcut     InputQuickReplyShortcut `tl:"quick_reply_shortcut,omitempty:flags:17"`
+	Effect                 *int64                  `tl:"effect,omitempty:flags:18"`
 }
 
 func (*MessagesSendMultiMediaRequestPredict) CRC() uint32 {
@@ -24982,8 +24982,8 @@ func MessagesSendMultiMedia(ctx context.Context, m Requester, i MessagesSendMult
 }
 
 type MessagesUploadEncryptedFileRequestPredict struct {
-	Peer InputEncryptedChat
-	File InputEncryptedFile
+	Peer InputEncryptedChat `tl:"peer"`
+	File InputEncryptedFile `tl:"file"`
 }
 
 func (*MessagesUploadEncryptedFileRequestPredict) CRC() uint32 {
@@ -24997,9 +24997,9 @@ func MessagesUploadEncryptedFile(ctx context.Context, m Requester, i MessagesUpl
 
 type MessagesSearchStickerSetsRequestPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	ExcludeFeatured bool     `tl:",omitempty:flags:0,implicit"`
-	Q               string
-	Hash            int64
+	ExcludeFeatured bool     `tl:"exclude_featured,omitempty:flags:0,implicit"`
+	Q               string   `tl:"q"`
+	Hash            int64    `tl:"hash"`
 }
 
 func (*MessagesSearchStickerSetsRequestPredict) CRC() uint32 {
@@ -25023,9 +25023,9 @@ func MessagesGetSplitRanges(ctx context.Context, m Requester, i MessagesGetSplit
 }
 
 type MessagesMarkDialogUnreadRequestPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Unread bool     `tl:",omitempty:flags:0,implicit"`
-	Peer   InputDialogPeer
+	_      struct{}        `tl:"flags,bitflag"`
+	Unread bool            `tl:"unread,omitempty:flags:0,implicit"`
+	Peer   InputDialogPeer `tl:"peer"`
 }
 
 func (*MessagesMarkDialogUnreadRequestPredict) CRC() uint32 {
@@ -25060,12 +25060,12 @@ func MessagesClearAllDrafts(ctx context.Context, m Requester, i MessagesClearAll
 }
 
 type MessagesUpdatePinnedMessageRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Silent    bool     `tl:",omitempty:flags:0,implicit"`
-	Unpin     bool     `tl:",omitempty:flags:1,implicit"`
-	PmOneside bool     `tl:",omitempty:flags:2,implicit"`
-	Peer      InputPeer
-	ID        int32
+	_         struct{}  `tl:"flags,bitflag"`
+	Silent    bool      `tl:"silent,omitempty:flags:0,implicit"`
+	Unpin     bool      `tl:"unpin,omitempty:flags:1,implicit"`
+	PmOneside bool      `tl:"pm_oneside,omitempty:flags:2,implicit"`
+	Peer      InputPeer `tl:"peer"`
+	ID        int32     `tl:"id"`
 }
 
 func (*MessagesUpdatePinnedMessageRequestPredict) CRC() uint32 {
@@ -25078,9 +25078,9 @@ func MessagesUpdatePinnedMessage(ctx context.Context, m Requester, i MessagesUpd
 }
 
 type MessagesSendVoteRequestPredict struct {
-	Peer    InputPeer
-	MsgID   int32
-	Options [][]byte
+	Peer    InputPeer `tl:"peer"`
+	MsgID   int32     `tl:"msg_id"`
+	Options [][]byte  `tl:"options"`
 }
 
 func (*MessagesSendVoteRequestPredict) CRC() uint32 {
@@ -25093,8 +25093,8 @@ func MessagesSendVote(ctx context.Context, m Requester, i MessagesSendVoteReques
 }
 
 type MessagesGetPollResultsRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*MessagesGetPollResultsRequestPredict) CRC() uint32 {
@@ -25107,7 +25107,7 @@ func MessagesGetPollResults(ctx context.Context, m Requester, i MessagesGetPollR
 }
 
 type MessagesGetOnlinesRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*MessagesGetOnlinesRequestPredict) CRC() uint32 {
@@ -25120,8 +25120,8 @@ func MessagesGetOnlines(ctx context.Context, m Requester, i MessagesGetOnlinesRe
 }
 
 type MessagesEditChatAboutRequestPredict struct {
-	Peer  InputPeer
-	About string
+	Peer  InputPeer `tl:"peer"`
+	About string    `tl:"about"`
 }
 
 func (*MessagesEditChatAboutRequestPredict) CRC() uint32 {
@@ -25134,8 +25134,8 @@ func MessagesEditChatAbout(ctx context.Context, m Requester, i MessagesEditChatA
 }
 
 type MessagesEditChatDefaultBannedRightsRequestPredict struct {
-	Peer         InputPeer
-	BannedRights ChatBannedRights
+	Peer         InputPeer        `tl:"peer"`
+	BannedRights ChatBannedRights `tl:"banned_rights"`
 }
 
 func (*MessagesEditChatDefaultBannedRightsRequestPredict) CRC() uint32 {
@@ -25148,7 +25148,7 @@ func MessagesEditChatDefaultBannedRights(ctx context.Context, m Requester, i Mes
 }
 
 type MessagesGetEmojiKeywordsRequestPredict struct {
-	LangCode string
+	LangCode string `tl:"lang_code"`
 }
 
 func (*MessagesGetEmojiKeywordsRequestPredict) CRC() uint32 {
@@ -25161,8 +25161,8 @@ func MessagesGetEmojiKeywords(ctx context.Context, m Requester, i MessagesGetEmo
 }
 
 type MessagesGetEmojiKeywordsDifferenceRequestPredict struct {
-	LangCode    string
-	FromVersion int32
+	LangCode    string `tl:"lang_code"`
+	FromVersion int32  `tl:"from_version"`
 }
 
 func (*MessagesGetEmojiKeywordsDifferenceRequestPredict) CRC() uint32 {
@@ -25175,7 +25175,7 @@ func MessagesGetEmojiKeywordsDifference(ctx context.Context, m Requester, i Mess
 }
 
 type MessagesGetEmojiKeywordsLanguagesRequestPredict struct {
-	LangCodes []string
+	LangCodes []string `tl:"lang_codes"`
 }
 
 func (*MessagesGetEmojiKeywordsLanguagesRequestPredict) CRC() uint32 {
@@ -25188,7 +25188,7 @@ func MessagesGetEmojiKeywordsLanguages(ctx context.Context, m Requester, i Messa
 }
 
 type MessagesGetEmojiURLRequestPredict struct {
-	LangCode string
+	LangCode string `tl:"lang_code"`
 }
 
 func (*MessagesGetEmojiURLRequestPredict) CRC() uint32 {
@@ -25201,11 +25201,11 @@ func MessagesGetEmojiURL(ctx context.Context, m Requester, i MessagesGetEmojiURL
 }
 
 type MessagesGetSearchCountersRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Peer        InputPeer
-	SavedPeerID InputPeer `tl:",omitempty:flags:2"`
-	TopMsgID    *int32    `tl:",omitempty:flags:0"`
-	Filters     []MessagesFilter
+	_           struct{}         `tl:"flags,bitflag"`
+	Peer        InputPeer        `tl:"peer"`
+	SavedPeerID InputPeer        `tl:"saved_peer_id,omitempty:flags:2"`
+	TopMsgID    *int32           `tl:"top_msg_id,omitempty:flags:0"`
+	Filters     []MessagesFilter `tl:"filters"`
 }
 
 func (*MessagesGetSearchCountersRequestPredict) CRC() uint32 {
@@ -25219,10 +25219,10 @@ func MessagesGetSearchCounters(ctx context.Context, m Requester, i MessagesGetSe
 
 type MessagesRequestURLAuthRequestPredict struct {
 	_        struct{}  `tl:"flags,bitflag"`
-	Peer     InputPeer `tl:",omitempty:flags:1"`
-	MsgID    *int32    `tl:",omitempty:flags:1"`
-	ButtonID *int32    `tl:",omitempty:flags:1"`
-	URL      *string   `tl:",omitempty:flags:2"`
+	Peer     InputPeer `tl:"peer,omitempty:flags:1"`
+	MsgID    *int32    `tl:"msg_id,omitempty:flags:1"`
+	ButtonID *int32    `tl:"button_id,omitempty:flags:1"`
+	URL      *string   `tl:"url,omitempty:flags:2"`
 }
 
 func (*MessagesRequestURLAuthRequestPredict) CRC() uint32 {
@@ -25236,11 +25236,11 @@ func MessagesRequestURLAuth(ctx context.Context, m Requester, i MessagesRequestU
 
 type MessagesAcceptURLAuthRequestPredict struct {
 	_            struct{}  `tl:"flags,bitflag"`
-	WriteAllowed bool      `tl:",omitempty:flags:0,implicit"`
-	Peer         InputPeer `tl:",omitempty:flags:1"`
-	MsgID        *int32    `tl:",omitempty:flags:1"`
-	ButtonID     *int32    `tl:",omitempty:flags:1"`
-	URL          *string   `tl:",omitempty:flags:2"`
+	WriteAllowed bool      `tl:"write_allowed,omitempty:flags:0,implicit"`
+	Peer         InputPeer `tl:"peer,omitempty:flags:1"`
+	MsgID        *int32    `tl:"msg_id,omitempty:flags:1"`
+	ButtonID     *int32    `tl:"button_id,omitempty:flags:1"`
+	URL          *string   `tl:"url,omitempty:flags:2"`
 }
 
 func (*MessagesAcceptURLAuthRequestPredict) CRC() uint32 {
@@ -25253,7 +25253,7 @@ func MessagesAcceptURLAuth(ctx context.Context, m Requester, i MessagesAcceptURL
 }
 
 type MessagesHidePeerSettingsBarRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*MessagesHidePeerSettingsBarRequestPredict) CRC() uint32 {
@@ -25266,8 +25266,8 @@ func MessagesHidePeerSettingsBar(ctx context.Context, m Requester, i MessagesHid
 }
 
 type MessagesGetScheduledHistoryRequestPredict struct {
-	Peer InputPeer
-	Hash int64
+	Peer InputPeer `tl:"peer"`
+	Hash int64     `tl:"hash"`
 }
 
 func (*MessagesGetScheduledHistoryRequestPredict) CRC() uint32 {
@@ -25280,8 +25280,8 @@ func MessagesGetScheduledHistory(ctx context.Context, m Requester, i MessagesGet
 }
 
 type MessagesGetScheduledMessagesRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*MessagesGetScheduledMessagesRequestPredict) CRC() uint32 {
@@ -25294,8 +25294,8 @@ func MessagesGetScheduledMessages(ctx context.Context, m Requester, i MessagesGe
 }
 
 type MessagesSendScheduledMessagesRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*MessagesSendScheduledMessagesRequestPredict) CRC() uint32 {
@@ -25308,8 +25308,8 @@ func MessagesSendScheduledMessages(ctx context.Context, m Requester, i MessagesS
 }
 
 type MessagesDeleteScheduledMessagesRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*MessagesDeleteScheduledMessagesRequestPredict) CRC() uint32 {
@@ -25322,12 +25322,12 @@ func MessagesDeleteScheduledMessages(ctx context.Context, m Requester, i Message
 }
 
 type MessagesGetPollVotesRequestPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Peer   InputPeer
-	ID     int32
-	Option *[]byte `tl:",omitempty:flags:0"`
-	Offset *string `tl:",omitempty:flags:1"`
-	Limit  int32
+	_      struct{}  `tl:"flags,bitflag"`
+	Peer   InputPeer `tl:"peer"`
+	ID     int32     `tl:"id"`
+	Option *[]byte   `tl:"option,omitempty:flags:0"`
+	Offset *string   `tl:"offset,omitempty:flags:1"`
+	Limit  int32     `tl:"limit"`
 }
 
 func (*MessagesGetPollVotesRequestPredict) CRC() uint32 {
@@ -25340,11 +25340,11 @@ func MessagesGetPollVotes(ctx context.Context, m Requester, i MessagesGetPollVot
 }
 
 type MessagesToggleStickerSetsRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Uninstall   bool     `tl:",omitempty:flags:0,implicit"`
-	Archive     bool     `tl:",omitempty:flags:1,implicit"`
-	Unarchive   bool     `tl:",omitempty:flags:2,implicit"`
-	Stickersets []InputStickerSet
+	_           struct{}          `tl:"flags,bitflag"`
+	Uninstall   bool              `tl:"uninstall,omitempty:flags:0,implicit"`
+	Archive     bool              `tl:"archive,omitempty:flags:1,implicit"`
+	Unarchive   bool              `tl:"unarchive,omitempty:flags:2,implicit"`
+	Stickersets []InputStickerSet `tl:"stickersets"`
 }
 
 func (*MessagesToggleStickerSetsRequestPredict) CRC() uint32 {
@@ -25379,9 +25379,9 @@ func MessagesGetSuggestedDialogFilters(ctx context.Context, m Requester, i Messa
 }
 
 type MessagesUpdateDialogFilterRequestPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	ID     int32
-	Filter DialogFilter `tl:",omitempty:flags:0"`
+	_      struct{}     `tl:"flags,bitflag"`
+	ID     int32        `tl:"id"`
+	Filter DialogFilter `tl:"filter,omitempty:flags:0"`
 }
 
 func (*MessagesUpdateDialogFilterRequestPredict) CRC() uint32 {
@@ -25394,7 +25394,7 @@ func MessagesUpdateDialogFilter(ctx context.Context, m Requester, i MessagesUpda
 }
 
 type MessagesUpdateDialogFiltersOrderRequestPredict struct {
-	Order []int32
+	Order []int32 `tl:"order"`
 }
 
 func (*MessagesUpdateDialogFiltersOrderRequestPredict) CRC() uint32 {
@@ -25407,9 +25407,9 @@ func MessagesUpdateDialogFiltersOrder(ctx context.Context, m Requester, i Messag
 }
 
 type MessagesGetOldFeaturedStickersRequestPredict struct {
-	Offset int32
-	Limit  int32
-	Hash   int64
+	Offset int32 `tl:"offset"`
+	Limit  int32 `tl:"limit"`
+	Hash   int64 `tl:"hash"`
 }
 
 func (*MessagesGetOldFeaturedStickersRequestPredict) CRC() uint32 {
@@ -25422,15 +25422,15 @@ func MessagesGetOldFeaturedStickers(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesGetRepliesRequestPredict struct {
-	Peer       InputPeer
-	MsgID      int32
-	OffsetID   int32
-	OffsetDate int32
-	AddOffset  int32
-	Limit      int32
-	MaxID      int32
-	MinID      int32
-	Hash       int64
+	Peer       InputPeer `tl:"peer"`
+	MsgID      int32     `tl:"msg_id"`
+	OffsetID   int32     `tl:"offset_id"`
+	OffsetDate int32     `tl:"offset_date"`
+	AddOffset  int32     `tl:"add_offset"`
+	Limit      int32     `tl:"limit"`
+	MaxID      int32     `tl:"max_id"`
+	MinID      int32     `tl:"min_id"`
+	Hash       int64     `tl:"hash"`
 }
 
 func (*MessagesGetRepliesRequestPredict) CRC() uint32 {
@@ -25443,8 +25443,8 @@ func MessagesGetReplies(ctx context.Context, m Requester, i MessagesGetRepliesRe
 }
 
 type MessagesGetDiscussionMessageRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*MessagesGetDiscussionMessageRequestPredict) CRC() uint32 {
@@ -25457,9 +25457,9 @@ func MessagesGetDiscussionMessage(ctx context.Context, m Requester, i MessagesGe
 }
 
 type MessagesReadDiscussionRequestPredict struct {
-	Peer      InputPeer
-	MsgID     int32
-	ReadMaxID int32
+	Peer      InputPeer `tl:"peer"`
+	MsgID     int32     `tl:"msg_id"`
+	ReadMaxID int32     `tl:"read_max_id"`
 }
 
 func (*MessagesReadDiscussionRequestPredict) CRC() uint32 {
@@ -25472,9 +25472,9 @@ func MessagesReadDiscussion(ctx context.Context, m Requester, i MessagesReadDisc
 }
 
 type MessagesUnpinAllMessagesRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Peer     InputPeer
-	TopMsgID *int32 `tl:",omitempty:flags:0"`
+	_        struct{}  `tl:"flags,bitflag"`
+	Peer     InputPeer `tl:"peer"`
+	TopMsgID *int32    `tl:"top_msg_id,omitempty:flags:0"`
 }
 
 func (*MessagesUnpinAllMessagesRequestPredict) CRC() uint32 {
@@ -25487,7 +25487,7 @@ func MessagesUnpinAllMessages(ctx context.Context, m Requester, i MessagesUnpinA
 }
 
 type MessagesDeleteChatRequestPredict struct {
-	ChatID int64
+	ChatID int64 `tl:"chat_id"`
 }
 
 func (*MessagesDeleteChatRequestPredict) CRC() uint32 {
@@ -25501,7 +25501,7 @@ func MessagesDeleteChat(ctx context.Context, m Requester, i MessagesDeleteChatRe
 
 type MessagesDeletePhoneCallHistoryRequestPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Revoke bool     `tl:",omitempty:flags:0,implicit"`
+	Revoke bool     `tl:"revoke,omitempty:flags:0,implicit"`
 }
 
 func (*MessagesDeletePhoneCallHistoryRequestPredict) CRC() uint32 {
@@ -25514,7 +25514,7 @@ func MessagesDeletePhoneCallHistory(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesCheckHistoryImportRequestPredict struct {
-	ImportHead string
+	ImportHead string `tl:"import_head"`
 }
 
 func (*MessagesCheckHistoryImportRequestPredict) CRC() uint32 {
@@ -25527,9 +25527,9 @@ func MessagesCheckHistoryImport(ctx context.Context, m Requester, i MessagesChec
 }
 
 type MessagesInitHistoryImportRequestPredict struct {
-	Peer       InputPeer
-	File       InputFile
-	MediaCount int32
+	Peer       InputPeer `tl:"peer"`
+	File       InputFile `tl:"file"`
+	MediaCount int32     `tl:"media_count"`
 }
 
 func (*MessagesInitHistoryImportRequestPredict) CRC() uint32 {
@@ -25542,10 +25542,10 @@ func MessagesInitHistoryImport(ctx context.Context, m Requester, i MessagesInitH
 }
 
 type MessagesUploadImportedMediaRequestPredict struct {
-	Peer     InputPeer
-	ImportID int64
-	FileName string
-	Media    InputMedia
+	Peer     InputPeer  `tl:"peer"`
+	ImportID int64      `tl:"import_id"`
+	FileName string     `tl:"file_name"`
+	Media    InputMedia `tl:"media"`
 }
 
 func (*MessagesUploadImportedMediaRequestPredict) CRC() uint32 {
@@ -25558,8 +25558,8 @@ func MessagesUploadImportedMedia(ctx context.Context, m Requester, i MessagesUpl
 }
 
 type MessagesStartHistoryImportRequestPredict struct {
-	Peer     InputPeer
-	ImportID int64
+	Peer     InputPeer `tl:"peer"`
+	ImportID int64     `tl:"import_id"`
 }
 
 func (*MessagesStartHistoryImportRequestPredict) CRC() uint32 {
@@ -25572,13 +25572,13 @@ func MessagesStartHistoryImport(ctx context.Context, m Requester, i MessagesStar
 }
 
 type MessagesGetExportedChatInvitesRequestPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Revoked    bool     `tl:",omitempty:flags:3,implicit"`
-	Peer       InputPeer
-	AdminID    InputUser
-	OffsetDate *int32  `tl:",omitempty:flags:2"`
-	OffsetLink *string `tl:",omitempty:flags:2"`
-	Limit      int32
+	_          struct{}  `tl:"flags,bitflag"`
+	Revoked    bool      `tl:"revoked,omitempty:flags:3,implicit"`
+	Peer       InputPeer `tl:"peer"`
+	AdminID    InputUser `tl:"admin_id"`
+	OffsetDate *int32    `tl:"offset_date,omitempty:flags:2"`
+	OffsetLink *string   `tl:"offset_link,omitempty:flags:2"`
+	Limit      int32     `tl:"limit"`
 }
 
 func (*MessagesGetExportedChatInvitesRequestPredict) CRC() uint32 {
@@ -25591,8 +25591,8 @@ func MessagesGetExportedChatInvites(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesGetExportedChatInviteRequestPredict struct {
-	Peer InputPeer
-	Link string
+	Peer InputPeer `tl:"peer"`
+	Link string    `tl:"link"`
 }
 
 func (*MessagesGetExportedChatInviteRequestPredict) CRC() uint32 {
@@ -25605,14 +25605,14 @@ func MessagesGetExportedChatInvite(ctx context.Context, m Requester, i MessagesG
 }
 
 type MessagesEditExportedChatInviteRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Revoked       bool     `tl:",omitempty:flags:2,implicit"`
-	Peer          InputPeer
-	Link          string
-	ExpireDate    *int32  `tl:",omitempty:flags:0"`
-	UsageLimit    *int32  `tl:",omitempty:flags:1"`
-	RequestNeeded *bool   `tl:",omitempty:flags:3"`
-	Title         *string `tl:",omitempty:flags:4"`
+	_             struct{}  `tl:"flags,bitflag"`
+	Revoked       bool      `tl:"revoked,omitempty:flags:2,implicit"`
+	Peer          InputPeer `tl:"peer"`
+	Link          string    `tl:"link"`
+	ExpireDate    *int32    `tl:"expire_date,omitempty:flags:0"`
+	UsageLimit    *int32    `tl:"usage_limit,omitempty:flags:1"`
+	RequestNeeded *bool     `tl:"request_needed,omitempty:flags:3"`
+	Title         *string   `tl:"title,omitempty:flags:4"`
 }
 
 func (*MessagesEditExportedChatInviteRequestPredict) CRC() uint32 {
@@ -25625,8 +25625,8 @@ func MessagesEditExportedChatInvite(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesDeleteRevokedExportedChatInvitesRequestPredict struct {
-	Peer    InputPeer
-	AdminID InputUser
+	Peer    InputPeer `tl:"peer"`
+	AdminID InputUser `tl:"admin_id"`
 }
 
 func (*MessagesDeleteRevokedExportedChatInvitesRequestPredict) CRC() uint32 {
@@ -25639,8 +25639,8 @@ func MessagesDeleteRevokedExportedChatInvites(ctx context.Context, m Requester, 
 }
 
 type MessagesDeleteExportedChatInviteRequestPredict struct {
-	Peer InputPeer
-	Link string
+	Peer InputPeer `tl:"peer"`
+	Link string    `tl:"link"`
 }
 
 func (*MessagesDeleteExportedChatInviteRequestPredict) CRC() uint32 {
@@ -25653,7 +25653,7 @@ func MessagesDeleteExportedChatInvite(ctx context.Context, m Requester, i Messag
 }
 
 type MessagesGetAdminsWithInvitesRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*MessagesGetAdminsWithInvitesRequestPredict) CRC() uint32 {
@@ -25666,14 +25666,14 @@ func MessagesGetAdminsWithInvites(ctx context.Context, m Requester, i MessagesGe
 }
 
 type MessagesGetChatInviteImportersRequestPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Requested  bool     `tl:",omitempty:flags:0,implicit"`
-	Peer       InputPeer
-	Link       *string `tl:",omitempty:flags:1"`
-	Q          *string `tl:",omitempty:flags:2"`
-	OffsetDate int32
-	OffsetUser InputUser
-	Limit      int32
+	_          struct{}  `tl:"flags,bitflag"`
+	Requested  bool      `tl:"requested,omitempty:flags:0,implicit"`
+	Peer       InputPeer `tl:"peer"`
+	Link       *string   `tl:"link,omitempty:flags:1"`
+	Q          *string   `tl:"q,omitempty:flags:2"`
+	OffsetDate int32     `tl:"offset_date"`
+	OffsetUser InputUser `tl:"offset_user"`
+	Limit      int32     `tl:"limit"`
 }
 
 func (*MessagesGetChatInviteImportersRequestPredict) CRC() uint32 {
@@ -25686,8 +25686,8 @@ func MessagesGetChatInviteImporters(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesSetHistoryTTLRequestPredict struct {
-	Peer   InputPeer
-	Period int32
+	Peer   InputPeer `tl:"peer"`
+	Period int32     `tl:"period"`
 }
 
 func (*MessagesSetHistoryTTLRequestPredict) CRC() uint32 {
@@ -25700,7 +25700,7 @@ func MessagesSetHistoryTTL(ctx context.Context, m Requester, i MessagesSetHistor
 }
 
 type MessagesCheckHistoryImportPeerRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*MessagesCheckHistoryImportPeerRequestPredict) CRC() uint32 {
@@ -25713,8 +25713,8 @@ func MessagesCheckHistoryImportPeer(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesSetChatThemeRequestPredict struct {
-	Peer     InputPeer
-	Emoticon string
+	Peer     InputPeer `tl:"peer"`
+	Emoticon string    `tl:"emoticon"`
 }
 
 func (*MessagesSetChatThemeRequestPredict) CRC() uint32 {
@@ -25727,8 +25727,8 @@ func MessagesSetChatTheme(ctx context.Context, m Requester, i MessagesSetChatThe
 }
 
 type MessagesGetMessageReadParticipantsRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*MessagesGetMessageReadParticipantsRequestPredict) CRC() uint32 {
@@ -25741,12 +25741,12 @@ func MessagesGetMessageReadParticipants(ctx context.Context, m Requester, i Mess
 }
 
 type MessagesGetSearchResultsCalendarRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Peer        InputPeer
-	SavedPeerID InputPeer `tl:",omitempty:flags:2"`
-	Filter      MessagesFilter
-	OffsetID    int32
-	OffsetDate  int32
+	_           struct{}       `tl:"flags,bitflag"`
+	Peer        InputPeer      `tl:"peer"`
+	SavedPeerID InputPeer      `tl:"saved_peer_id,omitempty:flags:2"`
+	Filter      MessagesFilter `tl:"filter"`
+	OffsetID    int32          `tl:"offset_id"`
+	OffsetDate  int32          `tl:"offset_date"`
 }
 
 func (*MessagesGetSearchResultsCalendarRequestPredict) CRC() uint32 {
@@ -25759,12 +25759,12 @@ func MessagesGetSearchResultsCalendar(ctx context.Context, m Requester, i Messag
 }
 
 type MessagesGetSearchResultsPositionsRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Peer        InputPeer
-	SavedPeerID InputPeer `tl:",omitempty:flags:2"`
-	Filter      MessagesFilter
-	OffsetID    int32
-	Limit       int32
+	_           struct{}       `tl:"flags,bitflag"`
+	Peer        InputPeer      `tl:"peer"`
+	SavedPeerID InputPeer      `tl:"saved_peer_id,omitempty:flags:2"`
+	Filter      MessagesFilter `tl:"filter"`
+	OffsetID    int32          `tl:"offset_id"`
+	Limit       int32          `tl:"limit"`
 }
 
 func (*MessagesGetSearchResultsPositionsRequestPredict) CRC() uint32 {
@@ -25777,10 +25777,10 @@ func MessagesGetSearchResultsPositions(ctx context.Context, m Requester, i Messa
 }
 
 type MessagesHideChatJoinRequestRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Approved bool     `tl:",omitempty:flags:0,implicit"`
-	Peer     InputPeer
-	UserID   InputUser
+	_        struct{}  `tl:"flags,bitflag"`
+	Approved bool      `tl:"approved,omitempty:flags:0,implicit"`
+	Peer     InputPeer `tl:"peer"`
+	UserID   InputUser `tl:"user_id"`
 }
 
 func (*MessagesHideChatJoinRequestRequestPredict) CRC() uint32 {
@@ -25793,10 +25793,10 @@ func MessagesHideChatJoinRequest(ctx context.Context, m Requester, i MessagesHid
 }
 
 type MessagesHideAllChatJoinRequestsRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Approved bool     `tl:",omitempty:flags:0,implicit"`
-	Peer     InputPeer
-	Link     *string `tl:",omitempty:flags:1"`
+	_        struct{}  `tl:"flags,bitflag"`
+	Approved bool      `tl:"approved,omitempty:flags:0,implicit"`
+	Peer     InputPeer `tl:"peer"`
+	Link     *string   `tl:"link,omitempty:flags:1"`
 }
 
 func (*MessagesHideAllChatJoinRequestsRequestPredict) CRC() uint32 {
@@ -25809,8 +25809,8 @@ func MessagesHideAllChatJoinRequests(ctx context.Context, m Requester, i Message
 }
 
 type MessagesToggleNoForwardsRequestPredict struct {
-	Peer    InputPeer
-	Enabled bool
+	Peer    InputPeer `tl:"peer"`
+	Enabled bool      `tl:"enabled"`
 }
 
 func (*MessagesToggleNoForwardsRequestPredict) CRC() uint32 {
@@ -25823,8 +25823,8 @@ func MessagesToggleNoForwards(ctx context.Context, m Requester, i MessagesToggle
 }
 
 type MessagesSaveDefaultSendAsRequestPredict struct {
-	Peer   InputPeer
-	SendAs InputPeer
+	Peer   InputPeer `tl:"peer"`
+	SendAs InputPeer `tl:"send_as"`
 }
 
 func (*MessagesSaveDefaultSendAsRequestPredict) CRC() uint32 {
@@ -25837,12 +25837,12 @@ func MessagesSaveDefaultSendAs(ctx context.Context, m Requester, i MessagesSaveD
 }
 
 type MessagesSendReactionRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Big         bool     `tl:",omitempty:flags:1,implicit"`
-	AddToRecent bool     `tl:",omitempty:flags:2,implicit"`
-	Peer        InputPeer
-	MsgID       int32
-	Reaction    []Reaction `tl:",omitempty:flags:0"`
+	_           struct{}   `tl:"flags,bitflag"`
+	Big         bool       `tl:"big,omitempty:flags:1,implicit"`
+	AddToRecent bool       `tl:"add_to_recent,omitempty:flags:2,implicit"`
+	Peer        InputPeer  `tl:"peer"`
+	MsgID       int32      `tl:"msg_id"`
+	Reaction    []Reaction `tl:"reaction,omitempty:flags:0"`
 }
 
 func (*MessagesSendReactionRequestPredict) CRC() uint32 {
@@ -25855,8 +25855,8 @@ func MessagesSendReaction(ctx context.Context, m Requester, i MessagesSendReacti
 }
 
 type MessagesGetMessagesReactionsRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*MessagesGetMessagesReactionsRequestPredict) CRC() uint32 {
@@ -25869,12 +25869,12 @@ func MessagesGetMessagesReactions(ctx context.Context, m Requester, i MessagesGe
 }
 
 type MessagesGetMessageReactionsListRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Peer     InputPeer
-	ID       int32
-	Reaction Reaction `tl:",omitempty:flags:0"`
-	Offset   *string  `tl:",omitempty:flags:1"`
-	Limit    int32
+	_        struct{}  `tl:"flags,bitflag"`
+	Peer     InputPeer `tl:"peer"`
+	ID       int32     `tl:"id"`
+	Reaction Reaction  `tl:"reaction,omitempty:flags:0"`
+	Offset   *string   `tl:"offset,omitempty:flags:1"`
+	Limit    int32     `tl:"limit"`
 }
 
 func (*MessagesGetMessageReactionsListRequestPredict) CRC() uint32 {
@@ -25887,10 +25887,10 @@ func MessagesGetMessageReactionsList(ctx context.Context, m Requester, i Message
 }
 
 type MessagesSetChatAvailableReactionsRequestPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	Peer               InputPeer
-	AvailableReactions ChatReactions
-	ReactionsLimit     *int32 `tl:",omitempty:flags:0"`
+	_                  struct{}      `tl:"flags,bitflag"`
+	Peer               InputPeer     `tl:"peer"`
+	AvailableReactions ChatReactions `tl:"available_reactions"`
+	ReactionsLimit     *int32        `tl:"reactions_limit,omitempty:flags:0"`
 }
 
 func (*MessagesSetChatAvailableReactionsRequestPredict) CRC() uint32 {
@@ -25903,7 +25903,7 @@ func MessagesSetChatAvailableReactions(ctx context.Context, m Requester, i Messa
 }
 
 type MessagesGetAvailableReactionsRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*MessagesGetAvailableReactionsRequestPredict) CRC() uint32 {
@@ -25916,7 +25916,7 @@ func MessagesGetAvailableReactions(ctx context.Context, m Requester, i MessagesG
 }
 
 type MessagesSetDefaultReactionRequestPredict struct {
-	Reaction Reaction
+	Reaction Reaction `tl:"reaction"`
 }
 
 func (*MessagesSetDefaultReactionRequestPredict) CRC() uint32 {
@@ -25930,10 +25930,10 @@ func MessagesSetDefaultReaction(ctx context.Context, m Requester, i MessagesSetD
 
 type MessagesTranslateTextRequestPredict struct {
 	_      struct{}           `tl:"flags,bitflag"`
-	Peer   InputPeer          `tl:",omitempty:flags:0"`
-	ID     []int32            `tl:",omitempty:flags:0"`
-	Text   []TextWithEntities `tl:",omitempty:flags:1"`
-	ToLang string
+	Peer   InputPeer          `tl:"peer,omitempty:flags:0"`
+	ID     []int32            `tl:"id,omitempty:flags:0"`
+	Text   []TextWithEntities `tl:"text,omitempty:flags:1"`
+	ToLang string             `tl:"to_lang"`
 }
 
 func (*MessagesTranslateTextRequestPredict) CRC() uint32 {
@@ -25946,14 +25946,14 @@ func MessagesTranslateText(ctx context.Context, m Requester, i MessagesTranslate
 }
 
 type MessagesGetUnreadReactionsRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Peer      InputPeer
-	TopMsgID  *int32 `tl:",omitempty:flags:0"`
-	OffsetID  int32
-	AddOffset int32
-	Limit     int32
-	MaxID     int32
-	MinID     int32
+	_         struct{}  `tl:"flags,bitflag"`
+	Peer      InputPeer `tl:"peer"`
+	TopMsgID  *int32    `tl:"top_msg_id,omitempty:flags:0"`
+	OffsetID  int32     `tl:"offset_id"`
+	AddOffset int32     `tl:"add_offset"`
+	Limit     int32     `tl:"limit"`
+	MaxID     int32     `tl:"max_id"`
+	MinID     int32     `tl:"min_id"`
 }
 
 func (*MessagesGetUnreadReactionsRequestPredict) CRC() uint32 {
@@ -25966,9 +25966,9 @@ func MessagesGetUnreadReactions(ctx context.Context, m Requester, i MessagesGetU
 }
 
 type MessagesReadReactionsRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Peer     InputPeer
-	TopMsgID *int32 `tl:",omitempty:flags:0"`
+	_        struct{}  `tl:"flags,bitflag"`
+	Peer     InputPeer `tl:"peer"`
+	TopMsgID *int32    `tl:"top_msg_id,omitempty:flags:0"`
 }
 
 func (*MessagesReadReactionsRequestPredict) CRC() uint32 {
@@ -25981,9 +25981,9 @@ func MessagesReadReactions(ctx context.Context, m Requester, i MessagesReadReact
 }
 
 type MessagesSearchSentMediaRequestPredict struct {
-	Q      string
-	Filter MessagesFilter
-	Limit  int32
+	Q      string         `tl:"q"`
+	Filter MessagesFilter `tl:"filter"`
+	Limit  int32          `tl:"limit"`
 }
 
 func (*MessagesSearchSentMediaRequestPredict) CRC() uint32 {
@@ -25996,7 +25996,7 @@ func MessagesSearchSentMedia(ctx context.Context, m Requester, i MessagesSearchS
 }
 
 type MessagesGetAttachMenuBotsRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetAttachMenuBotsRequestPredict) CRC() uint32 {
@@ -26009,7 +26009,7 @@ func MessagesGetAttachMenuBots(ctx context.Context, m Requester, i MessagesGetAt
 }
 
 type MessagesGetAttachMenuBotRequestPredict struct {
-	Bot InputUser
+	Bot InputUser `tl:"bot"`
 }
 
 func (*MessagesGetAttachMenuBotRequestPredict) CRC() uint32 {
@@ -26022,10 +26022,10 @@ func MessagesGetAttachMenuBot(ctx context.Context, m Requester, i MessagesGetAtt
 }
 
 type MessagesToggleBotInAttachMenuRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	WriteAllowed bool     `tl:",omitempty:flags:0,implicit"`
-	Bot          InputUser
-	Enabled      bool
+	_            struct{}  `tl:"flags,bitflag"`
+	WriteAllowed bool      `tl:"write_allowed,omitempty:flags:0,implicit"`
+	Bot          InputUser `tl:"bot"`
+	Enabled      bool      `tl:"enabled"`
 }
 
 func (*MessagesToggleBotInAttachMenuRequestPredict) CRC() uint32 {
@@ -26038,18 +26038,18 @@ func MessagesToggleBotInAttachMenu(ctx context.Context, m Requester, i MessagesT
 }
 
 type MessagesRequestWebViewRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	FromBotMenu bool     `tl:",omitempty:flags:4,implicit"`
-	Silent      bool     `tl:",omitempty:flags:5,implicit"`
-	Compact     bool     `tl:",omitempty:flags:7,implicit"`
-	Peer        InputPeer
-	Bot         InputUser
-	URL         *string  `tl:",omitempty:flags:1"`
-	StartParam  *string  `tl:",omitempty:flags:3"`
-	ThemeParams DataJSON `tl:",omitempty:flags:2"`
-	Platform    string
-	ReplyTo     InputReplyTo `tl:",omitempty:flags:0"`
-	SendAs      InputPeer    `tl:",omitempty:flags:13"`
+	_           struct{}     `tl:"flags,bitflag"`
+	FromBotMenu bool         `tl:"from_bot_menu,omitempty:flags:4,implicit"`
+	Silent      bool         `tl:"silent,omitempty:flags:5,implicit"`
+	Compact     bool         `tl:"compact,omitempty:flags:7,implicit"`
+	Peer        InputPeer    `tl:"peer"`
+	Bot         InputUser    `tl:"bot"`
+	URL         *string      `tl:"url,omitempty:flags:1"`
+	StartParam  *string      `tl:"start_param,omitempty:flags:3"`
+	ThemeParams DataJSON     `tl:"theme_params,omitempty:flags:2"`
+	Platform    string       `tl:"platform"`
+	ReplyTo     InputReplyTo `tl:"reply_to,omitempty:flags:0"`
+	SendAs      InputPeer    `tl:"send_as,omitempty:flags:13"`
 }
 
 func (*MessagesRequestWebViewRequestPredict) CRC() uint32 {
@@ -26062,13 +26062,13 @@ func MessagesRequestWebView(ctx context.Context, m Requester, i MessagesRequestW
 }
 
 type MessagesProlongWebViewRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Silent  bool     `tl:",omitempty:flags:5,implicit"`
-	Peer    InputPeer
-	Bot     InputUser
-	QueryID int64
-	ReplyTo InputReplyTo `tl:",omitempty:flags:0"`
-	SendAs  InputPeer    `tl:",omitempty:flags:13"`
+	_       struct{}     `tl:"flags,bitflag"`
+	Silent  bool         `tl:"silent,omitempty:flags:5,implicit"`
+	Peer    InputPeer    `tl:"peer"`
+	Bot     InputUser    `tl:"bot"`
+	QueryID int64        `tl:"query_id"`
+	ReplyTo InputReplyTo `tl:"reply_to,omitempty:flags:0"`
+	SendAs  InputPeer    `tl:"send_as,omitempty:flags:13"`
 }
 
 func (*MessagesProlongWebViewRequestPredict) CRC() uint32 {
@@ -26081,15 +26081,15 @@ func MessagesProlongWebView(ctx context.Context, m Requester, i MessagesProlongW
 }
 
 type MessagesRequestSimpleWebViewRequestPredict struct {
-	_                 struct{} `tl:"flags,bitflag"`
-	FromSwitchWebview bool     `tl:",omitempty:flags:1,implicit"`
-	FromSideMenu      bool     `tl:",omitempty:flags:2,implicit"`
-	Compact           bool     `tl:",omitempty:flags:7,implicit"`
-	Bot               InputUser
-	URL               *string  `tl:",omitempty:flags:3"`
-	StartParam        *string  `tl:",omitempty:flags:4"`
-	ThemeParams       DataJSON `tl:",omitempty:flags:0"`
-	Platform          string
+	_                 struct{}  `tl:"flags,bitflag"`
+	FromSwitchWebview bool      `tl:"from_switch_webview,omitempty:flags:1,implicit"`
+	FromSideMenu      bool      `tl:"from_side_menu,omitempty:flags:2,implicit"`
+	Compact           bool      `tl:"compact,omitempty:flags:7,implicit"`
+	Bot               InputUser `tl:"bot"`
+	URL               *string   `tl:"url,omitempty:flags:3"`
+	StartParam        *string   `tl:"start_param,omitempty:flags:4"`
+	ThemeParams       DataJSON  `tl:"theme_params,omitempty:flags:0"`
+	Platform          string    `tl:"platform"`
 }
 
 func (*MessagesRequestSimpleWebViewRequestPredict) CRC() uint32 {
@@ -26102,8 +26102,8 @@ func MessagesRequestSimpleWebView(ctx context.Context, m Requester, i MessagesRe
 }
 
 type MessagesSendWebViewResultMessageRequestPredict struct {
-	BotQueryID string
-	Result     InputBotInlineResult
+	BotQueryID string               `tl:"bot_query_id"`
+	Result     InputBotInlineResult `tl:"result"`
 }
 
 func (*MessagesSendWebViewResultMessageRequestPredict) CRC() uint32 {
@@ -26116,10 +26116,10 @@ func MessagesSendWebViewResultMessage(ctx context.Context, m Requester, i Messag
 }
 
 type MessagesSendWebViewDataRequestPredict struct {
-	Bot        InputUser
-	RandomID   int64
-	ButtonText string
-	Data       string
+	Bot        InputUser `tl:"bot"`
+	RandomID   int64     `tl:"random_id"`
+	ButtonText string    `tl:"button_text"`
+	Data       string    `tl:"data"`
 }
 
 func (*MessagesSendWebViewDataRequestPredict) CRC() uint32 {
@@ -26132,8 +26132,8 @@ func MessagesSendWebViewData(ctx context.Context, m Requester, i MessagesSendWeb
 }
 
 type MessagesTranscribeAudioRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*MessagesTranscribeAudioRequestPredict) CRC() uint32 {
@@ -26146,10 +26146,10 @@ func MessagesTranscribeAudio(ctx context.Context, m Requester, i MessagesTranscr
 }
 
 type MessagesRateTranscribedAudioRequestPredict struct {
-	Peer            InputPeer
-	MsgID           int32
-	TranscriptionID int64
-	Good            bool
+	Peer            InputPeer `tl:"peer"`
+	MsgID           int32     `tl:"msg_id"`
+	TranscriptionID int64     `tl:"transcription_id"`
+	Good            bool      `tl:"good"`
 }
 
 func (*MessagesRateTranscribedAudioRequestPredict) CRC() uint32 {
@@ -26162,7 +26162,7 @@ func MessagesRateTranscribedAudio(ctx context.Context, m Requester, i MessagesRa
 }
 
 type MessagesGetCustomEmojiDocumentsRequestPredict struct {
-	DocumentID []int64
+	DocumentID []int64 `tl:"document_id"`
 }
 
 func (*MessagesGetCustomEmojiDocumentsRequestPredict) CRC() uint32 {
@@ -26175,7 +26175,7 @@ func MessagesGetCustomEmojiDocuments(ctx context.Context, m Requester, i Message
 }
 
 type MessagesGetEmojiStickersRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetEmojiStickersRequestPredict) CRC() uint32 {
@@ -26188,7 +26188,7 @@ func MessagesGetEmojiStickers(ctx context.Context, m Requester, i MessagesGetEmo
 }
 
 type MessagesGetFeaturedEmojiStickersRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetFeaturedEmojiStickersRequestPredict) CRC() uint32 {
@@ -26201,9 +26201,9 @@ func MessagesGetFeaturedEmojiStickers(ctx context.Context, m Requester, i Messag
 }
 
 type MessagesReportReactionRequestPredict struct {
-	Peer         InputPeer
-	ID           int32
-	ReactionPeer InputPeer
+	Peer         InputPeer `tl:"peer"`
+	ID           int32     `tl:"id"`
+	ReactionPeer InputPeer `tl:"reaction_peer"`
 }
 
 func (*MessagesReportReactionRequestPredict) CRC() uint32 {
@@ -26216,8 +26216,8 @@ func MessagesReportReaction(ctx context.Context, m Requester, i MessagesReportRe
 }
 
 type MessagesGetTopReactionsRequestPredict struct {
-	Limit int32
-	Hash  int64
+	Limit int32 `tl:"limit"`
+	Hash  int64 `tl:"hash"`
 }
 
 func (*MessagesGetTopReactionsRequestPredict) CRC() uint32 {
@@ -26230,8 +26230,8 @@ func MessagesGetTopReactions(ctx context.Context, m Requester, i MessagesGetTopR
 }
 
 type MessagesGetRecentReactionsRequestPredict struct {
-	Limit int32
-	Hash  int64
+	Limit int32 `tl:"limit"`
+	Hash  int64 `tl:"hash"`
 }
 
 func (*MessagesGetRecentReactionsRequestPredict) CRC() uint32 {
@@ -26255,8 +26255,8 @@ func MessagesClearRecentReactions(ctx context.Context, m Requester, i MessagesCl
 }
 
 type MessagesGetExtendedMediaRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*MessagesGetExtendedMediaRequestPredict) CRC() uint32 {
@@ -26269,7 +26269,7 @@ func MessagesGetExtendedMedia(ctx context.Context, m Requester, i MessagesGetExt
 }
 
 type MessagesSetDefaultHistoryTTLRequestPredict struct {
-	Period int32
+	Period int32 `tl:"period"`
 }
 
 func (*MessagesSetDefaultHistoryTTLRequestPredict) CRC() uint32 {
@@ -26293,10 +26293,10 @@ func MessagesGetDefaultHistoryTTL(ctx context.Context, m Requester, i MessagesGe
 }
 
 type MessagesSendBotRequestedPeerRequestPredict struct {
-	Peer           InputPeer
-	MsgID          int32
-	ButtonID       int32
-	RequestedPeers []InputPeer
+	Peer           InputPeer   `tl:"peer"`
+	MsgID          int32       `tl:"msg_id"`
+	ButtonID       int32       `tl:"button_id"`
+	RequestedPeers []InputPeer `tl:"requested_peers"`
 }
 
 func (*MessagesSendBotRequestedPeerRequestPredict) CRC() uint32 {
@@ -26309,7 +26309,7 @@ func MessagesSendBotRequestedPeer(ctx context.Context, m Requester, i MessagesSe
 }
 
 type MessagesGetEmojiGroupsRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*MessagesGetEmojiGroupsRequestPredict) CRC() uint32 {
@@ -26322,7 +26322,7 @@ func MessagesGetEmojiGroups(ctx context.Context, m Requester, i MessagesGetEmoji
 }
 
 type MessagesGetEmojiStatusGroupsRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*MessagesGetEmojiStatusGroupsRequestPredict) CRC() uint32 {
@@ -26335,7 +26335,7 @@ func MessagesGetEmojiStatusGroups(ctx context.Context, m Requester, i MessagesGe
 }
 
 type MessagesGetEmojiProfilePhotoGroupsRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*MessagesGetEmojiProfilePhotoGroupsRequestPredict) CRC() uint32 {
@@ -26348,8 +26348,8 @@ func MessagesGetEmojiProfilePhotoGroups(ctx context.Context, m Requester, i Mess
 }
 
 type MessagesSearchCustomEmojiRequestPredict struct {
-	Emoticon string
-	Hash     int64
+	Emoticon string `tl:"emoticon"`
+	Hash     int64  `tl:"hash"`
 }
 
 func (*MessagesSearchCustomEmojiRequestPredict) CRC() uint32 {
@@ -26362,9 +26362,9 @@ func MessagesSearchCustomEmoji(ctx context.Context, m Requester, i MessagesSearc
 }
 
 type MessagesTogglePeerTranslationsRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Disabled bool     `tl:",omitempty:flags:0,implicit"`
-	Peer     InputPeer
+	_        struct{}  `tl:"flags,bitflag"`
+	Disabled bool      `tl:"disabled,omitempty:flags:0,implicit"`
+	Peer     InputPeer `tl:"peer"`
 }
 
 func (*MessagesTogglePeerTranslationsRequestPredict) CRC() uint32 {
@@ -26377,8 +26377,8 @@ func MessagesTogglePeerTranslations(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesGetBotAppRequestPredict struct {
-	App  InputBotApp
-	Hash int64
+	App  InputBotApp `tl:"app"`
+	Hash int64       `tl:"hash"`
 }
 
 func (*MessagesGetBotAppRequestPredict) CRC() uint32 {
@@ -26391,14 +26391,14 @@ func MessagesGetBotApp(ctx context.Context, m Requester, i MessagesGetBotAppRequ
 }
 
 type MessagesRequestAppWebViewRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	WriteAllowed bool     `tl:",omitempty:flags:0,implicit"`
-	Compact      bool     `tl:",omitempty:flags:7,implicit"`
-	Peer         InputPeer
-	App          InputBotApp
-	StartParam   *string  `tl:",omitempty:flags:1"`
-	ThemeParams  DataJSON `tl:",omitempty:flags:2"`
-	Platform     string
+	_            struct{}    `tl:"flags,bitflag"`
+	WriteAllowed bool        `tl:"write_allowed,omitempty:flags:0,implicit"`
+	Compact      bool        `tl:"compact,omitempty:flags:7,implicit"`
+	Peer         InputPeer   `tl:"peer"`
+	App          InputBotApp `tl:"app"`
+	StartParam   *string     `tl:"start_param,omitempty:flags:1"`
+	ThemeParams  DataJSON    `tl:"theme_params,omitempty:flags:2"`
+	Platform     string      `tl:"platform"`
 }
 
 func (*MessagesRequestAppWebViewRequestPredict) CRC() uint32 {
@@ -26411,13 +26411,13 @@ func MessagesRequestAppWebView(ctx context.Context, m Requester, i MessagesReque
 }
 
 type MessagesSetChatWallPaperRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	ForBoth   bool     `tl:",omitempty:flags:3,implicit"`
-	Revert    bool     `tl:",omitempty:flags:4,implicit"`
-	Peer      InputPeer
-	Wallpaper InputWallPaper    `tl:",omitempty:flags:0"`
-	Settings  WallPaperSettings `tl:",omitempty:flags:2"`
-	ID        *int32            `tl:",omitempty:flags:1"`
+	_         struct{}          `tl:"flags,bitflag"`
+	ForBoth   bool              `tl:"for_both,omitempty:flags:3,implicit"`
+	Revert    bool              `tl:"revert,omitempty:flags:4,implicit"`
+	Peer      InputPeer         `tl:"peer"`
+	Wallpaper InputWallPaper    `tl:"wallpaper,omitempty:flags:0"`
+	Settings  WallPaperSettings `tl:"settings,omitempty:flags:2"`
+	ID        *int32            `tl:"id,omitempty:flags:1"`
 }
 
 func (*MessagesSetChatWallPaperRequestPredict) CRC() uint32 {
@@ -26431,9 +26431,9 @@ func MessagesSetChatWallPaper(ctx context.Context, m Requester, i MessagesSetCha
 
 type MessagesSearchEmojiStickerSetsRequestPredict struct {
 	_               struct{} `tl:"flags,bitflag"`
-	ExcludeFeatured bool     `tl:",omitempty:flags:0,implicit"`
-	Q               string
-	Hash            int64
+	ExcludeFeatured bool     `tl:"exclude_featured,omitempty:flags:0,implicit"`
+	Q               string   `tl:"q"`
+	Hash            int64    `tl:"hash"`
 }
 
 func (*MessagesSearchEmojiStickerSetsRequestPredict) CRC() uint32 {
@@ -26446,13 +26446,13 @@ func MessagesSearchEmojiStickerSets(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesGetSavedDialogsRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	ExcludePinned bool     `tl:",omitempty:flags:0,implicit"`
-	OffsetDate    int32
-	OffsetID      int32
-	OffsetPeer    InputPeer
-	Limit         int32
-	Hash          int64
+	_             struct{}  `tl:"flags,bitflag"`
+	ExcludePinned bool      `tl:"exclude_pinned,omitempty:flags:0,implicit"`
+	OffsetDate    int32     `tl:"offset_date"`
+	OffsetID      int32     `tl:"offset_id"`
+	OffsetPeer    InputPeer `tl:"offset_peer"`
+	Limit         int32     `tl:"limit"`
+	Hash          int64     `tl:"hash"`
 }
 
 func (*MessagesGetSavedDialogsRequestPredict) CRC() uint32 {
@@ -26465,14 +26465,14 @@ func MessagesGetSavedDialogs(ctx context.Context, m Requester, i MessagesGetSave
 }
 
 type MessagesGetSavedHistoryRequestPredict struct {
-	Peer       InputPeer
-	OffsetID   int32
-	OffsetDate int32
-	AddOffset  int32
-	Limit      int32
-	MaxID      int32
-	MinID      int32
-	Hash       int64
+	Peer       InputPeer `tl:"peer"`
+	OffsetID   int32     `tl:"offset_id"`
+	OffsetDate int32     `tl:"offset_date"`
+	AddOffset  int32     `tl:"add_offset"`
+	Limit      int32     `tl:"limit"`
+	MaxID      int32     `tl:"max_id"`
+	MinID      int32     `tl:"min_id"`
+	Hash       int64     `tl:"hash"`
 }
 
 func (*MessagesGetSavedHistoryRequestPredict) CRC() uint32 {
@@ -26485,11 +26485,11 @@ func MessagesGetSavedHistory(ctx context.Context, m Requester, i MessagesGetSave
 }
 
 type MessagesDeleteSavedHistoryRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Peer    InputPeer
-	MaxID   int32
-	MinDate *int32 `tl:",omitempty:flags:2"`
-	MaxDate *int32 `tl:",omitempty:flags:3"`
+	_       struct{}  `tl:"flags,bitflag"`
+	Peer    InputPeer `tl:"peer"`
+	MaxID   int32     `tl:"max_id"`
+	MinDate *int32    `tl:"min_date,omitempty:flags:2"`
+	MaxDate *int32    `tl:"max_date,omitempty:flags:3"`
 }
 
 func (*MessagesDeleteSavedHistoryRequestPredict) CRC() uint32 {
@@ -26513,9 +26513,9 @@ func MessagesGetPinnedSavedDialogs(ctx context.Context, m Requester, i MessagesG
 }
 
 type MessagesToggleSavedDialogPinRequestPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Pinned bool     `tl:",omitempty:flags:0,implicit"`
-	Peer   InputDialogPeer
+	_      struct{}        `tl:"flags,bitflag"`
+	Pinned bool            `tl:"pinned,omitempty:flags:0,implicit"`
+	Peer   InputDialogPeer `tl:"peer"`
 }
 
 func (*MessagesToggleSavedDialogPinRequestPredict) CRC() uint32 {
@@ -26528,9 +26528,9 @@ func MessagesToggleSavedDialogPin(ctx context.Context, m Requester, i MessagesTo
 }
 
 type MessagesReorderPinnedSavedDialogsRequestPredict struct {
-	_     struct{} `tl:"flags,bitflag"`
-	Force bool     `tl:",omitempty:flags:0,implicit"`
-	Order []InputDialogPeer
+	_     struct{}          `tl:"flags,bitflag"`
+	Force bool              `tl:"force,omitempty:flags:0,implicit"`
+	Order []InputDialogPeer `tl:"order"`
 }
 
 func (*MessagesReorderPinnedSavedDialogsRequestPredict) CRC() uint32 {
@@ -26544,8 +26544,8 @@ func MessagesReorderPinnedSavedDialogs(ctx context.Context, m Requester, i Messa
 
 type MessagesGetSavedReactionTagsRequestPredict struct {
 	_    struct{}  `tl:"flags,bitflag"`
-	Peer InputPeer `tl:",omitempty:flags:0"`
-	Hash int64
+	Peer InputPeer `tl:"peer,omitempty:flags:0"`
+	Hash int64     `tl:"hash"`
 }
 
 func (*MessagesGetSavedReactionTagsRequestPredict) CRC() uint32 {
@@ -26559,8 +26559,8 @@ func MessagesGetSavedReactionTags(ctx context.Context, m Requester, i MessagesGe
 
 type MessagesUpdateSavedReactionTagRequestPredict struct {
 	_        struct{} `tl:"flags,bitflag"`
-	Reaction Reaction
-	Title    *string `tl:",omitempty:flags:0"`
+	Reaction Reaction `tl:"reaction"`
+	Title    *string  `tl:"title,omitempty:flags:0"`
 }
 
 func (*MessagesUpdateSavedReactionTagRequestPredict) CRC() uint32 {
@@ -26573,7 +26573,7 @@ func MessagesUpdateSavedReactionTag(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesGetDefaultTagReactionsRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetDefaultTagReactionsRequestPredict) CRC() uint32 {
@@ -26586,8 +26586,8 @@ func MessagesGetDefaultTagReactions(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesGetOutboxReadDateRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*MessagesGetOutboxReadDateRequestPredict) CRC() uint32 {
@@ -26600,7 +26600,7 @@ func MessagesGetOutboxReadDate(ctx context.Context, m Requester, i MessagesGetOu
 }
 
 type MessagesGetQuickRepliesRequestPredict struct {
-	Hash int64
+	Hash int64 `tl:"hash"`
 }
 
 func (*MessagesGetQuickRepliesRequestPredict) CRC() uint32 {
@@ -26613,7 +26613,7 @@ func MessagesGetQuickReplies(ctx context.Context, m Requester, i MessagesGetQuic
 }
 
 type MessagesReorderQuickRepliesRequestPredict struct {
-	Order []int32
+	Order []int32 `tl:"order"`
 }
 
 func (*MessagesReorderQuickRepliesRequestPredict) CRC() uint32 {
@@ -26626,7 +26626,7 @@ func MessagesReorderQuickReplies(ctx context.Context, m Requester, i MessagesReo
 }
 
 type MessagesCheckQuickReplyShortcutRequestPredict struct {
-	Shortcut string
+	Shortcut string `tl:"shortcut"`
 }
 
 func (*MessagesCheckQuickReplyShortcutRequestPredict) CRC() uint32 {
@@ -26639,8 +26639,8 @@ func MessagesCheckQuickReplyShortcut(ctx context.Context, m Requester, i Message
 }
 
 type MessagesEditQuickReplyShortcutRequestPredict struct {
-	ShortcutID int32
-	Shortcut   string
+	ShortcutID int32  `tl:"shortcut_id"`
+	Shortcut   string `tl:"shortcut"`
 }
 
 func (*MessagesEditQuickReplyShortcutRequestPredict) CRC() uint32 {
@@ -26653,7 +26653,7 @@ func MessagesEditQuickReplyShortcut(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesDeleteQuickReplyShortcutRequestPredict struct {
-	ShortcutID int32
+	ShortcutID int32 `tl:"shortcut_id"`
 }
 
 func (*MessagesDeleteQuickReplyShortcutRequestPredict) CRC() uint32 {
@@ -26667,9 +26667,9 @@ func MessagesDeleteQuickReplyShortcut(ctx context.Context, m Requester, i Messag
 
 type MessagesGetQuickReplyMessagesRequestPredict struct {
 	_          struct{} `tl:"flags,bitflag"`
-	ShortcutID int32
-	ID         []int32 `tl:",omitempty:flags:0"`
-	Hash       int64
+	ShortcutID int32    `tl:"shortcut_id"`
+	ID         []int32  `tl:"id,omitempty:flags:0"`
+	Hash       int64    `tl:"hash"`
 }
 
 func (*MessagesGetQuickReplyMessagesRequestPredict) CRC() uint32 {
@@ -26682,10 +26682,10 @@ func MessagesGetQuickReplyMessages(ctx context.Context, m Requester, i MessagesG
 }
 
 type MessagesSendQuickReplyMessagesRequestPredict struct {
-	Peer       InputPeer
-	ShortcutID int32
-	ID         []int32
-	RandomID   []int64
+	Peer       InputPeer `tl:"peer"`
+	ShortcutID int32     `tl:"shortcut_id"`
+	ID         []int32   `tl:"id"`
+	RandomID   []int64   `tl:"random_id"`
 }
 
 func (*MessagesSendQuickReplyMessagesRequestPredict) CRC() uint32 {
@@ -26698,8 +26698,8 @@ func MessagesSendQuickReplyMessages(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesDeleteQuickReplyMessagesRequestPredict struct {
-	ShortcutID int32
-	ID         []int32
+	ShortcutID int32   `tl:"shortcut_id"`
+	ID         []int32 `tl:"id"`
 }
 
 func (*MessagesDeleteQuickReplyMessagesRequestPredict) CRC() uint32 {
@@ -26712,7 +26712,7 @@ func MessagesDeleteQuickReplyMessages(ctx context.Context, m Requester, i Messag
 }
 
 type MessagesToggleDialogFilterTagsRequestPredict struct {
-	Enabled bool
+	Enabled bool `tl:"enabled"`
 }
 
 func (*MessagesToggleDialogFilterTagsRequestPredict) CRC() uint32 {
@@ -26725,8 +26725,8 @@ func MessagesToggleDialogFilterTags(ctx context.Context, m Requester, i Messages
 }
 
 type MessagesGetMyStickersRequestPredict struct {
-	OffsetID int64
-	Limit    int32
+	OffsetID int64 `tl:"offset_id"`
+	Limit    int32 `tl:"limit"`
 }
 
 func (*MessagesGetMyStickersRequestPredict) CRC() uint32 {
@@ -26739,7 +26739,7 @@ func MessagesGetMyStickers(ctx context.Context, m Requester, i MessagesGetMyStic
 }
 
 type MessagesGetEmojiStickerGroupsRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*MessagesGetEmojiStickerGroupsRequestPredict) CRC() uint32 {
@@ -26752,7 +26752,7 @@ func MessagesGetEmojiStickerGroups(ctx context.Context, m Requester, i MessagesG
 }
 
 type MessagesGetAvailableEffectsRequestPredict struct {
-	Hash int32
+	Hash int32 `tl:"hash"`
 }
 
 func (*MessagesGetAvailableEffectsRequestPredict) CRC() uint32 {
@@ -26765,9 +26765,9 @@ func MessagesGetAvailableEffects(ctx context.Context, m Requester, i MessagesGet
 }
 
 type MessagesEditFactCheckRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
-	Text  TextWithEntities
+	Peer  InputPeer        `tl:"peer"`
+	MsgID int32            `tl:"msg_id"`
+	Text  TextWithEntities `tl:"text"`
 }
 
 func (*MessagesEditFactCheckRequestPredict) CRC() uint32 {
@@ -26780,8 +26780,8 @@ func MessagesEditFactCheck(ctx context.Context, m Requester, i MessagesEditFactC
 }
 
 type MessagesDeleteFactCheckRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*MessagesDeleteFactCheckRequestPredict) CRC() uint32 {
@@ -26794,8 +26794,8 @@ func MessagesDeleteFactCheck(ctx context.Context, m Requester, i MessagesDeleteF
 }
 
 type MessagesGetFactCheckRequestPredict struct {
-	Peer  InputPeer
-	MsgID []int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID []int32   `tl:"msg_id"`
 }
 
 func (*MessagesGetFactCheckRequestPredict) CRC() uint32 {
@@ -26808,13 +26808,13 @@ func MessagesGetFactCheck(ctx context.Context, m Requester, i MessagesGetFactChe
 }
 
 type MessagesRequestMainWebViewRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Compact     bool     `tl:",omitempty:flags:7,implicit"`
-	Peer        InputPeer
-	Bot         InputUser
-	StartParam  *string  `tl:",omitempty:flags:1"`
-	ThemeParams DataJSON `tl:",omitempty:flags:0"`
-	Platform    string
+	_           struct{}  `tl:"flags,bitflag"`
+	Compact     bool      `tl:"compact,omitempty:flags:7,implicit"`
+	Peer        InputPeer `tl:"peer"`
+	Bot         InputUser `tl:"bot"`
+	StartParam  *string   `tl:"start_param,omitempty:flags:1"`
+	ThemeParams DataJSON  `tl:"theme_params,omitempty:flags:0"`
+	Platform    string    `tl:"platform"`
 }
 
 func (*MessagesRequestMainWebViewRequestPredict) CRC() uint32 {
@@ -26827,9 +26827,9 @@ func MessagesRequestMainWebView(ctx context.Context, m Requester, i MessagesRequ
 }
 
 type PaymentsGetPaymentFormRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	Invoice     InputInvoice
-	ThemeParams DataJSON `tl:",omitempty:flags:0"`
+	_           struct{}     `tl:"flags,bitflag"`
+	Invoice     InputInvoice `tl:"invoice"`
+	ThemeParams DataJSON     `tl:"theme_params,omitempty:flags:0"`
 }
 
 func (*PaymentsGetPaymentFormRequestPredict) CRC() uint32 {
@@ -26842,8 +26842,8 @@ func PaymentsGetPaymentForm(ctx context.Context, m Requester, i PaymentsGetPayme
 }
 
 type PaymentsGetPaymentReceiptRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*PaymentsGetPaymentReceiptRequestPredict) CRC() uint32 {
@@ -26856,10 +26856,10 @@ func PaymentsGetPaymentReceipt(ctx context.Context, m Requester, i PaymentsGetPa
 }
 
 type PaymentsValidateRequestedInfoRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Save    bool     `tl:",omitempty:flags:0,implicit"`
-	Invoice InputInvoice
-	Info    PaymentRequestedInfo
+	_       struct{}             `tl:"flags,bitflag"`
+	Save    bool                 `tl:"save,omitempty:flags:0,implicit"`
+	Invoice InputInvoice         `tl:"invoice"`
+	Info    PaymentRequestedInfo `tl:"info"`
 }
 
 func (*PaymentsValidateRequestedInfoRequestPredict) CRC() uint32 {
@@ -26872,13 +26872,13 @@ func PaymentsValidateRequestedInfo(ctx context.Context, m Requester, i PaymentsV
 }
 
 type PaymentsSendPaymentFormRequestPredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	FormID           int64
-	Invoice          InputInvoice
-	RequestedInfoID  *string `tl:",omitempty:flags:0"`
-	ShippingOptionID *string `tl:",omitempty:flags:1"`
-	Credentials      InputPaymentCredentials
-	TipAmount        *int64 `tl:",omitempty:flags:2"`
+	_                struct{}                `tl:"flags,bitflag"`
+	FormID           int64                   `tl:"form_id"`
+	Invoice          InputInvoice            `tl:"invoice"`
+	RequestedInfoID  *string                 `tl:"requested_info_id,omitempty:flags:0"`
+	ShippingOptionID *string                 `tl:"shipping_option_id,omitempty:flags:1"`
+	Credentials      InputPaymentCredentials `tl:"credentials"`
+	TipAmount        *int64                  `tl:"tip_amount,omitempty:flags:2"`
 }
 
 func (*PaymentsSendPaymentFormRequestPredict) CRC() uint32 {
@@ -26903,8 +26903,8 @@ func PaymentsGetSavedInfo(ctx context.Context, m Requester, i PaymentsGetSavedIn
 
 type PaymentsClearSavedInfoRequestPredict struct {
 	_           struct{} `tl:"flags,bitflag"`
-	Credentials bool     `tl:",omitempty:flags:0,implicit"`
-	Info        bool     `tl:",omitempty:flags:1,implicit"`
+	Credentials bool     `tl:"credentials,omitempty:flags:0,implicit"`
+	Info        bool     `tl:"info,omitempty:flags:1,implicit"`
 }
 
 func (*PaymentsClearSavedInfoRequestPredict) CRC() uint32 {
@@ -26917,7 +26917,7 @@ func PaymentsClearSavedInfo(ctx context.Context, m Requester, i PaymentsClearSav
 }
 
 type PaymentsGetBankCardDataRequestPredict struct {
-	Number string
+	Number string `tl:"number"`
 }
 
 func (*PaymentsGetBankCardDataRequestPredict) CRC() uint32 {
@@ -26930,7 +26930,7 @@ func PaymentsGetBankCardData(ctx context.Context, m Requester, i PaymentsGetBank
 }
 
 type PaymentsExportInvoiceRequestPredict struct {
-	InvoiceMedia InputMedia
+	InvoiceMedia InputMedia `tl:"invoice_media"`
 }
 
 func (*PaymentsExportInvoiceRequestPredict) CRC() uint32 {
@@ -26943,8 +26943,8 @@ func PaymentsExportInvoice(ctx context.Context, m Requester, i PaymentsExportInv
 }
 
 type PaymentsAssignAppStoreTransactionRequestPredict struct {
-	Receipt []byte
-	Purpose InputStorePaymentPurpose
+	Receipt []byte                   `tl:"receipt"`
+	Purpose InputStorePaymentPurpose `tl:"purpose"`
 }
 
 func (*PaymentsAssignAppStoreTransactionRequestPredict) CRC() uint32 {
@@ -26957,8 +26957,8 @@ func PaymentsAssignAppStoreTransaction(ctx context.Context, m Requester, i Payme
 }
 
 type PaymentsAssignPlayMarketTransactionRequestPredict struct {
-	Receipt DataJSON
-	Purpose InputStorePaymentPurpose
+	Receipt DataJSON                 `tl:"receipt"`
+	Purpose InputStorePaymentPurpose `tl:"purpose"`
 }
 
 func (*PaymentsAssignPlayMarketTransactionRequestPredict) CRC() uint32 {
@@ -26971,7 +26971,7 @@ func PaymentsAssignPlayMarketTransaction(ctx context.Context, m Requester, i Pay
 }
 
 type PaymentsCanPurchasePremiumRequestPredict struct {
-	Purpose InputStorePaymentPurpose
+	Purpose InputStorePaymentPurpose `tl:"purpose"`
 }
 
 func (*PaymentsCanPurchasePremiumRequestPredict) CRC() uint32 {
@@ -26985,7 +26985,7 @@ func PaymentsCanPurchasePremium(ctx context.Context, m Requester, i PaymentsCanP
 
 type PaymentsGetPremiumGiftCodeOptionsRequestPredict struct {
 	_         struct{}  `tl:"flags,bitflag"`
-	BoostPeer InputPeer `tl:",omitempty:flags:0"`
+	BoostPeer InputPeer `tl:"boost_peer,omitempty:flags:0"`
 }
 
 func (*PaymentsGetPremiumGiftCodeOptionsRequestPredict) CRC() uint32 {
@@ -26998,7 +26998,7 @@ func PaymentsGetPremiumGiftCodeOptions(ctx context.Context, m Requester, i Payme
 }
 
 type PaymentsCheckGiftCodeRequestPredict struct {
-	Slug string
+	Slug string `tl:"slug"`
 }
 
 func (*PaymentsCheckGiftCodeRequestPredict) CRC() uint32 {
@@ -27011,7 +27011,7 @@ func PaymentsCheckGiftCode(ctx context.Context, m Requester, i PaymentsCheckGift
 }
 
 type PaymentsApplyGiftCodeRequestPredict struct {
-	Slug string
+	Slug string `tl:"slug"`
 }
 
 func (*PaymentsApplyGiftCodeRequestPredict) CRC() uint32 {
@@ -27024,8 +27024,8 @@ func PaymentsApplyGiftCode(ctx context.Context, m Requester, i PaymentsApplyGift
 }
 
 type PaymentsGetGiveawayInfoRequestPredict struct {
-	Peer  InputPeer
-	MsgID int32
+	Peer  InputPeer `tl:"peer"`
+	MsgID int32     `tl:"msg_id"`
 }
 
 func (*PaymentsGetGiveawayInfoRequestPredict) CRC() uint32 {
@@ -27038,9 +27038,9 @@ func PaymentsGetGiveawayInfo(ctx context.Context, m Requester, i PaymentsGetGive
 }
 
 type PaymentsLaunchPrepaidGiveawayRequestPredict struct {
-	Peer       InputPeer
-	GiveawayID int64
-	Purpose    InputStorePaymentPurpose
+	Peer       InputPeer                `tl:"peer"`
+	GiveawayID int64                    `tl:"giveaway_id"`
+	Purpose    InputStorePaymentPurpose `tl:"purpose"`
 }
 
 func (*PaymentsLaunchPrepaidGiveawayRequestPredict) CRC() uint32 {
@@ -27064,7 +27064,7 @@ func PaymentsGetStarsTopupOptions(ctx context.Context, m Requester, i PaymentsGe
 }
 
 type PaymentsGetStarsStatusRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*PaymentsGetStarsStatusRequestPredict) CRC() uint32 {
@@ -27077,13 +27077,13 @@ func PaymentsGetStarsStatus(ctx context.Context, m Requester, i PaymentsGetStars
 }
 
 type PaymentsGetStarsTransactionsRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Inbound   bool     `tl:",omitempty:flags:0,implicit"`
-	Outbound  bool     `tl:",omitempty:flags:1,implicit"`
-	Ascending bool     `tl:",omitempty:flags:2,implicit"`
-	Peer      InputPeer
-	Offset    string
-	Limit     int32
+	_         struct{}  `tl:"flags,bitflag"`
+	Inbound   bool      `tl:"inbound,omitempty:flags:0,implicit"`
+	Outbound  bool      `tl:"outbound,omitempty:flags:1,implicit"`
+	Ascending bool      `tl:"ascending,omitempty:flags:2,implicit"`
+	Peer      InputPeer `tl:"peer"`
+	Offset    string    `tl:"offset"`
+	Limit     int32     `tl:"limit"`
 }
 
 func (*PaymentsGetStarsTransactionsRequestPredict) CRC() uint32 {
@@ -27096,9 +27096,9 @@ func PaymentsGetStarsTransactions(ctx context.Context, m Requester, i PaymentsGe
 }
 
 type PaymentsSendStarsFormRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	FormID  int64
-	Invoice InputInvoice
+	_       struct{}     `tl:"flags,bitflag"`
+	FormID  int64        `tl:"form_id"`
+	Invoice InputInvoice `tl:"invoice"`
 }
 
 func (*PaymentsSendStarsFormRequestPredict) CRC() uint32 {
@@ -27111,8 +27111,8 @@ func PaymentsSendStarsForm(ctx context.Context, m Requester, i PaymentsSendStars
 }
 
 type PaymentsRefundStarsChargeRequestPredict struct {
-	UserID   InputUser
-	ChargeID string
+	UserID   InputUser `tl:"user_id"`
+	ChargeID string    `tl:"charge_id"`
 }
 
 func (*PaymentsRefundStarsChargeRequestPredict) CRC() uint32 {
@@ -27125,9 +27125,9 @@ func PaymentsRefundStarsCharge(ctx context.Context, m Requester, i PaymentsRefun
 }
 
 type PaymentsGetStarsRevenueStatsRequestPredict struct {
-	_    struct{} `tl:"flags,bitflag"`
-	Dark bool     `tl:",omitempty:flags:0,implicit"`
-	Peer InputPeer
+	_    struct{}  `tl:"flags,bitflag"`
+	Dark bool      `tl:"dark,omitempty:flags:0,implicit"`
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*PaymentsGetStarsRevenueStatsRequestPredict) CRC() uint32 {
@@ -27140,9 +27140,9 @@ func PaymentsGetStarsRevenueStats(ctx context.Context, m Requester, i PaymentsGe
 }
 
 type PaymentsGetStarsRevenueWithdrawalURLRequestPredict struct {
-	Peer     InputPeer
-	Stars    int64
-	Password InputCheckPasswordSRP
+	Peer     InputPeer             `tl:"peer"`
+	Stars    int64                 `tl:"stars"`
+	Password InputCheckPasswordSRP `tl:"password"`
 }
 
 func (*PaymentsGetStarsRevenueWithdrawalURLRequestPredict) CRC() uint32 {
@@ -27155,7 +27155,7 @@ func PaymentsGetStarsRevenueWithdrawalURL(ctx context.Context, m Requester, i Pa
 }
 
 type PaymentsGetStarsRevenueAdsAccountURLRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*PaymentsGetStarsRevenueAdsAccountURLRequestPredict) CRC() uint32 {
@@ -27168,8 +27168,8 @@ func PaymentsGetStarsRevenueAdsAccountURL(ctx context.Context, m Requester, i Pa
 }
 
 type PaymentsGetStarsTransactionsByIDRequestPredict struct {
-	Peer InputPeer
-	ID   []InputStarsTransaction
+	Peer InputPeer               `tl:"peer"`
+	ID   []InputStarsTransaction `tl:"id"`
 }
 
 func (*PaymentsGetStarsTransactionsByIDRequestPredict) CRC() uint32 {
@@ -27183,7 +27183,7 @@ func PaymentsGetStarsTransactionsByID(ctx context.Context, m Requester, i Paymen
 
 type PaymentsGetStarsGiftOptionsRequestPredict struct {
 	_      struct{}  `tl:"flags,bitflag"`
-	UserID InputUser `tl:",omitempty:flags:0"`
+	UserID InputUser `tl:"user_id,omitempty:flags:0"`
 }
 
 func (*PaymentsGetStarsGiftOptionsRequestPredict) CRC() uint32 {
@@ -27207,12 +27207,12 @@ func PhoneGetCallConfig(ctx context.Context, m Requester, i PhoneGetCallConfigRe
 }
 
 type PhoneRequestCallRequestPredict struct {
-	_        struct{} `tl:"flags,bitflag"`
-	Video    bool     `tl:",omitempty:flags:0,implicit"`
-	UserID   InputUser
-	RandomID int32
-	GAHash   []byte
-	Protocol PhoneCallProtocol
+	_        struct{}          `tl:"flags,bitflag"`
+	Video    bool              `tl:"video,omitempty:flags:0,implicit"`
+	UserID   InputUser         `tl:"user_id"`
+	RandomID int32             `tl:"random_id"`
+	GAHash   []byte            `tl:"g_a_hash"`
+	Protocol PhoneCallProtocol `tl:"protocol"`
 }
 
 func (*PhoneRequestCallRequestPredict) CRC() uint32 {
@@ -27225,9 +27225,9 @@ func PhoneRequestCall(ctx context.Context, m Requester, i PhoneRequestCallReques
 }
 
 type PhoneAcceptCallRequestPredict struct {
-	Peer     InputPhoneCall
-	GB       []byte
-	Protocol PhoneCallProtocol
+	Peer     InputPhoneCall    `tl:"peer"`
+	GB       []byte            `tl:"g_b"`
+	Protocol PhoneCallProtocol `tl:"protocol"`
 }
 
 func (*PhoneAcceptCallRequestPredict) CRC() uint32 {
@@ -27240,10 +27240,10 @@ func PhoneAcceptCall(ctx context.Context, m Requester, i PhoneAcceptCallRequestP
 }
 
 type PhoneConfirmCallRequestPredict struct {
-	Peer           InputPhoneCall
-	GA             []byte
-	KeyFingerprint int64
-	Protocol       PhoneCallProtocol
+	Peer           InputPhoneCall    `tl:"peer"`
+	GA             []byte            `tl:"g_a"`
+	KeyFingerprint int64             `tl:"key_fingerprint"`
+	Protocol       PhoneCallProtocol `tl:"protocol"`
 }
 
 func (*PhoneConfirmCallRequestPredict) CRC() uint32 {
@@ -27256,7 +27256,7 @@ func PhoneConfirmCall(ctx context.Context, m Requester, i PhoneConfirmCallReques
 }
 
 type PhoneReceivedCallRequestPredict struct {
-	Peer InputPhoneCall
+	Peer InputPhoneCall `tl:"peer"`
 }
 
 func (*PhoneReceivedCallRequestPredict) CRC() uint32 {
@@ -27269,12 +27269,12 @@ func PhoneReceivedCall(ctx context.Context, m Requester, i PhoneReceivedCallRequ
 }
 
 type PhoneDiscardCallRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Video        bool     `tl:",omitempty:flags:0,implicit"`
-	Peer         InputPhoneCall
-	Duration     int32
-	Reason       PhoneCallDiscardReason
-	ConnectionID int64
+	_            struct{}               `tl:"flags,bitflag"`
+	Video        bool                   `tl:"video,omitempty:flags:0,implicit"`
+	Peer         InputPhoneCall         `tl:"peer"`
+	Duration     int32                  `tl:"duration"`
+	Reason       PhoneCallDiscardReason `tl:"reason"`
+	ConnectionID int64                  `tl:"connection_id"`
 }
 
 func (*PhoneDiscardCallRequestPredict) CRC() uint32 {
@@ -27287,11 +27287,11 @@ func PhoneDiscardCall(ctx context.Context, m Requester, i PhoneDiscardCallReques
 }
 
 type PhoneSetCallRatingRequestPredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	UserInitiative bool     `tl:",omitempty:flags:0,implicit"`
-	Peer           InputPhoneCall
-	Rating         int32
-	Comment        string
+	_              struct{}       `tl:"flags,bitflag"`
+	UserInitiative bool           `tl:"user_initiative,omitempty:flags:0,implicit"`
+	Peer           InputPhoneCall `tl:"peer"`
+	Rating         int32          `tl:"rating"`
+	Comment        string         `tl:"comment"`
 }
 
 func (*PhoneSetCallRatingRequestPredict) CRC() uint32 {
@@ -27304,8 +27304,8 @@ func PhoneSetCallRating(ctx context.Context, m Requester, i PhoneSetCallRatingRe
 }
 
 type PhoneSaveCallDebugRequestPredict struct {
-	Peer  InputPhoneCall
-	Debug DataJSON
+	Peer  InputPhoneCall `tl:"peer"`
+	Debug DataJSON       `tl:"debug"`
 }
 
 func (*PhoneSaveCallDebugRequestPredict) CRC() uint32 {
@@ -27318,8 +27318,8 @@ func PhoneSaveCallDebug(ctx context.Context, m Requester, i PhoneSaveCallDebugRe
 }
 
 type PhoneSendSignalingDataRequestPredict struct {
-	Peer InputPhoneCall
-	Data []byte
+	Peer InputPhoneCall `tl:"peer"`
+	Data []byte         `tl:"data"`
 }
 
 func (*PhoneSendSignalingDataRequestPredict) CRC() uint32 {
@@ -27332,12 +27332,12 @@ func PhoneSendSignalingData(ctx context.Context, m Requester, i PhoneSendSignali
 }
 
 type PhoneCreateGroupCallRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	RtmpStream   bool     `tl:",omitempty:flags:2,implicit"`
-	Peer         InputPeer
-	RandomID     int32
-	Title        *string `tl:",omitempty:flags:0"`
-	ScheduleDate *int32  `tl:",omitempty:flags:1"`
+	_            struct{}  `tl:"flags,bitflag"`
+	RtmpStream   bool      `tl:"rtmp_stream,omitempty:flags:2,implicit"`
+	Peer         InputPeer `tl:"peer"`
+	RandomID     int32     `tl:"random_id"`
+	Title        *string   `tl:"title,omitempty:flags:0"`
+	ScheduleDate *int32    `tl:"schedule_date,omitempty:flags:1"`
 }
 
 func (*PhoneCreateGroupCallRequestPredict) CRC() uint32 {
@@ -27350,13 +27350,13 @@ func PhoneCreateGroupCall(ctx context.Context, m Requester, i PhoneCreateGroupCa
 }
 
 type PhoneJoinGroupCallRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Muted        bool     `tl:",omitempty:flags:0,implicit"`
-	VideoStopped bool     `tl:",omitempty:flags:2,implicit"`
-	Call         InputGroupCall
-	JoinAs       InputPeer
-	InviteHash   *string `tl:",omitempty:flags:1"`
-	Params       DataJSON
+	_            struct{}       `tl:"flags,bitflag"`
+	Muted        bool           `tl:"muted,omitempty:flags:0,implicit"`
+	VideoStopped bool           `tl:"video_stopped,omitempty:flags:2,implicit"`
+	Call         InputGroupCall `tl:"call"`
+	JoinAs       InputPeer      `tl:"join_as"`
+	InviteHash   *string        `tl:"invite_hash,omitempty:flags:1"`
+	Params       DataJSON       `tl:"params"`
 }
 
 func (*PhoneJoinGroupCallRequestPredict) CRC() uint32 {
@@ -27369,8 +27369,8 @@ func PhoneJoinGroupCall(ctx context.Context, m Requester, i PhoneJoinGroupCallRe
 }
 
 type PhoneLeaveGroupCallRequestPredict struct {
-	Call   InputGroupCall
-	Source int32
+	Call   InputGroupCall `tl:"call"`
+	Source int32          `tl:"source"`
 }
 
 func (*PhoneLeaveGroupCallRequestPredict) CRC() uint32 {
@@ -27383,8 +27383,8 @@ func PhoneLeaveGroupCall(ctx context.Context, m Requester, i PhoneLeaveGroupCall
 }
 
 type PhoneInviteToGroupCallRequestPredict struct {
-	Call  InputGroupCall
-	Users []InputUser
+	Call  InputGroupCall `tl:"call"`
+	Users []InputUser    `tl:"users"`
 }
 
 func (*PhoneInviteToGroupCallRequestPredict) CRC() uint32 {
@@ -27397,7 +27397,7 @@ func PhoneInviteToGroupCall(ctx context.Context, m Requester, i PhoneInviteToGro
 }
 
 type PhoneDiscardGroupCallRequestPredict struct {
-	Call InputGroupCall
+	Call InputGroupCall `tl:"call"`
 }
 
 func (*PhoneDiscardGroupCallRequestPredict) CRC() uint32 {
@@ -27410,10 +27410,10 @@ func PhoneDiscardGroupCall(ctx context.Context, m Requester, i PhoneDiscardGroup
 }
 
 type PhoneToggleGroupCallSettingsRequestPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	ResetInviteHash bool     `tl:",omitempty:flags:1,implicit"`
-	Call            InputGroupCall
-	JoinMuted       *bool `tl:",omitempty:flags:0"`
+	_               struct{}       `tl:"flags,bitflag"`
+	ResetInviteHash bool           `tl:"reset_invite_hash,omitempty:flags:1,implicit"`
+	Call            InputGroupCall `tl:"call"`
+	JoinMuted       *bool          `tl:"join_muted,omitempty:flags:0"`
 }
 
 func (*PhoneToggleGroupCallSettingsRequestPredict) CRC() uint32 {
@@ -27426,8 +27426,8 @@ func PhoneToggleGroupCallSettings(ctx context.Context, m Requester, i PhoneToggl
 }
 
 type PhoneGetGroupCallRequestPredict struct {
-	Call  InputGroupCall
-	Limit int32
+	Call  InputGroupCall `tl:"call"`
+	Limit int32          `tl:"limit"`
 }
 
 func (*PhoneGetGroupCallRequestPredict) CRC() uint32 {
@@ -27440,11 +27440,11 @@ func PhoneGetGroupCall(ctx context.Context, m Requester, i PhoneGetGroupCallRequ
 }
 
 type PhoneGetGroupParticipantsRequestPredict struct {
-	Call    InputGroupCall
-	Ids     []InputPeer
-	Sources []int32
-	Offset  string
-	Limit   int32
+	Call    InputGroupCall `tl:"call"`
+	Ids     []InputPeer    `tl:"ids"`
+	Sources []int32        `tl:"sources"`
+	Offset  string         `tl:"offset"`
+	Limit   int32          `tl:"limit"`
 }
 
 func (*PhoneGetGroupParticipantsRequestPredict) CRC() uint32 {
@@ -27457,8 +27457,8 @@ func PhoneGetGroupParticipants(ctx context.Context, m Requester, i PhoneGetGroup
 }
 
 type PhoneCheckGroupCallRequestPredict struct {
-	Call    InputGroupCall
-	Sources []int32
+	Call    InputGroupCall `tl:"call"`
+	Sources []int32        `tl:"sources"`
 }
 
 func (*PhoneCheckGroupCallRequestPredict) CRC() uint32 {
@@ -27471,12 +27471,12 @@ func PhoneCheckGroupCall(ctx context.Context, m Requester, i PhoneCheckGroupCall
 }
 
 type PhoneToggleGroupCallRecordRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	Start         bool     `tl:",omitempty:flags:0,implicit"`
-	Video         bool     `tl:",omitempty:flags:2,implicit"`
-	Call          InputGroupCall
-	Title         *string `tl:",omitempty:flags:1"`
-	VideoPortrait *bool   `tl:",omitempty:flags:2"`
+	_             struct{}       `tl:"flags,bitflag"`
+	Start         bool           `tl:"start,omitempty:flags:0,implicit"`
+	Video         bool           `tl:"video,omitempty:flags:2,implicit"`
+	Call          InputGroupCall `tl:"call"`
+	Title         *string        `tl:"title,omitempty:flags:1"`
+	VideoPortrait *bool          `tl:"video_portrait,omitempty:flags:2"`
 }
 
 func (*PhoneToggleGroupCallRecordRequestPredict) CRC() uint32 {
@@ -27489,15 +27489,15 @@ func PhoneToggleGroupCallRecord(ctx context.Context, m Requester, i PhoneToggleG
 }
 
 type PhoneEditGroupCallParticipantRequestPredict struct {
-	_                  struct{} `tl:"flags,bitflag"`
-	Call               InputGroupCall
-	Participant        InputPeer
-	Muted              *bool  `tl:",omitempty:flags:0"`
-	Volume             *int32 `tl:",omitempty:flags:1"`
-	RaiseHand          *bool  `tl:",omitempty:flags:2"`
-	VideoStopped       *bool  `tl:",omitempty:flags:3"`
-	VideoPaused        *bool  `tl:",omitempty:flags:4"`
-	PresentationPaused *bool  `tl:",omitempty:flags:5"`
+	_                  struct{}       `tl:"flags,bitflag"`
+	Call               InputGroupCall `tl:"call"`
+	Participant        InputPeer      `tl:"participant"`
+	Muted              *bool          `tl:"muted,omitempty:flags:0"`
+	Volume             *int32         `tl:"volume,omitempty:flags:1"`
+	RaiseHand          *bool          `tl:"raise_hand,omitempty:flags:2"`
+	VideoStopped       *bool          `tl:"video_stopped,omitempty:flags:3"`
+	VideoPaused        *bool          `tl:"video_paused,omitempty:flags:4"`
+	PresentationPaused *bool          `tl:"presentation_paused,omitempty:flags:5"`
 }
 
 func (*PhoneEditGroupCallParticipantRequestPredict) CRC() uint32 {
@@ -27510,8 +27510,8 @@ func PhoneEditGroupCallParticipant(ctx context.Context, m Requester, i PhoneEdit
 }
 
 type PhoneEditGroupCallTitleRequestPredict struct {
-	Call  InputGroupCall
-	Title string
+	Call  InputGroupCall `tl:"call"`
+	Title string         `tl:"title"`
 }
 
 func (*PhoneEditGroupCallTitleRequestPredict) CRC() uint32 {
@@ -27524,7 +27524,7 @@ func PhoneEditGroupCallTitle(ctx context.Context, m Requester, i PhoneEditGroupC
 }
 
 type PhoneGetGroupCallJoinAsRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*PhoneGetGroupCallJoinAsRequestPredict) CRC() uint32 {
@@ -27537,9 +27537,9 @@ func PhoneGetGroupCallJoinAs(ctx context.Context, m Requester, i PhoneGetGroupCa
 }
 
 type PhoneExportGroupCallInviteRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	CanSelfUnmute bool     `tl:",omitempty:flags:0,implicit"`
-	Call          InputGroupCall
+	_             struct{}       `tl:"flags,bitflag"`
+	CanSelfUnmute bool           `tl:"can_self_unmute,omitempty:flags:0,implicit"`
+	Call          InputGroupCall `tl:"call"`
 }
 
 func (*PhoneExportGroupCallInviteRequestPredict) CRC() uint32 {
@@ -27552,8 +27552,8 @@ func PhoneExportGroupCallInvite(ctx context.Context, m Requester, i PhoneExportG
 }
 
 type PhoneToggleGroupCallStartSubscriptionRequestPredict struct {
-	Call       InputGroupCall
-	Subscribed bool
+	Call       InputGroupCall `tl:"call"`
+	Subscribed bool           `tl:"subscribed"`
 }
 
 func (*PhoneToggleGroupCallStartSubscriptionRequestPredict) CRC() uint32 {
@@ -27566,7 +27566,7 @@ func PhoneToggleGroupCallStartSubscription(ctx context.Context, m Requester, i P
 }
 
 type PhoneStartScheduledGroupCallRequestPredict struct {
-	Call InputGroupCall
+	Call InputGroupCall `tl:"call"`
 }
 
 func (*PhoneStartScheduledGroupCallRequestPredict) CRC() uint32 {
@@ -27579,8 +27579,8 @@ func PhoneStartScheduledGroupCall(ctx context.Context, m Requester, i PhoneStart
 }
 
 type PhoneSaveDefaultGroupCallJoinAsRequestPredict struct {
-	Peer   InputPeer
-	JoinAs InputPeer
+	Peer   InputPeer `tl:"peer"`
+	JoinAs InputPeer `tl:"join_as"`
 }
 
 func (*PhoneSaveDefaultGroupCallJoinAsRequestPredict) CRC() uint32 {
@@ -27593,8 +27593,8 @@ func PhoneSaveDefaultGroupCallJoinAs(ctx context.Context, m Requester, i PhoneSa
 }
 
 type PhoneJoinGroupCallPresentationRequestPredict struct {
-	Call   InputGroupCall
-	Params DataJSON
+	Call   InputGroupCall `tl:"call"`
+	Params DataJSON       `tl:"params"`
 }
 
 func (*PhoneJoinGroupCallPresentationRequestPredict) CRC() uint32 {
@@ -27607,7 +27607,7 @@ func PhoneJoinGroupCallPresentation(ctx context.Context, m Requester, i PhoneJoi
 }
 
 type PhoneLeaveGroupCallPresentationRequestPredict struct {
-	Call InputGroupCall
+	Call InputGroupCall `tl:"call"`
 }
 
 func (*PhoneLeaveGroupCallPresentationRequestPredict) CRC() uint32 {
@@ -27620,7 +27620,7 @@ func PhoneLeaveGroupCallPresentation(ctx context.Context, m Requester, i PhoneLe
 }
 
 type PhoneGetGroupCallStreamChannelsRequestPredict struct {
-	Call InputGroupCall
+	Call InputGroupCall `tl:"call"`
 }
 
 func (*PhoneGetGroupCallStreamChannelsRequestPredict) CRC() uint32 {
@@ -27633,8 +27633,8 @@ func PhoneGetGroupCallStreamChannels(ctx context.Context, m Requester, i PhoneGe
 }
 
 type PhoneGetGroupCallStreamRtmpURLRequestPredict struct {
-	Peer   InputPeer
-	Revoke bool
+	Peer   InputPeer `tl:"peer"`
+	Revoke bool      `tl:"revoke"`
 }
 
 func (*PhoneGetGroupCallStreamRtmpURLRequestPredict) CRC() uint32 {
@@ -27647,8 +27647,8 @@ func PhoneGetGroupCallStreamRtmpURL(ctx context.Context, m Requester, i PhoneGet
 }
 
 type PhoneSaveCallLogRequestPredict struct {
-	Peer InputPhoneCall
-	File InputFile
+	Peer InputPhoneCall `tl:"peer"`
+	File InputFile      `tl:"file"`
 }
 
 func (*PhoneSaveCallLogRequestPredict) CRC() uint32 {
@@ -27661,10 +27661,10 @@ func PhoneSaveCallLog(ctx context.Context, m Requester, i PhoneSaveCallLogReques
 }
 
 type PhotosUpdateProfilePhotoRequestPredict struct {
-	_        struct{}  `tl:"flags,bitflag"`
-	Fallback bool      `tl:",omitempty:flags:0,implicit"`
-	Bot      InputUser `tl:",omitempty:flags:1"`
-	ID       InputPhoto
+	_        struct{}   `tl:"flags,bitflag"`
+	Fallback bool       `tl:"fallback,omitempty:flags:0,implicit"`
+	Bot      InputUser  `tl:"bot,omitempty:flags:1"`
+	ID       InputPhoto `tl:"id"`
 }
 
 func (*PhotosUpdateProfilePhotoRequestPredict) CRC() uint32 {
@@ -27678,12 +27678,12 @@ func PhotosUpdateProfilePhoto(ctx context.Context, m Requester, i PhotosUpdatePr
 
 type PhotosUploadProfilePhotoRequestPredict struct {
 	_                struct{}  `tl:"flags,bitflag"`
-	Fallback         bool      `tl:",omitempty:flags:3,implicit"`
-	Bot              InputUser `tl:",omitempty:flags:5"`
-	File             InputFile `tl:",omitempty:flags:0"`
-	Video            InputFile `tl:",omitempty:flags:1"`
-	VideoStartTs     *float64  `tl:",omitempty:flags:2"`
-	VideoEmojiMarkup VideoSize `tl:",omitempty:flags:4"`
+	Fallback         bool      `tl:"fallback,omitempty:flags:3,implicit"`
+	Bot              InputUser `tl:"bot,omitempty:flags:5"`
+	File             InputFile `tl:"file,omitempty:flags:0"`
+	Video            InputFile `tl:"video,omitempty:flags:1"`
+	VideoStartTs     *float64  `tl:"video_start_ts,omitempty:flags:2"`
+	VideoEmojiMarkup VideoSize `tl:"video_emoji_markup,omitempty:flags:4"`
 }
 
 func (*PhotosUploadProfilePhotoRequestPredict) CRC() uint32 {
@@ -27696,7 +27696,7 @@ func PhotosUploadProfilePhoto(ctx context.Context, m Requester, i PhotosUploadPr
 }
 
 type PhotosDeletePhotosRequestPredict struct {
-	ID []InputPhoto
+	ID []InputPhoto `tl:"id"`
 }
 
 func (*PhotosDeletePhotosRequestPredict) CRC() uint32 {
@@ -27709,10 +27709,10 @@ func PhotosDeletePhotos(ctx context.Context, m Requester, i PhotosDeletePhotosRe
 }
 
 type PhotosGetUserPhotosRequestPredict struct {
-	UserID InputUser
-	Offset int32
-	MaxID  int64
-	Limit  int32
+	UserID InputUser `tl:"user_id"`
+	Offset int32     `tl:"offset"`
+	MaxID  int64     `tl:"max_id"`
+	Limit  int32     `tl:"limit"`
 }
 
 func (*PhotosGetUserPhotosRequestPredict) CRC() uint32 {
@@ -27725,14 +27725,14 @@ func PhotosGetUserPhotos(ctx context.Context, m Requester, i PhotosGetUserPhotos
 }
 
 type PhotosUploadContactProfilePhotoRequestPredict struct {
-	_                struct{} `tl:"flags,bitflag"`
-	Suggest          bool     `tl:",omitempty:flags:3,implicit"`
-	Save             bool     `tl:",omitempty:flags:4,implicit"`
-	UserID           InputUser
-	File             InputFile `tl:",omitempty:flags:0"`
-	Video            InputFile `tl:",omitempty:flags:1"`
-	VideoStartTs     *float64  `tl:",omitempty:flags:2"`
-	VideoEmojiMarkup VideoSize `tl:",omitempty:flags:5"`
+	_                struct{}  `tl:"flags,bitflag"`
+	Suggest          bool      `tl:"suggest,omitempty:flags:3,implicit"`
+	Save             bool      `tl:"save,omitempty:flags:4,implicit"`
+	UserID           InputUser `tl:"user_id"`
+	File             InputFile `tl:"file,omitempty:flags:0"`
+	Video            InputFile `tl:"video,omitempty:flags:1"`
+	VideoStartTs     *float64  `tl:"video_start_ts,omitempty:flags:2"`
+	VideoEmojiMarkup VideoSize `tl:"video_emoji_markup,omitempty:flags:5"`
 }
 
 func (*PhotosUploadContactProfilePhotoRequestPredict) CRC() uint32 {
@@ -27745,11 +27745,11 @@ func PhotosUploadContactProfilePhoto(ctx context.Context, m Requester, i PhotosU
 }
 
 type PremiumGetBoostsListRequestPredict struct {
-	_      struct{} `tl:"flags,bitflag"`
-	Gifts  bool     `tl:",omitempty:flags:0,implicit"`
-	Peer   InputPeer
-	Offset string
-	Limit  int32
+	_      struct{}  `tl:"flags,bitflag"`
+	Gifts  bool      `tl:"gifts,omitempty:flags:0,implicit"`
+	Peer   InputPeer `tl:"peer"`
+	Offset string    `tl:"offset"`
+	Limit  int32     `tl:"limit"`
 }
 
 func (*PremiumGetBoostsListRequestPredict) CRC() uint32 {
@@ -27773,9 +27773,9 @@ func PremiumGetMyBoosts(ctx context.Context, m Requester, i PremiumGetMyBoostsRe
 }
 
 type PremiumApplyBoostRequestPredict struct {
-	_     struct{} `tl:"flags,bitflag"`
-	Slots []int32  `tl:",omitempty:flags:0"`
-	Peer  InputPeer
+	_     struct{}  `tl:"flags,bitflag"`
+	Slots []int32   `tl:"slots,omitempty:flags:0"`
+	Peer  InputPeer `tl:"peer"`
 }
 
 func (*PremiumApplyBoostRequestPredict) CRC() uint32 {
@@ -27788,7 +27788,7 @@ func PremiumApplyBoost(ctx context.Context, m Requester, i PremiumApplyBoostRequ
 }
 
 type PremiumGetBoostsStatusRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*PremiumGetBoostsStatusRequestPredict) CRC() uint32 {
@@ -27801,8 +27801,8 @@ func PremiumGetBoostsStatus(ctx context.Context, m Requester, i PremiumGetBoosts
 }
 
 type PremiumGetUserBoostsRequestPredict struct {
-	Peer   InputPeer
-	UserID InputUser
+	Peer   InputPeer `tl:"peer"`
+	UserID InputUser `tl:"user_id"`
 }
 
 func (*PremiumGetUserBoostsRequestPredict) CRC() uint32 {
@@ -27849,7 +27849,7 @@ func SmsjobsLeave(ctx context.Context, m Requester, i SmsjobsLeaveRequestPredict
 
 type SmsjobsUpdateSettingsRequestPredict struct {
 	_                  struct{} `tl:"flags,bitflag"`
-	AllowInternational bool     `tl:",omitempty:flags:0,implicit"`
+	AllowInternational bool     `tl:"allow_international,omitempty:flags:0,implicit"`
 }
 
 func (*SmsjobsUpdateSettingsRequestPredict) CRC() uint32 {
@@ -27873,7 +27873,7 @@ func SmsjobsGetStatus(ctx context.Context, m Requester, i SmsjobsGetStatusReques
 }
 
 type SmsjobsGetSmsJobRequestPredict struct {
-	JobID string
+	JobID string `tl:"job_id"`
 }
 
 func (*SmsjobsGetSmsJobRequestPredict) CRC() uint32 {
@@ -27887,8 +27887,8 @@ func SmsjobsGetSmsJob(ctx context.Context, m Requester, i SmsjobsGetSmsJobReques
 
 type SmsjobsFinishJobRequestPredict struct {
 	_     struct{} `tl:"flags,bitflag"`
-	JobID string
-	Error *string `tl:",omitempty:flags:0"`
+	JobID string   `tl:"job_id"`
+	Error *string  `tl:"error,omitempty:flags:0"`
 }
 
 func (*SmsjobsFinishJobRequestPredict) CRC() uint32 {
@@ -27901,9 +27901,9 @@ func SmsjobsFinishJob(ctx context.Context, m Requester, i SmsjobsFinishJobReques
 }
 
 type StatsGetBroadcastStatsRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Dark    bool     `tl:",omitempty:flags:0,implicit"`
-	Channel InputChannel
+	_       struct{}     `tl:"flags,bitflag"`
+	Dark    bool         `tl:"dark,omitempty:flags:0,implicit"`
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*StatsGetBroadcastStatsRequestPredict) CRC() uint32 {
@@ -27917,8 +27917,8 @@ func StatsGetBroadcastStats(ctx context.Context, m Requester, i StatsGetBroadcas
 
 type StatsLoadAsyncGraphRequestPredict struct {
 	_     struct{} `tl:"flags,bitflag"`
-	Token string
-	X     *int64 `tl:",omitempty:flags:0"`
+	Token string   `tl:"token"`
+	X     *int64   `tl:"x,omitempty:flags:0"`
 }
 
 func (*StatsLoadAsyncGraphRequestPredict) CRC() uint32 {
@@ -27931,9 +27931,9 @@ func StatsLoadAsyncGraph(ctx context.Context, m Requester, i StatsLoadAsyncGraph
 }
 
 type StatsGetMegagroupStatsRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Dark    bool     `tl:",omitempty:flags:0,implicit"`
-	Channel InputChannel
+	_       struct{}     `tl:"flags,bitflag"`
+	Dark    bool         `tl:"dark,omitempty:flags:0,implicit"`
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*StatsGetMegagroupStatsRequestPredict) CRC() uint32 {
@@ -27946,10 +27946,10 @@ func StatsGetMegagroupStats(ctx context.Context, m Requester, i StatsGetMegagrou
 }
 
 type StatsGetMessagePublicForwardsRequestPredict struct {
-	Channel InputChannel
-	MsgID   int32
-	Offset  string
-	Limit   int32
+	Channel InputChannel `tl:"channel"`
+	MsgID   int32        `tl:"msg_id"`
+	Offset  string       `tl:"offset"`
+	Limit   int32        `tl:"limit"`
 }
 
 func (*StatsGetMessagePublicForwardsRequestPredict) CRC() uint32 {
@@ -27962,10 +27962,10 @@ func StatsGetMessagePublicForwards(ctx context.Context, m Requester, i StatsGetM
 }
 
 type StatsGetMessageStatsRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Dark    bool     `tl:",omitempty:flags:0,implicit"`
-	Channel InputChannel
-	MsgID   int32
+	_       struct{}     `tl:"flags,bitflag"`
+	Dark    bool         `tl:"dark,omitempty:flags:0,implicit"`
+	Channel InputChannel `tl:"channel"`
+	MsgID   int32        `tl:"msg_id"`
 }
 
 func (*StatsGetMessageStatsRequestPredict) CRC() uint32 {
@@ -27978,10 +27978,10 @@ func StatsGetMessageStats(ctx context.Context, m Requester, i StatsGetMessageSta
 }
 
 type StatsGetStoryStatsRequestPredict struct {
-	_    struct{} `tl:"flags,bitflag"`
-	Dark bool     `tl:",omitempty:flags:0,implicit"`
-	Peer InputPeer
-	ID   int32
+	_    struct{}  `tl:"flags,bitflag"`
+	Dark bool      `tl:"dark,omitempty:flags:0,implicit"`
+	Peer InputPeer `tl:"peer"`
+	ID   int32     `tl:"id"`
 }
 
 func (*StatsGetStoryStatsRequestPredict) CRC() uint32 {
@@ -27994,10 +27994,10 @@ func StatsGetStoryStats(ctx context.Context, m Requester, i StatsGetStoryStatsRe
 }
 
 type StatsGetStoryPublicForwardsRequestPredict struct {
-	Peer   InputPeer
-	ID     int32
-	Offset string
-	Limit  int32
+	Peer   InputPeer `tl:"peer"`
+	ID     int32     `tl:"id"`
+	Offset string    `tl:"offset"`
+	Limit  int32     `tl:"limit"`
 }
 
 func (*StatsGetStoryPublicForwardsRequestPredict) CRC() uint32 {
@@ -28010,9 +28010,9 @@ func StatsGetStoryPublicForwards(ctx context.Context, m Requester, i StatsGetSto
 }
 
 type StatsGetBroadcastRevenueStatsRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Dark    bool     `tl:",omitempty:flags:0,implicit"`
-	Channel InputChannel
+	_       struct{}     `tl:"flags,bitflag"`
+	Dark    bool         `tl:"dark,omitempty:flags:0,implicit"`
+	Channel InputChannel `tl:"channel"`
 }
 
 func (*StatsGetBroadcastRevenueStatsRequestPredict) CRC() uint32 {
@@ -28025,8 +28025,8 @@ func StatsGetBroadcastRevenueStats(ctx context.Context, m Requester, i StatsGetB
 }
 
 type StatsGetBroadcastRevenueWithdrawalURLRequestPredict struct {
-	Channel  InputChannel
-	Password InputCheckPasswordSRP
+	Channel  InputChannel          `tl:"channel"`
+	Password InputCheckPasswordSRP `tl:"password"`
 }
 
 func (*StatsGetBroadcastRevenueWithdrawalURLRequestPredict) CRC() uint32 {
@@ -28039,9 +28039,9 @@ func StatsGetBroadcastRevenueWithdrawalURL(ctx context.Context, m Requester, i S
 }
 
 type StatsGetBroadcastRevenueTransactionsRequestPredict struct {
-	Channel InputChannel
-	Offset  int32
-	Limit   int32
+	Channel InputChannel `tl:"channel"`
+	Offset  int32        `tl:"offset"`
+	Limit   int32        `tl:"limit"`
 }
 
 func (*StatsGetBroadcastRevenueTransactionsRequestPredict) CRC() uint32 {
@@ -28054,16 +28054,16 @@ func StatsGetBroadcastRevenueTransactions(ctx context.Context, m Requester, i St
 }
 
 type StickersCreateStickerSetRequestPredict struct {
-	_         struct{} `tl:"flags,bitflag"`
-	Masks     bool     `tl:",omitempty:flags:0,implicit"`
-	Emojis    bool     `tl:",omitempty:flags:5,implicit"`
-	TextColor bool     `tl:",omitempty:flags:6,implicit"`
-	UserID    InputUser
-	Title     string
-	ShortName string
-	Thumb     InputDocument `tl:",omitempty:flags:2"`
-	Stickers  []InputStickerSetItem
-	Software  *string `tl:",omitempty:flags:3"`
+	_         struct{}              `tl:"flags,bitflag"`
+	Masks     bool                  `tl:"masks,omitempty:flags:0,implicit"`
+	Emojis    bool                  `tl:"emojis,omitempty:flags:5,implicit"`
+	TextColor bool                  `tl:"text_color,omitempty:flags:6,implicit"`
+	UserID    InputUser             `tl:"user_id"`
+	Title     string                `tl:"title"`
+	ShortName string                `tl:"short_name"`
+	Thumb     InputDocument         `tl:"thumb,omitempty:flags:2"`
+	Stickers  []InputStickerSetItem `tl:"stickers"`
+	Software  *string               `tl:"software,omitempty:flags:3"`
 }
 
 func (*StickersCreateStickerSetRequestPredict) CRC() uint32 {
@@ -28076,7 +28076,7 @@ func StickersCreateStickerSet(ctx context.Context, m Requester, i StickersCreate
 }
 
 type StickersRemoveStickerFromSetRequestPredict struct {
-	Sticker InputDocument
+	Sticker InputDocument `tl:"sticker"`
 }
 
 func (*StickersRemoveStickerFromSetRequestPredict) CRC() uint32 {
@@ -28089,8 +28089,8 @@ func StickersRemoveStickerFromSet(ctx context.Context, m Requester, i StickersRe
 }
 
 type StickersChangeStickerPositionRequestPredict struct {
-	Sticker  InputDocument
-	Position int32
+	Sticker  InputDocument `tl:"sticker"`
+	Position int32         `tl:"position"`
 }
 
 func (*StickersChangeStickerPositionRequestPredict) CRC() uint32 {
@@ -28103,8 +28103,8 @@ func StickersChangeStickerPosition(ctx context.Context, m Requester, i StickersC
 }
 
 type StickersAddStickerToSetRequestPredict struct {
-	Stickerset InputStickerSet
-	Sticker    InputStickerSetItem
+	Stickerset InputStickerSet     `tl:"stickerset"`
+	Sticker    InputStickerSetItem `tl:"sticker"`
 }
 
 func (*StickersAddStickerToSetRequestPredict) CRC() uint32 {
@@ -28117,10 +28117,10 @@ func StickersAddStickerToSet(ctx context.Context, m Requester, i StickersAddStic
 }
 
 type StickersSetStickerSetThumbRequestPredict struct {
-	_               struct{} `tl:"flags,bitflag"`
-	Stickerset      InputStickerSet
-	Thumb           InputDocument `tl:",omitempty:flags:0"`
-	ThumbDocumentID *int64        `tl:",omitempty:flags:1"`
+	_               struct{}        `tl:"flags,bitflag"`
+	Stickerset      InputStickerSet `tl:"stickerset"`
+	Thumb           InputDocument   `tl:"thumb,omitempty:flags:0"`
+	ThumbDocumentID *int64          `tl:"thumb_document_id,omitempty:flags:1"`
 }
 
 func (*StickersSetStickerSetThumbRequestPredict) CRC() uint32 {
@@ -28133,7 +28133,7 @@ func StickersSetStickerSetThumb(ctx context.Context, m Requester, i StickersSetS
 }
 
 type StickersCheckShortNameRequestPredict struct {
-	ShortName string
+	ShortName string `tl:"short_name"`
 }
 
 func (*StickersCheckShortNameRequestPredict) CRC() uint32 {
@@ -28146,7 +28146,7 @@ func StickersCheckShortName(ctx context.Context, m Requester, i StickersCheckSho
 }
 
 type StickersSuggestShortNameRequestPredict struct {
-	Title string
+	Title string `tl:"title"`
 }
 
 func (*StickersSuggestShortNameRequestPredict) CRC() uint32 {
@@ -28159,11 +28159,11 @@ func StickersSuggestShortName(ctx context.Context, m Requester, i StickersSugges
 }
 
 type StickersChangeStickerRequestPredict struct {
-	_          struct{} `tl:"flags,bitflag"`
-	Sticker    InputDocument
-	Emoji      *string    `tl:",omitempty:flags:0"`
-	MaskCoords MaskCoords `tl:",omitempty:flags:1"`
-	Keywords   *string    `tl:",omitempty:flags:2"`
+	_          struct{}      `tl:"flags,bitflag"`
+	Sticker    InputDocument `tl:"sticker"`
+	Emoji      *string       `tl:"emoji,omitempty:flags:0"`
+	MaskCoords MaskCoords    `tl:"mask_coords,omitempty:flags:1"`
+	Keywords   *string       `tl:"keywords,omitempty:flags:2"`
 }
 
 func (*StickersChangeStickerRequestPredict) CRC() uint32 {
@@ -28176,8 +28176,8 @@ func StickersChangeSticker(ctx context.Context, m Requester, i StickersChangeSti
 }
 
 type StickersRenameStickerSetRequestPredict struct {
-	Stickerset InputStickerSet
-	Title      string
+	Stickerset InputStickerSet `tl:"stickerset"`
+	Title      string          `tl:"title"`
 }
 
 func (*StickersRenameStickerSetRequestPredict) CRC() uint32 {
@@ -28190,7 +28190,7 @@ func StickersRenameStickerSet(ctx context.Context, m Requester, i StickersRename
 }
 
 type StickersDeleteStickerSetRequestPredict struct {
-	Stickerset InputStickerSet
+	Stickerset InputStickerSet `tl:"stickerset"`
 }
 
 func (*StickersDeleteStickerSetRequestPredict) CRC() uint32 {
@@ -28203,8 +28203,8 @@ func StickersDeleteStickerSet(ctx context.Context, m Requester, i StickersDelete
 }
 
 type StickersReplaceStickerRequestPredict struct {
-	Sticker    InputDocument
-	NewSticker InputStickerSetItem
+	Sticker    InputDocument       `tl:"sticker"`
+	NewSticker InputStickerSetItem `tl:"new_sticker"`
 }
 
 func (*StickersReplaceStickerRequestPredict) CRC() uint32 {
@@ -28217,7 +28217,7 @@ func StickersReplaceSticker(ctx context.Context, m Requester, i StickersReplaceS
 }
 
 type StoriesCanSendStoryRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*StoriesCanSendStoryRequestPredict) CRC() uint32 {
@@ -28230,20 +28230,20 @@ func StoriesCanSendStory(ctx context.Context, m Requester, i StoriesCanSendStory
 }
 
 type StoriesSendStoryRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Pinned       bool     `tl:",omitempty:flags:2,implicit"`
-	Noforwards   bool     `tl:",omitempty:flags:4,implicit"`
-	FwdModified  bool     `tl:",omitempty:flags:7,implicit"`
-	Peer         InputPeer
-	Media        InputMedia
-	MediaAreas   []MediaArea     `tl:",omitempty:flags:5"`
-	Caption      *string         `tl:",omitempty:flags:0"`
-	Entities     []MessageEntity `tl:",omitempty:flags:1"`
-	PrivacyRules []InputPrivacyRule
-	RandomID     int64
-	Period       *int32    `tl:",omitempty:flags:3"`
-	FwdFromID    InputPeer `tl:",omitempty:flags:6"`
-	FwdFromStory *int32    `tl:",omitempty:flags:6"`
+	_            struct{}           `tl:"flags,bitflag"`
+	Pinned       bool               `tl:"pinned,omitempty:flags:2,implicit"`
+	Noforwards   bool               `tl:"noforwards,omitempty:flags:4,implicit"`
+	FwdModified  bool               `tl:"fwd_modified,omitempty:flags:7,implicit"`
+	Peer         InputPeer          `tl:"peer"`
+	Media        InputMedia         `tl:"media"`
+	MediaAreas   []MediaArea        `tl:"media_areas,omitempty:flags:5"`
+	Caption      *string            `tl:"caption,omitempty:flags:0"`
+	Entities     []MessageEntity    `tl:"entities,omitempty:flags:1"`
+	PrivacyRules []InputPrivacyRule `tl:"privacy_rules"`
+	RandomID     int64              `tl:"random_id"`
+	Period       *int32             `tl:"period,omitempty:flags:3"`
+	FwdFromID    InputPeer          `tl:"fwd_from_id,omitempty:flags:6"`
+	FwdFromStory *int32             `tl:"fwd_from_story,omitempty:flags:6"`
 }
 
 func (*StoriesSendStoryRequestPredict) CRC() uint32 {
@@ -28256,14 +28256,14 @@ func StoriesSendStory(ctx context.Context, m Requester, i StoriesSendStoryReques
 }
 
 type StoriesEditStoryRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Peer         InputPeer
-	ID           int32
-	Media        InputMedia         `tl:",omitempty:flags:0"`
-	MediaAreas   []MediaArea        `tl:",omitempty:flags:3"`
-	Caption      *string            `tl:",omitempty:flags:1"`
-	Entities     []MessageEntity    `tl:",omitempty:flags:1"`
-	PrivacyRules []InputPrivacyRule `tl:",omitempty:flags:2"`
+	_            struct{}           `tl:"flags,bitflag"`
+	Peer         InputPeer          `tl:"peer"`
+	ID           int32              `tl:"id"`
+	Media        InputMedia         `tl:"media,omitempty:flags:0"`
+	MediaAreas   []MediaArea        `tl:"media_areas,omitempty:flags:3"`
+	Caption      *string            `tl:"caption,omitempty:flags:1"`
+	Entities     []MessageEntity    `tl:"entities,omitempty:flags:1"`
+	PrivacyRules []InputPrivacyRule `tl:"privacy_rules,omitempty:flags:2"`
 }
 
 func (*StoriesEditStoryRequestPredict) CRC() uint32 {
@@ -28276,8 +28276,8 @@ func StoriesEditStory(ctx context.Context, m Requester, i StoriesEditStoryReques
 }
 
 type StoriesDeleteStoriesRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*StoriesDeleteStoriesRequestPredict) CRC() uint32 {
@@ -28290,9 +28290,9 @@ func StoriesDeleteStories(ctx context.Context, m Requester, i StoriesDeleteStori
 }
 
 type StoriesTogglePinnedRequestPredict struct {
-	Peer   InputPeer
-	ID     []int32
-	Pinned bool
+	Peer   InputPeer `tl:"peer"`
+	ID     []int32   `tl:"id"`
+	Pinned bool      `tl:"pinned"`
 }
 
 func (*StoriesTogglePinnedRequestPredict) CRC() uint32 {
@@ -28306,9 +28306,9 @@ func StoriesTogglePinned(ctx context.Context, m Requester, i StoriesTogglePinned
 
 type StoriesGetAllStoriesRequestPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Next   bool     `tl:",omitempty:flags:1,implicit"`
-	Hidden bool     `tl:",omitempty:flags:2,implicit"`
-	State  *string  `tl:",omitempty:flags:0"`
+	Next   bool     `tl:"next,omitempty:flags:1,implicit"`
+	Hidden bool     `tl:"hidden,omitempty:flags:2,implicit"`
+	State  *string  `tl:"state,omitempty:flags:0"`
 }
 
 func (*StoriesGetAllStoriesRequestPredict) CRC() uint32 {
@@ -28321,9 +28321,9 @@ func StoriesGetAllStories(ctx context.Context, m Requester, i StoriesGetAllStori
 }
 
 type StoriesGetPinnedStoriesRequestPredict struct {
-	Peer     InputPeer
-	OffsetID int32
-	Limit    int32
+	Peer     InputPeer `tl:"peer"`
+	OffsetID int32     `tl:"offset_id"`
+	Limit    int32     `tl:"limit"`
 }
 
 func (*StoriesGetPinnedStoriesRequestPredict) CRC() uint32 {
@@ -28336,9 +28336,9 @@ func StoriesGetPinnedStories(ctx context.Context, m Requester, i StoriesGetPinne
 }
 
 type StoriesGetStoriesArchiveRequestPredict struct {
-	Peer     InputPeer
-	OffsetID int32
-	Limit    int32
+	Peer     InputPeer `tl:"peer"`
+	OffsetID int32     `tl:"offset_id"`
+	Limit    int32     `tl:"limit"`
 }
 
 func (*StoriesGetStoriesArchiveRequestPredict) CRC() uint32 {
@@ -28351,8 +28351,8 @@ func StoriesGetStoriesArchive(ctx context.Context, m Requester, i StoriesGetStor
 }
 
 type StoriesGetStoriesByIDRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*StoriesGetStoriesByIDRequestPredict) CRC() uint32 {
@@ -28365,7 +28365,7 @@ func StoriesGetStoriesByID(ctx context.Context, m Requester, i StoriesGetStories
 }
 
 type StoriesToggleAllStoriesHiddenRequestPredict struct {
-	Hidden bool
+	Hidden bool `tl:"hidden"`
 }
 
 func (*StoriesToggleAllStoriesHiddenRequestPredict) CRC() uint32 {
@@ -28378,8 +28378,8 @@ func StoriesToggleAllStoriesHidden(ctx context.Context, m Requester, i StoriesTo
 }
 
 type StoriesReadStoriesRequestPredict struct {
-	Peer  InputPeer
-	MaxID int32
+	Peer  InputPeer `tl:"peer"`
+	MaxID int32     `tl:"max_id"`
 }
 
 func (*StoriesReadStoriesRequestPredict) CRC() uint32 {
@@ -28392,8 +28392,8 @@ func StoriesReadStories(ctx context.Context, m Requester, i StoriesReadStoriesRe
 }
 
 type StoriesIncrementStoryViewsRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*StoriesIncrementStoryViewsRequestPredict) CRC() uint32 {
@@ -28406,15 +28406,15 @@ func StoriesIncrementStoryViews(ctx context.Context, m Requester, i StoriesIncre
 }
 
 type StoriesGetStoryViewsListRequestPredict struct {
-	_              struct{} `tl:"flags,bitflag"`
-	JustContacts   bool     `tl:",omitempty:flags:0,implicit"`
-	ReactionsFirst bool     `tl:",omitempty:flags:2,implicit"`
-	ForwardsFirst  bool     `tl:",omitempty:flags:3,implicit"`
-	Peer           InputPeer
-	Q              *string `tl:",omitempty:flags:1"`
-	ID             int32
-	Offset         string
-	Limit          int32
+	_              struct{}  `tl:"flags,bitflag"`
+	JustContacts   bool      `tl:"just_contacts,omitempty:flags:0,implicit"`
+	ReactionsFirst bool      `tl:"reactions_first,omitempty:flags:2,implicit"`
+	ForwardsFirst  bool      `tl:"forwards_first,omitempty:flags:3,implicit"`
+	Peer           InputPeer `tl:"peer"`
+	Q              *string   `tl:"q,omitempty:flags:1"`
+	ID             int32     `tl:"id"`
+	Offset         string    `tl:"offset"`
+	Limit          int32     `tl:"limit"`
 }
 
 func (*StoriesGetStoryViewsListRequestPredict) CRC() uint32 {
@@ -28427,8 +28427,8 @@ func StoriesGetStoryViewsList(ctx context.Context, m Requester, i StoriesGetStor
 }
 
 type StoriesGetStoriesViewsRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*StoriesGetStoriesViewsRequestPredict) CRC() uint32 {
@@ -28441,8 +28441,8 @@ func StoriesGetStoriesViews(ctx context.Context, m Requester, i StoriesGetStorie
 }
 
 type StoriesExportStoryLinkRequestPredict struct {
-	Peer InputPeer
-	ID   int32
+	Peer InputPeer `tl:"peer"`
+	ID   int32     `tl:"id"`
 }
 
 func (*StoriesExportStoryLinkRequestPredict) CRC() uint32 {
@@ -28455,10 +28455,10 @@ func StoriesExportStoryLink(ctx context.Context, m Requester, i StoriesExportSto
 }
 
 type StoriesReportRequestPredict struct {
-	Peer    InputPeer
-	ID      []int32
-	Reason  ReportReason
-	Message string
+	Peer    InputPeer    `tl:"peer"`
+	ID      []int32      `tl:"id"`
+	Reason  ReportReason `tl:"reason"`
+	Message string       `tl:"message"`
 }
 
 func (*StoriesReportRequestPredict) CRC() uint32 {
@@ -28472,8 +28472,8 @@ func StoriesReport(ctx context.Context, m Requester, i StoriesReportRequestPredi
 
 type StoriesActivateStealthModeRequestPredict struct {
 	_      struct{} `tl:"flags,bitflag"`
-	Past   bool     `tl:",omitempty:flags:0,implicit"`
-	Future bool     `tl:",omitempty:flags:1,implicit"`
+	Past   bool     `tl:"past,omitempty:flags:0,implicit"`
+	Future bool     `tl:"future,omitempty:flags:1,implicit"`
 }
 
 func (*StoriesActivateStealthModeRequestPredict) CRC() uint32 {
@@ -28486,11 +28486,11 @@ func StoriesActivateStealthMode(ctx context.Context, m Requester, i StoriesActiv
 }
 
 type StoriesSendReactionRequestPredict struct {
-	_           struct{} `tl:"flags,bitflag"`
-	AddToRecent bool     `tl:",omitempty:flags:0,implicit"`
-	Peer        InputPeer
-	StoryID     int32
-	Reaction    Reaction
+	_           struct{}  `tl:"flags,bitflag"`
+	AddToRecent bool      `tl:"add_to_recent,omitempty:flags:0,implicit"`
+	Peer        InputPeer `tl:"peer"`
+	StoryID     int32     `tl:"story_id"`
+	Reaction    Reaction  `tl:"reaction"`
 }
 
 func (*StoriesSendReactionRequestPredict) CRC() uint32 {
@@ -28503,7 +28503,7 @@ func StoriesSendReaction(ctx context.Context, m Requester, i StoriesSendReaction
 }
 
 type StoriesGetPeerStoriesRequestPredict struct {
-	Peer InputPeer
+	Peer InputPeer `tl:"peer"`
 }
 
 func (*StoriesGetPeerStoriesRequestPredict) CRC() uint32 {
@@ -28527,7 +28527,7 @@ func StoriesGetAllReadPeerStories(ctx context.Context, m Requester, i StoriesGet
 }
 
 type StoriesGetPeerMaxIDsRequestPredict struct {
-	ID []InputPeer
+	ID []InputPeer `tl:"id"`
 }
 
 func (*StoriesGetPeerMaxIDsRequestPredict) CRC() uint32 {
@@ -28551,8 +28551,8 @@ func StoriesGetChatsToSend(ctx context.Context, m Requester, i StoriesGetChatsTo
 }
 
 type StoriesTogglePeerStoriesHiddenRequestPredict struct {
-	Peer   InputPeer
-	Hidden bool
+	Peer   InputPeer `tl:"peer"`
+	Hidden bool      `tl:"hidden"`
 }
 
 func (*StoriesTogglePeerStoriesHiddenRequestPredict) CRC() uint32 {
@@ -28565,13 +28565,13 @@ func StoriesTogglePeerStoriesHidden(ctx context.Context, m Requester, i StoriesT
 }
 
 type StoriesGetStoryReactionsListRequestPredict struct {
-	_             struct{} `tl:"flags,bitflag"`
-	ForwardsFirst bool     `tl:",omitempty:flags:2,implicit"`
-	Peer          InputPeer
-	ID            int32
-	Reaction      Reaction `tl:",omitempty:flags:0"`
-	Offset        *string  `tl:",omitempty:flags:1"`
-	Limit         int32
+	_             struct{}  `tl:"flags,bitflag"`
+	ForwardsFirst bool      `tl:"forwards_first,omitempty:flags:2,implicit"`
+	Peer          InputPeer `tl:"peer"`
+	ID            int32     `tl:"id"`
+	Reaction      Reaction  `tl:"reaction,omitempty:flags:0"`
+	Offset        *string   `tl:"offset,omitempty:flags:1"`
+	Limit         int32     `tl:"limit"`
 }
 
 func (*StoriesGetStoryReactionsListRequestPredict) CRC() uint32 {
@@ -28584,8 +28584,8 @@ func StoriesGetStoryReactionsList(ctx context.Context, m Requester, i StoriesGet
 }
 
 type StoriesTogglePinnedToTopRequestPredict struct {
-	Peer InputPeer
-	ID   []int32
+	Peer InputPeer `tl:"peer"`
+	ID   []int32   `tl:"id"`
 }
 
 func (*StoriesTogglePinnedToTopRequestPredict) CRC() uint32 {
@@ -28599,10 +28599,10 @@ func StoriesTogglePinnedToTop(ctx context.Context, m Requester, i StoriesToggleP
 
 type StoriesSearchPostsRequestPredict struct {
 	_       struct{}  `tl:"flags,bitflag"`
-	Hashtag *string   `tl:",omitempty:flags:0"`
-	Area    MediaArea `tl:",omitempty:flags:1"`
-	Offset  string
-	Limit   int32
+	Hashtag *string   `tl:"hashtag,omitempty:flags:0"`
+	Area    MediaArea `tl:"area,omitempty:flags:1"`
+	Offset  string    `tl:"offset"`
+	Limit   int32     `tl:"limit"`
 }
 
 func (*StoriesSearchPostsRequestPredict) CRC() uint32 {
@@ -28627,12 +28627,12 @@ func UpdatesGetState(ctx context.Context, m Requester, i UpdatesGetStateRequestP
 
 type UpdatesGetDifferenceRequestPredict struct {
 	_             struct{} `tl:"flags,bitflag"`
-	Pts           int32
-	PtsLimit      *int32 `tl:",omitempty:flags:1"`
-	PtsTotalLimit *int32 `tl:",omitempty:flags:0"`
-	Date          int32
-	Qts           int32
-	QtsLimit      *int32 `tl:",omitempty:flags:2"`
+	Pts           int32    `tl:"pts"`
+	PtsLimit      *int32   `tl:"pts_limit,omitempty:flags:1"`
+	PtsTotalLimit *int32   `tl:"pts_total_limit,omitempty:flags:0"`
+	Date          int32    `tl:"date"`
+	Qts           int32    `tl:"qts"`
+	QtsLimit      *int32   `tl:"qts_limit,omitempty:flags:2"`
 }
 
 func (*UpdatesGetDifferenceRequestPredict) CRC() uint32 {
@@ -28645,12 +28645,12 @@ func UpdatesGetDifference(ctx context.Context, m Requester, i UpdatesGetDifferen
 }
 
 type UpdatesGetChannelDifferenceRequestPredict struct {
-	_       struct{} `tl:"flags,bitflag"`
-	Force   bool     `tl:",omitempty:flags:0,implicit"`
-	Channel InputChannel
-	Filter  ChannelMessagesFilter
-	Pts     int32
-	Limit   int32
+	_       struct{}              `tl:"flags,bitflag"`
+	Force   bool                  `tl:"force,omitempty:flags:0,implicit"`
+	Channel InputChannel          `tl:"channel"`
+	Filter  ChannelMessagesFilter `tl:"filter"`
+	Pts     int32                 `tl:"pts"`
+	Limit   int32                 `tl:"limit"`
 }
 
 func (*UpdatesGetChannelDifferenceRequestPredict) CRC() uint32 {
@@ -28663,9 +28663,9 @@ func UpdatesGetChannelDifference(ctx context.Context, m Requester, i UpdatesGetC
 }
 
 type UploadSaveFilePartRequestPredict struct {
-	FileID   int64
-	FilePart int32
-	Bytes    []byte
+	FileID   int64  `tl:"file_id"`
+	FilePart int32  `tl:"file_part"`
+	Bytes    []byte `tl:"bytes"`
 }
 
 func (*UploadSaveFilePartRequestPredict) CRC() uint32 {
@@ -28678,12 +28678,12 @@ func UploadSaveFilePart(ctx context.Context, m Requester, i UploadSaveFilePartRe
 }
 
 type UploadGetFileRequestPredict struct {
-	_            struct{} `tl:"flags,bitflag"`
-	Precise      bool     `tl:",omitempty:flags:0,implicit"`
-	CdnSupported bool     `tl:",omitempty:flags:1,implicit"`
-	Location     InputFileLocation
-	Offset       int64
-	Limit        int32
+	_            struct{}          `tl:"flags,bitflag"`
+	Precise      bool              `tl:"precise,omitempty:flags:0,implicit"`
+	CdnSupported bool              `tl:"cdn_supported,omitempty:flags:1,implicit"`
+	Location     InputFileLocation `tl:"location"`
+	Offset       int64             `tl:"offset"`
+	Limit        int32             `tl:"limit"`
 }
 
 func (*UploadGetFileRequestPredict) CRC() uint32 {
@@ -28696,10 +28696,10 @@ func UploadGetFile(ctx context.Context, m Requester, i UploadGetFileRequestPredi
 }
 
 type UploadSaveBigFilePartRequestPredict struct {
-	FileID         int64
-	FilePart       int32
-	FileTotalParts int32
-	Bytes          []byte
+	FileID         int64  `tl:"file_id"`
+	FilePart       int32  `tl:"file_part"`
+	FileTotalParts int32  `tl:"file_total_parts"`
+	Bytes          []byte `tl:"bytes"`
 }
 
 func (*UploadSaveBigFilePartRequestPredict) CRC() uint32 {
@@ -28712,9 +28712,9 @@ func UploadSaveBigFilePart(ctx context.Context, m Requester, i UploadSaveBigFile
 }
 
 type UploadGetWebFileRequestPredict struct {
-	Location InputWebFileLocation
-	Offset   int32
-	Limit    int32
+	Location InputWebFileLocation `tl:"location"`
+	Offset   int32                `tl:"offset"`
+	Limit    int32                `tl:"limit"`
 }
 
 func (*UploadGetWebFileRequestPredict) CRC() uint32 {
@@ -28727,9 +28727,9 @@ func UploadGetWebFile(ctx context.Context, m Requester, i UploadGetWebFileReques
 }
 
 type UploadGetCdnFileRequestPredict struct {
-	FileToken []byte
-	Offset    int64
-	Limit     int32
+	FileToken []byte `tl:"file_token"`
+	Offset    int64  `tl:"offset"`
+	Limit     int32  `tl:"limit"`
 }
 
 func (*UploadGetCdnFileRequestPredict) CRC() uint32 {
@@ -28742,8 +28742,8 @@ func UploadGetCdnFile(ctx context.Context, m Requester, i UploadGetCdnFileReques
 }
 
 type UploadReuploadCdnFileRequestPredict struct {
-	FileToken    []byte
-	RequestToken []byte
+	FileToken    []byte `tl:"file_token"`
+	RequestToken []byte `tl:"request_token"`
 }
 
 func (*UploadReuploadCdnFileRequestPredict) CRC() uint32 {
@@ -28756,8 +28756,8 @@ func UploadReuploadCdnFile(ctx context.Context, m Requester, i UploadReuploadCdn
 }
 
 type UploadGetCdnFileHashesRequestPredict struct {
-	FileToken []byte
-	Offset    int64
+	FileToken []byte `tl:"file_token"`
+	Offset    int64  `tl:"offset"`
 }
 
 func (*UploadGetCdnFileHashesRequestPredict) CRC() uint32 {
@@ -28770,8 +28770,8 @@ func UploadGetCdnFileHashes(ctx context.Context, m Requester, i UploadGetCdnFile
 }
 
 type UploadGetFileHashesRequestPredict struct {
-	Location InputFileLocation
-	Offset   int64
+	Location InputFileLocation `tl:"location"`
+	Offset   int64             `tl:"offset"`
 }
 
 func (*UploadGetFileHashesRequestPredict) CRC() uint32 {
@@ -28784,7 +28784,7 @@ func UploadGetFileHashes(ctx context.Context, m Requester, i UploadGetFileHashes
 }
 
 type UsersGetUsersRequestPredict struct {
-	ID []InputUser
+	ID []InputUser `tl:"id"`
 }
 
 func (*UsersGetUsersRequestPredict) CRC() uint32 {
@@ -28797,7 +28797,7 @@ func UsersGetUsers(ctx context.Context, m Requester, i UsersGetUsersRequestPredi
 }
 
 type UsersGetFullUserRequestPredict struct {
-	ID InputUser
+	ID InputUser `tl:"id"`
 }
 
 func (*UsersGetFullUserRequestPredict) CRC() uint32 {
@@ -28810,8 +28810,8 @@ func UsersGetFullUser(ctx context.Context, m Requester, i UsersGetFullUserReques
 }
 
 type UsersSetSecureValueErrorsRequestPredict struct {
-	ID     InputUser
-	Errors []SecureValueError
+	ID     InputUser          `tl:"id"`
+	Errors []SecureValueError `tl:"errors"`
 }
 
 func (*UsersSetSecureValueErrorsRequestPredict) CRC() uint32 {
@@ -28824,7 +28824,7 @@ func UsersSetSecureValueErrors(ctx context.Context, m Requester, i UsersSetSecur
 }
 
 type UsersGetIsPremiumRequiredToContactRequestPredict struct {
-	ID []InputUser
+	ID []InputUser `tl:"id"`
 }
 
 func (*UsersGetIsPremiumRequiredToContactRequestPredict) CRC() uint32 {

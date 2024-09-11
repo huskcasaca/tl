@@ -532,6 +532,12 @@ func TestParseTag(t *testing.T) {
 			Name: "some_field",
 		},
 	}, {
+		tag:       "some_field,",
+		fieldName: "SomeField",
+		want: StructTag{
+			Name: "some_field",
+		},
+	}, {
 		tag:       ",omitempty:bitflag:30",
 		fieldName: "SomeField",
 		want: StructTag{

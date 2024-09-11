@@ -416,7 +416,7 @@ func (d *decoder) decodeObject(v reflect.Value, ignoreCRC bool) error {
 	bitflags := map[string]uint32{}
 	for i := 0; i < v.NumField(); i++ {
 		typ := v.Type().Field(i)
-		tags, err := ParseTag(typ.Tag.Get(tagName), typ.Name)
+		tags, err := ParseTag(typ.Tag.Get(TagName), typ.Name)
 		if err != nil {
 			panic(fmt.Sprintf("invalid tag: %v", err))
 		}

@@ -14,9 +14,9 @@ const (
 	ErrUnexpectedNil = errorConst("unexpected nil value")
 	ErrImplicitInt   = errorConst("value must be converted to int32, int64 or uint32 explicitly")
 
-	ErrBitflagTooHigh   = errorConst("trigger bit is more than 32")
-	ErrImplicitNoTarget = errorConst(implicitFlag + " defined without target field to trigger")
-	ErrImplicitBitflag  = errorConst("'" + implicitFlag + "' and '" + isBitflagFlag + "' can't be combined")
+	ErrBitflagOverflow  = errorConst("trigger bit is more than 32")
+	ErrImplicitNoTarget = errorConst(ImplicitFlag + " defined without target field to trigger")
+	ErrImplicitBitflag  = errorConst("'" + ImplicitFlag + "' and '" + IsBitflagFlag + "' can't be combined")
 	ErrTagNameEmpty     = errorConst("tag name is empty")
 	ErrInvalidTagOption = errorConst("invalid option")
 	ErrInvalidTagFormat = errorConst("invalid tag format")

@@ -10,11 +10,11 @@ import (
 
 // tag name of struct tags.
 const (
-	tagName = "tl"
+	TagName = "tl"
 
-	implicitFlag    = "implicit"
-	isBitflagFlag   = "bitflag"
-	omitemptyPrefix = "omitempty"
+	ImplicitFlag    = "implicit"
+	IsBitflagFlag   = "bitflag"
+	OmitemptyPrefix = "omitempty"
 
 	maxBitflagIndex = 32
 )
@@ -54,19 +54,20 @@ func parseTag(tag, defaultName string, ft reflect.Type) (t StructTag, err error)
 	t.Name = name
 	for _, option := range parts[1:] {
 		switch {
-		case option == implicitFlag:
+		case option == "":
+		case option == ImplicitFlag:
 			if t.Type != nil {
 				return StructTag{}, ErrImplicitBitflag
 			}
 			t.Type = fieldImplicitBool{}
 
-		case option == isBitflagFlag:
+		case option == IsBitflagFlag:
 			if t.Type != nil {
 				return StructTag{}, ErrImplicitBitflag
 			}
 			t.Type = fieldBitflags{}
 
-		case strings.HasPrefix(option, omitemptyPrefix):
+		case strings.HasPrefix(option, OmitemptyPrefix):
 			if t.BitFlags, err = parseOmitemptyTag(option); err != nil {
 				return StructTag{}, err
 			}
@@ -81,7 +82,7 @@ func parseTag(tag, defaultName string, ft reflect.Type) (t StructTag, err error)
 		}
 	}
 
-	if err := t.valid(); err != nil {
+	if err := t.validate(); err != nil {
 		return StructTag{}, err
 	}
 
@@ -106,7 +107,7 @@ func parseStructTags(t reflect.Type) ([]StructTag, map[int]BitflagBit, error) {
 		typName := t.Name() + "." + ft.Name
 
 		var err error
-		if tags[i], err = ParseTag(ft.Tag.Get(tagName), ft.Name); err != nil {
+		if tags[i], err = ParseTag(ft.Tag.Get(TagName), ft.Name); err != nil {
 			return nil, nil, fmt.Errorf("parsing tag of %v: %w", typName, err)
 		}
 
@@ -166,22 +167,22 @@ func (t StructTag) String() string { //cover:ignore
 	}
 	switch t.Type.(type) {
 	case fieldImplicitBool:
-		res += "," + implicitFlag
+		res += "," + ImplicitFlag
 	case fieldBitflags:
-		res += "," + isBitflagFlag
+		res += "," + IsBitflagFlag
 	}
 
 	return res
 }
 
-func (t StructTag) valid() error {
+func (t StructTag) validate() error {
 	switch {
 	case t.Name == "":
 		return ErrTagNameEmpty
 	case t.isImplicit() && (t.BitFlags == nil || t.BitFlags.TargetField == ""):
 		return ErrImplicitNoTarget
 	case t.BitFlags != nil && t.BitFlags.BitPosition > maxBitflagIndex:
-		return ErrBitflagTooHigh
+		return ErrBitflagOverflow
 	default:
 		return nil
 	}
@@ -204,7 +205,7 @@ type Bitflag struct {
 
 func (t *Bitflag) String() string { //cover:ignore
 	return strings.Join([]string{
-		omitemptyPrefix, t.TargetField, strconv.Itoa(int(t.BitPosition)),
+		OmitemptyPrefix, t.TargetField, strconv.Itoa(int(t.BitPosition)),
 	}, ":")
 }
 
@@ -214,12 +215,12 @@ func parseOmitemptyTag(opt string) (*Bitflag, error) {
 	parts := strings.Split(opt, ":")
 
 	if len(parts) != omitemptyParts {
-		return nil, fmt.Errorf("%v: %w", omitemptyPrefix, ErrInvalidTagFormat)
+		return nil, fmt.Errorf("%v: %w", OmitemptyPrefix, ErrInvalidTagFormat)
 	}
 
 	pos, err := parseUintMax32(parts[2])
 	if err != nil {
-		return nil, fmt.Errorf("%v: %w", omitemptyPrefix, err)
+		return nil, fmt.Errorf("%v: %w", OmitemptyPrefix, err)
 	}
 
 	return &Bitflag{
@@ -375,7 +376,7 @@ func typStructFields(typ reflect.Type) structFields {
 		fTyp := typ.Field(i)
 		typName := typ.Name() + "." + fTyp.Name
 
-		tag, err := ParseTag(fTyp.Tag.Get(tagName), fTyp.Name)
+		tag, err := ParseTag(fTyp.Tag.Get(TagName), fTyp.Name)
 		if err != nil {
 			panic(fmt.Sprintf("parsing tag of %v: %v", typName, err.Error()))
 		}
@@ -405,7 +406,7 @@ func typStructFields(typ reflect.Type) structFields {
 			}
 
 			if tag.isImplicit() && fTyp.Type.Kind() != reflect.Bool {
-				panic(fmt.Sprintf("%v: %q tag works only for bool fields", typName, implicitFlag))
+				panic(fmt.Sprintf("%v: %q tag works only for bool fields", typName, ImplicitFlag))
 			}
 		}
 

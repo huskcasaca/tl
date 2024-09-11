@@ -160,22 +160,23 @@ func generateFieldBase(p schema.TLParam) *jen.Statement {
 }
 
 func generateBitflagField(p schema.TLBitflagParam) *jen.Statement {
-	tag := fmt.Sprintf("%v,bitflag", p.Name)
-	return jen.Id("_").Struct().Tag(map[string]string{"tl": tag})
+	tag := fmt.Sprintf("%v,%v", p.Name, tl.IsBitflagFlag)
+	return jen.Id("_").Struct().Tag(map[string]string{tl.TagName: tag})
 }
 
 func generateRequiredField(p schema.TLRequiredParam) *jen.Statement {
-	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false))
+	tag := fmt.Sprintf("%v", p.Name)
+	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false)).Tag(map[string]string{tl.TagName: tag})
 }
 
 func generateOptionalField(p schema.TLOptionalParam) *jen.Statement {
-	tag := fmt.Sprintf(",omitempty:%v:%v", p.FlagTrigger, p.BitTrigger)
-	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{"tl": tag})
+	tag := fmt.Sprintf("%v,%v:%v:%v", p.Name, tl.OmitemptyPrefix, p.FlagTrigger, p.BitTrigger)
+	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{tl.TagName: tag})
 }
 
 func generateTriggerField(p schema.TLTriggerParam) *jen.Statement {
-	tag := fmt.Sprintf(",omitempty:%v:%v,implicit", p.FlagTrigger, p.BitTrigger)
-	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Bool().Tag(map[string]string{"tl": tag})
+	tag := fmt.Sprintf("%v,%v:%v:%v,%v", p.Name, tl.OmitemptyPrefix, p.FlagTrigger, p.BitTrigger, tl.ImplicitFlag)
+	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Bool().Tag(map[string]string{tl.TagName: tag})
 }
 
 func generateFieldType(t schema.TLType, isOptional bool) *jen.Statement {

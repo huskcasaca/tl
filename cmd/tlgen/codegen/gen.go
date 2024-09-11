@@ -110,13 +110,7 @@ func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement
 func generateGenericTypes(name string, polys schema.TLParams) *jen.Statement {
 	genericsTypes := make([]jen.Code, len(polys))
 	for i, t := range polys {
-		genericsType := jen.Id(getTypeName(schema.TLName{Key: t.GetName()}))
-		if t.GetType() == schema.TLAnyType {
-			genericsType = genericsType.Qual(util.GetTypePathName((*tl.TLObject)(nil)))
-		} else {
-			genericsType = genericsType.Id(getTypeName(t.GetType().Name()))
-		}
-		genericsTypes[i] = genericsType
+		genericsTypes[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()})).Add(generateFieldTypeCommon(t.GetType()))
 	}
 	return jen.Id(name).Types(genericsTypes...)
 }
@@ -175,7 +169,7 @@ func generateTriggerField(p schema.TLTriggerParam) *jen.Statement {
 func generateFieldType(t schema.TLType, isOptional bool) *jen.Statement {
 	switch t := t.(type) {
 	case schema.TLTypeCommon:
-		if isDefaultType(schema.TLName(t.TLName)) && isOptional {
+		if isDefaultType(t.TLName) && isOptional {
 			return jen.Op("*").Add(generateFieldTypeCommon(t))
 		}
 		return generateFieldTypeCommon(t)
@@ -200,6 +194,8 @@ func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 		return jen.String()
 	case typeBool:
 		return jen.Bool()
+	case typeAny:
+		return jen.Qual(util.GetTypePathName((*tl.TLObject)(nil)))
 	default:
 		if !typ.Name().IsInterface() {
 			panic(fmt.Sprintf("incorrect type name: %v", typ))
@@ -215,6 +211,7 @@ var (
 	typeLong   = schema.TLName{Key: "long"}
 	typeString = schema.TLName{Key: "string"}
 	typeBool   = schema.TLName{Key: "Bool"}
+	typeAny    = schema.TLName{Key: "Type"}
 )
 
 func isDefaultType(typeName schema.TLName) bool {
@@ -235,7 +232,7 @@ func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.
 		ret = ret.Comment(objects.Comment).Line()
 	}
 	ret = ret.Type().Id(typeName).Interface(
-		jen.Qual(util.GetTypePathName((*tl.TLObject)(nil))),
+		generateFieldTypeCommon(schema.TLAnyType),
 		jen.Id(typeMethod).Params(),
 	)
 

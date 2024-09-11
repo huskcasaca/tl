@@ -5,6 +5,8 @@ import (
 	"github.com/dave/jennifer/jen"
 	"github.com/iancoleman/strcase"
 	"github.com/quenbyako/ext/slices"
+	"github.com/xelaj/tl"
+	"github.com/xelaj/tl/cmd/tlgen/util"
 	"strings"
 
 	"github.com/xelaj/tl/schema"
@@ -115,7 +117,13 @@ func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement
 func generateGenericTypes(name string, polys schema.TLParams) *jen.Statement {
 	genericsTypes := make([]jen.Code, len(polys))
 	for i, t := range polys {
-		genericsTypes[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()})).Id(getTypeName(t.GetType().Name()))
+		genericsType := jen.Id(getTypeName(schema.TLName{Key: t.GetName()}))
+		if t.GetType() == schema.TLAnyType {
+			genericsType = genericsType.Qual(util.GetTypePathName((*tl.TLObject)(nil)))
+		} else {
+			genericsType = genericsType.Id(getTypeName(t.GetType().Name()))
+		}
+		genericsTypes[i] = genericsType
 	}
 	return jen.Id(name).Types(genericsTypes...)
 }
@@ -233,7 +241,7 @@ func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.
 		ret = ret.Comment(objects.Comment).Line()
 	}
 	ret = ret.Type().Id(typeName).Interface(
-		jen.Qual("github.com/xelaj/tl", "Object"),
+		jen.Qual(util.GetTypePathName((*tl.TLObject)(nil))),
 		jen.Id(typeMethod).Params(),
 	)
 
@@ -325,7 +333,7 @@ func generateRequestFunc() *jen.Statement {
 		).
 		Block(
 			jen.If(
-				jen.List(jen.Id("msg"), jen.Err()).Op(":=").Qual("github.com/xelaj/tl", "Marshal").Call(jen.Id("in")),
+				jen.List(jen.Id("msg"), jen.Err()).Op(":=").Qual(util.GetFunctionPathName(tl.Marshal)).Call(jen.Id("in")),
 				jen.Err().Op("!=").Nil(),
 			).Block(
 				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("marshaling: %w"), jen.Err())),
@@ -335,7 +343,7 @@ func generateRequestFunc() *jen.Statement {
 			).Block(
 				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("sending: %w"), jen.Err())),
 			).Else().If(
-				jen.Err().Op(":=").Qual("github.com/xelaj/tl", "Unmarshal").Call(jen.Id("respRaw"), jen.Id("out")),
+				jen.Err().Op(":=").Qual(util.GetFunctionPathName(tl.Unmarshal)).Call(jen.Id("respRaw"), jen.Id("out")),
 				jen.Err().Op("!=").Nil(),
 			).Block(
 				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("got invalid response type: %w"), jen.Err())),

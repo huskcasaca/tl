@@ -64,7 +64,7 @@ func normalizeIdent(i *declaration.ArgType) (TLType, error) {
 		if len(i.Extension.Inner) > 1 {
 			return nil, errors.New(i.String() + ": too many modificators")
 		}
-		if i.Simple.String() != "Vector" {
+		if i.Simple.String() != "Vector" && i.Simple.String() != "vector" {
 			return nil, errors.New(i.String() + ": only Vector is allowed to modify")
 		}
 
@@ -115,16 +115,18 @@ func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, erro
 
 func normalizeCombinator(decl *declaration.Declaration, constructorComment string, argsComments map[string]string) (*TLDeclaration, error) {
 	parts := strings.Split(decl.Combinator, "#") // guaranteed to split by two parts, lexer handles it
-	name := GetTLNameFromString(parts[0])
-	crcStr := parts[1]
-
-	// same: lexer handles everything already
-	crc, err := strconv.ParseUint(crcStr, 16, 32)
-	if err != nil {
-		panic(err)
+	if len(parts) == 0 || len(parts) > 2 {
+		return nil, errors.New(decl.Combinator + ": invalid combinator")
 	}
-
-	// todo: Matches(Name, CRC)
+	name := GetTLNameFromString(parts[0])
+	crc := uint64(0)
+	if len(parts) == 2 {
+		crc1, err := strconv.ParseUint(parts[1], 16, 32)
+		if err != nil {
+			return nil, fmt.Errorf("%v: %w", decl.Combinator, err)
+		}
+		crc = crc1
+	}
 
 	params := make([]TLParam, len(decl.Args))
 	for i, arg := range decl.Args {
@@ -292,6 +294,10 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*TLDeclarat
 			if err != nil {
 				return nil, nil, nil, err
 			}
+			// todo check crc
+			if decl.getCRC() != decl.CRC {
+				return nil, nil, nil, errors.New(decl.Name.String() + ": CRC mismatch! Described: " + fmt.Sprintf("0x%08x", decl.CRC) + " Calculated: " + fmt.Sprintf("0x%08x", decl.getCRC()))
+			}
 			if funcMode {
 				funcDecls = append(funcDecls, decl)
 			} else {
@@ -325,19 +331,19 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*TLDeclarat
 }
 
 func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
-	typeDeclsRaw, funcDeclsRaw, comments, err := normalizeEntries(program.Entries)
+	typeDecls, funcDecls, comments, err := normalizeEntries(program.Entries)
 	if err != nil {
 		return nil, err
 	}
 
 	typeSeq := []TLName{}
 	sortedTypeDecls := map[TLName][]TLDeclaration{}
-	for _, decl := range typeDeclsRaw {
-		typeDeclRaw, ok := decl.Type.(TLTypeCommon)
+	for _, decl := range typeDecls {
+		typeDecl, ok := decl.Type.(TLTypeCommon)
 		if !ok {
 			return nil, fmt.Errorf("object %#v: type is not interface", decl.Name)
 		}
-		declType := TLName(typeDeclRaw.TLName)
+		declType := TLName(typeDecl.TLName)
 
 		if !slices.Contains(typeSeq, declType) {
 			typeSeq = append(typeSeq, declType)
@@ -361,7 +367,7 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 
 	funcSeq := []string{}
 	funcDeclMap := map[string][]TLDeclaration{}
-	for _, decl := range funcDeclsRaw {
+	for _, decl := range funcDecls {
 		if !slices.Contains(funcSeq, decl.Name.Namespace) {
 			funcSeq = append(funcSeq, decl.Name.Namespace)
 		}

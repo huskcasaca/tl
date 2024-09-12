@@ -56,7 +56,7 @@ type ProgramEntry struct {
 // result-type ::= boxed-type-ident { subexpr }
 // result-type ::= boxed-type-ident < subexpr { , subexpr } >
 type Declaration struct {
-	Combinator string     `parser:"@lc_ident_full ws"`
+	Combinator string     `parser:"@(lc_ident_full | (lc_ident (dot lc_ident)?)) ws"`
 	OptArgs    []Argument `parser:"(open_brace @@ close_brace ws)*"`
 	Args       []Argument `parser:"(@@ (ws @@)* ws)? equals ws?"`
 	Result     RetType    `parser:"@@"`

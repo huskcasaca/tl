@@ -324,7 +324,18 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 }
 
 func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
-	typeDeclsRaw, comments, err := normalizeEntries(program.Constraints, false)
+	typeEntries := []declaration.ProgramEntry{}
+	funcEntries := []declaration.ProgramEntry{}
+
+	for _, section := range program.Sections {
+		if !section.StartFuncDecl {
+			typeEntries = append(typeEntries, section.Entries...)
+		} else {
+			funcEntries = append(funcEntries, section.Entries...)
+		}
+	}
+
+	typeDeclsRaw, comments, err := normalizeEntries(typeEntries, false)
 	if err != nil {
 		return nil, err
 	}
@@ -358,7 +369,7 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 		}
 	}
 
-	functions, _, err := normalizeEntries(program.Methods, true)
+	functions, _, err := normalizeEntries(funcEntries, true)
 	if err != nil {
 		return nil, err
 	}

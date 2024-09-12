@@ -9,14 +9,22 @@ import (
 //
 // TL-program ::= constr-declarations { --- functions --- fun-declarations | --- types --- constr-declarations }
 type Program struct {
-	Constraints []ProgramEntry `parser:"@@*"`
-	Methods     []ProgramEntry `parser:"(functions_decl newline @@*)?"`
+	Sections []ProgramSection `parser:"@@*"`
+}
+
+type ProgramSection struct {
+	StartTypeDecl bool           `parser:"@(constraints_decl newline)?"`
+	StartFuncDecl bool           `parser:"@(functions_decl newline)?"`
+	Entries       []ProgramEntry `parser:"@@+"`
 }
 
 // ProgramEntry represents TL formal described in https://core.telegram.org/mtproto/TL-formal#syntax
 //
-// # Newline is used to represent if the line is empty
+// StartTypeDecl is used to indicate if the following declarations are type declarations
+// constr-declarations ::= { declaration }
 //
+// StartFuncDecl is used to indicate if the following declarations are function declarations
+// Newline is used to represent if the line is empty
 // Declaration is used to represent functions and types
 // declaration ::= combinator-decl | partial-app-decl | final-decl
 // constr-declarations ::= { declaration }

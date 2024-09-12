@@ -9,13 +9,7 @@ import (
 //
 // TL-program ::= constr-declarations { --- functions --- fun-declarations | --- types --- constr-declarations }
 type Program struct {
-	Sections []ProgramSection `parser:"@@*"`
-}
-
-type ProgramSection struct {
-	StartTypeDecl bool           `parser:"@(constraints_decl newline)?"`
-	StartFuncDecl bool           `parser:"@(functions_decl newline)?"`
-	Entries       []ProgramEntry `parser:"@@+"`
+	Entries []ProgramEntry `parser:"@@*"`
 }
 
 // ProgramEntry represents TL formal described in https://core.telegram.org/mtproto/TL-formal#syntax
@@ -32,6 +26,8 @@ type ProgramSection struct {
 //
 // Comment is used to represent comments with `//`
 type ProgramEntry struct {
+	TypeDecl    bool         `parser:"@(constraints_decl newline) |"`
+	FuncDecl    bool         `parser:"@(functions_decl newline) |"`
 	Newline     bool         `parser:"@newline |"`
 	Declaration *Declaration `parser:"@@ ws? semicolon ( newline | EOF ) |"`
 	Comment     *string      `parser:"@comment ( newline | EOF ) "`

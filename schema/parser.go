@@ -113,12 +113,7 @@ func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, erro
 	}, nil
 }
 
-func normalizeCombinator(
-	decl *declaration.Declaration,
-	constructorComment string,
-	argsComments map[string]string,
-	functionsMode bool,
-) (*TLDeclaration, error) {
+func normalizeCombinator(decl *declaration.Declaration, constructorComment string, argsComments map[string]string) (*TLDeclaration, error) {
 	parts := strings.Split(decl.Combinator, "#") // guaranteed to split by two parts, lexer handles it
 	name := GetTLNameFromString(parts[0])
 	crcStr := parts[1]
@@ -202,18 +197,20 @@ const (
 	tagParam       = "param"
 )
 
-func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*TLDeclaration, map[TLName]string, error) {
+func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*TLDeclaration, funcDecls []*TLDeclaration, typeComments map[TLName]string, err error) {
 	var (
-		decls        = []*TLDeclaration{}
-		typeComments = map[TLName]string{}
-
 		currentTypeComment     string
 		constructorComment     string
 		constructorCommentType string
 		argumentComments       = map[string]string{}
+		funcMode               = false
 	)
 	for _, item := range items {
 		switch {
+		case item.TypeDecl:
+			funcMode = false
+		case item.FuncDecl:
+			funcMode = true
 		case item.Newline:
 			constructorComment = ""
 			constructorCommentType = ""
@@ -241,9 +238,9 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 				// pass
 
 			case tagType:
-				if functionsMode {
+				if funcMode {
 					err := fmt.Errorf("@%v %v: impossible on functions", tag, comment)
-					return nil, nil, err
+					return nil, nil, nil, err
 				}
 
 				// special case, declaration of type apply to first available type (= SomeType;).
@@ -251,20 +248,20 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 				// is this type comment declared twice.
 				if currentTypeComment != "" {
 					err := fmt.Errorf("@%v %v: type comment declared twice", tag, comment)
-					return nil, nil, err
+					return nil, nil, nil, err
 				}
 				currentTypeComment = comment
 
 			case tagEnum, tagConstructor, tagMethod:
-				if functionsMode && tag != tagMethod {
-					return nil, nil, errors.New("@" + tag + ": works only in type definitions")
-				} else if !functionsMode && comment == tagMethod {
-					return nil, nil, errors.New("@" + tag + ": works only in functions definitions")
+				if funcMode && tag != tagMethod {
+					return nil, nil, nil, errors.New("@" + tag + ": works only in type definitions")
+				} else if !funcMode && comment == tagMethod {
+					return nil, nil, nil, errors.New("@" + tag + ": works only in functions definitions")
 				}
 
 				if constructorCommentType != "" {
 					err := fmt.Errorf("@%v %v: constructor comment declared twice", tag, comment)
-					return nil, nil, err
+					return nil, nil, nil, err
 				}
 				constructorCommentType = tag
 				constructorComment = comment
@@ -280,34 +277,38 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 				}
 
 				if _, ok := argumentComments[paramName]; ok {
-					return nil, nil, errors.New("@param " + paramName + ": comment declared twice")
+					return nil, nil, nil, errors.New("@param " + paramName + ": comment declared twice")
 				}
 				if realComment != "" {
 					argumentComments[paramName] = realComment
 				}
 
 			default:
-				return nil, nil, errors.New("@" + commentTag + ": invalid comment tag")
+				return nil, nil, nil, errors.New("@" + commentTag + ": invalid comment tag")
 			}
 
 		case item.Declaration != nil:
-			decl, err := normalizeCombinator(item.Declaration, constructorComment, argumentComments, functionsMode)
+			decl, err := normalizeCombinator(item.Declaration, constructorComment, argumentComments)
 			if err != nil {
-				return nil, nil, err
+				return nil, nil, nil, err
 			}
-			decls = append(decls, decl)
+			if funcMode {
+				funcDecls = append(funcDecls, decl)
+			} else {
+				typeDecls = append(typeDecls, decl)
+			}
 
 			if currentTypeComment != "" {
 				v, ok := decl.Type.(TLTypeCommon)
 				if !ok {
 					typStr := decl.Type.String()
 					err := errors.New("@type: comment set to " + typStr + ", which is impossible")
-					return nil, nil, err
+					return nil, nil, nil, err
 				}
 
 				if _, ok := typeComments[TLName(v.TLName)]; ok {
 					err := errors.New("@type: for " + TLName(v.TLName).String() + ", type comment defined twice")
-					return nil, nil, err
+					return nil, nil, nil, err
 				}
 
 				typeComments[TLName(v.TLName)] = currentTypeComment
@@ -320,22 +321,11 @@ func normalizeEntries(items []declaration.ProgramEntry, functionsMode bool) ([]*
 		}
 	}
 
-	return decls, typeComments, nil
+	return typeDecls, funcDecls, typeComments, nil
 }
 
 func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
-	typeEntries := []declaration.ProgramEntry{}
-	funcEntries := []declaration.ProgramEntry{}
-
-	for _, section := range program.Sections {
-		if !section.StartFuncDecl {
-			typeEntries = append(typeEntries, section.Entries...)
-		} else {
-			funcEntries = append(funcEntries, section.Entries...)
-		}
-	}
-
-	typeDeclsRaw, comments, err := normalizeEntries(typeEntries, false)
+	typeDeclsRaw, funcDeclsRaw, comments, err := normalizeEntries(program.Entries)
 	if err != nil {
 		return nil, err
 	}
@@ -369,14 +359,9 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 		}
 	}
 
-	functions, _, err := normalizeEntries(funcEntries, true)
-	if err != nil {
-		return nil, err
-	}
-
 	funcSeq := []string{}
 	funcDeclMap := map[string][]TLDeclaration{}
-	for _, decl := range functions {
+	for _, decl := range funcDeclsRaw {
 		if !slices.Contains(funcSeq, decl.Name.Namespace) {
 			funcSeq = append(funcSeq, decl.Name.Namespace)
 		}

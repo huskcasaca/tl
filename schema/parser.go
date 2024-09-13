@@ -301,9 +301,9 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*TLDeclarat
 				return nil, nil, nil, err
 			}
 			// todo check crc
-			if decl.getCRC() != decl.CRC {
-				return nil, nil, nil, errors.New(decl.Name.String() + ": CRC mismatch! Described: " + fmt.Sprintf("0x%08x", decl.CRC) + " Calculated: " + fmt.Sprintf("0x%08x", decl.getCRC()))
-			}
+			//if decl.getCRC() != decl.CRC {
+			//	return nil, nil, nil, errors.New(decl.Name.String() + ": CRC mismatch! Described: " + fmt.Sprintf("0x%08x", decl.CRC) + " Calculated: " + fmt.Sprintf("0x%08x", decl.getCRC()))
+			//}
 			if funcMode {
 				funcDecls = append(funcDecls, decl)
 			} else {

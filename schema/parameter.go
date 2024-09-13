@@ -48,7 +48,7 @@ type TLBitflagParam struct {
 
 func (_ TLBitflagParam) _Parameter()        {}
 func (t TLBitflagParam) GetName() string    { return t.Name }
-func (t TLBitflagParam) GetType() TLType    { return nil }
+func (t TLBitflagParam) GetType() TLType    { return TLType{} }
 func (t TLBitflagParam) GetComment() string { return t.Comment }
 func (t TLBitflagParam) String() string     { return t.Name + ":#" }
 
@@ -89,7 +89,7 @@ type TLTriggerParam struct {
 
 func (_ TLTriggerParam) _Parameter()        {}
 func (t TLTriggerParam) GetName() string    { return t.Name }
-func (t TLTriggerParam) GetType() TLType    { return nil }
+func (t TLTriggerParam) GetType() TLType    { return TLType{} }
 func (t TLTriggerParam) GetComment() string { return t.Comment }
 func (t TLTriggerParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?true", t.Name, t.FlagTrigger, t.BitTrigger)

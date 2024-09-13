@@ -59,14 +59,14 @@ type Declaration struct {
 	Combinator string     `parser:"@(lc_ident_full | (lc_ident (dot lc_ident)?)) ws"`
 	OptArgs    []Argument `parser:"(open_brace @@ close_brace ws)*"`
 	Args       []Argument `parser:"(@@ (ws @@)* ws)? equals ws?"`
-	Result     RetType    `parser:"@@"`
+	Result     Type       `parser:"@@"`
 }
 
 // Argument represents TL formal described in https://core.telegram.org/mtproto/TL-formal#combinator-declarations
 type Argument struct {
 	Ident ArgIdent `parser:"@@ colon"` // var:
 	Flag  *Flag    `parser:"@@?"`      // flags.1?
-	Term  ArgType  `parser:"@@"`       // type
+	Term  Type     `parser:"@@"`       // type
 }
 
 // ArgIdent is identifier of argument name
@@ -90,25 +90,23 @@ type Flag struct {
 	Index int    `parser:"dot @nat_const question_mark"`
 }
 
-// ArgType is type of argument
-type ArgType struct {
-	Modifier  bool       `parser:"@excl_mark?"`
-	Simple    TypeIdent  `parser:"@@"`
-	Extension *Extension `parser:"@@?"`
+// Type is type of argument and result
+type Type struct {
+	Modifier bool      `parser:"@excl_mark?"`
+	Ident    TypeIdent `parser:"@@"`
+	SubTypes []Type    `parser:"(langle @@ (ws @@)* rangle)?"`
 }
 
-func (i *ArgType) String() string {
-	res := i.Simple.String()
-	if i.Extension != nil {
-		res += i.Extension.String()
+func (i *Type) String() string {
+	res := i.Ident.String()
+	if len(i.SubTypes) > 0 {
+		items := make([]string, len(i.SubTypes))
+		for i, item := range i.SubTypes {
+			items[i] = item.String()
+		}
+		res += "<" + strings.Join(items, " ") + ">"
 	}
 	return res
-}
-
-// RetType is type of return
-type RetType struct {
-	Simple    TypeIdent  `parser:"@@"`
-	Extension *Extension `parser:"@@?"`
 }
 
 // TypeIdent is identifier of argument type
@@ -118,18 +116,4 @@ type TypeIdent struct {
 
 func (s *TypeIdent) String() string {
 	return s.Ident
-}
-
-// Extension is subtype of type
-type Extension struct {
-	Inner []TypeIdent `parser:"langle @@ (ws @@)* rangle"`
-}
-
-func (i *Extension) String() string {
-	items := make([]string, len(i.Inner))
-	for i, item := range i.Inner {
-		items[i] = item.String()
-	}
-
-	return "<" + strings.Join(items, " ") + ">"
 }

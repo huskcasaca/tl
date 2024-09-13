@@ -8,28 +8,19 @@ import (
 
 type TLTypes []TLType
 
-type TLType interface {
-	Name() TLName
+type TLType struct {
+	TLName
+	TLTypes
 	fmt.Stringer
 }
 
+func (t TLType) Name() TLName   { return t.TLName }
+func (t TLType) Types() TLTypes { return t.TLTypes }
+func (t TLType) String() string { return t.TLName.String() }
+
 var (
-	TLAnyType TLType = TLTypeCommon{TLName{Key: "Type"}}
+	TLAnyType = TLType{TLName: TLName{Key: "Type"}}
 )
-
-type TLTypeCommon struct {
-	TLName
-}
-
-func (t TLTypeCommon) String() string { return t.TLName.String() }
-func (t TLTypeCommon) Name() TLName   { return t.TLName }
-
-type TLTypeVector struct {
-	TLName
-}
-
-func (t TLTypeVector) String() string { return "Vector<" + t.TLName.String() + ">" }
-func (t TLTypeVector) Name() TLName   { return t.TLName }
 
 func isFirstRuneUpper(s string) bool {
 	r, _ := utf8.DecodeRuneInString(s)

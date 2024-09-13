@@ -59,19 +59,25 @@ func Parse(filename string, content io.Reader) (*TLSchema, error) {
 	return normalized, nil
 }
 
-func normalizeIdent(i *declaration.ArgType) (TLType, error) {
-	if i.Extension != nil {
-		if len(i.Extension.Inner) > 1 {
-			return nil, errors.New(i.String() + ": too many modificators")
-		}
-		if i.Simple.String() != "Vector" && i.Simple.String() != "vector" {
-			return nil, errors.New(i.String() + ": only Vector is allowed to modify")
-		}
+func normalizeIdent(i *declaration.Type) (TLType, error) {
+	name := GetTLNameFromString(i.Ident.String())
+	if len(i.SubTypes) == 0 {
+		return TLType{TLName: name}, nil
+	}
+	types := make([]TLType, len(i.SubTypes))
 
-		return TLTypeVector{TLName: GetTLNameFromString(i.Extension.Inner[0].String())}, nil
+	for i, item := range i.SubTypes {
+		typ, err := normalizeIdent(&item)
+		if err != nil {
+			return typ, err
+		}
+		types[i] = typ
 	}
 
-	return TLTypeCommon{TLName: GetTLNameFromString(i.Simple.String())}, nil
+	return TLType{
+		TLName:  name,
+		TLTypes: types,
+	}, nil
 }
 
 func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, error) {
@@ -81,7 +87,7 @@ func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, erro
 	}
 
 	if arg.Flag == nil {
-		if typ, ok := typ.(TLTypeCommon); ok && typ.Key == "#" {
+		if typ.Key == "#" {
 			return TLBitflagParam{
 				Comment: comment,
 				Name:    arg.Ident.String(),
@@ -95,7 +101,7 @@ func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, erro
 		}, nil
 	}
 
-	if v, ok := typ.(TLTypeCommon); ok && v.Key == "true" {
+	if typ.Key == "true" {
 		return TLTriggerParam{
 			Comment:     comment,
 			Name:        arg.Ident.String(),
@@ -164,9 +170,9 @@ func normalizeCombinator(decl *declaration.Declaration, constructorComment strin
 		}
 	}
 
-	typ, err := normalizeIdent(&declaration.ArgType{
-		Simple:    decl.Result.Simple,
-		Extension: decl.Result.Extension,
+	typ, err := normalizeIdent(&declaration.Type{
+		Ident:    decl.Result.Ident,
+		SubTypes: decl.Result.SubTypes,
 	})
 	if err != nil {
 		return nil, fmt.Errorf(decl.Combinator+": parsing return type: %w", err)
@@ -305,12 +311,12 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*TLDeclarat
 			}
 
 			if currentTypeComment != "" {
-				v, ok := decl.Type.(TLTypeCommon)
-				if !ok {
-					typStr := decl.Type.String()
-					err := errors.New("@type: comment set to " + typStr + ", which is impossible")
-					return nil, nil, nil, err
-				}
+				v, _ := decl.Type, true
+				//if !ok {
+				//	typStr := decl.Type.String()
+				//	err := errors.New("@type: comment set to " + typStr + ", which is impossible")
+				//	return nil, nil, nil, err
+				//}
 
 				if _, ok := typeComments[TLName(v.TLName)]; ok {
 					err := errors.New("@type: for " + TLName(v.TLName).String() + ", type comment defined twice")
@@ -339,11 +345,7 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 	typeSeq := []TLName{}
 	sortedTypeDecls := map[TLName][]TLDeclaration{}
 	for _, decl := range typeDecls {
-		typeDecl, ok := decl.Type.(TLTypeCommon)
-		if !ok {
-			return nil, fmt.Errorf("object %#v: type is not interface", decl.Name)
-		}
-		declType := TLName(typeDecl.TLName)
+		declType := decl.Type.TLName
 
 		if !slices.Contains(typeSeq, declType) {
 			typeSeq = append(typeSeq, declType)

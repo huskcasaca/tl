@@ -48,14 +48,14 @@ func TestParseIt(t *testing.T) {
 				Ident: ArgIdent{
 					Ident: "user_id",
 				},
-				Term: ArgType{
-					Simple: TypeIdent{Ident: "long"},
+				Term: Type{
+					Ident: TypeIdent{Ident: "long"},
 				},
 			},
 		},
 		TcaseParseIt[Declaration]{
 			name: "declaration",
-			in:   "a#00000000 flags:# b_x:c_x d:e pipka:flags.2?Vector<popka> = F",
+			in:   "a#00000000 flags:# underscore_var:underscore_type var:type complexVar:flags.2?Vector<Vector<int>> = F",
 			want: Declaration{
 				Combinator: "a#00000000",
 				Args: []Argument{
@@ -63,44 +63,51 @@ func TestParseIt(t *testing.T) {
 						Ident: ArgIdent{
 							Ident: "flags",
 						},
-						Term: ArgType{
-							Simple: TypeIdent{Ident: "#"},
+						Term: Type{
+							Ident: TypeIdent{Ident: "#"},
 						},
 					},
 					{
 						Ident: ArgIdent{
-							Ident: "b_x",
+							Ident: "underscore_var",
 						},
-						Term: ArgType{
-							Simple: TypeIdent{Ident: "c_x"},
-						},
-					},
-					{
-						Ident: ArgIdent{
-							Ident: "d",
-						},
-						Term: ArgType{
-							Simple: TypeIdent{Ident: "e"},
+						Term: Type{
+							Ident: TypeIdent{Ident: "underscore_type"},
 						},
 					},
 					{
 						Ident: ArgIdent{
-							Ident: "pipka",
+							Ident: "var",
+						},
+						Term: Type{
+							Ident: TypeIdent{Ident: "type"},
+						},
+					},
+					{
+						Ident: ArgIdent{
+							Ident: "complexVar",
 						},
 						Flag: &Flag{
 							Ident: "flags",
 							Index: 2,
 						},
-						Term: ArgType{
-							Simple: TypeIdent{Ident: "Vector"},
-							Extension: &Extension{
-								Inner: []TypeIdent{{Ident: "popka"}},
+						Term: Type{
+							Ident: TypeIdent{Ident: "Vector"},
+							SubTypes: []Type{
+								{
+									Ident: TypeIdent{Ident: "Vector"},
+									SubTypes: []Type{
+										{
+											Ident: TypeIdent{Ident: "int"},
+										},
+									},
+								},
 							},
 						},
 					},
 				},
-				Result: RetType{
-					Simple: TypeIdent{Ident: "F"},
+				Result: Type{
+					Ident: TypeIdent{Ident: "F"},
 				},
 			},
 		},
@@ -128,14 +135,14 @@ k#678 = L;
 					{Newline: true},
 					{Declaration: &Declaration{
 						Combinator: "a#123",
-						Result: RetType{
-							Simple: TypeIdent{Ident: "B"},
+						Result: Type{
+							Ident: TypeIdent{Ident: "B"},
 						},
 					}},
 					{Declaration: &Declaration{
 						Combinator: "c#456",
-						Result: RetType{
-							Simple: TypeIdent{Ident: "D"},
+						Result: Type{
+							Ident: TypeIdent{Ident: "D"},
 						},
 					}},
 
@@ -146,14 +153,14 @@ k#678 = L;
 					{Comment: stringPtr("// comment")},
 					{Declaration: &Declaration{
 						Combinator: "e#789",
-						Result: RetType{
-							Simple: TypeIdent{Ident: "F"},
+						Result: Type{
+							Ident: TypeIdent{Ident: "F"},
 						},
 					}},
 					{Declaration: &Declaration{
 						Combinator: "g#012",
-						Result: RetType{
-							Simple: TypeIdent{Ident: "H"},
+						Result: Type{
+							Ident: TypeIdent{Ident: "H"},
 						},
 					}},
 					{Newline: true},
@@ -162,14 +169,14 @@ k#678 = L;
 					{Newline: true},
 					{Declaration: &Declaration{
 						Combinator: "i#345",
-						Result: RetType{
-							Simple: TypeIdent{Ident: "J"},
+						Result: Type{
+							Ident: TypeIdent{Ident: "J"},
 						},
 					}},
 					{Declaration: &Declaration{
 						Combinator: "k#678",
-						Result: RetType{
-							Simple: TypeIdent{Ident: "L"},
+						Result: Type{
+							Ident: TypeIdent{Ident: "L"},
 						},
 					}},
 					{Newline: true},

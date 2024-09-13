@@ -110,7 +110,7 @@ func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement
 func generateGenericTypes(name string, polys schema.TLParams) *jen.Statement {
 	genericsTypes := make([]jen.Code, len(polys))
 	for i, t := range polys {
-		genericsTypes[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()})).Add(generateFieldTypeCommon(t.GetType()))
+		genericsTypes[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()})).Add(generateFieldType(t.GetType(), true))
 	}
 	return jen.Id(name).Types(genericsTypes...)
 }
@@ -167,17 +167,30 @@ func generateTriggerField(p schema.TLTriggerParam) *jen.Statement {
 }
 
 func generateFieldType(t schema.TLType, isOptional bool) *jen.Statement {
-	switch t := t.(type) {
-	case schema.TLTypeCommon:
-		if isDefaultType(t.TLName) && isOptional {
-			return jen.Op("*").Add(generateFieldTypeCommon(t))
+	ret := generateFieldTypeCommon(t)
+	switch t.Name() {
+	case typeBytes, typeDouble, typeInt, typeLong, typeString, typeBool:
+		if len(t.Types()) != 0 {
+			panic(fmt.Sprintf("incorrect default type: %v", t))
 		}
-		return generateFieldTypeCommon(t)
-	case schema.TLTypeVector:
-		return jen.Index().Add(generateFieldTypeCommon(t))
+		if isOptional {
+			ret = jen.Op("*").Add(ret)
+		}
+	case typeVector:
+		if len(t.Types()) != 1 {
+			panic(fmt.Sprintf("incorrect vector type: %v", t))
+		}
+		ret = ret.Add(generateFieldType(t.Types()[0], false))
 	default:
-		panic("unknown type")
+		if len(t.Types()) != 0 {
+			generics := make([]jen.Code, len(t.Types()))
+			for _, t1 := range t.Types() {
+				generics = append(generics, generateFieldType(t1, false))
+			}
+			ret = ret.Index(generics...)
+		}
 	}
+	return ret
 }
 
 func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
@@ -196,6 +209,8 @@ func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 		return jen.Bool()
 	case typeAny:
 		return jen.Qual(util.GetTypePathName((*tl.TLObject)(nil)))
+	case typeVector:
+		return jen.Index()
 	default:
 		if !typ.Name().IsInterface() {
 			panic(fmt.Sprintf("incorrect type name: %v", typ))
@@ -212,12 +227,16 @@ var (
 	typeString = schema.TLName{Key: "string"}
 	typeBool   = schema.TLName{Key: "Bool"}
 	typeAny    = schema.TLName{Key: "Type"}
+	typeVector = schema.TLName{Key: "Vector"}
 )
 
-func isDefaultType(typeName schema.TLName) bool {
-	switch typeName {
+func isDefaultType(typ schema.TLType) bool {
+	switch typ.Name() {
 	case typeBytes, typeDouble, typeInt, typeLong, typeString, typeBool:
-		return true
+		if len(typ.Types()) != 0 {
+			panic(fmt.Sprintf("incorrect default type: %v", typ))
+		}
+		return len(typ.Types()) == 0
 	default:
 		return false
 	}
@@ -232,7 +251,7 @@ func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.
 		ret = ret.Comment(objects.Comment).Line()
 	}
 	ret = ret.Type().Id(typeName).Interface(
-		generateFieldTypeCommon(schema.TLAnyType),
+		generateFieldType(schema.TLAnyType, false),
 		jen.Id(typeMethod).Params(),
 	)
 

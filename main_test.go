@@ -37,11 +37,9 @@ func tearup() {
 	RegisterObjectDefault[*PollAnswer]()
 	RegisterObjectDefault[*DHParamsOk]()
 
-	RegisterEnumDefault[AuthCodeType](
-		AuthCodeTypeSms,
-		AuthCodeTypeCall,
-		AuthCodeTypeFlashCall,
-	)
+	RegisterObjectDefault[*AuthCodeTypeSms]()
+	RegisterObjectDefault[*AuthCodeTypeCall]()
+	RegisterObjectDefault[*AuthCodeTypeFlashCall]()
 }
 
 func teardown() {}

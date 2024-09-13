@@ -77,7 +77,7 @@ func TestDecode(t *testing.T) {
 					Length: 5,
 				},
 				PhoneCodeHash: "1f76da0d1551159636",
-				NextType:      AuthCodeTypeSms,
+				NextType:      &AuthCodeTypeSms{},
 			},
 		}, TcaseDecode[PollResults]{
 			name: "poll-results",

@@ -1,11 +1,8 @@
 package tl
 
 import (
-	"cmp"
 	"fmt"
 	"reflect"
-
-	"github.com/quenbyako/ext/slices"
 )
 
 // key is crc code, value is name of constructor.
@@ -22,8 +19,7 @@ var _defaultRegistry = val(NewRegistry())
 
 func DefaultRegistry() *ObjectRegistry { return &_defaultRegistry }
 
-func RegisterObjectDefault[T TLObject]()         { RegisterObject[T](&_defaultRegistry) }
-func RegisterEnumDefault[T TLObject](enums ...T) { RegisterEnum[T](&_defaultRegistry, enums...) }
+func RegisterObjectDefault[T TLObject]() { RegisterObject[T](&_defaultRegistry) }
 func RegisterCustomDefault[T TLObject](constructor func(uint32) T, crcs ...uint32) {
 	RegisterCustom[T](&_defaultRegistry, constructor, crcs...)
 }
@@ -79,36 +75,12 @@ func (s *structFields) isFieldOptional(fieldIndex int) bool {
 }
 
 type BitflagBit struct {
-	FieldIndex int // в какое поле пихать бит что поле существует
-	BitIndex   int // собственно в какой бит пихать флаг что все ок
+	FieldIndex int // which field to put the bit in, indicating that the field exists
+	BitIndex   int // specifically which bit to put the flag in, indicating that everything is okay
 }
 
 func RegisterObject[T TLObject](r *ObjectRegistry) {
 	r.registerObject(asObject(new[T]))
-}
-
-func RegisterEnum[T TLObject](r *ObjectRegistry, enums ...T) {
-	if t := new[T](); reflect.TypeOf(t).Kind() != reflect.Uint32 {
-		panic("enums must be uint32")
-	}
-
-	if len(enums) == 0 {
-		panic("no enums provided")
-	}
-
-	enums = slices.SortFunc(enums, func(a, b T) int { return cmp.Compare(a.CRC(), b.CRC()) })
-
-	f := func(crc uint32) (res T, ok bool) {
-		if i, ok := slices.BinarySearchFunc(enums, crc, func(enum T, crc uint32) int {
-			return cmp.Compare(enum.CRC(), crc)
-		}); ok {
-			return enums[i], true
-		}
-
-		return res, false
-	}
-
-	r.registerCustom(slices.Remap(enums, func(enum T) uint32 { return enum.CRC() }), asEnum(f))
 }
 
 func RegisterCustom[T TLObject](r *ObjectRegistry, constructor func(uint32) T, crcs ...uint32) {

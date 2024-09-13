@@ -82,28 +82,35 @@ type Rights struct {
 
 func (*Rights) CRC() uint32 { return uint32(0x5fb224d5) }
 
-type AuthCodeType uint32
-
-const (
-	AuthCodeTypeSms       AuthCodeType = 1923290508
-	AuthCodeTypeCall      AuthCodeType = 1948046307
-	AuthCodeTypeFlashCall AuthCodeType = 577556219
-)
-
-func (e AuthCodeType) String() string {
-	switch e {
-	case AuthCodeTypeSms:
-		return "auth.codeTypeSms"
-	case AuthCodeTypeCall:
-		return "auth.codeTypeCall"
-	case AuthCodeTypeFlashCall:
-		return "auth.codeTypeFlashCall"
-	default:
-		return "<UNKNOWN auth.CodeType>"
-	}
+type AuthCodeType interface {
+	TLObject
+	_AuthCodeType()
 }
 
-func (e AuthCodeType) CRC() uint32 { return uint32(e) }
+var _ AuthCodeType = (*AuthCodeTypeSms)(nil)
+var _ AuthCodeType = (*AuthCodeTypeCall)(nil)
+var _ AuthCodeType = (*AuthCodeTypeFlashCall)(nil)
+
+type AuthCodeTypeSms struct {
+}
+
+func (*AuthCodeTypeSms) CRC() uint32 { return uint32(1923290508) }
+
+func (*AuthCodeTypeSms) _AuthCodeType() {}
+
+type AuthCodeTypeCall struct {
+}
+
+func (*AuthCodeTypeCall) CRC() uint32 { return uint32(1948046307) }
+
+func (*AuthCodeTypeCall) _AuthCodeType() {}
+
+type AuthCodeTypeFlashCall struct {
+}
+
+func (*AuthCodeTypeFlashCall) CRC() uint32 { return uint32(577556219) }
+
+func (*AuthCodeTypeFlashCall) _AuthCodeType() {}
 
 type PollResults struct {
 	//nolint:revive // tl works with unexported tags

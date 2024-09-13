@@ -176,7 +176,7 @@ func generateFieldType(t schema.TLType, isOptional bool) *jen.Statement {
 		if isOptional {
 			ret = jen.Op("*").Add(ret)
 		}
-	case typeVector:
+	case typeVectorUc, typeVectorLc:
 		if len(t.Types()) != 1 {
 			panic(fmt.Sprintf("incorrect vector type: %v", t))
 		}
@@ -209,8 +209,12 @@ func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 		return jen.Bool()
 	case typeAny:
 		return jen.Qual(util.GetTypePathName((*tl.TLObject)(nil)))
-	case typeVector:
+	case typeVectorUc, typeVectorLc:
 		return jen.Index()
+	case typeInt128:
+		return jen.Qual(util.GetTypePathName((*tl.Int128)(nil)))
+	case typeInt256:
+		return jen.Qual(util.GetTypePathName((*tl.Int256)(nil)))
 	default:
 		if !typ.Name().IsInterface() {
 			panic(fmt.Sprintf("incorrect type name: %v", typ))
@@ -220,14 +224,17 @@ func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 }
 
 var (
-	typeBytes  = schema.TLName{Key: "bytes"}
-	typeDouble = schema.TLName{Key: "double"}
-	typeInt    = schema.TLName{Key: "int"}
-	typeLong   = schema.TLName{Key: "long"}
-	typeString = schema.TLName{Key: "string"}
-	typeBool   = schema.TLName{Key: "Bool"}
-	typeAny    = schema.TLName{Key: "Type"}
-	typeVector = schema.TLName{Key: "Vector"}
+	typeBytes    = schema.TLName{Key: "bytes"}
+	typeDouble   = schema.TLName{Key: "double"}
+	typeInt      = schema.TLName{Key: "int"}
+	typeLong     = schema.TLName{Key: "long"}
+	typeString   = schema.TLName{Key: "string"}
+	typeBool     = schema.TLName{Key: "Bool"}
+	typeAny      = schema.TLName{Key: "Type"}
+	typeVectorUc = schema.TLName{Key: "Vector"}
+	typeVectorLc = schema.TLName{Key: "vector"}
+	typeInt128   = schema.TLName{Key: "int128"}
+	typeInt256   = schema.TLName{Key: "int256"}
 )
 
 func isDefaultType(typ schema.TLType) bool {

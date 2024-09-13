@@ -1,18 +1,4 @@
-// Core types (no need to gen)
 
-int ? = Int;
-long ? = Long;
-double ? = Double;
-string ? = String;
-
-vector {t:Type} # [ t ] = Vector t;
-
-int128 4*[ int ] = Int128;
-int256 8*[ int ] = Int256;
-
-///////////////////////////////
-/// Authorization key creation
-///////////////////////////////
 
 resPQ#05162463 nonce:int128 server_nonce:int128 pq:string server_public_key_fingerprints:Vector<long> = ResPQ;
 
@@ -111,7 +97,7 @@ tlsBlockDomain = TlsBlock;
 tlsBlockGrease seed:int = TlsBlock;
 tlsBlockPublicKey = TlsBlock;
 tlsBlockScope entries:Vector<TlsBlock> = TlsBlock;
-tlsBlockPermutation entries:Vector<Vector<TlsBlock>> = TlsBlock;
+//tlsBlockPermutation entries:Vector<Vector<TlsBlock>> = TlsBlock;
 
 ---functions---
 

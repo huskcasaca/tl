@@ -7,7 +7,7 @@ import (
 )
 
 type GenericType interface {
-	tl.TLObject
+	tl.Any
 	_GenericType()
 }
 
@@ -15,7 +15,7 @@ var (
 	_ GenericType = (*GenericsTypePredict)(nil)
 )
 
-type GenericsTypePredict[X tl.TLObject] struct {
+type GenericsTypePredict[X tl.Any] struct {
 	X X `tl:"x"`
 }
 
@@ -25,7 +25,7 @@ func (*GenericsTypePredict[X]) CRC() uint32 {
 func (*GenericsTypePredict[X]) _GenericType() {}
 
 type Update interface {
-	tl.TLObject
+	tl.Any
 	_Update()
 }
 

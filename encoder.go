@@ -159,7 +159,7 @@ func (e *encoder) encodeValue(value reflect.Value) error {
 
 // v must be pointer to struct.
 func (e *encoder) encodeStruct(v reflect.Value, ignoreCRC bool) error {
-	o, ok := v.Interface().(TLObject)
+	o, ok := v.Interface().(Any)
 	if !ok {
 		// Trying to look implementation by pointer
 		//
@@ -169,8 +169,8 @@ func (e *encoder) encodeStruct(v reflect.Value, ignoreCRC bool) error {
 		vcopy.Set(v)
 
 		var ok bool
-		if o, ok = vcopy.Addr().Interface().(TLObject); !ok {
-			return errors.New(v.Type().String() + " doesn't implement tl.TLObject interface")
+		if o, ok = vcopy.Addr().Interface().(Any); !ok {
+			return errors.New(v.Type().String() + " doesn't implement tl.Any interface")
 		}
 	}
 
@@ -195,7 +195,7 @@ func (e *encoder) encodeStruct(v reflect.Value, ignoreCRC bool) error {
 
 	// what we checked and what we know about value:
 	// 1) it's not Marshaler (marshaler method if exist used already in c.encodeValue())
-	// 2) implements tl.TLObject
+	// 2) implements tl.Any
 	// 3) it's addressable
 	// 4) definitely struct (we don't call encodeStruct() but in c.encodeValue())
 	// 5) not nil (structs can't be nil, only pointers and interfaces)

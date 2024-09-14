@@ -12,15 +12,15 @@ type (
 )
 
 type Registry interface {
-	ConstructObject(code crc32) (TLObject, bool)
+	ConstructObject(code crc32) (Any, bool)
 }
 
 var _defaultRegistry = val(NewRegistry())
 
 func DefaultRegistry() *ObjectRegistry { return &_defaultRegistry }
 
-func RegisterObjectDefault[T TLObject]() { RegisterObject[T](&_defaultRegistry) }
-func RegisterCustomDefault[T TLObject](constructor func(uint32) T, crcs ...uint32) {
+func RegisterObjectDefault[T Any]() { RegisterObject[T](&_defaultRegistry) }
+func RegisterCustomDefault[T Any](constructor func(uint32) T, crcs ...uint32) {
 	RegisterCustom[T](&_defaultRegistry, constructor, crcs...)
 }
 
@@ -32,19 +32,19 @@ func RegisterCustomDefault[T TLObject](constructor func(uint32) T, crcs ...uint3
 // slower, but more flexible.
 type ObjectRegistry struct {
 	// in objects it's allowed to store ONLY structs and uint32.
-	objects map[crc32]func(uint32) TLObject
+	objects map[crc32]func(uint32) Any
 }
 
 var _ Registry = (*ObjectRegistry)(nil)
 
 func NewRegistry() *ObjectRegistry {
 	return &ObjectRegistry{
-		objects: make(map[crc32]func(uint32) TLObject),
+		objects: make(map[crc32]func(uint32) Any),
 	}
 }
 
 // ConstructObject spawns new object by crc code from registry.
-func (r *ObjectRegistry) ConstructObject(crc crc32) (TLObject, bool) {
+func (r *ObjectRegistry) ConstructObject(crc crc32) (Any, bool) {
 	if obj, ok := r.objects[crc]; ok {
 		return obj(crc), true
 	}
@@ -79,18 +79,18 @@ type BitflagBit struct {
 	BitIndex   int // specifically which bit to put the flag in, indicating that everything is okay
 }
 
-func RegisterObject[T TLObject](r *ObjectRegistry) {
+func RegisterObject[T Any](r *ObjectRegistry) {
 	r.registerObject(asObject(new[T]))
 }
 
-func RegisterCustom[T TLObject](r *ObjectRegistry, constructor func(uint32) T, crcs ...uint32) {
+func RegisterCustom[T Any](r *ObjectRegistry, constructor func(uint32) T, crcs ...uint32) {
 	if len(crcs) == 0 {
 		panic("no enums provided")
 	}
-	r.registerCustom(crcs, func(u uint32) TLObject { return constructor(u) })
+	r.registerCustom(crcs, func(u uint32) Any { return constructor(u) })
 }
 
-func (r *ObjectRegistry) registerObject(c func(uint32) TLObject) {
+func (r *ObjectRegistry) registerObject(c func(uint32) Any) {
 	typ := reflect.TypeOf(c(0))
 	if typ.Kind() == reflect.Ptr {
 		typ = typ.Elem()
@@ -101,7 +101,7 @@ func (r *ObjectRegistry) registerObject(c func(uint32) TLObject) {
 	}
 
 	if r.objects == nil {
-		r.objects = make(map[crc32]func(uint32) TLObject)
+		r.objects = make(map[crc32]func(uint32) Any)
 	}
 	crc := c(0).CRC()
 	if _, ok := r.objects[crc]; ok {
@@ -111,9 +111,9 @@ func (r *ObjectRegistry) registerObject(c func(uint32) TLObject) {
 	r.objects[crc] = c
 }
 
-func (r *ObjectRegistry) registerCustom(valid []uint32, c func(uint32) TLObject) {
+func (r *ObjectRegistry) registerCustom(valid []uint32, c func(uint32) Any) {
 	if r.objects == nil {
-		r.objects = make(map[crc32]func(uint32) TLObject)
+		r.objects = make(map[crc32]func(uint32) Any)
 	}
 	for _, enum := range valid {
 		r.objects[enum] = c

@@ -59,7 +59,7 @@ type SomeNullStruct null
 func (*SomeNullStruct) CRC() uint32 { return uint32(0xc4f9186b) }
 
 type AuthSentCodeType interface {
-	TLObject
+	Any
 	_AuthSentCodeType()
 }
 
@@ -83,7 +83,7 @@ type Rights struct {
 func (*Rights) CRC() uint32 { return uint32(0x5fb224d5) }
 
 type AuthCodeType interface {
-	TLObject
+	Any
 	_AuthCodeType()
 }
 
@@ -137,7 +137,7 @@ type PollAnswerVoters struct {
 func (*PollAnswerVoters) CRC() uint32 { return uint32(0x3b6ddad2) }
 
 type MessageEntity interface {
-	TLObject
+	Any
 	_MessageEntity()
 }
 
@@ -152,7 +152,7 @@ type AccountInstallThemeParams struct {
 func (*AccountInstallThemeParams) CRC() uint32 { return uint32(0x7ae43737) }
 
 type InputTheme interface {
-	TLObject
+	Any
 	_InputTheme()
 }
 
@@ -184,14 +184,14 @@ func (*AnyStructWithAnyType) CRC() uint32 { return uint32(0xfdfd4646) }
 
 type AnyStructWithAnyObject struct {
 	SomeInt int32
-	Data    TLObject
+	Data    Any
 }
 
 func (*AnyStructWithAnyObject) CRC() uint32 { return uint32(0xfd46fd46) }
 
 type InvokeWithLayerParams struct {
 	Layer int32
-	Query TLObject
+	Query Any
 }
 
 func (*InvokeWithLayerParams) CRC() uint32 { return 0xda9b0d0d }
@@ -206,10 +206,10 @@ type InitConnectionParams struct {
 	SystemLangCode string
 	LangPack       string
 	LangCode       string
-	Proxy          TLObject `tl:",omitempty:flag:0"`
-	Params         TLObject `tl:",omitempty:flag:1"`
+	Proxy          Any `tl:",omitempty:flag:0"`
+	Params         Any `tl:",omitempty:flag:1"`
 
-	Query TLObject
+	Query Any
 }
 
 func (*InitConnectionParams) CRC() uint32 { return 0xc1cd5ea9 }

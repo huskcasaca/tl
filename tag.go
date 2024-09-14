@@ -89,7 +89,7 @@ func parseTag(tag, defaultName string, ft reflect.Type) (t StructTag, err error)
 	return t, nil
 }
 
-func ParseStructTags(s TLObject) ([]StructTag, map[int]BitflagBit, error) {
+func ParseStructTags(s Any) ([]StructTag, map[int]BitflagBit, error) {
 	t := indirectType(reflect.TypeOf(s))
 	if t.Kind() != reflect.Struct {
 		return nil, nil, errors.New("value is not a struct")
@@ -267,11 +267,11 @@ func GetFieldTypeFromGoType(t reflect.Type) fieldType {
 		return fieldString{}
 
 	case reflect.Struct:
-		if crcGetter, ok := reflect.New(t).Interface().(TLObject); ok {
+		if crcGetter, ok := reflect.New(t).Interface().(Any); ok {
 			return fieldObject(crcGetter.CRC())
 		}
 
-		// we can't support other types but TLObject.
+		// we can't support other types but Any.
 		return nil
 
 	case reflect.Interface:

@@ -7,7 +7,7 @@ import (
 )
 
 type AccountDaysTTL interface {
-	tl.TLObject
+	tl.Any
 	_AccountDaysTTL()
 }
 
@@ -25,7 +25,7 @@ func (*AccountDaysTTLPredict) CRC() uint32 {
 func (*AccountDaysTTLPredict) _AccountDaysTTL() {}
 
 type AttachMenuBot interface {
-	tl.TLObject
+	tl.Any
 	_AttachMenuBot()
 }
 
@@ -53,7 +53,7 @@ func (*AttachMenuBotPredict) CRC() uint32 {
 func (*AttachMenuBotPredict) _AttachMenuBot() {}
 
 type AttachMenuBotIcon interface {
-	tl.TLObject
+	tl.Any
 	_AttachMenuBotIcon()
 }
 
@@ -74,7 +74,7 @@ func (*AttachMenuBotIconPredict) CRC() uint32 {
 func (*AttachMenuBotIconPredict) _AttachMenuBotIcon() {}
 
 type AttachMenuBotIconColor interface {
-	tl.TLObject
+	tl.Any
 	_AttachMenuBotIconColor()
 }
 
@@ -93,7 +93,7 @@ func (*AttachMenuBotIconColorPredict) CRC() uint32 {
 func (*AttachMenuBotIconColorPredict) _AttachMenuBotIconColor() {}
 
 type AttachMenuBots interface {
-	tl.TLObject
+	tl.Any
 	_AttachMenuBots()
 }
 
@@ -121,7 +121,7 @@ func (*AttachMenuBotsPredict) CRC() uint32 {
 func (*AttachMenuBotsPredict) _AttachMenuBots() {}
 
 type AttachMenuBotsBot interface {
-	tl.TLObject
+	tl.Any
 	_AttachMenuBotsBot()
 }
 
@@ -140,7 +140,7 @@ func (*AttachMenuBotsBotPredict) CRC() uint32 {
 func (*AttachMenuBotsBotPredict) _AttachMenuBotsBot() {}
 
 type AttachMenuPeerType interface {
-	tl.TLObject
+	tl.Any
 	_AttachMenuPeerType()
 }
 
@@ -188,7 +188,7 @@ func (*AttachMenuPeerTypeBroadcastPredict) CRC() uint32 {
 func (*AttachMenuPeerTypeBroadcastPredict) _AttachMenuPeerType() {}
 
 type Authorization interface {
-	tl.TLObject
+	tl.Any
 	_Authorization()
 }
 
@@ -224,7 +224,7 @@ func (*AuthorizationPredict) CRC() uint32 {
 func (*AuthorizationPredict) _Authorization() {}
 
 type AutoDownloadSettings interface {
-	tl.TLObject
+	tl.Any
 	_AutoDownloadSettings()
 }
 
@@ -253,7 +253,7 @@ func (*AutoDownloadSettingsPredict) CRC() uint32 {
 func (*AutoDownloadSettingsPredict) _AutoDownloadSettings() {}
 
 type AutoSaveException interface {
-	tl.TLObject
+	tl.Any
 	_AutoSaveException()
 }
 
@@ -272,7 +272,7 @@ func (*AutoSaveExceptionPredict) CRC() uint32 {
 func (*AutoSaveExceptionPredict) _AutoSaveException() {}
 
 type AutoSaveSettings interface {
-	tl.TLObject
+	tl.Any
 	_AutoSaveSettings()
 }
 
@@ -293,7 +293,7 @@ func (*AutoSaveSettingsPredict) CRC() uint32 {
 func (*AutoSaveSettingsPredict) _AutoSaveSettings() {}
 
 type AvailableEffect interface {
-	tl.TLObject
+	tl.Any
 	_AvailableEffect()
 }
 
@@ -317,7 +317,7 @@ func (*AvailableEffectPredict) CRC() uint32 {
 func (*AvailableEffectPredict) _AvailableEffect() {}
 
 type AvailableReaction interface {
-	tl.TLObject
+	tl.Any
 	_AvailableReaction()
 }
 
@@ -346,7 +346,7 @@ func (*AvailableReactionPredict) CRC() uint32 {
 func (*AvailableReactionPredict) _AvailableReaction() {}
 
 type BankCardOpenURL interface {
-	tl.TLObject
+	tl.Any
 	_BankCardOpenURL()
 }
 
@@ -365,7 +365,7 @@ func (*BankCardOpenURLPredict) CRC() uint32 {
 func (*BankCardOpenURLPredict) _BankCardOpenURL() {}
 
 type BaseTheme interface {
-	tl.TLObject
+	tl.Any
 	_BaseTheme()
 }
 
@@ -413,7 +413,7 @@ func (*BaseThemeArcticPredict) CRC() uint32 {
 func (*BaseThemeArcticPredict) _BaseTheme() {}
 
 type Birthday interface {
-	tl.TLObject
+	tl.Any
 	_Birthday()
 }
 
@@ -434,7 +434,7 @@ func (*BirthdayPredict) CRC() uint32 {
 func (*BirthdayPredict) _Birthday() {}
 
 type Bool interface {
-	tl.TLObject
+	tl.Any
 	_Bool()
 }
 
@@ -458,7 +458,7 @@ func (*BoolTruePredict) CRC() uint32 {
 func (*BoolTruePredict) _Bool() {}
 
 type Boost interface {
-	tl.TLObject
+	tl.Any
 	_Boost()
 }
 
@@ -486,7 +486,7 @@ func (*BoostPredict) CRC() uint32 {
 func (*BoostPredict) _Boost() {}
 
 type BotApp interface {
-	tl.TLObject
+	tl.Any
 	_BotApp()
 }
 
@@ -520,7 +520,7 @@ func (*BotAppPredict) CRC() uint32 {
 func (*BotAppPredict) _BotApp() {}
 
 type BotBusinessConnection interface {
-	tl.TLObject
+	tl.Any
 	_BotBusinessConnection()
 }
 
@@ -544,7 +544,7 @@ func (*BotBusinessConnectionPredict) CRC() uint32 {
 func (*BotBusinessConnectionPredict) _BotBusinessConnection() {}
 
 type BotCommand interface {
-	tl.TLObject
+	tl.Any
 	_BotCommand()
 }
 
@@ -563,7 +563,7 @@ func (*BotCommandPredict) CRC() uint32 {
 func (*BotCommandPredict) _BotCommand() {}
 
 type BotCommandScope interface {
-	tl.TLObject
+	tl.Any
 	_BotCommandScope()
 }
 
@@ -634,7 +634,7 @@ func (*BotCommandScopePeerUserPredict) CRC() uint32 {
 func (*BotCommandScopePeerUserPredict) _BotCommandScope() {}
 
 type BotInfo interface {
-	tl.TLObject
+	tl.Any
 	_BotInfo()
 }
 
@@ -659,7 +659,7 @@ func (*BotInfoPredict) CRC() uint32 {
 func (*BotInfoPredict) _BotInfo() {}
 
 type BotInlineMessage interface {
-	tl.TLObject
+	tl.Any
 	_BotInlineMessage()
 }
 
@@ -780,7 +780,7 @@ func (*BotInlineMessageMediaWebPagePredict) CRC() uint32 {
 func (*BotInlineMessageMediaWebPagePredict) _BotInlineMessage() {}
 
 type BotInlineResult interface {
-	tl.TLObject
+	tl.Any
 	_BotInlineResult()
 }
 
@@ -823,7 +823,7 @@ func (*BotInlineMediaResultPredict) CRC() uint32 {
 func (*BotInlineMediaResultPredict) _BotInlineResult() {}
 
 type BotMenuButton interface {
-	tl.TLObject
+	tl.Any
 	_BotMenuButton()
 }
 
@@ -858,7 +858,7 @@ func (*BotMenuButtonPredict) CRC() uint32 {
 func (*BotMenuButtonPredict) _BotMenuButton() {}
 
 type BotPreviewMedia interface {
-	tl.TLObject
+	tl.Any
 	_BotPreviewMedia()
 }
 
@@ -877,7 +877,7 @@ func (*BotPreviewMediaPredict) CRC() uint32 {
 func (*BotPreviewMediaPredict) _BotPreviewMedia() {}
 
 type BroadcastRevenueBalances interface {
-	tl.TLObject
+	tl.Any
 	_BroadcastRevenueBalances()
 }
 
@@ -897,7 +897,7 @@ func (*BroadcastRevenueBalancesPredict) CRC() uint32 {
 func (*BroadcastRevenueBalancesPredict) _BroadcastRevenueBalances() {}
 
 type BroadcastRevenueTransaction interface {
-	tl.TLObject
+	tl.Any
 	_BroadcastRevenueTransaction()
 }
 
@@ -946,7 +946,7 @@ func (*BroadcastRevenueTransactionRefundPredict) CRC() uint32 {
 func (*BroadcastRevenueTransactionRefundPredict) _BroadcastRevenueTransaction() {}
 
 type BusinessAwayMessage interface {
-	tl.TLObject
+	tl.Any
 	_BusinessAwayMessage()
 }
 
@@ -968,7 +968,7 @@ func (*BusinessAwayMessagePredict) CRC() uint32 {
 func (*BusinessAwayMessagePredict) _BusinessAwayMessage() {}
 
 type BusinessAwayMessageSchedule interface {
-	tl.TLObject
+	tl.Any
 	_BusinessAwayMessageSchedule()
 }
 
@@ -1003,7 +1003,7 @@ func (*BusinessAwayMessageScheduleCustomPredict) CRC() uint32 {
 func (*BusinessAwayMessageScheduleCustomPredict) _BusinessAwayMessageSchedule() {}
 
 type BusinessBotRecipients interface {
-	tl.TLObject
+	tl.Any
 	_BusinessBotRecipients()
 }
 
@@ -1028,7 +1028,7 @@ func (*BusinessBotRecipientsPredict) CRC() uint32 {
 func (*BusinessBotRecipientsPredict) _BusinessBotRecipients() {}
 
 type BusinessChatLink interface {
-	tl.TLObject
+	tl.Any
 	_BusinessChatLink()
 }
 
@@ -1051,7 +1051,7 @@ func (*BusinessChatLinkPredict) CRC() uint32 {
 func (*BusinessChatLinkPredict) _BusinessChatLink() {}
 
 type BusinessGreetingMessage interface {
-	tl.TLObject
+	tl.Any
 	_BusinessGreetingMessage()
 }
 
@@ -1071,7 +1071,7 @@ func (*BusinessGreetingMessagePredict) CRC() uint32 {
 func (*BusinessGreetingMessagePredict) _BusinessGreetingMessage() {}
 
 type BusinessIntro interface {
-	tl.TLObject
+	tl.Any
 	_BusinessIntro()
 }
 
@@ -1092,7 +1092,7 @@ func (*BusinessIntroPredict) CRC() uint32 {
 func (*BusinessIntroPredict) _BusinessIntro() {}
 
 type BusinessLocation interface {
-	tl.TLObject
+	tl.Any
 	_BusinessLocation()
 }
 
@@ -1112,7 +1112,7 @@ func (*BusinessLocationPredict) CRC() uint32 {
 func (*BusinessLocationPredict) _BusinessLocation() {}
 
 type BusinessRecipients interface {
-	tl.TLObject
+	tl.Any
 	_BusinessRecipients()
 }
 
@@ -1136,7 +1136,7 @@ func (*BusinessRecipientsPredict) CRC() uint32 {
 func (*BusinessRecipientsPredict) _BusinessRecipients() {}
 
 type BusinessWeeklyOpen interface {
-	tl.TLObject
+	tl.Any
 	_BusinessWeeklyOpen()
 }
 
@@ -1155,7 +1155,7 @@ func (*BusinessWeeklyOpenPredict) CRC() uint32 {
 func (*BusinessWeeklyOpenPredict) _BusinessWeeklyOpen() {}
 
 type BusinessWorkHours interface {
-	tl.TLObject
+	tl.Any
 	_BusinessWorkHours()
 }
 
@@ -1176,7 +1176,7 @@ func (*BusinessWorkHoursPredict) CRC() uint32 {
 func (*BusinessWorkHoursPredict) _BusinessWorkHours() {}
 
 type CdnConfig interface {
-	tl.TLObject
+	tl.Any
 	_CdnConfig()
 }
 
@@ -1194,7 +1194,7 @@ func (*CdnConfigPredict) CRC() uint32 {
 func (*CdnConfigPredict) _CdnConfig() {}
 
 type CdnPublicKey interface {
-	tl.TLObject
+	tl.Any
 	_CdnPublicKey()
 }
 
@@ -1213,7 +1213,7 @@ func (*CdnPublicKeyPredict) CRC() uint32 {
 func (*CdnPublicKeyPredict) _CdnPublicKey() {}
 
 type ChannelAdminLogEvent interface {
-	tl.TLObject
+	tl.Any
 	_ChannelAdminLogEvent()
 }
 
@@ -1234,7 +1234,7 @@ func (*ChannelAdminLogEventPredict) CRC() uint32 {
 func (*ChannelAdminLogEventPredict) _ChannelAdminLogEvent() {}
 
 type ChannelAdminLogEventAction interface {
-	tl.TLObject
+	tl.Any
 	_ChannelAdminLogEventAction()
 }
 
@@ -1745,7 +1745,7 @@ func (*ChannelAdminLogEventActionChangeEmojiStickerSetPredict) CRC() uint32 {
 func (*ChannelAdminLogEventActionChangeEmojiStickerSetPredict) _ChannelAdminLogEventAction() {}
 
 type ChannelAdminLogEventsFilter interface {
-	tl.TLObject
+	tl.Any
 	_ChannelAdminLogEventsFilter()
 }
 
@@ -1781,7 +1781,7 @@ func (*ChannelAdminLogEventsFilterPredict) CRC() uint32 {
 func (*ChannelAdminLogEventsFilterPredict) _ChannelAdminLogEventsFilter() {}
 
 type ChannelLocation interface {
-	tl.TLObject
+	tl.Any
 	_ChannelLocation()
 }
 
@@ -1808,7 +1808,7 @@ func (*ChannelLocationPredict) CRC() uint32 {
 func (*ChannelLocationPredict) _ChannelLocation() {}
 
 type ChannelMessagesFilter interface {
-	tl.TLObject
+	tl.Any
 	_ChannelMessagesFilter()
 }
 
@@ -1836,7 +1836,7 @@ func (*ChannelMessagesFilterPredict) CRC() uint32 {
 func (*ChannelMessagesFilterPredict) _ChannelMessagesFilter() {}
 
 type ChannelParticipant interface {
-	tl.TLObject
+	tl.Any
 	_ChannelParticipant()
 }
 
@@ -1925,7 +1925,7 @@ func (*ChannelParticipantLeftPredict) CRC() uint32 {
 func (*ChannelParticipantLeftPredict) _ChannelParticipant() {}
 
 type ChannelParticipantsFilter interface {
-	tl.TLObject
+	tl.Any
 	_ChannelParticipantsFilter()
 }
 
@@ -2009,7 +2009,7 @@ func (*ChannelParticipantsMentionsPredict) CRC() uint32 {
 func (*ChannelParticipantsMentionsPredict) _ChannelParticipantsFilter() {}
 
 type Chat interface {
-	tl.TLObject
+	tl.Any
 	_Chat()
 }
 
@@ -2130,7 +2130,7 @@ func (*ChannelForbiddenPredict) CRC() uint32 {
 func (*ChannelForbiddenPredict) _Chat() {}
 
 type ChatAdminRights interface {
-	tl.TLObject
+	tl.Any
 	_ChatAdminRights()
 }
 
@@ -2163,7 +2163,7 @@ func (*ChatAdminRightsPredict) CRC() uint32 {
 func (*ChatAdminRightsPredict) _ChatAdminRights() {}
 
 type ChatAdminWithInvites interface {
-	tl.TLObject
+	tl.Any
 	_ChatAdminWithInvites()
 }
 
@@ -2183,7 +2183,7 @@ func (*ChatAdminWithInvitesPredict) CRC() uint32 {
 func (*ChatAdminWithInvitesPredict) _ChatAdminWithInvites() {}
 
 type ChatBannedRights interface {
-	tl.TLObject
+	tl.Any
 	_ChatBannedRights()
 }
 
@@ -2222,7 +2222,7 @@ func (*ChatBannedRightsPredict) CRC() uint32 {
 func (*ChatBannedRightsPredict) _ChatBannedRights() {}
 
 type ChatFull interface {
-	tl.TLObject
+	tl.Any
 	_ChatFull()
 }
 
@@ -2330,7 +2330,7 @@ func (*ChannelFullPredict) CRC() uint32 {
 func (*ChannelFullPredict) _ChatFull() {}
 
 type ChatInvite interface {
-	tl.TLObject
+	tl.Any
 	_ChatInvite()
 }
 
@@ -2383,7 +2383,7 @@ func (*ChatInvitePeekPredict) CRC() uint32 {
 func (*ChatInvitePeekPredict) _ChatInvite() {}
 
 type ChatInviteImporter interface {
-	tl.TLObject
+	tl.Any
 	_ChatInviteImporter()
 }
 
@@ -2407,7 +2407,7 @@ func (*ChatInviteImporterPredict) CRC() uint32 {
 func (*ChatInviteImporterPredict) _ChatInviteImporter() {}
 
 type ChatOnlines interface {
-	tl.TLObject
+	tl.Any
 	_ChatOnlines()
 }
 
@@ -2425,7 +2425,7 @@ func (*ChatOnlinesPredict) CRC() uint32 {
 func (*ChatOnlinesPredict) _ChatOnlines() {}
 
 type ChatParticipant interface {
-	tl.TLObject
+	tl.Any
 	_ChatParticipant()
 }
 
@@ -2467,7 +2467,7 @@ func (*ChatParticipantAdminPredict) CRC() uint32 {
 func (*ChatParticipantAdminPredict) _ChatParticipant() {}
 
 type ChatParticipants interface {
-	tl.TLObject
+	tl.Any
 	_ChatParticipants()
 }
 
@@ -2499,7 +2499,7 @@ func (*ChatParticipantsPredict) CRC() uint32 {
 func (*ChatParticipantsPredict) _ChatParticipants() {}
 
 type ChatPhoto interface {
-	tl.TLObject
+	tl.Any
 	_ChatPhoto()
 }
 
@@ -2529,7 +2529,7 @@ func (*ChatPhotoPredict) CRC() uint32 {
 func (*ChatPhotoPredict) _ChatPhoto() {}
 
 type ChatReactions interface {
-	tl.TLObject
+	tl.Any
 	_ChatReactions()
 }
 
@@ -2566,7 +2566,7 @@ func (*ChatReactionsSomePredict) CRC() uint32 {
 func (*ChatReactionsSomePredict) _ChatReactions() {}
 
 type CodeSettings interface {
-	tl.TLObject
+	tl.Any
 	_CodeSettings()
 }
 
@@ -2593,7 +2593,7 @@ func (*CodeSettingsPredict) CRC() uint32 {
 func (*CodeSettingsPredict) _CodeSettings() {}
 
 type Config interface {
-	tl.TLObject
+	tl.Any
 	_Config()
 }
 
@@ -2658,7 +2658,7 @@ func (*ConfigPredict) CRC() uint32 {
 func (*ConfigPredict) _Config() {}
 
 type ConnectedBot interface {
-	tl.TLObject
+	tl.Any
 	_ConnectedBot()
 }
 
@@ -2679,7 +2679,7 @@ func (*ConnectedBotPredict) CRC() uint32 {
 func (*ConnectedBotPredict) _ConnectedBot() {}
 
 type Contact interface {
-	tl.TLObject
+	tl.Any
 	_Contact()
 }
 
@@ -2698,7 +2698,7 @@ func (*ContactPredict) CRC() uint32 {
 func (*ContactPredict) _Contact() {}
 
 type ContactBirthday interface {
-	tl.TLObject
+	tl.Any
 	_ContactBirthday()
 }
 
@@ -2717,7 +2717,7 @@ func (*ContactBirthdayPredict) CRC() uint32 {
 func (*ContactBirthdayPredict) _ContactBirthday() {}
 
 type ContactStatus interface {
-	tl.TLObject
+	tl.Any
 	_ContactStatus()
 }
 
@@ -2736,7 +2736,7 @@ func (*ContactStatusPredict) CRC() uint32 {
 func (*ContactStatusPredict) _ContactStatus() {}
 
 type DataJSON interface {
-	tl.TLObject
+	tl.Any
 	_DataJSON()
 }
 
@@ -2754,7 +2754,7 @@ func (*DataJSONPredict) CRC() uint32 {
 func (*DataJSONPredict) _DataJSON() {}
 
 type DcOption interface {
-	tl.TLObject
+	tl.Any
 	_DcOption()
 }
 
@@ -2782,7 +2782,7 @@ func (*DcOptionPredict) CRC() uint32 {
 func (*DcOptionPredict) _DcOption() {}
 
 type DefaultHistoryTTL interface {
-	tl.TLObject
+	tl.Any
 	_DefaultHistoryTTL()
 }
 
@@ -2800,7 +2800,7 @@ func (*DefaultHistoryTTLPredict) CRC() uint32 {
 func (*DefaultHistoryTTLPredict) _DefaultHistoryTTL() {}
 
 type Dialog interface {
-	tl.TLObject
+	tl.Any
 	_Dialog()
 }
 
@@ -2851,7 +2851,7 @@ func (*DialogFolderPredict) CRC() uint32 {
 func (*DialogFolderPredict) _Dialog() {}
 
 type DialogFilter interface {
-	tl.TLObject
+	tl.Any
 	_DialogFilter()
 }
 
@@ -2909,7 +2909,7 @@ func (*DialogFilterChatlistPredict) CRC() uint32 {
 func (*DialogFilterChatlistPredict) _DialogFilter() {}
 
 type DialogFilterSuggested interface {
-	tl.TLObject
+	tl.Any
 	_DialogFilterSuggested()
 }
 
@@ -2928,7 +2928,7 @@ func (*DialogFilterSuggestedPredict) CRC() uint32 {
 func (*DialogFilterSuggestedPredict) _DialogFilterSuggested() {}
 
 type DialogPeer interface {
-	tl.TLObject
+	tl.Any
 	_DialogPeer()
 }
 
@@ -2956,7 +2956,7 @@ func (*DialogPeerFolderPredict) CRC() uint32 {
 func (*DialogPeerFolderPredict) _DialogPeer() {}
 
 type Document interface {
-	tl.TLObject
+	tl.Any
 	_Document()
 }
 
@@ -2994,7 +2994,7 @@ func (*DocumentPredict) CRC() uint32 {
 func (*DocumentPredict) _Document() {}
 
 type DocumentAttribute interface {
-	tl.TLObject
+	tl.Any
 	_DocumentAttribute()
 }
 
@@ -3100,7 +3100,7 @@ func (*DocumentAttributeCustomEmojiPredict) CRC() uint32 {
 func (*DocumentAttributeCustomEmojiPredict) _DocumentAttribute() {}
 
 type DraftMessage interface {
-	tl.TLObject
+	tl.Any
 	_DraftMessage()
 }
 
@@ -3137,7 +3137,7 @@ func (*DraftMessagePredict) CRC() uint32 {
 func (*DraftMessagePredict) _DraftMessage() {}
 
 type EmailVerification interface {
-	tl.TLObject
+	tl.Any
 	_EmailVerification()
 }
 
@@ -3175,7 +3175,7 @@ func (*EmailVerificationApplePredict) CRC() uint32 {
 func (*EmailVerificationApplePredict) _EmailVerification() {}
 
 type EmailVerifyPurpose interface {
-	tl.TLObject
+	tl.Any
 	_EmailVerifyPurpose()
 }
 
@@ -3210,7 +3210,7 @@ func (*EmailVerifyPurposePassportPredict) CRC() uint32 {
 func (*EmailVerifyPurposePassportPredict) _EmailVerifyPurpose() {}
 
 type EmojiGroup interface {
-	tl.TLObject
+	tl.Any
 	_EmojiGroup()
 }
 
@@ -3253,7 +3253,7 @@ func (*EmojiGroupPremiumPredict) CRC() uint32 {
 func (*EmojiGroupPremiumPredict) _EmojiGroup() {}
 
 type EmojiKeyword interface {
-	tl.TLObject
+	tl.Any
 	_EmojiKeyword()
 }
 
@@ -3283,7 +3283,7 @@ func (*EmojiKeywordDeletedPredict) CRC() uint32 {
 func (*EmojiKeywordDeletedPredict) _EmojiKeyword() {}
 
 type EmojiKeywordsDifference interface {
-	tl.TLObject
+	tl.Any
 	_EmojiKeywordsDifference()
 }
 
@@ -3304,7 +3304,7 @@ func (*EmojiKeywordsDifferencePredict) CRC() uint32 {
 func (*EmojiKeywordsDifferencePredict) _EmojiKeywordsDifference() {}
 
 type EmojiLanguage interface {
-	tl.TLObject
+	tl.Any
 	_EmojiLanguage()
 }
 
@@ -3322,7 +3322,7 @@ func (*EmojiLanguagePredict) CRC() uint32 {
 func (*EmojiLanguagePredict) _EmojiLanguage() {}
 
 type EmojiList interface {
-	tl.TLObject
+	tl.Any
 	_EmojiList()
 }
 
@@ -3349,7 +3349,7 @@ func (*EmojiListPredict) CRC() uint32 {
 func (*EmojiListPredict) _EmojiList() {}
 
 type EmojiStatus interface {
-	tl.TLObject
+	tl.Any
 	_EmojiStatus()
 }
 
@@ -3386,7 +3386,7 @@ func (*EmojiStatusUntilPredict) CRC() uint32 {
 func (*EmojiStatusUntilPredict) _EmojiStatus() {}
 
 type EmojiURL interface {
-	tl.TLObject
+	tl.Any
 	_EmojiURL()
 }
 
@@ -3404,7 +3404,7 @@ func (*EmojiURLPredict) CRC() uint32 {
 func (*EmojiURLPredict) _EmojiURL() {}
 
 type EncryptedChat interface {
-	tl.TLObject
+	tl.Any
 	_EncryptedChat()
 }
 
@@ -3481,7 +3481,7 @@ func (*EncryptedChatDiscardedPredict) CRC() uint32 {
 func (*EncryptedChatDiscardedPredict) _EncryptedChat() {}
 
 type EncryptedFile interface {
-	tl.TLObject
+	tl.Any
 	_EncryptedFile()
 }
 
@@ -3511,7 +3511,7 @@ func (*EncryptedFilePredict) CRC() uint32 {
 func (*EncryptedFilePredict) _EncryptedFile() {}
 
 type EncryptedMessage interface {
-	tl.TLObject
+	tl.Any
 	_EncryptedMessage()
 }
 
@@ -3546,7 +3546,7 @@ func (*EncryptedMessageServicePredict) CRC() uint32 {
 func (*EncryptedMessageServicePredict) _EncryptedMessage() {}
 
 type Error interface {
-	tl.TLObject
+	tl.Any
 	_Error()
 }
 
@@ -3565,7 +3565,7 @@ func (*ErrorPredict) CRC() uint32 {
 func (*ErrorPredict) _Error() {}
 
 type ExportedChatInvite interface {
-	tl.TLObject
+	tl.Any
 	_ExportedChatInvite()
 }
 
@@ -3603,7 +3603,7 @@ func (*ChatInvitePublicJoinRequestsPredict) CRC() uint32 {
 func (*ChatInvitePublicJoinRequestsPredict) _ExportedChatInvite() {}
 
 type ExportedChatlistInvite interface {
-	tl.TLObject
+	tl.Any
 	_ExportedChatlistInvite()
 }
 
@@ -3624,7 +3624,7 @@ func (*ExportedChatlistInvitePredict) CRC() uint32 {
 func (*ExportedChatlistInvitePredict) _ExportedChatlistInvite() {}
 
 type ExportedContactToken interface {
-	tl.TLObject
+	tl.Any
 	_ExportedContactToken()
 }
 
@@ -3643,7 +3643,7 @@ func (*ExportedContactTokenPredict) CRC() uint32 {
 func (*ExportedContactTokenPredict) _ExportedContactToken() {}
 
 type ExportedMessageLink interface {
-	tl.TLObject
+	tl.Any
 	_ExportedMessageLink()
 }
 
@@ -3662,7 +3662,7 @@ func (*ExportedMessageLinkPredict) CRC() uint32 {
 func (*ExportedMessageLinkPredict) _ExportedMessageLink() {}
 
 type ExportedStoryLink interface {
-	tl.TLObject
+	tl.Any
 	_ExportedStoryLink()
 }
 
@@ -3680,7 +3680,7 @@ func (*ExportedStoryLinkPredict) CRC() uint32 {
 func (*ExportedStoryLinkPredict) _ExportedStoryLink() {}
 
 type FactCheck interface {
-	tl.TLObject
+	tl.Any
 	_FactCheck()
 }
 
@@ -3702,7 +3702,7 @@ func (*FactCheckPredict) CRC() uint32 {
 func (*FactCheckPredict) _FactCheck() {}
 
 type FileHash interface {
-	tl.TLObject
+	tl.Any
 	_FileHash()
 }
 
@@ -3722,7 +3722,7 @@ func (*FileHashPredict) CRC() uint32 {
 func (*FileHashPredict) _FileHash() {}
 
 type Folder interface {
-	tl.TLObject
+	tl.Any
 	_Folder()
 }
 
@@ -3746,7 +3746,7 @@ func (*FolderPredict) CRC() uint32 {
 func (*FolderPredict) _Folder() {}
 
 type FolderPeer interface {
-	tl.TLObject
+	tl.Any
 	_FolderPeer()
 }
 
@@ -3765,7 +3765,7 @@ func (*FolderPeerPredict) CRC() uint32 {
 func (*FolderPeerPredict) _FolderPeer() {}
 
 type ForumTopic interface {
-	tl.TLObject
+	tl.Any
 	_ForumTopic()
 }
 
@@ -3812,7 +3812,7 @@ func (*ForumTopicPredict) CRC() uint32 {
 func (*ForumTopicPredict) _ForumTopic() {}
 
 type FoundStory interface {
-	tl.TLObject
+	tl.Any
 	_FoundStory()
 }
 
@@ -3831,7 +3831,7 @@ func (*FoundStoryPredict) CRC() uint32 {
 func (*FoundStoryPredict) _FoundStory() {}
 
 type Game interface {
-	tl.TLObject
+	tl.Any
 	_Game()
 }
 
@@ -3856,7 +3856,7 @@ func (*GamePredict) CRC() uint32 {
 func (*GamePredict) _Game() {}
 
 type GeoPoint interface {
-	tl.TLObject
+	tl.Any
 	_GeoPoint()
 }
 
@@ -3886,7 +3886,7 @@ func (*GeoPointPredict) CRC() uint32 {
 func (*GeoPointPredict) _GeoPoint() {}
 
 type GeoPointAddress interface {
-	tl.TLObject
+	tl.Any
 	_GeoPointAddress()
 }
 
@@ -3908,7 +3908,7 @@ func (*GeoPointAddressPredict) CRC() uint32 {
 func (*GeoPointAddressPredict) _GeoPointAddress() {}
 
 type GlobalPrivacySettings interface {
-	tl.TLObject
+	tl.Any
 	_GlobalPrivacySettings()
 }
 
@@ -3931,7 +3931,7 @@ func (*GlobalPrivacySettingsPredict) CRC() uint32 {
 func (*GlobalPrivacySettingsPredict) _GlobalPrivacySettings() {}
 
 type GroupCall interface {
-	tl.TLObject
+	tl.Any
 	_GroupCall()
 }
 
@@ -3979,7 +3979,7 @@ func (*GroupCallPredict) CRC() uint32 {
 func (*GroupCallPredict) _GroupCall() {}
 
 type GroupCallParticipant interface {
-	tl.TLObject
+	tl.Any
 	_GroupCallParticipant()
 }
 
@@ -4016,7 +4016,7 @@ func (*GroupCallParticipantPredict) CRC() uint32 {
 func (*GroupCallParticipantPredict) _GroupCallParticipant() {}
 
 type GroupCallParticipantVideo interface {
-	tl.TLObject
+	tl.Any
 	_GroupCallParticipantVideo()
 }
 
@@ -4038,7 +4038,7 @@ func (*GroupCallParticipantVideoPredict) CRC() uint32 {
 func (*GroupCallParticipantVideoPredict) _GroupCallParticipantVideo() {}
 
 type GroupCallParticipantVideoSourceGroup interface {
-	tl.TLObject
+	tl.Any
 	_GroupCallParticipantVideoSourceGroup()
 }
 
@@ -4057,7 +4057,7 @@ func (*GroupCallParticipantVideoSourceGroupPredict) CRC() uint32 {
 func (*GroupCallParticipantVideoSourceGroupPredict) _GroupCallParticipantVideoSourceGroup() {}
 
 type GroupCallStreamChannel interface {
-	tl.TLObject
+	tl.Any
 	_GroupCallStreamChannel()
 }
 
@@ -4077,7 +4077,7 @@ func (*GroupCallStreamChannelPredict) CRC() uint32 {
 func (*GroupCallStreamChannelPredict) _GroupCallStreamChannel() {}
 
 type HighScore interface {
-	tl.TLObject
+	tl.Any
 	_HighScore()
 }
 
@@ -4097,7 +4097,7 @@ func (*HighScorePredict) CRC() uint32 {
 func (*HighScorePredict) _HighScore() {}
 
 type ImportedContact interface {
-	tl.TLObject
+	tl.Any
 	_ImportedContact()
 }
 
@@ -4116,7 +4116,7 @@ func (*ImportedContactPredict) CRC() uint32 {
 func (*ImportedContactPredict) _ImportedContact() {}
 
 type InlineBotSwitchPm interface {
-	tl.TLObject
+	tl.Any
 	_InlineBotSwitchPm()
 }
 
@@ -4135,7 +4135,7 @@ func (*InlineBotSwitchPmPredict) CRC() uint32 {
 func (*InlineBotSwitchPmPredict) _InlineBotSwitchPm() {}
 
 type InlineBotWebView interface {
-	tl.TLObject
+	tl.Any
 	_InlineBotWebView()
 }
 
@@ -4154,7 +4154,7 @@ func (*InlineBotWebViewPredict) CRC() uint32 {
 func (*InlineBotWebViewPredict) _InlineBotWebView() {}
 
 type InlineQueryPeerType interface {
-	tl.TLObject
+	tl.Any
 	_InlineQueryPeerType()
 }
 
@@ -4210,7 +4210,7 @@ func (*InlineQueryPeerTypeBotPmPredict) CRC() uint32 {
 func (*InlineQueryPeerTypeBotPmPredict) _InlineQueryPeerType() {}
 
 type InputAppEvent interface {
-	tl.TLObject
+	tl.Any
 	_InputAppEvent()
 }
 
@@ -4231,7 +4231,7 @@ func (*InputAppEventPredict) CRC() uint32 {
 func (*InputAppEventPredict) _InputAppEvent() {}
 
 type InputBotApp interface {
-	tl.TLObject
+	tl.Any
 	_InputBotApp()
 }
 
@@ -4261,7 +4261,7 @@ func (*InputBotAppShortNamePredict) CRC() uint32 {
 func (*InputBotAppShortNamePredict) _InputBotApp() {}
 
 type InputBotInlineMessage interface {
-	tl.TLObject
+	tl.Any
 	_InputBotInlineMessage()
 }
 
@@ -4392,7 +4392,7 @@ func (*InputBotInlineMessageMediaWebPagePredict) CRC() uint32 {
 func (*InputBotInlineMessageMediaWebPagePredict) _InputBotInlineMessage() {}
 
 type InputBotInlineMessageID interface {
-	tl.TLObject
+	tl.Any
 	_InputBotInlineMessageID()
 }
 
@@ -4425,7 +4425,7 @@ func (*InputBotInlineMessageID64Predict) CRC() uint32 {
 func (*InputBotInlineMessageID64Predict) _InputBotInlineMessageID() {}
 
 type InputBotInlineResult interface {
-	tl.TLObject
+	tl.Any
 	_InputBotInlineResult()
 }
 
@@ -4492,7 +4492,7 @@ func (*InputBotInlineResultGamePredict) CRC() uint32 {
 func (*InputBotInlineResultGamePredict) _InputBotInlineResult() {}
 
 type InputBusinessAwayMessage interface {
-	tl.TLObject
+	tl.Any
 	_InputBusinessAwayMessage()
 }
 
@@ -4514,7 +4514,7 @@ func (*InputBusinessAwayMessagePredict) CRC() uint32 {
 func (*InputBusinessAwayMessagePredict) _InputBusinessAwayMessage() {}
 
 type InputBusinessBotRecipients interface {
-	tl.TLObject
+	tl.Any
 	_InputBusinessBotRecipients()
 }
 
@@ -4539,7 +4539,7 @@ func (*InputBusinessBotRecipientsPredict) CRC() uint32 {
 func (*InputBusinessBotRecipientsPredict) _InputBusinessBotRecipients() {}
 
 type InputBusinessChatLink interface {
-	tl.TLObject
+	tl.Any
 	_InputBusinessChatLink()
 }
 
@@ -4560,7 +4560,7 @@ func (*InputBusinessChatLinkPredict) CRC() uint32 {
 func (*InputBusinessChatLinkPredict) _InputBusinessChatLink() {}
 
 type InputBusinessGreetingMessage interface {
-	tl.TLObject
+	tl.Any
 	_InputBusinessGreetingMessage()
 }
 
@@ -4580,7 +4580,7 @@ func (*InputBusinessGreetingMessagePredict) CRC() uint32 {
 func (*InputBusinessGreetingMessagePredict) _InputBusinessGreetingMessage() {}
 
 type InputBusinessIntro interface {
-	tl.TLObject
+	tl.Any
 	_InputBusinessIntro()
 }
 
@@ -4601,7 +4601,7 @@ func (*InputBusinessIntroPredict) CRC() uint32 {
 func (*InputBusinessIntroPredict) _InputBusinessIntro() {}
 
 type InputBusinessRecipients interface {
-	tl.TLObject
+	tl.Any
 	_InputBusinessRecipients()
 }
 
@@ -4625,7 +4625,7 @@ func (*InputBusinessRecipientsPredict) CRC() uint32 {
 func (*InputBusinessRecipientsPredict) _InputBusinessRecipients() {}
 
 type InputChannel interface {
-	tl.TLObject
+	tl.Any
 	_InputChannel()
 }
 
@@ -4664,7 +4664,7 @@ func (*InputChannelFromMessagePredict) CRC() uint32 {
 func (*InputChannelFromMessagePredict) _InputChannel() {}
 
 type InputChatPhoto interface {
-	tl.TLObject
+	tl.Any
 	_InputChatPhoto()
 }
 
@@ -4704,7 +4704,7 @@ func (*InputChatPhotoPredict) CRC() uint32 {
 func (*InputChatPhotoPredict) _InputChatPhoto() {}
 
 type InputChatlist interface {
-	tl.TLObject
+	tl.Any
 	_InputChatlist()
 }
 
@@ -4722,7 +4722,7 @@ func (*InputChatlistDialogFilterPredict) CRC() uint32 {
 func (*InputChatlistDialogFilterPredict) _InputChatlist() {}
 
 type InputCheckPasswordSRP interface {
-	tl.TLObject
+	tl.Any
 	_InputCheckPasswordSRP()
 }
 
@@ -4750,7 +4750,7 @@ func (*InputCheckPasswordSRPPredict) CRC() uint32 {
 func (*InputCheckPasswordSRPPredict) _InputCheckPasswordSRP() {}
 
 type InputClientProxy interface {
-	tl.TLObject
+	tl.Any
 	_InputClientProxy()
 }
 
@@ -4769,7 +4769,7 @@ func (*InputClientProxyPredict) CRC() uint32 {
 func (*InputClientProxyPredict) _InputClientProxy() {}
 
 type InputCollectible interface {
-	tl.TLObject
+	tl.Any
 	_InputCollectible()
 }
 
@@ -4797,7 +4797,7 @@ func (*InputCollectiblePhonePredict) CRC() uint32 {
 func (*InputCollectiblePhonePredict) _InputCollectible() {}
 
 type InputContact interface {
-	tl.TLObject
+	tl.Any
 	_InputContact()
 }
 
@@ -4818,7 +4818,7 @@ func (*InputPhoneContactPredict) CRC() uint32 {
 func (*InputPhoneContactPredict) _InputContact() {}
 
 type InputDialogPeer interface {
-	tl.TLObject
+	tl.Any
 	_InputDialogPeer()
 }
 
@@ -4846,7 +4846,7 @@ func (*InputDialogPeerFolderPredict) CRC() uint32 {
 func (*InputDialogPeerFolderPredict) _InputDialogPeer() {}
 
 type InputDocument interface {
-	tl.TLObject
+	tl.Any
 	_InputDocument()
 }
 
@@ -4874,7 +4874,7 @@ func (*InputDocumentPredict) CRC() uint32 {
 func (*InputDocumentPredict) _InputDocument() {}
 
 type InputEncryptedChat interface {
-	tl.TLObject
+	tl.Any
 	_InputEncryptedChat()
 }
 
@@ -4893,7 +4893,7 @@ func (*InputEncryptedChatPredict) CRC() uint32 {
 func (*InputEncryptedChatPredict) _InputEncryptedChat() {}
 
 type InputEncryptedFile interface {
-	tl.TLObject
+	tl.Any
 	_InputEncryptedFile()
 }
 
@@ -4945,7 +4945,7 @@ func (*InputEncryptedFileBigUploadedPredict) CRC() uint32 {
 func (*InputEncryptedFileBigUploadedPredict) _InputEncryptedFile() {}
 
 type InputFile interface {
-	tl.TLObject
+	tl.Any
 	_InputFile()
 }
 
@@ -4978,7 +4978,7 @@ func (*InputFileBigPredict) CRC() uint32 {
 func (*InputFileBigPredict) _InputFile() {}
 
 type InputFileLocation interface {
-	tl.TLObject
+	tl.Any
 	_InputFileLocation()
 }
 
@@ -5109,7 +5109,7 @@ func (*InputGroupCallStreamPredict) CRC() uint32 {
 func (*InputGroupCallStreamPredict) _InputFileLocation() {}
 
 type InputFolderPeer interface {
-	tl.TLObject
+	tl.Any
 	_InputFolderPeer()
 }
 
@@ -5128,7 +5128,7 @@ func (*InputFolderPeerPredict) CRC() uint32 {
 func (*InputFolderPeerPredict) _InputFolderPeer() {}
 
 type InputGame interface {
-	tl.TLObject
+	tl.Any
 	_InputGame()
 }
 
@@ -5158,7 +5158,7 @@ func (*InputGameShortNamePredict) CRC() uint32 {
 func (*InputGameShortNamePredict) _InputGame() {}
 
 type InputGeoPoint interface {
-	tl.TLObject
+	tl.Any
 	_InputGeoPoint()
 }
 
@@ -5187,7 +5187,7 @@ func (*InputGeoPointPredict) CRC() uint32 {
 func (*InputGeoPointPredict) _InputGeoPoint() {}
 
 type InputGroupCall interface {
-	tl.TLObject
+	tl.Any
 	_InputGroupCall()
 }
 
@@ -5206,7 +5206,7 @@ func (*InputGroupCallPredict) CRC() uint32 {
 func (*InputGroupCallPredict) _InputGroupCall() {}
 
 type InputInvoice interface {
-	tl.TLObject
+	tl.Any
 	_InputInvoice()
 }
 
@@ -5256,7 +5256,7 @@ func (*InputInvoiceStarsPredict) CRC() uint32 {
 func (*InputInvoiceStarsPredict) _InputInvoice() {}
 
 type InputMedia interface {
-	tl.TLObject
+	tl.Any
 	_InputMedia()
 }
 
@@ -5500,7 +5500,7 @@ func (*InputMediaPaidMediaPredict) CRC() uint32 {
 func (*InputMediaPaidMediaPredict) _InputMedia() {}
 
 type InputMessage interface {
-	tl.TLObject
+	tl.Any
 	_InputMessage()
 }
 
@@ -5547,7 +5547,7 @@ func (*InputMessageCallbackQueryPredict) CRC() uint32 {
 func (*InputMessageCallbackQueryPredict) _InputMessage() {}
 
 type InputNotifyPeer interface {
-	tl.TLObject
+	tl.Any
 	_InputNotifyPeer()
 }
 
@@ -5600,7 +5600,7 @@ func (*InputNotifyForumTopicPredict) CRC() uint32 {
 func (*InputNotifyForumTopicPredict) _InputNotifyPeer() {}
 
 type InputPaymentCredentials interface {
-	tl.TLObject
+	tl.Any
 	_InputPaymentCredentials()
 }
 
@@ -5651,7 +5651,7 @@ func (*InputPaymentCredentialsGooglePayPredict) CRC() uint32 {
 func (*InputPaymentCredentialsGooglePayPredict) _InputPaymentCredentials() {}
 
 type InputPeer interface {
-	tl.TLObject
+	tl.Any
 	_InputPeer()
 }
 
@@ -5731,7 +5731,7 @@ func (*InputPeerChannelFromMessagePredict) CRC() uint32 {
 func (*InputPeerChannelFromMessagePredict) _InputPeer() {}
 
 type InputPeerNotifySettings interface {
-	tl.TLObject
+	tl.Any
 	_InputPeerNotifySettings()
 }
 
@@ -5756,7 +5756,7 @@ func (*InputPeerNotifySettingsPredict) CRC() uint32 {
 func (*InputPeerNotifySettingsPredict) _InputPeerNotifySettings() {}
 
 type InputPhoneCall interface {
-	tl.TLObject
+	tl.Any
 	_InputPhoneCall()
 }
 
@@ -5775,7 +5775,7 @@ func (*InputPhoneCallPredict) CRC() uint32 {
 func (*InputPhoneCallPredict) _InputPhoneCall() {}
 
 type InputPhoto interface {
-	tl.TLObject
+	tl.Any
 	_InputPhoto()
 }
 
@@ -5803,7 +5803,7 @@ func (*InputPhotoPredict) CRC() uint32 {
 func (*InputPhotoPredict) _InputPhoto() {}
 
 type InputPrivacyKey interface {
-	tl.TLObject
+	tl.Any
 	_InputPrivacyKey()
 }
 
@@ -5899,7 +5899,7 @@ func (*InputPrivacyKeyBirthdayPredict) CRC() uint32 {
 func (*InputPrivacyKeyBirthdayPredict) _InputPrivacyKey() {}
 
 type InputPrivacyRule interface {
-	tl.TLObject
+	tl.Any
 	_InputPrivacyRule()
 }
 
@@ -5995,7 +5995,7 @@ func (*InputPrivacyValueAllowPremiumPredict) CRC() uint32 {
 func (*InputPrivacyValueAllowPremiumPredict) _InputPrivacyRule() {}
 
 type InputQuickReplyShortcut interface {
-	tl.TLObject
+	tl.Any
 	_InputQuickReplyShortcut()
 }
 
@@ -6023,7 +6023,7 @@ func (*InputQuickReplyShortcutIDPredict) CRC() uint32 {
 func (*InputQuickReplyShortcutIDPredict) _InputQuickReplyShortcut() {}
 
 type InputReplyTo interface {
-	tl.TLObject
+	tl.Any
 	_InputReplyTo()
 }
 
@@ -6058,7 +6058,7 @@ func (*InputReplyToStoryPredict) CRC() uint32 {
 func (*InputReplyToStoryPredict) _InputReplyTo() {}
 
 type InputSecureFile interface {
-	tl.TLObject
+	tl.Any
 	_InputSecureFile()
 }
 
@@ -6091,7 +6091,7 @@ func (*InputSecureFilePredict) CRC() uint32 {
 func (*InputSecureFilePredict) _InputSecureFile() {}
 
 type InputSecureValue interface {
-	tl.TLObject
+	tl.Any
 	_InputSecureValue()
 }
 
@@ -6117,7 +6117,7 @@ func (*InputSecureValuePredict) CRC() uint32 {
 func (*InputSecureValuePredict) _InputSecureValue() {}
 
 type InputSingleMedia interface {
-	tl.TLObject
+	tl.Any
 	_InputSingleMedia()
 }
 
@@ -6139,7 +6139,7 @@ func (*InputSingleMediaPredict) CRC() uint32 {
 func (*InputSingleMediaPredict) _InputSingleMedia() {}
 
 type InputStarsTransaction interface {
-	tl.TLObject
+	tl.Any
 	_InputStarsTransaction()
 }
 
@@ -6159,7 +6159,7 @@ func (*InputStarsTransactionPredict) CRC() uint32 {
 func (*InputStarsTransactionPredict) _InputStarsTransaction() {}
 
 type InputStickerSet interface {
-	tl.TLObject
+	tl.Any
 	_InputStickerSet()
 }
 
@@ -6262,7 +6262,7 @@ func (*InputStickerSetEmojiChannelDefaultStatusesPredict) CRC() uint32 {
 func (*InputStickerSetEmojiChannelDefaultStatusesPredict) _InputStickerSet() {}
 
 type InputStickerSetItem interface {
-	tl.TLObject
+	tl.Any
 	_InputStickerSetItem()
 }
 
@@ -6284,7 +6284,7 @@ func (*InputStickerSetItemPredict) CRC() uint32 {
 func (*InputStickerSetItemPredict) _InputStickerSetItem() {}
 
 type InputStickeredMedia interface {
-	tl.TLObject
+	tl.Any
 	_InputStickeredMedia()
 }
 
@@ -6312,7 +6312,7 @@ func (*InputStickeredMediaDocumentPredict) CRC() uint32 {
 func (*InputStickeredMediaDocumentPredict) _InputStickeredMedia() {}
 
 type InputStorePaymentPurpose interface {
-	tl.TLObject
+	tl.Any
 	_InputStorePaymentPurpose()
 }
 
@@ -6403,7 +6403,7 @@ func (*InputStorePaymentStarsGiftPredict) CRC() uint32 {
 func (*InputStorePaymentStarsGiftPredict) _InputStorePaymentPurpose() {}
 
 type InputTheme interface {
-	tl.TLObject
+	tl.Any
 	_InputTheme()
 }
 
@@ -6432,7 +6432,7 @@ func (*InputThemeSlugPredict) CRC() uint32 {
 func (*InputThemeSlugPredict) _InputTheme() {}
 
 type InputThemeSettings interface {
-	tl.TLObject
+	tl.Any
 	_InputThemeSettings()
 }
 
@@ -6457,7 +6457,7 @@ func (*InputThemeSettingsPredict) CRC() uint32 {
 func (*InputThemeSettingsPredict) _InputThemeSettings() {}
 
 type InputUser interface {
-	tl.TLObject
+	tl.Any
 	_InputUser()
 }
 
@@ -6504,7 +6504,7 @@ func (*InputUserFromMessagePredict) CRC() uint32 {
 func (*InputUserFromMessagePredict) _InputUser() {}
 
 type InputWallPaper interface {
-	tl.TLObject
+	tl.Any
 	_InputWallPaper()
 }
 
@@ -6543,7 +6543,7 @@ func (*InputWallPaperNoFilePredict) CRC() uint32 {
 func (*InputWallPaperNoFilePredict) _InputWallPaper() {}
 
 type InputWebDocument interface {
-	tl.TLObject
+	tl.Any
 	_InputWebDocument()
 }
 
@@ -6564,7 +6564,7 @@ func (*InputWebDocumentPredict) CRC() uint32 {
 func (*InputWebDocumentPredict) _InputWebDocument() {}
 
 type InputWebFileLocation interface {
-	tl.TLObject
+	tl.Any
 	_InputWebFileLocation()
 }
 
@@ -6612,7 +6612,7 @@ func (*InputWebFileAudioAlbumThumbLocationPredict) CRC() uint32 {
 func (*InputWebFileAudioAlbumThumbLocationPredict) _InputWebFileLocation() {}
 
 type Invoice interface {
-	tl.TLObject
+	tl.Any
 	_Invoice()
 }
 
@@ -6644,7 +6644,7 @@ func (*InvoicePredict) CRC() uint32 {
 func (*InvoicePredict) _Invoice() {}
 
 type JSONObjectValue interface {
-	tl.TLObject
+	tl.Any
 	_JSONObjectValue()
 }
 
@@ -6663,7 +6663,7 @@ func (*JSONObjectValuePredict) CRC() uint32 {
 func (*JSONObjectValuePredict) _JSONObjectValue() {}
 
 type JSONValue interface {
-	tl.TLObject
+	tl.Any
 	_JSONValue()
 }
 
@@ -6729,7 +6729,7 @@ func (*JSONObjectPredict) CRC() uint32 {
 func (*JSONObjectPredict) _JSONValue() {}
 
 type KeyboardButton interface {
-	tl.TLObject
+	tl.Any
 	_KeyboardButton()
 }
 
@@ -6940,7 +6940,7 @@ func (*InputKeyboardButtonRequestPeerPredict) CRC() uint32 {
 func (*InputKeyboardButtonRequestPeerPredict) _KeyboardButton() {}
 
 type KeyboardButtonRow interface {
-	tl.TLObject
+	tl.Any
 	_KeyboardButtonRow()
 }
 
@@ -6958,7 +6958,7 @@ func (*KeyboardButtonRowPredict) CRC() uint32 {
 func (*KeyboardButtonRowPredict) _KeyboardButtonRow() {}
 
 type LabeledPrice interface {
-	tl.TLObject
+	tl.Any
 	_LabeledPrice()
 }
 
@@ -6977,7 +6977,7 @@ func (*LabeledPricePredict) CRC() uint32 {
 func (*LabeledPricePredict) _LabeledPrice() {}
 
 type LangPackDifference interface {
-	tl.TLObject
+	tl.Any
 	_LangPackDifference()
 }
 
@@ -6998,7 +6998,7 @@ func (*LangPackDifferencePredict) CRC() uint32 {
 func (*LangPackDifferencePredict) _LangPackDifference() {}
 
 type LangPackLanguage interface {
-	tl.TLObject
+	tl.Any
 	_LangPackLanguage()
 }
 
@@ -7027,7 +7027,7 @@ func (*LangPackLanguagePredict) CRC() uint32 {
 func (*LangPackLanguagePredict) _LangPackLanguage() {}
 
 type LangPackString interface {
-	tl.TLObject
+	tl.Any
 	_LangPackString()
 }
 
@@ -7073,7 +7073,7 @@ func (*LangPackStringDeletedPredict) CRC() uint32 {
 func (*LangPackStringDeletedPredict) _LangPackString() {}
 
 type MaskCoords interface {
-	tl.TLObject
+	tl.Any
 	_MaskCoords()
 }
 
@@ -7094,7 +7094,7 @@ func (*MaskCoordsPredict) CRC() uint32 {
 func (*MaskCoordsPredict) _MaskCoords() {}
 
 type MediaArea interface {
-	tl.TLObject
+	tl.Any
 	_MediaArea()
 }
 
@@ -7205,7 +7205,7 @@ func (*MediaAreaWeatherPredict) CRC() uint32 {
 func (*MediaAreaWeatherPredict) _MediaArea() {}
 
 type MediaAreaCoordinates interface {
-	tl.TLObject
+	tl.Any
 	_MediaAreaCoordinates()
 }
 
@@ -7229,7 +7229,7 @@ func (*MediaAreaCoordinatesPredict) CRC() uint32 {
 func (*MediaAreaCoordinatesPredict) _MediaAreaCoordinates() {}
 
 type Message interface {
-	tl.TLObject
+	tl.Any
 	_Message()
 }
 
@@ -7321,7 +7321,7 @@ func (*MessageServicePredict) CRC() uint32 {
 func (*MessageServicePredict) _Message() {}
 
 type MessageAction interface {
-	tl.TLObject
+	tl.Any
 	_MessageAction()
 }
 
@@ -7835,7 +7835,7 @@ func (*MessageActionGiftStarsPredict) CRC() uint32 {
 func (*MessageActionGiftStarsPredict) _MessageAction() {}
 
 type MessageEntity interface {
-	tl.TLObject
+	tl.Any
 	_MessageEntity()
 }
 
@@ -8081,7 +8081,7 @@ func (*MessageEntityBlockquotePredict) CRC() uint32 {
 func (*MessageEntityBlockquotePredict) _MessageEntity() {}
 
 type MessageExtendedMedia interface {
-	tl.TLObject
+	tl.Any
 	_MessageExtendedMedia()
 }
 
@@ -8113,7 +8113,7 @@ func (*MessageExtendedMediaPredict) CRC() uint32 {
 func (*MessageExtendedMediaPredict) _MessageExtendedMedia() {}
 
 type MessageFwdHeader interface {
-	tl.TLObject
+	tl.Any
 	_MessageFwdHeader()
 }
 
@@ -8144,7 +8144,7 @@ func (*MessageFwdHeaderPredict) CRC() uint32 {
 func (*MessageFwdHeaderPredict) _MessageFwdHeader() {}
 
 type MessageMedia interface {
-	tl.TLObject
+	tl.Any
 	_MessageMedia()
 }
 
@@ -8383,7 +8383,7 @@ func (*MessageMediaPaidMediaPredict) CRC() uint32 {
 func (*MessageMediaPaidMediaPredict) _MessageMedia() {}
 
 type MessagePeerReaction interface {
-	tl.TLObject
+	tl.Any
 	_MessagePeerReaction()
 }
 
@@ -8407,7 +8407,7 @@ func (*MessagePeerReactionPredict) CRC() uint32 {
 func (*MessagePeerReactionPredict) _MessagePeerReaction() {}
 
 type MessagePeerVote interface {
-	tl.TLObject
+	tl.Any
 	_MessagePeerVote()
 }
 
@@ -8450,7 +8450,7 @@ func (*MessagePeerVoteMultiplePredict) CRC() uint32 {
 func (*MessagePeerVoteMultiplePredict) _MessagePeerVote() {}
 
 type MessageRange interface {
-	tl.TLObject
+	tl.Any
 	_MessageRange()
 }
 
@@ -8469,7 +8469,7 @@ func (*MessageRangePredict) CRC() uint32 {
 func (*MessageRangePredict) _MessageRange() {}
 
 type MessageReactions interface {
-	tl.TLObject
+	tl.Any
 	_MessageReactions()
 }
 
@@ -8492,7 +8492,7 @@ func (*MessageReactionsPredict) CRC() uint32 {
 func (*MessageReactionsPredict) _MessageReactions() {}
 
 type MessageReplies interface {
-	tl.TLObject
+	tl.Any
 	_MessageReplies()
 }
 
@@ -8517,7 +8517,7 @@ func (*MessageRepliesPredict) CRC() uint32 {
 func (*MessageRepliesPredict) _MessageReplies() {}
 
 type MessageReplyHeader interface {
-	tl.TLObject
+	tl.Any
 	_MessageReplyHeader()
 }
 
@@ -8557,7 +8557,7 @@ func (*MessageReplyStoryHeaderPredict) CRC() uint32 {
 func (*MessageReplyStoryHeaderPredict) _MessageReplyHeader() {}
 
 type MessageViews interface {
-	tl.TLObject
+	tl.Any
 	_MessageViews()
 }
 
@@ -8578,7 +8578,7 @@ func (*MessageViewsPredict) CRC() uint32 {
 func (*MessageViewsPredict) _MessageViews() {}
 
 type MessagesFilter interface {
-	tl.TLObject
+	tl.Any
 	_MessagesFilter()
 }
 
@@ -8725,7 +8725,7 @@ func (*InputMessagesFilterPinnedPredict) CRC() uint32 {
 func (*InputMessagesFilterPinnedPredict) _MessagesFilter() {}
 
 type MissingInvitee interface {
-	tl.TLObject
+	tl.Any
 	_MissingInvitee()
 }
 
@@ -8746,7 +8746,7 @@ func (*MissingInviteePredict) CRC() uint32 {
 func (*MissingInviteePredict) _MissingInvitee() {}
 
 type MyBoost interface {
-	tl.TLObject
+	tl.Any
 	_MyBoost()
 }
 
@@ -8769,7 +8769,7 @@ func (*MyBoostPredict) CRC() uint32 {
 func (*MyBoostPredict) _MyBoost() {}
 
 type NearestDc interface {
-	tl.TLObject
+	tl.Any
 	_NearestDc()
 }
 
@@ -8789,7 +8789,7 @@ func (*NearestDcPredict) CRC() uint32 {
 func (*NearestDcPredict) _NearestDc() {}
 
 type NotificationSound interface {
-	tl.TLObject
+	tl.Any
 	_NotificationSound()
 }
 
@@ -8834,7 +8834,7 @@ func (*NotificationSoundRingtonePredict) CRC() uint32 {
 func (*NotificationSoundRingtonePredict) _NotificationSound() {}
 
 type NotifyPeer interface {
-	tl.TLObject
+	tl.Any
 	_NotifyPeer()
 }
 
@@ -8887,7 +8887,7 @@ func (*NotifyForumTopicPredict) CRC() uint32 {
 func (*NotifyForumTopicPredict) _NotifyPeer() {}
 
 type Null interface {
-	tl.TLObject
+	tl.Any
 	_Null()
 }
 
@@ -8903,7 +8903,7 @@ func (*NullPredict) CRC() uint32 {
 func (*NullPredict) _Null() {}
 
 type OutboxReadDate interface {
-	tl.TLObject
+	tl.Any
 	_OutboxReadDate()
 }
 
@@ -8921,7 +8921,7 @@ func (*OutboxReadDatePredict) CRC() uint32 {
 func (*OutboxReadDatePredict) _OutboxReadDate() {}
 
 type Page interface {
-	tl.TLObject
+	tl.Any
 	_Page()
 }
 
@@ -8947,7 +8947,7 @@ func (*PagePredict) CRC() uint32 {
 func (*PagePredict) _Page() {}
 
 type PageBlock interface {
-	tl.TLObject
+	tl.Any
 	_PageBlock()
 }
 
@@ -9282,7 +9282,7 @@ func (*PageBlockMapPredict) CRC() uint32 {
 func (*PageBlockMapPredict) _PageBlock() {}
 
 type PageCaption interface {
-	tl.TLObject
+	tl.Any
 	_PageCaption()
 }
 
@@ -9301,7 +9301,7 @@ func (*PageCaptionPredict) CRC() uint32 {
 func (*PageCaptionPredict) _PageCaption() {}
 
 type PageListItem interface {
-	tl.TLObject
+	tl.Any
 	_PageListItem()
 }
 
@@ -9329,7 +9329,7 @@ func (*PageListItemBlocksPredict) CRC() uint32 {
 func (*PageListItemBlocksPredict) _PageListItem() {}
 
 type PageListOrderedItem interface {
-	tl.TLObject
+	tl.Any
 	_PageListOrderedItem()
 }
 
@@ -9359,7 +9359,7 @@ func (*PageListOrderedItemBlocksPredict) CRC() uint32 {
 func (*PageListOrderedItemBlocksPredict) _PageListOrderedItem() {}
 
 type PageRelatedArticle interface {
-	tl.TLObject
+	tl.Any
 	_PageRelatedArticle()
 }
 
@@ -9384,7 +9384,7 @@ func (*PageRelatedArticlePredict) CRC() uint32 {
 func (*PageRelatedArticlePredict) _PageRelatedArticle() {}
 
 type PageTableCell interface {
-	tl.TLObject
+	tl.Any
 	_PageTableCell()
 }
 
@@ -9410,7 +9410,7 @@ func (*PageTableCellPredict) CRC() uint32 {
 func (*PageTableCellPredict) _PageTableCell() {}
 
 type PageTableRow interface {
-	tl.TLObject
+	tl.Any
 	_PageTableRow()
 }
 
@@ -9428,7 +9428,7 @@ func (*PageTableRowPredict) CRC() uint32 {
 func (*PageTableRowPredict) _PageTableRow() {}
 
 type PasswordKdfAlgo interface {
-	tl.TLObject
+	tl.Any
 	_PasswordKdfAlgo()
 }
 
@@ -9457,7 +9457,7 @@ func (*PasswordKdfAlgoSHA256SHA256Pbkdf2Hmacsha512Iter100000SHA256ModPowPredict)
 func (*PasswordKdfAlgoSHA256SHA256Pbkdf2Hmacsha512Iter100000SHA256ModPowPredict) _PasswordKdfAlgo() {}
 
 type PaymentCharge interface {
-	tl.TLObject
+	tl.Any
 	_PaymentCharge()
 }
 
@@ -9476,7 +9476,7 @@ func (*PaymentChargePredict) CRC() uint32 {
 func (*PaymentChargePredict) _PaymentCharge() {}
 
 type PaymentFormMethod interface {
-	tl.TLObject
+	tl.Any
 	_PaymentFormMethod()
 }
 
@@ -9495,7 +9495,7 @@ func (*PaymentFormMethodPredict) CRC() uint32 {
 func (*PaymentFormMethodPredict) _PaymentFormMethod() {}
 
 type PaymentRequestedInfo interface {
-	tl.TLObject
+	tl.Any
 	_PaymentRequestedInfo()
 }
 
@@ -9517,7 +9517,7 @@ func (*PaymentRequestedInfoPredict) CRC() uint32 {
 func (*PaymentRequestedInfoPredict) _PaymentRequestedInfo() {}
 
 type PaymentSavedCredentials interface {
-	tl.TLObject
+	tl.Any
 	_PaymentSavedCredentials()
 }
 
@@ -9536,7 +9536,7 @@ func (*PaymentSavedCredentialsCardPredict) CRC() uint32 {
 func (*PaymentSavedCredentialsCardPredict) _PaymentSavedCredentials() {}
 
 type Peer interface {
-	tl.TLObject
+	tl.Any
 	_Peer()
 }
 
@@ -9574,7 +9574,7 @@ func (*PeerChannelPredict) CRC() uint32 {
 func (*PeerChannelPredict) _Peer() {}
 
 type PeerBlocked interface {
-	tl.TLObject
+	tl.Any
 	_PeerBlocked()
 }
 
@@ -9593,7 +9593,7 @@ func (*PeerBlockedPredict) CRC() uint32 {
 func (*PeerBlockedPredict) _PeerBlocked() {}
 
 type PeerColor interface {
-	tl.TLObject
+	tl.Any
 	_PeerColor()
 }
 
@@ -9613,7 +9613,7 @@ func (*PeerColorPredict) CRC() uint32 {
 func (*PeerColorPredict) _PeerColor() {}
 
 type PeerLocated interface {
-	tl.TLObject
+	tl.Any
 	_PeerLocated()
 }
 
@@ -9643,7 +9643,7 @@ func (*PeerSelfLocatedPredict) CRC() uint32 {
 func (*PeerSelfLocatedPredict) _PeerLocated() {}
 
 type PeerNotifySettings interface {
-	tl.TLObject
+	tl.Any
 	_PeerNotifySettings()
 }
 
@@ -9672,7 +9672,7 @@ func (*PeerNotifySettingsPredict) CRC() uint32 {
 func (*PeerNotifySettingsPredict) _PeerNotifySettings() {}
 
 type PeerSettings interface {
-	tl.TLObject
+	tl.Any
 	_PeerSettings()
 }
 
@@ -9706,7 +9706,7 @@ func (*PeerSettingsPredict) CRC() uint32 {
 func (*PeerSettingsPredict) _PeerSettings() {}
 
 type PeerStories interface {
-	tl.TLObject
+	tl.Any
 	_PeerStories()
 }
 
@@ -9727,7 +9727,7 @@ func (*PeerStoriesPredict) CRC() uint32 {
 func (*PeerStoriesPredict) _PeerStories() {}
 
 type PhoneCall interface {
-	tl.TLObject
+	tl.Any
 	_PhoneCall()
 }
 
@@ -9838,7 +9838,7 @@ func (*PhoneCallDiscardedPredict) CRC() uint32 {
 func (*PhoneCallDiscardedPredict) _PhoneCall() {}
 
 type PhoneCallDiscardReason interface {
-	tl.TLObject
+	tl.Any
 	_PhoneCallDiscardReason()
 }
 
@@ -9878,7 +9878,7 @@ func (*PhoneCallDiscardReasonBusyPredict) CRC() uint32 {
 func (*PhoneCallDiscardReasonBusyPredict) _PhoneCallDiscardReason() {}
 
 type PhoneCallProtocol interface {
-	tl.TLObject
+	tl.Any
 	_PhoneCallProtocol()
 }
 
@@ -9901,7 +9901,7 @@ func (*PhoneCallProtocolPredict) CRC() uint32 {
 func (*PhoneCallProtocolPredict) _PhoneCallProtocol() {}
 
 type PhoneConnection interface {
-	tl.TLObject
+	tl.Any
 	_PhoneConnection()
 }
 
@@ -9943,7 +9943,7 @@ func (*PhoneConnectionWebrtcPredict) CRC() uint32 {
 func (*PhoneConnectionWebrtcPredict) _PhoneConnection() {}
 
 type Photo interface {
-	tl.TLObject
+	tl.Any
 	_Photo()
 }
 
@@ -9979,7 +9979,7 @@ func (*PhotoPredict) CRC() uint32 {
 func (*PhotoPredict) _Photo() {}
 
 type PhotoSize interface {
-	tl.TLObject
+	tl.Any
 	_PhotoSize()
 }
 
@@ -10058,7 +10058,7 @@ func (*PhotoPathSizePredict) CRC() uint32 {
 func (*PhotoPathSizePredict) _PhotoSize() {}
 
 type Poll interface {
-	tl.TLObject
+	tl.Any
 	_Poll()
 }
 
@@ -10085,7 +10085,7 @@ func (*PollPredict) CRC() uint32 {
 func (*PollPredict) _Poll() {}
 
 type PollAnswer interface {
-	tl.TLObject
+	tl.Any
 	_PollAnswer()
 }
 
@@ -10104,7 +10104,7 @@ func (*PollAnswerPredict) CRC() uint32 {
 func (*PollAnswerPredict) _PollAnswer() {}
 
 type PollAnswerVoters interface {
-	tl.TLObject
+	tl.Any
 	_PollAnswerVoters()
 }
 
@@ -10126,7 +10126,7 @@ func (*PollAnswerVotersPredict) CRC() uint32 {
 func (*PollAnswerVotersPredict) _PollAnswerVoters() {}
 
 type PollResults interface {
-	tl.TLObject
+	tl.Any
 	_PollResults()
 }
 
@@ -10150,7 +10150,7 @@ func (*PollResultsPredict) CRC() uint32 {
 func (*PollResultsPredict) _PollResults() {}
 
 type PopularContact interface {
-	tl.TLObject
+	tl.Any
 	_PopularContact()
 }
 
@@ -10169,7 +10169,7 @@ func (*PopularContactPredict) CRC() uint32 {
 func (*PopularContactPredict) _PopularContact() {}
 
 type PostAddress interface {
-	tl.TLObject
+	tl.Any
 	_PostAddress()
 }
 
@@ -10192,7 +10192,7 @@ func (*PostAddressPredict) CRC() uint32 {
 func (*PostAddressPredict) _PostAddress() {}
 
 type PostInteractionCounters interface {
-	tl.TLObject
+	tl.Any
 	_PostInteractionCounters()
 }
 
@@ -10226,7 +10226,7 @@ func (*PostInteractionCountersStoryPredict) CRC() uint32 {
 func (*PostInteractionCountersStoryPredict) _PostInteractionCounters() {}
 
 type PremiumGiftCodeOption interface {
-	tl.TLObject
+	tl.Any
 	_PremiumGiftCodeOption()
 }
 
@@ -10250,7 +10250,7 @@ func (*PremiumGiftCodeOptionPredict) CRC() uint32 {
 func (*PremiumGiftCodeOptionPredict) _PremiumGiftCodeOption() {}
 
 type PremiumGiftOption interface {
-	tl.TLObject
+	tl.Any
 	_PremiumGiftOption()
 }
 
@@ -10273,7 +10273,7 @@ func (*PremiumGiftOptionPredict) CRC() uint32 {
 func (*PremiumGiftOptionPredict) _PremiumGiftOption() {}
 
 type PremiumSubscriptionOption interface {
-	tl.TLObject
+	tl.Any
 	_PremiumSubscriptionOption()
 }
 
@@ -10299,7 +10299,7 @@ func (*PremiumSubscriptionOptionPredict) CRC() uint32 {
 func (*PremiumSubscriptionOptionPredict) _PremiumSubscriptionOption() {}
 
 type PrepaidGiveaway interface {
-	tl.TLObject
+	tl.Any
 	_PrepaidGiveaway()
 }
 
@@ -10320,7 +10320,7 @@ func (*PrepaidGiveawayPredict) CRC() uint32 {
 func (*PrepaidGiveawayPredict) _PrepaidGiveaway() {}
 
 type PrivacyKey interface {
-	tl.TLObject
+	tl.Any
 	_PrivacyKey()
 }
 
@@ -10416,7 +10416,7 @@ func (*PrivacyKeyBirthdayPredict) CRC() uint32 {
 func (*PrivacyKeyBirthdayPredict) _PrivacyKey() {}
 
 type PrivacyRule interface {
-	tl.TLObject
+	tl.Any
 	_PrivacyRule()
 }
 
@@ -10512,7 +10512,7 @@ func (*PrivacyValueAllowPremiumPredict) CRC() uint32 {
 func (*PrivacyValueAllowPremiumPredict) _PrivacyRule() {}
 
 type PublicForward interface {
-	tl.TLObject
+	tl.Any
 	_PublicForward()
 }
 
@@ -10541,7 +10541,7 @@ func (*PublicForwardStoryPredict) CRC() uint32 {
 func (*PublicForwardStoryPredict) _PublicForward() {}
 
 type QuickReply interface {
-	tl.TLObject
+	tl.Any
 	_QuickReply()
 }
 
@@ -10562,7 +10562,7 @@ func (*QuickReplyPredict) CRC() uint32 {
 func (*QuickReplyPredict) _QuickReply() {}
 
 type Reaction interface {
-	tl.TLObject
+	tl.Any
 	_Reaction()
 }
 
@@ -10598,7 +10598,7 @@ func (*ReactionCustomEmojiPredict) CRC() uint32 {
 func (*ReactionCustomEmojiPredict) _Reaction() {}
 
 type ReactionCount interface {
-	tl.TLObject
+	tl.Any
 	_ReactionCount()
 }
 
@@ -10619,7 +10619,7 @@ func (*ReactionCountPredict) CRC() uint32 {
 func (*ReactionCountPredict) _ReactionCount() {}
 
 type ReactionNotificationsFrom interface {
-	tl.TLObject
+	tl.Any
 	_ReactionNotificationsFrom()
 }
 
@@ -10643,7 +10643,7 @@ func (*ReactionNotificationsFromAllPredict) CRC() uint32 {
 func (*ReactionNotificationsFromAllPredict) _ReactionNotificationsFrom() {}
 
 type ReactionsNotifySettings interface {
-	tl.TLObject
+	tl.Any
 	_ReactionsNotifySettings()
 }
 
@@ -10665,7 +10665,7 @@ func (*ReactionsNotifySettingsPredict) CRC() uint32 {
 func (*ReactionsNotifySettingsPredict) _ReactionsNotifySettings() {}
 
 type ReadParticipantDate interface {
-	tl.TLObject
+	tl.Any
 	_ReadParticipantDate()
 }
 
@@ -10684,7 +10684,7 @@ func (*ReadParticipantDatePredict) CRC() uint32 {
 func (*ReadParticipantDatePredict) _ReadParticipantDate() {}
 
 type ReceivedNotifyMessage interface {
-	tl.TLObject
+	tl.Any
 	_ReceivedNotifyMessage()
 }
 
@@ -10703,7 +10703,7 @@ func (*ReceivedNotifyMessagePredict) CRC() uint32 {
 func (*ReceivedNotifyMessagePredict) _ReceivedNotifyMessage() {}
 
 type RecentMeURL interface {
-	tl.TLObject
+	tl.Any
 	_RecentMeURL()
 }
 
@@ -10765,7 +10765,7 @@ func (*RecentMeURLStickerSetPredict) CRC() uint32 {
 func (*RecentMeURLStickerSetPredict) _RecentMeURL() {}
 
 type ReplyMarkup interface {
-	tl.TLObject
+	tl.Any
 	_ReplyMarkup()
 }
 
@@ -10823,7 +10823,7 @@ func (*ReplyInlineMarkupPredict) CRC() uint32 {
 func (*ReplyInlineMarkupPredict) _ReplyMarkup() {}
 
 type ReportReason interface {
-	tl.TLObject
+	tl.Any
 	_ReportReason()
 }
 
@@ -10911,7 +10911,7 @@ func (*InputReportReasonPersonalDetailsPredict) CRC() uint32 {
 func (*InputReportReasonPersonalDetailsPredict) _ReportReason() {}
 
 type RequestPeerType interface {
-	tl.TLObject
+	tl.Any
 	_RequestPeerType()
 }
 
@@ -10961,7 +10961,7 @@ func (*RequestPeerTypeBroadcastPredict) CRC() uint32 {
 func (*RequestPeerTypeBroadcastPredict) _RequestPeerType() {}
 
 type RequestedPeer interface {
-	tl.TLObject
+	tl.Any
 	_RequestedPeer()
 }
 
@@ -11011,7 +11011,7 @@ func (*RequestedPeerChannelPredict) CRC() uint32 {
 func (*RequestedPeerChannelPredict) _RequestedPeer() {}
 
 type RestrictionReason interface {
-	tl.TLObject
+	tl.Any
 	_RestrictionReason()
 }
 
@@ -11031,7 +11031,7 @@ func (*RestrictionReasonPredict) CRC() uint32 {
 func (*RestrictionReasonPredict) _RestrictionReason() {}
 
 type RichText interface {
-	tl.TLObject
+	tl.Any
 	_RichText()
 }
 
@@ -11204,7 +11204,7 @@ func (*TextAnchorPredict) CRC() uint32 {
 func (*TextAnchorPredict) _RichText() {}
 
 type SavedContact interface {
-	tl.TLObject
+	tl.Any
 	_SavedContact()
 }
 
@@ -11225,7 +11225,7 @@ func (*SavedPhoneContactPredict) CRC() uint32 {
 func (*SavedPhoneContactPredict) _SavedContact() {}
 
 type SavedDialog interface {
-	tl.TLObject
+	tl.Any
 	_SavedDialog()
 }
 
@@ -11246,7 +11246,7 @@ func (*SavedDialogPredict) CRC() uint32 {
 func (*SavedDialogPredict) _SavedDialog() {}
 
 type SavedReactionTag interface {
-	tl.TLObject
+	tl.Any
 	_SavedReactionTag()
 }
 
@@ -11267,7 +11267,7 @@ func (*SavedReactionTagPredict) CRC() uint32 {
 func (*SavedReactionTagPredict) _SavedReactionTag() {}
 
 type SearchResultsCalendarPeriod interface {
-	tl.TLObject
+	tl.Any
 	_SearchResultsCalendarPeriod()
 }
 
@@ -11288,7 +11288,7 @@ func (*SearchResultsCalendarPeriodPredict) CRC() uint32 {
 func (*SearchResultsCalendarPeriodPredict) _SearchResultsCalendarPeriod() {}
 
 type SearchResultsPosition interface {
-	tl.TLObject
+	tl.Any
 	_SearchResultsPosition()
 }
 
@@ -11308,7 +11308,7 @@ func (*SearchResultPositionPredict) CRC() uint32 {
 func (*SearchResultPositionPredict) _SearchResultsPosition() {}
 
 type SecureCredentialsEncrypted interface {
-	tl.TLObject
+	tl.Any
 	_SecureCredentialsEncrypted()
 }
 
@@ -11328,7 +11328,7 @@ func (*SecureCredentialsEncryptedPredict) CRC() uint32 {
 func (*SecureCredentialsEncryptedPredict) _SecureCredentialsEncrypted() {}
 
 type SecureData interface {
-	tl.TLObject
+	tl.Any
 	_SecureData()
 }
 
@@ -11348,7 +11348,7 @@ func (*SecureDataPredict) CRC() uint32 {
 func (*SecureDataPredict) _SecureData() {}
 
 type SecureFile interface {
-	tl.TLObject
+	tl.Any
 	_SecureFile()
 }
 
@@ -11380,7 +11380,7 @@ func (*SecureFilePredict) CRC() uint32 {
 func (*SecureFilePredict) _SecureFile() {}
 
 type SecurePasswordKdfAlgo interface {
-	tl.TLObject
+	tl.Any
 	_SecurePasswordKdfAlgo()
 }
 
@@ -11416,7 +11416,7 @@ func (*SecurePasswordKdfAlgoSHA512Predict) CRC() uint32 {
 func (*SecurePasswordKdfAlgoSHA512Predict) _SecurePasswordKdfAlgo() {}
 
 type SecurePlainData interface {
-	tl.TLObject
+	tl.Any
 	_SecurePlainData()
 }
 
@@ -11444,7 +11444,7 @@ func (*SecurePlainEmailPredict) CRC() uint32 {
 func (*SecurePlainEmailPredict) _SecurePlainData() {}
 
 type SecureRequiredType interface {
-	tl.TLObject
+	tl.Any
 	_SecureRequiredType()
 }
 
@@ -11476,7 +11476,7 @@ func (*SecureRequiredTypeOneOfPredict) CRC() uint32 {
 func (*SecureRequiredTypeOneOfPredict) _SecureRequiredType() {}
 
 type SecureSecretSettings interface {
-	tl.TLObject
+	tl.Any
 	_SecureSecretSettings()
 }
 
@@ -11496,7 +11496,7 @@ func (*SecureSecretSettingsPredict) CRC() uint32 {
 func (*SecureSecretSettingsPredict) _SecureSecretSettings() {}
 
 type SecureValue interface {
-	tl.TLObject
+	tl.Any
 	_SecureValue()
 }
 
@@ -11523,7 +11523,7 @@ func (*SecureValuePredict) CRC() uint32 {
 func (*SecureValuePredict) _SecureValue() {}
 
 type SecureValueError interface {
-	tl.TLObject
+	tl.Any
 	_SecureValueError()
 }
 
@@ -11640,7 +11640,7 @@ func (*SecureValueErrorTranslationFilesPredict) CRC() uint32 {
 func (*SecureValueErrorTranslationFilesPredict) _SecureValueError() {}
 
 type SecureValueHash interface {
-	tl.TLObject
+	tl.Any
 	_SecureValueHash()
 }
 
@@ -11659,7 +11659,7 @@ func (*SecureValueHashPredict) CRC() uint32 {
 func (*SecureValueHashPredict) _SecureValueHash() {}
 
 type SecureValueType interface {
-	tl.TLObject
+	tl.Any
 	_SecureValueType()
 }
 
@@ -11771,7 +11771,7 @@ func (*SecureValueTypeEmailPredict) CRC() uint32 {
 func (*SecureValueTypeEmailPredict) _SecureValueType() {}
 
 type SendAsPeer interface {
-	tl.TLObject
+	tl.Any
 	_SendAsPeer()
 }
 
@@ -11791,7 +11791,7 @@ func (*SendAsPeerPredict) CRC() uint32 {
 func (*SendAsPeerPredict) _SendAsPeer() {}
 
 type SendMessageAction interface {
-	tl.TLObject
+	tl.Any
 	_SendMessageAction()
 }
 
@@ -11961,7 +11961,7 @@ func (*SendMessageEmojiInteractionSeenPredict) CRC() uint32 {
 func (*SendMessageEmojiInteractionSeenPredict) _SendMessageAction() {}
 
 type ShippingOption interface {
-	tl.TLObject
+	tl.Any
 	_ShippingOption()
 }
 
@@ -11981,7 +11981,7 @@ func (*ShippingOptionPredict) CRC() uint32 {
 func (*ShippingOptionPredict) _ShippingOption() {}
 
 type SmsJob interface {
-	tl.TLObject
+	tl.Any
 	_SmsJob()
 }
 
@@ -12001,7 +12001,7 @@ func (*SmsJobPredict) CRC() uint32 {
 func (*SmsJobPredict) _SmsJob() {}
 
 type SponsoredMessage interface {
-	tl.TLObject
+	tl.Any
 	_SponsoredMessage()
 }
 
@@ -12031,7 +12031,7 @@ func (*SponsoredMessagePredict) CRC() uint32 {
 func (*SponsoredMessagePredict) _SponsoredMessage() {}
 
 type SponsoredMessageReportOption interface {
-	tl.TLObject
+	tl.Any
 	_SponsoredMessageReportOption()
 }
 
@@ -12050,7 +12050,7 @@ func (*SponsoredMessageReportOptionPredict) CRC() uint32 {
 func (*SponsoredMessageReportOptionPredict) _SponsoredMessageReportOption() {}
 
 type StarsGiftOption interface {
-	tl.TLObject
+	tl.Any
 	_StarsGiftOption()
 }
 
@@ -12073,7 +12073,7 @@ func (*StarsGiftOptionPredict) CRC() uint32 {
 func (*StarsGiftOptionPredict) _StarsGiftOption() {}
 
 type StarsRevenueStatus interface {
-	tl.TLObject
+	tl.Any
 	_StarsRevenueStatus()
 }
 
@@ -12096,7 +12096,7 @@ func (*StarsRevenueStatusPredict) CRC() uint32 {
 func (*StarsRevenueStatusPredict) _StarsRevenueStatus() {}
 
 type StarsTopupOption interface {
-	tl.TLObject
+	tl.Any
 	_StarsTopupOption()
 }
 
@@ -12119,7 +12119,7 @@ func (*StarsTopupOptionPredict) CRC() uint32 {
 func (*StarsTopupOptionPredict) _StarsTopupOption() {}
 
 type StarsTransaction interface {
-	tl.TLObject
+	tl.Any
 	_StarsTransaction()
 }
 
@@ -12153,7 +12153,7 @@ func (*StarsTransactionPredict) CRC() uint32 {
 func (*StarsTransactionPredict) _StarsTransaction() {}
 
 type StarsTransactionPeer interface {
-	tl.TLObject
+	tl.Any
 	_StarsTransactionPeer()
 }
 
@@ -12219,7 +12219,7 @@ func (*StarsTransactionPeerAdsPredict) CRC() uint32 {
 func (*StarsTransactionPeerAdsPredict) _StarsTransactionPeer() {}
 
 type StatsAbsValueAndPrev interface {
-	tl.TLObject
+	tl.Any
 	_StatsAbsValueAndPrev()
 }
 
@@ -12238,7 +12238,7 @@ func (*StatsAbsValueAndPrevPredict) CRC() uint32 {
 func (*StatsAbsValueAndPrevPredict) _StatsAbsValueAndPrev() {}
 
 type StatsDateRangeDays interface {
-	tl.TLObject
+	tl.Any
 	_StatsDateRangeDays()
 }
 
@@ -12257,7 +12257,7 @@ func (*StatsDateRangeDaysPredict) CRC() uint32 {
 func (*StatsDateRangeDaysPredict) _StatsDateRangeDays() {}
 
 type StatsGraph interface {
-	tl.TLObject
+	tl.Any
 	_StatsGraph()
 }
 
@@ -12297,7 +12297,7 @@ func (*StatsGraphPredict) CRC() uint32 {
 func (*StatsGraphPredict) _StatsGraph() {}
 
 type StatsGroupTopAdmin interface {
-	tl.TLObject
+	tl.Any
 	_StatsGroupTopAdmin()
 }
 
@@ -12318,7 +12318,7 @@ func (*StatsGroupTopAdminPredict) CRC() uint32 {
 func (*StatsGroupTopAdminPredict) _StatsGroupTopAdmin() {}
 
 type StatsGroupTopInviter interface {
-	tl.TLObject
+	tl.Any
 	_StatsGroupTopInviter()
 }
 
@@ -12337,7 +12337,7 @@ func (*StatsGroupTopInviterPredict) CRC() uint32 {
 func (*StatsGroupTopInviterPredict) _StatsGroupTopInviter() {}
 
 type StatsGroupTopPoster interface {
-	tl.TLObject
+	tl.Any
 	_StatsGroupTopPoster()
 }
 
@@ -12357,7 +12357,7 @@ func (*StatsGroupTopPosterPredict) CRC() uint32 {
 func (*StatsGroupTopPosterPredict) _StatsGroupTopPoster() {}
 
 type StatsPercentValue interface {
-	tl.TLObject
+	tl.Any
 	_StatsPercentValue()
 }
 
@@ -12376,7 +12376,7 @@ func (*StatsPercentValuePredict) CRC() uint32 {
 func (*StatsPercentValuePredict) _StatsPercentValue() {}
 
 type StatsURL interface {
-	tl.TLObject
+	tl.Any
 	_StatsURL()
 }
 
@@ -12394,7 +12394,7 @@ func (*StatsURLPredict) CRC() uint32 {
 func (*StatsURLPredict) _StatsURL() {}
 
 type StickerKeyword interface {
-	tl.TLObject
+	tl.Any
 	_StickerKeyword()
 }
 
@@ -12413,7 +12413,7 @@ func (*StickerKeywordPredict) CRC() uint32 {
 func (*StickerKeywordPredict) _StickerKeyword() {}
 
 type StickerPack interface {
-	tl.TLObject
+	tl.Any
 	_StickerPack()
 }
 
@@ -12432,7 +12432,7 @@ func (*StickerPackPredict) CRC() uint32 {
 func (*StickerPackPredict) _StickerPack() {}
 
 type StickerSet interface {
-	tl.TLObject
+	tl.Any
 	_StickerSet()
 }
 
@@ -12468,7 +12468,7 @@ func (*StickerSetPredict) CRC() uint32 {
 func (*StickerSetPredict) _StickerSet() {}
 
 type StickerSetCovered interface {
-	tl.TLObject
+	tl.Any
 	_StickerSetCovered()
 }
 
@@ -12521,7 +12521,7 @@ func (*StickerSetNoCoveredPredict) CRC() uint32 {
 func (*StickerSetNoCoveredPredict) _StickerSetCovered() {}
 
 type StoriesStealthMode interface {
-	tl.TLObject
+	tl.Any
 	_StoriesStealthMode()
 }
 
@@ -12541,7 +12541,7 @@ func (*StoriesStealthModePredict) CRC() uint32 {
 func (*StoriesStealthModePredict) _StoriesStealthMode() {}
 
 type StoryFwdHeader interface {
-	tl.TLObject
+	tl.Any
 	_StoryFwdHeader()
 }
 
@@ -12563,7 +12563,7 @@ func (*StoryFwdHeaderPredict) CRC() uint32 {
 func (*StoryFwdHeaderPredict) _StoryFwdHeader() {}
 
 type StoryItem interface {
-	tl.TLObject
+	tl.Any
 	_StoryItem()
 }
 
@@ -12626,7 +12626,7 @@ func (*StoryItemPredict) CRC() uint32 {
 func (*StoryItemPredict) _StoryItem() {}
 
 type StoryReaction interface {
-	tl.TLObject
+	tl.Any
 	_StoryReaction()
 }
 
@@ -12667,7 +12667,7 @@ func (*StoryReactionPublicRepostPredict) CRC() uint32 {
 func (*StoryReactionPublicRepostPredict) _StoryReaction() {}
 
 type StoryView interface {
-	tl.TLObject
+	tl.Any
 	_StoryView()
 }
 
@@ -12717,7 +12717,7 @@ func (*StoryViewPublicRepostPredict) CRC() uint32 {
 func (*StoryViewPublicRepostPredict) _StoryView() {}
 
 type StoryViews interface {
-	tl.TLObject
+	tl.Any
 	_StoryViews()
 }
 
@@ -12741,7 +12741,7 @@ func (*StoryViewsPredict) CRC() uint32 {
 func (*StoryViewsPredict) _StoryViews() {}
 
 type TextWithEntities interface {
-	tl.TLObject
+	tl.Any
 	_TextWithEntities()
 }
 
@@ -12760,7 +12760,7 @@ func (*TextWithEntitiesPredict) CRC() uint32 {
 func (*TextWithEntitiesPredict) _TextWithEntities() {}
 
 type Theme interface {
-	tl.TLObject
+	tl.Any
 	_Theme()
 }
 
@@ -12789,7 +12789,7 @@ func (*ThemePredict) CRC() uint32 {
 func (*ThemePredict) _Theme() {}
 
 type ThemeSettings interface {
-	tl.TLObject
+	tl.Any
 	_ThemeSettings()
 }
 
@@ -12813,7 +12813,7 @@ func (*ThemeSettingsPredict) CRC() uint32 {
 func (*ThemeSettingsPredict) _ThemeSettings() {}
 
 type Timezone interface {
-	tl.TLObject
+	tl.Any
 	_Timezone()
 }
 
@@ -12833,7 +12833,7 @@ func (*TimezonePredict) CRC() uint32 {
 func (*TimezonePredict) _Timezone() {}
 
 type TopPeer interface {
-	tl.TLObject
+	tl.Any
 	_TopPeer()
 }
 
@@ -12852,7 +12852,7 @@ func (*TopPeerPredict) CRC() uint32 {
 func (*TopPeerPredict) _TopPeer() {}
 
 type TopPeerCategory interface {
-	tl.TLObject
+	tl.Any
 	_TopPeerCategory()
 }
 
@@ -12932,7 +12932,7 @@ func (*TopPeerCategoryBotsAppPredict) CRC() uint32 {
 func (*TopPeerCategoryBotsAppPredict) _TopPeerCategory() {}
 
 type TopPeerCategoryPeers interface {
-	tl.TLObject
+	tl.Any
 	_TopPeerCategoryPeers()
 }
 
@@ -12952,7 +12952,7 @@ func (*TopPeerCategoryPeersPredict) CRC() uint32 {
 func (*TopPeerCategoryPeersPredict) _TopPeerCategoryPeers() {}
 
 type True interface {
-	tl.TLObject
+	tl.Any
 	_True()
 }
 
@@ -12968,7 +12968,7 @@ func (*TruePredict) CRC() uint32 {
 func (*TruePredict) _True() {}
 
 type Update interface {
-	tl.TLObject
+	tl.Any
 	_Update()
 }
 
@@ -14613,7 +14613,7 @@ func (*UpdateStarsRevenueStatusPredict) CRC() uint32 {
 func (*UpdateStarsRevenueStatusPredict) _Update() {}
 
 type Updates interface {
-	tl.TLObject
+	tl.Any
 	_Updates()
 }
 
@@ -14738,7 +14738,7 @@ func (*UpdateShortSentMessagePredict) CRC() uint32 {
 func (*UpdateShortSentMessagePredict) _Updates() {}
 
 type URLAuthResult interface {
-	tl.TLObject
+	tl.Any
 	_URLAuthResult()
 }
 
@@ -14777,7 +14777,7 @@ func (*URLAuthResultDefaultPredict) CRC() uint32 {
 func (*URLAuthResultDefaultPredict) _URLAuthResult() {}
 
 type User interface {
-	tl.TLObject
+	tl.Any
 	_User()
 }
 
@@ -14849,7 +14849,7 @@ func (*UserPredict) CRC() uint32 {
 func (*UserPredict) _User() {}
 
 type UserFull interface {
-	tl.TLObject
+	tl.Any
 	_UserFull()
 }
 
@@ -14909,7 +14909,7 @@ func (*UserFullPredict) CRC() uint32 {
 func (*UserFullPredict) _UserFull() {}
 
 type UserProfilePhoto interface {
-	tl.TLObject
+	tl.Any
 	_UserProfilePhoto()
 }
 
@@ -14940,7 +14940,7 @@ func (*UserProfilePhotoPredict) CRC() uint32 {
 func (*UserProfilePhotoPredict) _UserProfilePhoto() {}
 
 type UserStatus interface {
-	tl.TLObject
+	tl.Any
 	_UserStatus()
 }
 
@@ -15009,7 +15009,7 @@ func (*UserStatusLastMonthPredict) CRC() uint32 {
 func (*UserStatusLastMonthPredict) _UserStatus() {}
 
 type Username interface {
-	tl.TLObject
+	tl.Any
 	_Username()
 }
 
@@ -15030,7 +15030,7 @@ func (*UsernamePredict) CRC() uint32 {
 func (*UsernamePredict) _Username() {}
 
 type VideoSize interface {
-	tl.TLObject
+	tl.Any
 	_VideoSize()
 }
 
@@ -15076,7 +15076,7 @@ func (*VideoSizeStickerMarkupPredict) CRC() uint32 {
 func (*VideoSizeStickerMarkupPredict) _VideoSize() {}
 
 type WallPaper interface {
-	tl.TLObject
+	tl.Any
 	_WallPaper()
 }
 
@@ -15117,7 +15117,7 @@ func (*WallPaperNoFilePredict) CRC() uint32 {
 func (*WallPaperNoFilePredict) _WallPaper() {}
 
 type WallPaperSettings interface {
-	tl.TLObject
+	tl.Any
 	_WallPaperSettings()
 }
 
@@ -15144,7 +15144,7 @@ func (*WallPaperSettingsPredict) CRC() uint32 {
 func (*WallPaperSettingsPredict) _WallPaperSettings() {}
 
 type WebAuthorization interface {
-	tl.TLObject
+	tl.Any
 	_WebAuthorization()
 }
 
@@ -15170,7 +15170,7 @@ func (*WebAuthorizationPredict) CRC() uint32 {
 func (*WebAuthorizationPredict) _WebAuthorization() {}
 
 type WebDocument interface {
-	tl.TLObject
+	tl.Any
 	_WebDocument()
 }
 
@@ -15205,7 +15205,7 @@ func (*WebDocumentNoProxyPredict) CRC() uint32 {
 func (*WebDocumentNoProxyPredict) _WebDocument() {}
 
 type WebPage interface {
-	tl.TLObject
+	tl.Any
 	_WebPage()
 }
 
@@ -15278,7 +15278,7 @@ func (*WebPageNotModifiedPredict) CRC() uint32 {
 func (*WebPageNotModifiedPredict) _WebPage() {}
 
 type WebPageAttribute interface {
-	tl.TLObject
+	tl.Any
 	_WebPageAttribute()
 }
 
@@ -15324,7 +15324,7 @@ func (*WebPageAttributeStickerSetPredict) CRC() uint32 {
 func (*WebPageAttributeStickerSetPredict) _WebPageAttribute() {}
 
 type WebViewMessageSent interface {
-	tl.TLObject
+	tl.Any
 	_WebViewMessageSent()
 }
 
@@ -15343,7 +15343,7 @@ func (*WebViewMessageSentPredict) CRC() uint32 {
 func (*WebViewMessageSentPredict) _WebViewMessageSent() {}
 
 type WebViewResult interface {
-	tl.TLObject
+	tl.Any
 	_WebViewResult()
 }
 
@@ -15364,7 +15364,7 @@ func (*WebViewResultURLPredict) CRC() uint32 {
 func (*WebViewResultURLPredict) _WebViewResult() {}
 
 type AccountAuthorizationForm interface {
-	tl.TLObject
+	tl.Any
 	_AccountAuthorizationForm()
 }
 
@@ -15387,7 +15387,7 @@ func (*AccountAuthorizationFormPredict) CRC() uint32 {
 func (*AccountAuthorizationFormPredict) _AccountAuthorizationForm() {}
 
 type AccountAuthorizations interface {
-	tl.TLObject
+	tl.Any
 	_AccountAuthorizations()
 }
 
@@ -15406,7 +15406,7 @@ func (*AccountAuthorizationsPredict) CRC() uint32 {
 func (*AccountAuthorizationsPredict) _AccountAuthorizations() {}
 
 type AccountAutoDownloadSettings interface {
-	tl.TLObject
+	tl.Any
 	_AccountAutoDownloadSettings()
 }
 
@@ -15426,7 +15426,7 @@ func (*AccountAutoDownloadSettingsPredict) CRC() uint32 {
 func (*AccountAutoDownloadSettingsPredict) _AccountAutoDownloadSettings() {}
 
 type AccountAutoSaveSettings interface {
-	tl.TLObject
+	tl.Any
 	_AccountAutoSaveSettings()
 }
 
@@ -15449,7 +15449,7 @@ func (*AccountAutoSaveSettingsPredict) CRC() uint32 {
 func (*AccountAutoSaveSettingsPredict) _AccountAutoSaveSettings() {}
 
 type AccountBusinessChatLinks interface {
-	tl.TLObject
+	tl.Any
 	_AccountBusinessChatLinks()
 }
 
@@ -15469,7 +15469,7 @@ func (*AccountBusinessChatLinksPredict) CRC() uint32 {
 func (*AccountBusinessChatLinksPredict) _AccountBusinessChatLinks() {}
 
 type AccountConnectedBots interface {
-	tl.TLObject
+	tl.Any
 	_AccountConnectedBots()
 }
 
@@ -15488,7 +15488,7 @@ func (*AccountConnectedBotsPredict) CRC() uint32 {
 func (*AccountConnectedBotsPredict) _AccountConnectedBots() {}
 
 type AccountContentSettings interface {
-	tl.TLObject
+	tl.Any
 	_AccountContentSettings()
 }
 
@@ -15508,7 +15508,7 @@ func (*AccountContentSettingsPredict) CRC() uint32 {
 func (*AccountContentSettingsPredict) _AccountContentSettings() {}
 
 type AccountEmailVerified interface {
-	tl.TLObject
+	tl.Any
 	_AccountEmailVerified()
 }
 
@@ -15537,7 +15537,7 @@ func (*AccountEmailVerifiedLoginPredict) CRC() uint32 {
 func (*AccountEmailVerifiedLoginPredict) _AccountEmailVerified() {}
 
 type AccountEmojiStatuses interface {
-	tl.TLObject
+	tl.Any
 	_AccountEmojiStatuses()
 }
 
@@ -15564,7 +15564,7 @@ func (*AccountEmojiStatusesPredict) CRC() uint32 {
 func (*AccountEmojiStatusesPredict) _AccountEmojiStatuses() {}
 
 type AccountPassword interface {
-	tl.TLObject
+	tl.Any
 	_AccountPassword()
 }
 
@@ -15595,7 +15595,7 @@ func (*AccountPasswordPredict) CRC() uint32 {
 func (*AccountPasswordPredict) _AccountPassword() {}
 
 type AccountPasswordInputSettings interface {
-	tl.TLObject
+	tl.Any
 	_AccountPasswordInputSettings()
 }
 
@@ -15618,7 +15618,7 @@ func (*AccountPasswordInputSettingsPredict) CRC() uint32 {
 func (*AccountPasswordInputSettingsPredict) _AccountPasswordInputSettings() {}
 
 type AccountPasswordSettings interface {
-	tl.TLObject
+	tl.Any
 	_AccountPasswordSettings()
 }
 
@@ -15638,7 +15638,7 @@ func (*AccountPasswordSettingsPredict) CRC() uint32 {
 func (*AccountPasswordSettingsPredict) _AccountPasswordSettings() {}
 
 type AccountPrivacyRules interface {
-	tl.TLObject
+	tl.Any
 	_AccountPrivacyRules()
 }
 
@@ -15658,7 +15658,7 @@ func (*AccountPrivacyRulesPredict) CRC() uint32 {
 func (*AccountPrivacyRulesPredict) _AccountPrivacyRules() {}
 
 type AccountResetPasswordResult interface {
-	tl.TLObject
+	tl.Any
 	_AccountResetPasswordResult()
 }
 
@@ -15694,7 +15694,7 @@ func (*AccountResetPasswordOkPredict) CRC() uint32 {
 func (*AccountResetPasswordOkPredict) _AccountResetPasswordResult() {}
 
 type AccountResolvedBusinessChatLinks interface {
-	tl.TLObject
+	tl.Any
 	_AccountResolvedBusinessChatLinks()
 }
 
@@ -15717,7 +15717,7 @@ func (*AccountResolvedBusinessChatLinksPredict) CRC() uint32 {
 func (*AccountResolvedBusinessChatLinksPredict) _AccountResolvedBusinessChatLinks() {}
 
 type AccountSavedRingtone interface {
-	tl.TLObject
+	tl.Any
 	_AccountSavedRingtone()
 }
 
@@ -15743,7 +15743,7 @@ func (*AccountSavedRingtoneConvertedPredict) CRC() uint32 {
 func (*AccountSavedRingtoneConvertedPredict) _AccountSavedRingtone() {}
 
 type AccountSavedRingtones interface {
-	tl.TLObject
+	tl.Any
 	_AccountSavedRingtones()
 }
 
@@ -15770,7 +15770,7 @@ func (*AccountSavedRingtonesPredict) CRC() uint32 {
 func (*AccountSavedRingtonesPredict) _AccountSavedRingtones() {}
 
 type AccountSentEmailCode interface {
-	tl.TLObject
+	tl.Any
 	_AccountSentEmailCode()
 }
 
@@ -15789,7 +15789,7 @@ func (*AccountSentEmailCodePredict) CRC() uint32 {
 func (*AccountSentEmailCodePredict) _AccountSentEmailCode() {}
 
 type AccountTakeout interface {
-	tl.TLObject
+	tl.Any
 	_AccountTakeout()
 }
 
@@ -15807,7 +15807,7 @@ func (*AccountTakeoutPredict) CRC() uint32 {
 func (*AccountTakeoutPredict) _AccountTakeout() {}
 
 type AccountThemes interface {
-	tl.TLObject
+	tl.Any
 	_AccountThemes()
 }
 
@@ -15834,7 +15834,7 @@ func (*AccountThemesPredict) CRC() uint32 {
 func (*AccountThemesPredict) _AccountThemes() {}
 
 type AccountTmpPassword interface {
-	tl.TLObject
+	tl.Any
 	_AccountTmpPassword()
 }
 
@@ -15853,7 +15853,7 @@ func (*AccountTmpPasswordPredict) CRC() uint32 {
 func (*AccountTmpPasswordPredict) _AccountTmpPassword() {}
 
 type AccountWallPapers interface {
-	tl.TLObject
+	tl.Any
 	_AccountWallPapers()
 }
 
@@ -15880,7 +15880,7 @@ func (*AccountWallPapersPredict) CRC() uint32 {
 func (*AccountWallPapersPredict) _AccountWallPapers() {}
 
 type AccountWebAuthorizations interface {
-	tl.TLObject
+	tl.Any
 	_AccountWebAuthorizations()
 }
 
@@ -15899,7 +15899,7 @@ func (*AccountWebAuthorizationsPredict) CRC() uint32 {
 func (*AccountWebAuthorizationsPredict) _AccountWebAuthorizations() {}
 
 type AuthAuthorization interface {
-	tl.TLObject
+	tl.Any
 	_AuthAuthorization()
 }
 
@@ -15933,7 +15933,7 @@ func (*AuthAuthorizationSignUpRequiredPredict) CRC() uint32 {
 func (*AuthAuthorizationSignUpRequiredPredict) _AuthAuthorization() {}
 
 type AuthCodeType interface {
-	tl.TLObject
+	tl.Any
 	_AuthCodeType()
 }
 
@@ -15981,7 +15981,7 @@ func (*AuthCodeTypeFragmentSmsPredict) CRC() uint32 {
 func (*AuthCodeTypeFragmentSmsPredict) _AuthCodeType() {}
 
 type AuthExportedAuthorization interface {
-	tl.TLObject
+	tl.Any
 	_AuthExportedAuthorization()
 }
 
@@ -16000,7 +16000,7 @@ func (*AuthExportedAuthorizationPredict) CRC() uint32 {
 func (*AuthExportedAuthorizationPredict) _AuthExportedAuthorization() {}
 
 type AuthLoggedOut interface {
-	tl.TLObject
+	tl.Any
 	_AuthLoggedOut()
 }
 
@@ -16019,7 +16019,7 @@ func (*AuthLoggedOutPredict) CRC() uint32 {
 func (*AuthLoggedOutPredict) _AuthLoggedOut() {}
 
 type AuthLoginToken interface {
-	tl.TLObject
+	tl.Any
 	_AuthLoginToken()
 }
 
@@ -16059,7 +16059,7 @@ func (*AuthLoginTokenSuccessPredict) CRC() uint32 {
 func (*AuthLoginTokenSuccessPredict) _AuthLoginToken() {}
 
 type AuthPasswordRecovery interface {
-	tl.TLObject
+	tl.Any
 	_AuthPasswordRecovery()
 }
 
@@ -16077,7 +16077,7 @@ func (*AuthPasswordRecoveryPredict) CRC() uint32 {
 func (*AuthPasswordRecoveryPredict) _AuthPasswordRecovery() {}
 
 type AuthSentCode interface {
-	tl.TLObject
+	tl.Any
 	_AuthSentCode()
 }
 
@@ -16109,7 +16109,7 @@ func (*AuthSentCodeSuccessPredict) CRC() uint32 {
 func (*AuthSentCodeSuccessPredict) _AuthSentCode() {}
 
 type AuthSentCodeType interface {
-	tl.TLObject
+	tl.Any
 	_AuthSentCodeType()
 }
 
@@ -16245,7 +16245,7 @@ func (*AuthSentCodeTypeSmsPhrasePredict) CRC() uint32 {
 func (*AuthSentCodeTypeSmsPhrasePredict) _AuthSentCodeType() {}
 
 type BotsBotInfo interface {
-	tl.TLObject
+	tl.Any
 	_BotsBotInfo()
 }
 
@@ -16265,7 +16265,7 @@ func (*BotsBotInfoPredict) CRC() uint32 {
 func (*BotsBotInfoPredict) _BotsBotInfo() {}
 
 type BotsPopularAppBots interface {
-	tl.TLObject
+	tl.Any
 	_BotsPopularAppBots()
 }
 
@@ -16285,7 +16285,7 @@ func (*BotsPopularAppBotsPredict) CRC() uint32 {
 func (*BotsPopularAppBotsPredict) _BotsPopularAppBots() {}
 
 type BotsPreviewInfo interface {
-	tl.TLObject
+	tl.Any
 	_BotsPreviewInfo()
 }
 
@@ -16304,7 +16304,7 @@ func (*BotsPreviewInfoPredict) CRC() uint32 {
 func (*BotsPreviewInfoPredict) _BotsPreviewInfo() {}
 
 type ChannelsAdminLogResults interface {
-	tl.TLObject
+	tl.Any
 	_ChannelsAdminLogResults()
 }
 
@@ -16324,7 +16324,7 @@ func (*ChannelsAdminLogResultsPredict) CRC() uint32 {
 func (*ChannelsAdminLogResultsPredict) _ChannelsAdminLogResults() {}
 
 type ChannelsChannelParticipant interface {
-	tl.TLObject
+	tl.Any
 	_ChannelsChannelParticipant()
 }
 
@@ -16344,7 +16344,7 @@ func (*ChannelsChannelParticipantPredict) CRC() uint32 {
 func (*ChannelsChannelParticipantPredict) _ChannelsChannelParticipant() {}
 
 type ChannelsChannelParticipants interface {
-	tl.TLObject
+	tl.Any
 	_ChannelsChannelParticipants()
 }
 
@@ -16373,7 +16373,7 @@ func (*ChannelsChannelParticipantsNotModifiedPredict) CRC() uint32 {
 func (*ChannelsChannelParticipantsNotModifiedPredict) _ChannelsChannelParticipants() {}
 
 type ChannelsSendAsPeers interface {
-	tl.TLObject
+	tl.Any
 	_ChannelsSendAsPeers()
 }
 
@@ -16393,7 +16393,7 @@ func (*ChannelsSendAsPeersPredict) CRC() uint32 {
 func (*ChannelsSendAsPeersPredict) _ChannelsSendAsPeers() {}
 
 type ChannelsSponsoredMessageReportResult interface {
-	tl.TLObject
+	tl.Any
 	_ChannelsSponsoredMessageReportResult()
 }
 
@@ -16430,7 +16430,7 @@ func (*ChannelsSponsoredMessageReportResultReportedPredict) CRC() uint32 {
 func (*ChannelsSponsoredMessageReportResultReportedPredict) _ChannelsSponsoredMessageReportResult() {}
 
 type ChatlistsChatlistInvite interface {
-	tl.TLObject
+	tl.Any
 	_ChatlistsChatlistInvite()
 }
 
@@ -16467,7 +16467,7 @@ func (*ChatlistsChatlistInvitePredict) CRC() uint32 {
 func (*ChatlistsChatlistInvitePredict) _ChatlistsChatlistInvite() {}
 
 type ChatlistsChatlistUpdates interface {
-	tl.TLObject
+	tl.Any
 	_ChatlistsChatlistUpdates()
 }
 
@@ -16487,7 +16487,7 @@ func (*ChatlistsChatlistUpdatesPredict) CRC() uint32 {
 func (*ChatlistsChatlistUpdatesPredict) _ChatlistsChatlistUpdates() {}
 
 type ChatlistsExportedChatlistInvite interface {
-	tl.TLObject
+	tl.Any
 	_ChatlistsExportedChatlistInvite()
 }
 
@@ -16506,7 +16506,7 @@ func (*ChatlistsExportedChatlistInvitePredict) CRC() uint32 {
 func (*ChatlistsExportedChatlistInvitePredict) _ChatlistsExportedChatlistInvite() {}
 
 type ChatlistsExportedInvites interface {
-	tl.TLObject
+	tl.Any
 	_ChatlistsExportedInvites()
 }
 
@@ -16526,7 +16526,7 @@ func (*ChatlistsExportedInvitesPredict) CRC() uint32 {
 func (*ChatlistsExportedInvitesPredict) _ChatlistsExportedInvites() {}
 
 type ContactsBlocked interface {
-	tl.TLObject
+	tl.Any
 	_ContactsBlocked()
 }
 
@@ -16559,7 +16559,7 @@ func (*ContactsBlockedSlicePredict) CRC() uint32 {
 func (*ContactsBlockedSlicePredict) _ContactsBlocked() {}
 
 type ContactsContactBirthdays interface {
-	tl.TLObject
+	tl.Any
 	_ContactsContactBirthdays()
 }
 
@@ -16578,7 +16578,7 @@ func (*ContactsContactBirthdaysPredict) CRC() uint32 {
 func (*ContactsContactBirthdaysPredict) _ContactsContactBirthdays() {}
 
 type ContactsContacts interface {
-	tl.TLObject
+	tl.Any
 	_ContactsContacts()
 }
 
@@ -16606,7 +16606,7 @@ func (*ContactsContactsPredict) CRC() uint32 {
 func (*ContactsContactsPredict) _ContactsContacts() {}
 
 type ContactsFound interface {
-	tl.TLObject
+	tl.Any
 	_ContactsFound()
 }
 
@@ -16627,7 +16627,7 @@ func (*ContactsFoundPredict) CRC() uint32 {
 func (*ContactsFoundPredict) _ContactsFound() {}
 
 type ContactsImportedContacts interface {
-	tl.TLObject
+	tl.Any
 	_ContactsImportedContacts()
 }
 
@@ -16648,7 +16648,7 @@ func (*ContactsImportedContactsPredict) CRC() uint32 {
 func (*ContactsImportedContactsPredict) _ContactsImportedContacts() {}
 
 type ContactsResolvedPeer interface {
-	tl.TLObject
+	tl.Any
 	_ContactsResolvedPeer()
 }
 
@@ -16668,7 +16668,7 @@ func (*ContactsResolvedPeerPredict) CRC() uint32 {
 func (*ContactsResolvedPeerPredict) _ContactsResolvedPeer() {}
 
 type ContactsTopPeers interface {
-	tl.TLObject
+	tl.Any
 	_ContactsTopPeers()
 }
 
@@ -16704,7 +16704,7 @@ func (*ContactsTopPeersDisabledPredict) CRC() uint32 {
 func (*ContactsTopPeersDisabledPredict) _ContactsTopPeers() {}
 
 type FragmentCollectibleInfo interface {
-	tl.TLObject
+	tl.Any
 	_FragmentCollectibleInfo()
 }
 
@@ -16727,7 +16727,7 @@ func (*FragmentCollectibleInfoPredict) CRC() uint32 {
 func (*FragmentCollectibleInfoPredict) _FragmentCollectibleInfo() {}
 
 type HelpAppConfig interface {
-	tl.TLObject
+	tl.Any
 	_HelpAppConfig()
 }
 
@@ -16754,7 +16754,7 @@ func (*HelpAppConfigPredict) CRC() uint32 {
 func (*HelpAppConfigPredict) _HelpAppConfig() {}
 
 type HelpAppUpdate interface {
-	tl.TLObject
+	tl.Any
 	_HelpAppUpdate()
 }
 
@@ -16788,7 +16788,7 @@ func (*HelpNoAppUpdatePredict) CRC() uint32 {
 func (*HelpNoAppUpdatePredict) _HelpAppUpdate() {}
 
 type HelpCountriesList interface {
-	tl.TLObject
+	tl.Any
 	_HelpCountriesList()
 }
 
@@ -16815,7 +16815,7 @@ func (*HelpCountriesListPredict) CRC() uint32 {
 func (*HelpCountriesListPredict) _HelpCountriesList() {}
 
 type HelpCountry interface {
-	tl.TLObject
+	tl.Any
 	_HelpCountry()
 }
 
@@ -16838,7 +16838,7 @@ func (*HelpCountryPredict) CRC() uint32 {
 func (*HelpCountryPredict) _HelpCountry() {}
 
 type HelpCountryCode interface {
-	tl.TLObject
+	tl.Any
 	_HelpCountryCode()
 }
 
@@ -16859,7 +16859,7 @@ func (*HelpCountryCodePredict) CRC() uint32 {
 func (*HelpCountryCodePredict) _HelpCountryCode() {}
 
 type HelpDeepLinkInfo interface {
-	tl.TLObject
+	tl.Any
 	_HelpDeepLinkInfo()
 }
 
@@ -16888,7 +16888,7 @@ func (*HelpDeepLinkInfoPredict) CRC() uint32 {
 func (*HelpDeepLinkInfoPredict) _HelpDeepLinkInfo() {}
 
 type HelpInviteText interface {
-	tl.TLObject
+	tl.Any
 	_HelpInviteText()
 }
 
@@ -16906,7 +16906,7 @@ func (*HelpInviteTextPredict) CRC() uint32 {
 func (*HelpInviteTextPredict) _HelpInviteText() {}
 
 type HelpPassportConfig interface {
-	tl.TLObject
+	tl.Any
 	_HelpPassportConfig()
 }
 
@@ -16933,7 +16933,7 @@ func (*HelpPassportConfigPredict) CRC() uint32 {
 func (*HelpPassportConfigPredict) _HelpPassportConfig() {}
 
 type HelpPeerColorOption interface {
-	tl.TLObject
+	tl.Any
 	_HelpPeerColorOption()
 }
 
@@ -16957,7 +16957,7 @@ func (*HelpPeerColorOptionPredict) CRC() uint32 {
 func (*HelpPeerColorOptionPredict) _HelpPeerColorOption() {}
 
 type HelpPeerColorSet interface {
-	tl.TLObject
+	tl.Any
 	_HelpPeerColorSet()
 }
 
@@ -16987,7 +16987,7 @@ func (*HelpPeerColorProfileSetPredict) CRC() uint32 {
 func (*HelpPeerColorProfileSetPredict) _HelpPeerColorSet() {}
 
 type HelpPeerColors interface {
-	tl.TLObject
+	tl.Any
 	_HelpPeerColors()
 }
 
@@ -17014,7 +17014,7 @@ func (*HelpPeerColorsPredict) CRC() uint32 {
 func (*HelpPeerColorsPredict) _HelpPeerColors() {}
 
 type HelpPremiumPromo interface {
-	tl.TLObject
+	tl.Any
 	_HelpPremiumPromo()
 }
 
@@ -17037,7 +17037,7 @@ func (*HelpPremiumPromoPredict) CRC() uint32 {
 func (*HelpPremiumPromoPredict) _HelpPremiumPromo() {}
 
 type HelpPromoData interface {
-	tl.TLObject
+	tl.Any
 	_HelpPromoData()
 }
 
@@ -17072,7 +17072,7 @@ func (*HelpPromoDataPredict) CRC() uint32 {
 func (*HelpPromoDataPredict) _HelpPromoData() {}
 
 type HelpRecentMeUrls interface {
-	tl.TLObject
+	tl.Any
 	_HelpRecentMeUrls()
 }
 
@@ -17092,7 +17092,7 @@ func (*HelpRecentMeUrlsPredict) CRC() uint32 {
 func (*HelpRecentMeUrlsPredict) _HelpRecentMeUrls() {}
 
 type HelpSupport interface {
-	tl.TLObject
+	tl.Any
 	_HelpSupport()
 }
 
@@ -17111,7 +17111,7 @@ func (*HelpSupportPredict) CRC() uint32 {
 func (*HelpSupportPredict) _HelpSupport() {}
 
 type HelpSupportName interface {
-	tl.TLObject
+	tl.Any
 	_HelpSupportName()
 }
 
@@ -17129,7 +17129,7 @@ func (*HelpSupportNamePredict) CRC() uint32 {
 func (*HelpSupportNamePredict) _HelpSupportName() {}
 
 type HelpTermsOfService interface {
-	tl.TLObject
+	tl.Any
 	_HelpTermsOfService()
 }
 
@@ -17152,7 +17152,7 @@ func (*HelpTermsOfServicePredict) CRC() uint32 {
 func (*HelpTermsOfServicePredict) _HelpTermsOfService() {}
 
 type HelpTermsOfServiceUpdate interface {
-	tl.TLObject
+	tl.Any
 	_HelpTermsOfServiceUpdate()
 }
 
@@ -17181,7 +17181,7 @@ func (*HelpTermsOfServiceUpdatePredict) CRC() uint32 {
 func (*HelpTermsOfServiceUpdatePredict) _HelpTermsOfServiceUpdate() {}
 
 type HelpTimezonesList interface {
-	tl.TLObject
+	tl.Any
 	_HelpTimezonesList()
 }
 
@@ -17208,7 +17208,7 @@ func (*HelpTimezonesListPredict) CRC() uint32 {
 func (*HelpTimezonesListPredict) _HelpTimezonesList() {}
 
 type HelpUserInfo interface {
-	tl.TLObject
+	tl.Any
 	_HelpUserInfo()
 }
 
@@ -17237,7 +17237,7 @@ func (*HelpUserInfoPredict) CRC() uint32 {
 func (*HelpUserInfoPredict) _HelpUserInfo() {}
 
 type MessagesAffectedFoundMessages interface {
-	tl.TLObject
+	tl.Any
 	_MessagesAffectedFoundMessages()
 }
 
@@ -17258,7 +17258,7 @@ func (*MessagesAffectedFoundMessagesPredict) CRC() uint32 {
 func (*MessagesAffectedFoundMessagesPredict) _MessagesAffectedFoundMessages() {}
 
 type MessagesAffectedHistory interface {
-	tl.TLObject
+	tl.Any
 	_MessagesAffectedHistory()
 }
 
@@ -17278,7 +17278,7 @@ func (*MessagesAffectedHistoryPredict) CRC() uint32 {
 func (*MessagesAffectedHistoryPredict) _MessagesAffectedHistory() {}
 
 type MessagesAffectedMessages interface {
-	tl.TLObject
+	tl.Any
 	_MessagesAffectedMessages()
 }
 
@@ -17297,7 +17297,7 @@ func (*MessagesAffectedMessagesPredict) CRC() uint32 {
 func (*MessagesAffectedMessagesPredict) _MessagesAffectedMessages() {}
 
 type MessagesAllStickers interface {
-	tl.TLObject
+	tl.Any
 	_MessagesAllStickers()
 }
 
@@ -17324,7 +17324,7 @@ func (*MessagesAllStickersPredict) CRC() uint32 {
 func (*MessagesAllStickersPredict) _MessagesAllStickers() {}
 
 type MessagesArchivedStickers interface {
-	tl.TLObject
+	tl.Any
 	_MessagesArchivedStickers()
 }
 
@@ -17343,7 +17343,7 @@ func (*MessagesArchivedStickersPredict) CRC() uint32 {
 func (*MessagesArchivedStickersPredict) _MessagesArchivedStickers() {}
 
 type MessagesAvailableEffects interface {
-	tl.TLObject
+	tl.Any
 	_MessagesAvailableEffects()
 }
 
@@ -17371,7 +17371,7 @@ func (*MessagesAvailableEffectsPredict) CRC() uint32 {
 func (*MessagesAvailableEffectsPredict) _MessagesAvailableEffects() {}
 
 type MessagesAvailableReactions interface {
-	tl.TLObject
+	tl.Any
 	_MessagesAvailableReactions()
 }
 
@@ -17398,7 +17398,7 @@ func (*MessagesAvailableReactionsPredict) CRC() uint32 {
 func (*MessagesAvailableReactionsPredict) _MessagesAvailableReactions() {}
 
 type MessagesBotApp interface {
-	tl.TLObject
+	tl.Any
 	_MessagesBotApp()
 }
 
@@ -17420,7 +17420,7 @@ func (*MessagesBotAppPredict) CRC() uint32 {
 func (*MessagesBotAppPredict) _MessagesBotApp() {}
 
 type MessagesBotCallbackAnswer interface {
-	tl.TLObject
+	tl.Any
 	_MessagesBotCallbackAnswer()
 }
 
@@ -17444,7 +17444,7 @@ func (*MessagesBotCallbackAnswerPredict) CRC() uint32 {
 func (*MessagesBotCallbackAnswerPredict) _MessagesBotCallbackAnswer() {}
 
 type MessagesBotResults interface {
-	tl.TLObject
+	tl.Any
 	_MessagesBotResults()
 }
 
@@ -17470,7 +17470,7 @@ func (*MessagesBotResultsPredict) CRC() uint32 {
 func (*MessagesBotResultsPredict) _MessagesBotResults() {}
 
 type MessagesChatAdminsWithInvites interface {
-	tl.TLObject
+	tl.Any
 	_MessagesChatAdminsWithInvites()
 }
 
@@ -17489,7 +17489,7 @@ func (*MessagesChatAdminsWithInvitesPredict) CRC() uint32 {
 func (*MessagesChatAdminsWithInvitesPredict) _MessagesChatAdminsWithInvites() {}
 
 type MessagesChatFull interface {
-	tl.TLObject
+	tl.Any
 	_MessagesChatFull()
 }
 
@@ -17509,7 +17509,7 @@ func (*MessagesChatFullPredict) CRC() uint32 {
 func (*MessagesChatFullPredict) _MessagesChatFull() {}
 
 type MessagesChatInviteImporters interface {
-	tl.TLObject
+	tl.Any
 	_MessagesChatInviteImporters()
 }
 
@@ -17529,7 +17529,7 @@ func (*MessagesChatInviteImportersPredict) CRC() uint32 {
 func (*MessagesChatInviteImportersPredict) _MessagesChatInviteImporters() {}
 
 type MessagesChats interface {
-	tl.TLObject
+	tl.Any
 	_MessagesChats()
 }
 
@@ -17558,7 +17558,7 @@ func (*MessagesChatsSlicePredict) CRC() uint32 {
 func (*MessagesChatsSlicePredict) _MessagesChats() {}
 
 type MessagesCheckedHistoryImportPeer interface {
-	tl.TLObject
+	tl.Any
 	_MessagesCheckedHistoryImportPeer()
 }
 
@@ -17576,7 +17576,7 @@ func (*MessagesCheckedHistoryImportPeerPredict) CRC() uint32 {
 func (*MessagesCheckedHistoryImportPeerPredict) _MessagesCheckedHistoryImportPeer() {}
 
 type MessagesDhConfig interface {
-	tl.TLObject
+	tl.Any
 	_MessagesDhConfig()
 }
 
@@ -17607,7 +17607,7 @@ func (*MessagesDhConfigPredict) CRC() uint32 {
 func (*MessagesDhConfigPredict) _MessagesDhConfig() {}
 
 type MessagesDialogFilters interface {
-	tl.TLObject
+	tl.Any
 	_MessagesDialogFilters()
 }
 
@@ -17627,7 +17627,7 @@ func (*MessagesDialogFiltersPredict) CRC() uint32 {
 func (*MessagesDialogFiltersPredict) _MessagesDialogFilters() {}
 
 type MessagesDialogs interface {
-	tl.TLObject
+	tl.Any
 	_MessagesDialogs()
 }
 
@@ -17672,7 +17672,7 @@ func (*MessagesDialogsNotModifiedPredict) CRC() uint32 {
 func (*MessagesDialogsNotModifiedPredict) _MessagesDialogs() {}
 
 type MessagesDiscussionMessage interface {
-	tl.TLObject
+	tl.Any
 	_MessagesDiscussionMessage()
 }
 
@@ -17697,7 +17697,7 @@ func (*MessagesDiscussionMessagePredict) CRC() uint32 {
 func (*MessagesDiscussionMessagePredict) _MessagesDiscussionMessage() {}
 
 type MessagesEmojiGroups interface {
-	tl.TLObject
+	tl.Any
 	_MessagesEmojiGroups()
 }
 
@@ -17724,7 +17724,7 @@ func (*MessagesEmojiGroupsPredict) CRC() uint32 {
 func (*MessagesEmojiGroupsPredict) _MessagesEmojiGroups() {}
 
 type MessagesExportedChatInvite interface {
-	tl.TLObject
+	tl.Any
 	_MessagesExportedChatInvite()
 }
 
@@ -17755,7 +17755,7 @@ func (*MessagesExportedChatInviteReplacedPredict) CRC() uint32 {
 func (*MessagesExportedChatInviteReplacedPredict) _MessagesExportedChatInvite() {}
 
 type MessagesExportedChatInvites interface {
-	tl.TLObject
+	tl.Any
 	_MessagesExportedChatInvites()
 }
 
@@ -17775,7 +17775,7 @@ func (*MessagesExportedChatInvitesPredict) CRC() uint32 {
 func (*MessagesExportedChatInvitesPredict) _MessagesExportedChatInvites() {}
 
 type MessagesFavedStickers interface {
-	tl.TLObject
+	tl.Any
 	_MessagesFavedStickers()
 }
 
@@ -17803,7 +17803,7 @@ func (*MessagesFavedStickersPredict) CRC() uint32 {
 func (*MessagesFavedStickersPredict) _MessagesFavedStickers() {}
 
 type MessagesFeaturedStickers interface {
-	tl.TLObject
+	tl.Any
 	_MessagesFeaturedStickers()
 }
 
@@ -17836,7 +17836,7 @@ func (*MessagesFeaturedStickersPredict) CRC() uint32 {
 func (*MessagesFeaturedStickersPredict) _MessagesFeaturedStickers() {}
 
 type MessagesForumTopics interface {
-	tl.TLObject
+	tl.Any
 	_MessagesForumTopics()
 }
 
@@ -17861,7 +17861,7 @@ func (*MessagesForumTopicsPredict) CRC() uint32 {
 func (*MessagesForumTopicsPredict) _MessagesForumTopics() {}
 
 type MessagesFoundStickerSets interface {
-	tl.TLObject
+	tl.Any
 	_MessagesFoundStickerSets()
 }
 
@@ -17888,7 +17888,7 @@ func (*MessagesFoundStickerSetsPredict) CRC() uint32 {
 func (*MessagesFoundStickerSetsPredict) _MessagesFoundStickerSets() {}
 
 type MessagesHighScores interface {
-	tl.TLObject
+	tl.Any
 	_MessagesHighScores()
 }
 
@@ -17907,7 +17907,7 @@ func (*MessagesHighScoresPredict) CRC() uint32 {
 func (*MessagesHighScoresPredict) _MessagesHighScores() {}
 
 type MessagesHistoryImport interface {
-	tl.TLObject
+	tl.Any
 	_MessagesHistoryImport()
 }
 
@@ -17925,7 +17925,7 @@ func (*MessagesHistoryImportPredict) CRC() uint32 {
 func (*MessagesHistoryImportPredict) _MessagesHistoryImport() {}
 
 type MessagesHistoryImportParsed interface {
-	tl.TLObject
+	tl.Any
 	_MessagesHistoryImportParsed()
 }
 
@@ -17946,7 +17946,7 @@ func (*MessagesHistoryImportParsedPredict) CRC() uint32 {
 func (*MessagesHistoryImportParsedPredict) _MessagesHistoryImportParsed() {}
 
 type MessagesInactiveChats interface {
-	tl.TLObject
+	tl.Any
 	_MessagesInactiveChats()
 }
 
@@ -17966,7 +17966,7 @@ func (*MessagesInactiveChatsPredict) CRC() uint32 {
 func (*MessagesInactiveChatsPredict) _MessagesInactiveChats() {}
 
 type MessagesInvitedUsers interface {
-	tl.TLObject
+	tl.Any
 	_MessagesInvitedUsers()
 }
 
@@ -17985,7 +17985,7 @@ func (*MessagesInvitedUsersPredict) CRC() uint32 {
 func (*MessagesInvitedUsersPredict) _MessagesInvitedUsers() {}
 
 type MessagesMessageEditData interface {
-	tl.TLObject
+	tl.Any
 	_MessagesMessageEditData()
 }
 
@@ -18004,7 +18004,7 @@ func (*MessagesMessageEditDataPredict) CRC() uint32 {
 func (*MessagesMessageEditDataPredict) _MessagesMessageEditData() {}
 
 type MessagesMessageReactionsList interface {
-	tl.TLObject
+	tl.Any
 	_MessagesMessageReactionsList()
 }
 
@@ -18027,7 +18027,7 @@ func (*MessagesMessageReactionsListPredict) CRC() uint32 {
 func (*MessagesMessageReactionsListPredict) _MessagesMessageReactionsList() {}
 
 type MessagesMessageViews interface {
-	tl.TLObject
+	tl.Any
 	_MessagesMessageViews()
 }
 
@@ -18047,7 +18047,7 @@ func (*MessagesMessageViewsPredict) CRC() uint32 {
 func (*MessagesMessageViewsPredict) _MessagesMessageViews() {}
 
 type MessagesMessages interface {
-	tl.TLObject
+	tl.Any
 	_MessagesMessages()
 }
 
@@ -18112,7 +18112,7 @@ func (*MessagesMessagesNotModifiedPredict) CRC() uint32 {
 func (*MessagesMessagesNotModifiedPredict) _MessagesMessages() {}
 
 type MessagesMyStickers interface {
-	tl.TLObject
+	tl.Any
 	_MessagesMyStickers()
 }
 
@@ -18131,7 +18131,7 @@ func (*MessagesMyStickersPredict) CRC() uint32 {
 func (*MessagesMyStickersPredict) _MessagesMyStickers() {}
 
 type MessagesPeerDialogs interface {
-	tl.TLObject
+	tl.Any
 	_MessagesPeerDialogs()
 }
 
@@ -18153,7 +18153,7 @@ func (*MessagesPeerDialogsPredict) CRC() uint32 {
 func (*MessagesPeerDialogsPredict) _MessagesPeerDialogs() {}
 
 type MessagesPeerSettings interface {
-	tl.TLObject
+	tl.Any
 	_MessagesPeerSettings()
 }
 
@@ -18173,7 +18173,7 @@ func (*MessagesPeerSettingsPredict) CRC() uint32 {
 func (*MessagesPeerSettingsPredict) _MessagesPeerSettings() {}
 
 type MessagesQuickReplies interface {
-	tl.TLObject
+	tl.Any
 	_MessagesQuickReplies()
 }
 
@@ -18202,7 +18202,7 @@ func (*MessagesQuickRepliesNotModifiedPredict) CRC() uint32 {
 func (*MessagesQuickRepliesNotModifiedPredict) _MessagesQuickReplies() {}
 
 type MessagesReactions interface {
-	tl.TLObject
+	tl.Any
 	_MessagesReactions()
 }
 
@@ -18229,7 +18229,7 @@ func (*MessagesReactionsPredict) CRC() uint32 {
 func (*MessagesReactionsPredict) _MessagesReactions() {}
 
 type MessagesRecentStickers interface {
-	tl.TLObject
+	tl.Any
 	_MessagesRecentStickers()
 }
 
@@ -18258,7 +18258,7 @@ func (*MessagesRecentStickersPredict) CRC() uint32 {
 func (*MessagesRecentStickersPredict) _MessagesRecentStickers() {}
 
 type MessagesSavedDialogs interface {
-	tl.TLObject
+	tl.Any
 	_MessagesSavedDialogs()
 }
 
@@ -18303,7 +18303,7 @@ func (*MessagesSavedDialogsNotModifiedPredict) CRC() uint32 {
 func (*MessagesSavedDialogsNotModifiedPredict) _MessagesSavedDialogs() {}
 
 type MessagesSavedGifs interface {
-	tl.TLObject
+	tl.Any
 	_MessagesSavedGifs()
 }
 
@@ -18330,7 +18330,7 @@ func (*MessagesSavedGifsPredict) CRC() uint32 {
 func (*MessagesSavedGifsPredict) _MessagesSavedGifs() {}
 
 type MessagesSavedReactionTags interface {
-	tl.TLObject
+	tl.Any
 	_MessagesSavedReactionTags()
 }
 
@@ -18357,7 +18357,7 @@ func (*MessagesSavedReactionTagsPredict) CRC() uint32 {
 func (*MessagesSavedReactionTagsPredict) _MessagesSavedReactionTags() {}
 
 type MessagesSearchCounter interface {
-	tl.TLObject
+	tl.Any
 	_MessagesSearchCounter()
 }
 
@@ -18378,7 +18378,7 @@ func (*MessagesSearchCounterPredict) CRC() uint32 {
 func (*MessagesSearchCounterPredict) _MessagesSearchCounter() {}
 
 type MessagesSearchResultsCalendar interface {
-	tl.TLObject
+	tl.Any
 	_MessagesSearchResultsCalendar()
 }
 
@@ -18405,7 +18405,7 @@ func (*MessagesSearchResultsCalendarPredict) CRC() uint32 {
 func (*MessagesSearchResultsCalendarPredict) _MessagesSearchResultsCalendar() {}
 
 type MessagesSearchResultsPositions interface {
-	tl.TLObject
+	tl.Any
 	_MessagesSearchResultsPositions()
 }
 
@@ -18424,7 +18424,7 @@ func (*MessagesSearchResultsPositionsPredict) CRC() uint32 {
 func (*MessagesSearchResultsPositionsPredict) _MessagesSearchResultsPositions() {}
 
 type MessagesSentEncryptedMessage interface {
-	tl.TLObject
+	tl.Any
 	_MessagesSentEncryptedMessage()
 }
 
@@ -18453,7 +18453,7 @@ func (*MessagesSentEncryptedFilePredict) CRC() uint32 {
 func (*MessagesSentEncryptedFilePredict) _MessagesSentEncryptedMessage() {}
 
 type MessagesSponsoredMessages interface {
-	tl.TLObject
+	tl.Any
 	_MessagesSponsoredMessages()
 }
 
@@ -18483,7 +18483,7 @@ func (*MessagesSponsoredMessagesEmptyPredict) CRC() uint32 {
 func (*MessagesSponsoredMessagesEmptyPredict) _MessagesSponsoredMessages() {}
 
 type MessagesStickerSet interface {
-	tl.TLObject
+	tl.Any
 	_MessagesStickerSet()
 }
 
@@ -18512,7 +18512,7 @@ func (*MessagesStickerSetNotModifiedPredict) CRC() uint32 {
 func (*MessagesStickerSetNotModifiedPredict) _MessagesStickerSet() {}
 
 type MessagesStickerSetInstallResult interface {
-	tl.TLObject
+	tl.Any
 	_MessagesStickerSetInstallResult()
 }
 
@@ -18538,7 +18538,7 @@ func (*MessagesStickerSetInstallResultArchivePredict) CRC() uint32 {
 func (*MessagesStickerSetInstallResultArchivePredict) _MessagesStickerSetInstallResult() {}
 
 type MessagesStickers interface {
-	tl.TLObject
+	tl.Any
 	_MessagesStickers()
 }
 
@@ -18565,7 +18565,7 @@ func (*MessagesStickersPredict) CRC() uint32 {
 func (*MessagesStickersPredict) _MessagesStickers() {}
 
 type MessagesTranscribedAudio interface {
-	tl.TLObject
+	tl.Any
 	_MessagesTranscribedAudio()
 }
 
@@ -18588,7 +18588,7 @@ func (*MessagesTranscribedAudioPredict) CRC() uint32 {
 func (*MessagesTranscribedAudioPredict) _MessagesTranscribedAudio() {}
 
 type MessagesTranslatedText interface {
-	tl.TLObject
+	tl.Any
 	_MessagesTranslatedText()
 }
 
@@ -18606,7 +18606,7 @@ func (*MessagesTranslateResultPredict) CRC() uint32 {
 func (*MessagesTranslateResultPredict) _MessagesTranslatedText() {}
 
 type MessagesVotesList interface {
-	tl.TLObject
+	tl.Any
 	_MessagesVotesList()
 }
 
@@ -18629,7 +18629,7 @@ func (*MessagesVotesListPredict) CRC() uint32 {
 func (*MessagesVotesListPredict) _MessagesVotesList() {}
 
 type MessagesWebPage interface {
-	tl.TLObject
+	tl.Any
 	_MessagesWebPage()
 }
 
@@ -18649,7 +18649,7 @@ func (*MessagesWebPagePredict) CRC() uint32 {
 func (*MessagesWebPagePredict) _MessagesWebPage() {}
 
 type PaymentsBankCardData interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsBankCardData()
 }
 
@@ -18668,7 +18668,7 @@ func (*PaymentsBankCardDataPredict) CRC() uint32 {
 func (*PaymentsBankCardDataPredict) _PaymentsBankCardData() {}
 
 type PaymentsCheckedGiftCode interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsCheckedGiftCode()
 }
 
@@ -18695,7 +18695,7 @@ func (*PaymentsCheckedGiftCodePredict) CRC() uint32 {
 func (*PaymentsCheckedGiftCodePredict) _PaymentsCheckedGiftCode() {}
 
 type PaymentsExportedInvoice interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsExportedInvoice()
 }
 
@@ -18713,7 +18713,7 @@ func (*PaymentsExportedInvoicePredict) CRC() uint32 {
 func (*PaymentsExportedInvoicePredict) _PaymentsExportedInvoice() {}
 
 type PaymentsGiveawayInfo interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsGiveawayInfo()
 }
 
@@ -18754,7 +18754,7 @@ func (*PaymentsGiveawayInfoResultsPredict) CRC() uint32 {
 func (*PaymentsGiveawayInfoResultsPredict) _PaymentsGiveawayInfo() {}
 
 type PaymentsPaymentForm interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsPaymentForm()
 }
 
@@ -18805,7 +18805,7 @@ func (*PaymentsPaymentFormStarsPredict) CRC() uint32 {
 func (*PaymentsPaymentFormStarsPredict) _PaymentsPaymentForm() {}
 
 type PaymentsPaymentReceipt interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsPaymentReceipt()
 }
 
@@ -18857,7 +18857,7 @@ func (*PaymentsPaymentReceiptStarsPredict) CRC() uint32 {
 func (*PaymentsPaymentReceiptStarsPredict) _PaymentsPaymentReceipt() {}
 
 type PaymentsPaymentResult interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsPaymentResult()
 }
 
@@ -18885,7 +18885,7 @@ func (*PaymentsPaymentVerificationNeededPredict) CRC() uint32 {
 func (*PaymentsPaymentVerificationNeededPredict) _PaymentsPaymentResult() {}
 
 type PaymentsSavedInfo interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsSavedInfo()
 }
 
@@ -18905,7 +18905,7 @@ func (*PaymentsSavedInfoPredict) CRC() uint32 {
 func (*PaymentsSavedInfoPredict) _PaymentsSavedInfo() {}
 
 type PaymentsStarsRevenueAdsAccountURL interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsStarsRevenueAdsAccountURL()
 }
 
@@ -18923,7 +18923,7 @@ func (*PaymentsStarsRevenueAdsAccountURLPredict) CRC() uint32 {
 func (*PaymentsStarsRevenueAdsAccountURLPredict) _PaymentsStarsRevenueAdsAccountURL() {}
 
 type PaymentsStarsRevenueStats interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsStarsRevenueStats()
 }
 
@@ -18943,7 +18943,7 @@ func (*PaymentsStarsRevenueStatsPredict) CRC() uint32 {
 func (*PaymentsStarsRevenueStatsPredict) _PaymentsStarsRevenueStats() {}
 
 type PaymentsStarsRevenueWithdrawalURL interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsStarsRevenueWithdrawalURL()
 }
 
@@ -18961,7 +18961,7 @@ func (*PaymentsStarsRevenueWithdrawalURLPredict) CRC() uint32 {
 func (*PaymentsStarsRevenueWithdrawalURLPredict) _PaymentsStarsRevenueWithdrawalURL() {}
 
 type PaymentsStarsStatus interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsStarsStatus()
 }
 
@@ -18984,7 +18984,7 @@ func (*PaymentsStarsStatusPredict) CRC() uint32 {
 func (*PaymentsStarsStatusPredict) _PaymentsStarsStatus() {}
 
 type PaymentsValidatedRequestedInfo interface {
-	tl.TLObject
+	tl.Any
 	_PaymentsValidatedRequestedInfo()
 }
 
@@ -19004,7 +19004,7 @@ func (*PaymentsValidatedRequestedInfoPredict) CRC() uint32 {
 func (*PaymentsValidatedRequestedInfoPredict) _PaymentsValidatedRequestedInfo() {}
 
 type PhoneExportedGroupCallInvite interface {
-	tl.TLObject
+	tl.Any
 	_PhoneExportedGroupCallInvite()
 }
 
@@ -19022,7 +19022,7 @@ func (*PhoneExportedGroupCallInvitePredict) CRC() uint32 {
 func (*PhoneExportedGroupCallInvitePredict) _PhoneExportedGroupCallInvite() {}
 
 type PhoneGroupCall interface {
-	tl.TLObject
+	tl.Any
 	_PhoneGroupCall()
 }
 
@@ -19044,7 +19044,7 @@ func (*PhoneGroupCallPredict) CRC() uint32 {
 func (*PhoneGroupCallPredict) _PhoneGroupCall() {}
 
 type PhoneGroupCallStreamChannels interface {
-	tl.TLObject
+	tl.Any
 	_PhoneGroupCallStreamChannels()
 }
 
@@ -19062,7 +19062,7 @@ func (*PhoneGroupCallStreamChannelsPredict) CRC() uint32 {
 func (*PhoneGroupCallStreamChannelsPredict) _PhoneGroupCallStreamChannels() {}
 
 type PhoneGroupCallStreamRtmpURL interface {
-	tl.TLObject
+	tl.Any
 	_PhoneGroupCallStreamRtmpURL()
 }
 
@@ -19081,7 +19081,7 @@ func (*PhoneGroupCallStreamRtmpURLPredict) CRC() uint32 {
 func (*PhoneGroupCallStreamRtmpURLPredict) _PhoneGroupCallStreamRtmpURL() {}
 
 type PhoneGroupParticipants interface {
-	tl.TLObject
+	tl.Any
 	_PhoneGroupParticipants()
 }
 
@@ -19104,7 +19104,7 @@ func (*PhoneGroupParticipantsPredict) CRC() uint32 {
 func (*PhoneGroupParticipantsPredict) _PhoneGroupParticipants() {}
 
 type PhoneJoinAsPeers interface {
-	tl.TLObject
+	tl.Any
 	_PhoneJoinAsPeers()
 }
 
@@ -19124,7 +19124,7 @@ func (*PhoneJoinAsPeersPredict) CRC() uint32 {
 func (*PhoneJoinAsPeersPredict) _PhoneJoinAsPeers() {}
 
 type PhonePhoneCall interface {
-	tl.TLObject
+	tl.Any
 	_PhonePhoneCall()
 }
 
@@ -19143,7 +19143,7 @@ func (*PhonePhoneCallPredict) CRC() uint32 {
 func (*PhonePhoneCallPredict) _PhonePhoneCall() {}
 
 type PhotosPhoto interface {
-	tl.TLObject
+	tl.Any
 	_PhotosPhoto()
 }
 
@@ -19162,7 +19162,7 @@ func (*PhotosPhotoPredict) CRC() uint32 {
 func (*PhotosPhotoPredict) _PhotosPhoto() {}
 
 type PhotosPhotos interface {
-	tl.TLObject
+	tl.Any
 	_PhotosPhotos()
 }
 
@@ -19193,7 +19193,7 @@ func (*PhotosPhotosSlicePredict) CRC() uint32 {
 func (*PhotosPhotosSlicePredict) _PhotosPhotos() {}
 
 type PremiumBoostsList interface {
-	tl.TLObject
+	tl.Any
 	_PremiumBoostsList()
 }
 
@@ -19215,7 +19215,7 @@ func (*PremiumBoostsListPredict) CRC() uint32 {
 func (*PremiumBoostsListPredict) _PremiumBoostsList() {}
 
 type PremiumBoostsStatus interface {
-	tl.TLObject
+	tl.Any
 	_PremiumBoostsStatus()
 }
 
@@ -19243,7 +19243,7 @@ func (*PremiumBoostsStatusPredict) CRC() uint32 {
 func (*PremiumBoostsStatusPredict) _PremiumBoostsStatus() {}
 
 type PremiumMyBoosts interface {
-	tl.TLObject
+	tl.Any
 	_PremiumMyBoosts()
 }
 
@@ -19263,7 +19263,7 @@ func (*PremiumMyBoostsPredict) CRC() uint32 {
 func (*PremiumMyBoostsPredict) _PremiumMyBoosts() {}
 
 type SmsjobsEligibilityToJoin interface {
-	tl.TLObject
+	tl.Any
 	_SmsjobsEligibilityToJoin()
 }
 
@@ -19282,7 +19282,7 @@ func (*SmsjobsEligibleToJoinPredict) CRC() uint32 {
 func (*SmsjobsEligibleToJoinPredict) _SmsjobsEligibilityToJoin() {}
 
 type SmsjobsStatus interface {
-	tl.TLObject
+	tl.Any
 	_SmsjobsStatus()
 }
 
@@ -19308,7 +19308,7 @@ func (*SmsjobsStatusPredict) CRC() uint32 {
 func (*SmsjobsStatusPredict) _SmsjobsStatus() {}
 
 type StatsBroadcastRevenueStats interface {
-	tl.TLObject
+	tl.Any
 	_StatsBroadcastRevenueStats()
 }
 
@@ -19329,7 +19329,7 @@ func (*StatsBroadcastRevenueStatsPredict) CRC() uint32 {
 func (*StatsBroadcastRevenueStatsPredict) _StatsBroadcastRevenueStats() {}
 
 type StatsBroadcastRevenueTransactions interface {
-	tl.TLObject
+	tl.Any
 	_StatsBroadcastRevenueTransactions()
 }
 
@@ -19348,7 +19348,7 @@ func (*StatsBroadcastRevenueTransactionsPredict) CRC() uint32 {
 func (*StatsBroadcastRevenueTransactionsPredict) _StatsBroadcastRevenueTransactions() {}
 
 type StatsBroadcastRevenueWithdrawalURL interface {
-	tl.TLObject
+	tl.Any
 	_StatsBroadcastRevenueWithdrawalURL()
 }
 
@@ -19366,7 +19366,7 @@ func (*StatsBroadcastRevenueWithdrawalURLPredict) CRC() uint32 {
 func (*StatsBroadcastRevenueWithdrawalURLPredict) _StatsBroadcastRevenueWithdrawalURL() {}
 
 type StatsBroadcastStats interface {
-	tl.TLObject
+	tl.Any
 	_StatsBroadcastStats()
 }
 
@@ -19405,7 +19405,7 @@ func (*StatsBroadcastStatsPredict) CRC() uint32 {
 func (*StatsBroadcastStatsPredict) _StatsBroadcastStats() {}
 
 type StatsMegagroupStats interface {
-	tl.TLObject
+	tl.Any
 	_StatsMegagroupStats()
 }
 
@@ -19439,7 +19439,7 @@ func (*StatsMegagroupStatsPredict) CRC() uint32 {
 func (*StatsMegagroupStatsPredict) _StatsMegagroupStats() {}
 
 type StatsMessageStats interface {
-	tl.TLObject
+	tl.Any
 	_StatsMessageStats()
 }
 
@@ -19458,7 +19458,7 @@ func (*StatsMessageStatsPredict) CRC() uint32 {
 func (*StatsMessageStatsPredict) _StatsMessageStats() {}
 
 type StatsPublicForwards interface {
-	tl.TLObject
+	tl.Any
 	_StatsPublicForwards()
 }
 
@@ -19481,7 +19481,7 @@ func (*StatsPublicForwardsPredict) CRC() uint32 {
 func (*StatsPublicForwardsPredict) _StatsPublicForwards() {}
 
 type StatsStoryStats interface {
-	tl.TLObject
+	tl.Any
 	_StatsStoryStats()
 }
 
@@ -19500,7 +19500,7 @@ func (*StatsStoryStatsPredict) CRC() uint32 {
 func (*StatsStoryStatsPredict) _StatsStoryStats() {}
 
 type StickersSuggestedShortName interface {
-	tl.TLObject
+	tl.Any
 	_StickersSuggestedShortName()
 }
 
@@ -19518,7 +19518,7 @@ func (*StickersSuggestedShortNamePredict) CRC() uint32 {
 func (*StickersSuggestedShortNamePredict) _StickersSuggestedShortName() {}
 
 type StorageFileType interface {
-	tl.TLObject
+	tl.Any
 	_StorageFileType()
 }
 
@@ -19606,7 +19606,7 @@ func (*StorageFileWebpPredict) CRC() uint32 {
 func (*StorageFileWebpPredict) _StorageFileType() {}
 
 type StoriesAllStories interface {
-	tl.TLObject
+	tl.Any
 	_StoriesAllStories()
 }
 
@@ -19643,7 +19643,7 @@ func (*StoriesAllStoriesPredict) CRC() uint32 {
 func (*StoriesAllStoriesPredict) _StoriesAllStories() {}
 
 type StoriesFoundStories interface {
-	tl.TLObject
+	tl.Any
 	_StoriesFoundStories()
 }
 
@@ -19666,7 +19666,7 @@ func (*StoriesFoundStoriesPredict) CRC() uint32 {
 func (*StoriesFoundStoriesPredict) _StoriesFoundStories() {}
 
 type StoriesPeerStories interface {
-	tl.TLObject
+	tl.Any
 	_StoriesPeerStories()
 }
 
@@ -19686,7 +19686,7 @@ func (*StoriesPeerStoriesPredict) CRC() uint32 {
 func (*StoriesPeerStoriesPredict) _StoriesPeerStories() {}
 
 type StoriesStories interface {
-	tl.TLObject
+	tl.Any
 	_StoriesStories()
 }
 
@@ -19709,7 +19709,7 @@ func (*StoriesStoriesPredict) CRC() uint32 {
 func (*StoriesStoriesPredict) _StoriesStories() {}
 
 type StoriesStoryReactionsList interface {
-	tl.TLObject
+	tl.Any
 	_StoriesStoryReactionsList()
 }
 
@@ -19732,7 +19732,7 @@ func (*StoriesStoryReactionsListPredict) CRC() uint32 {
 func (*StoriesStoryReactionsListPredict) _StoriesStoryReactionsList() {}
 
 type StoriesStoryViews interface {
-	tl.TLObject
+	tl.Any
 	_StoriesStoryViews()
 }
 
@@ -19751,7 +19751,7 @@ func (*StoriesStoryViewsPredict) CRC() uint32 {
 func (*StoriesStoryViewsPredict) _StoriesStoryViews() {}
 
 type StoriesStoryViewsList interface {
-	tl.TLObject
+	tl.Any
 	_StoriesStoryViewsList()
 }
 
@@ -19777,7 +19777,7 @@ func (*StoriesStoryViewsListPredict) CRC() uint32 {
 func (*StoriesStoryViewsListPredict) _StoriesStoryViewsList() {}
 
 type UpdatesChannelDifference interface {
-	tl.TLObject
+	tl.Any
 	_UpdatesChannelDifference()
 }
 
@@ -19831,7 +19831,7 @@ func (*UpdatesChannelDifferencePredict) CRC() uint32 {
 func (*UpdatesChannelDifferencePredict) _UpdatesChannelDifference() {}
 
 type UpdatesDifference interface {
-	tl.TLObject
+	tl.Any
 	_UpdatesDifference()
 }
 
@@ -19890,7 +19890,7 @@ func (*UpdatesDifferenceTooLongPredict) CRC() uint32 {
 func (*UpdatesDifferenceTooLongPredict) _UpdatesDifference() {}
 
 type UpdatesState interface {
-	tl.TLObject
+	tl.Any
 	_UpdatesState()
 }
 
@@ -19912,7 +19912,7 @@ func (*UpdatesStatePredict) CRC() uint32 {
 func (*UpdatesStatePredict) _UpdatesState() {}
 
 type UploadCdnFile interface {
-	tl.TLObject
+	tl.Any
 	_UploadCdnFile()
 }
 
@@ -19940,7 +19940,7 @@ func (*UploadCdnFilePredict) CRC() uint32 {
 func (*UploadCdnFilePredict) _UploadCdnFile() {}
 
 type UploadFile interface {
-	tl.TLObject
+	tl.Any
 	_UploadFile()
 }
 
@@ -19974,7 +19974,7 @@ func (*UploadFileCdnRedirectPredict) CRC() uint32 {
 func (*UploadFileCdnRedirectPredict) _UploadFile() {}
 
 type UploadWebFile interface {
-	tl.TLObject
+	tl.Any
 	_UploadWebFile()
 }
 
@@ -19996,7 +19996,7 @@ func (*UploadWebFilePredict) CRC() uint32 {
 func (*UploadWebFilePredict) _UploadWebFile() {}
 
 type UsersUserFull interface {
-	tl.TLObject
+	tl.Any
 	_UsersUserFull()
 }
 
@@ -20030,7 +20030,7 @@ func request[IN any, OUT any](ctx context.Context, m Requester, in *IN, out *OUT
 	return nil
 }
 
-type InvokeAfterMsgRequestPredict[X tl.TLObject] struct {
+type InvokeAfterMsgRequestPredict[X tl.Any] struct {
 	MsgID int64 `tl:"msg_id"`
 	Query X     `tl:"query"`
 }
@@ -20039,12 +20039,12 @@ func (*InvokeAfterMsgRequestPredict[X]) CRC() uint32 {
 	return 0xcb9f372d
 }
 
-func InvokeAfterMsg[X tl.TLObject](ctx context.Context, m Requester, i InvokeAfterMsgRequestPredict[X]) (X, error) {
+func InvokeAfterMsg[X tl.Any](ctx context.Context, m Requester, i InvokeAfterMsgRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeAfterMsgsRequestPredict[X tl.TLObject] struct {
+type InvokeAfterMsgsRequestPredict[X tl.Any] struct {
 	MsgIds []int64 `tl:"msg_ids"`
 	Query  X       `tl:"query"`
 }
@@ -20053,12 +20053,12 @@ func (*InvokeAfterMsgsRequestPredict[X]) CRC() uint32 {
 	return 0x3dc4b4f0
 }
 
-func InvokeAfterMsgs[X tl.TLObject](ctx context.Context, m Requester, i InvokeAfterMsgsRequestPredict[X]) (X, error) {
+func InvokeAfterMsgs[X tl.Any](ctx context.Context, m Requester, i InvokeAfterMsgsRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InitConnectionRequestPredict[X tl.TLObject] struct {
+type InitConnectionRequestPredict[X tl.Any] struct {
 	_              struct{}         `tl:"flags,bitflag"`
 	APIID          int32            `tl:"api_id"`
 	DeviceModel    string           `tl:"device_model"`
@@ -20076,12 +20076,12 @@ func (*InitConnectionRequestPredict[X]) CRC() uint32 {
 	return 0xc1cd5ea9
 }
 
-func InitConnection[X tl.TLObject](ctx context.Context, m Requester, i InitConnectionRequestPredict[X]) (X, error) {
+func InitConnection[X tl.Any](ctx context.Context, m Requester, i InitConnectionRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithLayerRequestPredict[X tl.TLObject] struct {
+type InvokeWithLayerRequestPredict[X tl.Any] struct {
 	Layer int32 `tl:"layer"`
 	Query X     `tl:"query"`
 }
@@ -20090,12 +20090,12 @@ func (*InvokeWithLayerRequestPredict[X]) CRC() uint32 {
 	return 0xda9b0d0d
 }
 
-func InvokeWithLayer[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithLayerRequestPredict[X]) (X, error) {
+func InvokeWithLayer[X tl.Any](ctx context.Context, m Requester, i InvokeWithLayerRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithoutUpdatesRequestPredict[X tl.TLObject] struct {
+type InvokeWithoutUpdatesRequestPredict[X tl.Any] struct {
 	Query X `tl:"query"`
 }
 
@@ -20103,12 +20103,12 @@ func (*InvokeWithoutUpdatesRequestPredict[X]) CRC() uint32 {
 	return 0xbf9459b7
 }
 
-func InvokeWithoutUpdates[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithoutUpdatesRequestPredict[X]) (X, error) {
+func InvokeWithoutUpdates[X tl.Any](ctx context.Context, m Requester, i InvokeWithoutUpdatesRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithMessagesRangeRequestPredict[X tl.TLObject] struct {
+type InvokeWithMessagesRangeRequestPredict[X tl.Any] struct {
 	Range MessageRange `tl:"range"`
 	Query X            `tl:"query"`
 }
@@ -20117,12 +20117,12 @@ func (*InvokeWithMessagesRangeRequestPredict[X]) CRC() uint32 {
 	return 0x365275f2
 }
 
-func InvokeWithMessagesRange[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithMessagesRangeRequestPredict[X]) (X, error) {
+func InvokeWithMessagesRange[X tl.Any](ctx context.Context, m Requester, i InvokeWithMessagesRangeRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithTakeoutRequestPredict[X tl.TLObject] struct {
+type InvokeWithTakeoutRequestPredict[X tl.Any] struct {
 	TakeoutID int64 `tl:"takeout_id"`
 	Query     X     `tl:"query"`
 }
@@ -20131,12 +20131,12 @@ func (*InvokeWithTakeoutRequestPredict[X]) CRC() uint32 {
 	return 0xaca9fd2e
 }
 
-func InvokeWithTakeout[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithTakeoutRequestPredict[X]) (X, error) {
+func InvokeWithTakeout[X tl.Any](ctx context.Context, m Requester, i InvokeWithTakeoutRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithBusinessConnectionRequestPredict[X tl.TLObject] struct {
+type InvokeWithBusinessConnectionRequestPredict[X tl.Any] struct {
 	ConnectionID string `tl:"connection_id"`
 	Query        X      `tl:"query"`
 }
@@ -20145,12 +20145,12 @@ func (*InvokeWithBusinessConnectionRequestPredict[X]) CRC() uint32 {
 	return 0xdd289f8e
 }
 
-func InvokeWithBusinessConnection[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithBusinessConnectionRequestPredict[X]) (X, error) {
+func InvokeWithBusinessConnection[X tl.Any](ctx context.Context, m Requester, i InvokeWithBusinessConnectionRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithGooglePlayIntegrityRequestPredict[X tl.TLObject] struct {
+type InvokeWithGooglePlayIntegrityRequestPredict[X tl.Any] struct {
 	Nonce string `tl:"nonce"`
 	Token string `tl:"token"`
 	Query X      `tl:"query"`
@@ -20160,12 +20160,12 @@ func (*InvokeWithGooglePlayIntegrityRequestPredict[X]) CRC() uint32 {
 	return 0x1df92984
 }
 
-func InvokeWithGooglePlayIntegrity[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithGooglePlayIntegrityRequestPredict[X]) (X, error) {
+func InvokeWithGooglePlayIntegrity[X tl.Any](ctx context.Context, m Requester, i InvokeWithGooglePlayIntegrityRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
 
-type InvokeWithApnsSecretRequestPredict[X tl.TLObject] struct {
+type InvokeWithApnsSecretRequestPredict[X tl.Any] struct {
 	Nonce  string `tl:"nonce"`
 	Secret string `tl:"secret"`
 	Query  X      `tl:"query"`
@@ -20175,7 +20175,7 @@ func (*InvokeWithApnsSecretRequestPredict[X]) CRC() uint32 {
 	return 0x0dae54f8
 }
 
-func InvokeWithApnsSecret[X tl.TLObject](ctx context.Context, m Requester, i InvokeWithApnsSecretRequestPredict[X]) (X, error) {
+func InvokeWithApnsSecret[X tl.Any](ctx context.Context, m Requester, i InvokeWithApnsSecretRequestPredict[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }

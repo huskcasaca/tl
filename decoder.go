@@ -144,7 +144,7 @@ func (d *decoder) decodeValue(value reflect.Value) error {
 		val, err = d.PopLong()
 
 	case reflect.Uint32:
-		if _, ok := value.Interface().(TLObject); ok {
+		if _, ok := value.Interface().(Any); ok {
 			crc, err := d.PopCRC()
 			if err != nil {
 				return err
@@ -399,7 +399,7 @@ func (d *decoder) decodeObject(v reflect.Value, ignoreCRC bool) error {
 
 	crc, ok := getCRCofObject(v)
 	if !ok {
-		return errors.New("value must implement TLObject interface, got: " + v.Type().String())
+		return errors.New("value must implement Any interface, got: " + v.Type().String())
 	}
 
 	if !ignoreCRC {
@@ -626,11 +626,11 @@ func (d *decoder) ReadAll() ([]byte, error) { return io.ReadAll(&d.r) }
 */
 
 func getCRCofObject(v reflect.Value) (crc32, bool) {
-	if _, ok := v.Interface().(TLObject); !ok {
+	if _, ok := v.Interface().(Any); !ok {
 		v = v.Addr()
 	}
 
-	if v, ok := v.Interface().(TLObject); ok {
+	if v, ok := v.Interface().(Any); ok {
 		return v.CRC(), true
 	}
 

@@ -23,33 +23,32 @@ func Marshal(v any) ([]byte, error) {
 // specific struct. It's working absolutely like fmt.State, you just need to
 // write data to this abstraction.
 type MarshalState interface {
-	// if object will write bytes the size of which is not divided by the length
-	// of the word, it will throw specific error
+	// Writer will throw specific error if object will write bytes the size of which is not divided by the length of the word
 	io.Writer
 
 	PutBool(bool) error
-	PutInt(int32) error
-	PutLong(int64) error
-	PutCRC(crc32) error
-	PutMessage([]byte) error
+	PutInt32(int32) error
+	PutInt64(int64) error
+	PutCrc32(crc32) error
+	PutBytes([]byte) error
 }
 
 type RealEncoder interface {
 	Encode(v any) error
 }
 
-// encoder is a type, which allows you to decode serialized message.
-type encoder struct {
-	w io.Writer
+// Encoder is a type, which allows you to decode serialized message.
+type Encoder struct {
+	Writer io.Writer
 
-	endianess binary.ByteOrder
+	ByteOrder binary.ByteOrder
 }
 
 func NewEncoder(w io.Writer) RealEncoder {
-	return &encoder{w: w, endianess: binary.LittleEndian}
+	return &Encoder{Writer: w, ByteOrder: binary.LittleEndian}
 }
 
-func (e *encoder) Encode(value any) error {
+func (e *Encoder) Encode(value any) error {
 	if value == nil {
 		return ErrUnexpectedNil
 	}
@@ -64,7 +63,7 @@ func (e *encoder) Encode(value any) error {
 
 // writeErr works like write (also throwing panic), but without count of
 // written bytes.
-func (e *encoder) writeErr(b []byte) error {
+func (e *Encoder) writeErr(b []byte) error {
 	if n, err := e.write(b); err != nil {
 		return err
 	} else if n != len(b) {
@@ -74,7 +73,7 @@ func (e *encoder) writeErr(b []byte) error {
 	return nil
 }
 
-func (e *encoder) Write(b []byte) (int, error) {
+func (e *Encoder) Write(b []byte) (int, error) {
 	if len(b)%WordLen != 0 {
 		return 0, errors.New("value can't be divided by word length")
 	}
@@ -83,7 +82,7 @@ func (e *encoder) Write(b []byte) (int, error) {
 }
 
 // write is private, cause this function might panic.
-func (e *encoder) write(b []byte) (int, error) {
+func (e *Encoder) write(b []byte) (int, error) {
 	if len(b)%WordLen != 0 { //revive:disable-line:add-constant // makes no sense
 		// it's panic, because it's internal method, and we must not write in
 		// any case data, which is not divided by word length
@@ -94,12 +93,12 @@ func (e *encoder) write(b []byte) (int, error) {
 		return 0, nil
 	}
 
-	return e.w.Write(b) //nolint:wrapcheck // write() is a wrapper
+	return e.Writer.Write(b) //nolint:wrapcheck // write() is a wrapper
 }
 
 //nolint:cyclop // it contains only assertion and switch statement
 //revive:disable:function-length // same: can't make better
-func (e *encoder) encodeValue(value reflect.Value) error {
+func (e *Encoder) encodeValue(value reflect.Value) error {
 	if maybeNil(value) {
 		return ErrUnexpectedNil
 	}
@@ -112,25 +111,25 @@ func (e *encoder) encodeValue(value reflect.Value) error {
 
 	switch k := value.Type().Kind(); k { //nolint:exhaustive // has default case
 	case reflect.Uint32:
-		return e.putUint(uint32(value.Uint()))
+		return e.PutUint32(uint32(value.Uint()))
 
 	case reflect.Int32:
-		return e.putUint(uint32(value.Int()))
+		return e.PutUint32(uint32(value.Int()))
 
 	case reflect.Uint64:
-		return e.putULong(value.Uint())
+		return e.PutUint64(value.Uint())
 
 	case reflect.Int64:
-		return e.PutLong(value.Int())
+		return e.PutInt64(value.Int())
 
 	case reflect.Float64:
-		return e.putDouble(value.Float())
+		return e.PutFloat64(value.Float())
 
 	case reflect.Bool:
 		return e.PutBool(value.Bool())
 
 	case reflect.String:
-		return e.putString(value.String())
+		return e.PutString(value.String())
 
 	case reflect.Struct:
 		return e.encodeStruct(value, false)
@@ -158,7 +157,7 @@ func (e *encoder) encodeValue(value reflect.Value) error {
 //revive:enable
 
 // v must be pointer to struct.
-func (e *encoder) encodeStruct(v reflect.Value, ignoreCRC bool) error {
+func (e *Encoder) encodeStruct(v reflect.Value, ignoreCRC bool) error {
 	o, ok := v.Interface().(Any)
 	if !ok {
 		// Trying to look implementation by pointer
@@ -200,7 +199,7 @@ func (e *encoder) encodeStruct(v reflect.Value, ignoreCRC bool) error {
 	// 4) definitely struct (we don't call encodeStruct() but in c.encodeValue())
 	// 5) not nil (structs can't be nil, only pointers and interfaces)
 	if !ignoreCRC {
-		if err := e.PutCRC(o.CRC()); err != nil {
+		if err := e.PutCrc32(o.CRC()); err != nil {
 			return err
 		}
 	}
@@ -208,7 +207,7 @@ func (e *encoder) encodeStruct(v reflect.Value, ignoreCRC bool) error {
 	for i := 0; i < v.NumField(); i++ {
 		// putting bitflags, if this field is bitflag
 		if flags, ok := optFlags[i]; ok {
-			if err := e.putUint(flags); err != nil {
+			if err := e.PutUint32(flags); err != nil {
 				return err
 			}
 
@@ -235,7 +234,7 @@ func (e *encoder) encodeStruct(v reflect.Value, ignoreCRC bool) error {
 }
 
 /*
-func (e *encoder) encodeMap(m reflect.Value) error {
+func (e *Encoder) encodeMap(m reflect.Value) error {
 	if m.Type().Key().Kind() != reflect.String {
 		return errors.New("map keys are not string")
 	}
@@ -267,7 +266,7 @@ func (e *encoder) encodeMap(m reflect.Value) error {
 	for i, field := range definition.fields {
 		// putting bitflags, if this field is bitflag
 		if flags, ok := bitflags[uint8(i)]; ok {
-			if err := e.putUint(flags); err != nil {
+			if err := e.PutUint32(flags); err != nil {
 				return err
 			}
 
@@ -288,7 +287,7 @@ func (e *encoder) encodeMap(m reflect.Value) error {
 }
 */
 
-func (e *encoder) encodeRaw(v reflect.Value) error {
+func (e *Encoder) encodeRaw(v reflect.Value) error {
 	if v.Kind() != reflect.Array {
 		panic("raw must be array")
 	} else if v.Type().Elem() != byteTyp {
@@ -304,15 +303,15 @@ func (e *encoder) encodeRaw(v reflect.Value) error {
 	return err
 }
 
-func (e *encoder) encodeVector(slice reflect.Value) error {
+func (e *Encoder) encodeVector(slice reflect.Value) error {
 	if b, ok := slice.Interface().([]byte); ok {
-		return e.PutMessage(b)
+		return e.PutBytes(b)
 	}
 
-	if err := e.PutCRC(crcVector); err != nil {
+	if err := e.PutCrc32(crcVector); err != nil {
 		return err
 	}
-	if err := e.putUint(uint32(slice.Len())); err != nil {
+	if err := e.PutUint32(uint32(slice.Len())); err != nil {
 		return err
 	}
 
@@ -327,16 +326,16 @@ func (e *encoder) encodeVector(slice reflect.Value) error {
 	return nil
 }
 
-func (e *encoder) putUint(v uint32) error    { return e.writeErr(u32b(e.endianess, v)) }
-func (e *encoder) putULong(v uint64) error   { return e.writeErr(u64b(e.endianess, v)) }
-func (e *encoder) PutLong(v int64) error     { return e.writeErr(u64b(e.endianess, uint64(v))) }
-func (e *encoder) putDouble(v float64) error { return e.writeErr(f64b(e.endianess, v)) }
-func (e *encoder) PutCRC(v uint32) error     { return e.putUint(v) } // for selfdoc code
-func (e *encoder) PutInt(v int32) error      { return e.putUint(uint32(v)) }
-func (e *encoder) PutBool(v bool) error      { return e.putUint(boolToCRC(v)) }
-func (e *encoder) putString(v string) error  { return e.PutMessage([]byte(v)) }
+func (e *Encoder) PutUint32(v uint32) error   { return e.writeErr(u32b(e.ByteOrder, v)) }
+func (e *Encoder) PutUint64(v uint64) error   { return e.writeErr(u64b(e.ByteOrder, v)) }
+func (e *Encoder) PutInt64(v int64) error     { return e.writeErr(u64b(e.ByteOrder, uint64(v))) }
+func (e *Encoder) PutFloat64(v float64) error { return e.writeErr(f64b(e.ByteOrder, v)) }
+func (e *Encoder) PutCrc32(v uint32) error    { return e.PutUint32(v) } // for selfdoc code
+func (e *Encoder) PutInt32(v int32) error     { return e.PutUint32(uint32(v)) }
+func (e *Encoder) PutBool(v bool) error       { return e.PutUint32(boolToCRC(v)) }
+func (e *Encoder) PutString(v string) error   { return e.PutBytes([]byte(v)) }
 
-func (e *encoder) PutMessage(msg []byte) error {
+func (e *Encoder) PutBytes(msg []byte) error {
 	// 3 left bytes of word, which is 4 bytes
 	const maxLen = 1 << ((WordLen - 1) * bitsInByte)
 	if len(msg) > maxLen {
@@ -346,7 +345,7 @@ func (e *encoder) PutMessage(msg []byte) error {
 
 	var lenBytes []byte
 
-	// how does it works:
+	// how does it work:
 	// any object can be putted to byte set ONLY with length, without modula
 	// after dividing to word length. e.g. bytes 'Hi!' can be written as:
 	//            | 0x03 0x48 0x6A 0x21 |
@@ -355,9 +354,9 @@ func (e *encoder) PutMessage(msg []byte) error {
 	// BUT! bytes 'Hello!' MUST be written as
 	//            | 0x06 0x48 0x65 0x6C | 0x6C 0x6F 0x21 0x00 |
 	// See? We added extra empty byte to pad message to length of word. That is
-	// most important part of putting bytes to buffer.
+	// the most important part of putting bytes to buffer.
 	//
-	// So we must to create a buffer with length mod to 32 == 0. To not add
+	// So we must create a buffer with length mod to 32 == 0. To not add
 	// extra bytes manually. They could be random, but who needs that, right?
 	if len(msg) < fuckingMagicNumber {
 		lenBytes = []byte{byte(len(msg))}

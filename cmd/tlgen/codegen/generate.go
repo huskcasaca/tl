@@ -18,7 +18,7 @@ func Generate(s *schema.TLSchema) (string, error) {
 		f.Add(generateObjects(name, s.TypeDeclMap[name]))
 	}
 
-	f.Add(generateRequestFunc())
+	f.Add(generateMakeRequesterFunc())
 
 	for _, name := range slices.SortFunc(maps.Keys(s.FuncDeclMap), func(a, b schema.TLName) int { return a.Cmp(b) }) {
 		f.Add(generateRequestType(s.FuncDeclMap[name]))

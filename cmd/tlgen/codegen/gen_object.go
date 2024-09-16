@@ -55,13 +55,6 @@ func getPredictName(name schema.TLName) (res string) {
 	return /*"TL" + */ res + getGoName(name.Key, true) + "Predict"
 }
 
-func getRequestName(name schema.TLName) (res string) {
-	if name.Namespace != "" {
-		res += getGoName(name.Namespace, true)
-	}
-	return /*"TL" + */ res + getGoName(name.Key, true) + "Request"
-}
-
 func getTypeName(name schema.TLName) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
@@ -111,28 +104,6 @@ func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement
 	ret = ret.Add(generateInterfaceFunctions(generateGenericNames(predictTypeName, m.PolyParams), method))
 
 	return ret, predictTypeName
-}
-
-func generateRequest(m schema.TLDeclaration) (ret *jen.Statement, objName string) {
-	ret = &jen.Statement{}
-	if m.Comment != "" {
-		ret = ret.Comment(m.Comment).Line()
-	}
-
-	requestTypeName := getRequestName(m.Name)
-
-	ret = ret.Type().
-		Add(generateGenericTypes(requestTypeName, m.PolyParams)).
-		Struct(
-			slices.Remap(m.Params, func(p schema.TLParam) jen.Code {
-				return generateField(p)
-			})...,
-		)
-
-	ret = ret.Line()
-	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(requestTypeName, m.PolyParams), m.CRC))
-
-	return ret, requestTypeName
 }
 
 func generateGenericTypes(name string, polys schema.TLParams) *jen.Statement {
@@ -244,9 +215,9 @@ func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 	case typeInt256:
 		return jen.Qual(util.GetTypePathName((*tl.Int256)(nil)))
 	default:
-		if !typ.Name().IsInterface() {
-			panic(fmt.Sprintf("incorrect type name: %v", typ))
-		}
+		//if !typ.Name().IsInterface() {
+		//	panic(fmt.Sprintf("incorrect type name: %v", typ))
+		//}
 		return jen.Id(getTypeName(typ.Name()))
 	}
 }
@@ -264,18 +235,6 @@ var (
 	typeInt128   = schema.TLName{Key: "int128"}
 	typeInt256   = schema.TLName{Key: "int256"}
 )
-
-func isDefaultType(typ schema.TLType) bool {
-	switch typ.Name() {
-	case typeBytes, typeDouble, typeInt, typeLong, typeString, typeBool:
-		if len(typ.Types()) != 0 {
-			panic(fmt.Sprintf("incorrect default type: %v", typ))
-		}
-		return len(typ.Types()) == 0
-	default:
-		return false
-	}
-}
 
 func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.Statement {
 	typeName := getTypeName(name)
@@ -306,105 +265,4 @@ func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.
 	}
 
 	return ret.Line()
-}
-
-func generateRequestType(funcReqObj schema.TLDeclaration) *jen.Statement {
-	funcName := schema.TLName{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key}
-	//funcReqObj.Name = schema.TLName{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key + "Request"}
-
-	requestObjJens, requestTypeName := generateRequest(funcReqObj)
-	requestFuncJens := generateFunction(funcName, requestTypeName, funcReqObj.PolyParams, funcReqObj.Type)
-
-	return jen.Add(requestObjJens, jen.Line(), jen.Line(), requestFuncJens, jen.Line())
-}
-
-// output:
-//
-//	func request[IN, OUT any](ctx context.Context, m Requester, in *IN, out *OUT) error {
-//		if msg, err := tl.Marshal(in); err != nil {
-//			return fmt.Errorf("marshaling: %w", err)
-//		} else if respRaw, err := m.MakeRequest(ctx, msg); err != nil {
-//			return fmt.Errorf("sending: %w", err)
-//		} else if err := Unmarshal(respRaw, out); err != nil {
-//			return fmt.Errorf("got invalid response type: %w", err)
-//		}
-//
-//		return nil
-//	}
-func generateRequestFunc() *jen.Statement {
-	return jen.
-		Type().
-		Id("Requester").
-		Interface(
-			jen.Id("MakeRequest").Params(jen.Id("ctx").Qual("context", "Context"), jen.Id("msg").Index().Byte()).Params(jen.Index().Byte(), jen.Error()),
-		).
-		Line().
-		Func().
-		Id("request").
-		Types(
-			jen.Id("IN").Any(),
-			jen.Id("OUT").Any(),
-		).
-		Params(
-			jen.Id("ctx").Qual("context", "Context"),
-			jen.Id("m").Id("Requester"),
-			jen.Id("in").Op("*").Id("IN"),
-			jen.Id("out").Op("*").Id("OUT"),
-		).
-		Params(
-			jen.Error(),
-		).
-		Block(
-			jen.If(
-				jen.List(jen.Id("msg"), jen.Err()).Op(":=").Qual(util.GetFunctionPathName(tl.Marshal)).Call(jen.Id("in")),
-				jen.Err().Op("!=").Nil(),
-			).Block(
-				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("marshaling: %w"), jen.Err())),
-			).Else().If(
-				jen.List(jen.Id("respRaw"), jen.Err()).Op(":=").Id("m").Dot("MakeRequest").Call(jen.Id("ctx"), jen.Id("msg")),
-				jen.Err().Op("!=").Nil(),
-			).Block(
-				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("sending: %w"), jen.Err())),
-			).Else().If(
-				jen.Err().Op(":=").Qual(util.GetFunctionPathName(tl.Unmarshal)).Call(jen.Id("respRaw"), jen.Id("out")),
-				jen.Err().Op("!=").Nil(),
-			).Block(
-				jen.Return(jen.Qual("fmt", "Errorf").Call(jen.Lit("got invalid response type: %w"), jen.Err())),
-			),
-			jen.Return(jen.Nil()),
-		).Line()
-}
-
-// output:
-//
-//	func MethodName[Response any](ctx context.Context, m Requester, i MethodNameRequest) (Response, error) {
-//		var res Response
-//		return res, request(ctx, m, &i, &res)
-//	}
-func generateFunction(funcName schema.TLName, requestType string, polyParams schema.TLParams, returns schema.TLType) *jen.Statement {
-	returnType := generateFieldType(returns, false)
-
-	return jen.Func().
-		Add(generateGenericTypes(getFieldName(funcName), polyParams)).
-		Params(
-			jen.Id("ctx").Qual("context", "Context"),
-			jen.Id("m").Id("Requester"),
-			jen.Id("i").Add(generateGenericNames(requestType, polyParams)),
-		).
-		Params(
-			returnType,
-			jen.Error(),
-		).
-		Block(
-			jen.Var().Id("res").Add(returnType),
-			jen.Return(
-				jen.Id("res"),
-				jen.Id("request").Call(
-					jen.Id("ctx"),
-					jen.Id("m"),
-					jen.Op("&").Id("i"),
-					jen.Op("&").Id("res"),
-				),
-			),
-		)
 }

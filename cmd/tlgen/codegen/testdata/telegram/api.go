@@ -20049,7 +20049,7 @@ func (*InitConnectionRequest[X]) CRC() uint32 {
 	return 0xc1cd5ea9
 }
 
-func InitConnection[X tl.Any](ctx context.Context, m Requester, i InitConnectionRequest[X]) (X, error) {
+func MakeInitConnectionRequest[X tl.Any](ctx context.Context, m Requester, i InitConnectionRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20063,7 +20063,7 @@ func (*InvokeAfterMsgRequest[X]) CRC() uint32 {
 	return 0xcb9f372d
 }
 
-func InvokeAfterMsg[X tl.Any](ctx context.Context, m Requester, i InvokeAfterMsgRequest[X]) (X, error) {
+func MakeInvokeAfterMsgRequest[X tl.Any](ctx context.Context, m Requester, i InvokeAfterMsgRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20077,7 +20077,7 @@ func (*InvokeAfterMsgsRequest[X]) CRC() uint32 {
 	return 0x3dc4b4f0
 }
 
-func InvokeAfterMsgs[X tl.Any](ctx context.Context, m Requester, i InvokeAfterMsgsRequest[X]) (X, error) {
+func MakeInvokeAfterMsgsRequest[X tl.Any](ctx context.Context, m Requester, i InvokeAfterMsgsRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20092,7 +20092,7 @@ func (*InvokeWithApnsSecretRequest[X]) CRC() uint32 {
 	return 0x0dae54f8
 }
 
-func InvokeWithApnsSecret[X tl.Any](ctx context.Context, m Requester, i InvokeWithApnsSecretRequest[X]) (X, error) {
+func MakeInvokeWithApnsSecretRequest[X tl.Any](ctx context.Context, m Requester, i InvokeWithApnsSecretRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20106,7 +20106,7 @@ func (*InvokeWithBusinessConnectionRequest[X]) CRC() uint32 {
 	return 0xdd289f8e
 }
 
-func InvokeWithBusinessConnection[X tl.Any](ctx context.Context, m Requester, i InvokeWithBusinessConnectionRequest[X]) (X, error) {
+func MakeInvokeWithBusinessConnectionRequest[X tl.Any](ctx context.Context, m Requester, i InvokeWithBusinessConnectionRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20121,7 +20121,7 @@ func (*InvokeWithGooglePlayIntegrityRequest[X]) CRC() uint32 {
 	return 0x1df92984
 }
 
-func InvokeWithGooglePlayIntegrity[X tl.Any](ctx context.Context, m Requester, i InvokeWithGooglePlayIntegrityRequest[X]) (X, error) {
+func MakeInvokeWithGooglePlayIntegrityRequest[X tl.Any](ctx context.Context, m Requester, i InvokeWithGooglePlayIntegrityRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20135,7 +20135,7 @@ func (*InvokeWithLayerRequest[X]) CRC() uint32 {
 	return 0xda9b0d0d
 }
 
-func InvokeWithLayer[X tl.Any](ctx context.Context, m Requester, i InvokeWithLayerRequest[X]) (X, error) {
+func MakeInvokeWithLayerRequest[X tl.Any](ctx context.Context, m Requester, i InvokeWithLayerRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20149,7 +20149,7 @@ func (*InvokeWithMessagesRangeRequest[X]) CRC() uint32 {
 	return 0x365275f2
 }
 
-func InvokeWithMessagesRange[X tl.Any](ctx context.Context, m Requester, i InvokeWithMessagesRangeRequest[X]) (X, error) {
+func MakeInvokeWithMessagesRangeRequest[X tl.Any](ctx context.Context, m Requester, i InvokeWithMessagesRangeRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20163,7 +20163,7 @@ func (*InvokeWithTakeoutRequest[X]) CRC() uint32 {
 	return 0xaca9fd2e
 }
 
-func InvokeWithTakeout[X tl.Any](ctx context.Context, m Requester, i InvokeWithTakeoutRequest[X]) (X, error) {
+func MakeInvokeWithTakeoutRequest[X tl.Any](ctx context.Context, m Requester, i InvokeWithTakeoutRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20176,7 +20176,7 @@ func (*InvokeWithoutUpdatesRequest[X]) CRC() uint32 {
 	return 0xbf9459b7
 }
 
-func InvokeWithoutUpdates[X tl.Any](ctx context.Context, m Requester, i InvokeWithoutUpdatesRequest[X]) (X, error) {
+func MakeInvokeWithoutUpdatesRequest[X tl.Any](ctx context.Context, m Requester, i InvokeWithoutUpdatesRequest[X]) (X, error) {
 	var res X
 	return res, request(ctx, m, &i, &res)
 }
@@ -20193,7 +20193,7 @@ func (*AccountAcceptAuthorizationRequest) CRC() uint32 {
 	return 0xf3ed4c73
 }
 
-func AccountAcceptAuthorization(ctx context.Context, m Requester, i AccountAcceptAuthorizationRequest) (bool, error) {
+func MakeAccountAcceptAuthorizationRequest(ctx context.Context, m Requester, i AccountAcceptAuthorizationRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20204,7 +20204,7 @@ func (*AccountCancelPasswordEmailRequest) CRC() uint32 {
 	return 0xc1cbd5b6
 }
 
-func AccountCancelPasswordEmail(ctx context.Context, m Requester, i AccountCancelPasswordEmailRequest) (bool, error) {
+func MakeAccountCancelPasswordEmailRequest(ctx context.Context, m Requester, i AccountCancelPasswordEmailRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20221,7 +20221,7 @@ func (*AccountChangeAuthorizationSettingsRequest) CRC() uint32 {
 	return 0x40f48462
 }
 
-func AccountChangeAuthorizationSettings(ctx context.Context, m Requester, i AccountChangeAuthorizationSettingsRequest) (bool, error) {
+func MakeAccountChangeAuthorizationSettingsRequest(ctx context.Context, m Requester, i AccountChangeAuthorizationSettingsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20236,7 +20236,7 @@ func (*AccountChangePhoneRequest) CRC() uint32 {
 	return 0x70c32edb
 }
 
-func AccountChangePhone(ctx context.Context, m Requester, i AccountChangePhoneRequest) (User, error) {
+func MakeAccountChangePhoneRequest(ctx context.Context, m Requester, i AccountChangePhoneRequest) (User, error) {
 	var res User
 	return res, request(ctx, m, &i, &res)
 }
@@ -20249,7 +20249,7 @@ func (*AccountCheckUsernameRequest) CRC() uint32 {
 	return 0x2714d86c
 }
 
-func AccountCheckUsername(ctx context.Context, m Requester, i AccountCheckUsernameRequest) (bool, error) {
+func MakeAccountCheckUsernameRequest(ctx context.Context, m Requester, i AccountCheckUsernameRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20260,7 +20260,7 @@ func (*AccountClearRecentEmojiStatusesRequest) CRC() uint32 {
 	return 0x18201aae
 }
 
-func AccountClearRecentEmojiStatuses(ctx context.Context, m Requester, i AccountClearRecentEmojiStatusesRequest) (bool, error) {
+func MakeAccountClearRecentEmojiStatusesRequest(ctx context.Context, m Requester, i AccountClearRecentEmojiStatusesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20273,7 +20273,7 @@ func (*AccountConfirmPasswordEmailRequest) CRC() uint32 {
 	return 0x8fdf1920
 }
 
-func AccountConfirmPasswordEmail(ctx context.Context, m Requester, i AccountConfirmPasswordEmailRequest) (bool, error) {
+func MakeAccountConfirmPasswordEmailRequest(ctx context.Context, m Requester, i AccountConfirmPasswordEmailRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20287,7 +20287,7 @@ func (*AccountConfirmPhoneRequest) CRC() uint32 {
 	return 0x5f2178c3
 }
 
-func AccountConfirmPhone(ctx context.Context, m Requester, i AccountConfirmPhoneRequest) (bool, error) {
+func MakeAccountConfirmPhoneRequest(ctx context.Context, m Requester, i AccountConfirmPhoneRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20300,7 +20300,7 @@ func (*AccountCreateBusinessChatLinkRequest) CRC() uint32 {
 	return 0x8851e68e
 }
 
-func AccountCreateBusinessChatLink(ctx context.Context, m Requester, i AccountCreateBusinessChatLinkRequest) (BusinessChatLink, error) {
+func MakeAccountCreateBusinessChatLinkRequest(ctx context.Context, m Requester, i AccountCreateBusinessChatLinkRequest) (BusinessChatLink, error) {
 	var res BusinessChatLink
 	return res, request(ctx, m, &i, &res)
 }
@@ -20317,7 +20317,7 @@ func (*AccountCreateThemeRequest) CRC() uint32 {
 	return 0x652e4400
 }
 
-func AccountCreateTheme(ctx context.Context, m Requester, i AccountCreateThemeRequest) (Theme, error) {
+func MakeAccountCreateThemeRequest(ctx context.Context, m Requester, i AccountCreateThemeRequest) (Theme, error) {
 	var res Theme
 	return res, request(ctx, m, &i, &res)
 }
@@ -20328,7 +20328,7 @@ func (*AccountDeclinePasswordResetRequest) CRC() uint32 {
 	return 0x4c9409f6
 }
 
-func AccountDeclinePasswordReset(ctx context.Context, m Requester, i AccountDeclinePasswordResetRequest) (bool, error) {
+func MakeAccountDeclinePasswordResetRequest(ctx context.Context, m Requester, i AccountDeclinePasswordResetRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20343,7 +20343,7 @@ func (*AccountDeleteAccountRequest) CRC() uint32 {
 	return 0xa2c0cf74
 }
 
-func AccountDeleteAccount(ctx context.Context, m Requester, i AccountDeleteAccountRequest) (bool, error) {
+func MakeAccountDeleteAccountRequest(ctx context.Context, m Requester, i AccountDeleteAccountRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20354,7 +20354,7 @@ func (*AccountDeleteAutoSaveExceptionsRequest) CRC() uint32 {
 	return 0x53bc0020
 }
 
-func AccountDeleteAutoSaveExceptions(ctx context.Context, m Requester, i AccountDeleteAutoSaveExceptionsRequest) (bool, error) {
+func MakeAccountDeleteAutoSaveExceptionsRequest(ctx context.Context, m Requester, i AccountDeleteAutoSaveExceptionsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20367,7 +20367,7 @@ func (*AccountDeleteBusinessChatLinkRequest) CRC() uint32 {
 	return 0x60073674
 }
 
-func AccountDeleteBusinessChatLink(ctx context.Context, m Requester, i AccountDeleteBusinessChatLinkRequest) (bool, error) {
+func MakeAccountDeleteBusinessChatLinkRequest(ctx context.Context, m Requester, i AccountDeleteBusinessChatLinkRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20380,7 +20380,7 @@ func (*AccountDeleteSecureValueRequest) CRC() uint32 {
 	return 0xb880bc4b
 }
 
-func AccountDeleteSecureValue(ctx context.Context, m Requester, i AccountDeleteSecureValueRequest) (bool, error) {
+func MakeAccountDeleteSecureValueRequest(ctx context.Context, m Requester, i AccountDeleteSecureValueRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20393,7 +20393,7 @@ func (*AccountDisablePeerConnectedBotRequest) CRC() uint32 {
 	return 0x5e437ed9
 }
 
-func AccountDisablePeerConnectedBot(ctx context.Context, m Requester, i AccountDisablePeerConnectedBotRequest) (bool, error) {
+func MakeAccountDisablePeerConnectedBotRequest(ctx context.Context, m Requester, i AccountDisablePeerConnectedBotRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20407,7 +20407,7 @@ func (*AccountEditBusinessChatLinkRequest) CRC() uint32 {
 	return 0x8c3410af
 }
 
-func AccountEditBusinessChatLink(ctx context.Context, m Requester, i AccountEditBusinessChatLinkRequest) (BusinessChatLink, error) {
+func MakeAccountEditBusinessChatLinkRequest(ctx context.Context, m Requester, i AccountEditBusinessChatLinkRequest) (BusinessChatLink, error) {
 	var res BusinessChatLink
 	return res, request(ctx, m, &i, &res)
 }
@@ -20421,7 +20421,7 @@ func (*AccountFinishTakeoutSessionRequest) CRC() uint32 {
 	return 0x1d2652ee
 }
 
-func AccountFinishTakeoutSession(ctx context.Context, m Requester, i AccountFinishTakeoutSessionRequest) (bool, error) {
+func MakeAccountFinishTakeoutSessionRequest(ctx context.Context, m Requester, i AccountFinishTakeoutSessionRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20432,7 +20432,7 @@ func (*AccountGetAccountTTLRequest) CRC() uint32 {
 	return 0x08fc711d
 }
 
-func AccountGetAccountTTL(ctx context.Context, m Requester, i AccountGetAccountTTLRequest) (AccountDaysTTL, error) {
+func MakeAccountGetAccountTTLRequest(ctx context.Context, m Requester, i AccountGetAccountTTLRequest) (AccountDaysTTL, error) {
 	var res AccountDaysTTL
 	return res, request(ctx, m, &i, &res)
 }
@@ -20443,7 +20443,7 @@ func (*AccountGetAllSecureValuesRequest) CRC() uint32 {
 	return 0xb288bc7d
 }
 
-func AccountGetAllSecureValues(ctx context.Context, m Requester, i AccountGetAllSecureValuesRequest) ([]SecureValue, error) {
+func MakeAccountGetAllSecureValuesRequest(ctx context.Context, m Requester, i AccountGetAllSecureValuesRequest) ([]SecureValue, error) {
 	var res []SecureValue
 	return res, request(ctx, m, &i, &res)
 }
@@ -20458,7 +20458,7 @@ func (*AccountGetAuthorizationFormRequest) CRC() uint32 {
 	return 0xa929597a
 }
 
-func AccountGetAuthorizationForm(ctx context.Context, m Requester, i AccountGetAuthorizationFormRequest) (AccountAuthorizationForm, error) {
+func MakeAccountGetAuthorizationFormRequest(ctx context.Context, m Requester, i AccountGetAuthorizationFormRequest) (AccountAuthorizationForm, error) {
 	var res AccountAuthorizationForm
 	return res, request(ctx, m, &i, &res)
 }
@@ -20469,7 +20469,7 @@ func (*AccountGetAuthorizationsRequest) CRC() uint32 {
 	return 0xe320c158
 }
 
-func AccountGetAuthorizations(ctx context.Context, m Requester, i AccountGetAuthorizationsRequest) (AccountAuthorizations, error) {
+func MakeAccountGetAuthorizationsRequest(ctx context.Context, m Requester, i AccountGetAuthorizationsRequest) (AccountAuthorizations, error) {
 	var res AccountAuthorizations
 	return res, request(ctx, m, &i, &res)
 }
@@ -20480,7 +20480,7 @@ func (*AccountGetAutoDownloadSettingsRequest) CRC() uint32 {
 	return 0x56da0b3f
 }
 
-func AccountGetAutoDownloadSettings(ctx context.Context, m Requester, i AccountGetAutoDownloadSettingsRequest) (AccountAutoDownloadSettings, error) {
+func MakeAccountGetAutoDownloadSettingsRequest(ctx context.Context, m Requester, i AccountGetAutoDownloadSettingsRequest) (AccountAutoDownloadSettings, error) {
 	var res AccountAutoDownloadSettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -20491,7 +20491,7 @@ func (*AccountGetAutoSaveSettingsRequest) CRC() uint32 {
 	return 0xadcbbcda
 }
 
-func AccountGetAutoSaveSettings(ctx context.Context, m Requester, i AccountGetAutoSaveSettingsRequest) (AccountAutoSaveSettings, error) {
+func MakeAccountGetAutoSaveSettingsRequest(ctx context.Context, m Requester, i AccountGetAutoSaveSettingsRequest) (AccountAutoSaveSettings, error) {
 	var res AccountAutoSaveSettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -20504,7 +20504,7 @@ func (*AccountGetBotBusinessConnectionRequest) CRC() uint32 {
 	return 0x76a86270
 }
 
-func AccountGetBotBusinessConnection(ctx context.Context, m Requester, i AccountGetBotBusinessConnectionRequest) (Updates, error) {
+func MakeAccountGetBotBusinessConnectionRequest(ctx context.Context, m Requester, i AccountGetBotBusinessConnectionRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -20515,7 +20515,7 @@ func (*AccountGetBusinessChatLinksRequest) CRC() uint32 {
 	return 0x6f70dde1
 }
 
-func AccountGetBusinessChatLinks(ctx context.Context, m Requester, i AccountGetBusinessChatLinksRequest) (AccountBusinessChatLinks, error) {
+func MakeAccountGetBusinessChatLinksRequest(ctx context.Context, m Requester, i AccountGetBusinessChatLinksRequest) (AccountBusinessChatLinks, error) {
 	var res AccountBusinessChatLinks
 	return res, request(ctx, m, &i, &res)
 }
@@ -20528,7 +20528,7 @@ func (*AccountGetChannelDefaultEmojiStatusesRequest) CRC() uint32 {
 	return 0x7727a7d5
 }
 
-func AccountGetChannelDefaultEmojiStatuses(ctx context.Context, m Requester, i AccountGetChannelDefaultEmojiStatusesRequest) (AccountEmojiStatuses, error) {
+func MakeAccountGetChannelDefaultEmojiStatusesRequest(ctx context.Context, m Requester, i AccountGetChannelDefaultEmojiStatusesRequest) (AccountEmojiStatuses, error) {
 	var res AccountEmojiStatuses
 	return res, request(ctx, m, &i, &res)
 }
@@ -20541,7 +20541,7 @@ func (*AccountGetChannelRestrictedStatusEmojisRequest) CRC() uint32 {
 	return 0x35a9e0d5
 }
 
-func AccountGetChannelRestrictedStatusEmojis(ctx context.Context, m Requester, i AccountGetChannelRestrictedStatusEmojisRequest) (EmojiList, error) {
+func MakeAccountGetChannelRestrictedStatusEmojisRequest(ctx context.Context, m Requester, i AccountGetChannelRestrictedStatusEmojisRequest) (EmojiList, error) {
 	var res EmojiList
 	return res, request(ctx, m, &i, &res)
 }
@@ -20554,7 +20554,7 @@ func (*AccountGetChatThemesRequest) CRC() uint32 {
 	return 0xd638de89
 }
 
-func AccountGetChatThemes(ctx context.Context, m Requester, i AccountGetChatThemesRequest) (AccountThemes, error) {
+func MakeAccountGetChatThemesRequest(ctx context.Context, m Requester, i AccountGetChatThemesRequest) (AccountThemes, error) {
 	var res AccountThemes
 	return res, request(ctx, m, &i, &res)
 }
@@ -20565,7 +20565,7 @@ func (*AccountGetConnectedBotsRequest) CRC() uint32 {
 	return 0x4ea4c80f
 }
 
-func AccountGetConnectedBots(ctx context.Context, m Requester, i AccountGetConnectedBotsRequest) (AccountConnectedBots, error) {
+func MakeAccountGetConnectedBotsRequest(ctx context.Context, m Requester, i AccountGetConnectedBotsRequest) (AccountConnectedBots, error) {
 	var res AccountConnectedBots
 	return res, request(ctx, m, &i, &res)
 }
@@ -20576,7 +20576,7 @@ func (*AccountGetContactSignUpNotificationRequest) CRC() uint32 {
 	return 0x9f07c728
 }
 
-func AccountGetContactSignUpNotification(ctx context.Context, m Requester, i AccountGetContactSignUpNotificationRequest) (bool, error) {
+func MakeAccountGetContactSignUpNotificationRequest(ctx context.Context, m Requester, i AccountGetContactSignUpNotificationRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20587,7 +20587,7 @@ func (*AccountGetContentSettingsRequest) CRC() uint32 {
 	return 0x8b9b4dae
 }
 
-func AccountGetContentSettings(ctx context.Context, m Requester, i AccountGetContentSettingsRequest) (AccountContentSettings, error) {
+func MakeAccountGetContentSettingsRequest(ctx context.Context, m Requester, i AccountGetContentSettingsRequest) (AccountContentSettings, error) {
 	var res AccountContentSettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -20600,7 +20600,7 @@ func (*AccountGetDefaultBackgroundEmojisRequest) CRC() uint32 {
 	return 0xa60ab9ce
 }
 
-func AccountGetDefaultBackgroundEmojis(ctx context.Context, m Requester, i AccountGetDefaultBackgroundEmojisRequest) (EmojiList, error) {
+func MakeAccountGetDefaultBackgroundEmojisRequest(ctx context.Context, m Requester, i AccountGetDefaultBackgroundEmojisRequest) (EmojiList, error) {
 	var res EmojiList
 	return res, request(ctx, m, &i, &res)
 }
@@ -20613,7 +20613,7 @@ func (*AccountGetDefaultEmojiStatusesRequest) CRC() uint32 {
 	return 0xd6753386
 }
 
-func AccountGetDefaultEmojiStatuses(ctx context.Context, m Requester, i AccountGetDefaultEmojiStatusesRequest) (AccountEmojiStatuses, error) {
+func MakeAccountGetDefaultEmojiStatusesRequest(ctx context.Context, m Requester, i AccountGetDefaultEmojiStatusesRequest) (AccountEmojiStatuses, error) {
 	var res AccountEmojiStatuses
 	return res, request(ctx, m, &i, &res)
 }
@@ -20626,7 +20626,7 @@ func (*AccountGetDefaultGroupPhotoEmojisRequest) CRC() uint32 {
 	return 0x915860ae
 }
 
-func AccountGetDefaultGroupPhotoEmojis(ctx context.Context, m Requester, i AccountGetDefaultGroupPhotoEmojisRequest) (EmojiList, error) {
+func MakeAccountGetDefaultGroupPhotoEmojisRequest(ctx context.Context, m Requester, i AccountGetDefaultGroupPhotoEmojisRequest) (EmojiList, error) {
 	var res EmojiList
 	return res, request(ctx, m, &i, &res)
 }
@@ -20639,7 +20639,7 @@ func (*AccountGetDefaultProfilePhotoEmojisRequest) CRC() uint32 {
 	return 0xe2750328
 }
 
-func AccountGetDefaultProfilePhotoEmojis(ctx context.Context, m Requester, i AccountGetDefaultProfilePhotoEmojisRequest) (EmojiList, error) {
+func MakeAccountGetDefaultProfilePhotoEmojisRequest(ctx context.Context, m Requester, i AccountGetDefaultProfilePhotoEmojisRequest) (EmojiList, error) {
 	var res EmojiList
 	return res, request(ctx, m, &i, &res)
 }
@@ -20650,7 +20650,7 @@ func (*AccountGetGlobalPrivacySettingsRequest) CRC() uint32 {
 	return 0xeb2b4cf6
 }
 
-func AccountGetGlobalPrivacySettings(ctx context.Context, m Requester, i AccountGetGlobalPrivacySettingsRequest) (GlobalPrivacySettings, error) {
+func MakeAccountGetGlobalPrivacySettingsRequest(ctx context.Context, m Requester, i AccountGetGlobalPrivacySettingsRequest) (GlobalPrivacySettings, error) {
 	var res GlobalPrivacySettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -20663,7 +20663,7 @@ func (*AccountGetMultiWallPapersRequest) CRC() uint32 {
 	return 0x65ad71dc
 }
 
-func AccountGetMultiWallPapers(ctx context.Context, m Requester, i AccountGetMultiWallPapersRequest) ([]WallPaper, error) {
+func MakeAccountGetMultiWallPapersRequest(ctx context.Context, m Requester, i AccountGetMultiWallPapersRequest) ([]WallPaper, error) {
 	var res []WallPaper
 	return res, request(ctx, m, &i, &res)
 }
@@ -20679,7 +20679,7 @@ func (*AccountGetNotifyExceptionsRequest) CRC() uint32 {
 	return 0x53577479
 }
 
-func AccountGetNotifyExceptions(ctx context.Context, m Requester, i AccountGetNotifyExceptionsRequest) (Updates, error) {
+func MakeAccountGetNotifyExceptionsRequest(ctx context.Context, m Requester, i AccountGetNotifyExceptionsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -20692,7 +20692,7 @@ func (*AccountGetNotifySettingsRequest) CRC() uint32 {
 	return 0x12b3ad31
 }
 
-func AccountGetNotifySettings(ctx context.Context, m Requester, i AccountGetNotifySettingsRequest) (PeerNotifySettings, error) {
+func MakeAccountGetNotifySettingsRequest(ctx context.Context, m Requester, i AccountGetNotifySettingsRequest) (PeerNotifySettings, error) {
 	var res PeerNotifySettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -20703,7 +20703,7 @@ func (*AccountGetPasswordRequest) CRC() uint32 {
 	return 0x548a30f5
 }
 
-func AccountGetPassword(ctx context.Context, m Requester, i AccountGetPasswordRequest) (AccountPassword, error) {
+func MakeAccountGetPasswordRequest(ctx context.Context, m Requester, i AccountGetPasswordRequest) (AccountPassword, error) {
 	var res AccountPassword
 	return res, request(ctx, m, &i, &res)
 }
@@ -20716,7 +20716,7 @@ func (*AccountGetPasswordSettingsRequest) CRC() uint32 {
 	return 0x9cd4eaf9
 }
 
-func AccountGetPasswordSettings(ctx context.Context, m Requester, i AccountGetPasswordSettingsRequest) (AccountPasswordSettings, error) {
+func MakeAccountGetPasswordSettingsRequest(ctx context.Context, m Requester, i AccountGetPasswordSettingsRequest) (AccountPasswordSettings, error) {
 	var res AccountPasswordSettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -20729,7 +20729,7 @@ func (*AccountGetPrivacyRequest) CRC() uint32 {
 	return 0xdadbc950
 }
 
-func AccountGetPrivacy(ctx context.Context, m Requester, i AccountGetPrivacyRequest) (AccountPrivacyRules, error) {
+func MakeAccountGetPrivacyRequest(ctx context.Context, m Requester, i AccountGetPrivacyRequest) (AccountPrivacyRules, error) {
 	var res AccountPrivacyRules
 	return res, request(ctx, m, &i, &res)
 }
@@ -20740,7 +20740,7 @@ func (*AccountGetReactionsNotifySettingsRequest) CRC() uint32 {
 	return 0x06dd654c
 }
 
-func AccountGetReactionsNotifySettings(ctx context.Context, m Requester, i AccountGetReactionsNotifySettingsRequest) (ReactionsNotifySettings, error) {
+func MakeAccountGetReactionsNotifySettingsRequest(ctx context.Context, m Requester, i AccountGetReactionsNotifySettingsRequest) (ReactionsNotifySettings, error) {
 	var res ReactionsNotifySettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -20753,7 +20753,7 @@ func (*AccountGetRecentEmojiStatusesRequest) CRC() uint32 {
 	return 0x0f578105
 }
 
-func AccountGetRecentEmojiStatuses(ctx context.Context, m Requester, i AccountGetRecentEmojiStatusesRequest) (AccountEmojiStatuses, error) {
+func MakeAccountGetRecentEmojiStatusesRequest(ctx context.Context, m Requester, i AccountGetRecentEmojiStatusesRequest) (AccountEmojiStatuses, error) {
 	var res AccountEmojiStatuses
 	return res, request(ctx, m, &i, &res)
 }
@@ -20766,7 +20766,7 @@ func (*AccountGetSavedRingtonesRequest) CRC() uint32 {
 	return 0xe1902288
 }
 
-func AccountGetSavedRingtones(ctx context.Context, m Requester, i AccountGetSavedRingtonesRequest) (AccountSavedRingtones, error) {
+func MakeAccountGetSavedRingtonesRequest(ctx context.Context, m Requester, i AccountGetSavedRingtonesRequest) (AccountSavedRingtones, error) {
 	var res AccountSavedRingtones
 	return res, request(ctx, m, &i, &res)
 }
@@ -20779,7 +20779,7 @@ func (*AccountGetSecureValueRequest) CRC() uint32 {
 	return 0x73665bc2
 }
 
-func AccountGetSecureValue(ctx context.Context, m Requester, i AccountGetSecureValueRequest) ([]SecureValue, error) {
+func MakeAccountGetSecureValueRequest(ctx context.Context, m Requester, i AccountGetSecureValueRequest) ([]SecureValue, error) {
 	var res []SecureValue
 	return res, request(ctx, m, &i, &res)
 }
@@ -20793,7 +20793,7 @@ func (*AccountGetThemeRequest) CRC() uint32 {
 	return 0x3a5869ec
 }
 
-func AccountGetTheme(ctx context.Context, m Requester, i AccountGetThemeRequest) (Theme, error) {
+func MakeAccountGetThemeRequest(ctx context.Context, m Requester, i AccountGetThemeRequest) (Theme, error) {
 	var res Theme
 	return res, request(ctx, m, &i, &res)
 }
@@ -20807,7 +20807,7 @@ func (*AccountGetThemesRequest) CRC() uint32 {
 	return 0x7206e458
 }
 
-func AccountGetThemes(ctx context.Context, m Requester, i AccountGetThemesRequest) (AccountThemes, error) {
+func MakeAccountGetThemesRequest(ctx context.Context, m Requester, i AccountGetThemesRequest) (AccountThemes, error) {
 	var res AccountThemes
 	return res, request(ctx, m, &i, &res)
 }
@@ -20821,7 +20821,7 @@ func (*AccountGetTmpPasswordRequest) CRC() uint32 {
 	return 0x449e0b51
 }
 
-func AccountGetTmpPassword(ctx context.Context, m Requester, i AccountGetTmpPasswordRequest) (AccountTmpPassword, error) {
+func MakeAccountGetTmpPasswordRequest(ctx context.Context, m Requester, i AccountGetTmpPasswordRequest) (AccountTmpPassword, error) {
 	var res AccountTmpPassword
 	return res, request(ctx, m, &i, &res)
 }
@@ -20834,7 +20834,7 @@ func (*AccountGetWallPaperRequest) CRC() uint32 {
 	return 0xfc8ddbea
 }
 
-func AccountGetWallPaper(ctx context.Context, m Requester, i AccountGetWallPaperRequest) (WallPaper, error) {
+func MakeAccountGetWallPaperRequest(ctx context.Context, m Requester, i AccountGetWallPaperRequest) (WallPaper, error) {
 	var res WallPaper
 	return res, request(ctx, m, &i, &res)
 }
@@ -20847,7 +20847,7 @@ func (*AccountGetWallPapersRequest) CRC() uint32 {
 	return 0x07967d36
 }
 
-func AccountGetWallPapers(ctx context.Context, m Requester, i AccountGetWallPapersRequest) (AccountWallPapers, error) {
+func MakeAccountGetWallPapersRequest(ctx context.Context, m Requester, i AccountGetWallPapersRequest) (AccountWallPapers, error) {
 	var res AccountWallPapers
 	return res, request(ctx, m, &i, &res)
 }
@@ -20858,7 +20858,7 @@ func (*AccountGetWebAuthorizationsRequest) CRC() uint32 {
 	return 0x182e6d6f
 }
 
-func AccountGetWebAuthorizations(ctx context.Context, m Requester, i AccountGetWebAuthorizationsRequest) (AccountWebAuthorizations, error) {
+func MakeAccountGetWebAuthorizationsRequest(ctx context.Context, m Requester, i AccountGetWebAuthorizationsRequest) (AccountWebAuthorizations, error) {
 	var res AccountWebAuthorizations
 	return res, request(ctx, m, &i, &res)
 }
@@ -20878,7 +20878,7 @@ func (*AccountInitTakeoutSessionRequest) CRC() uint32 {
 	return 0x8ef3eab0
 }
 
-func AccountInitTakeoutSession(ctx context.Context, m Requester, i AccountInitTakeoutSessionRequest) (AccountTakeout, error) {
+func MakeAccountInitTakeoutSessionRequest(ctx context.Context, m Requester, i AccountInitTakeoutSessionRequest) (AccountTakeout, error) {
 	var res AccountTakeout
 	return res, request(ctx, m, &i, &res)
 }
@@ -20895,7 +20895,7 @@ func (*AccountInstallThemeRequest) CRC() uint32 {
 	return 0xc727bb3b
 }
 
-func AccountInstallTheme(ctx context.Context, m Requester, i AccountInstallThemeRequest) (bool, error) {
+func MakeAccountInstallThemeRequest(ctx context.Context, m Requester, i AccountInstallThemeRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20909,7 +20909,7 @@ func (*AccountInstallWallPaperRequest) CRC() uint32 {
 	return 0xfeed5769
 }
 
-func AccountInstallWallPaper(ctx context.Context, m Requester, i AccountInstallWallPaperRequest) (bool, error) {
+func MakeAccountInstallWallPaperRequest(ctx context.Context, m Requester, i AccountInstallWallPaperRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20922,7 +20922,7 @@ func (*AccountInvalidateSignInCodesRequest) CRC() uint32 {
 	return 0xca8ae8ba
 }
 
-func AccountInvalidateSignInCodes(ctx context.Context, m Requester, i AccountInvalidateSignInCodesRequest) (bool, error) {
+func MakeAccountInvalidateSignInCodesRequest(ctx context.Context, m Requester, i AccountInvalidateSignInCodesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20941,7 +20941,7 @@ func (*AccountRegisterDeviceRequest) CRC() uint32 {
 	return 0xec86017a
 }
 
-func AccountRegisterDevice(ctx context.Context, m Requester, i AccountRegisterDeviceRequest) (bool, error) {
+func MakeAccountRegisterDeviceRequest(ctx context.Context, m Requester, i AccountRegisterDeviceRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20954,7 +20954,7 @@ func (*AccountReorderUsernamesRequest) CRC() uint32 {
 	return 0xef500eab
 }
 
-func AccountReorderUsernames(ctx context.Context, m Requester, i AccountReorderUsernamesRequest) (bool, error) {
+func MakeAccountReorderUsernamesRequest(ctx context.Context, m Requester, i AccountReorderUsernamesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20969,7 +20969,7 @@ func (*AccountReportPeerRequest) CRC() uint32 {
 	return 0xc5ba3d86
 }
 
-func AccountReportPeer(ctx context.Context, m Requester, i AccountReportPeerRequest) (bool, error) {
+func MakeAccountReportPeerRequest(ctx context.Context, m Requester, i AccountReportPeerRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20985,7 +20985,7 @@ func (*AccountReportProfilePhotoRequest) CRC() uint32 {
 	return 0xfa8cc6f5
 }
 
-func AccountReportProfilePhoto(ctx context.Context, m Requester, i AccountReportProfilePhotoRequest) (bool, error) {
+func MakeAccountReportProfilePhotoRequest(ctx context.Context, m Requester, i AccountReportProfilePhotoRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -20996,7 +20996,7 @@ func (*AccountResendPasswordEmailRequest) CRC() uint32 {
 	return 0x7a7f2a15
 }
 
-func AccountResendPasswordEmail(ctx context.Context, m Requester, i AccountResendPasswordEmailRequest) (bool, error) {
+func MakeAccountResendPasswordEmailRequest(ctx context.Context, m Requester, i AccountResendPasswordEmailRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21009,7 +21009,7 @@ func (*AccountResetAuthorizationRequest) CRC() uint32 {
 	return 0xdf77f3bc
 }
 
-func AccountResetAuthorization(ctx context.Context, m Requester, i AccountResetAuthorizationRequest) (bool, error) {
+func MakeAccountResetAuthorizationRequest(ctx context.Context, m Requester, i AccountResetAuthorizationRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21020,7 +21020,7 @@ func (*AccountResetNotifySettingsRequest) CRC() uint32 {
 	return 0xdb7e1747
 }
 
-func AccountResetNotifySettings(ctx context.Context, m Requester, i AccountResetNotifySettingsRequest) (bool, error) {
+func MakeAccountResetNotifySettingsRequest(ctx context.Context, m Requester, i AccountResetNotifySettingsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21031,7 +21031,7 @@ func (*AccountResetPasswordRequest) CRC() uint32 {
 	return 0x9308ce1b
 }
 
-func AccountResetPassword(ctx context.Context, m Requester, i AccountResetPasswordRequest) (AccountResetPasswordResult, error) {
+func MakeAccountResetPasswordRequest(ctx context.Context, m Requester, i AccountResetPasswordRequest) (AccountResetPasswordResult, error) {
 	var res AccountResetPasswordResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -21042,7 +21042,7 @@ func (*AccountResetWallPapersRequest) CRC() uint32 {
 	return 0xbb3b9804
 }
 
-func AccountResetWallPapers(ctx context.Context, m Requester, i AccountResetWallPapersRequest) (bool, error) {
+func MakeAccountResetWallPapersRequest(ctx context.Context, m Requester, i AccountResetWallPapersRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21055,7 +21055,7 @@ func (*AccountResetWebAuthorizationRequest) CRC() uint32 {
 	return 0x2d01b9ef
 }
 
-func AccountResetWebAuthorization(ctx context.Context, m Requester, i AccountResetWebAuthorizationRequest) (bool, error) {
+func MakeAccountResetWebAuthorizationRequest(ctx context.Context, m Requester, i AccountResetWebAuthorizationRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21066,7 +21066,7 @@ func (*AccountResetWebAuthorizationsRequest) CRC() uint32 {
 	return 0x682d2594
 }
 
-func AccountResetWebAuthorizations(ctx context.Context, m Requester, i AccountResetWebAuthorizationsRequest) (bool, error) {
+func MakeAccountResetWebAuthorizationsRequest(ctx context.Context, m Requester, i AccountResetWebAuthorizationsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21079,7 +21079,7 @@ func (*AccountResolveBusinessChatLinkRequest) CRC() uint32 {
 	return 0x5492e5ee
 }
 
-func AccountResolveBusinessChatLink(ctx context.Context, m Requester, i AccountResolveBusinessChatLinkRequest) (AccountResolvedBusinessChatLinks, error) {
+func MakeAccountResolveBusinessChatLinkRequest(ctx context.Context, m Requester, i AccountResolveBusinessChatLinkRequest) (AccountResolvedBusinessChatLinks, error) {
 	var res AccountResolvedBusinessChatLinks
 	return res, request(ctx, m, &i, &res)
 }
@@ -21095,7 +21095,7 @@ func (*AccountSaveAutoDownloadSettingsRequest) CRC() uint32 {
 	return 0x76f36233
 }
 
-func AccountSaveAutoDownloadSettings(ctx context.Context, m Requester, i AccountSaveAutoDownloadSettingsRequest) (bool, error) {
+func MakeAccountSaveAutoDownloadSettingsRequest(ctx context.Context, m Requester, i AccountSaveAutoDownloadSettingsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21113,7 +21113,7 @@ func (*AccountSaveAutoSaveSettingsRequest) CRC() uint32 {
 	return 0xd69b8361
 }
 
-func AccountSaveAutoSaveSettings(ctx context.Context, m Requester, i AccountSaveAutoSaveSettingsRequest) (bool, error) {
+func MakeAccountSaveAutoSaveSettingsRequest(ctx context.Context, m Requester, i AccountSaveAutoSaveSettingsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21127,7 +21127,7 @@ func (*AccountSaveRingtoneRequest) CRC() uint32 {
 	return 0x3dea5b03
 }
 
-func AccountSaveRingtone(ctx context.Context, m Requester, i AccountSaveRingtoneRequest) (AccountSavedRingtone, error) {
+func MakeAccountSaveRingtoneRequest(ctx context.Context, m Requester, i AccountSaveRingtoneRequest) (AccountSavedRingtone, error) {
 	var res AccountSavedRingtone
 	return res, request(ctx, m, &i, &res)
 }
@@ -21141,7 +21141,7 @@ func (*AccountSaveSecureValueRequest) CRC() uint32 {
 	return 0x899fe31d
 }
 
-func AccountSaveSecureValue(ctx context.Context, m Requester, i AccountSaveSecureValueRequest) (SecureValue, error) {
+func MakeAccountSaveSecureValueRequest(ctx context.Context, m Requester, i AccountSaveSecureValueRequest) (SecureValue, error) {
 	var res SecureValue
 	return res, request(ctx, m, &i, &res)
 }
@@ -21155,7 +21155,7 @@ func (*AccountSaveThemeRequest) CRC() uint32 {
 	return 0xf257106c
 }
 
-func AccountSaveTheme(ctx context.Context, m Requester, i AccountSaveThemeRequest) (bool, error) {
+func MakeAccountSaveThemeRequest(ctx context.Context, m Requester, i AccountSaveThemeRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21170,7 +21170,7 @@ func (*AccountSaveWallPaperRequest) CRC() uint32 {
 	return 0x6c5a5b37
 }
 
-func AccountSaveWallPaper(ctx context.Context, m Requester, i AccountSaveWallPaperRequest) (bool, error) {
+func MakeAccountSaveWallPaperRequest(ctx context.Context, m Requester, i AccountSaveWallPaperRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21184,7 +21184,7 @@ func (*AccountSendChangePhoneCodeRequest) CRC() uint32 {
 	return 0x82574ae5
 }
 
-func AccountSendChangePhoneCode(ctx context.Context, m Requester, i AccountSendChangePhoneCodeRequest) (AuthSentCode, error) {
+func MakeAccountSendChangePhoneCodeRequest(ctx context.Context, m Requester, i AccountSendChangePhoneCodeRequest) (AuthSentCode, error) {
 	var res AuthSentCode
 	return res, request(ctx, m, &i, &res)
 }
@@ -21198,7 +21198,7 @@ func (*AccountSendConfirmPhoneCodeRequest) CRC() uint32 {
 	return 0x1b3faa88
 }
 
-func AccountSendConfirmPhoneCode(ctx context.Context, m Requester, i AccountSendConfirmPhoneCodeRequest) (AuthSentCode, error) {
+func MakeAccountSendConfirmPhoneCodeRequest(ctx context.Context, m Requester, i AccountSendConfirmPhoneCodeRequest) (AuthSentCode, error) {
 	var res AuthSentCode
 	return res, request(ctx, m, &i, &res)
 }
@@ -21212,7 +21212,7 @@ func (*AccountSendVerifyEmailCodeRequest) CRC() uint32 {
 	return 0x98e037bb
 }
 
-func AccountSendVerifyEmailCode(ctx context.Context, m Requester, i AccountSendVerifyEmailCodeRequest) (AccountSentEmailCode, error) {
+func MakeAccountSendVerifyEmailCodeRequest(ctx context.Context, m Requester, i AccountSendVerifyEmailCodeRequest) (AccountSentEmailCode, error) {
 	var res AccountSentEmailCode
 	return res, request(ctx, m, &i, &res)
 }
@@ -21226,7 +21226,7 @@ func (*AccountSendVerifyPhoneCodeRequest) CRC() uint32 {
 	return 0xa5a356f9
 }
 
-func AccountSendVerifyPhoneCode(ctx context.Context, m Requester, i AccountSendVerifyPhoneCodeRequest) (AuthSentCode, error) {
+func MakeAccountSendVerifyPhoneCodeRequest(ctx context.Context, m Requester, i AccountSendVerifyPhoneCodeRequest) (AuthSentCode, error) {
 	var res AuthSentCode
 	return res, request(ctx, m, &i, &res)
 }
@@ -21239,7 +21239,7 @@ func (*AccountSetAccountTTLRequest) CRC() uint32 {
 	return 0x2442485e
 }
 
-func AccountSetAccountTTL(ctx context.Context, m Requester, i AccountSetAccountTTLRequest) (bool, error) {
+func MakeAccountSetAccountTTLRequest(ctx context.Context, m Requester, i AccountSetAccountTTLRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21252,7 +21252,7 @@ func (*AccountSetAuthorizationTTLRequest) CRC() uint32 {
 	return 0xbf899aa0
 }
 
-func AccountSetAuthorizationTTL(ctx context.Context, m Requester, i AccountSetAuthorizationTTLRequest) (bool, error) {
+func MakeAccountSetAuthorizationTTLRequest(ctx context.Context, m Requester, i AccountSetAuthorizationTTLRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21265,7 +21265,7 @@ func (*AccountSetContactSignUpNotificationRequest) CRC() uint32 {
 	return 0xcff43f61
 }
 
-func AccountSetContactSignUpNotification(ctx context.Context, m Requester, i AccountSetContactSignUpNotificationRequest) (bool, error) {
+func MakeAccountSetContactSignUpNotificationRequest(ctx context.Context, m Requester, i AccountSetContactSignUpNotificationRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21279,7 +21279,7 @@ func (*AccountSetContentSettingsRequest) CRC() uint32 {
 	return 0xb574b16b
 }
 
-func AccountSetContentSettings(ctx context.Context, m Requester, i AccountSetContentSettingsRequest) (bool, error) {
+func MakeAccountSetContentSettingsRequest(ctx context.Context, m Requester, i AccountSetContentSettingsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21292,7 +21292,7 @@ func (*AccountSetGlobalPrivacySettingsRequest) CRC() uint32 {
 	return 0x1edaaac2
 }
 
-func AccountSetGlobalPrivacySettings(ctx context.Context, m Requester, i AccountSetGlobalPrivacySettingsRequest) (GlobalPrivacySettings, error) {
+func MakeAccountSetGlobalPrivacySettingsRequest(ctx context.Context, m Requester, i AccountSetGlobalPrivacySettingsRequest) (GlobalPrivacySettings, error) {
 	var res GlobalPrivacySettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -21306,7 +21306,7 @@ func (*AccountSetPrivacyRequest) CRC() uint32 {
 	return 0xc9f81ce8
 }
 
-func AccountSetPrivacy(ctx context.Context, m Requester, i AccountSetPrivacyRequest) (AccountPrivacyRules, error) {
+func MakeAccountSetPrivacyRequest(ctx context.Context, m Requester, i AccountSetPrivacyRequest) (AccountPrivacyRules, error) {
 	var res AccountPrivacyRules
 	return res, request(ctx, m, &i, &res)
 }
@@ -21319,7 +21319,7 @@ func (*AccountSetReactionsNotifySettingsRequest) CRC() uint32 {
 	return 0x316ce548
 }
 
-func AccountSetReactionsNotifySettings(ctx context.Context, m Requester, i AccountSetReactionsNotifySettingsRequest) (ReactionsNotifySettings, error) {
+func MakeAccountSetReactionsNotifySettingsRequest(ctx context.Context, m Requester, i AccountSetReactionsNotifySettingsRequest) (ReactionsNotifySettings, error) {
 	var res ReactionsNotifySettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -21333,7 +21333,7 @@ func (*AccountToggleConnectedBotPausedRequest) CRC() uint32 {
 	return 0x646e1097
 }
 
-func AccountToggleConnectedBotPaused(ctx context.Context, m Requester, i AccountToggleConnectedBotPausedRequest) (bool, error) {
+func MakeAccountToggleConnectedBotPausedRequest(ctx context.Context, m Requester, i AccountToggleConnectedBotPausedRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21346,7 +21346,7 @@ func (*AccountToggleSponsoredMessagesRequest) CRC() uint32 {
 	return 0xb9d9a38d
 }
 
-func AccountToggleSponsoredMessages(ctx context.Context, m Requester, i AccountToggleSponsoredMessagesRequest) (bool, error) {
+func MakeAccountToggleSponsoredMessagesRequest(ctx context.Context, m Requester, i AccountToggleSponsoredMessagesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21360,7 +21360,7 @@ func (*AccountToggleUsernameRequest) CRC() uint32 {
 	return 0x58d6b376
 }
 
-func AccountToggleUsername(ctx context.Context, m Requester, i AccountToggleUsernameRequest) (bool, error) {
+func MakeAccountToggleUsernameRequest(ctx context.Context, m Requester, i AccountToggleUsernameRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21375,7 +21375,7 @@ func (*AccountUnregisterDeviceRequest) CRC() uint32 {
 	return 0x6a0d3206
 }
 
-func AccountUnregisterDevice(ctx context.Context, m Requester, i AccountUnregisterDeviceRequest) (bool, error) {
+func MakeAccountUnregisterDeviceRequest(ctx context.Context, m Requester, i AccountUnregisterDeviceRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21389,7 +21389,7 @@ func (*AccountUpdateBirthdayRequest) CRC() uint32 {
 	return 0xcc6e0c11
 }
 
-func AccountUpdateBirthday(ctx context.Context, m Requester, i AccountUpdateBirthdayRequest) (bool, error) {
+func MakeAccountUpdateBirthdayRequest(ctx context.Context, m Requester, i AccountUpdateBirthdayRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21403,7 +21403,7 @@ func (*AccountUpdateBusinessAwayMessageRequest) CRC() uint32 {
 	return 0xa26a7fa5
 }
 
-func AccountUpdateBusinessAwayMessage(ctx context.Context, m Requester, i AccountUpdateBusinessAwayMessageRequest) (bool, error) {
+func MakeAccountUpdateBusinessAwayMessageRequest(ctx context.Context, m Requester, i AccountUpdateBusinessAwayMessageRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21417,7 +21417,7 @@ func (*AccountUpdateBusinessGreetingMessageRequest) CRC() uint32 {
 	return 0x66cdafc4
 }
 
-func AccountUpdateBusinessGreetingMessage(ctx context.Context, m Requester, i AccountUpdateBusinessGreetingMessageRequest) (bool, error) {
+func MakeAccountUpdateBusinessGreetingMessageRequest(ctx context.Context, m Requester, i AccountUpdateBusinessGreetingMessageRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21431,7 +21431,7 @@ func (*AccountUpdateBusinessIntroRequest) CRC() uint32 {
 	return 0xa614d034
 }
 
-func AccountUpdateBusinessIntro(ctx context.Context, m Requester, i AccountUpdateBusinessIntroRequest) (bool, error) {
+func MakeAccountUpdateBusinessIntroRequest(ctx context.Context, m Requester, i AccountUpdateBusinessIntroRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21446,7 +21446,7 @@ func (*AccountUpdateBusinessLocationRequest) CRC() uint32 {
 	return 0x9e6b131a
 }
 
-func AccountUpdateBusinessLocation(ctx context.Context, m Requester, i AccountUpdateBusinessLocationRequest) (bool, error) {
+func MakeAccountUpdateBusinessLocationRequest(ctx context.Context, m Requester, i AccountUpdateBusinessLocationRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21460,7 +21460,7 @@ func (*AccountUpdateBusinessWorkHoursRequest) CRC() uint32 {
 	return 0x4b00e066
 }
 
-func AccountUpdateBusinessWorkHours(ctx context.Context, m Requester, i AccountUpdateBusinessWorkHoursRequest) (bool, error) {
+func MakeAccountUpdateBusinessWorkHoursRequest(ctx context.Context, m Requester, i AccountUpdateBusinessWorkHoursRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21476,7 +21476,7 @@ func (*AccountUpdateColorRequest) CRC() uint32 {
 	return 0x7cefa15d
 }
 
-func AccountUpdateColor(ctx context.Context, m Requester, i AccountUpdateColorRequest) (bool, error) {
+func MakeAccountUpdateColorRequest(ctx context.Context, m Requester, i AccountUpdateColorRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21493,7 +21493,7 @@ func (*AccountUpdateConnectedBotRequest) CRC() uint32 {
 	return 0x43d8521d
 }
 
-func AccountUpdateConnectedBot(ctx context.Context, m Requester, i AccountUpdateConnectedBotRequest) (Updates, error) {
+func MakeAccountUpdateConnectedBotRequest(ctx context.Context, m Requester, i AccountUpdateConnectedBotRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -21506,7 +21506,7 @@ func (*AccountUpdateDeviceLockedRequest) CRC() uint32 {
 	return 0x38df3532
 }
 
-func AccountUpdateDeviceLocked(ctx context.Context, m Requester, i AccountUpdateDeviceLockedRequest) (bool, error) {
+func MakeAccountUpdateDeviceLockedRequest(ctx context.Context, m Requester, i AccountUpdateDeviceLockedRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21519,7 +21519,7 @@ func (*AccountUpdateEmojiStatusRequest) CRC() uint32 {
 	return 0xfbd3de6b
 }
 
-func AccountUpdateEmojiStatus(ctx context.Context, m Requester, i AccountUpdateEmojiStatusRequest) (bool, error) {
+func MakeAccountUpdateEmojiStatusRequest(ctx context.Context, m Requester, i AccountUpdateEmojiStatusRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21533,7 +21533,7 @@ func (*AccountUpdateNotifySettingsRequest) CRC() uint32 {
 	return 0x84be5b93
 }
 
-func AccountUpdateNotifySettings(ctx context.Context, m Requester, i AccountUpdateNotifySettingsRequest) (bool, error) {
+func MakeAccountUpdateNotifySettingsRequest(ctx context.Context, m Requester, i AccountUpdateNotifySettingsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21547,7 +21547,7 @@ func (*AccountUpdatePasswordSettingsRequest) CRC() uint32 {
 	return 0xa59b102f
 }
 
-func AccountUpdatePasswordSettings(ctx context.Context, m Requester, i AccountUpdatePasswordSettingsRequest) (bool, error) {
+func MakeAccountUpdatePasswordSettingsRequest(ctx context.Context, m Requester, i AccountUpdatePasswordSettingsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21560,7 +21560,7 @@ func (*AccountUpdatePersonalChannelRequest) CRC() uint32 {
 	return 0xd94305e0
 }
 
-func AccountUpdatePersonalChannel(ctx context.Context, m Requester, i AccountUpdatePersonalChannelRequest) (bool, error) {
+func MakeAccountUpdatePersonalChannelRequest(ctx context.Context, m Requester, i AccountUpdatePersonalChannelRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21576,7 +21576,7 @@ func (*AccountUpdateProfileRequest) CRC() uint32 {
 	return 0x78515775
 }
 
-func AccountUpdateProfile(ctx context.Context, m Requester, i AccountUpdateProfileRequest) (User, error) {
+func MakeAccountUpdateProfileRequest(ctx context.Context, m Requester, i AccountUpdateProfileRequest) (User, error) {
 	var res User
 	return res, request(ctx, m, &i, &res)
 }
@@ -21589,7 +21589,7 @@ func (*AccountUpdateStatusRequest) CRC() uint32 {
 	return 0x6628562c
 }
 
-func AccountUpdateStatus(ctx context.Context, m Requester, i AccountUpdateStatusRequest) (bool, error) {
+func MakeAccountUpdateStatusRequest(ctx context.Context, m Requester, i AccountUpdateStatusRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21608,7 +21608,7 @@ func (*AccountUpdateThemeRequest) CRC() uint32 {
 	return 0x2bf40ccc
 }
 
-func AccountUpdateTheme(ctx context.Context, m Requester, i AccountUpdateThemeRequest) (Theme, error) {
+func MakeAccountUpdateThemeRequest(ctx context.Context, m Requester, i AccountUpdateThemeRequest) (Theme, error) {
 	var res Theme
 	return res, request(ctx, m, &i, &res)
 }
@@ -21621,7 +21621,7 @@ func (*AccountUpdateUsernameRequest) CRC() uint32 {
 	return 0x3e0bdd7c
 }
 
-func AccountUpdateUsername(ctx context.Context, m Requester, i AccountUpdateUsernameRequest) (User, error) {
+func MakeAccountUpdateUsernameRequest(ctx context.Context, m Requester, i AccountUpdateUsernameRequest) (User, error) {
 	var res User
 	return res, request(ctx, m, &i, &res)
 }
@@ -21636,7 +21636,7 @@ func (*AccountUploadRingtoneRequest) CRC() uint32 {
 	return 0x831a83a2
 }
 
-func AccountUploadRingtone(ctx context.Context, m Requester, i AccountUploadRingtoneRequest) (Document, error) {
+func MakeAccountUploadRingtoneRequest(ctx context.Context, m Requester, i AccountUploadRingtoneRequest) (Document, error) {
 	var res Document
 	return res, request(ctx, m, &i, &res)
 }
@@ -21653,7 +21653,7 @@ func (*AccountUploadThemeRequest) CRC() uint32 {
 	return 0x1c3db333
 }
 
-func AccountUploadTheme(ctx context.Context, m Requester, i AccountUploadThemeRequest) (Document, error) {
+func MakeAccountUploadThemeRequest(ctx context.Context, m Requester, i AccountUploadThemeRequest) (Document, error) {
 	var res Document
 	return res, request(ctx, m, &i, &res)
 }
@@ -21670,7 +21670,7 @@ func (*AccountUploadWallPaperRequest) CRC() uint32 {
 	return 0xe39a8f03
 }
 
-func AccountUploadWallPaper(ctx context.Context, m Requester, i AccountUploadWallPaperRequest) (WallPaper, error) {
+func MakeAccountUploadWallPaperRequest(ctx context.Context, m Requester, i AccountUploadWallPaperRequest) (WallPaper, error) {
 	var res WallPaper
 	return res, request(ctx, m, &i, &res)
 }
@@ -21684,7 +21684,7 @@ func (*AccountVerifyEmailRequest) CRC() uint32 {
 	return 0x032da4cf
 }
 
-func AccountVerifyEmail(ctx context.Context, m Requester, i AccountVerifyEmailRequest) (AccountEmailVerified, error) {
+func MakeAccountVerifyEmailRequest(ctx context.Context, m Requester, i AccountVerifyEmailRequest) (AccountEmailVerified, error) {
 	var res AccountEmailVerified
 	return res, request(ctx, m, &i, &res)
 }
@@ -21699,7 +21699,7 @@ func (*AccountVerifyPhoneRequest) CRC() uint32 {
 	return 0x4dd3a7f6
 }
 
-func AccountVerifyPhone(ctx context.Context, m Requester, i AccountVerifyPhoneRequest) (bool, error) {
+func MakeAccountVerifyPhoneRequest(ctx context.Context, m Requester, i AccountVerifyPhoneRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21712,7 +21712,7 @@ func (*AuthAcceptLoginTokenRequest) CRC() uint32 {
 	return 0xe894ad4d
 }
 
-func AuthAcceptLoginToken(ctx context.Context, m Requester, i AuthAcceptLoginTokenRequest) (Authorization, error) {
+func MakeAuthAcceptLoginTokenRequest(ctx context.Context, m Requester, i AuthAcceptLoginTokenRequest) (Authorization, error) {
 	var res Authorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -21728,7 +21728,7 @@ func (*AuthBindTempAuthKeyRequest) CRC() uint32 {
 	return 0xcdd42a05
 }
 
-func AuthBindTempAuthKey(ctx context.Context, m Requester, i AuthBindTempAuthKeyRequest) (bool, error) {
+func MakeAuthBindTempAuthKeyRequest(ctx context.Context, m Requester, i AuthBindTempAuthKeyRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21742,7 +21742,7 @@ func (*AuthCancelCodeRequest) CRC() uint32 {
 	return 0x1f040578
 }
 
-func AuthCancelCode(ctx context.Context, m Requester, i AuthCancelCodeRequest) (bool, error) {
+func MakeAuthCancelCodeRequest(ctx context.Context, m Requester, i AuthCancelCodeRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21755,7 +21755,7 @@ func (*AuthCheckPasswordRequest) CRC() uint32 {
 	return 0xd18b4d16
 }
 
-func AuthCheckPassword(ctx context.Context, m Requester, i AuthCheckPasswordRequest) (AuthAuthorization, error) {
+func MakeAuthCheckPasswordRequest(ctx context.Context, m Requester, i AuthCheckPasswordRequest) (AuthAuthorization, error) {
 	var res AuthAuthorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -21768,7 +21768,7 @@ func (*AuthCheckRecoveryPasswordRequest) CRC() uint32 {
 	return 0x0d36bf79
 }
 
-func AuthCheckRecoveryPassword(ctx context.Context, m Requester, i AuthCheckRecoveryPasswordRequest) (bool, error) {
+func MakeAuthCheckRecoveryPasswordRequest(ctx context.Context, m Requester, i AuthCheckRecoveryPasswordRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21781,7 +21781,7 @@ func (*AuthDropTempAuthKeysRequest) CRC() uint32 {
 	return 0x8e48a188
 }
 
-func AuthDropTempAuthKeys(ctx context.Context, m Requester, i AuthDropTempAuthKeysRequest) (bool, error) {
+func MakeAuthDropTempAuthKeysRequest(ctx context.Context, m Requester, i AuthDropTempAuthKeysRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21794,7 +21794,7 @@ func (*AuthExportAuthorizationRequest) CRC() uint32 {
 	return 0xe5bfffcd
 }
 
-func AuthExportAuthorization(ctx context.Context, m Requester, i AuthExportAuthorizationRequest) (AuthExportedAuthorization, error) {
+func MakeAuthExportAuthorizationRequest(ctx context.Context, m Requester, i AuthExportAuthorizationRequest) (AuthExportedAuthorization, error) {
 	var res AuthExportedAuthorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -21809,7 +21809,7 @@ func (*AuthExportLoginTokenRequest) CRC() uint32 {
 	return 0xb7e085fe
 }
 
-func AuthExportLoginToken(ctx context.Context, m Requester, i AuthExportLoginTokenRequest) (AuthLoginToken, error) {
+func MakeAuthExportLoginTokenRequest(ctx context.Context, m Requester, i AuthExportLoginTokenRequest) (AuthLoginToken, error) {
 	var res AuthLoginToken
 	return res, request(ctx, m, &i, &res)
 }
@@ -21823,7 +21823,7 @@ func (*AuthImportAuthorizationRequest) CRC() uint32 {
 	return 0xa57a7dad
 }
 
-func AuthImportAuthorization(ctx context.Context, m Requester, i AuthImportAuthorizationRequest) (AuthAuthorization, error) {
+func MakeAuthImportAuthorizationRequest(ctx context.Context, m Requester, i AuthImportAuthorizationRequest) (AuthAuthorization, error) {
 	var res AuthAuthorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -21839,7 +21839,7 @@ func (*AuthImportBotAuthorizationRequest) CRC() uint32 {
 	return 0x67a3ff2c
 }
 
-func AuthImportBotAuthorization(ctx context.Context, m Requester, i AuthImportBotAuthorizationRequest) (AuthAuthorization, error) {
+func MakeAuthImportBotAuthorizationRequest(ctx context.Context, m Requester, i AuthImportBotAuthorizationRequest) (AuthAuthorization, error) {
 	var res AuthAuthorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -21852,7 +21852,7 @@ func (*AuthImportLoginTokenRequest) CRC() uint32 {
 	return 0x95ac5ce4
 }
 
-func AuthImportLoginToken(ctx context.Context, m Requester, i AuthImportLoginTokenRequest) (AuthLoginToken, error) {
+func MakeAuthImportLoginTokenRequest(ctx context.Context, m Requester, i AuthImportLoginTokenRequest) (AuthLoginToken, error) {
 	var res AuthLoginToken
 	return res, request(ctx, m, &i, &res)
 }
@@ -21867,7 +21867,7 @@ func (*AuthImportWebTokenAuthorizationRequest) CRC() uint32 {
 	return 0x2db873a9
 }
 
-func AuthImportWebTokenAuthorization(ctx context.Context, m Requester, i AuthImportWebTokenAuthorizationRequest) (AuthAuthorization, error) {
+func MakeAuthImportWebTokenAuthorizationRequest(ctx context.Context, m Requester, i AuthImportWebTokenAuthorizationRequest) (AuthAuthorization, error) {
 	var res AuthAuthorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -21878,7 +21878,7 @@ func (*AuthLogOutRequest) CRC() uint32 {
 	return 0x3e72ba19
 }
 
-func AuthLogOut(ctx context.Context, m Requester, i AuthLogOutRequest) (AuthLoggedOut, error) {
+func MakeAuthLogOutRequest(ctx context.Context, m Requester, i AuthLogOutRequest) (AuthLoggedOut, error) {
 	var res AuthLoggedOut
 	return res, request(ctx, m, &i, &res)
 }
@@ -21893,7 +21893,7 @@ func (*AuthRecoverPasswordRequest) CRC() uint32 {
 	return 0x37096c70
 }
 
-func AuthRecoverPassword(ctx context.Context, m Requester, i AuthRecoverPasswordRequest) (AuthAuthorization, error) {
+func MakeAuthRecoverPasswordRequest(ctx context.Context, m Requester, i AuthRecoverPasswordRequest) (AuthAuthorization, error) {
 	var res AuthAuthorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -21908,7 +21908,7 @@ func (*AuthReportMissingCodeRequest) CRC() uint32 {
 	return 0xcb9deff6
 }
 
-func AuthReportMissingCode(ctx context.Context, m Requester, i AuthReportMissingCodeRequest) (bool, error) {
+func MakeAuthReportMissingCodeRequest(ctx context.Context, m Requester, i AuthReportMissingCodeRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21926,7 +21926,7 @@ func (*AuthRequestFirebaseSmsRequest) CRC() uint32 {
 	return 0x8e39261e
 }
 
-func AuthRequestFirebaseSms(ctx context.Context, m Requester, i AuthRequestFirebaseSmsRequest) (bool, error) {
+func MakeAuthRequestFirebaseSmsRequest(ctx context.Context, m Requester, i AuthRequestFirebaseSmsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21937,7 +21937,7 @@ func (*AuthRequestPasswordRecoveryRequest) CRC() uint32 {
 	return 0xd897bc66
 }
 
-func AuthRequestPasswordRecovery(ctx context.Context, m Requester, i AuthRequestPasswordRecoveryRequest) (AuthPasswordRecovery, error) {
+func MakeAuthRequestPasswordRecoveryRequest(ctx context.Context, m Requester, i AuthRequestPasswordRecoveryRequest) (AuthPasswordRecovery, error) {
 	var res AuthPasswordRecovery
 	return res, request(ctx, m, &i, &res)
 }
@@ -21953,7 +21953,7 @@ func (*AuthResendCodeRequest) CRC() uint32 {
 	return 0xcae47523
 }
 
-func AuthResendCode(ctx context.Context, m Requester, i AuthResendCodeRequest) (AuthSentCode, error) {
+func MakeAuthResendCodeRequest(ctx context.Context, m Requester, i AuthResendCodeRequest) (AuthSentCode, error) {
 	var res AuthSentCode
 	return res, request(ctx, m, &i, &res)
 }
@@ -21964,7 +21964,7 @@ func (*AuthResetAuthorizationsRequest) CRC() uint32 {
 	return 0x9fab0d1a
 }
 
-func AuthResetAuthorizations(ctx context.Context, m Requester, i AuthResetAuthorizationsRequest) (bool, error) {
+func MakeAuthResetAuthorizationsRequest(ctx context.Context, m Requester, i AuthResetAuthorizationsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -21978,7 +21978,7 @@ func (*AuthResetLoginEmailRequest) CRC() uint32 {
 	return 0x7e960193
 }
 
-func AuthResetLoginEmail(ctx context.Context, m Requester, i AuthResetLoginEmailRequest) (AuthSentCode, error) {
+func MakeAuthResetLoginEmailRequest(ctx context.Context, m Requester, i AuthResetLoginEmailRequest) (AuthSentCode, error) {
 	var res AuthSentCode
 	return res, request(ctx, m, &i, &res)
 }
@@ -21994,7 +21994,7 @@ func (*AuthSendCodeRequest) CRC() uint32 {
 	return 0xa677244f
 }
 
-func AuthSendCode(ctx context.Context, m Requester, i AuthSendCodeRequest) (AuthSentCode, error) {
+func MakeAuthSendCodeRequest(ctx context.Context, m Requester, i AuthSendCodeRequest) (AuthSentCode, error) {
 	var res AuthSentCode
 	return res, request(ctx, m, &i, &res)
 }
@@ -22011,7 +22011,7 @@ func (*AuthSignInRequest) CRC() uint32 {
 	return 0x8d52a951
 }
 
-func AuthSignIn(ctx context.Context, m Requester, i AuthSignInRequest) (AuthAuthorization, error) {
+func MakeAuthSignInRequest(ctx context.Context, m Requester, i AuthSignInRequest) (AuthAuthorization, error) {
 	var res AuthAuthorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -22029,7 +22029,7 @@ func (*AuthSignUpRequest) CRC() uint32 {
 	return 0xaac7b717
 }
 
-func AuthSignUp(ctx context.Context, m Requester, i AuthSignUpRequest) (AuthAuthorization, error) {
+func MakeAuthSignUpRequest(ctx context.Context, m Requester, i AuthSignUpRequest) (AuthAuthorization, error) {
 	var res AuthAuthorization
 	return res, request(ctx, m, &i, &res)
 }
@@ -22044,7 +22044,7 @@ func (*BotsAddPreviewMediaRequest) CRC() uint32 {
 	return 0x17aeb75a
 }
 
-func BotsAddPreviewMedia(ctx context.Context, m Requester, i BotsAddPreviewMediaRequest) (BotPreviewMedia, error) {
+func MakeBotsAddPreviewMediaRequest(ctx context.Context, m Requester, i BotsAddPreviewMediaRequest) (BotPreviewMedia, error) {
 	var res BotPreviewMedia
 	return res, request(ctx, m, &i, &res)
 }
@@ -22057,7 +22057,7 @@ func (*BotsAllowSendMessageRequest) CRC() uint32 {
 	return 0xf132e3ef
 }
 
-func BotsAllowSendMessage(ctx context.Context, m Requester, i BotsAllowSendMessageRequest) (Updates, error) {
+func MakeBotsAllowSendMessageRequest(ctx context.Context, m Requester, i BotsAllowSendMessageRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22071,7 +22071,7 @@ func (*BotsAnswerWebhookJSONQueryRequest) CRC() uint32 {
 	return 0xe6213f4d
 }
 
-func BotsAnswerWebhookJSONQuery(ctx context.Context, m Requester, i BotsAnswerWebhookJSONQueryRequest) (bool, error) {
+func MakeBotsAnswerWebhookJSONQueryRequest(ctx context.Context, m Requester, i BotsAnswerWebhookJSONQueryRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22084,7 +22084,7 @@ func (*BotsCanSendMessageRequest) CRC() uint32 {
 	return 0x1359f4e6
 }
 
-func BotsCanSendMessage(ctx context.Context, m Requester, i BotsCanSendMessageRequest) (bool, error) {
+func MakeBotsCanSendMessageRequest(ctx context.Context, m Requester, i BotsCanSendMessageRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22099,7 +22099,7 @@ func (*BotsDeletePreviewMediaRequest) CRC() uint32 {
 	return 0x2d0135b3
 }
 
-func BotsDeletePreviewMedia(ctx context.Context, m Requester, i BotsDeletePreviewMediaRequest) (bool, error) {
+func MakeBotsDeletePreviewMediaRequest(ctx context.Context, m Requester, i BotsDeletePreviewMediaRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22115,7 +22115,7 @@ func (*BotsEditPreviewMediaRequest) CRC() uint32 {
 	return 0x8525606f
 }
 
-func BotsEditPreviewMedia(ctx context.Context, m Requester, i BotsEditPreviewMediaRequest) (BotPreviewMedia, error) {
+func MakeBotsEditPreviewMediaRequest(ctx context.Context, m Requester, i BotsEditPreviewMediaRequest) (BotPreviewMedia, error) {
 	var res BotPreviewMedia
 	return res, request(ctx, m, &i, &res)
 }
@@ -22129,7 +22129,7 @@ func (*BotsGetBotCommandsRequest) CRC() uint32 {
 	return 0xe34c0dd6
 }
 
-func BotsGetBotCommands(ctx context.Context, m Requester, i BotsGetBotCommandsRequest) ([]BotCommand, error) {
+func MakeBotsGetBotCommandsRequest(ctx context.Context, m Requester, i BotsGetBotCommandsRequest) ([]BotCommand, error) {
 	var res []BotCommand
 	return res, request(ctx, m, &i, &res)
 }
@@ -22144,7 +22144,7 @@ func (*BotsGetBotInfoRequest) CRC() uint32 {
 	return 0xdcd914fd
 }
 
-func BotsGetBotInfo(ctx context.Context, m Requester, i BotsGetBotInfoRequest) (BotsBotInfo, error) {
+func MakeBotsGetBotInfoRequest(ctx context.Context, m Requester, i BotsGetBotInfoRequest) (BotsBotInfo, error) {
 	var res BotsBotInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -22157,7 +22157,7 @@ func (*BotsGetBotMenuButtonRequest) CRC() uint32 {
 	return 0x9c60eb28
 }
 
-func BotsGetBotMenuButton(ctx context.Context, m Requester, i BotsGetBotMenuButtonRequest) (BotMenuButton, error) {
+func MakeBotsGetBotMenuButtonRequest(ctx context.Context, m Requester, i BotsGetBotMenuButtonRequest) (BotMenuButton, error) {
 	var res BotMenuButton
 	return res, request(ctx, m, &i, &res)
 }
@@ -22171,7 +22171,7 @@ func (*BotsGetPopularAppBotsRequest) CRC() uint32 {
 	return 0xc2510192
 }
 
-func BotsGetPopularAppBots(ctx context.Context, m Requester, i BotsGetPopularAppBotsRequest) (BotsPopularAppBots, error) {
+func MakeBotsGetPopularAppBotsRequest(ctx context.Context, m Requester, i BotsGetPopularAppBotsRequest) (BotsPopularAppBots, error) {
 	var res BotsPopularAppBots
 	return res, request(ctx, m, &i, &res)
 }
@@ -22185,7 +22185,7 @@ func (*BotsGetPreviewInfoRequest) CRC() uint32 {
 	return 0x423ab3ad
 }
 
-func BotsGetPreviewInfo(ctx context.Context, m Requester, i BotsGetPreviewInfoRequest) (BotsPreviewInfo, error) {
+func MakeBotsGetPreviewInfoRequest(ctx context.Context, m Requester, i BotsGetPreviewInfoRequest) (BotsPreviewInfo, error) {
 	var res BotsPreviewInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -22198,7 +22198,7 @@ func (*BotsGetPreviewMediasRequest) CRC() uint32 {
 	return 0xa2a5594d
 }
 
-func BotsGetPreviewMedias(ctx context.Context, m Requester, i BotsGetPreviewMediasRequest) ([]BotPreviewMedia, error) {
+func MakeBotsGetPreviewMediasRequest(ctx context.Context, m Requester, i BotsGetPreviewMediasRequest) ([]BotPreviewMedia, error) {
 	var res []BotPreviewMedia
 	return res, request(ctx, m, &i, &res)
 }
@@ -22213,7 +22213,7 @@ func (*BotsInvokeWebViewCustomMethodRequest) CRC() uint32 {
 	return 0x087fc5e7
 }
 
-func BotsInvokeWebViewCustomMethod(ctx context.Context, m Requester, i BotsInvokeWebViewCustomMethodRequest) (DataJSON, error) {
+func MakeBotsInvokeWebViewCustomMethodRequest(ctx context.Context, m Requester, i BotsInvokeWebViewCustomMethodRequest) (DataJSON, error) {
 	var res DataJSON
 	return res, request(ctx, m, &i, &res)
 }
@@ -22228,7 +22228,7 @@ func (*BotsReorderPreviewMediasRequest) CRC() uint32 {
 	return 0xb627f3aa
 }
 
-func BotsReorderPreviewMedias(ctx context.Context, m Requester, i BotsReorderPreviewMediasRequest) (bool, error) {
+func MakeBotsReorderPreviewMediasRequest(ctx context.Context, m Requester, i BotsReorderPreviewMediasRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22242,7 +22242,7 @@ func (*BotsReorderUsernamesRequest) CRC() uint32 {
 	return 0x9709b1c2
 }
 
-func BotsReorderUsernames(ctx context.Context, m Requester, i BotsReorderUsernamesRequest) (bool, error) {
+func MakeBotsReorderUsernamesRequest(ctx context.Context, m Requester, i BotsReorderUsernamesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22256,7 +22256,7 @@ func (*BotsResetBotCommandsRequest) CRC() uint32 {
 	return 0x3d8de0f9
 }
 
-func BotsResetBotCommands(ctx context.Context, m Requester, i BotsResetBotCommandsRequest) (bool, error) {
+func MakeBotsResetBotCommandsRequest(ctx context.Context, m Requester, i BotsResetBotCommandsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22270,7 +22270,7 @@ func (*BotsSendCustomRequestRequest) CRC() uint32 {
 	return 0xaa2769ed
 }
 
-func BotsSendCustomRequest(ctx context.Context, m Requester, i BotsSendCustomRequestRequest) (DataJSON, error) {
+func MakeBotsSendCustomRequestRequest(ctx context.Context, m Requester, i BotsSendCustomRequestRequest) (DataJSON, error) {
 	var res DataJSON
 	return res, request(ctx, m, &i, &res)
 }
@@ -22283,7 +22283,7 @@ func (*BotsSetBotBroadcastDefaultAdminRightsRequest) CRC() uint32 {
 	return 0x788464e1
 }
 
-func BotsSetBotBroadcastDefaultAdminRights(ctx context.Context, m Requester, i BotsSetBotBroadcastDefaultAdminRightsRequest) (bool, error) {
+func MakeBotsSetBotBroadcastDefaultAdminRightsRequest(ctx context.Context, m Requester, i BotsSetBotBroadcastDefaultAdminRightsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22298,7 +22298,7 @@ func (*BotsSetBotCommandsRequest) CRC() uint32 {
 	return 0x0517165a
 }
 
-func BotsSetBotCommands(ctx context.Context, m Requester, i BotsSetBotCommandsRequest) (bool, error) {
+func MakeBotsSetBotCommandsRequest(ctx context.Context, m Requester, i BotsSetBotCommandsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22311,7 +22311,7 @@ func (*BotsSetBotGroupDefaultAdminRightsRequest) CRC() uint32 {
 	return 0x925ec9ea
 }
 
-func BotsSetBotGroupDefaultAdminRights(ctx context.Context, m Requester, i BotsSetBotGroupDefaultAdminRightsRequest) (bool, error) {
+func MakeBotsSetBotGroupDefaultAdminRightsRequest(ctx context.Context, m Requester, i BotsSetBotGroupDefaultAdminRightsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22329,7 +22329,7 @@ func (*BotsSetBotInfoRequest) CRC() uint32 {
 	return 0x10cf3123
 }
 
-func BotsSetBotInfo(ctx context.Context, m Requester, i BotsSetBotInfoRequest) (bool, error) {
+func MakeBotsSetBotInfoRequest(ctx context.Context, m Requester, i BotsSetBotInfoRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22343,7 +22343,7 @@ func (*BotsSetBotMenuButtonRequest) CRC() uint32 {
 	return 0x4504d54f
 }
 
-func BotsSetBotMenuButton(ctx context.Context, m Requester, i BotsSetBotMenuButtonRequest) (bool, error) {
+func MakeBotsSetBotMenuButtonRequest(ctx context.Context, m Requester, i BotsSetBotMenuButtonRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22358,7 +22358,7 @@ func (*BotsToggleUsernameRequest) CRC() uint32 {
 	return 0x053ca973
 }
 
-func BotsToggleUsername(ctx context.Context, m Requester, i BotsToggleUsernameRequest) (bool, error) {
+func MakeBotsToggleUsernameRequest(ctx context.Context, m Requester, i BotsToggleUsernameRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22372,7 +22372,7 @@ func (*ChannelsCheckUsernameRequest) CRC() uint32 {
 	return 0x10e6bd2c
 }
 
-func ChannelsCheckUsername(ctx context.Context, m Requester, i ChannelsCheckUsernameRequest) (bool, error) {
+func MakeChannelsCheckUsernameRequest(ctx context.Context, m Requester, i ChannelsCheckUsernameRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22386,7 +22386,7 @@ func (*ChannelsClickSponsoredMessageRequest) CRC() uint32 {
 	return 0x18afbc93
 }
 
-func ChannelsClickSponsoredMessage(ctx context.Context, m Requester, i ChannelsClickSponsoredMessageRequest) (bool, error) {
+func MakeChannelsClickSponsoredMessageRequest(ctx context.Context, m Requester, i ChannelsClickSponsoredMessageRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22399,7 +22399,7 @@ func (*ChannelsConvertToGigagroupRequest) CRC() uint32 {
 	return 0x0b290c69
 }
 
-func ChannelsConvertToGigagroup(ctx context.Context, m Requester, i ChannelsConvertToGigagroupRequest) (Updates, error) {
+func MakeChannelsConvertToGigagroupRequest(ctx context.Context, m Requester, i ChannelsConvertToGigagroupRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22421,7 +22421,7 @@ func (*ChannelsCreateChannelRequest) CRC() uint32 {
 	return 0x91006707
 }
 
-func ChannelsCreateChannel(ctx context.Context, m Requester, i ChannelsCreateChannelRequest) (Updates, error) {
+func MakeChannelsCreateChannelRequest(ctx context.Context, m Requester, i ChannelsCreateChannelRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22440,7 +22440,7 @@ func (*ChannelsCreateForumTopicRequest) CRC() uint32 {
 	return 0xf40c0224
 }
 
-func ChannelsCreateForumTopic(ctx context.Context, m Requester, i ChannelsCreateForumTopicRequest) (Updates, error) {
+func MakeChannelsCreateForumTopicRequest(ctx context.Context, m Requester, i ChannelsCreateForumTopicRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22453,7 +22453,7 @@ func (*ChannelsDeactivateAllUsernamesRequest) CRC() uint32 {
 	return 0x0a245dd3
 }
 
-func ChannelsDeactivateAllUsernames(ctx context.Context, m Requester, i ChannelsDeactivateAllUsernamesRequest) (bool, error) {
+func MakeChannelsDeactivateAllUsernamesRequest(ctx context.Context, m Requester, i ChannelsDeactivateAllUsernamesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22466,7 +22466,7 @@ func (*ChannelsDeleteChannelRequest) CRC() uint32 {
 	return 0xc0111fe3
 }
 
-func ChannelsDeleteChannel(ctx context.Context, m Requester, i ChannelsDeleteChannelRequest) (Updates, error) {
+func MakeChannelsDeleteChannelRequest(ctx context.Context, m Requester, i ChannelsDeleteChannelRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22482,7 +22482,7 @@ func (*ChannelsDeleteHistoryRequest) CRC() uint32 {
 	return 0x9baa9647
 }
 
-func ChannelsDeleteHistory(ctx context.Context, m Requester, i ChannelsDeleteHistoryRequest) (Updates, error) {
+func MakeChannelsDeleteHistoryRequest(ctx context.Context, m Requester, i ChannelsDeleteHistoryRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22496,7 +22496,7 @@ func (*ChannelsDeleteMessagesRequest) CRC() uint32 {
 	return 0x84c1fd4e
 }
 
-func ChannelsDeleteMessages(ctx context.Context, m Requester, i ChannelsDeleteMessagesRequest) (MessagesAffectedMessages, error) {
+func MakeChannelsDeleteMessagesRequest(ctx context.Context, m Requester, i ChannelsDeleteMessagesRequest) (MessagesAffectedMessages, error) {
 	var res MessagesAffectedMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -22510,7 +22510,7 @@ func (*ChannelsDeleteParticipantHistoryRequest) CRC() uint32 {
 	return 0x367544db
 }
 
-func ChannelsDeleteParticipantHistory(ctx context.Context, m Requester, i ChannelsDeleteParticipantHistoryRequest) (MessagesAffectedHistory, error) {
+func MakeChannelsDeleteParticipantHistoryRequest(ctx context.Context, m Requester, i ChannelsDeleteParticipantHistoryRequest) (MessagesAffectedHistory, error) {
 	var res MessagesAffectedHistory
 	return res, request(ctx, m, &i, &res)
 }
@@ -22524,7 +22524,7 @@ func (*ChannelsDeleteTopicHistoryRequest) CRC() uint32 {
 	return 0x34435f2d
 }
 
-func ChannelsDeleteTopicHistory(ctx context.Context, m Requester, i ChannelsDeleteTopicHistoryRequest) (MessagesAffectedHistory, error) {
+func MakeChannelsDeleteTopicHistoryRequest(ctx context.Context, m Requester, i ChannelsDeleteTopicHistoryRequest) (MessagesAffectedHistory, error) {
 	var res MessagesAffectedHistory
 	return res, request(ctx, m, &i, &res)
 }
@@ -22540,7 +22540,7 @@ func (*ChannelsEditAdminRequest) CRC() uint32 {
 	return 0xd33c8902
 }
 
-func ChannelsEditAdmin(ctx context.Context, m Requester, i ChannelsEditAdminRequest) (Updates, error) {
+func MakeChannelsEditAdminRequest(ctx context.Context, m Requester, i ChannelsEditAdminRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22555,7 +22555,7 @@ func (*ChannelsEditBannedRequest) CRC() uint32 {
 	return 0x96e6cd81
 }
 
-func ChannelsEditBanned(ctx context.Context, m Requester, i ChannelsEditBannedRequest) (Updates, error) {
+func MakeChannelsEditBannedRequest(ctx context.Context, m Requester, i ChannelsEditBannedRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22570,7 +22570,7 @@ func (*ChannelsEditCreatorRequest) CRC() uint32 {
 	return 0x8f38cd1f
 }
 
-func ChannelsEditCreator(ctx context.Context, m Requester, i ChannelsEditCreatorRequest) (Updates, error) {
+func MakeChannelsEditCreatorRequest(ctx context.Context, m Requester, i ChannelsEditCreatorRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22589,7 +22589,7 @@ func (*ChannelsEditForumTopicRequest) CRC() uint32 {
 	return 0xf4dfa185
 }
 
-func ChannelsEditForumTopic(ctx context.Context, m Requester, i ChannelsEditForumTopicRequest) (Updates, error) {
+func MakeChannelsEditForumTopicRequest(ctx context.Context, m Requester, i ChannelsEditForumTopicRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22604,7 +22604,7 @@ func (*ChannelsEditLocationRequest) CRC() uint32 {
 	return 0x58e63f6d
 }
 
-func ChannelsEditLocation(ctx context.Context, m Requester, i ChannelsEditLocationRequest) (bool, error) {
+func MakeChannelsEditLocationRequest(ctx context.Context, m Requester, i ChannelsEditLocationRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22618,7 +22618,7 @@ func (*ChannelsEditPhotoRequest) CRC() uint32 {
 	return 0xf12e57c9
 }
 
-func ChannelsEditPhoto(ctx context.Context, m Requester, i ChannelsEditPhotoRequest) (Updates, error) {
+func MakeChannelsEditPhotoRequest(ctx context.Context, m Requester, i ChannelsEditPhotoRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22632,7 +22632,7 @@ func (*ChannelsEditTitleRequest) CRC() uint32 {
 	return 0x566decd0
 }
 
-func ChannelsEditTitle(ctx context.Context, m Requester, i ChannelsEditTitleRequest) (Updates, error) {
+func MakeChannelsEditTitleRequest(ctx context.Context, m Requester, i ChannelsEditTitleRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22649,7 +22649,7 @@ func (*ChannelsExportMessageLinkRequest) CRC() uint32 {
 	return 0xe63fadeb
 }
 
-func ChannelsExportMessageLink(ctx context.Context, m Requester, i ChannelsExportMessageLinkRequest) (ExportedMessageLink, error) {
+func MakeChannelsExportMessageLinkRequest(ctx context.Context, m Requester, i ChannelsExportMessageLinkRequest) (ExportedMessageLink, error) {
 	var res ExportedMessageLink
 	return res, request(ctx, m, &i, &res)
 }
@@ -22669,7 +22669,7 @@ func (*ChannelsGetAdminLogRequest) CRC() uint32 {
 	return 0x33ddf480
 }
 
-func ChannelsGetAdminLog(ctx context.Context, m Requester, i ChannelsGetAdminLogRequest) (ChannelsAdminLogResults, error) {
+func MakeChannelsGetAdminLogRequest(ctx context.Context, m Requester, i ChannelsGetAdminLogRequest) (ChannelsAdminLogResults, error) {
 	var res ChannelsAdminLogResults
 	return res, request(ctx, m, &i, &res)
 }
@@ -22685,7 +22685,7 @@ func (*ChannelsGetAdminedPublicChannelsRequest) CRC() uint32 {
 	return 0xf8b036af
 }
 
-func ChannelsGetAdminedPublicChannels(ctx context.Context, m Requester, i ChannelsGetAdminedPublicChannelsRequest) (MessagesChats, error) {
+func MakeChannelsGetAdminedPublicChannelsRequest(ctx context.Context, m Requester, i ChannelsGetAdminedPublicChannelsRequest) (MessagesChats, error) {
 	var res MessagesChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -22699,7 +22699,7 @@ func (*ChannelsGetChannelRecommendationsRequest) CRC() uint32 {
 	return 0x25a71742
 }
 
-func ChannelsGetChannelRecommendations(ctx context.Context, m Requester, i ChannelsGetChannelRecommendationsRequest) (MessagesChats, error) {
+func MakeChannelsGetChannelRecommendationsRequest(ctx context.Context, m Requester, i ChannelsGetChannelRecommendationsRequest) (MessagesChats, error) {
 	var res MessagesChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -22712,7 +22712,7 @@ func (*ChannelsGetChannelsRequest) CRC() uint32 {
 	return 0x0a7f6bbb
 }
 
-func ChannelsGetChannels(ctx context.Context, m Requester, i ChannelsGetChannelsRequest) (MessagesChats, error) {
+func MakeChannelsGetChannelsRequest(ctx context.Context, m Requester, i ChannelsGetChannelsRequest) (MessagesChats, error) {
 	var res MessagesChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -22731,7 +22731,7 @@ func (*ChannelsGetForumTopicsRequest) CRC() uint32 {
 	return 0x0de560d1
 }
 
-func ChannelsGetForumTopics(ctx context.Context, m Requester, i ChannelsGetForumTopicsRequest) (MessagesForumTopics, error) {
+func MakeChannelsGetForumTopicsRequest(ctx context.Context, m Requester, i ChannelsGetForumTopicsRequest) (MessagesForumTopics, error) {
 	var res MessagesForumTopics
 	return res, request(ctx, m, &i, &res)
 }
@@ -22745,7 +22745,7 @@ func (*ChannelsGetForumTopicsByIDRequest) CRC() uint32 {
 	return 0xb0831eb9
 }
 
-func ChannelsGetForumTopicsByID(ctx context.Context, m Requester, i ChannelsGetForumTopicsByIDRequest) (MessagesForumTopics, error) {
+func MakeChannelsGetForumTopicsByIDRequest(ctx context.Context, m Requester, i ChannelsGetForumTopicsByIDRequest) (MessagesForumTopics, error) {
 	var res MessagesForumTopics
 	return res, request(ctx, m, &i, &res)
 }
@@ -22758,7 +22758,7 @@ func (*ChannelsGetFullChannelRequest) CRC() uint32 {
 	return 0x08736a09
 }
 
-func ChannelsGetFullChannel(ctx context.Context, m Requester, i ChannelsGetFullChannelRequest) (MessagesChatFull, error) {
+func MakeChannelsGetFullChannelRequest(ctx context.Context, m Requester, i ChannelsGetFullChannelRequest) (MessagesChatFull, error) {
 	var res MessagesChatFull
 	return res, request(ctx, m, &i, &res)
 }
@@ -22769,7 +22769,7 @@ func (*ChannelsGetGroupsForDiscussionRequest) CRC() uint32 {
 	return 0xf5dad378
 }
 
-func ChannelsGetGroupsForDiscussion(ctx context.Context, m Requester, i ChannelsGetGroupsForDiscussionRequest) (MessagesChats, error) {
+func MakeChannelsGetGroupsForDiscussionRequest(ctx context.Context, m Requester, i ChannelsGetGroupsForDiscussionRequest) (MessagesChats, error) {
 	var res MessagesChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -22780,7 +22780,7 @@ func (*ChannelsGetInactiveChannelsRequest) CRC() uint32 {
 	return 0x11e831ee
 }
 
-func ChannelsGetInactiveChannels(ctx context.Context, m Requester, i ChannelsGetInactiveChannelsRequest) (MessagesInactiveChats, error) {
+func MakeChannelsGetInactiveChannelsRequest(ctx context.Context, m Requester, i ChannelsGetInactiveChannelsRequest) (MessagesInactiveChats, error) {
 	var res MessagesInactiveChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -22793,7 +22793,7 @@ func (*ChannelsGetLeftChannelsRequest) CRC() uint32 {
 	return 0x8341ecc0
 }
 
-func ChannelsGetLeftChannels(ctx context.Context, m Requester, i ChannelsGetLeftChannelsRequest) (MessagesChats, error) {
+func MakeChannelsGetLeftChannelsRequest(ctx context.Context, m Requester, i ChannelsGetLeftChannelsRequest) (MessagesChats, error) {
 	var res MessagesChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -22807,7 +22807,7 @@ func (*ChannelsGetMessagesRequest) CRC() uint32 {
 	return 0xad8c9a23
 }
 
-func ChannelsGetMessages(ctx context.Context, m Requester, i ChannelsGetMessagesRequest) (MessagesMessages, error) {
+func MakeChannelsGetMessagesRequest(ctx context.Context, m Requester, i ChannelsGetMessagesRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -22821,7 +22821,7 @@ func (*ChannelsGetParticipantRequest) CRC() uint32 {
 	return 0xa0ab6cc6
 }
 
-func ChannelsGetParticipant(ctx context.Context, m Requester, i ChannelsGetParticipantRequest) (ChannelsChannelParticipant, error) {
+func MakeChannelsGetParticipantRequest(ctx context.Context, m Requester, i ChannelsGetParticipantRequest) (ChannelsChannelParticipant, error) {
 	var res ChannelsChannelParticipant
 	return res, request(ctx, m, &i, &res)
 }
@@ -22838,7 +22838,7 @@ func (*ChannelsGetParticipantsRequest) CRC() uint32 {
 	return 0x77ced9d0
 }
 
-func ChannelsGetParticipants(ctx context.Context, m Requester, i ChannelsGetParticipantsRequest) (ChannelsChannelParticipants, error) {
+func MakeChannelsGetParticipantsRequest(ctx context.Context, m Requester, i ChannelsGetParticipantsRequest) (ChannelsChannelParticipants, error) {
 	var res ChannelsChannelParticipants
 	return res, request(ctx, m, &i, &res)
 }
@@ -22851,7 +22851,7 @@ func (*ChannelsGetSendAsRequest) CRC() uint32 {
 	return 0x0dc770ee
 }
 
-func ChannelsGetSendAs(ctx context.Context, m Requester, i ChannelsGetSendAsRequest) (ChannelsSendAsPeers, error) {
+func MakeChannelsGetSendAsRequest(ctx context.Context, m Requester, i ChannelsGetSendAsRequest) (ChannelsSendAsPeers, error) {
 	var res ChannelsSendAsPeers
 	return res, request(ctx, m, &i, &res)
 }
@@ -22864,7 +22864,7 @@ func (*ChannelsGetSponsoredMessagesRequest) CRC() uint32 {
 	return 0xec210fbf
 }
 
-func ChannelsGetSponsoredMessages(ctx context.Context, m Requester, i ChannelsGetSponsoredMessagesRequest) (MessagesSponsoredMessages, error) {
+func MakeChannelsGetSponsoredMessagesRequest(ctx context.Context, m Requester, i ChannelsGetSponsoredMessagesRequest) (MessagesSponsoredMessages, error) {
 	var res MessagesSponsoredMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -22878,7 +22878,7 @@ func (*ChannelsInviteToChannelRequest) CRC() uint32 {
 	return 0xc9e33d54
 }
 
-func ChannelsInviteToChannel(ctx context.Context, m Requester, i ChannelsInviteToChannelRequest) (MessagesInvitedUsers, error) {
+func MakeChannelsInviteToChannelRequest(ctx context.Context, m Requester, i ChannelsInviteToChannelRequest) (MessagesInvitedUsers, error) {
 	var res MessagesInvitedUsers
 	return res, request(ctx, m, &i, &res)
 }
@@ -22891,7 +22891,7 @@ func (*ChannelsJoinChannelRequest) CRC() uint32 {
 	return 0x24b524c5
 }
 
-func ChannelsJoinChannel(ctx context.Context, m Requester, i ChannelsJoinChannelRequest) (Updates, error) {
+func MakeChannelsJoinChannelRequest(ctx context.Context, m Requester, i ChannelsJoinChannelRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22904,7 +22904,7 @@ func (*ChannelsLeaveChannelRequest) CRC() uint32 {
 	return 0xf836aa95
 }
 
-func ChannelsLeaveChannel(ctx context.Context, m Requester, i ChannelsLeaveChannelRequest) (Updates, error) {
+func MakeChannelsLeaveChannelRequest(ctx context.Context, m Requester, i ChannelsLeaveChannelRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22918,7 +22918,7 @@ func (*ChannelsReadHistoryRequest) CRC() uint32 {
 	return 0xcc104937
 }
 
-func ChannelsReadHistory(ctx context.Context, m Requester, i ChannelsReadHistoryRequest) (bool, error) {
+func MakeChannelsReadHistoryRequest(ctx context.Context, m Requester, i ChannelsReadHistoryRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22932,7 +22932,7 @@ func (*ChannelsReadMessageContentsRequest) CRC() uint32 {
 	return 0xeab5dc38
 }
 
-func ChannelsReadMessageContents(ctx context.Context, m Requester, i ChannelsReadMessageContentsRequest) (bool, error) {
+func MakeChannelsReadMessageContentsRequest(ctx context.Context, m Requester, i ChannelsReadMessageContentsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22948,7 +22948,7 @@ func (*ChannelsReorderPinnedForumTopicsRequest) CRC() uint32 {
 	return 0x2950a18f
 }
 
-func ChannelsReorderPinnedForumTopics(ctx context.Context, m Requester, i ChannelsReorderPinnedForumTopicsRequest) (Updates, error) {
+func MakeChannelsReorderPinnedForumTopicsRequest(ctx context.Context, m Requester, i ChannelsReorderPinnedForumTopicsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -22962,7 +22962,7 @@ func (*ChannelsReorderUsernamesRequest) CRC() uint32 {
 	return 0xb45ced1d
 }
 
-func ChannelsReorderUsernames(ctx context.Context, m Requester, i ChannelsReorderUsernamesRequest) (bool, error) {
+func MakeChannelsReorderUsernamesRequest(ctx context.Context, m Requester, i ChannelsReorderUsernamesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22976,7 +22976,7 @@ func (*ChannelsReportAntiSpamFalsePositiveRequest) CRC() uint32 {
 	return 0xa850a693
 }
 
-func ChannelsReportAntiSpamFalsePositive(ctx context.Context, m Requester, i ChannelsReportAntiSpamFalsePositiveRequest) (bool, error) {
+func MakeChannelsReportAntiSpamFalsePositiveRequest(ctx context.Context, m Requester, i ChannelsReportAntiSpamFalsePositiveRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -22991,7 +22991,7 @@ func (*ChannelsReportSpamRequest) CRC() uint32 {
 	return 0xf44a8315
 }
 
-func ChannelsReportSpam(ctx context.Context, m Requester, i ChannelsReportSpamRequest) (bool, error) {
+func MakeChannelsReportSpamRequest(ctx context.Context, m Requester, i ChannelsReportSpamRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23006,7 +23006,7 @@ func (*ChannelsReportSponsoredMessageRequest) CRC() uint32 {
 	return 0xaf8ff6b9
 }
 
-func ChannelsReportSponsoredMessage(ctx context.Context, m Requester, i ChannelsReportSponsoredMessageRequest) (ChannelsSponsoredMessageReportResult, error) {
+func MakeChannelsReportSponsoredMessageRequest(ctx context.Context, m Requester, i ChannelsReportSponsoredMessageRequest) (ChannelsSponsoredMessageReportResult, error) {
 	var res ChannelsSponsoredMessageReportResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -23020,7 +23020,7 @@ func (*ChannelsRestrictSponsoredMessagesRequest) CRC() uint32 {
 	return 0x9ae91519
 }
 
-func ChannelsRestrictSponsoredMessages(ctx context.Context, m Requester, i ChannelsRestrictSponsoredMessagesRequest) (Updates, error) {
+func MakeChannelsRestrictSponsoredMessagesRequest(ctx context.Context, m Requester, i ChannelsRestrictSponsoredMessagesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23037,7 +23037,7 @@ func (*ChannelsSearchPostsRequest) CRC() uint32 {
 	return 0xd19f987b
 }
 
-func ChannelsSearchPosts(ctx context.Context, m Requester, i ChannelsSearchPostsRequest) (MessagesMessages, error) {
+func MakeChannelsSearchPostsRequest(ctx context.Context, m Requester, i ChannelsSearchPostsRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -23051,7 +23051,7 @@ func (*ChannelsSetBoostsToUnblockRestrictionsRequest) CRC() uint32 {
 	return 0xad399cee
 }
 
-func ChannelsSetBoostsToUnblockRestrictions(ctx context.Context, m Requester, i ChannelsSetBoostsToUnblockRestrictionsRequest) (Updates, error) {
+func MakeChannelsSetBoostsToUnblockRestrictionsRequest(ctx context.Context, m Requester, i ChannelsSetBoostsToUnblockRestrictionsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23065,7 +23065,7 @@ func (*ChannelsSetDiscussionGroupRequest) CRC() uint32 {
 	return 0x40582bb2
 }
 
-func ChannelsSetDiscussionGroup(ctx context.Context, m Requester, i ChannelsSetDiscussionGroupRequest) (bool, error) {
+func MakeChannelsSetDiscussionGroupRequest(ctx context.Context, m Requester, i ChannelsSetDiscussionGroupRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23079,7 +23079,7 @@ func (*ChannelsSetEmojiStickersRequest) CRC() uint32 {
 	return 0x3cd930b7
 }
 
-func ChannelsSetEmojiStickers(ctx context.Context, m Requester, i ChannelsSetEmojiStickersRequest) (bool, error) {
+func MakeChannelsSetEmojiStickersRequest(ctx context.Context, m Requester, i ChannelsSetEmojiStickersRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23093,7 +23093,7 @@ func (*ChannelsSetStickersRequest) CRC() uint32 {
 	return 0xea8ca4f9
 }
 
-func ChannelsSetStickers(ctx context.Context, m Requester, i ChannelsSetStickersRequest) (bool, error) {
+func MakeChannelsSetStickersRequest(ctx context.Context, m Requester, i ChannelsSetStickersRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23107,7 +23107,7 @@ func (*ChannelsToggleAntiSpamRequest) CRC() uint32 {
 	return 0x68f3e4eb
 }
 
-func ChannelsToggleAntiSpam(ctx context.Context, m Requester, i ChannelsToggleAntiSpamRequest) (Updates, error) {
+func MakeChannelsToggleAntiSpamRequest(ctx context.Context, m Requester, i ChannelsToggleAntiSpamRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23121,7 +23121,7 @@ func (*ChannelsToggleForumRequest) CRC() uint32 {
 	return 0xa4298b29
 }
 
-func ChannelsToggleForum(ctx context.Context, m Requester, i ChannelsToggleForumRequest) (Updates, error) {
+func MakeChannelsToggleForumRequest(ctx context.Context, m Requester, i ChannelsToggleForumRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23135,7 +23135,7 @@ func (*ChannelsToggleJoinRequestRequest) CRC() uint32 {
 	return 0x4c2985b6
 }
 
-func ChannelsToggleJoinRequest(ctx context.Context, m Requester, i ChannelsToggleJoinRequestRequest) (Updates, error) {
+func MakeChannelsToggleJoinRequestRequest(ctx context.Context, m Requester, i ChannelsToggleJoinRequestRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23149,7 +23149,7 @@ func (*ChannelsToggleJoinToSendRequest) CRC() uint32 {
 	return 0xe4cb9580
 }
 
-func ChannelsToggleJoinToSend(ctx context.Context, m Requester, i ChannelsToggleJoinToSendRequest) (Updates, error) {
+func MakeChannelsToggleJoinToSendRequest(ctx context.Context, m Requester, i ChannelsToggleJoinToSendRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23163,7 +23163,7 @@ func (*ChannelsToggleParticipantsHiddenRequest) CRC() uint32 {
 	return 0x6a6e7854
 }
 
-func ChannelsToggleParticipantsHidden(ctx context.Context, m Requester, i ChannelsToggleParticipantsHiddenRequest) (Updates, error) {
+func MakeChannelsToggleParticipantsHiddenRequest(ctx context.Context, m Requester, i ChannelsToggleParticipantsHiddenRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23177,7 +23177,7 @@ func (*ChannelsTogglePreHistoryHiddenRequest) CRC() uint32 {
 	return 0xeabbb94c
 }
 
-func ChannelsTogglePreHistoryHidden(ctx context.Context, m Requester, i ChannelsTogglePreHistoryHiddenRequest) (Updates, error) {
+func MakeChannelsTogglePreHistoryHiddenRequest(ctx context.Context, m Requester, i ChannelsTogglePreHistoryHiddenRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23191,7 +23191,7 @@ func (*ChannelsToggleSignaturesRequest) CRC() uint32 {
 	return 0x1f69b606
 }
 
-func ChannelsToggleSignatures(ctx context.Context, m Requester, i ChannelsToggleSignaturesRequest) (Updates, error) {
+func MakeChannelsToggleSignaturesRequest(ctx context.Context, m Requester, i ChannelsToggleSignaturesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23205,7 +23205,7 @@ func (*ChannelsToggleSlowModeRequest) CRC() uint32 {
 	return 0xedd49ef0
 }
 
-func ChannelsToggleSlowMode(ctx context.Context, m Requester, i ChannelsToggleSlowModeRequest) (Updates, error) {
+func MakeChannelsToggleSlowModeRequest(ctx context.Context, m Requester, i ChannelsToggleSlowModeRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23220,7 +23220,7 @@ func (*ChannelsToggleUsernameRequest) CRC() uint32 {
 	return 0x50f24105
 }
 
-func ChannelsToggleUsername(ctx context.Context, m Requester, i ChannelsToggleUsernameRequest) (bool, error) {
+func MakeChannelsToggleUsernameRequest(ctx context.Context, m Requester, i ChannelsToggleUsernameRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23234,7 +23234,7 @@ func (*ChannelsToggleViewForumAsMessagesRequest) CRC() uint32 {
 	return 0x9738bb15
 }
 
-func ChannelsToggleViewForumAsMessages(ctx context.Context, m Requester, i ChannelsToggleViewForumAsMessagesRequest) (Updates, error) {
+func MakeChannelsToggleViewForumAsMessagesRequest(ctx context.Context, m Requester, i ChannelsToggleViewForumAsMessagesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23251,7 +23251,7 @@ func (*ChannelsUpdateColorRequest) CRC() uint32 {
 	return 0xd8aa3671
 }
 
-func ChannelsUpdateColor(ctx context.Context, m Requester, i ChannelsUpdateColorRequest) (Updates, error) {
+func MakeChannelsUpdateColorRequest(ctx context.Context, m Requester, i ChannelsUpdateColorRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23265,7 +23265,7 @@ func (*ChannelsUpdateEmojiStatusRequest) CRC() uint32 {
 	return 0xf0d3e6a8
 }
 
-func ChannelsUpdateEmojiStatus(ctx context.Context, m Requester, i ChannelsUpdateEmojiStatusRequest) (Updates, error) {
+func MakeChannelsUpdateEmojiStatusRequest(ctx context.Context, m Requester, i ChannelsUpdateEmojiStatusRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23280,7 +23280,7 @@ func (*ChannelsUpdatePinnedForumTopicRequest) CRC() uint32 {
 	return 0x6c2d9026
 }
 
-func ChannelsUpdatePinnedForumTopic(ctx context.Context, m Requester, i ChannelsUpdatePinnedForumTopicRequest) (Updates, error) {
+func MakeChannelsUpdatePinnedForumTopicRequest(ctx context.Context, m Requester, i ChannelsUpdatePinnedForumTopicRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23294,7 +23294,7 @@ func (*ChannelsUpdateUsernameRequest) CRC() uint32 {
 	return 0x3514b3de
 }
 
-func ChannelsUpdateUsername(ctx context.Context, m Requester, i ChannelsUpdateUsernameRequest) (bool, error) {
+func MakeChannelsUpdateUsernameRequest(ctx context.Context, m Requester, i ChannelsUpdateUsernameRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23308,7 +23308,7 @@ func (*ChannelsViewSponsoredMessageRequest) CRC() uint32 {
 	return 0xbeaedb94
 }
 
-func ChannelsViewSponsoredMessage(ctx context.Context, m Requester, i ChannelsViewSponsoredMessageRequest) (bool, error) {
+func MakeChannelsViewSponsoredMessageRequest(ctx context.Context, m Requester, i ChannelsViewSponsoredMessageRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23321,7 +23321,7 @@ func (*ChatlistsCheckChatlistInviteRequest) CRC() uint32 {
 	return 0x41c10fff
 }
 
-func ChatlistsCheckChatlistInvite(ctx context.Context, m Requester, i ChatlistsCheckChatlistInviteRequest) (ChatlistsChatlistInvite, error) {
+func MakeChatlistsCheckChatlistInviteRequest(ctx context.Context, m Requester, i ChatlistsCheckChatlistInviteRequest) (ChatlistsChatlistInvite, error) {
 	var res ChatlistsChatlistInvite
 	return res, request(ctx, m, &i, &res)
 }
@@ -23335,7 +23335,7 @@ func (*ChatlistsDeleteExportedInviteRequest) CRC() uint32 {
 	return 0x719c5c5e
 }
 
-func ChatlistsDeleteExportedInvite(ctx context.Context, m Requester, i ChatlistsDeleteExportedInviteRequest) (bool, error) {
+func MakeChatlistsDeleteExportedInviteRequest(ctx context.Context, m Requester, i ChatlistsDeleteExportedInviteRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23352,7 +23352,7 @@ func (*ChatlistsEditExportedInviteRequest) CRC() uint32 {
 	return 0x653db63d
 }
 
-func ChatlistsEditExportedInvite(ctx context.Context, m Requester, i ChatlistsEditExportedInviteRequest) (ExportedChatlistInvite, error) {
+func MakeChatlistsEditExportedInviteRequest(ctx context.Context, m Requester, i ChatlistsEditExportedInviteRequest) (ExportedChatlistInvite, error) {
 	var res ExportedChatlistInvite
 	return res, request(ctx, m, &i, &res)
 }
@@ -23367,7 +23367,7 @@ func (*ChatlistsExportChatlistInviteRequest) CRC() uint32 {
 	return 0x8472478e
 }
 
-func ChatlistsExportChatlistInvite(ctx context.Context, m Requester, i ChatlistsExportChatlistInviteRequest) (ChatlistsExportedChatlistInvite, error) {
+func MakeChatlistsExportChatlistInviteRequest(ctx context.Context, m Requester, i ChatlistsExportChatlistInviteRequest) (ChatlistsExportedChatlistInvite, error) {
 	var res ChatlistsExportedChatlistInvite
 	return res, request(ctx, m, &i, &res)
 }
@@ -23380,7 +23380,7 @@ func (*ChatlistsGetChatlistUpdatesRequest) CRC() uint32 {
 	return 0x89419521
 }
 
-func ChatlistsGetChatlistUpdates(ctx context.Context, m Requester, i ChatlistsGetChatlistUpdatesRequest) (ChatlistsChatlistUpdates, error) {
+func MakeChatlistsGetChatlistUpdatesRequest(ctx context.Context, m Requester, i ChatlistsGetChatlistUpdatesRequest) (ChatlistsChatlistUpdates, error) {
 	var res ChatlistsChatlistUpdates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23393,7 +23393,7 @@ func (*ChatlistsGetExportedInvitesRequest) CRC() uint32 {
 	return 0xce03da83
 }
 
-func ChatlistsGetExportedInvites(ctx context.Context, m Requester, i ChatlistsGetExportedInvitesRequest) (ChatlistsExportedInvites, error) {
+func MakeChatlistsGetExportedInvitesRequest(ctx context.Context, m Requester, i ChatlistsGetExportedInvitesRequest) (ChatlistsExportedInvites, error) {
 	var res ChatlistsExportedInvites
 	return res, request(ctx, m, &i, &res)
 }
@@ -23406,7 +23406,7 @@ func (*ChatlistsGetLeaveChatlistSuggestionsRequest) CRC() uint32 {
 	return 0xfdbcd714
 }
 
-func ChatlistsGetLeaveChatlistSuggestions(ctx context.Context, m Requester, i ChatlistsGetLeaveChatlistSuggestionsRequest) ([]Peer, error) {
+func MakeChatlistsGetLeaveChatlistSuggestionsRequest(ctx context.Context, m Requester, i ChatlistsGetLeaveChatlistSuggestionsRequest) ([]Peer, error) {
 	var res []Peer
 	return res, request(ctx, m, &i, &res)
 }
@@ -23419,7 +23419,7 @@ func (*ChatlistsHideChatlistUpdatesRequest) CRC() uint32 {
 	return 0x66e486fb
 }
 
-func ChatlistsHideChatlistUpdates(ctx context.Context, m Requester, i ChatlistsHideChatlistUpdatesRequest) (bool, error) {
+func MakeChatlistsHideChatlistUpdatesRequest(ctx context.Context, m Requester, i ChatlistsHideChatlistUpdatesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23433,7 +23433,7 @@ func (*ChatlistsJoinChatlistInviteRequest) CRC() uint32 {
 	return 0xa6b1e39a
 }
 
-func ChatlistsJoinChatlistInvite(ctx context.Context, m Requester, i ChatlistsJoinChatlistInviteRequest) (Updates, error) {
+func MakeChatlistsJoinChatlistInviteRequest(ctx context.Context, m Requester, i ChatlistsJoinChatlistInviteRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23447,7 +23447,7 @@ func (*ChatlistsJoinChatlistUpdatesRequest) CRC() uint32 {
 	return 0xe089f8f5
 }
 
-func ChatlistsJoinChatlistUpdates(ctx context.Context, m Requester, i ChatlistsJoinChatlistUpdatesRequest) (Updates, error) {
+func MakeChatlistsJoinChatlistUpdatesRequest(ctx context.Context, m Requester, i ChatlistsJoinChatlistUpdatesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23461,7 +23461,7 @@ func (*ChatlistsLeaveChatlistRequest) CRC() uint32 {
 	return 0x74fae13a
 }
 
-func ChatlistsLeaveChatlist(ctx context.Context, m Requester, i ChatlistsLeaveChatlistRequest) (Updates, error) {
+func MakeChatlistsLeaveChatlistRequest(ctx context.Context, m Requester, i ChatlistsLeaveChatlistRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23474,7 +23474,7 @@ func (*ContactsAcceptContactRequest) CRC() uint32 {
 	return 0xf831a20f
 }
 
-func ContactsAcceptContact(ctx context.Context, m Requester, i ContactsAcceptContactRequest) (Updates, error) {
+func MakeContactsAcceptContactRequest(ctx context.Context, m Requester, i ContactsAcceptContactRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23492,7 +23492,7 @@ func (*ContactsAddContactRequest) CRC() uint32 {
 	return 0xe8f463d0
 }
 
-func ContactsAddContact(ctx context.Context, m Requester, i ContactsAddContactRequest) (Updates, error) {
+func MakeContactsAddContactRequest(ctx context.Context, m Requester, i ContactsAddContactRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23507,7 +23507,7 @@ func (*ContactsBlockRequest) CRC() uint32 {
 	return 0x2e2e8734
 }
 
-func ContactsBlock(ctx context.Context, m Requester, i ContactsBlockRequest) (bool, error) {
+func MakeContactsBlockRequest(ctx context.Context, m Requester, i ContactsBlockRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23524,7 +23524,7 @@ func (*ContactsBlockFromRepliesRequest) CRC() uint32 {
 	return 0x29a8962c
 }
 
-func ContactsBlockFromReplies(ctx context.Context, m Requester, i ContactsBlockFromRepliesRequest) (Updates, error) {
+func MakeContactsBlockFromRepliesRequest(ctx context.Context, m Requester, i ContactsBlockFromRepliesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23537,7 +23537,7 @@ func (*ContactsDeleteByPhonesRequest) CRC() uint32 {
 	return 0x1013fd9e
 }
 
-func ContactsDeleteByPhones(ctx context.Context, m Requester, i ContactsDeleteByPhonesRequest) (bool, error) {
+func MakeContactsDeleteByPhonesRequest(ctx context.Context, m Requester, i ContactsDeleteByPhonesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23550,7 +23550,7 @@ func (*ContactsDeleteContactsRequest) CRC() uint32 {
 	return 0x096a0e00
 }
 
-func ContactsDeleteContacts(ctx context.Context, m Requester, i ContactsDeleteContactsRequest) (Updates, error) {
+func MakeContactsDeleteContactsRequest(ctx context.Context, m Requester, i ContactsDeleteContactsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23563,7 +23563,7 @@ func (*ContactsEditCloseFriendsRequest) CRC() uint32 {
 	return 0xba6705f0
 }
 
-func ContactsEditCloseFriends(ctx context.Context, m Requester, i ContactsEditCloseFriendsRequest) (bool, error) {
+func MakeContactsEditCloseFriendsRequest(ctx context.Context, m Requester, i ContactsEditCloseFriendsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23574,7 +23574,7 @@ func (*ContactsExportContactTokenRequest) CRC() uint32 {
 	return 0xf8654027
 }
 
-func ContactsExportContactToken(ctx context.Context, m Requester, i ContactsExportContactTokenRequest) (ExportedContactToken, error) {
+func MakeContactsExportContactTokenRequest(ctx context.Context, m Requester, i ContactsExportContactTokenRequest) (ExportedContactToken, error) {
 	var res ExportedContactToken
 	return res, request(ctx, m, &i, &res)
 }
@@ -23585,7 +23585,7 @@ func (*ContactsGetBirthdaysRequest) CRC() uint32 {
 	return 0xdaeda864
 }
 
-func ContactsGetBirthdays(ctx context.Context, m Requester, i ContactsGetBirthdaysRequest) (ContactsContactBirthdays, error) {
+func MakeContactsGetBirthdaysRequest(ctx context.Context, m Requester, i ContactsGetBirthdaysRequest) (ContactsContactBirthdays, error) {
 	var res ContactsContactBirthdays
 	return res, request(ctx, m, &i, &res)
 }
@@ -23601,7 +23601,7 @@ func (*ContactsGetBlockedRequest) CRC() uint32 {
 	return 0x9a868f80
 }
 
-func ContactsGetBlocked(ctx context.Context, m Requester, i ContactsGetBlockedRequest) (ContactsBlocked, error) {
+func MakeContactsGetBlockedRequest(ctx context.Context, m Requester, i ContactsGetBlockedRequest) (ContactsBlocked, error) {
 	var res ContactsBlocked
 	return res, request(ctx, m, &i, &res)
 }
@@ -23614,7 +23614,7 @@ func (*ContactsGetContactIDsRequest) CRC() uint32 {
 	return 0x7adc669d
 }
 
-func ContactsGetContactIDs(ctx context.Context, m Requester, i ContactsGetContactIDsRequest) ([]int32, error) {
+func MakeContactsGetContactIDsRequest(ctx context.Context, m Requester, i ContactsGetContactIDsRequest) ([]int32, error) {
 	var res []int32
 	return res, request(ctx, m, &i, &res)
 }
@@ -23627,7 +23627,7 @@ func (*ContactsGetContactsRequest) CRC() uint32 {
 	return 0x5dd69e12
 }
 
-func ContactsGetContacts(ctx context.Context, m Requester, i ContactsGetContactsRequest) (ContactsContacts, error) {
+func MakeContactsGetContactsRequest(ctx context.Context, m Requester, i ContactsGetContactsRequest) (ContactsContacts, error) {
 	var res ContactsContacts
 	return res, request(ctx, m, &i, &res)
 }
@@ -23643,7 +23643,7 @@ func (*ContactsGetLocatedRequest) CRC() uint32 {
 	return 0xd348bc44
 }
 
-func ContactsGetLocated(ctx context.Context, m Requester, i ContactsGetLocatedRequest) (Updates, error) {
+func MakeContactsGetLocatedRequest(ctx context.Context, m Requester, i ContactsGetLocatedRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23654,7 +23654,7 @@ func (*ContactsGetSavedRequest) CRC() uint32 {
 	return 0x82f1e39f
 }
 
-func ContactsGetSaved(ctx context.Context, m Requester, i ContactsGetSavedRequest) ([]SavedContact, error) {
+func MakeContactsGetSavedRequest(ctx context.Context, m Requester, i ContactsGetSavedRequest) ([]SavedContact, error) {
 	var res []SavedContact
 	return res, request(ctx, m, &i, &res)
 }
@@ -23665,7 +23665,7 @@ func (*ContactsGetStatusesRequest) CRC() uint32 {
 	return 0xc4a353ee
 }
 
-func ContactsGetStatuses(ctx context.Context, m Requester, i ContactsGetStatusesRequest) ([]ContactStatus, error) {
+func MakeContactsGetStatusesRequest(ctx context.Context, m Requester, i ContactsGetStatusesRequest) ([]ContactStatus, error) {
 	var res []ContactStatus
 	return res, request(ctx, m, &i, &res)
 }
@@ -23690,7 +23690,7 @@ func (*ContactsGetTopPeersRequest) CRC() uint32 {
 	return 0x973478b6
 }
 
-func ContactsGetTopPeers(ctx context.Context, m Requester, i ContactsGetTopPeersRequest) (ContactsTopPeers, error) {
+func MakeContactsGetTopPeersRequest(ctx context.Context, m Requester, i ContactsGetTopPeersRequest) (ContactsTopPeers, error) {
 	var res ContactsTopPeers
 	return res, request(ctx, m, &i, &res)
 }
@@ -23703,7 +23703,7 @@ func (*ContactsImportContactTokenRequest) CRC() uint32 {
 	return 0x13005788
 }
 
-func ContactsImportContactToken(ctx context.Context, m Requester, i ContactsImportContactTokenRequest) (User, error) {
+func MakeContactsImportContactTokenRequest(ctx context.Context, m Requester, i ContactsImportContactTokenRequest) (User, error) {
 	var res User
 	return res, request(ctx, m, &i, &res)
 }
@@ -23716,7 +23716,7 @@ func (*ContactsImportContactsRequest) CRC() uint32 {
 	return 0x2c800be5
 }
 
-func ContactsImportContacts(ctx context.Context, m Requester, i ContactsImportContactsRequest) (ContactsImportedContacts, error) {
+func MakeContactsImportContactsRequest(ctx context.Context, m Requester, i ContactsImportContactsRequest) (ContactsImportedContacts, error) {
 	var res ContactsImportedContacts
 	return res, request(ctx, m, &i, &res)
 }
@@ -23727,7 +23727,7 @@ func (*ContactsResetSavedRequest) CRC() uint32 {
 	return 0x879537f1
 }
 
-func ContactsResetSaved(ctx context.Context, m Requester, i ContactsResetSavedRequest) (bool, error) {
+func MakeContactsResetSavedRequest(ctx context.Context, m Requester, i ContactsResetSavedRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23741,7 +23741,7 @@ func (*ContactsResetTopPeerRatingRequest) CRC() uint32 {
 	return 0x1ae373ac
 }
 
-func ContactsResetTopPeerRating(ctx context.Context, m Requester, i ContactsResetTopPeerRatingRequest) (bool, error) {
+func MakeContactsResetTopPeerRatingRequest(ctx context.Context, m Requester, i ContactsResetTopPeerRatingRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23754,7 +23754,7 @@ func (*ContactsResolvePhoneRequest) CRC() uint32 {
 	return 0x8af94344
 }
 
-func ContactsResolvePhone(ctx context.Context, m Requester, i ContactsResolvePhoneRequest) (ContactsResolvedPeer, error) {
+func MakeContactsResolvePhoneRequest(ctx context.Context, m Requester, i ContactsResolvePhoneRequest) (ContactsResolvedPeer, error) {
 	var res ContactsResolvedPeer
 	return res, request(ctx, m, &i, &res)
 }
@@ -23767,7 +23767,7 @@ func (*ContactsResolveUsernameRequest) CRC() uint32 {
 	return 0xf93ccba3
 }
 
-func ContactsResolveUsername(ctx context.Context, m Requester, i ContactsResolveUsernameRequest) (ContactsResolvedPeer, error) {
+func MakeContactsResolveUsernameRequest(ctx context.Context, m Requester, i ContactsResolveUsernameRequest) (ContactsResolvedPeer, error) {
 	var res ContactsResolvedPeer
 	return res, request(ctx, m, &i, &res)
 }
@@ -23781,7 +23781,7 @@ func (*ContactsSearchRequest) CRC() uint32 {
 	return 0x11f812d8
 }
 
-func ContactsSearch(ctx context.Context, m Requester, i ContactsSearchRequest) (ContactsFound, error) {
+func MakeContactsSearchRequest(ctx context.Context, m Requester, i ContactsSearchRequest) (ContactsFound, error) {
 	var res ContactsFound
 	return res, request(ctx, m, &i, &res)
 }
@@ -23797,7 +23797,7 @@ func (*ContactsSetBlockedRequest) CRC() uint32 {
 	return 0x94c65c76
 }
 
-func ContactsSetBlocked(ctx context.Context, m Requester, i ContactsSetBlockedRequest) (bool, error) {
+func MakeContactsSetBlockedRequest(ctx context.Context, m Requester, i ContactsSetBlockedRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23810,7 +23810,7 @@ func (*ContactsToggleTopPeersRequest) CRC() uint32 {
 	return 0x8514bdda
 }
 
-func ContactsToggleTopPeers(ctx context.Context, m Requester, i ContactsToggleTopPeersRequest) (bool, error) {
+func MakeContactsToggleTopPeersRequest(ctx context.Context, m Requester, i ContactsToggleTopPeersRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23825,7 +23825,7 @@ func (*ContactsUnblockRequest) CRC() uint32 {
 	return 0xb550d328
 }
 
-func ContactsUnblock(ctx context.Context, m Requester, i ContactsUnblockRequest) (bool, error) {
+func MakeContactsUnblockRequest(ctx context.Context, m Requester, i ContactsUnblockRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23838,7 +23838,7 @@ func (*FoldersEditPeerFoldersRequest) CRC() uint32 {
 	return 0x6847d0ab
 }
 
-func FoldersEditPeerFolders(ctx context.Context, m Requester, i FoldersEditPeerFoldersRequest) (Updates, error) {
+func MakeFoldersEditPeerFoldersRequest(ctx context.Context, m Requester, i FoldersEditPeerFoldersRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -23851,7 +23851,7 @@ func (*FragmentGetCollectibleInfoRequest) CRC() uint32 {
 	return 0xbe1e85ba
 }
 
-func FragmentGetCollectibleInfo(ctx context.Context, m Requester, i FragmentGetCollectibleInfoRequest) (FragmentCollectibleInfo, error) {
+func MakeFragmentGetCollectibleInfoRequest(ctx context.Context, m Requester, i FragmentGetCollectibleInfoRequest) (FragmentCollectibleInfo, error) {
 	var res FragmentCollectibleInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -23864,7 +23864,7 @@ func (*HelpAcceptTermsOfServiceRequest) CRC() uint32 {
 	return 0xee72f79a
 }
 
-func HelpAcceptTermsOfService(ctx context.Context, m Requester, i HelpAcceptTermsOfServiceRequest) (bool, error) {
+func MakeHelpAcceptTermsOfServiceRequest(ctx context.Context, m Requester, i HelpAcceptTermsOfServiceRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23878,7 +23878,7 @@ func (*HelpDismissSuggestionRequest) CRC() uint32 {
 	return 0xf50dbaa1
 }
 
-func HelpDismissSuggestion(ctx context.Context, m Requester, i HelpDismissSuggestionRequest) (bool, error) {
+func MakeHelpDismissSuggestionRequest(ctx context.Context, m Requester, i HelpDismissSuggestionRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -23893,7 +23893,7 @@ func (*HelpEditUserInfoRequest) CRC() uint32 {
 	return 0x66b91b70
 }
 
-func HelpEditUserInfo(ctx context.Context, m Requester, i HelpEditUserInfoRequest) (HelpUserInfo, error) {
+func MakeHelpEditUserInfoRequest(ctx context.Context, m Requester, i HelpEditUserInfoRequest) (HelpUserInfo, error) {
 	var res HelpUserInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -23906,7 +23906,7 @@ func (*HelpGetAppConfigRequest) CRC() uint32 {
 	return 0x61e3f854
 }
 
-func HelpGetAppConfig(ctx context.Context, m Requester, i HelpGetAppConfigRequest) (HelpAppConfig, error) {
+func MakeHelpGetAppConfigRequest(ctx context.Context, m Requester, i HelpGetAppConfigRequest) (HelpAppConfig, error) {
 	var res HelpAppConfig
 	return res, request(ctx, m, &i, &res)
 }
@@ -23919,7 +23919,7 @@ func (*HelpGetAppUpdateRequest) CRC() uint32 {
 	return 0x522d5a7d
 }
 
-func HelpGetAppUpdate(ctx context.Context, m Requester, i HelpGetAppUpdateRequest) (HelpAppUpdate, error) {
+func MakeHelpGetAppUpdateRequest(ctx context.Context, m Requester, i HelpGetAppUpdateRequest) (HelpAppUpdate, error) {
 	var res HelpAppUpdate
 	return res, request(ctx, m, &i, &res)
 }
@@ -23930,7 +23930,7 @@ func (*HelpGetCdnConfigRequest) CRC() uint32 {
 	return 0x52029342
 }
 
-func HelpGetCdnConfig(ctx context.Context, m Requester, i HelpGetCdnConfigRequest) (CdnConfig, error) {
+func MakeHelpGetCdnConfigRequest(ctx context.Context, m Requester, i HelpGetCdnConfigRequest) (CdnConfig, error) {
 	var res CdnConfig
 	return res, request(ctx, m, &i, &res)
 }
@@ -23941,7 +23941,7 @@ func (*HelpGetConfigRequest) CRC() uint32 {
 	return 0xc4f9186b
 }
 
-func HelpGetConfig(ctx context.Context, m Requester, i HelpGetConfigRequest) (Config, error) {
+func MakeHelpGetConfigRequest(ctx context.Context, m Requester, i HelpGetConfigRequest) (Config, error) {
 	var res Config
 	return res, request(ctx, m, &i, &res)
 }
@@ -23955,7 +23955,7 @@ func (*HelpGetCountriesListRequest) CRC() uint32 {
 	return 0x735787a8
 }
 
-func HelpGetCountriesList(ctx context.Context, m Requester, i HelpGetCountriesListRequest) (HelpCountriesList, error) {
+func MakeHelpGetCountriesListRequest(ctx context.Context, m Requester, i HelpGetCountriesListRequest) (HelpCountriesList, error) {
 	var res HelpCountriesList
 	return res, request(ctx, m, &i, &res)
 }
@@ -23968,7 +23968,7 @@ func (*HelpGetDeepLinkInfoRequest) CRC() uint32 {
 	return 0x3fedc75f
 }
 
-func HelpGetDeepLinkInfo(ctx context.Context, m Requester, i HelpGetDeepLinkInfoRequest) (HelpDeepLinkInfo, error) {
+func MakeHelpGetDeepLinkInfoRequest(ctx context.Context, m Requester, i HelpGetDeepLinkInfoRequest) (HelpDeepLinkInfo, error) {
 	var res HelpDeepLinkInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -23979,7 +23979,7 @@ func (*HelpGetInviteTextRequest) CRC() uint32 {
 	return 0x4d392343
 }
 
-func HelpGetInviteText(ctx context.Context, m Requester, i HelpGetInviteTextRequest) (HelpInviteText, error) {
+func MakeHelpGetInviteTextRequest(ctx context.Context, m Requester, i HelpGetInviteTextRequest) (HelpInviteText, error) {
 	var res HelpInviteText
 	return res, request(ctx, m, &i, &res)
 }
@@ -23990,7 +23990,7 @@ func (*HelpGetNearestDcRequest) CRC() uint32 {
 	return 0x1fb33026
 }
 
-func HelpGetNearestDc(ctx context.Context, m Requester, i HelpGetNearestDcRequest) (NearestDc, error) {
+func MakeHelpGetNearestDcRequest(ctx context.Context, m Requester, i HelpGetNearestDcRequest) (NearestDc, error) {
 	var res NearestDc
 	return res, request(ctx, m, &i, &res)
 }
@@ -24003,7 +24003,7 @@ func (*HelpGetPassportConfigRequest) CRC() uint32 {
 	return 0xc661ad08
 }
 
-func HelpGetPassportConfig(ctx context.Context, m Requester, i HelpGetPassportConfigRequest) (HelpPassportConfig, error) {
+func MakeHelpGetPassportConfigRequest(ctx context.Context, m Requester, i HelpGetPassportConfigRequest) (HelpPassportConfig, error) {
 	var res HelpPassportConfig
 	return res, request(ctx, m, &i, &res)
 }
@@ -24016,7 +24016,7 @@ func (*HelpGetPeerColorsRequest) CRC() uint32 {
 	return 0xda80f42f
 }
 
-func HelpGetPeerColors(ctx context.Context, m Requester, i HelpGetPeerColorsRequest) (HelpPeerColors, error) {
+func MakeHelpGetPeerColorsRequest(ctx context.Context, m Requester, i HelpGetPeerColorsRequest) (HelpPeerColors, error) {
 	var res HelpPeerColors
 	return res, request(ctx, m, &i, &res)
 }
@@ -24029,7 +24029,7 @@ func (*HelpGetPeerProfileColorsRequest) CRC() uint32 {
 	return 0xabcfa9fd
 }
 
-func HelpGetPeerProfileColors(ctx context.Context, m Requester, i HelpGetPeerProfileColorsRequest) (HelpPeerColors, error) {
+func MakeHelpGetPeerProfileColorsRequest(ctx context.Context, m Requester, i HelpGetPeerProfileColorsRequest) (HelpPeerColors, error) {
 	var res HelpPeerColors
 	return res, request(ctx, m, &i, &res)
 }
@@ -24040,7 +24040,7 @@ func (*HelpGetPremiumPromoRequest) CRC() uint32 {
 	return 0xb81b93d4
 }
 
-func HelpGetPremiumPromo(ctx context.Context, m Requester, i HelpGetPremiumPromoRequest) (HelpPremiumPromo, error) {
+func MakeHelpGetPremiumPromoRequest(ctx context.Context, m Requester, i HelpGetPremiumPromoRequest) (HelpPremiumPromo, error) {
 	var res HelpPremiumPromo
 	return res, request(ctx, m, &i, &res)
 }
@@ -24051,7 +24051,7 @@ func (*HelpGetPromoDataRequest) CRC() uint32 {
 	return 0xc0977421
 }
 
-func HelpGetPromoData(ctx context.Context, m Requester, i HelpGetPromoDataRequest) (HelpPromoData, error) {
+func MakeHelpGetPromoDataRequest(ctx context.Context, m Requester, i HelpGetPromoDataRequest) (HelpPromoData, error) {
 	var res HelpPromoData
 	return res, request(ctx, m, &i, &res)
 }
@@ -24064,7 +24064,7 @@ func (*HelpGetRecentMeUrlsRequest) CRC() uint32 {
 	return 0x3dc0f114
 }
 
-func HelpGetRecentMeUrls(ctx context.Context, m Requester, i HelpGetRecentMeUrlsRequest) (HelpRecentMeUrls, error) {
+func MakeHelpGetRecentMeUrlsRequest(ctx context.Context, m Requester, i HelpGetRecentMeUrlsRequest) (HelpRecentMeUrls, error) {
 	var res HelpRecentMeUrls
 	return res, request(ctx, m, &i, &res)
 }
@@ -24075,7 +24075,7 @@ func (*HelpGetSupportRequest) CRC() uint32 {
 	return 0x9cdf08cd
 }
 
-func HelpGetSupport(ctx context.Context, m Requester, i HelpGetSupportRequest) (HelpSupport, error) {
+func MakeHelpGetSupportRequest(ctx context.Context, m Requester, i HelpGetSupportRequest) (HelpSupport, error) {
 	var res HelpSupport
 	return res, request(ctx, m, &i, &res)
 }
@@ -24086,7 +24086,7 @@ func (*HelpGetSupportNameRequest) CRC() uint32 {
 	return 0xd360e72c
 }
 
-func HelpGetSupportName(ctx context.Context, m Requester, i HelpGetSupportNameRequest) (HelpSupportName, error) {
+func MakeHelpGetSupportNameRequest(ctx context.Context, m Requester, i HelpGetSupportNameRequest) (HelpSupportName, error) {
 	var res HelpSupportName
 	return res, request(ctx, m, &i, &res)
 }
@@ -24097,7 +24097,7 @@ func (*HelpGetTermsOfServiceUpdateRequest) CRC() uint32 {
 	return 0x2ca51fd1
 }
 
-func HelpGetTermsOfServiceUpdate(ctx context.Context, m Requester, i HelpGetTermsOfServiceUpdateRequest) (HelpTermsOfServiceUpdate, error) {
+func MakeHelpGetTermsOfServiceUpdateRequest(ctx context.Context, m Requester, i HelpGetTermsOfServiceUpdateRequest) (HelpTermsOfServiceUpdate, error) {
 	var res HelpTermsOfServiceUpdate
 	return res, request(ctx, m, &i, &res)
 }
@@ -24110,7 +24110,7 @@ func (*HelpGetTimezonesListRequest) CRC() uint32 {
 	return 0x49b30240
 }
 
-func HelpGetTimezonesList(ctx context.Context, m Requester, i HelpGetTimezonesListRequest) (HelpTimezonesList, error) {
+func MakeHelpGetTimezonesListRequest(ctx context.Context, m Requester, i HelpGetTimezonesListRequest) (HelpTimezonesList, error) {
 	var res HelpTimezonesList
 	return res, request(ctx, m, &i, &res)
 }
@@ -24123,7 +24123,7 @@ func (*HelpGetUserInfoRequest) CRC() uint32 {
 	return 0x038a08d3
 }
 
-func HelpGetUserInfo(ctx context.Context, m Requester, i HelpGetUserInfoRequest) (HelpUserInfo, error) {
+func MakeHelpGetUserInfoRequest(ctx context.Context, m Requester, i HelpGetUserInfoRequest) (HelpUserInfo, error) {
 	var res HelpUserInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -24136,7 +24136,7 @@ func (*HelpHidePromoDataRequest) CRC() uint32 {
 	return 0x1e251c95
 }
 
-func HelpHidePromoData(ctx context.Context, m Requester, i HelpHidePromoDataRequest) (bool, error) {
+func MakeHelpHidePromoDataRequest(ctx context.Context, m Requester, i HelpHidePromoDataRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24149,7 +24149,7 @@ func (*HelpSaveAppLogRequest) CRC() uint32 {
 	return 0x6f02f748
 }
 
-func HelpSaveAppLog(ctx context.Context, m Requester, i HelpSaveAppLogRequest) (bool, error) {
+func MakeHelpSaveAppLogRequest(ctx context.Context, m Requester, i HelpSaveAppLogRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24163,7 +24163,7 @@ func (*HelpSetBotUpdatesStatusRequest) CRC() uint32 {
 	return 0xec22cfcd
 }
 
-func HelpSetBotUpdatesStatus(ctx context.Context, m Requester, i HelpSetBotUpdatesStatusRequest) (bool, error) {
+func MakeHelpSetBotUpdatesStatusRequest(ctx context.Context, m Requester, i HelpSetBotUpdatesStatusRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24178,7 +24178,7 @@ func (*LangpackGetDifferenceRequest) CRC() uint32 {
 	return 0xcd984aa5
 }
 
-func LangpackGetDifference(ctx context.Context, m Requester, i LangpackGetDifferenceRequest) (LangPackDifference, error) {
+func MakeLangpackGetDifferenceRequest(ctx context.Context, m Requester, i LangpackGetDifferenceRequest) (LangPackDifference, error) {
 	var res LangPackDifference
 	return res, request(ctx, m, &i, &res)
 }
@@ -24192,7 +24192,7 @@ func (*LangpackGetLangPackRequest) CRC() uint32 {
 	return 0xf2f2330a
 }
 
-func LangpackGetLangPack(ctx context.Context, m Requester, i LangpackGetLangPackRequest) (LangPackDifference, error) {
+func MakeLangpackGetLangPackRequest(ctx context.Context, m Requester, i LangpackGetLangPackRequest) (LangPackDifference, error) {
 	var res LangPackDifference
 	return res, request(ctx, m, &i, &res)
 }
@@ -24206,7 +24206,7 @@ func (*LangpackGetLanguageRequest) CRC() uint32 {
 	return 0x6a596502
 }
 
-func LangpackGetLanguage(ctx context.Context, m Requester, i LangpackGetLanguageRequest) (LangPackLanguage, error) {
+func MakeLangpackGetLanguageRequest(ctx context.Context, m Requester, i LangpackGetLanguageRequest) (LangPackLanguage, error) {
 	var res LangPackLanguage
 	return res, request(ctx, m, &i, &res)
 }
@@ -24219,7 +24219,7 @@ func (*LangpackGetLanguagesRequest) CRC() uint32 {
 	return 0x42c6978f
 }
 
-func LangpackGetLanguages(ctx context.Context, m Requester, i LangpackGetLanguagesRequest) ([]LangPackLanguage, error) {
+func MakeLangpackGetLanguagesRequest(ctx context.Context, m Requester, i LangpackGetLanguagesRequest) ([]LangPackLanguage, error) {
 	var res []LangPackLanguage
 	return res, request(ctx, m, &i, &res)
 }
@@ -24234,7 +24234,7 @@ func (*LangpackGetStringsRequest) CRC() uint32 {
 	return 0xefea3803
 }
 
-func LangpackGetStrings(ctx context.Context, m Requester, i LangpackGetStringsRequest) ([]LangPackString, error) {
+func MakeLangpackGetStringsRequest(ctx context.Context, m Requester, i LangpackGetStringsRequest) ([]LangPackString, error) {
 	var res []LangPackString
 	return res, request(ctx, m, &i, &res)
 }
@@ -24249,7 +24249,7 @@ func (*MessagesAcceptEncryptionRequest) CRC() uint32 {
 	return 0x3dbc0415
 }
 
-func MessagesAcceptEncryption(ctx context.Context, m Requester, i MessagesAcceptEncryptionRequest) (EncryptedChat, error) {
+func MakeMessagesAcceptEncryptionRequest(ctx context.Context, m Requester, i MessagesAcceptEncryptionRequest) (EncryptedChat, error) {
 	var res EncryptedChat
 	return res, request(ctx, m, &i, &res)
 }
@@ -24267,7 +24267,7 @@ func (*MessagesAcceptURLAuthRequest) CRC() uint32 {
 	return 0xb12c7125
 }
 
-func MessagesAcceptURLAuth(ctx context.Context, m Requester, i MessagesAcceptURLAuthRequest) (URLAuthResult, error) {
+func MakeMessagesAcceptURLAuthRequest(ctx context.Context, m Requester, i MessagesAcceptURLAuthRequest) (URLAuthResult, error) {
 	var res URLAuthResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -24282,7 +24282,7 @@ func (*MessagesAddChatUserRequest) CRC() uint32 {
 	return 0xcbc6d107
 }
 
-func MessagesAddChatUser(ctx context.Context, m Requester, i MessagesAddChatUserRequest) (MessagesInvitedUsers, error) {
+func MakeMessagesAddChatUserRequest(ctx context.Context, m Requester, i MessagesAddChatUserRequest) (MessagesInvitedUsers, error) {
 	var res MessagesInvitedUsers
 	return res, request(ctx, m, &i, &res)
 }
@@ -24295,7 +24295,7 @@ func (*MessagesCheckChatInviteRequest) CRC() uint32 {
 	return 0x3eadb1bb
 }
 
-func MessagesCheckChatInvite(ctx context.Context, m Requester, i MessagesCheckChatInviteRequest) (ChatInvite, error) {
+func MakeMessagesCheckChatInviteRequest(ctx context.Context, m Requester, i MessagesCheckChatInviteRequest) (ChatInvite, error) {
 	var res ChatInvite
 	return res, request(ctx, m, &i, &res)
 }
@@ -24308,7 +24308,7 @@ func (*MessagesCheckHistoryImportRequest) CRC() uint32 {
 	return 0x43fe19f3
 }
 
-func MessagesCheckHistoryImport(ctx context.Context, m Requester, i MessagesCheckHistoryImportRequest) (MessagesHistoryImportParsed, error) {
+func MakeMessagesCheckHistoryImportRequest(ctx context.Context, m Requester, i MessagesCheckHistoryImportRequest) (MessagesHistoryImportParsed, error) {
 	var res MessagesHistoryImportParsed
 	return res, request(ctx, m, &i, &res)
 }
@@ -24321,7 +24321,7 @@ func (*MessagesCheckHistoryImportPeerRequest) CRC() uint32 {
 	return 0x5dc60f03
 }
 
-func MessagesCheckHistoryImportPeer(ctx context.Context, m Requester, i MessagesCheckHistoryImportPeerRequest) (MessagesCheckedHistoryImportPeer, error) {
+func MakeMessagesCheckHistoryImportPeerRequest(ctx context.Context, m Requester, i MessagesCheckHistoryImportPeerRequest) (MessagesCheckedHistoryImportPeer, error) {
 	var res MessagesCheckedHistoryImportPeer
 	return res, request(ctx, m, &i, &res)
 }
@@ -24334,7 +24334,7 @@ func (*MessagesCheckQuickReplyShortcutRequest) CRC() uint32 {
 	return 0xf1d0fbd3
 }
 
-func MessagesCheckQuickReplyShortcut(ctx context.Context, m Requester, i MessagesCheckQuickReplyShortcutRequest) (bool, error) {
+func MakeMessagesCheckQuickReplyShortcutRequest(ctx context.Context, m Requester, i MessagesCheckQuickReplyShortcutRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24345,7 +24345,7 @@ func (*MessagesClearAllDraftsRequest) CRC() uint32 {
 	return 0x7e58ee9c
 }
 
-func MessagesClearAllDrafts(ctx context.Context, m Requester, i MessagesClearAllDraftsRequest) (bool, error) {
+func MakeMessagesClearAllDraftsRequest(ctx context.Context, m Requester, i MessagesClearAllDraftsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24356,7 +24356,7 @@ func (*MessagesClearRecentReactionsRequest) CRC() uint32 {
 	return 0x9dfeefb4
 }
 
-func MessagesClearRecentReactions(ctx context.Context, m Requester, i MessagesClearRecentReactionsRequest) (bool, error) {
+func MakeMessagesClearRecentReactionsRequest(ctx context.Context, m Requester, i MessagesClearRecentReactionsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24370,7 +24370,7 @@ func (*MessagesClearRecentStickersRequest) CRC() uint32 {
 	return 0x8999602d
 }
 
-func MessagesClearRecentStickers(ctx context.Context, m Requester, i MessagesClearRecentStickersRequest) (bool, error) {
+func MakeMessagesClearRecentStickersRequest(ctx context.Context, m Requester, i MessagesClearRecentStickersRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24386,7 +24386,7 @@ func (*MessagesCreateChatRequest) CRC() uint32 {
 	return 0x92ceddd4
 }
 
-func MessagesCreateChat(ctx context.Context, m Requester, i MessagesCreateChatRequest) (MessagesInvitedUsers, error) {
+func MakeMessagesCreateChatRequest(ctx context.Context, m Requester, i MessagesCreateChatRequest) (MessagesInvitedUsers, error) {
 	var res MessagesInvitedUsers
 	return res, request(ctx, m, &i, &res)
 }
@@ -24399,7 +24399,7 @@ func (*MessagesDeleteChatRequest) CRC() uint32 {
 	return 0x5bd0ee50
 }
 
-func MessagesDeleteChat(ctx context.Context, m Requester, i MessagesDeleteChatRequest) (bool, error) {
+func MakeMessagesDeleteChatRequest(ctx context.Context, m Requester, i MessagesDeleteChatRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24415,7 +24415,7 @@ func (*MessagesDeleteChatUserRequest) CRC() uint32 {
 	return 0xa2185cab
 }
 
-func MessagesDeleteChatUser(ctx context.Context, m Requester, i MessagesDeleteChatUserRequest) (Updates, error) {
+func MakeMessagesDeleteChatUserRequest(ctx context.Context, m Requester, i MessagesDeleteChatUserRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24429,7 +24429,7 @@ func (*MessagesDeleteExportedChatInviteRequest) CRC() uint32 {
 	return 0xd464a42b
 }
 
-func MessagesDeleteExportedChatInvite(ctx context.Context, m Requester, i MessagesDeleteExportedChatInviteRequest) (bool, error) {
+func MakeMessagesDeleteExportedChatInviteRequest(ctx context.Context, m Requester, i MessagesDeleteExportedChatInviteRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24443,7 +24443,7 @@ func (*MessagesDeleteFactCheckRequest) CRC() uint32 {
 	return 0xd1da940c
 }
 
-func MessagesDeleteFactCheck(ctx context.Context, m Requester, i MessagesDeleteFactCheckRequest) (Updates, error) {
+func MakeMessagesDeleteFactCheckRequest(ctx context.Context, m Requester, i MessagesDeleteFactCheckRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24462,7 +24462,7 @@ func (*MessagesDeleteHistoryRequest) CRC() uint32 {
 	return 0xb08f922a
 }
 
-func MessagesDeleteHistory(ctx context.Context, m Requester, i MessagesDeleteHistoryRequest) (MessagesAffectedHistory, error) {
+func MakeMessagesDeleteHistoryRequest(ctx context.Context, m Requester, i MessagesDeleteHistoryRequest) (MessagesAffectedHistory, error) {
 	var res MessagesAffectedHistory
 	return res, request(ctx, m, &i, &res)
 }
@@ -24477,7 +24477,7 @@ func (*MessagesDeleteMessagesRequest) CRC() uint32 {
 	return 0xe58e95d2
 }
 
-func MessagesDeleteMessages(ctx context.Context, m Requester, i MessagesDeleteMessagesRequest) (MessagesAffectedMessages, error) {
+func MakeMessagesDeleteMessagesRequest(ctx context.Context, m Requester, i MessagesDeleteMessagesRequest) (MessagesAffectedMessages, error) {
 	var res MessagesAffectedMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -24491,7 +24491,7 @@ func (*MessagesDeletePhoneCallHistoryRequest) CRC() uint32 {
 	return 0xf9cbe409
 }
 
-func MessagesDeletePhoneCallHistory(ctx context.Context, m Requester, i MessagesDeletePhoneCallHistoryRequest) (MessagesAffectedFoundMessages, error) {
+func MakeMessagesDeletePhoneCallHistoryRequest(ctx context.Context, m Requester, i MessagesDeletePhoneCallHistoryRequest) (MessagesAffectedFoundMessages, error) {
 	var res MessagesAffectedFoundMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -24505,7 +24505,7 @@ func (*MessagesDeleteQuickReplyMessagesRequest) CRC() uint32 {
 	return 0xe105e910
 }
 
-func MessagesDeleteQuickReplyMessages(ctx context.Context, m Requester, i MessagesDeleteQuickReplyMessagesRequest) (Updates, error) {
+func MakeMessagesDeleteQuickReplyMessagesRequest(ctx context.Context, m Requester, i MessagesDeleteQuickReplyMessagesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24518,7 +24518,7 @@ func (*MessagesDeleteQuickReplyShortcutRequest) CRC() uint32 {
 	return 0x3cc04740
 }
 
-func MessagesDeleteQuickReplyShortcut(ctx context.Context, m Requester, i MessagesDeleteQuickReplyShortcutRequest) (bool, error) {
+func MakeMessagesDeleteQuickReplyShortcutRequest(ctx context.Context, m Requester, i MessagesDeleteQuickReplyShortcutRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24532,7 +24532,7 @@ func (*MessagesDeleteRevokedExportedChatInvitesRequest) CRC() uint32 {
 	return 0x56987bd5
 }
 
-func MessagesDeleteRevokedExportedChatInvites(ctx context.Context, m Requester, i MessagesDeleteRevokedExportedChatInvitesRequest) (bool, error) {
+func MakeMessagesDeleteRevokedExportedChatInvitesRequest(ctx context.Context, m Requester, i MessagesDeleteRevokedExportedChatInvitesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24549,7 +24549,7 @@ func (*MessagesDeleteSavedHistoryRequest) CRC() uint32 {
 	return 0x6e98102b
 }
 
-func MessagesDeleteSavedHistory(ctx context.Context, m Requester, i MessagesDeleteSavedHistoryRequest) (MessagesAffectedHistory, error) {
+func MakeMessagesDeleteSavedHistoryRequest(ctx context.Context, m Requester, i MessagesDeleteSavedHistoryRequest) (MessagesAffectedHistory, error) {
 	var res MessagesAffectedHistory
 	return res, request(ctx, m, &i, &res)
 }
@@ -24563,7 +24563,7 @@ func (*MessagesDeleteScheduledMessagesRequest) CRC() uint32 {
 	return 0x59ae2b16
 }
 
-func MessagesDeleteScheduledMessages(ctx context.Context, m Requester, i MessagesDeleteScheduledMessagesRequest) (Updates, error) {
+func MakeMessagesDeleteScheduledMessagesRequest(ctx context.Context, m Requester, i MessagesDeleteScheduledMessagesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24578,7 +24578,7 @@ func (*MessagesDiscardEncryptionRequest) CRC() uint32 {
 	return 0xf393aea0
 }
 
-func MessagesDiscardEncryption(ctx context.Context, m Requester, i MessagesDiscardEncryptionRequest) (bool, error) {
+func MakeMessagesDiscardEncryptionRequest(ctx context.Context, m Requester, i MessagesDiscardEncryptionRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24592,7 +24592,7 @@ func (*MessagesEditChatAboutRequest) CRC() uint32 {
 	return 0xdef60797
 }
 
-func MessagesEditChatAbout(ctx context.Context, m Requester, i MessagesEditChatAboutRequest) (bool, error) {
+func MakeMessagesEditChatAboutRequest(ctx context.Context, m Requester, i MessagesEditChatAboutRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24607,7 +24607,7 @@ func (*MessagesEditChatAdminRequest) CRC() uint32 {
 	return 0xa85bd1c2
 }
 
-func MessagesEditChatAdmin(ctx context.Context, m Requester, i MessagesEditChatAdminRequest) (bool, error) {
+func MakeMessagesEditChatAdminRequest(ctx context.Context, m Requester, i MessagesEditChatAdminRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24621,7 +24621,7 @@ func (*MessagesEditChatDefaultBannedRightsRequest) CRC() uint32 {
 	return 0xa5866b41
 }
 
-func MessagesEditChatDefaultBannedRights(ctx context.Context, m Requester, i MessagesEditChatDefaultBannedRightsRequest) (Updates, error) {
+func MakeMessagesEditChatDefaultBannedRightsRequest(ctx context.Context, m Requester, i MessagesEditChatDefaultBannedRightsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24635,7 +24635,7 @@ func (*MessagesEditChatPhotoRequest) CRC() uint32 {
 	return 0x35ddd674
 }
 
-func MessagesEditChatPhoto(ctx context.Context, m Requester, i MessagesEditChatPhotoRequest) (Updates, error) {
+func MakeMessagesEditChatPhotoRequest(ctx context.Context, m Requester, i MessagesEditChatPhotoRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24649,7 +24649,7 @@ func (*MessagesEditChatTitleRequest) CRC() uint32 {
 	return 0x73783ffd
 }
 
-func MessagesEditChatTitle(ctx context.Context, m Requester, i MessagesEditChatTitleRequest) (Updates, error) {
+func MakeMessagesEditChatTitleRequest(ctx context.Context, m Requester, i MessagesEditChatTitleRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24669,7 +24669,7 @@ func (*MessagesEditExportedChatInviteRequest) CRC() uint32 {
 	return 0xbdca2f75
 }
 
-func MessagesEditExportedChatInvite(ctx context.Context, m Requester, i MessagesEditExportedChatInviteRequest) (MessagesExportedChatInvite, error) {
+func MakeMessagesEditExportedChatInviteRequest(ctx context.Context, m Requester, i MessagesEditExportedChatInviteRequest) (MessagesExportedChatInvite, error) {
 	var res MessagesExportedChatInvite
 	return res, request(ctx, m, &i, &res)
 }
@@ -24684,7 +24684,7 @@ func (*MessagesEditFactCheckRequest) CRC() uint32 {
 	return 0x0589ee75
 }
 
-func MessagesEditFactCheck(ctx context.Context, m Requester, i MessagesEditFactCheckRequest) (Updates, error) {
+func MakeMessagesEditFactCheckRequest(ctx context.Context, m Requester, i MessagesEditFactCheckRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24704,7 +24704,7 @@ func (*MessagesEditInlineBotMessageRequest) CRC() uint32 {
 	return 0x83557dba
 }
 
-func MessagesEditInlineBotMessage(ctx context.Context, m Requester, i MessagesEditInlineBotMessageRequest) (bool, error) {
+func MakeMessagesEditInlineBotMessageRequest(ctx context.Context, m Requester, i MessagesEditInlineBotMessageRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24727,7 +24727,7 @@ func (*MessagesEditMessageRequest) CRC() uint32 {
 	return 0xdfd14005
 }
 
-func MessagesEditMessage(ctx context.Context, m Requester, i MessagesEditMessageRequest) (Updates, error) {
+func MakeMessagesEditMessageRequest(ctx context.Context, m Requester, i MessagesEditMessageRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24741,7 +24741,7 @@ func (*MessagesEditQuickReplyShortcutRequest) CRC() uint32 {
 	return 0x5c003cef
 }
 
-func MessagesEditQuickReplyShortcut(ctx context.Context, m Requester, i MessagesEditQuickReplyShortcutRequest) (bool, error) {
+func MakeMessagesEditQuickReplyShortcutRequest(ctx context.Context, m Requester, i MessagesEditQuickReplyShortcutRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24760,7 +24760,7 @@ func (*MessagesExportChatInviteRequest) CRC() uint32 {
 	return 0xa02ce5d5
 }
 
-func MessagesExportChatInvite(ctx context.Context, m Requester, i MessagesExportChatInviteRequest) (ExportedChatInvite, error) {
+func MakeMessagesExportChatInviteRequest(ctx context.Context, m Requester, i MessagesExportChatInviteRequest) (ExportedChatInvite, error) {
 	var res ExportedChatInvite
 	return res, request(ctx, m, &i, &res)
 }
@@ -24774,7 +24774,7 @@ func (*MessagesFaveStickerRequest) CRC() uint32 {
 	return 0xb9ffc55b
 }
 
-func MessagesFaveSticker(ctx context.Context, m Requester, i MessagesFaveStickerRequest) (bool, error) {
+func MakeMessagesFaveStickerRequest(ctx context.Context, m Requester, i MessagesFaveStickerRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -24801,7 +24801,7 @@ func (*MessagesForwardMessagesRequest) CRC() uint32 {
 	return 0xd5039208
 }
 
-func MessagesForwardMessages(ctx context.Context, m Requester, i MessagesForwardMessagesRequest) (Updates, error) {
+func MakeMessagesForwardMessagesRequest(ctx context.Context, m Requester, i MessagesForwardMessagesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24814,7 +24814,7 @@ func (*MessagesGetAdminsWithInvitesRequest) CRC() uint32 {
 	return 0x3920e6ef
 }
 
-func MessagesGetAdminsWithInvites(ctx context.Context, m Requester, i MessagesGetAdminsWithInvitesRequest) (MessagesChatAdminsWithInvites, error) {
+func MakeMessagesGetAdminsWithInvitesRequest(ctx context.Context, m Requester, i MessagesGetAdminsWithInvitesRequest) (MessagesChatAdminsWithInvites, error) {
 	var res MessagesChatAdminsWithInvites
 	return res, request(ctx, m, &i, &res)
 }
@@ -24825,7 +24825,7 @@ func (*MessagesGetAllDraftsRequest) CRC() uint32 {
 	return 0x6a3f8d65
 }
 
-func MessagesGetAllDrafts(ctx context.Context, m Requester, i MessagesGetAllDraftsRequest) (Updates, error) {
+func MakeMessagesGetAllDraftsRequest(ctx context.Context, m Requester, i MessagesGetAllDraftsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -24838,7 +24838,7 @@ func (*MessagesGetAllStickersRequest) CRC() uint32 {
 	return 0xb8a0a1a8
 }
 
-func MessagesGetAllStickers(ctx context.Context, m Requester, i MessagesGetAllStickersRequest) (MessagesAllStickers, error) {
+func MakeMessagesGetAllStickersRequest(ctx context.Context, m Requester, i MessagesGetAllStickersRequest) (MessagesAllStickers, error) {
 	var res MessagesAllStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -24855,7 +24855,7 @@ func (*MessagesGetArchivedStickersRequest) CRC() uint32 {
 	return 0x57f17692
 }
 
-func MessagesGetArchivedStickers(ctx context.Context, m Requester, i MessagesGetArchivedStickersRequest) (MessagesArchivedStickers, error) {
+func MakeMessagesGetArchivedStickersRequest(ctx context.Context, m Requester, i MessagesGetArchivedStickersRequest) (MessagesArchivedStickers, error) {
 	var res MessagesArchivedStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -24868,7 +24868,7 @@ func (*MessagesGetAttachMenuBotRequest) CRC() uint32 {
 	return 0x77216192
 }
 
-func MessagesGetAttachMenuBot(ctx context.Context, m Requester, i MessagesGetAttachMenuBotRequest) (AttachMenuBotsBot, error) {
+func MakeMessagesGetAttachMenuBotRequest(ctx context.Context, m Requester, i MessagesGetAttachMenuBotRequest) (AttachMenuBotsBot, error) {
 	var res AttachMenuBotsBot
 	return res, request(ctx, m, &i, &res)
 }
@@ -24881,7 +24881,7 @@ func (*MessagesGetAttachMenuBotsRequest) CRC() uint32 {
 	return 0x16fcc2cb
 }
 
-func MessagesGetAttachMenuBots(ctx context.Context, m Requester, i MessagesGetAttachMenuBotsRequest) (AttachMenuBots, error) {
+func MakeMessagesGetAttachMenuBotsRequest(ctx context.Context, m Requester, i MessagesGetAttachMenuBotsRequest) (AttachMenuBots, error) {
 	var res AttachMenuBots
 	return res, request(ctx, m, &i, &res)
 }
@@ -24894,7 +24894,7 @@ func (*MessagesGetAttachedStickersRequest) CRC() uint32 {
 	return 0xcc5b67cc
 }
 
-func MessagesGetAttachedStickers(ctx context.Context, m Requester, i MessagesGetAttachedStickersRequest) ([]StickerSetCovered, error) {
+func MakeMessagesGetAttachedStickersRequest(ctx context.Context, m Requester, i MessagesGetAttachedStickersRequest) ([]StickerSetCovered, error) {
 	var res []StickerSetCovered
 	return res, request(ctx, m, &i, &res)
 }
@@ -24907,7 +24907,7 @@ func (*MessagesGetAvailableEffectsRequest) CRC() uint32 {
 	return 0xdea20a39
 }
 
-func MessagesGetAvailableEffects(ctx context.Context, m Requester, i MessagesGetAvailableEffectsRequest) (MessagesAvailableEffects, error) {
+func MakeMessagesGetAvailableEffectsRequest(ctx context.Context, m Requester, i MessagesGetAvailableEffectsRequest) (MessagesAvailableEffects, error) {
 	var res MessagesAvailableEffects
 	return res, request(ctx, m, &i, &res)
 }
@@ -24920,7 +24920,7 @@ func (*MessagesGetAvailableReactionsRequest) CRC() uint32 {
 	return 0x18dea0ac
 }
 
-func MessagesGetAvailableReactions(ctx context.Context, m Requester, i MessagesGetAvailableReactionsRequest) (MessagesAvailableReactions, error) {
+func MakeMessagesGetAvailableReactionsRequest(ctx context.Context, m Requester, i MessagesGetAvailableReactionsRequest) (MessagesAvailableReactions, error) {
 	var res MessagesAvailableReactions
 	return res, request(ctx, m, &i, &res)
 }
@@ -24934,7 +24934,7 @@ func (*MessagesGetBotAppRequest) CRC() uint32 {
 	return 0x34fdc5c3
 }
 
-func MessagesGetBotApp(ctx context.Context, m Requester, i MessagesGetBotAppRequest) (MessagesBotApp, error) {
+func MakeMessagesGetBotAppRequest(ctx context.Context, m Requester, i MessagesGetBotAppRequest) (MessagesBotApp, error) {
 	var res MessagesBotApp
 	return res, request(ctx, m, &i, &res)
 }
@@ -24952,7 +24952,7 @@ func (*MessagesGetBotCallbackAnswerRequest) CRC() uint32 {
 	return 0x9342ca07
 }
 
-func MessagesGetBotCallbackAnswer(ctx context.Context, m Requester, i MessagesGetBotCallbackAnswerRequest) (MessagesBotCallbackAnswer, error) {
+func MakeMessagesGetBotCallbackAnswerRequest(ctx context.Context, m Requester, i MessagesGetBotCallbackAnswerRequest) (MessagesBotCallbackAnswer, error) {
 	var res MessagesBotCallbackAnswer
 	return res, request(ctx, m, &i, &res)
 }
@@ -24972,7 +24972,7 @@ func (*MessagesGetChatInviteImportersRequest) CRC() uint32 {
 	return 0xdf04dd4e
 }
 
-func MessagesGetChatInviteImporters(ctx context.Context, m Requester, i MessagesGetChatInviteImportersRequest) (MessagesChatInviteImporters, error) {
+func MakeMessagesGetChatInviteImportersRequest(ctx context.Context, m Requester, i MessagesGetChatInviteImportersRequest) (MessagesChatInviteImporters, error) {
 	var res MessagesChatInviteImporters
 	return res, request(ctx, m, &i, &res)
 }
@@ -24985,7 +24985,7 @@ func (*MessagesGetChatsRequest) CRC() uint32 {
 	return 0x49e9528f
 }
 
-func MessagesGetChats(ctx context.Context, m Requester, i MessagesGetChatsRequest) (MessagesChats, error) {
+func MakeMessagesGetChatsRequest(ctx context.Context, m Requester, i MessagesGetChatsRequest) (MessagesChats, error) {
 	var res MessagesChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -25000,7 +25000,7 @@ func (*MessagesGetCommonChatsRequest) CRC() uint32 {
 	return 0xe40ca104
 }
 
-func MessagesGetCommonChats(ctx context.Context, m Requester, i MessagesGetCommonChatsRequest) (MessagesChats, error) {
+func MakeMessagesGetCommonChatsRequest(ctx context.Context, m Requester, i MessagesGetCommonChatsRequest) (MessagesChats, error) {
 	var res MessagesChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -25013,7 +25013,7 @@ func (*MessagesGetCustomEmojiDocumentsRequest) CRC() uint32 {
 	return 0xd9ab0f54
 }
 
-func MessagesGetCustomEmojiDocuments(ctx context.Context, m Requester, i MessagesGetCustomEmojiDocumentsRequest) ([]Document, error) {
+func MakeMessagesGetCustomEmojiDocumentsRequest(ctx context.Context, m Requester, i MessagesGetCustomEmojiDocumentsRequest) ([]Document, error) {
 	var res []Document
 	return res, request(ctx, m, &i, &res)
 }
@@ -25024,7 +25024,7 @@ func (*MessagesGetDefaultHistoryTTLRequest) CRC() uint32 {
 	return 0x658b7188
 }
 
-func MessagesGetDefaultHistoryTTL(ctx context.Context, m Requester, i MessagesGetDefaultHistoryTTLRequest) (DefaultHistoryTTL, error) {
+func MakeMessagesGetDefaultHistoryTTLRequest(ctx context.Context, m Requester, i MessagesGetDefaultHistoryTTLRequest) (DefaultHistoryTTL, error) {
 	var res DefaultHistoryTTL
 	return res, request(ctx, m, &i, &res)
 }
@@ -25037,7 +25037,7 @@ func (*MessagesGetDefaultTagReactionsRequest) CRC() uint32 {
 	return 0xbdf93428
 }
 
-func MessagesGetDefaultTagReactions(ctx context.Context, m Requester, i MessagesGetDefaultTagReactionsRequest) (MessagesReactions, error) {
+func MakeMessagesGetDefaultTagReactionsRequest(ctx context.Context, m Requester, i MessagesGetDefaultTagReactionsRequest) (MessagesReactions, error) {
 	var res MessagesReactions
 	return res, request(ctx, m, &i, &res)
 }
@@ -25051,7 +25051,7 @@ func (*MessagesGetDhConfigRequest) CRC() uint32 {
 	return 0x26cf8950
 }
 
-func MessagesGetDhConfig(ctx context.Context, m Requester, i MessagesGetDhConfigRequest) (MessagesDhConfig, error) {
+func MakeMessagesGetDhConfigRequest(ctx context.Context, m Requester, i MessagesGetDhConfigRequest) (MessagesDhConfig, error) {
 	var res MessagesDhConfig
 	return res, request(ctx, m, &i, &res)
 }
@@ -25062,7 +25062,7 @@ func (*MessagesGetDialogFiltersRequest) CRC() uint32 {
 	return 0xefd48c89
 }
 
-func MessagesGetDialogFilters(ctx context.Context, m Requester, i MessagesGetDialogFiltersRequest) (MessagesDialogFilters, error) {
+func MakeMessagesGetDialogFiltersRequest(ctx context.Context, m Requester, i MessagesGetDialogFiltersRequest) (MessagesDialogFilters, error) {
 	var res MessagesDialogFilters
 	return res, request(ctx, m, &i, &res)
 }
@@ -25073,7 +25073,7 @@ func (*MessagesGetDialogUnreadMarksRequest) CRC() uint32 {
 	return 0x22e24e22
 }
 
-func MessagesGetDialogUnreadMarks(ctx context.Context, m Requester, i MessagesGetDialogUnreadMarksRequest) ([]DialogPeer, error) {
+func MakeMessagesGetDialogUnreadMarksRequest(ctx context.Context, m Requester, i MessagesGetDialogUnreadMarksRequest) ([]DialogPeer, error) {
 	var res []DialogPeer
 	return res, request(ctx, m, &i, &res)
 }
@@ -25093,7 +25093,7 @@ func (*MessagesGetDialogsRequest) CRC() uint32 {
 	return 0xa0f4cb4f
 }
 
-func MessagesGetDialogs(ctx context.Context, m Requester, i MessagesGetDialogsRequest) (MessagesDialogs, error) {
+func MakeMessagesGetDialogsRequest(ctx context.Context, m Requester, i MessagesGetDialogsRequest) (MessagesDialogs, error) {
 	var res MessagesDialogs
 	return res, request(ctx, m, &i, &res)
 }
@@ -25107,7 +25107,7 @@ func (*MessagesGetDiscussionMessageRequest) CRC() uint32 {
 	return 0x446972fd
 }
 
-func MessagesGetDiscussionMessage(ctx context.Context, m Requester, i MessagesGetDiscussionMessageRequest) (MessagesDiscussionMessage, error) {
+func MakeMessagesGetDiscussionMessageRequest(ctx context.Context, m Requester, i MessagesGetDiscussionMessageRequest) (MessagesDiscussionMessage, error) {
 	var res MessagesDiscussionMessage
 	return res, request(ctx, m, &i, &res)
 }
@@ -25122,7 +25122,7 @@ func (*MessagesGetDocumentByHashRequest) CRC() uint32 {
 	return 0xb1f2061f
 }
 
-func MessagesGetDocumentByHash(ctx context.Context, m Requester, i MessagesGetDocumentByHashRequest) (Document, error) {
+func MakeMessagesGetDocumentByHashRequest(ctx context.Context, m Requester, i MessagesGetDocumentByHashRequest) (Document, error) {
 	var res Document
 	return res, request(ctx, m, &i, &res)
 }
@@ -25135,7 +25135,7 @@ func (*MessagesGetEmojiGroupsRequest) CRC() uint32 {
 	return 0x7488ce5b
 }
 
-func MessagesGetEmojiGroups(ctx context.Context, m Requester, i MessagesGetEmojiGroupsRequest) (MessagesEmojiGroups, error) {
+func MakeMessagesGetEmojiGroupsRequest(ctx context.Context, m Requester, i MessagesGetEmojiGroupsRequest) (MessagesEmojiGroups, error) {
 	var res MessagesEmojiGroups
 	return res, request(ctx, m, &i, &res)
 }
@@ -25148,7 +25148,7 @@ func (*MessagesGetEmojiKeywordsRequest) CRC() uint32 {
 	return 0x35a0e062
 }
 
-func MessagesGetEmojiKeywords(ctx context.Context, m Requester, i MessagesGetEmojiKeywordsRequest) (EmojiKeywordsDifference, error) {
+func MakeMessagesGetEmojiKeywordsRequest(ctx context.Context, m Requester, i MessagesGetEmojiKeywordsRequest) (EmojiKeywordsDifference, error) {
 	var res EmojiKeywordsDifference
 	return res, request(ctx, m, &i, &res)
 }
@@ -25162,7 +25162,7 @@ func (*MessagesGetEmojiKeywordsDifferenceRequest) CRC() uint32 {
 	return 0x1508b6af
 }
 
-func MessagesGetEmojiKeywordsDifference(ctx context.Context, m Requester, i MessagesGetEmojiKeywordsDifferenceRequest) (EmojiKeywordsDifference, error) {
+func MakeMessagesGetEmojiKeywordsDifferenceRequest(ctx context.Context, m Requester, i MessagesGetEmojiKeywordsDifferenceRequest) (EmojiKeywordsDifference, error) {
 	var res EmojiKeywordsDifference
 	return res, request(ctx, m, &i, &res)
 }
@@ -25175,7 +25175,7 @@ func (*MessagesGetEmojiKeywordsLanguagesRequest) CRC() uint32 {
 	return 0x4e9963b2
 }
 
-func MessagesGetEmojiKeywordsLanguages(ctx context.Context, m Requester, i MessagesGetEmojiKeywordsLanguagesRequest) ([]EmojiLanguage, error) {
+func MakeMessagesGetEmojiKeywordsLanguagesRequest(ctx context.Context, m Requester, i MessagesGetEmojiKeywordsLanguagesRequest) ([]EmojiLanguage, error) {
 	var res []EmojiLanguage
 	return res, request(ctx, m, &i, &res)
 }
@@ -25188,7 +25188,7 @@ func (*MessagesGetEmojiProfilePhotoGroupsRequest) CRC() uint32 {
 	return 0x21a548f3
 }
 
-func MessagesGetEmojiProfilePhotoGroups(ctx context.Context, m Requester, i MessagesGetEmojiProfilePhotoGroupsRequest) (MessagesEmojiGroups, error) {
+func MakeMessagesGetEmojiProfilePhotoGroupsRequest(ctx context.Context, m Requester, i MessagesGetEmojiProfilePhotoGroupsRequest) (MessagesEmojiGroups, error) {
 	var res MessagesEmojiGroups
 	return res, request(ctx, m, &i, &res)
 }
@@ -25201,7 +25201,7 @@ func (*MessagesGetEmojiStatusGroupsRequest) CRC() uint32 {
 	return 0x2ecd56cd
 }
 
-func MessagesGetEmojiStatusGroups(ctx context.Context, m Requester, i MessagesGetEmojiStatusGroupsRequest) (MessagesEmojiGroups, error) {
+func MakeMessagesGetEmojiStatusGroupsRequest(ctx context.Context, m Requester, i MessagesGetEmojiStatusGroupsRequest) (MessagesEmojiGroups, error) {
 	var res MessagesEmojiGroups
 	return res, request(ctx, m, &i, &res)
 }
@@ -25214,7 +25214,7 @@ func (*MessagesGetEmojiStickerGroupsRequest) CRC() uint32 {
 	return 0x1dd840f5
 }
 
-func MessagesGetEmojiStickerGroups(ctx context.Context, m Requester, i MessagesGetEmojiStickerGroupsRequest) (MessagesEmojiGroups, error) {
+func MakeMessagesGetEmojiStickerGroupsRequest(ctx context.Context, m Requester, i MessagesGetEmojiStickerGroupsRequest) (MessagesEmojiGroups, error) {
 	var res MessagesEmojiGroups
 	return res, request(ctx, m, &i, &res)
 }
@@ -25227,7 +25227,7 @@ func (*MessagesGetEmojiStickersRequest) CRC() uint32 {
 	return 0xfbfca18f
 }
 
-func MessagesGetEmojiStickers(ctx context.Context, m Requester, i MessagesGetEmojiStickersRequest) (MessagesAllStickers, error) {
+func MakeMessagesGetEmojiStickersRequest(ctx context.Context, m Requester, i MessagesGetEmojiStickersRequest) (MessagesAllStickers, error) {
 	var res MessagesAllStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25240,7 +25240,7 @@ func (*MessagesGetEmojiURLRequest) CRC() uint32 {
 	return 0xd5b10c26
 }
 
-func MessagesGetEmojiURL(ctx context.Context, m Requester, i MessagesGetEmojiURLRequest) (EmojiURL, error) {
+func MakeMessagesGetEmojiURLRequest(ctx context.Context, m Requester, i MessagesGetEmojiURLRequest) (EmojiURL, error) {
 	var res EmojiURL
 	return res, request(ctx, m, &i, &res)
 }
@@ -25254,7 +25254,7 @@ func (*MessagesGetExportedChatInviteRequest) CRC() uint32 {
 	return 0x73746f5c
 }
 
-func MessagesGetExportedChatInvite(ctx context.Context, m Requester, i MessagesGetExportedChatInviteRequest) (MessagesExportedChatInvite, error) {
+func MakeMessagesGetExportedChatInviteRequest(ctx context.Context, m Requester, i MessagesGetExportedChatInviteRequest) (MessagesExportedChatInvite, error) {
 	var res MessagesExportedChatInvite
 	return res, request(ctx, m, &i, &res)
 }
@@ -25273,7 +25273,7 @@ func (*MessagesGetExportedChatInvitesRequest) CRC() uint32 {
 	return 0xa2b5a3f6
 }
 
-func MessagesGetExportedChatInvites(ctx context.Context, m Requester, i MessagesGetExportedChatInvitesRequest) (MessagesExportedChatInvites, error) {
+func MakeMessagesGetExportedChatInvitesRequest(ctx context.Context, m Requester, i MessagesGetExportedChatInvitesRequest) (MessagesExportedChatInvites, error) {
 	var res MessagesExportedChatInvites
 	return res, request(ctx, m, &i, &res)
 }
@@ -25287,7 +25287,7 @@ func (*MessagesGetExtendedMediaRequest) CRC() uint32 {
 	return 0x84f80814
 }
 
-func MessagesGetExtendedMedia(ctx context.Context, m Requester, i MessagesGetExtendedMediaRequest) (Updates, error) {
+func MakeMessagesGetExtendedMediaRequest(ctx context.Context, m Requester, i MessagesGetExtendedMediaRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -25301,7 +25301,7 @@ func (*MessagesGetFactCheckRequest) CRC() uint32 {
 	return 0xb9cdc5ee
 }
 
-func MessagesGetFactCheck(ctx context.Context, m Requester, i MessagesGetFactCheckRequest) ([]FactCheck, error) {
+func MakeMessagesGetFactCheckRequest(ctx context.Context, m Requester, i MessagesGetFactCheckRequest) ([]FactCheck, error) {
 	var res []FactCheck
 	return res, request(ctx, m, &i, &res)
 }
@@ -25314,7 +25314,7 @@ func (*MessagesGetFavedStickersRequest) CRC() uint32 {
 	return 0x04f1aaa9
 }
 
-func MessagesGetFavedStickers(ctx context.Context, m Requester, i MessagesGetFavedStickersRequest) (MessagesFavedStickers, error) {
+func MakeMessagesGetFavedStickersRequest(ctx context.Context, m Requester, i MessagesGetFavedStickersRequest) (MessagesFavedStickers, error) {
 	var res MessagesFavedStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25327,7 +25327,7 @@ func (*MessagesGetFeaturedEmojiStickersRequest) CRC() uint32 {
 	return 0x0ecf6736
 }
 
-func MessagesGetFeaturedEmojiStickers(ctx context.Context, m Requester, i MessagesGetFeaturedEmojiStickersRequest) (MessagesFeaturedStickers, error) {
+func MakeMessagesGetFeaturedEmojiStickersRequest(ctx context.Context, m Requester, i MessagesGetFeaturedEmojiStickersRequest) (MessagesFeaturedStickers, error) {
 	var res MessagesFeaturedStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25340,7 +25340,7 @@ func (*MessagesGetFeaturedStickersRequest) CRC() uint32 {
 	return 0x64780b14
 }
 
-func MessagesGetFeaturedStickers(ctx context.Context, m Requester, i MessagesGetFeaturedStickersRequest) (MessagesFeaturedStickers, error) {
+func MakeMessagesGetFeaturedStickersRequest(ctx context.Context, m Requester, i MessagesGetFeaturedStickersRequest) (MessagesFeaturedStickers, error) {
 	var res MessagesFeaturedStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25353,7 +25353,7 @@ func (*MessagesGetFullChatRequest) CRC() uint32 {
 	return 0xaeb00b34
 }
 
-func MessagesGetFullChat(ctx context.Context, m Requester, i MessagesGetFullChatRequest) (MessagesChatFull, error) {
+func MakeMessagesGetFullChatRequest(ctx context.Context, m Requester, i MessagesGetFullChatRequest) (MessagesChatFull, error) {
 	var res MessagesChatFull
 	return res, request(ctx, m, &i, &res)
 }
@@ -25368,7 +25368,7 @@ func (*MessagesGetGameHighScoresRequest) CRC() uint32 {
 	return 0xe822649d
 }
 
-func MessagesGetGameHighScores(ctx context.Context, m Requester, i MessagesGetGameHighScoresRequest) (MessagesHighScores, error) {
+func MakeMessagesGetGameHighScoresRequest(ctx context.Context, m Requester, i MessagesGetGameHighScoresRequest) (MessagesHighScores, error) {
 	var res MessagesHighScores
 	return res, request(ctx, m, &i, &res)
 }
@@ -25388,7 +25388,7 @@ func (*MessagesGetHistoryRequest) CRC() uint32 {
 	return 0x4423e6c5
 }
 
-func MessagesGetHistory(ctx context.Context, m Requester, i MessagesGetHistoryRequest) (MessagesMessages, error) {
+func MakeMessagesGetHistoryRequest(ctx context.Context, m Requester, i MessagesGetHistoryRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -25406,7 +25406,7 @@ func (*MessagesGetInlineBotResultsRequest) CRC() uint32 {
 	return 0x514e999d
 }
 
-func MessagesGetInlineBotResults(ctx context.Context, m Requester, i MessagesGetInlineBotResultsRequest) (MessagesBotResults, error) {
+func MakeMessagesGetInlineBotResultsRequest(ctx context.Context, m Requester, i MessagesGetInlineBotResultsRequest) (MessagesBotResults, error) {
 	var res MessagesBotResults
 	return res, request(ctx, m, &i, &res)
 }
@@ -25420,7 +25420,7 @@ func (*MessagesGetInlineGameHighScoresRequest) CRC() uint32 {
 	return 0x0f635e1b
 }
 
-func MessagesGetInlineGameHighScores(ctx context.Context, m Requester, i MessagesGetInlineGameHighScoresRequest) (MessagesHighScores, error) {
+func MakeMessagesGetInlineGameHighScoresRequest(ctx context.Context, m Requester, i MessagesGetInlineGameHighScoresRequest) (MessagesHighScores, error) {
 	var res MessagesHighScores
 	return res, request(ctx, m, &i, &res)
 }
@@ -25433,7 +25433,7 @@ func (*MessagesGetMaskStickersRequest) CRC() uint32 {
 	return 0x640f82b8
 }
 
-func MessagesGetMaskStickers(ctx context.Context, m Requester, i MessagesGetMaskStickersRequest) (MessagesAllStickers, error) {
+func MakeMessagesGetMaskStickersRequest(ctx context.Context, m Requester, i MessagesGetMaskStickersRequest) (MessagesAllStickers, error) {
 	var res MessagesAllStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25447,7 +25447,7 @@ func (*MessagesGetMessageEditDataRequest) CRC() uint32 {
 	return 0xfda68d36
 }
 
-func MessagesGetMessageEditData(ctx context.Context, m Requester, i MessagesGetMessageEditDataRequest) (MessagesMessageEditData, error) {
+func MakeMessagesGetMessageEditDataRequest(ctx context.Context, m Requester, i MessagesGetMessageEditDataRequest) (MessagesMessageEditData, error) {
 	var res MessagesMessageEditData
 	return res, request(ctx, m, &i, &res)
 }
@@ -25465,7 +25465,7 @@ func (*MessagesGetMessageReactionsListRequest) CRC() uint32 {
 	return 0x461b3f48
 }
 
-func MessagesGetMessageReactionsList(ctx context.Context, m Requester, i MessagesGetMessageReactionsListRequest) (MessagesMessageReactionsList, error) {
+func MakeMessagesGetMessageReactionsListRequest(ctx context.Context, m Requester, i MessagesGetMessageReactionsListRequest) (MessagesMessageReactionsList, error) {
 	var res MessagesMessageReactionsList
 	return res, request(ctx, m, &i, &res)
 }
@@ -25479,7 +25479,7 @@ func (*MessagesGetMessageReadParticipantsRequest) CRC() uint32 {
 	return 0x31c1c44f
 }
 
-func MessagesGetMessageReadParticipants(ctx context.Context, m Requester, i MessagesGetMessageReadParticipantsRequest) ([]ReadParticipantDate, error) {
+func MakeMessagesGetMessageReadParticipantsRequest(ctx context.Context, m Requester, i MessagesGetMessageReadParticipantsRequest) ([]ReadParticipantDate, error) {
 	var res []ReadParticipantDate
 	return res, request(ctx, m, &i, &res)
 }
@@ -25492,7 +25492,7 @@ func (*MessagesGetMessagesRequest) CRC() uint32 {
 	return 0x63c66506
 }
 
-func MessagesGetMessages(ctx context.Context, m Requester, i MessagesGetMessagesRequest) (MessagesMessages, error) {
+func MakeMessagesGetMessagesRequest(ctx context.Context, m Requester, i MessagesGetMessagesRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -25506,7 +25506,7 @@ func (*MessagesGetMessagesReactionsRequest) CRC() uint32 {
 	return 0x8bba90e6
 }
 
-func MessagesGetMessagesReactions(ctx context.Context, m Requester, i MessagesGetMessagesReactionsRequest) (Updates, error) {
+func MakeMessagesGetMessagesReactionsRequest(ctx context.Context, m Requester, i MessagesGetMessagesReactionsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -25521,7 +25521,7 @@ func (*MessagesGetMessagesViewsRequest) CRC() uint32 {
 	return 0x5784d3e1
 }
 
-func MessagesGetMessagesViews(ctx context.Context, m Requester, i MessagesGetMessagesViewsRequest) (MessagesMessageViews, error) {
+func MakeMessagesGetMessagesViewsRequest(ctx context.Context, m Requester, i MessagesGetMessagesViewsRequest) (MessagesMessageViews, error) {
 	var res MessagesMessageViews
 	return res, request(ctx, m, &i, &res)
 }
@@ -25535,7 +25535,7 @@ func (*MessagesGetMyStickersRequest) CRC() uint32 {
 	return 0xd0b5e1fc
 }
 
-func MessagesGetMyStickers(ctx context.Context, m Requester, i MessagesGetMyStickersRequest) (MessagesMyStickers, error) {
+func MakeMessagesGetMyStickersRequest(ctx context.Context, m Requester, i MessagesGetMyStickersRequest) (MessagesMyStickers, error) {
 	var res MessagesMyStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25550,7 +25550,7 @@ func (*MessagesGetOldFeaturedStickersRequest) CRC() uint32 {
 	return 0x7ed094a1
 }
 
-func MessagesGetOldFeaturedStickers(ctx context.Context, m Requester, i MessagesGetOldFeaturedStickersRequest) (MessagesFeaturedStickers, error) {
+func MakeMessagesGetOldFeaturedStickersRequest(ctx context.Context, m Requester, i MessagesGetOldFeaturedStickersRequest) (MessagesFeaturedStickers, error) {
 	var res MessagesFeaturedStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25563,7 +25563,7 @@ func (*MessagesGetOnlinesRequest) CRC() uint32 {
 	return 0x6e2be050
 }
 
-func MessagesGetOnlines(ctx context.Context, m Requester, i MessagesGetOnlinesRequest) (ChatOnlines, error) {
+func MakeMessagesGetOnlinesRequest(ctx context.Context, m Requester, i MessagesGetOnlinesRequest) (ChatOnlines, error) {
 	var res ChatOnlines
 	return res, request(ctx, m, &i, &res)
 }
@@ -25577,7 +25577,7 @@ func (*MessagesGetOutboxReadDateRequest) CRC() uint32 {
 	return 0x8c4bfe5d
 }
 
-func MessagesGetOutboxReadDate(ctx context.Context, m Requester, i MessagesGetOutboxReadDateRequest) (OutboxReadDate, error) {
+func MakeMessagesGetOutboxReadDateRequest(ctx context.Context, m Requester, i MessagesGetOutboxReadDateRequest) (OutboxReadDate, error) {
 	var res OutboxReadDate
 	return res, request(ctx, m, &i, &res)
 }
@@ -25590,7 +25590,7 @@ func (*MessagesGetPeerDialogsRequest) CRC() uint32 {
 	return 0xe470bcfd
 }
 
-func MessagesGetPeerDialogs(ctx context.Context, m Requester, i MessagesGetPeerDialogsRequest) (MessagesPeerDialogs, error) {
+func MakeMessagesGetPeerDialogsRequest(ctx context.Context, m Requester, i MessagesGetPeerDialogsRequest) (MessagesPeerDialogs, error) {
 	var res MessagesPeerDialogs
 	return res, request(ctx, m, &i, &res)
 }
@@ -25603,7 +25603,7 @@ func (*MessagesGetPeerSettingsRequest) CRC() uint32 {
 	return 0xefd9a6a2
 }
 
-func MessagesGetPeerSettings(ctx context.Context, m Requester, i MessagesGetPeerSettingsRequest) (MessagesPeerSettings, error) {
+func MakeMessagesGetPeerSettingsRequest(ctx context.Context, m Requester, i MessagesGetPeerSettingsRequest) (MessagesPeerSettings, error) {
 	var res MessagesPeerSettings
 	return res, request(ctx, m, &i, &res)
 }
@@ -25616,7 +25616,7 @@ func (*MessagesGetPinnedDialogsRequest) CRC() uint32 {
 	return 0xd6b94df2
 }
 
-func MessagesGetPinnedDialogs(ctx context.Context, m Requester, i MessagesGetPinnedDialogsRequest) (MessagesPeerDialogs, error) {
+func MakeMessagesGetPinnedDialogsRequest(ctx context.Context, m Requester, i MessagesGetPinnedDialogsRequest) (MessagesPeerDialogs, error) {
 	var res MessagesPeerDialogs
 	return res, request(ctx, m, &i, &res)
 }
@@ -25627,7 +25627,7 @@ func (*MessagesGetPinnedSavedDialogsRequest) CRC() uint32 {
 	return 0xd63d94e0
 }
 
-func MessagesGetPinnedSavedDialogs(ctx context.Context, m Requester, i MessagesGetPinnedSavedDialogsRequest) (MessagesSavedDialogs, error) {
+func MakeMessagesGetPinnedSavedDialogsRequest(ctx context.Context, m Requester, i MessagesGetPinnedSavedDialogsRequest) (MessagesSavedDialogs, error) {
 	var res MessagesSavedDialogs
 	return res, request(ctx, m, &i, &res)
 }
@@ -25641,7 +25641,7 @@ func (*MessagesGetPollResultsRequest) CRC() uint32 {
 	return 0x73bb643b
 }
 
-func MessagesGetPollResults(ctx context.Context, m Requester, i MessagesGetPollResultsRequest) (Updates, error) {
+func MakeMessagesGetPollResultsRequest(ctx context.Context, m Requester, i MessagesGetPollResultsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -25659,7 +25659,7 @@ func (*MessagesGetPollVotesRequest) CRC() uint32 {
 	return 0xb86e380e
 }
 
-func MessagesGetPollVotes(ctx context.Context, m Requester, i MessagesGetPollVotesRequest) (MessagesVotesList, error) {
+func MakeMessagesGetPollVotesRequest(ctx context.Context, m Requester, i MessagesGetPollVotesRequest) (MessagesVotesList, error) {
 	var res MessagesVotesList
 	return res, request(ctx, m, &i, &res)
 }
@@ -25672,7 +25672,7 @@ func (*MessagesGetQuickRepliesRequest) CRC() uint32 {
 	return 0xd483f2a8
 }
 
-func MessagesGetQuickReplies(ctx context.Context, m Requester, i MessagesGetQuickRepliesRequest) (MessagesQuickReplies, error) {
+func MakeMessagesGetQuickRepliesRequest(ctx context.Context, m Requester, i MessagesGetQuickRepliesRequest) (MessagesQuickReplies, error) {
 	var res MessagesQuickReplies
 	return res, request(ctx, m, &i, &res)
 }
@@ -25688,7 +25688,7 @@ func (*MessagesGetQuickReplyMessagesRequest) CRC() uint32 {
 	return 0x94a495c3
 }
 
-func MessagesGetQuickReplyMessages(ctx context.Context, m Requester, i MessagesGetQuickReplyMessagesRequest) (MessagesMessages, error) {
+func MakeMessagesGetQuickReplyMessagesRequest(ctx context.Context, m Requester, i MessagesGetQuickReplyMessagesRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -25703,7 +25703,7 @@ func (*MessagesGetRecentLocationsRequest) CRC() uint32 {
 	return 0x702a40e0
 }
 
-func MessagesGetRecentLocations(ctx context.Context, m Requester, i MessagesGetRecentLocationsRequest) (MessagesMessages, error) {
+func MakeMessagesGetRecentLocationsRequest(ctx context.Context, m Requester, i MessagesGetRecentLocationsRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -25717,7 +25717,7 @@ func (*MessagesGetRecentReactionsRequest) CRC() uint32 {
 	return 0x39461db2
 }
 
-func MessagesGetRecentReactions(ctx context.Context, m Requester, i MessagesGetRecentReactionsRequest) (MessagesReactions, error) {
+func MakeMessagesGetRecentReactionsRequest(ctx context.Context, m Requester, i MessagesGetRecentReactionsRequest) (MessagesReactions, error) {
 	var res MessagesReactions
 	return res, request(ctx, m, &i, &res)
 }
@@ -25732,7 +25732,7 @@ func (*MessagesGetRecentStickersRequest) CRC() uint32 {
 	return 0x9da9403b
 }
 
-func MessagesGetRecentStickers(ctx context.Context, m Requester, i MessagesGetRecentStickersRequest) (MessagesRecentStickers, error) {
+func MakeMessagesGetRecentStickersRequest(ctx context.Context, m Requester, i MessagesGetRecentStickersRequest) (MessagesRecentStickers, error) {
 	var res MessagesRecentStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25753,7 +25753,7 @@ func (*MessagesGetRepliesRequest) CRC() uint32 {
 	return 0x22ddd30c
 }
 
-func MessagesGetReplies(ctx context.Context, m Requester, i MessagesGetRepliesRequest) (MessagesMessages, error) {
+func MakeMessagesGetRepliesRequest(ctx context.Context, m Requester, i MessagesGetRepliesRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -25772,7 +25772,7 @@ func (*MessagesGetSavedDialogsRequest) CRC() uint32 {
 	return 0x5381d21a
 }
 
-func MessagesGetSavedDialogs(ctx context.Context, m Requester, i MessagesGetSavedDialogsRequest) (MessagesSavedDialogs, error) {
+func MakeMessagesGetSavedDialogsRequest(ctx context.Context, m Requester, i MessagesGetSavedDialogsRequest) (MessagesSavedDialogs, error) {
 	var res MessagesSavedDialogs
 	return res, request(ctx, m, &i, &res)
 }
@@ -25785,7 +25785,7 @@ func (*MessagesGetSavedGifsRequest) CRC() uint32 {
 	return 0x5cf09635
 }
 
-func MessagesGetSavedGifs(ctx context.Context, m Requester, i MessagesGetSavedGifsRequest) (MessagesSavedGifs, error) {
+func MakeMessagesGetSavedGifsRequest(ctx context.Context, m Requester, i MessagesGetSavedGifsRequest) (MessagesSavedGifs, error) {
 	var res MessagesSavedGifs
 	return res, request(ctx, m, &i, &res)
 }
@@ -25805,7 +25805,7 @@ func (*MessagesGetSavedHistoryRequest) CRC() uint32 {
 	return 0x3d9a414d
 }
 
-func MessagesGetSavedHistory(ctx context.Context, m Requester, i MessagesGetSavedHistoryRequest) (MessagesMessages, error) {
+func MakeMessagesGetSavedHistoryRequest(ctx context.Context, m Requester, i MessagesGetSavedHistoryRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -25820,7 +25820,7 @@ func (*MessagesGetSavedReactionTagsRequest) CRC() uint32 {
 	return 0x3637e05b
 }
 
-func MessagesGetSavedReactionTags(ctx context.Context, m Requester, i MessagesGetSavedReactionTagsRequest) (MessagesSavedReactionTags, error) {
+func MakeMessagesGetSavedReactionTagsRequest(ctx context.Context, m Requester, i MessagesGetSavedReactionTagsRequest) (MessagesSavedReactionTags, error) {
 	var res MessagesSavedReactionTags
 	return res, request(ctx, m, &i, &res)
 }
@@ -25834,7 +25834,7 @@ func (*MessagesGetScheduledHistoryRequest) CRC() uint32 {
 	return 0xf516760b
 }
 
-func MessagesGetScheduledHistory(ctx context.Context, m Requester, i MessagesGetScheduledHistoryRequest) (MessagesMessages, error) {
+func MakeMessagesGetScheduledHistoryRequest(ctx context.Context, m Requester, i MessagesGetScheduledHistoryRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -25848,7 +25848,7 @@ func (*MessagesGetScheduledMessagesRequest) CRC() uint32 {
 	return 0xbdbb0464
 }
 
-func MessagesGetScheduledMessages(ctx context.Context, m Requester, i MessagesGetScheduledMessagesRequest) (MessagesMessages, error) {
+func MakeMessagesGetScheduledMessagesRequest(ctx context.Context, m Requester, i MessagesGetScheduledMessagesRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -25865,7 +25865,7 @@ func (*MessagesGetSearchCountersRequest) CRC() uint32 {
 	return 0x1bbcf300
 }
 
-func MessagesGetSearchCounters(ctx context.Context, m Requester, i MessagesGetSearchCountersRequest) ([]MessagesSearchCounter, error) {
+func MakeMessagesGetSearchCountersRequest(ctx context.Context, m Requester, i MessagesGetSearchCountersRequest) ([]MessagesSearchCounter, error) {
 	var res []MessagesSearchCounter
 	return res, request(ctx, m, &i, &res)
 }
@@ -25883,7 +25883,7 @@ func (*MessagesGetSearchResultsCalendarRequest) CRC() uint32 {
 	return 0x6aa3f6bd
 }
 
-func MessagesGetSearchResultsCalendar(ctx context.Context, m Requester, i MessagesGetSearchResultsCalendarRequest) (MessagesSearchResultsCalendar, error) {
+func MakeMessagesGetSearchResultsCalendarRequest(ctx context.Context, m Requester, i MessagesGetSearchResultsCalendarRequest) (MessagesSearchResultsCalendar, error) {
 	var res MessagesSearchResultsCalendar
 	return res, request(ctx, m, &i, &res)
 }
@@ -25901,7 +25901,7 @@ func (*MessagesGetSearchResultsPositionsRequest) CRC() uint32 {
 	return 0x9c7f2f10
 }
 
-func MessagesGetSearchResultsPositions(ctx context.Context, m Requester, i MessagesGetSearchResultsPositionsRequest) (MessagesSearchResultsPositions, error) {
+func MakeMessagesGetSearchResultsPositionsRequest(ctx context.Context, m Requester, i MessagesGetSearchResultsPositionsRequest) (MessagesSearchResultsPositions, error) {
 	var res MessagesSearchResultsPositions
 	return res, request(ctx, m, &i, &res)
 }
@@ -25912,7 +25912,7 @@ func (*MessagesGetSplitRangesRequest) CRC() uint32 {
 	return 0x1cff7e08
 }
 
-func MessagesGetSplitRanges(ctx context.Context, m Requester, i MessagesGetSplitRangesRequest) ([]MessageRange, error) {
+func MakeMessagesGetSplitRangesRequest(ctx context.Context, m Requester, i MessagesGetSplitRangesRequest) ([]MessageRange, error) {
 	var res []MessageRange
 	return res, request(ctx, m, &i, &res)
 }
@@ -25926,7 +25926,7 @@ func (*MessagesGetStickerSetRequest) CRC() uint32 {
 	return 0xc8a0ec74
 }
 
-func MessagesGetStickerSet(ctx context.Context, m Requester, i MessagesGetStickerSetRequest) (MessagesStickerSet, error) {
+func MakeMessagesGetStickerSetRequest(ctx context.Context, m Requester, i MessagesGetStickerSetRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -25940,7 +25940,7 @@ func (*MessagesGetStickersRequest) CRC() uint32 {
 	return 0xd5a5d3a1
 }
 
-func MessagesGetStickers(ctx context.Context, m Requester, i MessagesGetStickersRequest) (MessagesStickers, error) {
+func MakeMessagesGetStickersRequest(ctx context.Context, m Requester, i MessagesGetStickersRequest) (MessagesStickers, error) {
 	var res MessagesStickers
 	return res, request(ctx, m, &i, &res)
 }
@@ -25951,7 +25951,7 @@ func (*MessagesGetSuggestedDialogFiltersRequest) CRC() uint32 {
 	return 0xa29cd42c
 }
 
-func MessagesGetSuggestedDialogFilters(ctx context.Context, m Requester, i MessagesGetSuggestedDialogFiltersRequest) ([]DialogFilterSuggested, error) {
+func MakeMessagesGetSuggestedDialogFiltersRequest(ctx context.Context, m Requester, i MessagesGetSuggestedDialogFiltersRequest) ([]DialogFilterSuggested, error) {
 	var res []DialogFilterSuggested
 	return res, request(ctx, m, &i, &res)
 }
@@ -25965,7 +25965,7 @@ func (*MessagesGetTopReactionsRequest) CRC() uint32 {
 	return 0xbb8125ba
 }
 
-func MessagesGetTopReactions(ctx context.Context, m Requester, i MessagesGetTopReactionsRequest) (MessagesReactions, error) {
+func MakeMessagesGetTopReactionsRequest(ctx context.Context, m Requester, i MessagesGetTopReactionsRequest) (MessagesReactions, error) {
 	var res MessagesReactions
 	return res, request(ctx, m, &i, &res)
 }
@@ -25985,7 +25985,7 @@ func (*MessagesGetUnreadMentionsRequest) CRC() uint32 {
 	return 0xf107e790
 }
 
-func MessagesGetUnreadMentions(ctx context.Context, m Requester, i MessagesGetUnreadMentionsRequest) (MessagesMessages, error) {
+func MakeMessagesGetUnreadMentionsRequest(ctx context.Context, m Requester, i MessagesGetUnreadMentionsRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -26005,7 +26005,7 @@ func (*MessagesGetUnreadReactionsRequest) CRC() uint32 {
 	return 0x3223495b
 }
 
-func MessagesGetUnreadReactions(ctx context.Context, m Requester, i MessagesGetUnreadReactionsRequest) (MessagesMessages, error) {
+func MakeMessagesGetUnreadReactionsRequest(ctx context.Context, m Requester, i MessagesGetUnreadReactionsRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -26019,7 +26019,7 @@ func (*MessagesGetWebPageRequest) CRC() uint32 {
 	return 0x8d9692a3
 }
 
-func MessagesGetWebPage(ctx context.Context, m Requester, i MessagesGetWebPageRequest) (MessagesWebPage, error) {
+func MakeMessagesGetWebPageRequest(ctx context.Context, m Requester, i MessagesGetWebPageRequest) (MessagesWebPage, error) {
 	var res MessagesWebPage
 	return res, request(ctx, m, &i, &res)
 }
@@ -26034,7 +26034,7 @@ func (*MessagesGetWebPagePreviewRequest) CRC() uint32 {
 	return 0x8b68b0cc
 }
 
-func MessagesGetWebPagePreview(ctx context.Context, m Requester, i MessagesGetWebPagePreviewRequest) (MessageMedia, error) {
+func MakeMessagesGetWebPagePreviewRequest(ctx context.Context, m Requester, i MessagesGetWebPagePreviewRequest) (MessageMedia, error) {
 	var res MessageMedia
 	return res, request(ctx, m, &i, &res)
 }
@@ -26050,7 +26050,7 @@ func (*MessagesHideAllChatJoinRequestsRequest) CRC() uint32 {
 	return 0xe085f4ea
 }
 
-func MessagesHideAllChatJoinRequests(ctx context.Context, m Requester, i MessagesHideAllChatJoinRequestsRequest) (Updates, error) {
+func MakeMessagesHideAllChatJoinRequestsRequest(ctx context.Context, m Requester, i MessagesHideAllChatJoinRequestsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26066,7 +26066,7 @@ func (*MessagesHideChatJoinRequestRequest) CRC() uint32 {
 	return 0x7fe7e815
 }
 
-func MessagesHideChatJoinRequest(ctx context.Context, m Requester, i MessagesHideChatJoinRequestRequest) (Updates, error) {
+func MakeMessagesHideChatJoinRequestRequest(ctx context.Context, m Requester, i MessagesHideChatJoinRequestRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26079,7 +26079,7 @@ func (*MessagesHidePeerSettingsBarRequest) CRC() uint32 {
 	return 0x4facb138
 }
 
-func MessagesHidePeerSettingsBar(ctx context.Context, m Requester, i MessagesHidePeerSettingsBarRequest) (bool, error) {
+func MakeMessagesHidePeerSettingsBarRequest(ctx context.Context, m Requester, i MessagesHidePeerSettingsBarRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26092,7 +26092,7 @@ func (*MessagesImportChatInviteRequest) CRC() uint32 {
 	return 0x6c50051c
 }
 
-func MessagesImportChatInvite(ctx context.Context, m Requester, i MessagesImportChatInviteRequest) (Updates, error) {
+func MakeMessagesImportChatInviteRequest(ctx context.Context, m Requester, i MessagesImportChatInviteRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26107,7 +26107,7 @@ func (*MessagesInitHistoryImportRequest) CRC() uint32 {
 	return 0x34090c3b
 }
 
-func MessagesInitHistoryImport(ctx context.Context, m Requester, i MessagesInitHistoryImportRequest) (MessagesHistoryImport, error) {
+func MakeMessagesInitHistoryImportRequest(ctx context.Context, m Requester, i MessagesInitHistoryImportRequest) (MessagesHistoryImport, error) {
 	var res MessagesHistoryImport
 	return res, request(ctx, m, &i, &res)
 }
@@ -26121,7 +26121,7 @@ func (*MessagesInstallStickerSetRequest) CRC() uint32 {
 	return 0xc78fe460
 }
 
-func MessagesInstallStickerSet(ctx context.Context, m Requester, i MessagesInstallStickerSetRequest) (MessagesStickerSetInstallResult, error) {
+func MakeMessagesInstallStickerSetRequest(ctx context.Context, m Requester, i MessagesInstallStickerSetRequest) (MessagesStickerSetInstallResult, error) {
 	var res MessagesStickerSetInstallResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -26136,7 +26136,7 @@ func (*MessagesMarkDialogUnreadRequest) CRC() uint32 {
 	return 0xc286d98f
 }
 
-func MessagesMarkDialogUnread(ctx context.Context, m Requester, i MessagesMarkDialogUnreadRequest) (bool, error) {
+func MakeMessagesMarkDialogUnreadRequest(ctx context.Context, m Requester, i MessagesMarkDialogUnreadRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26149,7 +26149,7 @@ func (*MessagesMigrateChatRequest) CRC() uint32 {
 	return 0xa2875319
 }
 
-func MessagesMigrateChat(ctx context.Context, m Requester, i MessagesMigrateChatRequest) (Updates, error) {
+func MakeMessagesMigrateChatRequest(ctx context.Context, m Requester, i MessagesMigrateChatRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26168,7 +26168,7 @@ func (*MessagesProlongWebViewRequest) CRC() uint32 {
 	return 0xb0d81a83
 }
 
-func MessagesProlongWebView(ctx context.Context, m Requester, i MessagesProlongWebViewRequest) (bool, error) {
+func MakeMessagesProlongWebViewRequest(ctx context.Context, m Requester, i MessagesProlongWebViewRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26184,7 +26184,7 @@ func (*MessagesRateTranscribedAudioRequest) CRC() uint32 {
 	return 0x7f1d072f
 }
 
-func MessagesRateTranscribedAudio(ctx context.Context, m Requester, i MessagesRateTranscribedAudioRequest) (bool, error) {
+func MakeMessagesRateTranscribedAudioRequest(ctx context.Context, m Requester, i MessagesRateTranscribedAudioRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26199,7 +26199,7 @@ func (*MessagesReadDiscussionRequest) CRC() uint32 {
 	return 0xf731a9f4
 }
 
-func MessagesReadDiscussion(ctx context.Context, m Requester, i MessagesReadDiscussionRequest) (bool, error) {
+func MakeMessagesReadDiscussionRequest(ctx context.Context, m Requester, i MessagesReadDiscussionRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26213,7 +26213,7 @@ func (*MessagesReadEncryptedHistoryRequest) CRC() uint32 {
 	return 0x7f4b690a
 }
 
-func MessagesReadEncryptedHistory(ctx context.Context, m Requester, i MessagesReadEncryptedHistoryRequest) (bool, error) {
+func MakeMessagesReadEncryptedHistoryRequest(ctx context.Context, m Requester, i MessagesReadEncryptedHistoryRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26226,7 +26226,7 @@ func (*MessagesReadFeaturedStickersRequest) CRC() uint32 {
 	return 0x5b118126
 }
 
-func MessagesReadFeaturedStickers(ctx context.Context, m Requester, i MessagesReadFeaturedStickersRequest) (bool, error) {
+func MakeMessagesReadFeaturedStickersRequest(ctx context.Context, m Requester, i MessagesReadFeaturedStickersRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26240,7 +26240,7 @@ func (*MessagesReadHistoryRequest) CRC() uint32 {
 	return 0x0e306d3a
 }
 
-func MessagesReadHistory(ctx context.Context, m Requester, i MessagesReadHistoryRequest) (MessagesAffectedMessages, error) {
+func MakeMessagesReadHistoryRequest(ctx context.Context, m Requester, i MessagesReadHistoryRequest) (MessagesAffectedMessages, error) {
 	var res MessagesAffectedMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -26255,7 +26255,7 @@ func (*MessagesReadMentionsRequest) CRC() uint32 {
 	return 0x36e5bf4d
 }
 
-func MessagesReadMentions(ctx context.Context, m Requester, i MessagesReadMentionsRequest) (MessagesAffectedHistory, error) {
+func MakeMessagesReadMentionsRequest(ctx context.Context, m Requester, i MessagesReadMentionsRequest) (MessagesAffectedHistory, error) {
 	var res MessagesAffectedHistory
 	return res, request(ctx, m, &i, &res)
 }
@@ -26268,7 +26268,7 @@ func (*MessagesReadMessageContentsRequest) CRC() uint32 {
 	return 0x36a73f77
 }
 
-func MessagesReadMessageContents(ctx context.Context, m Requester, i MessagesReadMessageContentsRequest) (MessagesAffectedMessages, error) {
+func MakeMessagesReadMessageContentsRequest(ctx context.Context, m Requester, i MessagesReadMessageContentsRequest) (MessagesAffectedMessages, error) {
 	var res MessagesAffectedMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -26283,7 +26283,7 @@ func (*MessagesReadReactionsRequest) CRC() uint32 {
 	return 0x54aa7f8e
 }
 
-func MessagesReadReactions(ctx context.Context, m Requester, i MessagesReadReactionsRequest) (MessagesAffectedHistory, error) {
+func MakeMessagesReadReactionsRequest(ctx context.Context, m Requester, i MessagesReadReactionsRequest) (MessagesAffectedHistory, error) {
 	var res MessagesAffectedHistory
 	return res, request(ctx, m, &i, &res)
 }
@@ -26296,7 +26296,7 @@ func (*MessagesReceivedMessagesRequest) CRC() uint32 {
 	return 0x05a954c0
 }
 
-func MessagesReceivedMessages(ctx context.Context, m Requester, i MessagesReceivedMessagesRequest) ([]ReceivedNotifyMessage, error) {
+func MakeMessagesReceivedMessagesRequest(ctx context.Context, m Requester, i MessagesReceivedMessagesRequest) ([]ReceivedNotifyMessage, error) {
 	var res []ReceivedNotifyMessage
 	return res, request(ctx, m, &i, &res)
 }
@@ -26309,7 +26309,7 @@ func (*MessagesReceivedQueueRequest) CRC() uint32 {
 	return 0x55a5bb66
 }
 
-func MessagesReceivedQueue(ctx context.Context, m Requester, i MessagesReceivedQueueRequest) ([]int64, error) {
+func MakeMessagesReceivedQueueRequest(ctx context.Context, m Requester, i MessagesReceivedQueueRequest) ([]int64, error) {
 	var res []int64
 	return res, request(ctx, m, &i, &res)
 }
@@ -26325,7 +26325,7 @@ func (*MessagesReorderPinnedDialogsRequest) CRC() uint32 {
 	return 0x3b1adf37
 }
 
-func MessagesReorderPinnedDialogs(ctx context.Context, m Requester, i MessagesReorderPinnedDialogsRequest) (bool, error) {
+func MakeMessagesReorderPinnedDialogsRequest(ctx context.Context, m Requester, i MessagesReorderPinnedDialogsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26340,7 +26340,7 @@ func (*MessagesReorderPinnedSavedDialogsRequest) CRC() uint32 {
 	return 0x8b716587
 }
 
-func MessagesReorderPinnedSavedDialogs(ctx context.Context, m Requester, i MessagesReorderPinnedSavedDialogsRequest) (bool, error) {
+func MakeMessagesReorderPinnedSavedDialogsRequest(ctx context.Context, m Requester, i MessagesReorderPinnedSavedDialogsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26353,7 +26353,7 @@ func (*MessagesReorderQuickRepliesRequest) CRC() uint32 {
 	return 0x60331907
 }
 
-func MessagesReorderQuickReplies(ctx context.Context, m Requester, i MessagesReorderQuickRepliesRequest) (bool, error) {
+func MakeMessagesReorderQuickRepliesRequest(ctx context.Context, m Requester, i MessagesReorderQuickRepliesRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26369,7 +26369,7 @@ func (*MessagesReorderStickerSetsRequest) CRC() uint32 {
 	return 0x78337739
 }
 
-func MessagesReorderStickerSets(ctx context.Context, m Requester, i MessagesReorderStickerSetsRequest) (bool, error) {
+func MakeMessagesReorderStickerSetsRequest(ctx context.Context, m Requester, i MessagesReorderStickerSetsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26385,7 +26385,7 @@ func (*MessagesReportRequest) CRC() uint32 {
 	return 0x8953ab4e
 }
 
-func MessagesReport(ctx context.Context, m Requester, i MessagesReportRequest) (bool, error) {
+func MakeMessagesReportRequest(ctx context.Context, m Requester, i MessagesReportRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26398,7 +26398,7 @@ func (*MessagesReportEncryptedSpamRequest) CRC() uint32 {
 	return 0x4b0c8c0f
 }
 
-func MessagesReportEncryptedSpam(ctx context.Context, m Requester, i MessagesReportEncryptedSpamRequest) (bool, error) {
+func MakeMessagesReportEncryptedSpamRequest(ctx context.Context, m Requester, i MessagesReportEncryptedSpamRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26413,7 +26413,7 @@ func (*MessagesReportReactionRequest) CRC() uint32 {
 	return 0x3f64c076
 }
 
-func MessagesReportReaction(ctx context.Context, m Requester, i MessagesReportReactionRequest) (bool, error) {
+func MakeMessagesReportReactionRequest(ctx context.Context, m Requester, i MessagesReportReactionRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26426,7 +26426,7 @@ func (*MessagesReportSpamRequest) CRC() uint32 {
 	return 0xcf1592db
 }
 
-func MessagesReportSpam(ctx context.Context, m Requester, i MessagesReportSpamRequest) (bool, error) {
+func MakeMessagesReportSpamRequest(ctx context.Context, m Requester, i MessagesReportSpamRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26446,7 +26446,7 @@ func (*MessagesRequestAppWebViewRequest) CRC() uint32 {
 	return 0x53618bce
 }
 
-func MessagesRequestAppWebView(ctx context.Context, m Requester, i MessagesRequestAppWebViewRequest) (WebViewResult, error) {
+func MakeMessagesRequestAppWebViewRequest(ctx context.Context, m Requester, i MessagesRequestAppWebViewRequest) (WebViewResult, error) {
 	var res WebViewResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -26461,7 +26461,7 @@ func (*MessagesRequestEncryptionRequest) CRC() uint32 {
 	return 0xf64daf43
 }
 
-func MessagesRequestEncryption(ctx context.Context, m Requester, i MessagesRequestEncryptionRequest) (EncryptedChat, error) {
+func MakeMessagesRequestEncryptionRequest(ctx context.Context, m Requester, i MessagesRequestEncryptionRequest) (EncryptedChat, error) {
 	var res EncryptedChat
 	return res, request(ctx, m, &i, &res)
 }
@@ -26480,7 +26480,7 @@ func (*MessagesRequestMainWebViewRequest) CRC() uint32 {
 	return 0xc9e01e7b
 }
 
-func MessagesRequestMainWebView(ctx context.Context, m Requester, i MessagesRequestMainWebViewRequest) (WebViewResult, error) {
+func MakeMessagesRequestMainWebViewRequest(ctx context.Context, m Requester, i MessagesRequestMainWebViewRequest) (WebViewResult, error) {
 	var res WebViewResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -26501,7 +26501,7 @@ func (*MessagesRequestSimpleWebViewRequest) CRC() uint32 {
 	return 0x413a3e73
 }
 
-func MessagesRequestSimpleWebView(ctx context.Context, m Requester, i MessagesRequestSimpleWebViewRequest) (WebViewResult, error) {
+func MakeMessagesRequestSimpleWebViewRequest(ctx context.Context, m Requester, i MessagesRequestSimpleWebViewRequest) (WebViewResult, error) {
 	var res WebViewResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -26518,7 +26518,7 @@ func (*MessagesRequestURLAuthRequest) CRC() uint32 {
 	return 0x198fb446
 }
 
-func MessagesRequestURLAuth(ctx context.Context, m Requester, i MessagesRequestURLAuthRequest) (URLAuthResult, error) {
+func MakeMessagesRequestURLAuthRequest(ctx context.Context, m Requester, i MessagesRequestURLAuthRequest) (URLAuthResult, error) {
 	var res URLAuthResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -26542,7 +26542,7 @@ func (*MessagesRequestWebViewRequest) CRC() uint32 {
 	return 0x269dc2c1
 }
 
-func MessagesRequestWebView(ctx context.Context, m Requester, i MessagesRequestWebViewRequest) (WebViewResult, error) {
+func MakeMessagesRequestWebViewRequest(ctx context.Context, m Requester, i MessagesRequestWebViewRequest) (WebViewResult, error) {
 	var res WebViewResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -26556,7 +26556,7 @@ func (*MessagesSaveDefaultSendAsRequest) CRC() uint32 {
 	return 0xccfddf96
 }
 
-func MessagesSaveDefaultSendAs(ctx context.Context, m Requester, i MessagesSaveDefaultSendAsRequest) (bool, error) {
+func MakeMessagesSaveDefaultSendAsRequest(ctx context.Context, m Requester, i MessagesSaveDefaultSendAsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26577,7 +26577,7 @@ func (*MessagesSaveDraftRequest) CRC() uint32 {
 	return 0xd372c5ce
 }
 
-func MessagesSaveDraft(ctx context.Context, m Requester, i MessagesSaveDraftRequest) (bool, error) {
+func MakeMessagesSaveDraftRequest(ctx context.Context, m Requester, i MessagesSaveDraftRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26591,7 +26591,7 @@ func (*MessagesSaveGifRequest) CRC() uint32 {
 	return 0x327a30cb
 }
 
-func MessagesSaveGif(ctx context.Context, m Requester, i MessagesSaveGifRequest) (bool, error) {
+func MakeMessagesSaveGifRequest(ctx context.Context, m Requester, i MessagesSaveGifRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26607,7 +26607,7 @@ func (*MessagesSaveRecentStickerRequest) CRC() uint32 {
 	return 0x392718f8
 }
 
-func MessagesSaveRecentSticker(ctx context.Context, m Requester, i MessagesSaveRecentStickerRequest) (bool, error) {
+func MakeMessagesSaveRecentStickerRequest(ctx context.Context, m Requester, i MessagesSaveRecentStickerRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -26635,7 +26635,7 @@ func (*MessagesSearchRequest) CRC() uint32 {
 	return 0x29ee847a
 }
 
-func MessagesSearch(ctx context.Context, m Requester, i MessagesSearchRequest) (MessagesMessages, error) {
+func MakeMessagesSearchRequest(ctx context.Context, m Requester, i MessagesSearchRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -26649,7 +26649,7 @@ func (*MessagesSearchCustomEmojiRequest) CRC() uint32 {
 	return 0x2c11c0d7
 }
 
-func MessagesSearchCustomEmoji(ctx context.Context, m Requester, i MessagesSearchCustomEmojiRequest) (EmojiList, error) {
+func MakeMessagesSearchCustomEmojiRequest(ctx context.Context, m Requester, i MessagesSearchCustomEmojiRequest) (EmojiList, error) {
 	var res EmojiList
 	return res, request(ctx, m, &i, &res)
 }
@@ -26665,7 +26665,7 @@ func (*MessagesSearchEmojiStickerSetsRequest) CRC() uint32 {
 	return 0x92b4494c
 }
 
-func MessagesSearchEmojiStickerSets(ctx context.Context, m Requester, i MessagesSearchEmojiStickerSetsRequest) (MessagesFoundStickerSets, error) {
+func MakeMessagesSearchEmojiStickerSetsRequest(ctx context.Context, m Requester, i MessagesSearchEmojiStickerSetsRequest) (MessagesFoundStickerSets, error) {
 	var res MessagesFoundStickerSets
 	return res, request(ctx, m, &i, &res)
 }
@@ -26688,7 +26688,7 @@ func (*MessagesSearchGlobalRequest) CRC() uint32 {
 	return 0x4bc6589a
 }
 
-func MessagesSearchGlobal(ctx context.Context, m Requester, i MessagesSearchGlobalRequest) (MessagesMessages, error) {
+func MakeMessagesSearchGlobalRequest(ctx context.Context, m Requester, i MessagesSearchGlobalRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -26703,7 +26703,7 @@ func (*MessagesSearchSentMediaRequest) CRC() uint32 {
 	return 0x107e31a0
 }
 
-func MessagesSearchSentMedia(ctx context.Context, m Requester, i MessagesSearchSentMediaRequest) (MessagesMessages, error) {
+func MakeMessagesSearchSentMediaRequest(ctx context.Context, m Requester, i MessagesSearchSentMediaRequest) (MessagesMessages, error) {
 	var res MessagesMessages
 	return res, request(ctx, m, &i, &res)
 }
@@ -26719,7 +26719,7 @@ func (*MessagesSearchStickerSetsRequest) CRC() uint32 {
 	return 0x35705b8a
 }
 
-func MessagesSearchStickerSets(ctx context.Context, m Requester, i MessagesSearchStickerSetsRequest) (MessagesFoundStickerSets, error) {
+func MakeMessagesSearchStickerSetsRequest(ctx context.Context, m Requester, i MessagesSearchStickerSetsRequest) (MessagesFoundStickerSets, error) {
 	var res MessagesFoundStickerSets
 	return res, request(ctx, m, &i, &res)
 }
@@ -26735,7 +26735,7 @@ func (*MessagesSendBotRequestedPeerRequest) CRC() uint32 {
 	return 0x91b2d060
 }
 
-func MessagesSendBotRequestedPeer(ctx context.Context, m Requester, i MessagesSendBotRequestedPeerRequest) (Updates, error) {
+func MakeMessagesSendBotRequestedPeerRequest(ctx context.Context, m Requester, i MessagesSendBotRequestedPeerRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26752,7 +26752,7 @@ func (*MessagesSendEncryptedRequest) CRC() uint32 {
 	return 0x44fa7a15
 }
 
-func MessagesSendEncrypted(ctx context.Context, m Requester, i MessagesSendEncryptedRequest) (MessagesSentEncryptedMessage, error) {
+func MakeMessagesSendEncryptedRequest(ctx context.Context, m Requester, i MessagesSendEncryptedRequest) (MessagesSentEncryptedMessage, error) {
 	var res MessagesSentEncryptedMessage
 	return res, request(ctx, m, &i, &res)
 }
@@ -26770,7 +26770,7 @@ func (*MessagesSendEncryptedFileRequest) CRC() uint32 {
 	return 0x5559481d
 }
 
-func MessagesSendEncryptedFile(ctx context.Context, m Requester, i MessagesSendEncryptedFileRequest) (MessagesSentEncryptedMessage, error) {
+func MakeMessagesSendEncryptedFileRequest(ctx context.Context, m Requester, i MessagesSendEncryptedFileRequest) (MessagesSentEncryptedMessage, error) {
 	var res MessagesSentEncryptedMessage
 	return res, request(ctx, m, &i, &res)
 }
@@ -26785,7 +26785,7 @@ func (*MessagesSendEncryptedServiceRequest) CRC() uint32 {
 	return 0x32d439a4
 }
 
-func MessagesSendEncryptedService(ctx context.Context, m Requester, i MessagesSendEncryptedServiceRequest) (MessagesSentEncryptedMessage, error) {
+func MakeMessagesSendEncryptedServiceRequest(ctx context.Context, m Requester, i MessagesSendEncryptedServiceRequest) (MessagesSentEncryptedMessage, error) {
 	var res MessagesSentEncryptedMessage
 	return res, request(ctx, m, &i, &res)
 }
@@ -26810,7 +26810,7 @@ func (*MessagesSendInlineBotResultRequest) CRC() uint32 {
 	return 0x3ebee86a
 }
 
-func MessagesSendInlineBotResult(ctx context.Context, m Requester, i MessagesSendInlineBotResultRequest) (Updates, error) {
+func MakeMessagesSendInlineBotResultRequest(ctx context.Context, m Requester, i MessagesSendInlineBotResultRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26840,7 +26840,7 @@ func (*MessagesSendMediaRequest) CRC() uint32 {
 	return 0x7852834e
 }
 
-func MessagesSendMedia(ctx context.Context, m Requester, i MessagesSendMediaRequest) (Updates, error) {
+func MakeMessagesSendMediaRequest(ctx context.Context, m Requester, i MessagesSendMediaRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26870,7 +26870,7 @@ func (*MessagesSendMessageRequest) CRC() uint32 {
 	return 0x983f9745
 }
 
-func MessagesSendMessage(ctx context.Context, m Requester, i MessagesSendMessageRequest) (Updates, error) {
+func MakeMessagesSendMessageRequest(ctx context.Context, m Requester, i MessagesSendMessageRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26896,7 +26896,7 @@ func (*MessagesSendMultiMediaRequest) CRC() uint32 {
 	return 0x37b74355
 }
 
-func MessagesSendMultiMedia(ctx context.Context, m Requester, i MessagesSendMultiMediaRequest) (Updates, error) {
+func MakeMessagesSendMultiMediaRequest(ctx context.Context, m Requester, i MessagesSendMultiMediaRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26912,7 +26912,7 @@ func (*MessagesSendQuickReplyMessagesRequest) CRC() uint32 {
 	return 0x6c750de1
 }
 
-func MessagesSendQuickReplyMessages(ctx context.Context, m Requester, i MessagesSendQuickReplyMessagesRequest) (Updates, error) {
+func MakeMessagesSendQuickReplyMessagesRequest(ctx context.Context, m Requester, i MessagesSendQuickReplyMessagesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26930,7 +26930,7 @@ func (*MessagesSendReactionRequest) CRC() uint32 {
 	return 0xd30d78d4
 }
 
-func MessagesSendReaction(ctx context.Context, m Requester, i MessagesSendReactionRequest) (Updates, error) {
+func MakeMessagesSendReactionRequest(ctx context.Context, m Requester, i MessagesSendReactionRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26944,7 +26944,7 @@ func (*MessagesSendScheduledMessagesRequest) CRC() uint32 {
 	return 0xbd38850a
 }
 
-func MessagesSendScheduledMessages(ctx context.Context, m Requester, i MessagesSendScheduledMessagesRequest) (Updates, error) {
+func MakeMessagesSendScheduledMessagesRequest(ctx context.Context, m Requester, i MessagesSendScheduledMessagesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26959,7 +26959,7 @@ func (*MessagesSendScreenshotNotificationRequest) CRC() uint32 {
 	return 0xa1405817
 }
 
-func MessagesSendScreenshotNotification(ctx context.Context, m Requester, i MessagesSendScreenshotNotificationRequest) (Updates, error) {
+func MakeMessagesSendScreenshotNotificationRequest(ctx context.Context, m Requester, i MessagesSendScreenshotNotificationRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26974,7 +26974,7 @@ func (*MessagesSendVoteRequest) CRC() uint32 {
 	return 0x10ea6184
 }
 
-func MessagesSendVote(ctx context.Context, m Requester, i MessagesSendVoteRequest) (Updates, error) {
+func MakeMessagesSendVoteRequest(ctx context.Context, m Requester, i MessagesSendVoteRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -26990,7 +26990,7 @@ func (*MessagesSendWebViewDataRequest) CRC() uint32 {
 	return 0xdc0242c8
 }
 
-func MessagesSendWebViewData(ctx context.Context, m Requester, i MessagesSendWebViewDataRequest) (Updates, error) {
+func MakeMessagesSendWebViewDataRequest(ctx context.Context, m Requester, i MessagesSendWebViewDataRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27004,7 +27004,7 @@ func (*MessagesSendWebViewResultMessageRequest) CRC() uint32 {
 	return 0x0a4314f5
 }
 
-func MessagesSendWebViewResultMessage(ctx context.Context, m Requester, i MessagesSendWebViewResultMessageRequest) (WebViewMessageSent, error) {
+func MakeMessagesSendWebViewResultMessageRequest(ctx context.Context, m Requester, i MessagesSendWebViewResultMessageRequest) (WebViewMessageSent, error) {
 	var res WebViewMessageSent
 	return res, request(ctx, m, &i, &res)
 }
@@ -27022,7 +27022,7 @@ func (*MessagesSetBotCallbackAnswerRequest) CRC() uint32 {
 	return 0xd58f130a
 }
 
-func MessagesSetBotCallbackAnswer(ctx context.Context, m Requester, i MessagesSetBotCallbackAnswerRequest) (bool, error) {
+func MakeMessagesSetBotCallbackAnswerRequest(ctx context.Context, m Requester, i MessagesSetBotCallbackAnswerRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27038,7 +27038,7 @@ func (*MessagesSetBotPrecheckoutResultsRequest) CRC() uint32 {
 	return 0x09c2dd95
 }
 
-func MessagesSetBotPrecheckoutResults(ctx context.Context, m Requester, i MessagesSetBotPrecheckoutResultsRequest) (bool, error) {
+func MakeMessagesSetBotPrecheckoutResultsRequest(ctx context.Context, m Requester, i MessagesSetBotPrecheckoutResultsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27054,7 +27054,7 @@ func (*MessagesSetBotShippingResultsRequest) CRC() uint32 {
 	return 0xe5f672fa
 }
 
-func MessagesSetBotShippingResults(ctx context.Context, m Requester, i MessagesSetBotShippingResultsRequest) (bool, error) {
+func MakeMessagesSetBotShippingResultsRequest(ctx context.Context, m Requester, i MessagesSetBotShippingResultsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27070,7 +27070,7 @@ func (*MessagesSetChatAvailableReactionsRequest) CRC() uint32 {
 	return 0x5a150bd4
 }
 
-func MessagesSetChatAvailableReactions(ctx context.Context, m Requester, i MessagesSetChatAvailableReactionsRequest) (Updates, error) {
+func MakeMessagesSetChatAvailableReactionsRequest(ctx context.Context, m Requester, i MessagesSetChatAvailableReactionsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27084,7 +27084,7 @@ func (*MessagesSetChatThemeRequest) CRC() uint32 {
 	return 0xe63be13f
 }
 
-func MessagesSetChatTheme(ctx context.Context, m Requester, i MessagesSetChatThemeRequest) (Updates, error) {
+func MakeMessagesSetChatThemeRequest(ctx context.Context, m Requester, i MessagesSetChatThemeRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27103,7 +27103,7 @@ func (*MessagesSetChatWallPaperRequest) CRC() uint32 {
 	return 0x8ffacae1
 }
 
-func MessagesSetChatWallPaper(ctx context.Context, m Requester, i MessagesSetChatWallPaperRequest) (Updates, error) {
+func MakeMessagesSetChatWallPaperRequest(ctx context.Context, m Requester, i MessagesSetChatWallPaperRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27116,7 +27116,7 @@ func (*MessagesSetDefaultHistoryTTLRequest) CRC() uint32 {
 	return 0x9eb51445
 }
 
-func MessagesSetDefaultHistoryTTL(ctx context.Context, m Requester, i MessagesSetDefaultHistoryTTLRequest) (bool, error) {
+func MakeMessagesSetDefaultHistoryTTLRequest(ctx context.Context, m Requester, i MessagesSetDefaultHistoryTTLRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27129,7 +27129,7 @@ func (*MessagesSetDefaultReactionRequest) CRC() uint32 {
 	return 0x4f47a016
 }
 
-func MessagesSetDefaultReaction(ctx context.Context, m Requester, i MessagesSetDefaultReactionRequest) (bool, error) {
+func MakeMessagesSetDefaultReactionRequest(ctx context.Context, m Requester, i MessagesSetDefaultReactionRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27143,7 +27143,7 @@ func (*MessagesSetEncryptedTypingRequest) CRC() uint32 {
 	return 0x791451ed
 }
 
-func MessagesSetEncryptedTyping(ctx context.Context, m Requester, i MessagesSetEncryptedTypingRequest) (bool, error) {
+func MakeMessagesSetEncryptedTypingRequest(ctx context.Context, m Requester, i MessagesSetEncryptedTypingRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27162,7 +27162,7 @@ func (*MessagesSetGameScoreRequest) CRC() uint32 {
 	return 0x8ef8ecc0
 }
 
-func MessagesSetGameScore(ctx context.Context, m Requester, i MessagesSetGameScoreRequest) (Updates, error) {
+func MakeMessagesSetGameScoreRequest(ctx context.Context, m Requester, i MessagesSetGameScoreRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27176,7 +27176,7 @@ func (*MessagesSetHistoryTTLRequest) CRC() uint32 {
 	return 0xb80e5fe4
 }
 
-func MessagesSetHistoryTTL(ctx context.Context, m Requester, i MessagesSetHistoryTTLRequest) (Updates, error) {
+func MakeMessagesSetHistoryTTLRequest(ctx context.Context, m Requester, i MessagesSetHistoryTTLRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27197,7 +27197,7 @@ func (*MessagesSetInlineBotResultsRequest) CRC() uint32 {
 	return 0xbb12a419
 }
 
-func MessagesSetInlineBotResults(ctx context.Context, m Requester, i MessagesSetInlineBotResultsRequest) (bool, error) {
+func MakeMessagesSetInlineBotResultsRequest(ctx context.Context, m Requester, i MessagesSetInlineBotResultsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27215,7 +27215,7 @@ func (*MessagesSetInlineGameScoreRequest) CRC() uint32 {
 	return 0x15ad9f64
 }
 
-func MessagesSetInlineGameScore(ctx context.Context, m Requester, i MessagesSetInlineGameScoreRequest) (bool, error) {
+func MakeMessagesSetInlineGameScoreRequest(ctx context.Context, m Requester, i MessagesSetInlineGameScoreRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27231,7 +27231,7 @@ func (*MessagesSetTypingRequest) CRC() uint32 {
 	return 0x58943ee2
 }
 
-func MessagesSetTyping(ctx context.Context, m Requester, i MessagesSetTypingRequest) (bool, error) {
+func MakeMessagesSetTypingRequest(ctx context.Context, m Requester, i MessagesSetTypingRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27247,7 +27247,7 @@ func (*MessagesStartBotRequest) CRC() uint32 {
 	return 0xe6df7378
 }
 
-func MessagesStartBot(ctx context.Context, m Requester, i MessagesStartBotRequest) (Updates, error) {
+func MakeMessagesStartBotRequest(ctx context.Context, m Requester, i MessagesStartBotRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27261,7 +27261,7 @@ func (*MessagesStartHistoryImportRequest) CRC() uint32 {
 	return 0xb43df344
 }
 
-func MessagesStartHistoryImport(ctx context.Context, m Requester, i MessagesStartHistoryImportRequest) (bool, error) {
+func MakeMessagesStartHistoryImportRequest(ctx context.Context, m Requester, i MessagesStartHistoryImportRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27277,7 +27277,7 @@ func (*MessagesToggleBotInAttachMenuRequest) CRC() uint32 {
 	return 0x69f59d69
 }
 
-func MessagesToggleBotInAttachMenu(ctx context.Context, m Requester, i MessagesToggleBotInAttachMenuRequest) (bool, error) {
+func MakeMessagesToggleBotInAttachMenuRequest(ctx context.Context, m Requester, i MessagesToggleBotInAttachMenuRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27290,7 +27290,7 @@ func (*MessagesToggleDialogFilterTagsRequest) CRC() uint32 {
 	return 0xfd2dda49
 }
 
-func MessagesToggleDialogFilterTags(ctx context.Context, m Requester, i MessagesToggleDialogFilterTagsRequest) (bool, error) {
+func MakeMessagesToggleDialogFilterTagsRequest(ctx context.Context, m Requester, i MessagesToggleDialogFilterTagsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27305,7 +27305,7 @@ func (*MessagesToggleDialogPinRequest) CRC() uint32 {
 	return 0xa731e257
 }
 
-func MessagesToggleDialogPin(ctx context.Context, m Requester, i MessagesToggleDialogPinRequest) (bool, error) {
+func MakeMessagesToggleDialogPinRequest(ctx context.Context, m Requester, i MessagesToggleDialogPinRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27319,7 +27319,7 @@ func (*MessagesToggleNoForwardsRequest) CRC() uint32 {
 	return 0xb11eafa2
 }
 
-func MessagesToggleNoForwards(ctx context.Context, m Requester, i MessagesToggleNoForwardsRequest) (Updates, error) {
+func MakeMessagesToggleNoForwardsRequest(ctx context.Context, m Requester, i MessagesToggleNoForwardsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27334,7 +27334,7 @@ func (*MessagesTogglePeerTranslationsRequest) CRC() uint32 {
 	return 0xe47cb579
 }
 
-func MessagesTogglePeerTranslations(ctx context.Context, m Requester, i MessagesTogglePeerTranslationsRequest) (bool, error) {
+func MakeMessagesTogglePeerTranslationsRequest(ctx context.Context, m Requester, i MessagesTogglePeerTranslationsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27349,7 +27349,7 @@ func (*MessagesToggleSavedDialogPinRequest) CRC() uint32 {
 	return 0xac81bbde
 }
 
-func MessagesToggleSavedDialogPin(ctx context.Context, m Requester, i MessagesToggleSavedDialogPinRequest) (bool, error) {
+func MakeMessagesToggleSavedDialogPinRequest(ctx context.Context, m Requester, i MessagesToggleSavedDialogPinRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27366,7 +27366,7 @@ func (*MessagesToggleStickerSetsRequest) CRC() uint32 {
 	return 0xb5052fea
 }
 
-func MessagesToggleStickerSets(ctx context.Context, m Requester, i MessagesToggleStickerSetsRequest) (bool, error) {
+func MakeMessagesToggleStickerSetsRequest(ctx context.Context, m Requester, i MessagesToggleStickerSetsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27380,7 +27380,7 @@ func (*MessagesTranscribeAudioRequest) CRC() uint32 {
 	return 0x269e9a49
 }
 
-func MessagesTranscribeAudio(ctx context.Context, m Requester, i MessagesTranscribeAudioRequest) (MessagesTranscribedAudio, error) {
+func MakeMessagesTranscribeAudioRequest(ctx context.Context, m Requester, i MessagesTranscribeAudioRequest) (MessagesTranscribedAudio, error) {
 	var res MessagesTranscribedAudio
 	return res, request(ctx, m, &i, &res)
 }
@@ -27397,7 +27397,7 @@ func (*MessagesTranslateTextRequest) CRC() uint32 {
 	return 0x63183030
 }
 
-func MessagesTranslateText(ctx context.Context, m Requester, i MessagesTranslateTextRequest) (MessagesTranslatedText, error) {
+func MakeMessagesTranslateTextRequest(ctx context.Context, m Requester, i MessagesTranslateTextRequest) (MessagesTranslatedText, error) {
 	var res MessagesTranslatedText
 	return res, request(ctx, m, &i, &res)
 }
@@ -27410,7 +27410,7 @@ func (*MessagesUninstallStickerSetRequest) CRC() uint32 {
 	return 0xf96e55de
 }
 
-func MessagesUninstallStickerSet(ctx context.Context, m Requester, i MessagesUninstallStickerSetRequest) (bool, error) {
+func MakeMessagesUninstallStickerSetRequest(ctx context.Context, m Requester, i MessagesUninstallStickerSetRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27425,7 +27425,7 @@ func (*MessagesUnpinAllMessagesRequest) CRC() uint32 {
 	return 0xee22b9a8
 }
 
-func MessagesUnpinAllMessages(ctx context.Context, m Requester, i MessagesUnpinAllMessagesRequest) (MessagesAffectedHistory, error) {
+func MakeMessagesUnpinAllMessagesRequest(ctx context.Context, m Requester, i MessagesUnpinAllMessagesRequest) (MessagesAffectedHistory, error) {
 	var res MessagesAffectedHistory
 	return res, request(ctx, m, &i, &res)
 }
@@ -27440,7 +27440,7 @@ func (*MessagesUpdateDialogFilterRequest) CRC() uint32 {
 	return 0x1ad4a04a
 }
 
-func MessagesUpdateDialogFilter(ctx context.Context, m Requester, i MessagesUpdateDialogFilterRequest) (bool, error) {
+func MakeMessagesUpdateDialogFilterRequest(ctx context.Context, m Requester, i MessagesUpdateDialogFilterRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27453,7 +27453,7 @@ func (*MessagesUpdateDialogFiltersOrderRequest) CRC() uint32 {
 	return 0xc563c1e4
 }
 
-func MessagesUpdateDialogFiltersOrder(ctx context.Context, m Requester, i MessagesUpdateDialogFiltersOrderRequest) (bool, error) {
+func MakeMessagesUpdateDialogFiltersOrderRequest(ctx context.Context, m Requester, i MessagesUpdateDialogFiltersOrderRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27471,7 +27471,7 @@ func (*MessagesUpdatePinnedMessageRequest) CRC() uint32 {
 	return 0xd2aaf7ec
 }
 
-func MessagesUpdatePinnedMessage(ctx context.Context, m Requester, i MessagesUpdatePinnedMessageRequest) (Updates, error) {
+func MakeMessagesUpdatePinnedMessageRequest(ctx context.Context, m Requester, i MessagesUpdatePinnedMessageRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27486,7 +27486,7 @@ func (*MessagesUpdateSavedReactionTagRequest) CRC() uint32 {
 	return 0x60297dec
 }
 
-func MessagesUpdateSavedReactionTag(ctx context.Context, m Requester, i MessagesUpdateSavedReactionTagRequest) (bool, error) {
+func MakeMessagesUpdateSavedReactionTagRequest(ctx context.Context, m Requester, i MessagesUpdateSavedReactionTagRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27500,7 +27500,7 @@ func (*MessagesUploadEncryptedFileRequest) CRC() uint32 {
 	return 0x5057c497
 }
 
-func MessagesUploadEncryptedFile(ctx context.Context, m Requester, i MessagesUploadEncryptedFileRequest) (EncryptedFile, error) {
+func MakeMessagesUploadEncryptedFileRequest(ctx context.Context, m Requester, i MessagesUploadEncryptedFileRequest) (EncryptedFile, error) {
 	var res EncryptedFile
 	return res, request(ctx, m, &i, &res)
 }
@@ -27516,7 +27516,7 @@ func (*MessagesUploadImportedMediaRequest) CRC() uint32 {
 	return 0x2a862092
 }
 
-func MessagesUploadImportedMedia(ctx context.Context, m Requester, i MessagesUploadImportedMediaRequest) (MessageMedia, error) {
+func MakeMessagesUploadImportedMediaRequest(ctx context.Context, m Requester, i MessagesUploadImportedMediaRequest) (MessageMedia, error) {
 	var res MessageMedia
 	return res, request(ctx, m, &i, &res)
 }
@@ -27532,7 +27532,7 @@ func (*MessagesUploadMediaRequest) CRC() uint32 {
 	return 0x14967978
 }
 
-func MessagesUploadMedia(ctx context.Context, m Requester, i MessagesUploadMediaRequest) (MessageMedia, error) {
+func MakeMessagesUploadMediaRequest(ctx context.Context, m Requester, i MessagesUploadMediaRequest) (MessageMedia, error) {
 	var res MessageMedia
 	return res, request(ctx, m, &i, &res)
 }
@@ -27545,7 +27545,7 @@ func (*PaymentsApplyGiftCodeRequest) CRC() uint32 {
 	return 0xf6e26854
 }
 
-func PaymentsApplyGiftCode(ctx context.Context, m Requester, i PaymentsApplyGiftCodeRequest) (Updates, error) {
+func MakePaymentsApplyGiftCodeRequest(ctx context.Context, m Requester, i PaymentsApplyGiftCodeRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27559,7 +27559,7 @@ func (*PaymentsAssignAppStoreTransactionRequest) CRC() uint32 {
 	return 0x80ed747d
 }
 
-func PaymentsAssignAppStoreTransaction(ctx context.Context, m Requester, i PaymentsAssignAppStoreTransactionRequest) (Updates, error) {
+func MakePaymentsAssignAppStoreTransactionRequest(ctx context.Context, m Requester, i PaymentsAssignAppStoreTransactionRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27573,7 +27573,7 @@ func (*PaymentsAssignPlayMarketTransactionRequest) CRC() uint32 {
 	return 0xdffd50d3
 }
 
-func PaymentsAssignPlayMarketTransaction(ctx context.Context, m Requester, i PaymentsAssignPlayMarketTransactionRequest) (Updates, error) {
+func MakePaymentsAssignPlayMarketTransactionRequest(ctx context.Context, m Requester, i PaymentsAssignPlayMarketTransactionRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27586,7 +27586,7 @@ func (*PaymentsCanPurchasePremiumRequest) CRC() uint32 {
 	return 0x9fc19eb6
 }
 
-func PaymentsCanPurchasePremium(ctx context.Context, m Requester, i PaymentsCanPurchasePremiumRequest) (bool, error) {
+func MakePaymentsCanPurchasePremiumRequest(ctx context.Context, m Requester, i PaymentsCanPurchasePremiumRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27599,7 +27599,7 @@ func (*PaymentsCheckGiftCodeRequest) CRC() uint32 {
 	return 0x8e51b4c1
 }
 
-func PaymentsCheckGiftCode(ctx context.Context, m Requester, i PaymentsCheckGiftCodeRequest) (PaymentsCheckedGiftCode, error) {
+func MakePaymentsCheckGiftCodeRequest(ctx context.Context, m Requester, i PaymentsCheckGiftCodeRequest) (PaymentsCheckedGiftCode, error) {
 	var res PaymentsCheckedGiftCode
 	return res, request(ctx, m, &i, &res)
 }
@@ -27614,7 +27614,7 @@ func (*PaymentsClearSavedInfoRequest) CRC() uint32 {
 	return 0xd83d70c1
 }
 
-func PaymentsClearSavedInfo(ctx context.Context, m Requester, i PaymentsClearSavedInfoRequest) (bool, error) {
+func MakePaymentsClearSavedInfoRequest(ctx context.Context, m Requester, i PaymentsClearSavedInfoRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -27627,7 +27627,7 @@ func (*PaymentsExportInvoiceRequest) CRC() uint32 {
 	return 0x0f91b065
 }
 
-func PaymentsExportInvoice(ctx context.Context, m Requester, i PaymentsExportInvoiceRequest) (PaymentsExportedInvoice, error) {
+func MakePaymentsExportInvoiceRequest(ctx context.Context, m Requester, i PaymentsExportInvoiceRequest) (PaymentsExportedInvoice, error) {
 	var res PaymentsExportedInvoice
 	return res, request(ctx, m, &i, &res)
 }
@@ -27640,7 +27640,7 @@ func (*PaymentsGetBankCardDataRequest) CRC() uint32 {
 	return 0x2e79d779
 }
 
-func PaymentsGetBankCardData(ctx context.Context, m Requester, i PaymentsGetBankCardDataRequest) (PaymentsBankCardData, error) {
+func MakePaymentsGetBankCardDataRequest(ctx context.Context, m Requester, i PaymentsGetBankCardDataRequest) (PaymentsBankCardData, error) {
 	var res PaymentsBankCardData
 	return res, request(ctx, m, &i, &res)
 }
@@ -27654,7 +27654,7 @@ func (*PaymentsGetGiveawayInfoRequest) CRC() uint32 {
 	return 0xf4239425
 }
 
-func PaymentsGetGiveawayInfo(ctx context.Context, m Requester, i PaymentsGetGiveawayInfoRequest) (PaymentsGiveawayInfo, error) {
+func MakePaymentsGetGiveawayInfoRequest(ctx context.Context, m Requester, i PaymentsGetGiveawayInfoRequest) (PaymentsGiveawayInfo, error) {
 	var res PaymentsGiveawayInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -27669,7 +27669,7 @@ func (*PaymentsGetPaymentFormRequest) CRC() uint32 {
 	return 0x37148dbb
 }
 
-func PaymentsGetPaymentForm(ctx context.Context, m Requester, i PaymentsGetPaymentFormRequest) (PaymentsPaymentForm, error) {
+func MakePaymentsGetPaymentFormRequest(ctx context.Context, m Requester, i PaymentsGetPaymentFormRequest) (PaymentsPaymentForm, error) {
 	var res PaymentsPaymentForm
 	return res, request(ctx, m, &i, &res)
 }
@@ -27683,7 +27683,7 @@ func (*PaymentsGetPaymentReceiptRequest) CRC() uint32 {
 	return 0x2478d1cc
 }
 
-func PaymentsGetPaymentReceipt(ctx context.Context, m Requester, i PaymentsGetPaymentReceiptRequest) (PaymentsPaymentReceipt, error) {
+func MakePaymentsGetPaymentReceiptRequest(ctx context.Context, m Requester, i PaymentsGetPaymentReceiptRequest) (PaymentsPaymentReceipt, error) {
 	var res PaymentsPaymentReceipt
 	return res, request(ctx, m, &i, &res)
 }
@@ -27697,7 +27697,7 @@ func (*PaymentsGetPremiumGiftCodeOptionsRequest) CRC() uint32 {
 	return 0x2757ba54
 }
 
-func PaymentsGetPremiumGiftCodeOptions(ctx context.Context, m Requester, i PaymentsGetPremiumGiftCodeOptionsRequest) ([]PremiumGiftCodeOption, error) {
+func MakePaymentsGetPremiumGiftCodeOptionsRequest(ctx context.Context, m Requester, i PaymentsGetPremiumGiftCodeOptionsRequest) ([]PremiumGiftCodeOption, error) {
 	var res []PremiumGiftCodeOption
 	return res, request(ctx, m, &i, &res)
 }
@@ -27708,7 +27708,7 @@ func (*PaymentsGetSavedInfoRequest) CRC() uint32 {
 	return 0x227d824b
 }
 
-func PaymentsGetSavedInfo(ctx context.Context, m Requester, i PaymentsGetSavedInfoRequest) (PaymentsSavedInfo, error) {
+func MakePaymentsGetSavedInfoRequest(ctx context.Context, m Requester, i PaymentsGetSavedInfoRequest) (PaymentsSavedInfo, error) {
 	var res PaymentsSavedInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -27722,7 +27722,7 @@ func (*PaymentsGetStarsGiftOptionsRequest) CRC() uint32 {
 	return 0xd3c96bc8
 }
 
-func PaymentsGetStarsGiftOptions(ctx context.Context, m Requester, i PaymentsGetStarsGiftOptionsRequest) ([]StarsGiftOption, error) {
+func MakePaymentsGetStarsGiftOptionsRequest(ctx context.Context, m Requester, i PaymentsGetStarsGiftOptionsRequest) ([]StarsGiftOption, error) {
 	var res []StarsGiftOption
 	return res, request(ctx, m, &i, &res)
 }
@@ -27735,7 +27735,7 @@ func (*PaymentsGetStarsRevenueAdsAccountURLRequest) CRC() uint32 {
 	return 0xd1d7efc5
 }
 
-func PaymentsGetStarsRevenueAdsAccountURL(ctx context.Context, m Requester, i PaymentsGetStarsRevenueAdsAccountURLRequest) (PaymentsStarsRevenueAdsAccountURL, error) {
+func MakePaymentsGetStarsRevenueAdsAccountURLRequest(ctx context.Context, m Requester, i PaymentsGetStarsRevenueAdsAccountURLRequest) (PaymentsStarsRevenueAdsAccountURL, error) {
 	var res PaymentsStarsRevenueAdsAccountURL
 	return res, request(ctx, m, &i, &res)
 }
@@ -27750,7 +27750,7 @@ func (*PaymentsGetStarsRevenueStatsRequest) CRC() uint32 {
 	return 0xd91ffad6
 }
 
-func PaymentsGetStarsRevenueStats(ctx context.Context, m Requester, i PaymentsGetStarsRevenueStatsRequest) (PaymentsStarsRevenueStats, error) {
+func MakePaymentsGetStarsRevenueStatsRequest(ctx context.Context, m Requester, i PaymentsGetStarsRevenueStatsRequest) (PaymentsStarsRevenueStats, error) {
 	var res PaymentsStarsRevenueStats
 	return res, request(ctx, m, &i, &res)
 }
@@ -27765,7 +27765,7 @@ func (*PaymentsGetStarsRevenueWithdrawalURLRequest) CRC() uint32 {
 	return 0x13bbe8b3
 }
 
-func PaymentsGetStarsRevenueWithdrawalURL(ctx context.Context, m Requester, i PaymentsGetStarsRevenueWithdrawalURLRequest) (PaymentsStarsRevenueWithdrawalURL, error) {
+func MakePaymentsGetStarsRevenueWithdrawalURLRequest(ctx context.Context, m Requester, i PaymentsGetStarsRevenueWithdrawalURLRequest) (PaymentsStarsRevenueWithdrawalURL, error) {
 	var res PaymentsStarsRevenueWithdrawalURL
 	return res, request(ctx, m, &i, &res)
 }
@@ -27778,7 +27778,7 @@ func (*PaymentsGetStarsStatusRequest) CRC() uint32 {
 	return 0x104fcfa7
 }
 
-func PaymentsGetStarsStatus(ctx context.Context, m Requester, i PaymentsGetStarsStatusRequest) (PaymentsStarsStatus, error) {
+func MakePaymentsGetStarsStatusRequest(ctx context.Context, m Requester, i PaymentsGetStarsStatusRequest) (PaymentsStarsStatus, error) {
 	var res PaymentsStarsStatus
 	return res, request(ctx, m, &i, &res)
 }
@@ -27789,7 +27789,7 @@ func (*PaymentsGetStarsTopupOptionsRequest) CRC() uint32 {
 	return 0xc00ec7d3
 }
 
-func PaymentsGetStarsTopupOptions(ctx context.Context, m Requester, i PaymentsGetStarsTopupOptionsRequest) ([]StarsTopupOption, error) {
+func MakePaymentsGetStarsTopupOptionsRequest(ctx context.Context, m Requester, i PaymentsGetStarsTopupOptionsRequest) ([]StarsTopupOption, error) {
 	var res []StarsTopupOption
 	return res, request(ctx, m, &i, &res)
 }
@@ -27808,7 +27808,7 @@ func (*PaymentsGetStarsTransactionsRequest) CRC() uint32 {
 	return 0x97938d5a
 }
 
-func PaymentsGetStarsTransactions(ctx context.Context, m Requester, i PaymentsGetStarsTransactionsRequest) (PaymentsStarsStatus, error) {
+func MakePaymentsGetStarsTransactionsRequest(ctx context.Context, m Requester, i PaymentsGetStarsTransactionsRequest) (PaymentsStarsStatus, error) {
 	var res PaymentsStarsStatus
 	return res, request(ctx, m, &i, &res)
 }
@@ -27822,7 +27822,7 @@ func (*PaymentsGetStarsTransactionsByIDRequest) CRC() uint32 {
 	return 0x27842d2e
 }
 
-func PaymentsGetStarsTransactionsByID(ctx context.Context, m Requester, i PaymentsGetStarsTransactionsByIDRequest) (PaymentsStarsStatus, error) {
+func MakePaymentsGetStarsTransactionsByIDRequest(ctx context.Context, m Requester, i PaymentsGetStarsTransactionsByIDRequest) (PaymentsStarsStatus, error) {
 	var res PaymentsStarsStatus
 	return res, request(ctx, m, &i, &res)
 }
@@ -27837,7 +27837,7 @@ func (*PaymentsLaunchPrepaidGiveawayRequest) CRC() uint32 {
 	return 0x5ff58f20
 }
 
-func PaymentsLaunchPrepaidGiveaway(ctx context.Context, m Requester, i PaymentsLaunchPrepaidGiveawayRequest) (Updates, error) {
+func MakePaymentsLaunchPrepaidGiveawayRequest(ctx context.Context, m Requester, i PaymentsLaunchPrepaidGiveawayRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27851,7 +27851,7 @@ func (*PaymentsRefundStarsChargeRequest) CRC() uint32 {
 	return 0x25ae8f4a
 }
 
-func PaymentsRefundStarsCharge(ctx context.Context, m Requester, i PaymentsRefundStarsChargeRequest) (Updates, error) {
+func MakePaymentsRefundStarsChargeRequest(ctx context.Context, m Requester, i PaymentsRefundStarsChargeRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27870,7 +27870,7 @@ func (*PaymentsSendPaymentFormRequest) CRC() uint32 {
 	return 0x2d03522f
 }
 
-func PaymentsSendPaymentForm(ctx context.Context, m Requester, i PaymentsSendPaymentFormRequest) (PaymentsPaymentResult, error) {
+func MakePaymentsSendPaymentFormRequest(ctx context.Context, m Requester, i PaymentsSendPaymentFormRequest) (PaymentsPaymentResult, error) {
 	var res PaymentsPaymentResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -27885,7 +27885,7 @@ func (*PaymentsSendStarsFormRequest) CRC() uint32 {
 	return 0x02bb731d
 }
 
-func PaymentsSendStarsForm(ctx context.Context, m Requester, i PaymentsSendStarsFormRequest) (PaymentsPaymentResult, error) {
+func MakePaymentsSendStarsFormRequest(ctx context.Context, m Requester, i PaymentsSendStarsFormRequest) (PaymentsPaymentResult, error) {
 	var res PaymentsPaymentResult
 	return res, request(ctx, m, &i, &res)
 }
@@ -27901,7 +27901,7 @@ func (*PaymentsValidateRequestedInfoRequest) CRC() uint32 {
 	return 0xb6c8f12b
 }
 
-func PaymentsValidateRequestedInfo(ctx context.Context, m Requester, i PaymentsValidateRequestedInfoRequest) (PaymentsValidatedRequestedInfo, error) {
+func MakePaymentsValidateRequestedInfoRequest(ctx context.Context, m Requester, i PaymentsValidateRequestedInfoRequest) (PaymentsValidatedRequestedInfo, error) {
 	var res PaymentsValidatedRequestedInfo
 	return res, request(ctx, m, &i, &res)
 }
@@ -27916,7 +27916,7 @@ func (*PhoneAcceptCallRequest) CRC() uint32 {
 	return 0x3bd2b4a0
 }
 
-func PhoneAcceptCall(ctx context.Context, m Requester, i PhoneAcceptCallRequest) (PhonePhoneCall, error) {
+func MakePhoneAcceptCallRequest(ctx context.Context, m Requester, i PhoneAcceptCallRequest) (PhonePhoneCall, error) {
 	var res PhonePhoneCall
 	return res, request(ctx, m, &i, &res)
 }
@@ -27930,7 +27930,7 @@ func (*PhoneCheckGroupCallRequest) CRC() uint32 {
 	return 0xb59cf977
 }
 
-func PhoneCheckGroupCall(ctx context.Context, m Requester, i PhoneCheckGroupCallRequest) ([]int32, error) {
+func MakePhoneCheckGroupCallRequest(ctx context.Context, m Requester, i PhoneCheckGroupCallRequest) ([]int32, error) {
 	var res []int32
 	return res, request(ctx, m, &i, &res)
 }
@@ -27946,7 +27946,7 @@ func (*PhoneConfirmCallRequest) CRC() uint32 {
 	return 0x2efe1722
 }
 
-func PhoneConfirmCall(ctx context.Context, m Requester, i PhoneConfirmCallRequest) (PhonePhoneCall, error) {
+func MakePhoneConfirmCallRequest(ctx context.Context, m Requester, i PhoneConfirmCallRequest) (PhonePhoneCall, error) {
 	var res PhonePhoneCall
 	return res, request(ctx, m, &i, &res)
 }
@@ -27964,7 +27964,7 @@ func (*PhoneCreateGroupCallRequest) CRC() uint32 {
 	return 0x48cdc6d8
 }
 
-func PhoneCreateGroupCall(ctx context.Context, m Requester, i PhoneCreateGroupCallRequest) (Updates, error) {
+func MakePhoneCreateGroupCallRequest(ctx context.Context, m Requester, i PhoneCreateGroupCallRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27982,7 +27982,7 @@ func (*PhoneDiscardCallRequest) CRC() uint32 {
 	return 0xb2cbc1c0
 }
 
-func PhoneDiscardCall(ctx context.Context, m Requester, i PhoneDiscardCallRequest) (Updates, error) {
+func MakePhoneDiscardCallRequest(ctx context.Context, m Requester, i PhoneDiscardCallRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -27995,7 +27995,7 @@ func (*PhoneDiscardGroupCallRequest) CRC() uint32 {
 	return 0x7a777135
 }
 
-func PhoneDiscardGroupCall(ctx context.Context, m Requester, i PhoneDiscardGroupCallRequest) (Updates, error) {
+func MakePhoneDiscardGroupCallRequest(ctx context.Context, m Requester, i PhoneDiscardGroupCallRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28016,7 +28016,7 @@ func (*PhoneEditGroupCallParticipantRequest) CRC() uint32 {
 	return 0xa5273abf
 }
 
-func PhoneEditGroupCallParticipant(ctx context.Context, m Requester, i PhoneEditGroupCallParticipantRequest) (Updates, error) {
+func MakePhoneEditGroupCallParticipantRequest(ctx context.Context, m Requester, i PhoneEditGroupCallParticipantRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28030,7 +28030,7 @@ func (*PhoneEditGroupCallTitleRequest) CRC() uint32 {
 	return 0x1ca6ac0a
 }
 
-func PhoneEditGroupCallTitle(ctx context.Context, m Requester, i PhoneEditGroupCallTitleRequest) (Updates, error) {
+func MakePhoneEditGroupCallTitleRequest(ctx context.Context, m Requester, i PhoneEditGroupCallTitleRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28045,7 +28045,7 @@ func (*PhoneExportGroupCallInviteRequest) CRC() uint32 {
 	return 0xe6aa647f
 }
 
-func PhoneExportGroupCallInvite(ctx context.Context, m Requester, i PhoneExportGroupCallInviteRequest) (PhoneExportedGroupCallInvite, error) {
+func MakePhoneExportGroupCallInviteRequest(ctx context.Context, m Requester, i PhoneExportGroupCallInviteRequest) (PhoneExportedGroupCallInvite, error) {
 	var res PhoneExportedGroupCallInvite
 	return res, request(ctx, m, &i, &res)
 }
@@ -28056,7 +28056,7 @@ func (*PhoneGetCallConfigRequest) CRC() uint32 {
 	return 0x55451fa9
 }
 
-func PhoneGetCallConfig(ctx context.Context, m Requester, i PhoneGetCallConfigRequest) (DataJSON, error) {
+func MakePhoneGetCallConfigRequest(ctx context.Context, m Requester, i PhoneGetCallConfigRequest) (DataJSON, error) {
 	var res DataJSON
 	return res, request(ctx, m, &i, &res)
 }
@@ -28070,7 +28070,7 @@ func (*PhoneGetGroupCallRequest) CRC() uint32 {
 	return 0x041845db
 }
 
-func PhoneGetGroupCall(ctx context.Context, m Requester, i PhoneGetGroupCallRequest) (PhoneGroupCall, error) {
+func MakePhoneGetGroupCallRequest(ctx context.Context, m Requester, i PhoneGetGroupCallRequest) (PhoneGroupCall, error) {
 	var res PhoneGroupCall
 	return res, request(ctx, m, &i, &res)
 }
@@ -28083,7 +28083,7 @@ func (*PhoneGetGroupCallJoinAsRequest) CRC() uint32 {
 	return 0xef7c213a
 }
 
-func PhoneGetGroupCallJoinAs(ctx context.Context, m Requester, i PhoneGetGroupCallJoinAsRequest) (PhoneJoinAsPeers, error) {
+func MakePhoneGetGroupCallJoinAsRequest(ctx context.Context, m Requester, i PhoneGetGroupCallJoinAsRequest) (PhoneJoinAsPeers, error) {
 	var res PhoneJoinAsPeers
 	return res, request(ctx, m, &i, &res)
 }
@@ -28096,7 +28096,7 @@ func (*PhoneGetGroupCallStreamChannelsRequest) CRC() uint32 {
 	return 0x1ab21940
 }
 
-func PhoneGetGroupCallStreamChannels(ctx context.Context, m Requester, i PhoneGetGroupCallStreamChannelsRequest) (PhoneGroupCallStreamChannels, error) {
+func MakePhoneGetGroupCallStreamChannelsRequest(ctx context.Context, m Requester, i PhoneGetGroupCallStreamChannelsRequest) (PhoneGroupCallStreamChannels, error) {
 	var res PhoneGroupCallStreamChannels
 	return res, request(ctx, m, &i, &res)
 }
@@ -28110,7 +28110,7 @@ func (*PhoneGetGroupCallStreamRtmpURLRequest) CRC() uint32 {
 	return 0xdeb3abbf
 }
 
-func PhoneGetGroupCallStreamRtmpURL(ctx context.Context, m Requester, i PhoneGetGroupCallStreamRtmpURLRequest) (PhoneGroupCallStreamRtmpURL, error) {
+func MakePhoneGetGroupCallStreamRtmpURLRequest(ctx context.Context, m Requester, i PhoneGetGroupCallStreamRtmpURLRequest) (PhoneGroupCallStreamRtmpURL, error) {
 	var res PhoneGroupCallStreamRtmpURL
 	return res, request(ctx, m, &i, &res)
 }
@@ -28127,7 +28127,7 @@ func (*PhoneGetGroupParticipantsRequest) CRC() uint32 {
 	return 0xc558d8ab
 }
 
-func PhoneGetGroupParticipants(ctx context.Context, m Requester, i PhoneGetGroupParticipantsRequest) (PhoneGroupParticipants, error) {
+func MakePhoneGetGroupParticipantsRequest(ctx context.Context, m Requester, i PhoneGetGroupParticipantsRequest) (PhoneGroupParticipants, error) {
 	var res PhoneGroupParticipants
 	return res, request(ctx, m, &i, &res)
 }
@@ -28141,7 +28141,7 @@ func (*PhoneInviteToGroupCallRequest) CRC() uint32 {
 	return 0x7b393160
 }
 
-func PhoneInviteToGroupCall(ctx context.Context, m Requester, i PhoneInviteToGroupCallRequest) (Updates, error) {
+func MakePhoneInviteToGroupCallRequest(ctx context.Context, m Requester, i PhoneInviteToGroupCallRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28160,7 +28160,7 @@ func (*PhoneJoinGroupCallRequest) CRC() uint32 {
 	return 0xb132ff7b
 }
 
-func PhoneJoinGroupCall(ctx context.Context, m Requester, i PhoneJoinGroupCallRequest) (Updates, error) {
+func MakePhoneJoinGroupCallRequest(ctx context.Context, m Requester, i PhoneJoinGroupCallRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28174,7 +28174,7 @@ func (*PhoneJoinGroupCallPresentationRequest) CRC() uint32 {
 	return 0xcbea6bc4
 }
 
-func PhoneJoinGroupCallPresentation(ctx context.Context, m Requester, i PhoneJoinGroupCallPresentationRequest) (Updates, error) {
+func MakePhoneJoinGroupCallPresentationRequest(ctx context.Context, m Requester, i PhoneJoinGroupCallPresentationRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28188,7 +28188,7 @@ func (*PhoneLeaveGroupCallRequest) CRC() uint32 {
 	return 0x500377f9
 }
 
-func PhoneLeaveGroupCall(ctx context.Context, m Requester, i PhoneLeaveGroupCallRequest) (Updates, error) {
+func MakePhoneLeaveGroupCallRequest(ctx context.Context, m Requester, i PhoneLeaveGroupCallRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28201,7 +28201,7 @@ func (*PhoneLeaveGroupCallPresentationRequest) CRC() uint32 {
 	return 0x1c50d144
 }
 
-func PhoneLeaveGroupCallPresentation(ctx context.Context, m Requester, i PhoneLeaveGroupCallPresentationRequest) (Updates, error) {
+func MakePhoneLeaveGroupCallPresentationRequest(ctx context.Context, m Requester, i PhoneLeaveGroupCallPresentationRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28214,7 +28214,7 @@ func (*PhoneReceivedCallRequest) CRC() uint32 {
 	return 0x17d54f61
 }
 
-func PhoneReceivedCall(ctx context.Context, m Requester, i PhoneReceivedCallRequest) (bool, error) {
+func MakePhoneReceivedCallRequest(ctx context.Context, m Requester, i PhoneReceivedCallRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28232,7 +28232,7 @@ func (*PhoneRequestCallRequest) CRC() uint32 {
 	return 0x42ff96ed
 }
 
-func PhoneRequestCall(ctx context.Context, m Requester, i PhoneRequestCallRequest) (PhonePhoneCall, error) {
+func MakePhoneRequestCallRequest(ctx context.Context, m Requester, i PhoneRequestCallRequest) (PhonePhoneCall, error) {
 	var res PhonePhoneCall
 	return res, request(ctx, m, &i, &res)
 }
@@ -28246,7 +28246,7 @@ func (*PhoneSaveCallDebugRequest) CRC() uint32 {
 	return 0x277add7e
 }
 
-func PhoneSaveCallDebug(ctx context.Context, m Requester, i PhoneSaveCallDebugRequest) (bool, error) {
+func MakePhoneSaveCallDebugRequest(ctx context.Context, m Requester, i PhoneSaveCallDebugRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28260,7 +28260,7 @@ func (*PhoneSaveCallLogRequest) CRC() uint32 {
 	return 0x41248786
 }
 
-func PhoneSaveCallLog(ctx context.Context, m Requester, i PhoneSaveCallLogRequest) (bool, error) {
+func MakePhoneSaveCallLogRequest(ctx context.Context, m Requester, i PhoneSaveCallLogRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28274,7 +28274,7 @@ func (*PhoneSaveDefaultGroupCallJoinAsRequest) CRC() uint32 {
 	return 0x575e1f8c
 }
 
-func PhoneSaveDefaultGroupCallJoinAs(ctx context.Context, m Requester, i PhoneSaveDefaultGroupCallJoinAsRequest) (bool, error) {
+func MakePhoneSaveDefaultGroupCallJoinAsRequest(ctx context.Context, m Requester, i PhoneSaveDefaultGroupCallJoinAsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28288,7 +28288,7 @@ func (*PhoneSendSignalingDataRequest) CRC() uint32 {
 	return 0xff7a9383
 }
 
-func PhoneSendSignalingData(ctx context.Context, m Requester, i PhoneSendSignalingDataRequest) (bool, error) {
+func MakePhoneSendSignalingDataRequest(ctx context.Context, m Requester, i PhoneSendSignalingDataRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28305,7 +28305,7 @@ func (*PhoneSetCallRatingRequest) CRC() uint32 {
 	return 0x59ead627
 }
 
-func PhoneSetCallRating(ctx context.Context, m Requester, i PhoneSetCallRatingRequest) (Updates, error) {
+func MakePhoneSetCallRatingRequest(ctx context.Context, m Requester, i PhoneSetCallRatingRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28318,7 +28318,7 @@ func (*PhoneStartScheduledGroupCallRequest) CRC() uint32 {
 	return 0x5680e342
 }
 
-func PhoneStartScheduledGroupCall(ctx context.Context, m Requester, i PhoneStartScheduledGroupCallRequest) (Updates, error) {
+func MakePhoneStartScheduledGroupCallRequest(ctx context.Context, m Requester, i PhoneStartScheduledGroupCallRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28336,7 +28336,7 @@ func (*PhoneToggleGroupCallRecordRequest) CRC() uint32 {
 	return 0xf128c708
 }
 
-func PhoneToggleGroupCallRecord(ctx context.Context, m Requester, i PhoneToggleGroupCallRecordRequest) (Updates, error) {
+func MakePhoneToggleGroupCallRecordRequest(ctx context.Context, m Requester, i PhoneToggleGroupCallRecordRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28352,7 +28352,7 @@ func (*PhoneToggleGroupCallSettingsRequest) CRC() uint32 {
 	return 0x74bbb43d
 }
 
-func PhoneToggleGroupCallSettings(ctx context.Context, m Requester, i PhoneToggleGroupCallSettingsRequest) (Updates, error) {
+func MakePhoneToggleGroupCallSettingsRequest(ctx context.Context, m Requester, i PhoneToggleGroupCallSettingsRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28366,7 +28366,7 @@ func (*PhoneToggleGroupCallStartSubscriptionRequest) CRC() uint32 {
 	return 0x219c34e6
 }
 
-func PhoneToggleGroupCallStartSubscription(ctx context.Context, m Requester, i PhoneToggleGroupCallStartSubscriptionRequest) (Updates, error) {
+func MakePhoneToggleGroupCallStartSubscriptionRequest(ctx context.Context, m Requester, i PhoneToggleGroupCallStartSubscriptionRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28379,7 +28379,7 @@ func (*PhotosDeletePhotosRequest) CRC() uint32 {
 	return 0x87cf7f2f
 }
 
-func PhotosDeletePhotos(ctx context.Context, m Requester, i PhotosDeletePhotosRequest) ([]int64, error) {
+func MakePhotosDeletePhotosRequest(ctx context.Context, m Requester, i PhotosDeletePhotosRequest) ([]int64, error) {
 	var res []int64
 	return res, request(ctx, m, &i, &res)
 }
@@ -28395,7 +28395,7 @@ func (*PhotosGetUserPhotosRequest) CRC() uint32 {
 	return 0x91cd32a8
 }
 
-func PhotosGetUserPhotos(ctx context.Context, m Requester, i PhotosGetUserPhotosRequest) (PhotosPhotos, error) {
+func MakePhotosGetUserPhotosRequest(ctx context.Context, m Requester, i PhotosGetUserPhotosRequest) (PhotosPhotos, error) {
 	var res PhotosPhotos
 	return res, request(ctx, m, &i, &res)
 }
@@ -28411,7 +28411,7 @@ func (*PhotosUpdateProfilePhotoRequest) CRC() uint32 {
 	return 0x09e82039
 }
 
-func PhotosUpdateProfilePhoto(ctx context.Context, m Requester, i PhotosUpdateProfilePhotoRequest) (PhotosPhoto, error) {
+func MakePhotosUpdateProfilePhotoRequest(ctx context.Context, m Requester, i PhotosUpdateProfilePhotoRequest) (PhotosPhoto, error) {
 	var res PhotosPhoto
 	return res, request(ctx, m, &i, &res)
 }
@@ -28431,7 +28431,7 @@ func (*PhotosUploadContactProfilePhotoRequest) CRC() uint32 {
 	return 0xe14c4a71
 }
 
-func PhotosUploadContactProfilePhoto(ctx context.Context, m Requester, i PhotosUploadContactProfilePhotoRequest) (PhotosPhoto, error) {
+func MakePhotosUploadContactProfilePhotoRequest(ctx context.Context, m Requester, i PhotosUploadContactProfilePhotoRequest) (PhotosPhoto, error) {
 	var res PhotosPhoto
 	return res, request(ctx, m, &i, &res)
 }
@@ -28450,7 +28450,7 @@ func (*PhotosUploadProfilePhotoRequest) CRC() uint32 {
 	return 0x0388a3b5
 }
 
-func PhotosUploadProfilePhoto(ctx context.Context, m Requester, i PhotosUploadProfilePhotoRequest) (PhotosPhoto, error) {
+func MakePhotosUploadProfilePhotoRequest(ctx context.Context, m Requester, i PhotosUploadProfilePhotoRequest) (PhotosPhoto, error) {
 	var res PhotosPhoto
 	return res, request(ctx, m, &i, &res)
 }
@@ -28465,7 +28465,7 @@ func (*PremiumApplyBoostRequest) CRC() uint32 {
 	return 0x6b7da746
 }
 
-func PremiumApplyBoost(ctx context.Context, m Requester, i PremiumApplyBoostRequest) (PremiumMyBoosts, error) {
+func MakePremiumApplyBoostRequest(ctx context.Context, m Requester, i PremiumApplyBoostRequest) (PremiumMyBoosts, error) {
 	var res PremiumMyBoosts
 	return res, request(ctx, m, &i, &res)
 }
@@ -28482,7 +28482,7 @@ func (*PremiumGetBoostsListRequest) CRC() uint32 {
 	return 0x60f67660
 }
 
-func PremiumGetBoostsList(ctx context.Context, m Requester, i PremiumGetBoostsListRequest) (PremiumBoostsList, error) {
+func MakePremiumGetBoostsListRequest(ctx context.Context, m Requester, i PremiumGetBoostsListRequest) (PremiumBoostsList, error) {
 	var res PremiumBoostsList
 	return res, request(ctx, m, &i, &res)
 }
@@ -28495,7 +28495,7 @@ func (*PremiumGetBoostsStatusRequest) CRC() uint32 {
 	return 0x042f1f61
 }
 
-func PremiumGetBoostsStatus(ctx context.Context, m Requester, i PremiumGetBoostsStatusRequest) (PremiumBoostsStatus, error) {
+func MakePremiumGetBoostsStatusRequest(ctx context.Context, m Requester, i PremiumGetBoostsStatusRequest) (PremiumBoostsStatus, error) {
 	var res PremiumBoostsStatus
 	return res, request(ctx, m, &i, &res)
 }
@@ -28506,7 +28506,7 @@ func (*PremiumGetMyBoostsRequest) CRC() uint32 {
 	return 0x0be77b4a
 }
 
-func PremiumGetMyBoosts(ctx context.Context, m Requester, i PremiumGetMyBoostsRequest) (PremiumMyBoosts, error) {
+func MakePremiumGetMyBoostsRequest(ctx context.Context, m Requester, i PremiumGetMyBoostsRequest) (PremiumMyBoosts, error) {
 	var res PremiumMyBoosts
 	return res, request(ctx, m, &i, &res)
 }
@@ -28520,7 +28520,7 @@ func (*PremiumGetUserBoostsRequest) CRC() uint32 {
 	return 0x39854d1f
 }
 
-func PremiumGetUserBoosts(ctx context.Context, m Requester, i PremiumGetUserBoostsRequest) (PremiumBoostsList, error) {
+func MakePremiumGetUserBoostsRequest(ctx context.Context, m Requester, i PremiumGetUserBoostsRequest) (PremiumBoostsList, error) {
 	var res PremiumBoostsList
 	return res, request(ctx, m, &i, &res)
 }
@@ -28535,7 +28535,7 @@ func (*SmsjobsFinishJobRequest) CRC() uint32 {
 	return 0x4f1ebf24
 }
 
-func SmsjobsFinishJob(ctx context.Context, m Requester, i SmsjobsFinishJobRequest) (bool, error) {
+func MakeSmsjobsFinishJobRequest(ctx context.Context, m Requester, i SmsjobsFinishJobRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28548,7 +28548,7 @@ func (*SmsjobsGetSmsJobRequest) CRC() uint32 {
 	return 0x778d902f
 }
 
-func SmsjobsGetSmsJob(ctx context.Context, m Requester, i SmsjobsGetSmsJobRequest) (SmsJob, error) {
+func MakeSmsjobsGetSmsJobRequest(ctx context.Context, m Requester, i SmsjobsGetSmsJobRequest) (SmsJob, error) {
 	var res SmsJob
 	return res, request(ctx, m, &i, &res)
 }
@@ -28559,7 +28559,7 @@ func (*SmsjobsGetStatusRequest) CRC() uint32 {
 	return 0x10a698e8
 }
 
-func SmsjobsGetStatus(ctx context.Context, m Requester, i SmsjobsGetStatusRequest) (SmsjobsStatus, error) {
+func MakeSmsjobsGetStatusRequest(ctx context.Context, m Requester, i SmsjobsGetStatusRequest) (SmsjobsStatus, error) {
 	var res SmsjobsStatus
 	return res, request(ctx, m, &i, &res)
 }
@@ -28570,7 +28570,7 @@ func (*SmsjobsIsEligibleToJoinRequest) CRC() uint32 {
 	return 0x0edc39d0
 }
 
-func SmsjobsIsEligibleToJoin(ctx context.Context, m Requester, i SmsjobsIsEligibleToJoinRequest) (SmsjobsEligibilityToJoin, error) {
+func MakeSmsjobsIsEligibleToJoinRequest(ctx context.Context, m Requester, i SmsjobsIsEligibleToJoinRequest) (SmsjobsEligibilityToJoin, error) {
 	var res SmsjobsEligibilityToJoin
 	return res, request(ctx, m, &i, &res)
 }
@@ -28581,7 +28581,7 @@ func (*SmsjobsJoinRequest) CRC() uint32 {
 	return 0xa74ece2d
 }
 
-func SmsjobsJoin(ctx context.Context, m Requester, i SmsjobsJoinRequest) (bool, error) {
+func MakeSmsjobsJoinRequest(ctx context.Context, m Requester, i SmsjobsJoinRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28592,7 +28592,7 @@ func (*SmsjobsLeaveRequest) CRC() uint32 {
 	return 0x9898ad73
 }
 
-func SmsjobsLeave(ctx context.Context, m Requester, i SmsjobsLeaveRequest) (bool, error) {
+func MakeSmsjobsLeaveRequest(ctx context.Context, m Requester, i SmsjobsLeaveRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28606,7 +28606,7 @@ func (*SmsjobsUpdateSettingsRequest) CRC() uint32 {
 	return 0x093fa0bf
 }
 
-func SmsjobsUpdateSettings(ctx context.Context, m Requester, i SmsjobsUpdateSettingsRequest) (bool, error) {
+func MakeSmsjobsUpdateSettingsRequest(ctx context.Context, m Requester, i SmsjobsUpdateSettingsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28621,7 +28621,7 @@ func (*StatsGetBroadcastRevenueStatsRequest) CRC() uint32 {
 	return 0x75dfb671
 }
 
-func StatsGetBroadcastRevenueStats(ctx context.Context, m Requester, i StatsGetBroadcastRevenueStatsRequest) (StatsBroadcastRevenueStats, error) {
+func MakeStatsGetBroadcastRevenueStatsRequest(ctx context.Context, m Requester, i StatsGetBroadcastRevenueStatsRequest) (StatsBroadcastRevenueStats, error) {
 	var res StatsBroadcastRevenueStats
 	return res, request(ctx, m, &i, &res)
 }
@@ -28636,7 +28636,7 @@ func (*StatsGetBroadcastRevenueTransactionsRequest) CRC() uint32 {
 	return 0x0069280f
 }
 
-func StatsGetBroadcastRevenueTransactions(ctx context.Context, m Requester, i StatsGetBroadcastRevenueTransactionsRequest) (StatsBroadcastRevenueTransactions, error) {
+func MakeStatsGetBroadcastRevenueTransactionsRequest(ctx context.Context, m Requester, i StatsGetBroadcastRevenueTransactionsRequest) (StatsBroadcastRevenueTransactions, error) {
 	var res StatsBroadcastRevenueTransactions
 	return res, request(ctx, m, &i, &res)
 }
@@ -28650,7 +28650,7 @@ func (*StatsGetBroadcastRevenueWithdrawalURLRequest) CRC() uint32 {
 	return 0x2a65ef73
 }
 
-func StatsGetBroadcastRevenueWithdrawalURL(ctx context.Context, m Requester, i StatsGetBroadcastRevenueWithdrawalURLRequest) (StatsBroadcastRevenueWithdrawalURL, error) {
+func MakeStatsGetBroadcastRevenueWithdrawalURLRequest(ctx context.Context, m Requester, i StatsGetBroadcastRevenueWithdrawalURLRequest) (StatsBroadcastRevenueWithdrawalURL, error) {
 	var res StatsBroadcastRevenueWithdrawalURL
 	return res, request(ctx, m, &i, &res)
 }
@@ -28665,7 +28665,7 @@ func (*StatsGetBroadcastStatsRequest) CRC() uint32 {
 	return 0xab42441a
 }
 
-func StatsGetBroadcastStats(ctx context.Context, m Requester, i StatsGetBroadcastStatsRequest) (StatsBroadcastStats, error) {
+func MakeStatsGetBroadcastStatsRequest(ctx context.Context, m Requester, i StatsGetBroadcastStatsRequest) (StatsBroadcastStats, error) {
 	var res StatsBroadcastStats
 	return res, request(ctx, m, &i, &res)
 }
@@ -28680,7 +28680,7 @@ func (*StatsGetMegagroupStatsRequest) CRC() uint32 {
 	return 0xdcdf8607
 }
 
-func StatsGetMegagroupStats(ctx context.Context, m Requester, i StatsGetMegagroupStatsRequest) (StatsMegagroupStats, error) {
+func MakeStatsGetMegagroupStatsRequest(ctx context.Context, m Requester, i StatsGetMegagroupStatsRequest) (StatsMegagroupStats, error) {
 	var res StatsMegagroupStats
 	return res, request(ctx, m, &i, &res)
 }
@@ -28696,7 +28696,7 @@ func (*StatsGetMessagePublicForwardsRequest) CRC() uint32 {
 	return 0x5f150144
 }
 
-func StatsGetMessagePublicForwards(ctx context.Context, m Requester, i StatsGetMessagePublicForwardsRequest) (StatsPublicForwards, error) {
+func MakeStatsGetMessagePublicForwardsRequest(ctx context.Context, m Requester, i StatsGetMessagePublicForwardsRequest) (StatsPublicForwards, error) {
 	var res StatsPublicForwards
 	return res, request(ctx, m, &i, &res)
 }
@@ -28712,7 +28712,7 @@ func (*StatsGetMessageStatsRequest) CRC() uint32 {
 	return 0xb6e0a3f5
 }
 
-func StatsGetMessageStats(ctx context.Context, m Requester, i StatsGetMessageStatsRequest) (StatsMessageStats, error) {
+func MakeStatsGetMessageStatsRequest(ctx context.Context, m Requester, i StatsGetMessageStatsRequest) (StatsMessageStats, error) {
 	var res StatsMessageStats
 	return res, request(ctx, m, &i, &res)
 }
@@ -28728,7 +28728,7 @@ func (*StatsGetStoryPublicForwardsRequest) CRC() uint32 {
 	return 0xa6437ef6
 }
 
-func StatsGetStoryPublicForwards(ctx context.Context, m Requester, i StatsGetStoryPublicForwardsRequest) (StatsPublicForwards, error) {
+func MakeStatsGetStoryPublicForwardsRequest(ctx context.Context, m Requester, i StatsGetStoryPublicForwardsRequest) (StatsPublicForwards, error) {
 	var res StatsPublicForwards
 	return res, request(ctx, m, &i, &res)
 }
@@ -28744,7 +28744,7 @@ func (*StatsGetStoryStatsRequest) CRC() uint32 {
 	return 0x374fef40
 }
 
-func StatsGetStoryStats(ctx context.Context, m Requester, i StatsGetStoryStatsRequest) (StatsStoryStats, error) {
+func MakeStatsGetStoryStatsRequest(ctx context.Context, m Requester, i StatsGetStoryStatsRequest) (StatsStoryStats, error) {
 	var res StatsStoryStats
 	return res, request(ctx, m, &i, &res)
 }
@@ -28759,7 +28759,7 @@ func (*StatsLoadAsyncGraphRequest) CRC() uint32 {
 	return 0x621d5fa0
 }
 
-func StatsLoadAsyncGraph(ctx context.Context, m Requester, i StatsLoadAsyncGraphRequest) (StatsGraph, error) {
+func MakeStatsLoadAsyncGraphRequest(ctx context.Context, m Requester, i StatsLoadAsyncGraphRequest) (StatsGraph, error) {
 	var res StatsGraph
 	return res, request(ctx, m, &i, &res)
 }
@@ -28773,7 +28773,7 @@ func (*StickersAddStickerToSetRequest) CRC() uint32 {
 	return 0x8653febe
 }
 
-func StickersAddStickerToSet(ctx context.Context, m Requester, i StickersAddStickerToSetRequest) (MessagesStickerSet, error) {
+func MakeStickersAddStickerToSetRequest(ctx context.Context, m Requester, i StickersAddStickerToSetRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -28790,7 +28790,7 @@ func (*StickersChangeStickerRequest) CRC() uint32 {
 	return 0xf5537ebc
 }
 
-func StickersChangeSticker(ctx context.Context, m Requester, i StickersChangeStickerRequest) (MessagesStickerSet, error) {
+func MakeStickersChangeStickerRequest(ctx context.Context, m Requester, i StickersChangeStickerRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -28804,7 +28804,7 @@ func (*StickersChangeStickerPositionRequest) CRC() uint32 {
 	return 0xffb6d4ca
 }
 
-func StickersChangeStickerPosition(ctx context.Context, m Requester, i StickersChangeStickerPositionRequest) (MessagesStickerSet, error) {
+func MakeStickersChangeStickerPositionRequest(ctx context.Context, m Requester, i StickersChangeStickerPositionRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -28817,7 +28817,7 @@ func (*StickersCheckShortNameRequest) CRC() uint32 {
 	return 0x284b3639
 }
 
-func StickersCheckShortName(ctx context.Context, m Requester, i StickersCheckShortNameRequest) (bool, error) {
+func MakeStickersCheckShortNameRequest(ctx context.Context, m Requester, i StickersCheckShortNameRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28839,7 +28839,7 @@ func (*StickersCreateStickerSetRequest) CRC() uint32 {
 	return 0x9021ab67
 }
 
-func StickersCreateStickerSet(ctx context.Context, m Requester, i StickersCreateStickerSetRequest) (MessagesStickerSet, error) {
+func MakeStickersCreateStickerSetRequest(ctx context.Context, m Requester, i StickersCreateStickerSetRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -28852,7 +28852,7 @@ func (*StickersDeleteStickerSetRequest) CRC() uint32 {
 	return 0x87704394
 }
 
-func StickersDeleteStickerSet(ctx context.Context, m Requester, i StickersDeleteStickerSetRequest) (bool, error) {
+func MakeStickersDeleteStickerSetRequest(ctx context.Context, m Requester, i StickersDeleteStickerSetRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28865,7 +28865,7 @@ func (*StickersRemoveStickerFromSetRequest) CRC() uint32 {
 	return 0xf7760f51
 }
 
-func StickersRemoveStickerFromSet(ctx context.Context, m Requester, i StickersRemoveStickerFromSetRequest) (MessagesStickerSet, error) {
+func MakeStickersRemoveStickerFromSetRequest(ctx context.Context, m Requester, i StickersRemoveStickerFromSetRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -28879,7 +28879,7 @@ func (*StickersRenameStickerSetRequest) CRC() uint32 {
 	return 0x124b1c00
 }
 
-func StickersRenameStickerSet(ctx context.Context, m Requester, i StickersRenameStickerSetRequest) (MessagesStickerSet, error) {
+func MakeStickersRenameStickerSetRequest(ctx context.Context, m Requester, i StickersRenameStickerSetRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -28893,7 +28893,7 @@ func (*StickersReplaceStickerRequest) CRC() uint32 {
 	return 0x4696459a
 }
 
-func StickersReplaceSticker(ctx context.Context, m Requester, i StickersReplaceStickerRequest) (MessagesStickerSet, error) {
+func MakeStickersReplaceStickerRequest(ctx context.Context, m Requester, i StickersReplaceStickerRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -28909,7 +28909,7 @@ func (*StickersSetStickerSetThumbRequest) CRC() uint32 {
 	return 0xa76a5392
 }
 
-func StickersSetStickerSetThumb(ctx context.Context, m Requester, i StickersSetStickerSetThumbRequest) (MessagesStickerSet, error) {
+func MakeStickersSetStickerSetThumbRequest(ctx context.Context, m Requester, i StickersSetStickerSetThumbRequest) (MessagesStickerSet, error) {
 	var res MessagesStickerSet
 	return res, request(ctx, m, &i, &res)
 }
@@ -28922,7 +28922,7 @@ func (*StickersSuggestShortNameRequest) CRC() uint32 {
 	return 0x4dafc503
 }
 
-func StickersSuggestShortName(ctx context.Context, m Requester, i StickersSuggestShortNameRequest) (StickersSuggestedShortName, error) {
+func MakeStickersSuggestShortNameRequest(ctx context.Context, m Requester, i StickersSuggestShortNameRequest) (StickersSuggestedShortName, error) {
 	var res StickersSuggestedShortName
 	return res, request(ctx, m, &i, &res)
 }
@@ -28937,7 +28937,7 @@ func (*StoriesActivateStealthModeRequest) CRC() uint32 {
 	return 0x57bbd166
 }
 
-func StoriesActivateStealthMode(ctx context.Context, m Requester, i StoriesActivateStealthModeRequest) (Updates, error) {
+func MakeStoriesActivateStealthModeRequest(ctx context.Context, m Requester, i StoriesActivateStealthModeRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28950,7 +28950,7 @@ func (*StoriesCanSendStoryRequest) CRC() uint32 {
 	return 0xc7dfdfdd
 }
 
-func StoriesCanSendStory(ctx context.Context, m Requester, i StoriesCanSendStoryRequest) (bool, error) {
+func MakeStoriesCanSendStoryRequest(ctx context.Context, m Requester, i StoriesCanSendStoryRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -28964,7 +28964,7 @@ func (*StoriesDeleteStoriesRequest) CRC() uint32 {
 	return 0xae59db5f
 }
 
-func StoriesDeleteStories(ctx context.Context, m Requester, i StoriesDeleteStoriesRequest) ([]int32, error) {
+func MakeStoriesDeleteStoriesRequest(ctx context.Context, m Requester, i StoriesDeleteStoriesRequest) ([]int32, error) {
 	var res []int32
 	return res, request(ctx, m, &i, &res)
 }
@@ -28984,7 +28984,7 @@ func (*StoriesEditStoryRequest) CRC() uint32 {
 	return 0xb583ba46
 }
 
-func StoriesEditStory(ctx context.Context, m Requester, i StoriesEditStoryRequest) (Updates, error) {
+func MakeStoriesEditStoryRequest(ctx context.Context, m Requester, i StoriesEditStoryRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -28998,7 +28998,7 @@ func (*StoriesExportStoryLinkRequest) CRC() uint32 {
 	return 0x7b8def20
 }
 
-func StoriesExportStoryLink(ctx context.Context, m Requester, i StoriesExportStoryLinkRequest) (ExportedStoryLink, error) {
+func MakeStoriesExportStoryLinkRequest(ctx context.Context, m Requester, i StoriesExportStoryLinkRequest) (ExportedStoryLink, error) {
 	var res ExportedStoryLink
 	return res, request(ctx, m, &i, &res)
 }
@@ -29009,7 +29009,7 @@ func (*StoriesGetAllReadPeerStoriesRequest) CRC() uint32 {
 	return 0x9b5ae7f9
 }
 
-func StoriesGetAllReadPeerStories(ctx context.Context, m Requester, i StoriesGetAllReadPeerStoriesRequest) (Updates, error) {
+func MakeStoriesGetAllReadPeerStoriesRequest(ctx context.Context, m Requester, i StoriesGetAllReadPeerStoriesRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -29025,7 +29025,7 @@ func (*StoriesGetAllStoriesRequest) CRC() uint32 {
 	return 0xeeb0d625
 }
 
-func StoriesGetAllStories(ctx context.Context, m Requester, i StoriesGetAllStoriesRequest) (StoriesAllStories, error) {
+func MakeStoriesGetAllStoriesRequest(ctx context.Context, m Requester, i StoriesGetAllStoriesRequest) (StoriesAllStories, error) {
 	var res StoriesAllStories
 	return res, request(ctx, m, &i, &res)
 }
@@ -29036,7 +29036,7 @@ func (*StoriesGetChatsToSendRequest) CRC() uint32 {
 	return 0xa56a8b60
 }
 
-func StoriesGetChatsToSend(ctx context.Context, m Requester, i StoriesGetChatsToSendRequest) (MessagesChats, error) {
+func MakeStoriesGetChatsToSendRequest(ctx context.Context, m Requester, i StoriesGetChatsToSendRequest) (MessagesChats, error) {
 	var res MessagesChats
 	return res, request(ctx, m, &i, &res)
 }
@@ -29049,7 +29049,7 @@ func (*StoriesGetPeerMaxIDsRequest) CRC() uint32 {
 	return 0x535983c3
 }
 
-func StoriesGetPeerMaxIDs(ctx context.Context, m Requester, i StoriesGetPeerMaxIDsRequest) ([]int32, error) {
+func MakeStoriesGetPeerMaxIDsRequest(ctx context.Context, m Requester, i StoriesGetPeerMaxIDsRequest) ([]int32, error) {
 	var res []int32
 	return res, request(ctx, m, &i, &res)
 }
@@ -29062,7 +29062,7 @@ func (*StoriesGetPeerStoriesRequest) CRC() uint32 {
 	return 0x2c4ada50
 }
 
-func StoriesGetPeerStories(ctx context.Context, m Requester, i StoriesGetPeerStoriesRequest) (StoriesPeerStories, error) {
+func MakeStoriesGetPeerStoriesRequest(ctx context.Context, m Requester, i StoriesGetPeerStoriesRequest) (StoriesPeerStories, error) {
 	var res StoriesPeerStories
 	return res, request(ctx, m, &i, &res)
 }
@@ -29077,7 +29077,7 @@ func (*StoriesGetPinnedStoriesRequest) CRC() uint32 {
 	return 0x5821a5dc
 }
 
-func StoriesGetPinnedStories(ctx context.Context, m Requester, i StoriesGetPinnedStoriesRequest) (StoriesStories, error) {
+func MakeStoriesGetPinnedStoriesRequest(ctx context.Context, m Requester, i StoriesGetPinnedStoriesRequest) (StoriesStories, error) {
 	var res StoriesStories
 	return res, request(ctx, m, &i, &res)
 }
@@ -29092,7 +29092,7 @@ func (*StoriesGetStoriesArchiveRequest) CRC() uint32 {
 	return 0xb4352016
 }
 
-func StoriesGetStoriesArchive(ctx context.Context, m Requester, i StoriesGetStoriesArchiveRequest) (StoriesStories, error) {
+func MakeStoriesGetStoriesArchiveRequest(ctx context.Context, m Requester, i StoriesGetStoriesArchiveRequest) (StoriesStories, error) {
 	var res StoriesStories
 	return res, request(ctx, m, &i, &res)
 }
@@ -29106,7 +29106,7 @@ func (*StoriesGetStoriesByIDRequest) CRC() uint32 {
 	return 0x5774ca74
 }
 
-func StoriesGetStoriesByID(ctx context.Context, m Requester, i StoriesGetStoriesByIDRequest) (StoriesStories, error) {
+func MakeStoriesGetStoriesByIDRequest(ctx context.Context, m Requester, i StoriesGetStoriesByIDRequest) (StoriesStories, error) {
 	var res StoriesStories
 	return res, request(ctx, m, &i, &res)
 }
@@ -29120,7 +29120,7 @@ func (*StoriesGetStoriesViewsRequest) CRC() uint32 {
 	return 0x28e16cc8
 }
 
-func StoriesGetStoriesViews(ctx context.Context, m Requester, i StoriesGetStoriesViewsRequest) (StoriesStoryViews, error) {
+func MakeStoriesGetStoriesViewsRequest(ctx context.Context, m Requester, i StoriesGetStoriesViewsRequest) (StoriesStoryViews, error) {
 	var res StoriesStoryViews
 	return res, request(ctx, m, &i, &res)
 }
@@ -29139,7 +29139,7 @@ func (*StoriesGetStoryReactionsListRequest) CRC() uint32 {
 	return 0xb9b2881f
 }
 
-func StoriesGetStoryReactionsList(ctx context.Context, m Requester, i StoriesGetStoryReactionsListRequest) (StoriesStoryReactionsList, error) {
+func MakeStoriesGetStoryReactionsListRequest(ctx context.Context, m Requester, i StoriesGetStoryReactionsListRequest) (StoriesStoryReactionsList, error) {
 	var res StoriesStoryReactionsList
 	return res, request(ctx, m, &i, &res)
 }
@@ -29160,7 +29160,7 @@ func (*StoriesGetStoryViewsListRequest) CRC() uint32 {
 	return 0x7ed23c57
 }
 
-func StoriesGetStoryViewsList(ctx context.Context, m Requester, i StoriesGetStoryViewsListRequest) (StoriesStoryViewsList, error) {
+func MakeStoriesGetStoryViewsListRequest(ctx context.Context, m Requester, i StoriesGetStoryViewsListRequest) (StoriesStoryViewsList, error) {
 	var res StoriesStoryViewsList
 	return res, request(ctx, m, &i, &res)
 }
@@ -29174,7 +29174,7 @@ func (*StoriesIncrementStoryViewsRequest) CRC() uint32 {
 	return 0xb2028afb
 }
 
-func StoriesIncrementStoryViews(ctx context.Context, m Requester, i StoriesIncrementStoryViewsRequest) (bool, error) {
+func MakeStoriesIncrementStoryViewsRequest(ctx context.Context, m Requester, i StoriesIncrementStoryViewsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -29188,7 +29188,7 @@ func (*StoriesReadStoriesRequest) CRC() uint32 {
 	return 0xa556dac8
 }
 
-func StoriesReadStories(ctx context.Context, m Requester, i StoriesReadStoriesRequest) ([]int32, error) {
+func MakeStoriesReadStoriesRequest(ctx context.Context, m Requester, i StoriesReadStoriesRequest) ([]int32, error) {
 	var res []int32
 	return res, request(ctx, m, &i, &res)
 }
@@ -29204,7 +29204,7 @@ func (*StoriesReportRequest) CRC() uint32 {
 	return 0x1923fa8c
 }
 
-func StoriesReport(ctx context.Context, m Requester, i StoriesReportRequest) (bool, error) {
+func MakeStoriesReportRequest(ctx context.Context, m Requester, i StoriesReportRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -29221,7 +29221,7 @@ func (*StoriesSearchPostsRequest) CRC() uint32 {
 	return 0x6cea116a
 }
 
-func StoriesSearchPosts(ctx context.Context, m Requester, i StoriesSearchPostsRequest) (StoriesFoundStories, error) {
+func MakeStoriesSearchPostsRequest(ctx context.Context, m Requester, i StoriesSearchPostsRequest) (StoriesFoundStories, error) {
 	var res StoriesFoundStories
 	return res, request(ctx, m, &i, &res)
 }
@@ -29238,7 +29238,7 @@ func (*StoriesSendReactionRequest) CRC() uint32 {
 	return 0x7fd736b2
 }
 
-func StoriesSendReaction(ctx context.Context, m Requester, i StoriesSendReactionRequest) (Updates, error) {
+func MakeStoriesSendReactionRequest(ctx context.Context, m Requester, i StoriesSendReactionRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -29264,7 +29264,7 @@ func (*StoriesSendStoryRequest) CRC() uint32 {
 	return 0xe4e6694b
 }
 
-func StoriesSendStory(ctx context.Context, m Requester, i StoriesSendStoryRequest) (Updates, error) {
+func MakeStoriesSendStoryRequest(ctx context.Context, m Requester, i StoriesSendStoryRequest) (Updates, error) {
 	var res Updates
 	return res, request(ctx, m, &i, &res)
 }
@@ -29277,7 +29277,7 @@ func (*StoriesToggleAllStoriesHiddenRequest) CRC() uint32 {
 	return 0x7c2557c4
 }
 
-func StoriesToggleAllStoriesHidden(ctx context.Context, m Requester, i StoriesToggleAllStoriesHiddenRequest) (bool, error) {
+func MakeStoriesToggleAllStoriesHiddenRequest(ctx context.Context, m Requester, i StoriesToggleAllStoriesHiddenRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -29291,7 +29291,7 @@ func (*StoriesTogglePeerStoriesHiddenRequest) CRC() uint32 {
 	return 0xbd0415c4
 }
 
-func StoriesTogglePeerStoriesHidden(ctx context.Context, m Requester, i StoriesTogglePeerStoriesHiddenRequest) (bool, error) {
+func MakeStoriesTogglePeerStoriesHiddenRequest(ctx context.Context, m Requester, i StoriesTogglePeerStoriesHiddenRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -29306,7 +29306,7 @@ func (*StoriesTogglePinnedRequest) CRC() uint32 {
 	return 0x9a75a1ef
 }
 
-func StoriesTogglePinned(ctx context.Context, m Requester, i StoriesTogglePinnedRequest) ([]int32, error) {
+func MakeStoriesTogglePinnedRequest(ctx context.Context, m Requester, i StoriesTogglePinnedRequest) ([]int32, error) {
 	var res []int32
 	return res, request(ctx, m, &i, &res)
 }
@@ -29320,7 +29320,7 @@ func (*StoriesTogglePinnedToTopRequest) CRC() uint32 {
 	return 0x0b297e9b
 }
 
-func StoriesTogglePinnedToTop(ctx context.Context, m Requester, i StoriesTogglePinnedToTopRequest) (bool, error) {
+func MakeStoriesTogglePinnedToTopRequest(ctx context.Context, m Requester, i StoriesTogglePinnedToTopRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -29338,7 +29338,7 @@ func (*UpdatesGetChannelDifferenceRequest) CRC() uint32 {
 	return 0x03173d78
 }
 
-func UpdatesGetChannelDifference(ctx context.Context, m Requester, i UpdatesGetChannelDifferenceRequest) (UpdatesChannelDifference, error) {
+func MakeUpdatesGetChannelDifferenceRequest(ctx context.Context, m Requester, i UpdatesGetChannelDifferenceRequest) (UpdatesChannelDifference, error) {
 	var res UpdatesChannelDifference
 	return res, request(ctx, m, &i, &res)
 }
@@ -29357,7 +29357,7 @@ func (*UpdatesGetDifferenceRequest) CRC() uint32 {
 	return 0x19c2f763
 }
 
-func UpdatesGetDifference(ctx context.Context, m Requester, i UpdatesGetDifferenceRequest) (UpdatesDifference, error) {
+func MakeUpdatesGetDifferenceRequest(ctx context.Context, m Requester, i UpdatesGetDifferenceRequest) (UpdatesDifference, error) {
 	var res UpdatesDifference
 	return res, request(ctx, m, &i, &res)
 }
@@ -29368,7 +29368,7 @@ func (*UpdatesGetStateRequest) CRC() uint32 {
 	return 0xedd4882a
 }
 
-func UpdatesGetState(ctx context.Context, m Requester, i UpdatesGetStateRequest) (UpdatesState, error) {
+func MakeUpdatesGetStateRequest(ctx context.Context, m Requester, i UpdatesGetStateRequest) (UpdatesState, error) {
 	var res UpdatesState
 	return res, request(ctx, m, &i, &res)
 }
@@ -29383,7 +29383,7 @@ func (*UploadGetCdnFileRequest) CRC() uint32 {
 	return 0x395f69da
 }
 
-func UploadGetCdnFile(ctx context.Context, m Requester, i UploadGetCdnFileRequest) (UploadCdnFile, error) {
+func MakeUploadGetCdnFileRequest(ctx context.Context, m Requester, i UploadGetCdnFileRequest) (UploadCdnFile, error) {
 	var res UploadCdnFile
 	return res, request(ctx, m, &i, &res)
 }
@@ -29397,7 +29397,7 @@ func (*UploadGetCdnFileHashesRequest) CRC() uint32 {
 	return 0x91dc3f31
 }
 
-func UploadGetCdnFileHashes(ctx context.Context, m Requester, i UploadGetCdnFileHashesRequest) ([]FileHash, error) {
+func MakeUploadGetCdnFileHashesRequest(ctx context.Context, m Requester, i UploadGetCdnFileHashesRequest) ([]FileHash, error) {
 	var res []FileHash
 	return res, request(ctx, m, &i, &res)
 }
@@ -29415,7 +29415,7 @@ func (*UploadGetFileRequest) CRC() uint32 {
 	return 0xbe5335be
 }
 
-func UploadGetFile(ctx context.Context, m Requester, i UploadGetFileRequest) (UploadFile, error) {
+func MakeUploadGetFileRequest(ctx context.Context, m Requester, i UploadGetFileRequest) (UploadFile, error) {
 	var res UploadFile
 	return res, request(ctx, m, &i, &res)
 }
@@ -29429,7 +29429,7 @@ func (*UploadGetFileHashesRequest) CRC() uint32 {
 	return 0x9156982a
 }
 
-func UploadGetFileHashes(ctx context.Context, m Requester, i UploadGetFileHashesRequest) ([]FileHash, error) {
+func MakeUploadGetFileHashesRequest(ctx context.Context, m Requester, i UploadGetFileHashesRequest) ([]FileHash, error) {
 	var res []FileHash
 	return res, request(ctx, m, &i, &res)
 }
@@ -29444,7 +29444,7 @@ func (*UploadGetWebFileRequest) CRC() uint32 {
 	return 0x24e6818d
 }
 
-func UploadGetWebFile(ctx context.Context, m Requester, i UploadGetWebFileRequest) (UploadWebFile, error) {
+func MakeUploadGetWebFileRequest(ctx context.Context, m Requester, i UploadGetWebFileRequest) (UploadWebFile, error) {
 	var res UploadWebFile
 	return res, request(ctx, m, &i, &res)
 }
@@ -29458,7 +29458,7 @@ func (*UploadReuploadCdnFileRequest) CRC() uint32 {
 	return 0x9b2754a8
 }
 
-func UploadReuploadCdnFile(ctx context.Context, m Requester, i UploadReuploadCdnFileRequest) ([]FileHash, error) {
+func MakeUploadReuploadCdnFileRequest(ctx context.Context, m Requester, i UploadReuploadCdnFileRequest) ([]FileHash, error) {
 	var res []FileHash
 	return res, request(ctx, m, &i, &res)
 }
@@ -29474,7 +29474,7 @@ func (*UploadSaveBigFilePartRequest) CRC() uint32 {
 	return 0xde7b673d
 }
 
-func UploadSaveBigFilePart(ctx context.Context, m Requester, i UploadSaveBigFilePartRequest) (bool, error) {
+func MakeUploadSaveBigFilePartRequest(ctx context.Context, m Requester, i UploadSaveBigFilePartRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -29489,7 +29489,7 @@ func (*UploadSaveFilePartRequest) CRC() uint32 {
 	return 0xb304a621
 }
 
-func UploadSaveFilePart(ctx context.Context, m Requester, i UploadSaveFilePartRequest) (bool, error) {
+func MakeUploadSaveFilePartRequest(ctx context.Context, m Requester, i UploadSaveFilePartRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -29502,7 +29502,7 @@ func (*UsersGetFullUserRequest) CRC() uint32 {
 	return 0xb60f5918
 }
 
-func UsersGetFullUser(ctx context.Context, m Requester, i UsersGetFullUserRequest) (UsersUserFull, error) {
+func MakeUsersGetFullUserRequest(ctx context.Context, m Requester, i UsersGetFullUserRequest) (UsersUserFull, error) {
 	var res UsersUserFull
 	return res, request(ctx, m, &i, &res)
 }
@@ -29515,7 +29515,7 @@ func (*UsersGetIsPremiumRequiredToContactRequest) CRC() uint32 {
 	return 0xa622aa10
 }
 
-func UsersGetIsPremiumRequiredToContact(ctx context.Context, m Requester, i UsersGetIsPremiumRequiredToContactRequest) ([]bool, error) {
+func MakeUsersGetIsPremiumRequiredToContactRequest(ctx context.Context, m Requester, i UsersGetIsPremiumRequiredToContactRequest) ([]bool, error) {
 	var res []bool
 	return res, request(ctx, m, &i, &res)
 }
@@ -29528,7 +29528,7 @@ func (*UsersGetUsersRequest) CRC() uint32 {
 	return 0x0d91a548
 }
 
-func UsersGetUsers(ctx context.Context, m Requester, i UsersGetUsersRequest) ([]User, error) {
+func MakeUsersGetUsersRequest(ctx context.Context, m Requester, i UsersGetUsersRequest) ([]User, error) {
 	var res []User
 	return res, request(ctx, m, &i, &res)
 }
@@ -29542,7 +29542,7 @@ func (*UsersSetSecureValueErrorsRequest) CRC() uint32 {
 	return 0x90c894b5
 }
 
-func UsersSetSecureValueErrors(ctx context.Context, m Requester, i UsersSetSecureValueErrorsRequest) (bool, error) {
+func MakeUsersSetSecureValueErrorsRequest(ctx context.Context, m Requester, i UsersSetSecureValueErrorsRequest) (bool, error) {
 	var res bool
 	return res, request(ctx, m, &i, &res)
 }

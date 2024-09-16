@@ -9,10 +9,10 @@ import (
 
 type TLSchema struct {
 	TypeSeq     []TLName
-	TypeDeclMap map[TLName]TLTypeDeclaration // key is type name
+	TypeDeclMap map[TLName]TLTypeDeclaration
 
-	FuncSeq     []string
-	FuncDeclMap map[string][]TLDeclaration // methods must be sorted by name
+	FuncSeq     []TLName
+	FuncDeclMap map[TLName]TLDeclaration
 }
 
 func (s *TLSchema) String() string {
@@ -37,7 +37,7 @@ func (s *TLSchema) String() string {
 			panic(fmt.Sprintf("missed group %#v", group))
 		}
 
-		parts = append(parts, methodsString(decl, group))
+		parts = append(parts, methodsString(decl))
 	}
 
 	return strings.Join(parts, "\n\n") + "\n"
@@ -81,17 +81,17 @@ func (s TLTypeDeclaration) String() string {
 	return strings.Join(parts, "\n")
 }
 
-func methodsString(methods []TLDeclaration, group string) (res string) {
+func methodsString(decl TLDeclaration) (res string) {
 	var parts []string
 
-	if group != "" {
-		group += "."
-	}
+	//if group != "" {
+	//	group += "."
+	//}
 
-	for _, decl := range slices.SortFunc(methods, sortDeclarations) {
-		parts = append(parts, decl.Comments(TLDeclarationTypeMethod)...)
-		parts = append(parts, decl.String())
-	}
+	//for _, decl := range slices.SortFunc(methods, sortDeclarations) {
+	parts = append(parts, decl.Comments(TLDeclarationTypeMethod)...)
+	parts = append(parts, decl.String())
+	//}
 
 	return strings.Join(parts, "\n")
 }

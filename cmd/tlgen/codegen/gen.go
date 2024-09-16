@@ -55,6 +55,13 @@ func getPredictName(name schema.TLName) (res string) {
 	return /*"TL" + */ res + getGoName(name.Key, true) + "Predict"
 }
 
+func getRequestName(name schema.TLName) (res string) {
+	if name.Namespace != "" {
+		res += getGoName(name.Namespace, true)
+	}
+	return /*"TL" + */ res + getGoName(name.Key, true) + "Request"
+}
+
 func getTypeName(name schema.TLName) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
@@ -100,11 +107,32 @@ func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement
 
 	ret = ret.Line()
 	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(predictTypeName, m.PolyParams), m.CRC))
-	if method != "" {
-		ret = ret.Add(jen.Line(), generateInterfaceFunctions(generateGenericNames(predictTypeName, m.PolyParams), method))
-	}
+	ret = ret.Line()
+	ret = ret.Add(generateInterfaceFunctions(generateGenericNames(predictTypeName, m.PolyParams), method))
 
 	return ret, predictTypeName
+}
+
+func generateRequest(m schema.TLDeclaration) (ret *jen.Statement, objName string) {
+	ret = &jen.Statement{}
+	if m.Comment != "" {
+		ret = ret.Comment(m.Comment).Line()
+	}
+
+	requestTypeName := getRequestName(m.Name)
+
+	ret = ret.Type().
+		Add(generateGenericTypes(requestTypeName, m.PolyParams)).
+		Struct(
+			slices.Remap(m.Params, func(p schema.TLParam) jen.Code {
+				return generateField(p)
+			})...,
+		)
+
+	ret = ret.Line()
+	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(requestTypeName, m.PolyParams), m.CRC))
+
+	return ret, requestTypeName
 }
 
 func generateGenericTypes(name string, polys schema.TLParams) *jen.Statement {
@@ -280,14 +308,14 @@ func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.
 	return ret.Line()
 }
 
-func generateRequestType(namespace string, obj schema.TLDeclaration) *jen.Statement {
-	funcName := schema.TLName{Namespace: namespace, Key: obj.Name.Key}
-	obj.Name = schema.TLName{Namespace: namespace, Key: obj.Name.Key + "Request"}
+func generateRequestType(funcReqObj schema.TLDeclaration) *jen.Statement {
+	funcName := schema.TLName{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key}
+	//funcReqObj.Name = schema.TLName{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key + "Request"}
 
-	predictObjJens, predictTypeName := generatePredicts("", obj)
-	predictFuncJens := generateFunction(funcName, predictTypeName, obj.PolyParams, obj.Type)
+	requestObjJens, requestTypeName := generateRequest(funcReqObj)
+	requestFuncJens := generateFunction(funcName, requestTypeName, funcReqObj.PolyParams, funcReqObj.Type)
 
-	return jen.Add(predictObjJens, jen.Line(), jen.Line(), predictFuncJens, jen.Line())
+	return jen.Add(requestObjJens, jen.Line(), jen.Line(), requestFuncJens, jen.Line())
 }
 
 // output:

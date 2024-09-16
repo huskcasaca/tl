@@ -367,14 +367,10 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 		}
 	}
 
-	funcSeq := []string{}
-	funcDeclMap := map[string][]TLDeclaration{}
+	funcSeq := []TLName{}
+	funcDeclMap := map[TLName]TLDeclaration{}
 	for _, decl := range funcDecls {
-		if !slices.Contains(funcSeq, decl.Name.Namespace) {
-			funcSeq = append(funcSeq, decl.Name.Namespace)
-		}
-
-		funcDeclMap[decl.Name.Namespace] = append(funcDeclMap[decl.Name.Namespace], *decl)
+		funcDeclMap[decl.Name] = *decl
 	}
 
 	return &TLSchema{

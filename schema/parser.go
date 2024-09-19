@@ -81,7 +81,7 @@ func normalizeIdent(i *declaration.Type) (TLType, error) {
 }
 
 func normalizeArgument(arg *declaration.Argument, comment string) (TLParam, error) {
-	typ, err := normalizeIdent(&arg.Term)
+	typ, err := normalizeIdent(&arg.Type)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", arg.Ident.String(), err)
 	}

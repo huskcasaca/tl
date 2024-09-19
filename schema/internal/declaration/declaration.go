@@ -66,7 +66,7 @@ type Declaration struct {
 type Argument struct {
 	Ident ArgIdent `parser:"@@ colon"` // var:
 	Flag  *Flag    `parser:"@@?"`      // flags.1?
-	Term  Type     `parser:"@@"`       // type
+	Type  Type     `parser:"@@"`       // type
 }
 
 // ArgIdent is identifier of argument name
@@ -92,7 +92,7 @@ type Flag struct {
 
 // Type is type of argument and result
 type Type struct {
-	Modifier bool      `parser:"@excl_mark?"`
+	Optional bool      `parser:"@excl_mark?"`
 	Ident    TypeIdent `parser:"@@"`
 	SubTypes []Type    `parser:"(langle @@ (ws @@)* rangle)?"`
 }

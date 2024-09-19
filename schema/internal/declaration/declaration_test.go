@@ -48,7 +48,7 @@ func TestParseIt(t *testing.T) {
 				Ident: ArgIdent{
 					Ident: "user_id",
 				},
-				Term: Type{
+				Type: Type{
 					Ident: TypeIdent{Ident: "long"},
 				},
 			},
@@ -63,7 +63,7 @@ func TestParseIt(t *testing.T) {
 						Ident: ArgIdent{
 							Ident: "flags",
 						},
-						Term: Type{
+						Type: Type{
 							Ident: TypeIdent{Ident: "#"},
 						},
 					},
@@ -71,7 +71,7 @@ func TestParseIt(t *testing.T) {
 						Ident: ArgIdent{
 							Ident: "underscore_var",
 						},
-						Term: Type{
+						Type: Type{
 							Ident: TypeIdent{Ident: "underscore_type"},
 						},
 					},
@@ -79,7 +79,7 @@ func TestParseIt(t *testing.T) {
 						Ident: ArgIdent{
 							Ident: "var",
 						},
-						Term: Type{
+						Type: Type{
 							Ident: TypeIdent{Ident: "type"},
 						},
 					},
@@ -91,7 +91,7 @@ func TestParseIt(t *testing.T) {
 							Ident: "flags",
 							Index: 2,
 						},
-						Term: Type{
+						Type: Type{
 							Ident: TypeIdent{Ident: "Vector"},
 							SubTypes: []Type{
 								{

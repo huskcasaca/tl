@@ -206,7 +206,7 @@ func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 		return jen.String()
 	case typeBool:
 		return jen.Bool()
-	case typeAny:
+	case typeAny, typeObject:
 		return jen.Qual(util.GetTypePathName((*tl.Any)(nil)))
 	case typeVectorUc, typeVectorLc:
 		return jen.Index()
@@ -234,6 +234,7 @@ var (
 	typeVectorLc = schema.TLName{Key: "vector"}
 	typeInt128   = schema.TLName{Key: "int128"}
 	typeInt256   = schema.TLName{Key: "int256"}
+	typeObject   = schema.TLName{Key: "Object"}
 )
 
 func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.Statement {

@@ -198,11 +198,10 @@ func normalizeCombinator(decl *declaration.Declaration, constructorComment strin
 }
 
 const (
-	tagType        = "type"
-	tagEnum        = "enum"
-	tagConstructor = "constructor"
-	tagMethod      = "method"
-	tagParam       = "param"
+	tagType    = "type"
+	tagPredict = "predict"
+	tagMethod  = "method"
+	tagParam   = "param"
 )
 
 func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*TLDeclaration, funcDecls []*TLDeclaration, typeComments map[TLName]string, err error) {
@@ -260,7 +259,7 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*TLDeclarat
 				}
 				currentTypeComment = comment
 
-			case tagEnum, tagConstructor, tagMethod:
+			case tagPredict, tagMethod:
 				if funcMode && tag != tagMethod {
 					return nil, nil, nil, errors.New("@" + tag + ": works only in type definitions")
 				} else if !funcMode && comment == tagMethod {
@@ -318,12 +317,16 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*TLDeclarat
 				//	return nil, nil, nil, err
 				//}
 
-				if _, ok := typeComments[TLName(v.TLName)]; ok {
+				if typeComments == nil {
+					typeComments = map[TLName]string{}
+				}
+
+				if _, ok := typeComments[v.TLName]; ok {
 					err := errors.New("@type: for " + TLName(v.TLName).String() + ", type comment defined twice")
 					return nil, nil, nil, err
 				}
 
-				typeComments[TLName(v.TLName)] = currentTypeComment
+				typeComments[v.TLName] = currentTypeComment
 				currentTypeComment = ""
 			}
 
@@ -370,6 +373,12 @@ func normalizeProgram(program *declaration.Program) (*TLSchema, error) {
 	funcSeq := []TLName{}
 	funcDeclMap := map[TLName]TLDeclaration{}
 	for _, decl := range funcDecls {
+		declType := decl.Name
+
+		if !slices.Contains(funcSeq, declType) {
+			funcSeq = append(funcSeq, declType)
+		}
+
 		funcDeclMap[decl.Name] = *decl
 	}
 

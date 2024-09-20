@@ -34,22 +34,22 @@ func TestParseFile(t *testing.T) {
 					}},
 				},
 			},
-			FuncSeq: []string{"", "auth"},
-			FuncDeclMap: map[string][]TLDeclaration{
-				"": {{
+			FuncSeq: []TLName{{Key: "someFunc"}, {Namespace: "auth", Key: "someFunc"}},
+			FuncDeclMap: map[TLName]TLDeclaration{
+				TLName{Key: "someFunc"}: {
 					Name:       TLName{Key: "someFunc"},
 					CRC:        0x7da07ec9,
 					Params:     []TLParam{},
 					PolyParams: []TLParam{},
 					Type:       TLType{TLName: TLName{Key: "CoolEnumerate"}},
-				}},
-				"auth": {{
+				},
+				TLName{Namespace: "auth", Key: "someFunc"}: {
 					Name:       TLName{Namespace: "auth", Key: "someFunc"},
 					CRC:        0x7da07ec9,
 					Params:     []TLParam{},
 					PolyParams: []TLParam{},
 					Type:       TLType{TLName: TLName{Key: "CoolEnumerate"}},
-				}},
+				},
 			},
 		},
 	}, {
@@ -83,8 +83,8 @@ func TestParseFile(t *testing.T) {
 					}},
 				},
 			},
-			FuncSeq:     []string{},
-			FuncDeclMap: map[string][]TLDeclaration{},
+			FuncSeq:     []TLName{},
+			FuncDeclMap: map[TLName]TLDeclaration{},
 		},
 	}} {
 		tt := tt // for parallel tests

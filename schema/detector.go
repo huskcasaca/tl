@@ -7,7 +7,7 @@ import (
 	"sync"
 	"unicode/utf8"
 
-	"github.com/xelaj/tl/schema/internal/lexer"
+	"github.com/xelaj/tl/schema/typelang/lexer"
 )
 
 func IsTypeLangDefinition(raw []byte, limit uint32) (matched bool) {

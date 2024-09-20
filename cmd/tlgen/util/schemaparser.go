@@ -3,6 +3,7 @@ package util
 import (
 	"bufio"
 	"fmt"
+	"github.com/xelaj/tl/schema/typelang"
 	"io"
 	"sync"
 
@@ -26,7 +27,7 @@ func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*schema.
 
 	switch predictedMime {
 	case mimeTypeLang:
-		return schema.Parse(filename, r)
+		return typelang.Parse(filename, r)
 
 	case mimeProtobuf:
 		return proto.Parse(filename, r)

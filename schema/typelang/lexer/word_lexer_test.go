@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	. "github.com/xelaj/tl/schema/internal/lexer"
+	. "github.com/xelaj/tl/schema/typelang/lexer"
 )
 
 func TestAllLexers(t *testing.T) {

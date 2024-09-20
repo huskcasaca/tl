@@ -2,12 +2,12 @@ package diff
 
 import (
 	"context"
+	"github.com/xelaj/tl/schema/typelang"
 	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/xelaj/tl/cmd/tlgen/util"
-	"github.com/xelaj/tl/schema"
 )
 
 // rootCmd is cobra cli entry point of the application.
@@ -42,7 +42,7 @@ func Action(ctx context.Context, app util.AppCtx[Flags]) int {
 		app.Log.Fatal().Err(err).Msg("failed to open old schema")
 		return 1
 	}
-	oldSchema, err := schema.Parse(app.Flags.OldSchema, oldSchemaFile)
+	oldSchema, err := typelang.Parse(app.Flags.OldSchema, oldSchemaFile)
 	if err != nil {
 		app.Log.Fatal().Err(err).Msg("failed to parse old schema")
 		return 1
@@ -53,7 +53,7 @@ func Action(ctx context.Context, app util.AppCtx[Flags]) int {
 		app.Log.Fatal().Err(err).Msg("failed to open new schema")
 		return 1
 	}
-	newSchema, err := schema.Parse(app.Flags.NewSchema, newSchemaFile)
+	newSchema, err := typelang.Parse(app.Flags.NewSchema, newSchemaFile)
 	if err != nil {
 		app.Log.Fatal().Err(err).Msg("failed to parse new schema")
 		return 1

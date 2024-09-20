@@ -1,7 +1,8 @@
-package schema_test
+package typelang_test
 
 import (
 	"embed"
+	. "github.com/xelaj/tl/schema/typelang"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,7 +11,7 @@ import (
 	. "github.com/xelaj/tl/schema"
 )
 
-//go:embed internal/testdata
+//go:embed testdata
 var testdata embed.FS
 
 func TestParseFile(t *testing.T) {

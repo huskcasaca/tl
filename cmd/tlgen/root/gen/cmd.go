@@ -2,13 +2,13 @@ package gen
 
 import (
 	"context"
+	"github.com/xelaj/tl/schema/typelang"
 	"io"
 
 	"github.com/spf13/cobra"
 
 	"github.com/xelaj/tl/cmd/tlgen/codegen"
 	"github.com/xelaj/tl/cmd/tlgen/util"
-	"github.com/xelaj/tl/schema"
 )
 
 // rootCmd is cobra cli entry point of the application.
@@ -41,7 +41,7 @@ func Action(ctx context.Context, app util.AppCtx[Flags]) int {
 		return 1
 	}
 
-	schema, err := schema.Parse(app.Flags.File, in)
+	schema, err := typelang.Parse(app.Flags.File, in)
 	if err != nil {
 		app.Log.Fatal().Err(err).Msg("failed to parse schema")
 		return 1

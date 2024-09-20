@@ -52,6 +52,10 @@ func Parse(filename string, content io.Reader) (*TLSchema, error) {
 	}
 
 	normalized, err := normalizeProgram(res)
+
+	normalized.Name = filename
+	normalized.Layer = 0
+
 	if err != nil {
 		return nil, err
 	}

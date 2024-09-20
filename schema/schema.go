@@ -8,6 +8,9 @@ import (
 )
 
 type TLSchema struct {
+	Name  string
+	Layer uint32
+
 	TypeSeq     []TLName
 	TypeDeclMap map[TLName]TLTypeDeclaration
 

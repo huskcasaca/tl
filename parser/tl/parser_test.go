@@ -114,13 +114,13 @@ func TestEquality(t *testing.T) {
 		file string
 	}{{
 		name: "simplest",
-		file: "internal/testdata/simplest.tl",
+		file: "testdata/simplest.tl",
 	}, {
 		name: "many_flags",
-		file: "internal/testdata/many_flags.tl",
+		file: "testdata/many_flags.tl",
 	}, {
 		name: "with_comments",
-		file: "internal/testdata/with_comments.tl",
+		file: "testdata/with_comments.tl",
 	}} {
 		tt := tt // for parallel tests
 

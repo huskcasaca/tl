@@ -68,7 +68,7 @@ const (
 func (o TLDeclarationType) String() string {
 	switch o {
 	case TLDeclarationTypeConstructor:
-		return "constructor"
+		return "predict"
 	case TLDeclarationTypeMethod:
 		return "method"
 	default:

@@ -1,11 +1,11 @@
 module github.com/xelaj/tl
 
-go 1.21
+go 1.23.0
 
 require (
-	github.com/quenbyako/ext v0.0.0-20240210142841-0ae6adb966e4
+	github.com/quenbyako/ext v0.0.0-20240818145340-a4d86245030f
 	github.com/stretchr/testify v1.9.0
-	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225
+	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0
 )
 
 require (

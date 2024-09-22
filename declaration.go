@@ -7,21 +7,21 @@ import (
 	"strings"
 )
 
-type TLDeclaration struct {
+type Declaration struct {
 	Comment    string
-	Name       TLName
+	Name       Name
 	CRC        uint32
-	Params     TLParams
-	PolyParams TLParams
-	Type       TLType
+	Params     Params
+	PolyParams Params
+	Type       Type
 }
 
-type TLName struct {
+type Name struct {
 	Namespace string
 	Key       string
 }
 
-func GetTLNameFromString(s string) TLName {
+func GetNameFromString(s string) Name {
 	groups := strings.Split(s, ".")
 	var namespace string
 	key := groups[0]
@@ -30,10 +30,10 @@ func GetTLNameFromString(s string) TLName {
 		key = groups[1]
 	}
 
-	return TLName{Namespace: namespace, Key: key}
+	return Name{Namespace: namespace, Key: key}
 }
 
-func (o TLName) String() string {
+func (o Name) String() string {
 	if o.Namespace != "" {
 		return o.Namespace + "." + o.Key
 	}
@@ -41,11 +41,11 @@ func (o TLName) String() string {
 	return o.Key
 }
 
-func (o TLName) IsInterface() bool { return isFirstRuneUpper(o.Key) }
+func (o Name) IsInterface() bool { return isFirstRuneUpper(o.Key) }
 
-func (o TLName) Cmp(b TLName) int { return cmpDeclName(o, b) }
+func (o Name) Cmp(b Name) int { return cmpDeclName(o, b) }
 
-func cmpDeclName(a, b TLName) int {
+func cmpDeclName(a, b Name) int {
 	if c := cmp.Compare(a.Namespace, b.Namespace); c != 0 {
 		return c
 	} else if c := cmp.Compare(a.Key, b.Key); c != 0 {
@@ -55,21 +55,21 @@ func cmpDeclName(a, b TLName) int {
 	}
 }
 
-func sortDeclarations(a, b TLDeclaration) int { return cmpDeclName(a.Name, b.Name) }
+func sortDeclarations(a, b Declaration) int { return cmpDeclName(a.Name, b.Name) }
 
-type TLDeclarationType uint8
+type DeclarationType uint8
 
 const (
-	TLDeclarationTypeUnknown TLDeclarationType = iota
-	TLDeclarationTypeConstructor
-	TLDeclarationTypeMethod
+	DeclarationTypeUnknown DeclarationType = iota
+	DeclarationTypeConstructor
+	DeclarationTypeMethod
 )
 
-func (o TLDeclarationType) String() string {
+func (o DeclarationType) String() string {
 	switch o {
-	case TLDeclarationTypeConstructor:
+	case DeclarationTypeConstructor:
 		return "predict"
-	case TLDeclarationTypeMethod:
+	case DeclarationTypeMethod:
 		return "method"
 	default:
 		return "<UNKNOWN>"
@@ -89,14 +89,14 @@ func (o TLDeclarationType) String() string {
 //
 // For vectors like `getSmthn items:Vector<int> = Bool` i still don't understand
 // how to generate, cause it fails in real mtproto schema.
-func (o *TLDeclaration) getCRC() uint32 {
+func (o *Declaration) getCRC() uint32 {
 	if o.CRC != 0 {
 		return o.CRC
 	}
 
-	filtered := make(TLParams, 0, len(o.Params))
+	filtered := make(Params, 0, len(o.Params))
 	for _, item := range o.Params {
-		if _, ok := item.(TLTriggerParam); !ok {
+		if _, ok := item.(TriggerParam); !ok {
 			filtered = append(filtered, item)
 		}
 	}
@@ -109,7 +109,7 @@ func (o *TLDeclaration) getCRC() uint32 {
 	return hash.ChecksumIEEE([]byte(fmt.Sprintf("%v%v = %v;", o.Name.String(), fieldsStr, o.Type)))
 }
 
-func (o *TLDeclaration) String() string {
+func (o *Declaration) String() string {
 	fields := ""
 	if len(o.Params) > 0 {
 		fields = " " + o.Params.String()
@@ -118,7 +118,7 @@ func (o *TLDeclaration) String() string {
 	return fmt.Sprintf("%v#%08x%v = %v;", o.Name.String(), o.getCRC(), fields, o.Type)
 }
 
-func (o *TLDeclaration) Comments(typ TLDeclarationType) []string {
+func (o *Declaration) Comments(typ DeclarationType) []string {
 	var res []string
 	if o.Comment != "" {
 		res = append(res, "// @"+typ.String()+" "+o.Comment)

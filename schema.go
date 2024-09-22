@@ -7,18 +7,18 @@ import (
 	"github.com/quenbyako/ext/slices"
 )
 
-type TLSchema struct {
+type Schema struct {
 	Name  string
 	Layer uint32
 
-	TypeSeq     []TLName
-	TypeDeclMap map[TLName]TLTypeDeclaration
+	TypeSeq     []Name
+	TypeDeclMap map[Name]DeclarationGroup
 
-	FuncSeq     []TLName
-	FuncDeclMap map[TLName]TLDeclaration
+	FuncSeq     []Name
+	FuncDeclMap map[Name]Declaration
 }
 
-func (s *TLSchema) String() string {
+func (s *Schema) String() string {
 	var parts []string
 	for _, typ := range s.TypeSeq {
 		if decl, ok := s.TypeDeclMap[typ]; ok {
@@ -47,11 +47,11 @@ func (s *TLSchema) String() string {
 }
 
 type CRCIndex struct {
-	Type  TLName
+	Type  Name
 	Index int
 }
 
-func (s *TLSchema) MakeCRCIndex() map[uint32]CRCIndex {
+func (s *Schema) MakeCRCIndex() map[uint32]CRCIndex {
 	res := make(map[uint32]CRCIndex, len(s.TypeDeclMap))
 	for typ, decl := range s.TypeDeclMap {
 		for i, o := range decl.Declarations {
@@ -65,26 +65,26 @@ func (s *TLSchema) MakeCRCIndex() map[uint32]CRCIndex {
 	return res
 }
 
-type TLTypeDeclaration struct {
+type DeclarationGroup struct {
 	Comment      string
-	Declarations []TLDeclaration // must be sorted by name
+	Declarations []Declaration // must be sorted by name
 }
 
-func (s TLTypeDeclaration) String() string {
+func (s DeclarationGroup) String() string {
 	var parts []string
 	if s.Comment != "" {
 		parts = append(parts, "// @type "+s.Comment)
 	}
 
 	for _, decl := range slices.SortFunc(s.Declarations, sortDeclarations) {
-		parts = append(parts, decl.Comments(TLDeclarationTypeConstructor)...)
+		parts = append(parts, decl.Comments(DeclarationTypeConstructor)...)
 		parts = append(parts, decl.String())
 	}
 
 	return strings.Join(parts, "\n")
 }
 
-func methodsString(decl TLDeclaration) (res string) {
+func methodsString(decl Declaration) (res string) {
 	var parts []string
 
 	//if group != "" {
@@ -92,7 +92,7 @@ func methodsString(decl TLDeclaration) (res string) {
 	//}
 
 	//for _, decl := range slices.SortFunc(methods, sortDeclarations) {
-	parts = append(parts, decl.Comments(TLDeclarationTypeMethod)...)
+	parts = append(parts, decl.Comments(DeclarationTypeMethod)...)
 	parts = append(parts, decl.String())
 	//}
 

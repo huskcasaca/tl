@@ -9,89 +9,89 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-type TLParams []TLParam
+type Params []Param
 
-func (p TLParams) String() string {
-	return strings.Join(slices.Remap(p, func(p TLParam) string { return p.String() }), " ")
+func (p Params) String() string {
+	return strings.Join(slices.Remap(p, func(p Param) string { return p.String() }), " ")
 }
 
-func (p TLParams) Comments() []string {
-	params := slices.Filter(p, func(p TLParam) bool { return p.GetComment() != "" })
-	paramMaxLen := slicesMaxFunc(params, func(p TLParam) int { return len([]rune(p.GetName())) })
+func (p Params) Comments() []string {
+	params := slices.Filter(p, func(p Param) bool { return p.GetComment() != "" })
+	paramMaxLen := slicesMaxFunc(params, func(p Param) int { return len([]rune(p.GetName())) })
 
-	return slices.Remap(params, func(p TLParam) string {
+	return slices.Remap(params, func(p Param) string {
 		return fmt.Sprintf("// @param %-*v %v", paramMaxLen, p.GetName(), p.GetComment())
 	})
 }
 
-type TLParam interface {
+type Param interface {
 	_Parameter()
 
 	GetName() string
-	GetType() TLType
+	GetType() Type
 	GetComment() string
 	fmt.Stringer
 }
 
 var (
-	_ TLParam = TLBitflagParam{}
-	_ TLParam = TLRequiredParam{}
-	_ TLParam = TLOptionalParam{}
-	_ TLParam = TLTriggerParam{}
-	_ TLParam = TLPolyParam{}
+	_ Param = BitflagParam{}
+	_ Param = RequiredParam{}
+	_ Param = OptionalParam{}
+	_ Param = TriggerParam{}
+	_ Param = GenericParam{}
 )
 
-type TLBitflagParam struct {
+type BitflagParam struct {
 	Comment string
 	Name    string
 }
 
-func (_ TLBitflagParam) _Parameter()        {}
-func (t TLBitflagParam) GetName() string    { return t.Name }
-func (t TLBitflagParam) GetType() TLType    { return TLType{} }
-func (t TLBitflagParam) GetComment() string { return t.Comment }
-func (t TLBitflagParam) String() string     { return t.Name + ":#" }
+func (_ BitflagParam) _Parameter()        {}
+func (t BitflagParam) GetName() string    { return t.Name }
+func (t BitflagParam) GetType() Type      { return Type{} }
+func (t BitflagParam) GetComment() string { return t.Comment }
+func (t BitflagParam) String() string     { return t.Name + ":#" }
 
-type TLRequiredParam struct {
+type RequiredParam struct {
 	Comment string
 	Name    string
-	Type    TLType
+	Type    Type
 }
 
-func (_ TLRequiredParam) _Parameter()        {}
-func (t TLRequiredParam) GetName() string    { return t.Name }
-func (t TLRequiredParam) GetType() TLType    { return t.Type }
-func (t TLRequiredParam) GetComment() string { return t.Comment }
-func (t TLRequiredParam) String() string     { return t.Name + ":" + t.Type.String() }
+func (_ RequiredParam) _Parameter()        {}
+func (t RequiredParam) GetName() string    { return t.Name }
+func (t RequiredParam) GetType() Type      { return t.Type }
+func (t RequiredParam) GetComment() string { return t.Comment }
+func (t RequiredParam) String() string     { return t.Name + ":" + t.Type.String() }
 
-type TLOptionalParam struct {
+type OptionalParam struct {
 	Comment     string
 	Name        string
-	Type        TLType
+	Type        Type
 	FlagTrigger string
 	BitTrigger  int
 }
 
-func (_ TLOptionalParam) _Parameter()        {}
-func (t TLOptionalParam) GetName() string    { return t.Name }
-func (t TLOptionalParam) GetType() TLType    { return t.Type }
-func (t TLOptionalParam) GetComment() string { return t.Comment }
-func (t TLOptionalParam) String() string {
+func (_ OptionalParam) _Parameter()        {}
+func (t OptionalParam) GetName() string    { return t.Name }
+func (t OptionalParam) GetType() Type      { return t.Type }
+func (t OptionalParam) GetComment() string { return t.Comment }
+func (t OptionalParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?%v", t.Name, t.FlagTrigger, t.BitTrigger, t.Type.String())
 }
 
-type TLTriggerParam struct {
+type TriggerParam struct {
 	Comment     string
 	Name        string
 	FlagTrigger string
 	BitTrigger  int
 }
 
-func (_ TLTriggerParam) _Parameter()        {}
-func (t TLTriggerParam) GetName() string    { return t.Name }
-func (t TLTriggerParam) GetType() TLType    { return TLType{} }
-func (t TLTriggerParam) GetComment() string { return t.Comment }
-func (t TLTriggerParam) String() string {
+func (_ TriggerParam) _Parameter()        {}
+func (t TriggerParam) GetName() string    { return t.Name }
+func (t TriggerParam) GetType() Type      { return Type{} }
+func (t TriggerParam) GetComment() string { return t.Comment }
+func (t TriggerParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?true", t.Name, t.FlagTrigger, t.BitTrigger)
 }
 
@@ -137,16 +137,16 @@ func slicesSumFunc[S ~[]T, T any, C constraints.Ordered](s S, f func(T) C) (sum 
 	return sum
 }
 
-type TLPolyParam struct {
+type GenericParam struct {
 	Comment string
 	Name    string
-	Type    TLType
+	Type    Type
 }
 
-func (_ TLPolyParam) _Parameter()        {}
-func (t TLPolyParam) GetName() string    { return t.Name }
-func (t TLPolyParam) GetType() TLType    { return t.Type }
-func (t TLPolyParam) GetComment() string { return t.Comment }
-func (t TLPolyParam) String() string {
+func (_ GenericParam) _Parameter()        {}
+func (t GenericParam) GetName() string    { return t.Name }
+func (t GenericParam) GetType() Type      { return t.Type }
+func (t GenericParam) GetComment() string { return t.Comment }
+func (t GenericParam) String() string {
 	return fmt.Sprintf("%v:%v", t.Name, t.Type.String())
 }

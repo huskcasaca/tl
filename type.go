@@ -6,20 +6,18 @@ import (
 	"unicode/utf8"
 )
 
-type TLTypes []TLType
+type Types []Type
 
-type TLType struct {
-	TLName
-	TLTypes
+type Type struct {
+	Name
+	Types
 	fmt.Stringer
 }
 
-func (t TLType) Name() TLName   { return t.TLName }
-func (t TLType) Types() TLTypes { return t.TLTypes }
-func (t TLType) String() string { return t.TLName.String() }
+func (t Type) String() string { return t.Name.String() }
 
 var (
-	TLAnyType = TLType{TLName: TLName{Key: "Type"}}
+	AnyType = Type{Name: Name{Key: "Type"}}
 )
 
 func isFirstRuneUpper(s string) bool {

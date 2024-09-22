@@ -19,74 +19,74 @@ func TestParseFile(t *testing.T) {
 	for _, tt := range []struct {
 		name     string
 		file     string
-		expected *tl.TLSchema
+		expected *tl.Schema
 		wantErr  assert.ErrorAssertionFunc
 	}{{
 		file: "internal/testdata/simplest.tl",
-		expected: &tl.TLSchema{
-			TypeSeq: []TLName{{Key: "CoolEnumerate"}},
-			TypeDeclMap: map[TLName]tl.TLTypeDeclaration{
+		expected: &tl.Schema{
+			TypeSeq: []Name{{Key: "CoolEnumerate"}},
+			TypeDeclMap: map[Name]tl.DeclarationGroup{
 				{Key: "CoolEnumerate"}: {
-					Declarations: []TLDeclaration{{
-						Name:       TLName{Key: "someEnum"},
+					Declarations: []Declaration{{
+						Name:       Name{Key: "someEnum"},
 						CRC:        0x5508ec75,
-						Params:     []TLParam{},
-						PolyParams: []TLParam{},
-						Type:       tl.TLType{TLName: TLName{Key: "CoolEnumerate"}},
+						Params:     []Param{},
+						PolyParams: []Param{},
+						Type:       tl.Type{Name: Name{Key: "CoolEnumerate"}},
 					}},
 				},
 			},
-			FuncSeq: []TLName{{Key: "someFunc"}, {Namespace: "auth", Key: "someFunc"}},
-			FuncDeclMap: map[TLName]TLDeclaration{
-				TLName{Key: "someFunc"}: {
-					Name:       TLName{Key: "someFunc"},
+			FuncSeq: []Name{{Key: "someFunc"}, {Namespace: "auth", Key: "someFunc"}},
+			FuncDeclMap: map[Name]Declaration{
+				Name{Key: "someFunc"}: {
+					Name:       Name{Key: "someFunc"},
 					CRC:        0x7da07ec9,
-					Params:     []TLParam{},
-					PolyParams: []TLParam{},
-					Type:       tl.TLType{TLName: TLName{Key: "CoolEnumerate"}},
+					Params:     []Param{},
+					PolyParams: []Param{},
+					Type:       tl.Type{Name: Name{Key: "CoolEnumerate"}},
 				},
-				TLName{Namespace: "auth", Key: "someFunc"}: {
-					Name:       TLName{Namespace: "auth", Key: "someFunc"},
+				Name{Namespace: "auth", Key: "someFunc"}: {
+					Name:       Name{Namespace: "auth", Key: "someFunc"},
 					CRC:        0x7da07ec9,
-					Params:     []TLParam{},
-					PolyParams: []TLParam{},
-					Type:       tl.TLType{TLName: TLName{Key: "CoolEnumerate"}},
+					Params:     []Param{},
+					PolyParams: []Param{},
+					Type:       tl.Type{Name: Name{Key: "CoolEnumerate"}},
 				},
 			},
 		},
 	}, {
 		file: "internal/testdata/many_flags.tl",
-		expected: &tl.TLSchema{
-			TypeSeq: []TLName{{Key: "ChatFull"}},
-			TypeDeclMap: map[TLName]tl.TLTypeDeclaration{
+		expected: &tl.Schema{
+			TypeSeq: []Name{{Key: "ChatFull"}},
+			TypeDeclMap: map[Name]tl.DeclarationGroup{
 				{Key: "ChatFull"}: {
-					Declarations: []TLDeclaration{{
-						Name: TLName{Key: "a"},
+					Declarations: []Declaration{{
+						Name: Name{Key: "a"},
 						CRC:  0xf2355507,
-						Params: []TLParam{TLBitflagParam{
+						Params: []Param{BitflagParam{
 							Name: "flags",
-						}, TLTriggerParam{
+						}, TriggerParam{
 							Name:        "opt_prop",
 							FlagTrigger: "flags",
 							BitTrigger:  3,
-						}, TLBitflagParam{
+						}, BitflagParam{
 							Name: "flags2",
-						}, TLOptionalParam{
+						}, OptionalParam{
 							Name:        "opt2_prop",
-							Type:        tl.TLType{TLName: TLName{Key: "double"}},
+							Type:        tl.Type{Name: Name{Key: "double"}},
 							FlagTrigger: "flags2",
 							BitTrigger:  9,
-						}, TLRequiredParam{
+						}, RequiredParam{
 							Name: "id",
-							Type: tl.TLType{TLName: TLName{Key: "long"}},
+							Type: tl.Type{Name: Name{Key: "long"}},
 						}},
-						PolyParams: []TLParam{},
-						Type:       tl.TLType{TLName: TLName{Key: "ChatFull"}},
+						PolyParams: []Param{},
+						Type:       tl.Type{Name: Name{Key: "ChatFull"}},
 					}},
 				},
 			},
-			FuncSeq:     []TLName{},
-			FuncDeclMap: map[TLName]TLDeclaration{},
+			FuncSeq:     []Name{},
+			FuncDeclMap: map[Name]Declaration{},
 		},
 	}} {
 		tt := tt // for parallel tests

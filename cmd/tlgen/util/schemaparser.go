@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/xelaj/tl"
-	"github.com/xelaj/tl/parser/tl"
+	typelang "github.com/xelaj/tl/parser/tl"
 	"io"
 	"sync"
 
@@ -13,7 +13,7 @@ import (
 	"github.com/xelaj/tl/parser/proto"
 )
 
-func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*tl.TLSchema, error) {
+func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*tl.Schema, error) {
 	if predictedMime == "" {
 		buf := bufio.NewReader(r)
 		r = buf
@@ -27,7 +27,7 @@ func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*tl.TLSc
 
 	switch predictedMime {
 	case mimeTypeLang:
-		return tl.Parse(filename, r)
+		return typelang.Parse(filename, r)
 
 	case mimeProtobuf:
 		return proto.Parse(filename, r)

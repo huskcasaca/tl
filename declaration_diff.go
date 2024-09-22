@@ -2,12 +2,12 @@ package tl
 
 import "github.com/quenbyako/ext/slices"
 
-type TLDeclarationDiff struct {
-	Added   []TLDeclaration
-	Removed []TLName
+type DeclarationDiff struct {
+	Added   []Declaration
+	Removed []Name
 }
 
-func (d TLDeclarationDiff) Patch(a []TLDeclaration) []TLDeclaration {
+func (d DeclarationDiff) Patch(a []Declaration) []Declaration {
 	for _, add := range d.Added {
 		a = append(a, add)
 	}
@@ -26,5 +26,5 @@ func (d TLDeclarationDiff) Patch(a []TLDeclaration) []TLDeclaration {
 
 type DiffEnum struct {
 	Comment string
-	Changes TLDeclarationDiff
+	Changes DeclarationDiff
 }

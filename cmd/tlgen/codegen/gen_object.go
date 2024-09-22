@@ -39,21 +39,21 @@ func getGoName(name string, public bool) string {
 	return strings.Join(parts, "")
 }
 
-func getFieldName(name tl.TLName) (res string) {
+func getFieldName(name tl.Name) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
 	}
 	return res + getGoName(name.Key, true)
 }
 
-func getPredictName(name tl.TLName) (res string) {
+func getPredictName(name tl.Name) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
 	}
 	return /*"TL" + */ res + getGoName(name.Key, true) + "Predict"
 }
 
-func getTypeName(name tl.TLName) (res string) {
+func getTypeName(name tl.Name) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
 	}
@@ -80,7 +80,7 @@ func generateInterfaceFunctions(typ jen.Code, method string) *jen.Statement {
 		Block()
 }
 
-func generatePredicts(method string, m tl.TLDeclaration) (ret *jen.Statement, objName string) {
+func generatePredicts(method string, m tl.Declaration) (ret *jen.Statement, objName string) {
 	ret = &jen.Statement{}
 	if m.Comment != "" {
 		ret = ret.Comment(m.Comment).Line()
@@ -91,7 +91,7 @@ func generatePredicts(method string, m tl.TLDeclaration) (ret *jen.Statement, ob
 	ret = ret.Type().
 		Add(generateGenericTypes(predictTypeName, m.PolyParams)).
 		Struct(
-			slices.Remap(m.Params, func(p tl.TLParam) jen.Code {
+			slices.Remap(m.Params, func(p tl.Param) jen.Code {
 				return generateField(p)
 			})...,
 		)
@@ -104,23 +104,23 @@ func generatePredicts(method string, m tl.TLDeclaration) (ret *jen.Statement, ob
 	return ret, predictTypeName
 }
 
-func generateGenericTypes(name string, polys tl.TLParams) *jen.Statement {
+func generateGenericTypes(name string, polys tl.Params) *jen.Statement {
 	genericsTypes := make([]jen.Code, len(polys))
 	for i, t := range polys {
-		genericsTypes[i] = jen.Id(getTypeName(tl.TLName{Key: t.GetName()})).Add(generateFieldType(t.GetType(), true))
+		genericsTypes[i] = jen.Id(getTypeName(tl.Name{Key: t.GetName()})).Add(generateFieldType(t.GetType(), true))
 	}
 	return jen.Id(name).Types(genericsTypes...)
 }
 
-func generateGenericNames(name string, polys tl.TLParams) *jen.Statement {
+func generateGenericNames(name string, polys tl.Params) *jen.Statement {
 	genericsNames := make([]jen.Code, len(polys))
 	for i, t := range polys {
-		genericsNames[i] = jen.Id(getTypeName(tl.TLName{Key: t.GetName()}))
+		genericsNames[i] = jen.Id(getTypeName(tl.Name{Key: t.GetName()}))
 	}
 	return jen.Id(name).Types(genericsNames...)
 }
 
-func generateField(p tl.TLParam) *jen.Statement {
+func generateField(p tl.Param) *jen.Statement {
 	ret := generateFieldBase(p)
 	if comment := p.GetComment(); comment != "" {
 		ret = ret.Comment(comment)
@@ -128,60 +128,60 @@ func generateField(p tl.TLParam) *jen.Statement {
 	return ret
 }
 
-func generateFieldBase(p tl.TLParam) *jen.Statement {
+func generateFieldBase(p tl.Param) *jen.Statement {
 	switch p := p.(type) {
-	case tl.TLBitflagParam:
+	case tl.BitflagParam:
 		return generateBitflagField(p)
-	case tl.TLRequiredParam:
+	case tl.RequiredParam:
 		return generateRequiredField(p)
-	case tl.TLOptionalParam:
+	case tl.OptionalParam:
 		return generateOptionalField(p)
-	case tl.TLTriggerParam:
+	case tl.TriggerParam:
 		return generateTriggerField(p)
 	default:
 		panic("unknown parameter type")
 	}
 }
 
-func generateBitflagField(p tl.TLBitflagParam) *jen.Statement {
+func generateBitflagField(p tl.BitflagParam) *jen.Statement {
 	tag := fmt.Sprintf("%v,%v", p.Name, tl.IsBitflagFlag)
 	return jen.Id("_").Struct().Tag(map[string]string{tl.TagName: tag})
 }
 
-func generateRequiredField(p tl.TLRequiredParam) *jen.Statement {
+func generateRequiredField(p tl.RequiredParam) *jen.Statement {
 	tag := fmt.Sprintf("%v", p.Name)
-	return jen.Id(getFieldName(tl.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false)).Tag(map[string]string{tl.TagName: tag})
+	return jen.Id(getFieldName(tl.Name{Key: p.Name})).Add(generateFieldType(p.Type, false)).Tag(map[string]string{tl.TagName: tag})
 }
 
-func generateOptionalField(p tl.TLOptionalParam) *jen.Statement {
+func generateOptionalField(p tl.OptionalParam) *jen.Statement {
 	tag := fmt.Sprintf("%v,%v:%v:%v", p.Name, tl.OmitemptyPrefix, p.FlagTrigger, p.BitTrigger)
-	return jen.Id(getFieldName(tl.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{tl.TagName: tag})
+	return jen.Id(getFieldName(tl.Name{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{tl.TagName: tag})
 }
 
-func generateTriggerField(p tl.TLTriggerParam) *jen.Statement {
+func generateTriggerField(p tl.TriggerParam) *jen.Statement {
 	tag := fmt.Sprintf("%v,%v:%v:%v,%v", p.Name, tl.OmitemptyPrefix, p.FlagTrigger, p.BitTrigger, tl.ImplicitFlag)
-	return jen.Id(getFieldName(tl.TLName{Key: p.Name})).Bool().Tag(map[string]string{tl.TagName: tag})
+	return jen.Id(getFieldName(tl.Name{Key: p.Name})).Bool().Tag(map[string]string{tl.TagName: tag})
 }
 
-func generateFieldType(t tl.TLType, isOptional bool) *jen.Statement {
+func generateFieldType(t tl.Type, isOptional bool) *jen.Statement {
 	ret := generateFieldTypeCommon(t)
-	switch t.Name() {
+	switch t.Name {
 	case typeBytes, typeDouble, typeInt, typeLong, typeString, typeBool:
-		if len(t.Types()) != 0 {
+		if len(t.Types) != 0 {
 			panic(fmt.Sprintf("incorrect default type: %v", t))
 		}
 		if isOptional {
 			ret = jen.Op("*").Add(ret)
 		}
 	case typeVectorUc, typeVectorLc:
-		if len(t.Types()) != 1 {
+		if len(t.Types) != 1 {
 			panic(fmt.Sprintf("incorrect vector type: %v", t))
 		}
-		ret = ret.Add(generateFieldType(t.Types()[0], false))
+		ret = ret.Add(generateFieldType(t.Types[0], false))
 	default:
-		if len(t.Types()) != 0 {
-			generics := make([]jen.Code, len(t.Types()))
-			for _, t1 := range t.Types() {
+		if len(t.Types) != 0 {
+			generics := make([]jen.Code, len(t.Types))
+			for _, t1 := range t.Types {
 				generics = append(generics, generateFieldType(t1, false))
 			}
 			ret = ret.Index(generics...)
@@ -190,8 +190,8 @@ func generateFieldType(t tl.TLType, isOptional bool) *jen.Statement {
 	return ret
 }
 
-func generateFieldTypeCommon(typ tl.TLType) *jen.Statement {
-	switch typ.Name() {
+func generateFieldTypeCommon(typ tl.Type) *jen.Statement {
+	switch typ.Name {
 	case typeBytes:
 		return jen.Index().Byte()
 	case typeDouble:
@@ -216,26 +216,26 @@ func generateFieldTypeCommon(typ tl.TLType) *jen.Statement {
 		//if !typ.Name().IsInterface() {
 		//	panic(fmt.Sprintf("incorrect type name: %v", typ))
 		//}
-		return jen.Id(getTypeName(typ.Name()))
+		return jen.Id(getTypeName(typ.Name))
 	}
 }
 
 var (
-	typeBytes    = tl.TLName{Key: "bytes"}
-	typeDouble   = tl.TLName{Key: "double"}
-	typeInt      = tl.TLName{Key: "int"}
-	typeLong     = tl.TLName{Key: "long"}
-	typeString   = tl.TLName{Key: "string"}
-	typeBool     = tl.TLName{Key: "Bool"}
-	typeAny      = tl.TLName{Key: "Type"}
-	typeVectorUc = tl.TLName{Key: "Vector"}
-	typeVectorLc = tl.TLName{Key: "vector"}
-	typeInt128   = tl.TLName{Key: "int128"}
-	typeInt256   = tl.TLName{Key: "int256"}
-	typeObject   = tl.TLName{Key: "Object"}
+	typeBytes    = tl.Name{Key: "bytes"}
+	typeDouble   = tl.Name{Key: "double"}
+	typeInt      = tl.Name{Key: "int"}
+	typeLong     = tl.Name{Key: "long"}
+	typeString   = tl.Name{Key: "string"}
+	typeBool     = tl.Name{Key: "Bool"}
+	typeAny      = tl.Name{Key: "Type"}
+	typeVectorUc = tl.Name{Key: "Vector"}
+	typeVectorLc = tl.Name{Key: "vector"}
+	typeInt128   = tl.Name{Key: "int128"}
+	typeInt256   = tl.Name{Key: "int256"}
+	typeObject   = tl.Name{Key: "Object"}
 )
 
-func generateObjects(name tl.TLName, objects tl.TLTypeDeclaration) *jen.Statement {
+func generateObjects(name tl.Name, objects tl.DeclarationGroup) *jen.Statement {
 	typeName := getTypeName(name)
 	typeMethod := "_" + typeName
 
@@ -244,7 +244,7 @@ func generateObjects(name tl.TLName, objects tl.TLTypeDeclaration) *jen.Statemen
 		ret = ret.Comment(objects.Comment).Line()
 	}
 	ret = ret.Type().Id(typeName).Interface(
-		generateFieldType(tl.TLAnyType, false),
+		generateFieldType(tl.AnyType, false),
 		jen.Id(typeMethod).Params(),
 	)
 

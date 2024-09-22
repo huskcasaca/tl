@@ -1,4 +1,4 @@
-package proto
+package protobuf
 
 import (
 	"github.com/alecthomas/participle/v2"

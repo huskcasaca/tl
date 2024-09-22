@@ -1,11 +1,11 @@
-package tl
+package typelang
 
 import (
 	"errors"
 	"fmt"
 	"github.com/xelaj/tl"
-	"github.com/xelaj/tl/parser/tl/declaration"
-	"github.com/xelaj/tl/parser/tl/lexer"
+	"github.com/xelaj/tl/parser/typelang/declaration"
+	"github.com/xelaj/tl/parser/typelang/lexer"
 	"io"
 	"io/fs"
 	"os"

@@ -3,7 +3,7 @@ package tl
 import (
 	"context"
 	"errors"
-	"github.com/xelaj/tl/parser/tl/lexer"
+	"github.com/xelaj/tl/parser/typelang/lexer"
 	"strings"
 	"sync"
 	"unicode/utf8"

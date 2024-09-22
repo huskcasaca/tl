@@ -2,7 +2,7 @@ package fmt
 
 import (
 	"context"
-	"github.com/xelaj/tl/parser/tl"
+	"github.com/xelaj/tl/parser/typelang"
 
 	"github.com/spf13/cobra"
 
@@ -38,7 +38,7 @@ func Action(ctx context.Context, app util.AppCtx[Flags]) int {
 		return 1
 	}
 
-	schema, err := tl.Parse(app.Flags.File, in)
+	schema, err := typelang.Parse(app.Flags.File, in)
 	if err != nil {
 		app.Log.Fatal().Err(err).Msg("failed to parse schema")
 		return 1

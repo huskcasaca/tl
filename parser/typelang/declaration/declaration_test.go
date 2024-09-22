@@ -1,8 +1,8 @@
 package declaration_test
 
 import (
-	. "github.com/xelaj/tl/parser/tl/declaration"
-	"github.com/xelaj/tl/parser/tl/lexer"
+	. "github.com/xelaj/tl/parser/typelang/declaration"
+	"github.com/xelaj/tl/parser/typelang/lexer"
 	"testing"
 
 	"github.com/alecthomas/participle/v2"

@@ -1,9 +1,9 @@
-package tl_test
+package typelang_test
 
 import (
 	"embed"
 	"github.com/xelaj/tl"
-	. "github.com/xelaj/tl/parser/tl"
+	. "github.com/xelaj/tl/parser/typelang"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

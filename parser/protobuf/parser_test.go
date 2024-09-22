@@ -1,9 +1,9 @@
-package proto_test
+package protobuf_test
 
 import (
 	"embed"
 	"github.com/xelaj/tl"
-	. "github.com/xelaj/tl/parser/proto"
+	. "github.com/xelaj/tl/parser/protobuf"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

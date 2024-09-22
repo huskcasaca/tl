@@ -4,13 +4,13 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/xelaj/tl"
-	typelang "github.com/xelaj/tl/parser/tl"
+	typelang "github.com/xelaj/tl/parser/typelang"
 	"io"
 	"sync"
 
 	"github.com/gabriel-vasile/mimetype"
 
-	"github.com/xelaj/tl/parser/proto"
+	"github.com/xelaj/tl/parser/protobuf"
 )
 
 func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*tl.Schema, error) {
@@ -30,7 +30,7 @@ func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*tl.Sche
 		return typelang.Parse(filename, r)
 
 	case mimeProtobuf:
-		return proto.Parse(filename, r)
+		return protobuf.Parse(filename, r)
 
 	default:
 		return nil, fmt.Errorf("%#v is not supported", predictedMime)

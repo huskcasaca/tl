@@ -1,9 +1,11 @@
-package typelang
+package tl
 
 import (
 	"errors"
 	"fmt"
-	"github.com/xelaj/tl/schema"
+	"github.com/xelaj/tl"
+	"github.com/xelaj/tl/parser/tl/declaration"
+	"github.com/xelaj/tl/parser/tl/lexer"
 	"io"
 	"io/fs"
 	"os"
@@ -12,9 +14,6 @@ import (
 
 	"github.com/alecthomas/participle/v2"
 	"github.com/quenbyako/ext/slices"
-
-	"github.com/xelaj/tl/schema/typelang/declaration"
-	"github.com/xelaj/tl/schema/typelang/lexer"
 )
 
 //nolint:gochecknoglobals // obviously parser must be global
@@ -22,7 +21,7 @@ var parser = participle.MustBuild[declaration.Program](
 	participle.Lexer(lexer.NewDefinition()),
 )
 
-func ParseFile(filename string) (*schema.TLSchema, error) {
+func ParseFile(filename string) (*tl.TLSchema, error) {
 	f, err := os.Open(filename)
 	if err != nil {
 		return nil, err
@@ -32,7 +31,7 @@ func ParseFile(filename string) (*schema.TLSchema, error) {
 	return Parse(filename, f)
 }
 
-func ParseFS(fsys fs.FS, filename string) (*schema.TLSchema, error) {
+func ParseFS(fsys fs.FS, filename string) (*tl.TLSchema, error) {
 	f, err := fsys.Open(filename)
 	if err != nil {
 		return nil, err
@@ -42,11 +41,11 @@ func ParseFS(fsys fs.FS, filename string) (*schema.TLSchema, error) {
 	return Parse(filename, f)
 }
 
-func ParseString(filename string, content string) (*schema.TLSchema, error) {
+func ParseString(filename string, content string) (*tl.TLSchema, error) {
 	return Parse(filename, strings.NewReader(content))
 }
 
-func Parse(filename string, content io.Reader) (*schema.TLSchema, error) {
+func Parse(filename string, content io.Reader) (*tl.TLSchema, error) {
 	res, err := parser.Parse(filename, content)
 	if err != nil {
 		return nil, err //nolint:wrapcheck // it's important to keep error
@@ -64,12 +63,12 @@ func Parse(filename string, content io.Reader) (*schema.TLSchema, error) {
 	return normalized, nil
 }
 
-func normalizeIdent(i *declaration.Type) (schema.TLType, error) {
-	name := schema.GetTLNameFromString(i.Ident.String())
+func normalizeIdent(i *declaration.Type) (tl.TLType, error) {
+	name := tl.GetTLNameFromString(i.Ident.String())
 	if len(i.SubTypes) == 0 {
-		return schema.TLType{TLName: name}, nil
+		return tl.TLType{TLName: name}, nil
 	}
-	types := make([]schema.TLType, len(i.SubTypes))
+	types := make([]tl.TLType, len(i.SubTypes))
 
 	for i, item := range i.SubTypes {
 		typ, err := normalizeIdent(&item)
@@ -79,13 +78,13 @@ func normalizeIdent(i *declaration.Type) (schema.TLType, error) {
 		types[i] = typ
 	}
 
-	return schema.TLType{
+	return tl.TLType{
 		TLName:  name,
 		TLTypes: types,
 	}, nil
 }
 
-func normalizeArgument(arg *declaration.Argument, comment string) (schema.TLParam, error) {
+func normalizeArgument(arg *declaration.Argument, comment string) (tl.TLParam, error) {
 	typ, err := normalizeIdent(&arg.Type)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", arg.Ident.String(), err)
@@ -93,13 +92,13 @@ func normalizeArgument(arg *declaration.Argument, comment string) (schema.TLPara
 
 	if arg.Flag == nil {
 		if typ.Key == "#" {
-			return schema.TLBitflagParam{
+			return tl.TLBitflagParam{
 				Comment: comment,
 				Name:    arg.Ident.String(),
 			}, nil
 		}
 
-		return schema.TLRequiredParam{
+		return tl.TLRequiredParam{
 			Comment: comment,
 			Name:    arg.Ident.String(),
 			Type:    typ,
@@ -107,7 +106,7 @@ func normalizeArgument(arg *declaration.Argument, comment string) (schema.TLPara
 	}
 
 	if typ.Key == "true" {
-		return schema.TLTriggerParam{
+		return tl.TLTriggerParam{
 			Comment:     comment,
 			Name:        arg.Ident.String(),
 			FlagTrigger: arg.Flag.Ident,
@@ -115,7 +114,7 @@ func normalizeArgument(arg *declaration.Argument, comment string) (schema.TLPara
 		}, nil
 	}
 
-	return schema.TLOptionalParam{
+	return tl.TLOptionalParam{
 		Comment:     comment,
 		Name:        arg.Ident.String(),
 		Type:        typ,
@@ -124,12 +123,12 @@ func normalizeArgument(arg *declaration.Argument, comment string) (schema.TLPara
 	}, nil
 }
 
-func normalizeCombinator(decl *declaration.Declaration, constructorComment string, argsComments map[string]string) (*schema.TLDeclaration, error) {
+func normalizeCombinator(decl *declaration.Declaration, constructorComment string, argsComments map[string]string) (*tl.TLDeclaration, error) {
 	parts := strings.Split(decl.Combinator, "#") // guaranteed to split by two parts, lexer handles it
 	if len(parts) == 0 || len(parts) > 2 {
 		return nil, errors.New(decl.Combinator + ": invalid combinator")
 	}
-	name := schema.GetTLNameFromString(parts[0])
+	name := tl.GetTLNameFromString(parts[0])
 	crc := uint64(0)
 	if len(parts) == 2 {
 		crc1, err := strconv.ParseUint(parts[1], 16, 32)
@@ -139,7 +138,7 @@ func normalizeCombinator(decl *declaration.Declaration, constructorComment strin
 		crc = crc1
 	}
 
-	params := make([]schema.TLParam, len(decl.Args))
+	params := make([]tl.TLParam, len(decl.Args))
 	for i, arg := range decl.Args {
 		arg := arg
 
@@ -156,7 +155,7 @@ func normalizeCombinator(decl *declaration.Declaration, constructorComment strin
 		}
 	}
 
-	polyParams := make(schema.TLParams, len(decl.OptArgs))
+	polyParams := make(tl.TLParams, len(decl.OptArgs))
 
 	for i, arg := range decl.OptArgs {
 		arg := arg
@@ -192,7 +191,7 @@ func normalizeCombinator(decl *declaration.Declaration, constructorComment strin
 		return nil, fmt.Errorf("%v: unknown params in comment tags: %v", decl.Combinator, keysStr)
 	}
 
-	return &schema.TLDeclaration{
+	return &tl.TLDeclaration{
 		Comment:    constructorComment,
 		Name:       name,
 		CRC:        uint32(crc),
@@ -209,7 +208,7 @@ const (
 	tagParam   = "param"
 )
 
-func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*schema.TLDeclaration, funcDecls []*schema.TLDeclaration, typeComments map[schema.TLName]string, err error) {
+func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*tl.TLDeclaration, funcDecls []*tl.TLDeclaration, typeComments map[tl.TLName]string, err error) {
 	var (
 		currentTypeComment     string
 		constructorComment     string
@@ -323,11 +322,11 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*schema.TLD
 				//}
 
 				if typeComments == nil {
-					typeComments = map[schema.TLName]string{}
+					typeComments = map[tl.TLName]string{}
 				}
 
 				if _, ok := typeComments[v.TLName]; ok {
-					err := errors.New("@type: for " + schema.TLName(v.TLName).String() + ", type comment defined twice")
+					err := errors.New("@type: for " + tl.TLName(v.TLName).String() + ", type comment defined twice")
 					return nil, nil, nil, err
 				}
 
@@ -344,14 +343,14 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*schema.TLD
 	return typeDecls, funcDecls, typeComments, nil
 }
 
-func normalizeProgram(program *declaration.Program) (*schema.TLSchema, error) {
+func normalizeProgram(program *declaration.Program) (*tl.TLSchema, error) {
 	typeDecls, funcDecls, comments, err := normalizeEntries(program.Entries)
 	if err != nil {
 		return nil, err
 	}
 
-	typeSeq := []schema.TLName{}
-	sortedTypeDecls := map[schema.TLName][]schema.TLDeclaration{}
+	typeSeq := []tl.TLName{}
+	sortedTypeDecls := map[tl.TLName][]tl.TLDeclaration{}
 	for _, decl := range typeDecls {
 		declType := decl.Type.TLName
 
@@ -362,21 +361,21 @@ func normalizeProgram(program *declaration.Program) (*schema.TLSchema, error) {
 		sortedTypeDecls[declType] = append(sortedTypeDecls[declType], *decl)
 	}
 
-	typeDeclMap := map[schema.TLName]schema.TLTypeDeclaration{}
+	typeDeclMap := map[tl.TLName]tl.TLTypeDeclaration{}
 	for typ, decl := range sortedTypeDecls {
 		var comment string
 		if v, ok := comments[typ]; ok {
 			comment = v
 		}
 
-		typeDeclMap[typ] = schema.TLTypeDeclaration{
+		typeDeclMap[typ] = tl.TLTypeDeclaration{
 			Comment:      comment,
 			Declarations: decl,
 		}
 	}
 
-	funcSeq := []schema.TLName{}
-	funcDeclMap := map[schema.TLName]schema.TLDeclaration{}
+	funcSeq := []tl.TLName{}
+	funcDeclMap := map[tl.TLName]tl.TLDeclaration{}
 	for _, decl := range funcDecls {
 		declType := decl.Name
 
@@ -387,7 +386,7 @@ func normalizeProgram(program *declaration.Program) (*schema.TLSchema, error) {
 		funcDeclMap[decl.Name] = *decl
 	}
 
-	return &schema.TLSchema{
+	return &tl.TLSchema{
 		TypeSeq:     typeSeq,
 		TypeDeclMap: typeDeclMap,
 		FuncSeq:     funcSeq,

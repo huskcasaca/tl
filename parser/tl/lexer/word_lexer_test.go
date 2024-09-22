@@ -2,12 +2,11 @@ package lexer_test
 
 import (
 	"context"
+	. "github.com/xelaj/tl/parser/tl/lexer"
 	"sync"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
-	. "github.com/xelaj/tl/schema/typelang/lexer"
 )
 
 func TestAllLexers(t *testing.T) {

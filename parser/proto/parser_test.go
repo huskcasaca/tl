@@ -2,13 +2,12 @@ package proto_test
 
 import (
 	"embed"
+	"github.com/xelaj/tl"
+	. "github.com/xelaj/tl/parser/proto"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-
-	"github.com/xelaj/tl/schema"
-	. "github.com/xelaj/tl/schema/proto"
 )
 
 //go:embed testdata
@@ -18,7 +17,7 @@ func TestParseFile(t *testing.T) {
 	for _, tt := range []struct {
 		name     string
 		file     string
-		expected *schema.TLSchema
+		expected *tl.TLSchema
 		wantErr  assert.ErrorAssertionFunc
 	}{
 		// {

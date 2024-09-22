@@ -1,9 +1,9 @@
-package schema
+package tl
 
 import (
 	"cmp"
 	"fmt"
-	"hash/crc32"
+	hash "hash/crc32"
 	"strings"
 )
 
@@ -106,7 +106,7 @@ func (o *TLDeclaration) getCRC() uint32 {
 		fieldsStr = " " + filtered.String()
 	}
 
-	return crc32.ChecksumIEEE([]byte(fmt.Sprintf("%v%v = %v;", o.Name.String(), fieldsStr, o.Type)))
+	return hash.ChecksumIEEE([]byte(fmt.Sprintf("%v%v = %v;", o.Name.String(), fieldsStr, o.Type)))
 }
 
 func (o *TLDeclaration) String() string {

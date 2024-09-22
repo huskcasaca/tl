@@ -1,13 +1,12 @@
-package schema
+package tl
 
 import (
 	"context"
 	"errors"
+	"github.com/xelaj/tl/parser/tl/lexer"
 	"strings"
 	"sync"
 	"unicode/utf8"
-
-	"github.com/xelaj/tl/schema/typelang/lexer"
 )
 
 func IsTypeLangDefinition(raw []byte, limit uint32) (matched bool) {

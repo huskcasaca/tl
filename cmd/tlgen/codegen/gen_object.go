@@ -8,8 +8,6 @@ import (
 	"github.com/xelaj/tl"
 	"github.com/xelaj/tl/cmd/tlgen/util"
 	"strings"
-
-	"github.com/xelaj/tl/schema"
 )
 
 // Some terms (id, api, url etc.) it's important to write in uppercase letters
@@ -41,21 +39,21 @@ func getGoName(name string, public bool) string {
 	return strings.Join(parts, "")
 }
 
-func getFieldName(name schema.TLName) (res string) {
+func getFieldName(name tl.TLName) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
 	}
 	return res + getGoName(name.Key, true)
 }
 
-func getPredictName(name schema.TLName) (res string) {
+func getPredictName(name tl.TLName) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
 	}
 	return /*"TL" + */ res + getGoName(name.Key, true) + "Predict"
 }
 
-func getTypeName(name schema.TLName) (res string) {
+func getTypeName(name tl.TLName) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
 	}
@@ -82,7 +80,7 @@ func generateInterfaceFunctions(typ jen.Code, method string) *jen.Statement {
 		Block()
 }
 
-func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement, objName string) {
+func generatePredicts(method string, m tl.TLDeclaration) (ret *jen.Statement, objName string) {
 	ret = &jen.Statement{}
 	if m.Comment != "" {
 		ret = ret.Comment(m.Comment).Line()
@@ -93,7 +91,7 @@ func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement
 	ret = ret.Type().
 		Add(generateGenericTypes(predictTypeName, m.PolyParams)).
 		Struct(
-			slices.Remap(m.Params, func(p schema.TLParam) jen.Code {
+			slices.Remap(m.Params, func(p tl.TLParam) jen.Code {
 				return generateField(p)
 			})...,
 		)
@@ -106,23 +104,23 @@ func generatePredicts(method string, m schema.TLDeclaration) (ret *jen.Statement
 	return ret, predictTypeName
 }
 
-func generateGenericTypes(name string, polys schema.TLParams) *jen.Statement {
+func generateGenericTypes(name string, polys tl.TLParams) *jen.Statement {
 	genericsTypes := make([]jen.Code, len(polys))
 	for i, t := range polys {
-		genericsTypes[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()})).Add(generateFieldType(t.GetType(), true))
+		genericsTypes[i] = jen.Id(getTypeName(tl.TLName{Key: t.GetName()})).Add(generateFieldType(t.GetType(), true))
 	}
 	return jen.Id(name).Types(genericsTypes...)
 }
 
-func generateGenericNames(name string, polys schema.TLParams) *jen.Statement {
+func generateGenericNames(name string, polys tl.TLParams) *jen.Statement {
 	genericsNames := make([]jen.Code, len(polys))
 	for i, t := range polys {
-		genericsNames[i] = jen.Id(getTypeName(schema.TLName{Key: t.GetName()}))
+		genericsNames[i] = jen.Id(getTypeName(tl.TLName{Key: t.GetName()}))
 	}
 	return jen.Id(name).Types(genericsNames...)
 }
 
-func generateField(p schema.TLParam) *jen.Statement {
+func generateField(p tl.TLParam) *jen.Statement {
 	ret := generateFieldBase(p)
 	if comment := p.GetComment(); comment != "" {
 		ret = ret.Comment(comment)
@@ -130,42 +128,42 @@ func generateField(p schema.TLParam) *jen.Statement {
 	return ret
 }
 
-func generateFieldBase(p schema.TLParam) *jen.Statement {
+func generateFieldBase(p tl.TLParam) *jen.Statement {
 	switch p := p.(type) {
-	case schema.TLBitflagParam:
+	case tl.TLBitflagParam:
 		return generateBitflagField(p)
-	case schema.TLRequiredParam:
+	case tl.TLRequiredParam:
 		return generateRequiredField(p)
-	case schema.TLOptionalParam:
+	case tl.TLOptionalParam:
 		return generateOptionalField(p)
-	case schema.TLTriggerParam:
+	case tl.TLTriggerParam:
 		return generateTriggerField(p)
 	default:
 		panic("unknown parameter type")
 	}
 }
 
-func generateBitflagField(p schema.TLBitflagParam) *jen.Statement {
+func generateBitflagField(p tl.TLBitflagParam) *jen.Statement {
 	tag := fmt.Sprintf("%v,%v", p.Name, tl.IsBitflagFlag)
 	return jen.Id("_").Struct().Tag(map[string]string{tl.TagName: tag})
 }
 
-func generateRequiredField(p schema.TLRequiredParam) *jen.Statement {
+func generateRequiredField(p tl.TLRequiredParam) *jen.Statement {
 	tag := fmt.Sprintf("%v", p.Name)
-	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false)).Tag(map[string]string{tl.TagName: tag})
+	return jen.Id(getFieldName(tl.TLName{Key: p.Name})).Add(generateFieldType(p.Type, false)).Tag(map[string]string{tl.TagName: tag})
 }
 
-func generateOptionalField(p schema.TLOptionalParam) *jen.Statement {
+func generateOptionalField(p tl.TLOptionalParam) *jen.Statement {
 	tag := fmt.Sprintf("%v,%v:%v:%v", p.Name, tl.OmitemptyPrefix, p.FlagTrigger, p.BitTrigger)
-	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{tl.TagName: tag})
+	return jen.Id(getFieldName(tl.TLName{Key: p.Name})).Add(generateFieldType(p.Type, true)).Tag(map[string]string{tl.TagName: tag})
 }
 
-func generateTriggerField(p schema.TLTriggerParam) *jen.Statement {
+func generateTriggerField(p tl.TLTriggerParam) *jen.Statement {
 	tag := fmt.Sprintf("%v,%v:%v:%v,%v", p.Name, tl.OmitemptyPrefix, p.FlagTrigger, p.BitTrigger, tl.ImplicitFlag)
-	return jen.Id(getFieldName(schema.TLName{Key: p.Name})).Bool().Tag(map[string]string{tl.TagName: tag})
+	return jen.Id(getFieldName(tl.TLName{Key: p.Name})).Bool().Tag(map[string]string{tl.TagName: tag})
 }
 
-func generateFieldType(t schema.TLType, isOptional bool) *jen.Statement {
+func generateFieldType(t tl.TLType, isOptional bool) *jen.Statement {
 	ret := generateFieldTypeCommon(t)
 	switch t.Name() {
 	case typeBytes, typeDouble, typeInt, typeLong, typeString, typeBool:
@@ -192,7 +190,7 @@ func generateFieldType(t schema.TLType, isOptional bool) *jen.Statement {
 	return ret
 }
 
-func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
+func generateFieldTypeCommon(typ tl.TLType) *jen.Statement {
 	switch typ.Name() {
 	case typeBytes:
 		return jen.Index().Byte()
@@ -223,21 +221,21 @@ func generateFieldTypeCommon(typ schema.TLType) *jen.Statement {
 }
 
 var (
-	typeBytes    = schema.TLName{Key: "bytes"}
-	typeDouble   = schema.TLName{Key: "double"}
-	typeInt      = schema.TLName{Key: "int"}
-	typeLong     = schema.TLName{Key: "long"}
-	typeString   = schema.TLName{Key: "string"}
-	typeBool     = schema.TLName{Key: "Bool"}
-	typeAny      = schema.TLName{Key: "Type"}
-	typeVectorUc = schema.TLName{Key: "Vector"}
-	typeVectorLc = schema.TLName{Key: "vector"}
-	typeInt128   = schema.TLName{Key: "int128"}
-	typeInt256   = schema.TLName{Key: "int256"}
-	typeObject   = schema.TLName{Key: "Object"}
+	typeBytes    = tl.TLName{Key: "bytes"}
+	typeDouble   = tl.TLName{Key: "double"}
+	typeInt      = tl.TLName{Key: "int"}
+	typeLong     = tl.TLName{Key: "long"}
+	typeString   = tl.TLName{Key: "string"}
+	typeBool     = tl.TLName{Key: "Bool"}
+	typeAny      = tl.TLName{Key: "Type"}
+	typeVectorUc = tl.TLName{Key: "Vector"}
+	typeVectorLc = tl.TLName{Key: "vector"}
+	typeInt128   = tl.TLName{Key: "int128"}
+	typeInt256   = tl.TLName{Key: "int256"}
+	typeObject   = tl.TLName{Key: "Object"}
 )
 
-func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.Statement {
+func generateObjects(name tl.TLName, objects tl.TLTypeDeclaration) *jen.Statement {
 	typeName := getTypeName(name)
 	typeMethod := "_" + typeName
 
@@ -246,7 +244,7 @@ func generateObjects(name schema.TLName, objects schema.TLTypeDeclaration) *jen.
 		ret = ret.Comment(objects.Comment).Line()
 	}
 	ret = ret.Type().Id(typeName).Interface(
-		generateFieldType(schema.TLAnyType, false),
+		generateFieldType(tl.TLAnyType, false),
 		jen.Id(typeMethod).Params(),
 	)
 

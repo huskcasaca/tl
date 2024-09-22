@@ -1,13 +1,12 @@
 package declaration_test
 
 import (
+	. "github.com/xelaj/tl/parser/tl/declaration"
+	"github.com/xelaj/tl/parser/tl/lexer"
 	"testing"
 
 	"github.com/alecthomas/participle/v2"
 	"github.com/stretchr/testify/assert"
-
-	. "github.com/xelaj/tl/schema/typelang/declaration"
-	"github.com/xelaj/tl/schema/typelang/lexer"
 )
 
 type TestCase interface {

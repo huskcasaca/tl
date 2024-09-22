@@ -1,4 +1,4 @@
-package schema
+package tl
 
 import "github.com/quenbyako/ext/slices"
 

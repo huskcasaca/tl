@@ -5,17 +5,16 @@ import (
 	"github.com/quenbyako/ext/slices"
 	"github.com/xelaj/tl"
 	"github.com/xelaj/tl/cmd/tlgen/util"
-	"github.com/xelaj/tl/schema"
 )
 
-func getRequestName(name schema.TLName) (res string) {
+func getRequestName(name tl.TLName) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
 	}
 	return /*"TL" + */ res + getGoName(name.Key, true) + "Request"
 }
 
-func generateRequest(m schema.TLDeclaration) (ret *jen.Statement, objName string) {
+func generateRequest(m tl.TLDeclaration) (ret *jen.Statement, objName string) {
 	ret = &jen.Statement{}
 	if m.Comment != "" {
 		ret = ret.Comment(m.Comment).Line()
@@ -26,7 +25,7 @@ func generateRequest(m schema.TLDeclaration) (ret *jen.Statement, objName string
 	ret = ret.Type().
 		Add(generateGenericTypes(requestTypeName, m.PolyParams)).
 		Struct(
-			slices.Remap(m.Params, func(p schema.TLParam) jen.Code {
+			slices.Remap(m.Params, func(p tl.TLParam) jen.Code {
 				return generateField(p)
 			})...,
 		)
@@ -37,8 +36,8 @@ func generateRequest(m schema.TLDeclaration) (ret *jen.Statement, objName string
 	return ret, requestTypeName
 }
 
-func generateRequestType(funcReqObj schema.TLDeclaration) *jen.Statement {
-	funcName := schema.TLName{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key}
+func generateRequestType(funcReqObj tl.TLDeclaration) *jen.Statement {
+	funcName := tl.TLName{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key}
 	//funcReqObj.Name = schema.TLName{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key + "Request"}
 
 	requestObjJens, requestTypeName := generateRequest(funcReqObj)
@@ -105,7 +104,7 @@ func generateMakeRequesterFunc() *jen.Statement {
 		).Line()
 }
 
-func getRequestFuncName(name schema.TLName) (res string) {
+func getRequestFuncName(name tl.TLName) (res string) {
 	if name.Namespace != "" {
 		res += getGoName(name.Namespace, true)
 	}
@@ -118,7 +117,7 @@ func getRequestFuncName(name schema.TLName) (res string) {
 //		var res Response
 //		return res, request(ctx, m, &i, &res)
 //	}
-func generateRequestFunction(funcName schema.TLName, requestType string, polyParams schema.TLParams, returns schema.TLType) *jen.Statement {
+func generateRequestFunction(funcName tl.TLName, requestType string, polyParams tl.TLParams, returns tl.TLType) *jen.Statement {
 	returnType := generateFieldType(returns, false)
 
 	return jen.Func().

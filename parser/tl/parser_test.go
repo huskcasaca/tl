@@ -1,14 +1,15 @@
-package typelang_test
+package tl_test
 
 import (
 	"embed"
-	. "github.com/xelaj/tl/schema/typelang"
+	"github.com/xelaj/tl"
+	. "github.com/xelaj/tl/parser/tl"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	. "github.com/xelaj/tl/schema"
+	. "github.com/xelaj/tl"
 )
 
 //go:embed testdata
@@ -18,20 +19,20 @@ func TestParseFile(t *testing.T) {
 	for _, tt := range []struct {
 		name     string
 		file     string
-		expected *TLSchema
+		expected *tl.TLSchema
 		wantErr  assert.ErrorAssertionFunc
 	}{{
 		file: "internal/testdata/simplest.tl",
-		expected: &TLSchema{
+		expected: &tl.TLSchema{
 			TypeSeq: []TLName{{Key: "CoolEnumerate"}},
-			TypeDeclMap: map[TLName]TLTypeDeclaration{
+			TypeDeclMap: map[TLName]tl.TLTypeDeclaration{
 				{Key: "CoolEnumerate"}: {
 					Declarations: []TLDeclaration{{
 						Name:       TLName{Key: "someEnum"},
 						CRC:        0x5508ec75,
 						Params:     []TLParam{},
 						PolyParams: []TLParam{},
-						Type:       TLType{TLName: TLName{Key: "CoolEnumerate"}},
+						Type:       tl.TLType{TLName: TLName{Key: "CoolEnumerate"}},
 					}},
 				},
 			},
@@ -42,22 +43,22 @@ func TestParseFile(t *testing.T) {
 					CRC:        0x7da07ec9,
 					Params:     []TLParam{},
 					PolyParams: []TLParam{},
-					Type:       TLType{TLName: TLName{Key: "CoolEnumerate"}},
+					Type:       tl.TLType{TLName: TLName{Key: "CoolEnumerate"}},
 				},
 				TLName{Namespace: "auth", Key: "someFunc"}: {
 					Name:       TLName{Namespace: "auth", Key: "someFunc"},
 					CRC:        0x7da07ec9,
 					Params:     []TLParam{},
 					PolyParams: []TLParam{},
-					Type:       TLType{TLName: TLName{Key: "CoolEnumerate"}},
+					Type:       tl.TLType{TLName: TLName{Key: "CoolEnumerate"}},
 				},
 			},
 		},
 	}, {
 		file: "internal/testdata/many_flags.tl",
-		expected: &TLSchema{
+		expected: &tl.TLSchema{
 			TypeSeq: []TLName{{Key: "ChatFull"}},
-			TypeDeclMap: map[TLName]TLTypeDeclaration{
+			TypeDeclMap: map[TLName]tl.TLTypeDeclaration{
 				{Key: "ChatFull"}: {
 					Declarations: []TLDeclaration{{
 						Name: TLName{Key: "a"},
@@ -72,15 +73,15 @@ func TestParseFile(t *testing.T) {
 							Name: "flags2",
 						}, TLOptionalParam{
 							Name:        "opt2_prop",
-							Type:        TLType{TLName: TLName{Key: "double"}},
+							Type:        tl.TLType{TLName: TLName{Key: "double"}},
 							FlagTrigger: "flags2",
 							BitTrigger:  9,
 						}, TLRequiredParam{
 							Name: "id",
-							Type: TLType{TLName: TLName{Key: "long"}},
+							Type: tl.TLType{TLName: TLName{Key: "long"}},
 						}},
 						PolyParams: []TLParam{},
-						Type:       TLType{TLName: TLName{Key: "ChatFull"}},
+						Type:       tl.TLType{TLName: TLName{Key: "ChatFull"}},
 					}},
 				},
 			},

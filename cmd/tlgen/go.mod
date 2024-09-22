@@ -4,8 +4,6 @@ go 1.21.5
 
 replace github.com/xelaj/tl => ../..
 
-replace github.com/xelaj/tl/schema => ../../schema
-
 require (
 	dario.cat/mergo v1.0.0
 	github.com/caarlos0/env/v10 v10.0.0
@@ -17,7 +15,6 @@ require (
 	github.com/rs/zerolog v1.31.0
 	github.com/spf13/cobra v1.8.0
 	github.com/xelaj/tl v0.0.0-00010101000000-000000000000
-	github.com/xelaj/tl/schema v0.0.0-00010101000000-000000000000
 )
 
 require (

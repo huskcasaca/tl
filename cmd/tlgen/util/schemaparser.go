@@ -3,17 +3,17 @@ package util
 import (
 	"bufio"
 	"fmt"
-	"github.com/xelaj/tl/schema/typelang"
+	"github.com/xelaj/tl"
+	"github.com/xelaj/tl/parser/tl"
 	"io"
 	"sync"
 
 	"github.com/gabriel-vasile/mimetype"
 
-	"github.com/xelaj/tl/schema"
-	"github.com/xelaj/tl/schema/proto"
+	"github.com/xelaj/tl/parser/proto"
 )
 
-func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*schema.TLSchema, error) {
+func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*tl.TLSchema, error) {
 	if predictedMime == "" {
 		buf := bufio.NewReader(r)
 		r = buf
@@ -27,7 +27,7 @@ func DetectAndParseSchema(filename, predictedMime string, r io.Reader) (*schema.
 
 	switch predictedMime {
 	case mimeTypeLang:
-		return typelang.Parse(filename, r)
+		return tl.Parse(filename, r)
 
 	case mimeProtobuf:
 		return proto.Parse(filename, r)
@@ -52,7 +52,7 @@ var onceExtend sync.Once
 func predictMime(b []byte) string {
 	onceExtend.Do(func() {
 		mimetype.SetLimit(mimeBufferMax)
-		mimetype.Extend(schema.IsTypeLangDefinition, mimeTypeLang, ".tl")
+		mimetype.Extend(tl.IsTypeLangDefinition, mimeTypeLang, ".tl")
 	})
 
 	return mimetype.Detect(b).String()

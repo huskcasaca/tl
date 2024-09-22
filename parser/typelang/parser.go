@@ -53,7 +53,6 @@ func Parse(filename string, content io.Reader) (*tl.Schema, error) {
 
 	normalized, err := normalizeProgram(res)
 
-	normalized.Name = filename
 	normalized.Layer = 0
 
 	if err != nil {

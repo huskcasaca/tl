@@ -8,7 +8,6 @@ import (
 )
 
 type Schema struct {
-	Name  string
 	Layer uint32
 
 	TypeSeq     []Name

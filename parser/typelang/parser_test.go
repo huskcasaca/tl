@@ -24,22 +24,16 @@ func TestParseFile(t *testing.T) {
 	}{{
 		file: "testdata/simplest.tl",
 		expected: &tl.Schema{
-			TypeSeq: []Name{{Key: "CoolEnumerate"}},
-			TypeDeclMap: map[Name]tl.DeclarationGroup{
-				{Key: "CoolEnumerate"}: {
-					Declarations: []Declaration{{
-						Name:      Name{Key: "someEnum"},
-						CRC:       0x5508ec75,
-						Category:  CategoryPredict,
-						Params:    []Param{},
-						OptParams: []Param{},
-						Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
-					}},
+			Declarations: []Declaration{
+				{
+					Name:      Name{Key: "someEnum"},
+					CRC:       0x5508ec75,
+					Category:  CategoryPredict,
+					Params:    []Param{},
+					OptParams: []Param{},
+					Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
 				},
-			},
-			FuncSeq: []Name{{Key: "someFunc"}, {Namespace: "auth", Key: "someFunc"}},
-			FuncDeclMap: map[Name]Declaration{
-				Name{Key: "someFunc"}: {
+				{
 					Name:      Name{Key: "someFunc"},
 					CRC:       0x7da07ec9,
 					Category:  CategoryFunction,
@@ -47,7 +41,7 @@ func TestParseFile(t *testing.T) {
 					OptParams: []Param{},
 					Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
 				},
-				Name{Namespace: "auth", Key: "someFunc"}: {
+				{
 					Name:      Name{Namespace: "auth", Key: "someFunc"},
 					CRC:       0x7da07ec9,
 					Category:  CategoryFunction,
@@ -60,37 +54,32 @@ func TestParseFile(t *testing.T) {
 	}, {
 		file: "testdata/many_flags.tl",
 		expected: &tl.Schema{
-			TypeSeq: []Name{{Key: "ChatFull"}},
-			TypeDeclMap: map[Name]tl.DeclarationGroup{
-				{Key: "ChatFull"}: {
-					Declarations: []Declaration{{
-						Name:     Name{Key: "a"},
-						CRC:      0xf2355507,
-						Category: CategoryPredict,
-						Params: []Param{BitflagParam{
-							Name: "flags",
-						}, TriggerParam{
-							Name:        "opt_prop",
-							FlagTrigger: "flags",
-							BitTrigger:  3,
-						}, BitflagParam{
-							Name: "flags2",
-						}, OptionalParam{
-							Name:        "opt2_prop",
-							Type:        tl.Type{Name: Name{Key: "double"}},
-							FlagTrigger: "flags2",
-							BitTrigger:  9,
-						}, RequiredParam{
-							Name: "id",
-							Type: tl.Type{Name: Name{Key: "long"}},
-						}},
-						OptParams: []Param{},
-						Type:      tl.Type{Name: Name{Key: "ChatFull"}},
+			Declarations: []tl.Declaration{
+				{
+					Name:     Name{Key: "a"},
+					CRC:      0xf2355507,
+					Category: CategoryPredict,
+					Params: []Param{BitflagParam{
+						Name: "flags",
+					}, TriggerParam{
+						Name:        "opt_prop",
+						FlagTrigger: "flags",
+						BitTrigger:  3,
+					}, BitflagParam{
+						Name: "flags2",
+					}, OptionalParam{
+						Name:        "opt2_prop",
+						Type:        tl.Type{Name: Name{Key: "double"}},
+						FlagTrigger: "flags2",
+						BitTrigger:  9,
+					}, RequiredParam{
+						Name: "id",
+						Type: tl.Type{Name: Name{Key: "long"}},
 					}},
+					OptParams: []Param{},
+					Type:      tl.Type{Name: Name{Key: "ChatFull"}},
 				},
 			},
-			FuncSeq:     []Name{},
-			FuncDeclMap: map[Name]Declaration{},
 		},
 	}} {
 		tt := tt // for parallel tests

@@ -167,24 +167,20 @@ func generateFieldType(t tl.Type, isOptional bool) *jen.Statement {
 	ret := generateFieldTypeCommon(t)
 	switch t.Name {
 	case typeBytes, typeDouble, typeInt, typeLong, typeString, typeBool:
-		if len(t.Types) != 0 {
+		if t.SubType != nil {
 			panic(fmt.Sprintf("incorrect default type: %v", t))
 		}
 		if isOptional {
 			ret = jen.Op("*").Add(ret)
 		}
 	case typeVectorUc, typeVectorLc:
-		if len(t.Types) != 1 {
+		if t.SubType == nil {
 			panic(fmt.Sprintf("incorrect vector type: %v", t))
 		}
-		ret = ret.Add(generateFieldType(t.Types[0], false))
+		ret = ret.Add(generateFieldType(*t.SubType, false))
 	default:
-		if len(t.Types) != 0 {
-			generics := make([]jen.Code, len(t.Types))
-			for _, t1 := range t.Types {
-				generics = append(generics, generateFieldType(t1, false))
-			}
-			ret = ret.Index(generics...)
+		if t.SubType != nil {
+			ret = ret.Index(generateFieldType(*t.SubType, false))
 		}
 	}
 	return ret
@@ -235,13 +231,13 @@ var (
 	typeObject   = tl.Name{Key: "Object"}
 )
 
-func generateObjects(name tl.Name, objects tl.DeclarationGroup) *jen.Statement {
-	typeName := getTypeName(name)
+func generateObjects(td tl.TypeDeclaration) *jen.Statement {
+	typeName := getTypeName(td.Type.Name)
 	typeMethod := "_" + typeName
 
 	ret := &jen.Statement{}
-	if objects.Comment != "" {
-		ret = ret.Comment(objects.Comment).Line()
+	if td.Comment != "" {
+		ret = ret.Comment(td.Comment).Line()
 	}
 	ret = ret.Type().Id(typeName).Interface(
 		generateFieldType(tl.AnyType, false),
@@ -251,7 +247,7 @@ func generateObjects(name tl.Name, objects tl.DeclarationGroup) *jen.Statement {
 	checkJens := []jen.Code{}
 	objectJens := []*jen.Statement{}
 
-	for _, obj := range objects.Declarations {
+	for _, obj := range td.Declarations {
 		predictJens, predictTypeName := generatePredicts(typeMethod, obj)
 		objectJens = append(objectJens, predictJens)
 		checkJens = append(checkJens, jen.Id("_").Id(typeName).Op("=").Call(jen.Op("*").Id(predictTypeName)).Call(jen.Nil()))

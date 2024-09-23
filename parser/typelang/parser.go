@@ -13,7 +13,6 @@ import (
 	"strings"
 
 	"github.com/alecthomas/participle/v2"
-	"github.com/quenbyako/ext/slices"
 )
 
 //nolint:gochecknoglobals // obviously parser must be global
@@ -67,20 +66,14 @@ func normalizeType(i *declaration.Type) (tl.Type, error) {
 	if len(i.SubTypes) == 0 {
 		return tl.Type{Name: name}, nil
 	}
-	types := make([]tl.Type, len(i.SubTypes))
-
-	for i, item := range i.SubTypes {
-		typ, err := normalizeType(&item)
+	if len(i.SubTypes) == 1 {
+		typ, err := normalizeType(&i.SubTypes[0])
 		if err != nil {
 			return typ, err
 		}
-		types[i] = typ
+		return tl.Type{Name: name, SubType: &typ}, nil
 	}
-
-	return tl.Type{
-		Name:  name,
-		Types: types,
-	}, nil
+	return tl.Type{}, errors.New("too many subtypes")
 }
 
 func normalizeArgument(arg *declaration.Argument, comment string) (tl.Param, error) {
@@ -345,52 +338,35 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*tl.Declara
 }
 
 func normalizeProgram(program *declaration.Program) (*tl.Schema, error) {
-	typeDecls, funcDecls, comments, err := normalizeEntries(program.Entries)
+	typeDecls, funcDecls, _, err := normalizeEntries(program.Entries)
 	if err != nil {
 		return nil, err
 	}
 
-	typeSeq := []tl.Name{}
-	sortedTypeDecls := map[tl.Name][]tl.Declaration{}
+	decls := make([]tl.Declaration, 0)
+
 	for _, decl := range typeDecls {
-		declType := decl.Type.Name
-
-		if !slices.Contains(typeSeq, declType) {
-			typeSeq = append(typeSeq, declType)
-		}
-
-		sortedTypeDecls[declType] = append(sortedTypeDecls[declType], *decl)
+		decls = append(decls, *decl)
 	}
 
-	typeDeclMap := map[tl.Name]tl.DeclarationGroup{}
-	for typ, decl := range sortedTypeDecls {
-		var comment string
-		if v, ok := comments[typ]; ok {
-			comment = v
-		}
-
-		typeDeclMap[typ] = tl.DeclarationGroup{
-			Comment:      comment,
-			Declarations: decl,
-		}
-	}
-
-	funcSeq := []tl.Name{}
-	funcDeclMap := map[tl.Name]tl.Declaration{}
 	for _, decl := range funcDecls {
-		declType := decl.Name
-
-		if !slices.Contains(funcSeq, declType) {
-			funcSeq = append(funcSeq, declType)
-		}
-
-		funcDeclMap[decl.Name] = *decl
+		decls = append(decls, *decl)
 	}
+
+	//typeDeclMap := map[tl.Name]tl.TypeDeclaration{}
+	//for typ, decl := range sortedTypeDecls {
+	//	var comment string
+	//	if v, ok := comments[typ]; ok {
+	//		comment = v
+	//	}
+	//
+	//	typeDeclMap[typ] = tl.TypeDeclaration{
+	//		Comment:      comment,
+	//		Declarations: decl,
+	//	}
+	//}
 
 	return &tl.Schema{
-		TypeSeq:     typeSeq,
-		TypeDeclMap: typeDeclMap,
-		FuncSeq:     funcSeq,
-		FuncDeclMap: funcDeclMap,
+		Declarations: decls,
 	}, nil
 }

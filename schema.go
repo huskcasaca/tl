@@ -7,44 +7,88 @@ import (
 	"github.com/quenbyako/ext/slices"
 )
 
+// LayeredSchema represents a slice of tl schemas with their layers.
 type LayeredSchema struct {
-	Layers  []uint8
-	Schemas map[uint8]Schema
+	Layers  []uint8          // Layers holds the sequence of layers.
+	Schemas map[uint8]Schema // Schemas maps each layer to its corresponding Schema.
 }
 
+// Schema represents a single schema layer with its declarations.
 type Schema struct {
-	Layer uint8
+	Layer        uint8         // Layer indicates the schema layer number.
+	Declarations []Declaration // Declarations holds the list of declarations in this schema.
+}
 
-	TypeSeq     []Name
-	TypeDeclMap map[Name]DeclarationGroup
+// Types returns the list of types in this schema.
+func (s *Schema) Types() []Type {
+	types := map[string]Type{}
+	for _, decl := range s.Declarations {
+		types[decl.Type.String()] = decl.Type
+	}
+	var typeSlice []Type
+	for _, t := range types {
+		typeSlice = append(typeSlice, t)
+	}
+	return slices.SortFunc(typeSlice, SortType)
+}
 
-	FuncSeq     []Name
-	FuncDeclMap map[Name]Declaration
+// Predicts returns the list of predicts in this schema.
+func (s *Schema) Predicts() []Declaration {
+	var predicts []Declaration
+	for _, decl := range s.Declarations {
+		if decl.Category == CategoryPredict {
+			predicts = append(predicts, decl)
+		}
+	}
+	return slices.SortFunc(predicts, SortDeclarations)
+}
+
+// Functions returns the list of functions in this schema.
+func (s *Schema) Functions() []Declaration {
+	var predicts []Declaration
+	for _, decl := range s.Declarations {
+		if decl.Category == CategoryFunction {
+			predicts = append(predicts, decl)
+		}
+	}
+	return slices.SortFunc(predicts, SortDeclarations)
+}
+
+// TypePredicts returns the list of predicts grouped by type.
+func (s *Schema) TypePredicts() []TypeDeclaration {
+	typePredicts := map[Type][]Declaration{}
+	for _, decl := range s.Declarations {
+		if decl.Category == CategoryPredict {
+			typePredicts[decl.Type] = append(typePredicts[decl.Type], decl)
+		}
+	}
+	predicts := []TypeDeclaration{}
+	for t, declarations := range typePredicts {
+		predicts = append(predicts, TypeDeclaration{Type: t, Declarations: slices.SortFunc(declarations, SortDeclarations)})
+	}
+	return slices.SortFunc(predicts, func(a, b TypeDeclaration) int { return SortType(a.Type, b.Type) })
 }
 
 func (s *Schema) String() string {
 	var parts []string
-	for _, typ := range s.TypeSeq {
-		if decl, ok := s.TypeDeclMap[typ]; ok {
+	predicts := s.Predicts()
+	if len(predicts) != 0 {
+		//parts = append(parts, "---types---")
+		for _, decl := range predicts {
 			parts = append(parts, decl.String())
-		} else {
-			panic(fmt.Sprintf("missed type %#v", typ))
 		}
 	}
 
-	if len(s.FuncSeq) == 0 {
-		return strings.Join(parts, "\n\n") + "\n"
+	functions := s.Functions()
+	if len(functions) != 0 {
+		parts = append(parts, "---functions---")
+		for _, decl := range functions {
+			parts = append(parts, decl.String())
+		}
 	}
 
-	parts = append(parts, "---functions---")
-
-	for _, group := range s.FuncSeq {
-		decl, ok := s.FuncDeclMap[group]
-		if !ok {
-			panic(fmt.Sprintf("missed group %#v", group))
-		}
-
-		parts = append(parts, methodsString(decl))
+	if s.Layer != 0 {
+		parts = append(parts, fmt.Sprintf("// LAYER %v", s.Layer))
 	}
 
 	return strings.Join(parts, "\n\n") + "\n"
@@ -56,49 +100,35 @@ type CRCIndex struct {
 }
 
 func (s *Schema) MakeCRCIndex() map[uint32]CRCIndex {
-	res := make(map[uint32]CRCIndex, len(s.TypeDeclMap))
-	for typ, decl := range s.TypeDeclMap {
-		for i, o := range decl.Declarations {
-			res[o.CRC] = CRCIndex{
-				Type:  typ,
-				Index: i,
-			}
-		}
-	}
+	res := make(map[uint32]CRCIndex, len(s.Declarations))
+	//for typ, decl := range s.Declarations {
+	//	for i, o := range decl.Declarations {
+	//		res[o.CRC] = CRCIndex{
+	//			Type:  typ,
+	//			Index: i,
+	//		}
+	//	}
+	//}
 
 	return res
 }
 
-type DeclarationGroup struct {
+type TypeDeclaration struct {
 	Comment      string
+	Type         Type
 	Declarations []Declaration // must be sorted by name
 }
 
-func (s DeclarationGroup) String() string {
+func (s TypeDeclaration) String() string {
 	var parts []string
 	if s.Comment != "" {
 		parts = append(parts, "// @type "+s.Comment)
 	}
 
-	for _, decl := range slices.SortFunc(s.Declarations, sortDeclarations) {
+	for _, decl := range slices.SortFunc(s.Declarations, SortDeclarations) {
 		parts = append(parts, decl.Comments(decl.Category)...)
 		parts = append(parts, decl.String())
 	}
-
-	return strings.Join(parts, "\n")
-}
-
-func methodsString(decl Declaration) (res string) {
-	var parts []string
-
-	//if group != "" {
-	//	group += "."
-	//}
-
-	//for _, decl := range slices.SortFunc(methods, sortDeclarations) {
-	parts = append(parts, decl.Comments(decl.Category)...)
-	parts = append(parts, decl.String())
-	//}
 
 	return strings.Join(parts, "\n")
 }

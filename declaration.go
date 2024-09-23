@@ -54,7 +54,7 @@ func cmpDeclName(a, b Name) int {
 	}
 }
 
-func sortDeclarations(a, b Declaration) int { return cmpDeclName(a.Name, b.Name) }
+func SortDeclarations(a, b Declaration) int { return cmpDeclName(a.Name, b.Name) }
 
 // GenerateCRC32 generates crc32 of this declaration
 func (o *Declaration) GenerateCRC32() uint32 {

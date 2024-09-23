@@ -21,7 +21,7 @@ func (d DeclarationDiff) Patch(a []Declaration) []Declaration {
 		}
 	}
 
-	return slices.SortFunc(a, sortDeclarations)
+	return slices.SortFunc(a, SortDeclarations)
 }
 
 type DiffEnum struct {

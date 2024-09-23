@@ -89,7 +89,7 @@ func generatePredicts(method string, m tl.Declaration) (ret *jen.Statement, objN
 	predictTypeName := getPredictName(m.Name)
 
 	ret = ret.Type().
-		Add(generateGenericTypes(predictTypeName, m.PolyParams)).
+		Add(generateGenericTypes(predictTypeName, m.OptParams)).
 		Struct(
 			slices.Remap(m.Params, func(p tl.Param) jen.Code {
 				return generateField(p)
@@ -97,9 +97,9 @@ func generatePredicts(method string, m tl.Declaration) (ret *jen.Statement, objN
 		)
 
 	ret = ret.Line()
-	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(predictTypeName, m.PolyParams), m.CRC))
+	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(predictTypeName, m.OptParams), m.CRC))
 	ret = ret.Line()
-	ret = ret.Add(generateInterfaceFunctions(generateGenericNames(predictTypeName, m.PolyParams), method))
+	ret = ret.Add(generateInterfaceFunctions(generateGenericNames(predictTypeName, m.OptParams), method))
 
 	return ret, predictTypeName
 }

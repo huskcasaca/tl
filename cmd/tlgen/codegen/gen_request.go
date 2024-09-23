@@ -23,7 +23,7 @@ func generateRequest(m tl.Declaration) (ret *jen.Statement, objName string) {
 	requestTypeName := getRequestName(m.Name)
 
 	ret = ret.Type().
-		Add(generateGenericTypes(requestTypeName, m.PolyParams)).
+		Add(generateGenericTypes(requestTypeName, m.OptParams)).
 		Struct(
 			slices.Remap(m.Params, func(p tl.Param) jen.Code {
 				return generateField(p)
@@ -31,7 +31,7 @@ func generateRequest(m tl.Declaration) (ret *jen.Statement, objName string) {
 		)
 
 	ret = ret.Line()
-	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(requestTypeName, m.PolyParams), m.CRC))
+	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(requestTypeName, m.OptParams), m.CRC))
 
 	return ret, requestTypeName
 }
@@ -42,7 +42,7 @@ func generateRequestType(funcReqObj tl.Declaration) *jen.Statement {
 
 	requestObjJens, requestTypeName := generateRequest(funcReqObj)
 
-	requestFuncJens := generateRequestFunction(funcName, requestTypeName, funcReqObj.PolyParams, funcReqObj.Type)
+	requestFuncJens := generateRequestFunction(funcName, requestTypeName, funcReqObj.OptParams, funcReqObj.Type)
 
 	return jen.Add(requestObjJens, jen.Line(), jen.Line(), requestFuncJens, jen.Line())
 }

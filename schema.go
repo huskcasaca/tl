@@ -7,8 +7,13 @@ import (
 	"github.com/quenbyako/ext/slices"
 )
 
+type LayeredSchema struct {
+	Layers  []uint8
+	Schemas map[uint8]Schema
+}
+
 type Schema struct {
-	Layer uint32
+	Layer uint8
 
 	TypeSeq     []Name
 	TypeDeclMap map[Name]DeclarationGroup
@@ -76,7 +81,7 @@ func (s DeclarationGroup) String() string {
 	}
 
 	for _, decl := range slices.SortFunc(s.Declarations, sortDeclarations) {
-		parts = append(parts, decl.Comments(DeclarationTypeConstructor)...)
+		parts = append(parts, decl.Comments(decl.Category)...)
 		parts = append(parts, decl.String())
 	}
 
@@ -91,7 +96,7 @@ func methodsString(decl Declaration) (res string) {
 	//}
 
 	//for _, decl := range slices.SortFunc(methods, sortDeclarations) {
-	parts = append(parts, decl.Comments(DeclarationTypeMethod)...)
+	parts = append(parts, decl.Comments(decl.Category)...)
 	parts = append(parts, decl.String())
 	//}
 

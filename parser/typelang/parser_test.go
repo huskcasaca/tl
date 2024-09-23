@@ -22,47 +22,51 @@ func TestParseFile(t *testing.T) {
 		expected *tl.Schema
 		wantErr  assert.ErrorAssertionFunc
 	}{{
-		file: "internal/testdata/simplest.tl",
+		file: "testdata/simplest.tl",
 		expected: &tl.Schema{
 			TypeSeq: []Name{{Key: "CoolEnumerate"}},
 			TypeDeclMap: map[Name]tl.DeclarationGroup{
 				{Key: "CoolEnumerate"}: {
 					Declarations: []Declaration{{
-						Name:       Name{Key: "someEnum"},
-						CRC:        0x5508ec75,
-						Params:     []Param{},
-						PolyParams: []Param{},
-						Type:       tl.Type{Name: Name{Key: "CoolEnumerate"}},
+						Name:      Name{Key: "someEnum"},
+						CRC:       0x5508ec75,
+						Category:  CategoryPredict,
+						Params:    []Param{},
+						OptParams: []Param{},
+						Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
 					}},
 				},
 			},
 			FuncSeq: []Name{{Key: "someFunc"}, {Namespace: "auth", Key: "someFunc"}},
 			FuncDeclMap: map[Name]Declaration{
 				Name{Key: "someFunc"}: {
-					Name:       Name{Key: "someFunc"},
-					CRC:        0x7da07ec9,
-					Params:     []Param{},
-					PolyParams: []Param{},
-					Type:       tl.Type{Name: Name{Key: "CoolEnumerate"}},
+					Name:      Name{Key: "someFunc"},
+					CRC:       0x7da07ec9,
+					Category:  CategoryFunction,
+					Params:    []Param{},
+					OptParams: []Param{},
+					Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
 				},
 				Name{Namespace: "auth", Key: "someFunc"}: {
-					Name:       Name{Namespace: "auth", Key: "someFunc"},
-					CRC:        0x7da07ec9,
-					Params:     []Param{},
-					PolyParams: []Param{},
-					Type:       tl.Type{Name: Name{Key: "CoolEnumerate"}},
+					Name:      Name{Namespace: "auth", Key: "someFunc"},
+					CRC:       0x7da07ec9,
+					Category:  CategoryFunction,
+					Params:    []Param{},
+					OptParams: []Param{},
+					Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
 				},
 			},
 		},
 	}, {
-		file: "internal/testdata/many_flags.tl",
+		file: "testdata/many_flags.tl",
 		expected: &tl.Schema{
 			TypeSeq: []Name{{Key: "ChatFull"}},
 			TypeDeclMap: map[Name]tl.DeclarationGroup{
 				{Key: "ChatFull"}: {
 					Declarations: []Declaration{{
-						Name: Name{Key: "a"},
-						CRC:  0xf2355507,
+						Name:     Name{Key: "a"},
+						CRC:      0xf2355507,
+						Category: CategoryPredict,
 						Params: []Param{BitflagParam{
 							Name: "flags",
 						}, TriggerParam{
@@ -80,8 +84,8 @@ func TestParseFile(t *testing.T) {
 							Name: "id",
 							Type: tl.Type{Name: Name{Key: "long"}},
 						}},
-						PolyParams: []Param{},
-						Type:       tl.Type{Name: Name{Key: "ChatFull"}},
+						OptParams: []Param{},
+						Type:      tl.Type{Name: Name{Key: "ChatFull"}},
 					}},
 				},
 			},

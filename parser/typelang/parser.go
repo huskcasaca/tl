@@ -62,15 +62,15 @@ func Parse(filename string, content io.Reader) (*tl.Schema, error) {
 	return normalized, nil
 }
 
-func normalizeIdent(i *declaration.Type) (tl.Type, error) {
-	name := tl.GetNameFromString(i.Ident.String())
+func normalizeType(i *declaration.Type) (tl.Type, error) {
+	name := tl.ParseNameFromString(i.Ident.String())
 	if len(i.SubTypes) == 0 {
 		return tl.Type{Name: name}, nil
 	}
 	types := make([]tl.Type, len(i.SubTypes))
 
 	for i, item := range i.SubTypes {
-		typ, err := normalizeIdent(&item)
+		typ, err := normalizeType(&item)
 		if err != nil {
 			return typ, err
 		}
@@ -84,7 +84,7 @@ func normalizeIdent(i *declaration.Type) (tl.Type, error) {
 }
 
 func normalizeArgument(arg *declaration.Argument, comment string) (tl.Param, error) {
-	typ, err := normalizeIdent(&arg.Type)
+	typ, err := normalizeType(&arg.Type)
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", arg.Ident.String(), err)
 	}
@@ -122,12 +122,12 @@ func normalizeArgument(arg *declaration.Argument, comment string) (tl.Param, err
 	}, nil
 }
 
-func normalizeCombinator(decl *declaration.Declaration, constructorComment string, argsComments map[string]string) (*tl.Declaration, error) {
+func normalizeDeclaration(decl *declaration.Declaration, constructorComment string, argsComments map[string]string) (*tl.Declaration, error) {
 	parts := strings.Split(decl.Combinator, "#") // guaranteed to split by two parts, lexer handles it
 	if len(parts) == 0 || len(parts) > 2 {
 		return nil, errors.New(decl.Combinator + ": invalid combinator")
 	}
-	name := tl.GetNameFromString(parts[0])
+	name := tl.ParseNameFromString(parts[0])
 	crc := uint64(0)
 	if len(parts) == 2 {
 		crc1, err := strconv.ParseUint(parts[1], 16, 32)
@@ -154,7 +154,7 @@ func normalizeCombinator(decl *declaration.Declaration, constructorComment strin
 		}
 	}
 
-	polyParams := make(tl.Params, len(decl.OptArgs))
+	optParams := make(tl.Params, len(decl.OptArgs))
 
 	for i, arg := range decl.OptArgs {
 		arg := arg
@@ -167,13 +167,13 @@ func normalizeCombinator(decl *declaration.Declaration, constructorComment strin
 		}
 
 		var argErr error
-		polyParams[i], argErr = normalizeArgument(&arg, comment)
+		optParams[i], argErr = normalizeArgument(&arg, comment)
 		if argErr != nil {
 			return nil, fmt.Errorf("%v: %w", decl.Combinator, argErr)
 		}
 	}
 
-	typ, err := normalizeIdent(&declaration.Type{
+	typ, err := normalizeType(&declaration.Type{
 		Ident:    decl.Result.Ident,
 		SubTypes: decl.Result.SubTypes,
 	})
@@ -191,12 +191,12 @@ func normalizeCombinator(decl *declaration.Declaration, constructorComment strin
 	}
 
 	return &tl.Declaration{
-		Comment:    constructorComment,
-		Name:       name,
-		CRC:        uint32(crc),
-		Params:     params,
-		PolyParams: polyParams,
-		Type:       typ,
+		Comment:   constructorComment,
+		Name:      name,
+		CRC:       uint32(crc),
+		Params:    params,
+		OptParams: optParams,
+		Type:      typ,
 	}, nil
 }
 
@@ -298,7 +298,7 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*tl.Declara
 			}
 
 		case item.Declaration != nil:
-			decl, err := normalizeCombinator(item.Declaration, constructorComment, argumentComments)
+			decl, err := normalizeDeclaration(item.Declaration, constructorComment, argumentComments)
 			if err != nil {
 				return nil, nil, nil, err
 			}
@@ -307,8 +307,10 @@ func normalizeEntries(items []declaration.ProgramEntry) (typeDecls []*tl.Declara
 			//	return nil, nil, nil, errors.New(decl.Name.String() + ": CRC mismatch! Described: " + fmt.Sprintf("0x%08x", decl.CRC) + " Calculated: " + fmt.Sprintf("0x%08x", decl.getCRC()))
 			//}
 			if funcMode {
+				decl.Category = tl.CategoryFunction
 				funcDecls = append(funcDecls, decl)
 			} else {
+				decl.Category = tl.CategoryPredict
 				typeDecls = append(typeDecls, decl)
 			}
 

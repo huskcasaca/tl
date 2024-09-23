@@ -6,6 +6,8 @@ import (
 	"reflect"
 )
 
+type CRC32 = uint32
+
 type crc32 = uint32
 
 //nolint:gochecknoglobals // types must be global

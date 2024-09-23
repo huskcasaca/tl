@@ -8,12 +8,13 @@ import (
 )
 
 type Declaration struct {
-	Comment    string
-	Name       Name
-	CRC        uint32
-	Params     Params
-	PolyParams Params
-	Type       Type
+	Comment   string
+	Name      Name
+	CRC       CRC32
+	Category  Category
+	Params    Params
+	OptParams Params
+	Type      Type
 }
 
 type Name struct {
@@ -21,7 +22,7 @@ type Name struct {
 	Key       string
 }
 
-func GetNameFromString(s string) Name {
+func ParseNameFromString(s string) Name {
 	groups := strings.Split(s, ".")
 	var namespace string
 	key := groups[0]
@@ -41,8 +42,6 @@ func (o Name) String() string {
 	return o.Key
 }
 
-func (o Name) IsInterface() bool { return isFirstRuneUpper(o.Key) }
-
 func (o Name) Cmp(b Name) int { return cmpDeclName(o, b) }
 
 func cmpDeclName(a, b Name) int {
@@ -57,39 +56,8 @@ func cmpDeclName(a, b Name) int {
 
 func sortDeclarations(a, b Declaration) int { return cmpDeclName(a.Name, b.Name) }
 
-type DeclarationType uint8
-
-const (
-	DeclarationTypeUnknown DeclarationType = iota
-	DeclarationTypeConstructor
-	DeclarationTypeMethod
-)
-
-func (o DeclarationType) String() string {
-	switch o {
-	case DeclarationTypeConstructor:
-		return "predict"
-	case DeclarationTypeMethod:
-		return "method"
-	default:
-		return "<UNKNOWN>"
-	}
-}
-
-// how CRC is calculated:
-// first of all, constructor formats to canonical state, e.g.
-// `user#12325 id:int         first_name:string    last_name:string = User`
-// ↓↓↓
-// `user id:int first_name:string last_name:string = User`
-//
-// all bit triggers are removing, e.g.
-// `messages.clearRecentStickers#8999602d flags:# attached:flags.0?true = Bool`
-// ↓↓↓
-// `messages.clearRecentStickers flags:# = Bool`
-//
-// For vectors like `getSmthn items:Vector<int> = Bool` i still don't understand
-// how to generate, cause it fails in real mtproto schema.
-func (o *Declaration) getCRC() uint32 {
+// GenerateCRC32 generates crc32 of this declaration
+func (o *Declaration) GenerateCRC32() uint32 {
 	if o.CRC != 0 {
 		return o.CRC
 	}
@@ -115,10 +83,10 @@ func (o *Declaration) String() string {
 		fields = " " + o.Params.String()
 	}
 
-	return fmt.Sprintf("%v#%08x%v = %v;", o.Name.String(), o.getCRC(), fields, o.Type)
+	return fmt.Sprintf("%v#%08x%v = %v;", o.Name.String(), o.GenerateCRC32(), fields, o.Type)
 }
 
-func (o *Declaration) Comments(typ DeclarationType) []string {
+func (o *Declaration) Comments(typ Category) []string {
 	var res []string
 	if o.Comment != "" {
 		res = append(res, "// @"+typ.String()+" "+o.Comment)

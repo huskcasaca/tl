@@ -1,13 +1,13 @@
 package program_test
 
 import (
-	"github.com/xelaj/tl/parser/typelang/lexer"
+	"github.com/xelaj/tl/lang/typelang/lexer"
 	"testing"
 
 	"github.com/alecthomas/participle/v2"
 	"github.com/stretchr/testify/assert"
 
-	. "github.com/xelaj/tl/parser/typelang/program"
+	. "github.com/xelaj/tl/lang/typelang/program"
 )
 
 type TestCase interface {

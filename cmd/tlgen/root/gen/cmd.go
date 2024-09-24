@@ -2,7 +2,7 @@ package gen
 
 import (
 	"context"
-	"github.com/xelaj/tl/parser/typelang"
+	"github.com/xelaj/tl/lang/typelang"
 	"io"
 
 	"github.com/spf13/cobra"

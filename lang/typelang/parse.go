@@ -2,8 +2,8 @@ package typelang
 
 import (
 	"github.com/xelaj/tl"
-	"github.com/xelaj/tl/parser/typelang/lexer"
-	"github.com/xelaj/tl/parser/typelang/program"
+	"github.com/xelaj/tl/lang/typelang/lexer"
+	"github.com/xelaj/tl/lang/typelang/program"
 	"io"
 	"io/fs"
 	"os"

@@ -3,7 +3,7 @@ package protobuf_test
 import (
 	"embed"
 	"github.com/xelaj/tl"
-	. "github.com/xelaj/tl/parser/protobuf"
+	. "github.com/xelaj/tl/lang/protobuf"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

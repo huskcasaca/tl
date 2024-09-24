@@ -1,4 +1,4 @@
-package parser
+package lang
 
 import (
 	"bufio"
@@ -6,9 +6,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/xelaj/tl"
-	"github.com/xelaj/tl/parser/protobuf"
-	"github.com/xelaj/tl/parser/typelang"
-	"github.com/xelaj/tl/parser/typelang/lexer"
+	"github.com/xelaj/tl/lang/protobuf"
+	"github.com/xelaj/tl/lang/typelang"
+	"github.com/xelaj/tl/lang/typelang/lexer"
 	"io"
 	"strings"
 	"sync"

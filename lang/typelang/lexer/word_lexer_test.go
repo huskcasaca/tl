@@ -2,7 +2,7 @@ package lexer_test
 
 import (
 	"context"
-	. "github.com/xelaj/tl/parser/typelang/lexer"
+	. "github.com/xelaj/tl/lang/typelang/lexer"
 	"sync"
 	"testing"
 

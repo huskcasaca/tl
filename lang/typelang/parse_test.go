@@ -2,7 +2,7 @@ package typelang_test
 
 import (
 	"embed"
-	. "github.com/xelaj/tl/parser/typelang"
+	. "github.com/xelaj/tl/lang/typelang"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

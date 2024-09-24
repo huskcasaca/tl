@@ -1,7 +1,7 @@
 package program_test
 
 import (
-	. "github.com/xelaj/tl/parser/typelang/program"
+	. "github.com/xelaj/tl/lang/typelang/program"
 	"testing"
 )
 

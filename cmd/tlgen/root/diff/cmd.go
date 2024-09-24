@@ -2,7 +2,7 @@ package diff
 
 import (
 	"context"
-	"github.com/xelaj/tl/parser/typelang"
+	"github.com/xelaj/tl/lang/typelang"
 	"os"
 
 	"github.com/spf13/cobra"

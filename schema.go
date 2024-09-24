@@ -1,9 +1,6 @@
 package tl
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/quenbyako/ext/slices"
 )
 
@@ -69,31 +66,6 @@ func (s *Schema) TypePredicts() []TypeDeclaration {
 	return slices.SortFunc(predicts, func(a, b TypeDeclaration) int { return SortType(a.Type, b.Type) })
 }
 
-func (s *Schema) String() string {
-	var parts []string
-	predicts := s.Predicts()
-	if len(predicts) != 0 {
-		//parts = append(parts, "---types---")
-		for _, decl := range predicts {
-			parts = append(parts, decl.String())
-		}
-	}
-
-	functions := s.Functions()
-	if len(functions) != 0 {
-		parts = append(parts, "---functions---")
-		for _, decl := range functions {
-			parts = append(parts, decl.String())
-		}
-	}
-
-	if s.Layer != 0 {
-		parts = append(parts, fmt.Sprintf("// LAYER %v", s.Layer))
-	}
-
-	return strings.Join(parts, "\n\n") + "\n"
-}
-
 type CRCIndex struct {
 	Type  Name
 	Index int
@@ -117,18 +89,4 @@ type TypeDeclaration struct {
 	Comment      string
 	Type         Type
 	Declarations []Declaration // must be sorted by name
-}
-
-func (s TypeDeclaration) String() string {
-	var parts []string
-	if s.Comment != "" {
-		parts = append(parts, "// @type "+s.Comment)
-	}
-
-	for _, decl := range slices.SortFunc(s.Declarations, SortDeclarations) {
-		parts = append(parts, decl.Comments(decl.Category)...)
-		parts = append(parts, decl.String())
-	}
-
-	return strings.Join(parts, "\n")
 }

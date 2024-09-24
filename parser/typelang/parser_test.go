@@ -2,7 +2,6 @@ package typelang_test
 
 import (
 	"embed"
-	"github.com/xelaj/tl"
 	. "github.com/xelaj/tl/parser/typelang"
 	"testing"
 
@@ -19,11 +18,11 @@ func TestParseFile(t *testing.T) {
 	for _, tt := range []struct {
 		name     string
 		file     string
-		expected *tl.Schema
+		expected *Schema
 		wantErr  assert.ErrorAssertionFunc
 	}{{
 		file: "testdata/simplest.tl",
-		expected: &tl.Schema{
+		expected: &Schema{
 			Declarations: []Declaration{
 				{
 					Name:      Name{Key: "someEnum"},
@@ -31,7 +30,7 @@ func TestParseFile(t *testing.T) {
 					Category:  CategoryPredict,
 					Params:    []Param{},
 					OptParams: []Param{},
-					Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
+					Type:      Type{Name: Name{Key: "CoolEnumerate"}},
 				},
 				{
 					Name:      Name{Key: "someFunc"},
@@ -39,7 +38,7 @@ func TestParseFile(t *testing.T) {
 					Category:  CategoryFunction,
 					Params:    []Param{},
 					OptParams: []Param{},
-					Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
+					Type:      Type{Name: Name{Key: "CoolEnumerate"}},
 				},
 				{
 					Name:      Name{Namespace: "auth", Key: "someFunc"},
@@ -47,14 +46,14 @@ func TestParseFile(t *testing.T) {
 					Category:  CategoryFunction,
 					Params:    []Param{},
 					OptParams: []Param{},
-					Type:      tl.Type{Name: Name{Key: "CoolEnumerate"}},
+					Type:      Type{Name: Name{Key: "CoolEnumerate"}},
 				},
 			},
 		},
 	}, {
-		file: "testdata/many_flags.tl",
-		expected: &tl.Schema{
-			Declarations: []tl.Declaration{
+		file: "testdata/flags.tl",
+		expected: &Schema{
+			Declarations: []Declaration{
 				{
 					Name:     Name{Key: "a"},
 					CRC:      0xf2355507,
@@ -69,15 +68,89 @@ func TestParseFile(t *testing.T) {
 						Name: "flags2",
 					}, OptionalParam{
 						Name:        "opt2_prop",
-						Type:        tl.Type{Name: Name{Key: "double"}},
+						Type:        Type{Name: Name{Key: "double"}},
 						FlagTrigger: "flags2",
 						BitTrigger:  9,
 					}, RequiredParam{
 						Name: "id",
-						Type: tl.Type{Name: Name{Key: "long"}},
+						Type: Type{Name: Name{Key: "long"}},
 					}},
 					OptParams: []Param{},
-					Type:      tl.Type{Name: Name{Key: "ChatFull"}},
+					Type:      Type{Name: Name{Key: "ChatFull"}},
+				},
+			},
+		},
+	}, {
+		file: "testdata/annotations.tl",
+		expected: &Schema{
+			Declarations: []Declaration{
+				{
+					Name:       Name{Key: "predict"},
+					CRC:        0x12345678,
+					Category:   CategoryPredict,
+					Params:     []Param{},
+					OptParams:  []Param{},
+					Type:       Type{Name: Name{Key: "SomeType"}},
+					Comment:    "this is a comment for predict",
+					RetComment: "this is a comment for return type",
+				},
+				{
+					Name:     Name{Key: "function"},
+					CRC:      305419896,
+					Category: CategoryFunction,
+					Params: []Param{
+						RequiredParam{
+							Comment: "this is a comment for param1",
+							Name:    "param1",
+							Type: Type{
+								Name: Name{Key: "string"},
+							},
+						},
+						RequiredParam{
+							Comment: "this is a comment for param2",
+							Name:    "param2",
+							Type: Type{
+								Name: Name{Key: "bool"},
+							},
+						},
+					},
+					OptParams: []Param{},
+					Type: Type{
+						Name: Name{Key: "SomeType"},
+					},
+					Comment:    "this is a comment for function",
+					RetComment: "this is a comment for return type",
+				},
+				{
+					Name:      Name{Key: "functionNoFields"},
+					CRC:       0x12345678,
+					Category:  CategoryFunction,
+					Params:    []Param{},
+					OptParams: []Param{},
+					Type: Type{
+						Name: Name{
+							Key: "SomeType",
+						},
+					},
+				},
+				{
+					Name:     Name{Key: "functionWithoutComments"},
+					CRC:      0x12345678,
+					Category: CategoryFunction,
+					Params: []Param{
+						BitflagParam{
+							Name: "flags",
+						},
+						TriggerParam{
+							Name:        "a",
+							FlagTrigger: "flags",
+							BitTrigger:  1,
+						},
+					},
+					OptParams: []Param{},
+					Type: Type{
+						Name: Name{Key: "SomeType"},
+					},
 				},
 			},
 		},
@@ -97,36 +170,6 @@ func TestParseFile(t *testing.T) {
 			}
 
 			assert.Equal(t, tt.expected, got)
-		})
-	}
-}
-
-func TestEquality(t *testing.T) {
-	for _, tt := range []struct {
-		name string
-		file string
-	}{{
-		name: "simplest",
-		file: "testdata/simplest.tl",
-	}, {
-		name: "many_flags",
-		file: "testdata/many_flags.tl",
-	}, {
-		name: "with_comments",
-		file: "testdata/with_comments.tl",
-	}} {
-		tt := tt // for parallel tests
-
-		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
-			data, err := testdata.ReadFile(tt.file)
-			require.NoError(t, err)
-
-			got, err := ParseString(tt.file, string(data))
-			require.NoError(t, err)
-
-			assert.Equal(t, string(data), got.String())
 		})
 	}
 }

@@ -3,8 +3,6 @@ package tl
 import (
 	"fmt"
 	"strings"
-	"unicode"
-	"unicode/utf8"
 )
 
 type Types []Type
@@ -27,8 +25,3 @@ func SortType(a, b Type) int { return strings.Compare(a.String(), b.String()) }
 var (
 	AnyType = Type{Name: Name{Key: "Type"}}
 )
-
-func isFirstRuneUpper(s string) bool {
-	r, _ := utf8.DecodeRuneInString(s)
-	return unicode.IsUpper(r)
-}

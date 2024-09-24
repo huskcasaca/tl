@@ -148,5 +148,5 @@ func (t GenericParam) GetName() string    { return t.Name }
 func (t GenericParam) GetType() Type      { return t.Type }
 func (t GenericParam) GetComment() string { return t.Comment }
 func (t GenericParam) String() string {
-	return fmt.Sprintf("%v:%v", t.Name, t.Type.String())
+	return fmt.Sprintf("{%v:%v}", t.Name, t.Type.String())
 }

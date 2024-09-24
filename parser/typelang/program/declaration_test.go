@@ -1,8 +1,8 @@
-package declaration_test
+package program_test
 
 import (
-	. "github.com/xelaj/tl/parser/typelang/declaration"
 	"github.com/xelaj/tl/parser/typelang/lexer"
+	. "github.com/xelaj/tl/parser/typelang/program"
 	"testing"
 
 	"github.com/alecthomas/participle/v2"

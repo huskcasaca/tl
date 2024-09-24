@@ -1,4 +1,4 @@
-package typelang
+package program
 
 import (
 	"errors"

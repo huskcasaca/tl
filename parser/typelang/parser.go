@@ -2,8 +2,8 @@ package typelang
 
 import (
 	"github.com/xelaj/tl"
-	"github.com/xelaj/tl/parser/typelang/declaration"
 	"github.com/xelaj/tl/parser/typelang/lexer"
+	"github.com/xelaj/tl/parser/typelang/program"
 	"io"
 	"io/fs"
 	"os"
@@ -12,7 +12,7 @@ import (
 	"github.com/alecthomas/participle/v2"
 )
 
-var parser = participle.MustBuild[declaration.Program](
+var parser = participle.MustBuild[program.Program](
 	participle.Lexer(lexer.NewDefinition()),
 )
 
@@ -46,7 +46,7 @@ func Parse(filename string, content io.Reader) (*tl.Schema, error) {
 		return nil, err
 	}
 
-	normalized, err := ParseProgram(res)
+	normalized, err := program.ParseProgram(res)
 
 	if err != nil {
 		return nil, err

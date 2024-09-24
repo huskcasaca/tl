@@ -55,6 +55,8 @@ func ParseAnnotation(annotation string) (*Annotation, error) {
 		} else {
 			return nil, nil
 		}
+	} else {
+		return nil, nil
 	}
 
 	switch tag := commentTag; tag {

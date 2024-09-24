@@ -38,16 +38,16 @@ func Action(ctx context.Context, app util.AppCtx[Flags]) int {
 		return 1
 	}
 
-	schema, err := typelang.Parse(app.Flags.File, in)
+	_, err = typelang.Parse(app.Flags.File, in)
 	if err != nil {
 		app.Log.Fatal().Err(err).Msg("failed to parse schema")
 		return 1
 	}
 
-	if _, err := app.Stdout.Write([]byte(schema.String())); err != nil {
-		app.Log.Fatal().Err(err).Msg("failed to write schema")
-		return 1
-	}
+	//if _, err := app.Stdout.Write([]byte(schema.String())); err != nil {
+	//	app.Log.Fatal().Err(err).Msg("failed to write schema")
+	//	return 1
+	//}
 
 	return 0
 }

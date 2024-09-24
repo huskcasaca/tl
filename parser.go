@@ -1,12 +1,19 @@
 package tl
 
 import (
+	"bufio"
 	"context"
 	"errors"
+	"fmt"
+	"github.com/xelaj/tl/parser/protobuf"
+	"github.com/xelaj/tl/parser/typelang"
 	"github.com/xelaj/tl/parser/typelang/lexer"
+	"io"
 	"strings"
 	"sync"
 	"unicode/utf8"
+
+	"github.com/gabriel-vasile/mimetype"
 )
 
 func IsTypeLangDefinition(raw []byte, limit uint32) (matched bool) {
@@ -67,4 +74,49 @@ func readLineWithoutComment(str string) (line, left string) {
 
 	commentStart := strings.Index(line, "//")
 	return strings.TrimSpace(line[:commentStart]), left
+}
+
+// for both of these file formats, there is no official mime type, so using
+// most common mime variants.
+const (
+	mimeTypeLang    = "application/x-typelang"
+	mimeTypeLangBin = "application/x-tlb"
+	mimeProtobuf    = "application/x-protofile"
+
+	mimeBufferMax = 512
+)
+
+var onceExtend sync.Once
+
+func predictMime(b []byte) string {
+	onceExtend.Do(func() {
+		mimetype.SetLimit(mimeBufferMax)
+		mimetype.Extend(IsTypeLangDefinition, mimeTypeLang, ".tl")
+	})
+
+	return mimetype.Detect(b).String()
+}
+
+func Parse(filename, predictedMime string, r io.Reader) (*Schema, error) {
+	if predictedMime == "" {
+		buf := bufio.NewReader(r)
+		r = buf
+
+		b, err := buf.Peek(mimeBufferMax)
+		if err != nil {
+			return nil, fmt.Errorf("predicting data format: %w", err)
+		}
+		predictedMime = predictMime(b)
+	}
+
+	switch predictedMime {
+	case mimeTypeLang:
+		return typelang.Parse(filename, r)
+
+	case mimeProtobuf:
+		return protobuf.Parse(filename, r)
+
+	default:
+		return nil, fmt.Errorf("%#v is not supported", predictedMime)
+	}
 }

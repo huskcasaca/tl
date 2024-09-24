@@ -33,8 +33,8 @@ type Flag struct {
 	Index int    `parser:"dot @nat_const question_mark"`
 }
 
-func ParseArgument(arg *Argument, comment string) (tl.Param, error) {
-	typ, err := ParseType(&arg.Type)
+func (arg *Argument) Normalize() (tl.Param, error) {
+	typ, err := arg.Type.Normalize()
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", arg.Ident.String(), err)
 	}
@@ -42,21 +42,18 @@ func ParseArgument(arg *Argument, comment string) (tl.Param, error) {
 	if arg.Flag == nil {
 		if typ.Key == "#" {
 			return tl.BitflagParam{
-				Comment: comment,
-				Name:    arg.Ident.String(),
+				Name: arg.Ident.String(),
 			}, nil
 		}
 
 		return tl.RequiredParam{
-			Comment: comment,
-			Name:    arg.Ident.String(),
-			Type:    typ,
+			Name: arg.Ident.String(),
+			Type: typ,
 		}, nil
 	}
 
 	if typ.Key == "true" {
 		return tl.TriggerParam{
-			Comment:     comment,
 			Name:        arg.Ident.String(),
 			FlagTrigger: arg.Flag.Ident,
 			BitTrigger:  arg.Flag.Index,
@@ -64,7 +61,6 @@ func ParseArgument(arg *Argument, comment string) (tl.Param, error) {
 	}
 
 	return tl.OptionalParam{
-		Comment:     comment,
 		Name:        arg.Ident.String(),
 		Type:        typ,
 		FlagTrigger: arg.Flag.Ident,

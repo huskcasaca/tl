@@ -34,13 +34,13 @@ func (s *TypeIdent) String() string {
 	return s.Ident
 }
 
-func ParseType(i *Type) (tl.Type, error) {
+func (i *Type) Normalize() (tl.Type, error) {
 	name := tl.NameFromString(i.Ident.String())
 	if len(i.SubTypes) == 0 {
 		return tl.Type{Name: name}, nil
 	}
 	if len(i.SubTypes) == 1 {
-		typ, err := ParseType(&i.SubTypes[0])
+		typ, err := i.SubTypes[0].Normalize()
 		if err != nil {
 			return typ, err
 		}

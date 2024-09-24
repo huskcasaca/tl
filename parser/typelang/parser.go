@@ -46,7 +46,7 @@ func Parse(filename string, content io.Reader) (*tl.Schema, error) {
 		return nil, err
 	}
 
-	normalized, err := program.ParseProgram(res)
+	normalized, err := res.Normalize()
 
 	if err != nil {
 		return nil, err

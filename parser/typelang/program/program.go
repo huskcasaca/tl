@@ -31,7 +31,7 @@ type ProgramEntry struct {
 	Comment     *string      `parser:"@comment ( newline | EOF ) "`
 }
 
-func ParseProgram(program *Program) (*tl.Schema, error) {
+func (program *Program) Normalize() (*tl.Schema, error) {
 	var (
 		decls    = []tl.Declaration{}
 		comments = []Annotation{}
@@ -56,7 +56,7 @@ func ParseProgram(program *Program) (*tl.Schema, error) {
 			}
 
 		case e.Declaration != nil:
-			d, err := ParseDeclaration(e.Declaration, comments)
+			d, err := e.Declaration.Normalize(comments)
 			if err != nil {
 				return nil, err
 			}

@@ -30,6 +30,7 @@ type Param interface {
 	GetName() string
 	GetType() Type
 	GetComment() string
+	SetComment(comment string)
 	fmt.Stringer
 }
 
@@ -46,11 +47,12 @@ type BitflagParam struct {
 	Name    string
 }
 
-func (_ BitflagParam) _Parameter()        {}
-func (t BitflagParam) GetName() string    { return t.Name }
-func (t BitflagParam) GetType() Type      { return Type{} }
-func (t BitflagParam) GetComment() string { return t.Comment }
-func (t BitflagParam) String() string     { return t.Name + ":#" }
+func (_ BitflagParam) _Parameter()               {}
+func (t BitflagParam) GetName() string           { return t.Name }
+func (t BitflagParam) GetType() Type             { return Type{} }
+func (t BitflagParam) GetComment() string        { return t.Comment }
+func (t BitflagParam) SetComment(comment string) { t.Comment = comment }
+func (t BitflagParam) String() string            { return t.Name + ":#" }
 
 type RequiredParam struct {
 	Comment string
@@ -58,11 +60,12 @@ type RequiredParam struct {
 	Type    Type
 }
 
-func (_ RequiredParam) _Parameter()        {}
-func (t RequiredParam) GetName() string    { return t.Name }
-func (t RequiredParam) GetType() Type      { return t.Type }
-func (t RequiredParam) GetComment() string { return t.Comment }
-func (t RequiredParam) String() string     { return t.Name + ":" + t.Type.String() }
+func (_ RequiredParam) _Parameter()               {}
+func (t RequiredParam) GetName() string           { return t.Name }
+func (t RequiredParam) GetType() Type             { return t.Type }
+func (t RequiredParam) GetComment() string        { return t.Comment }
+func (t RequiredParam) SetComment(comment string) { t.Comment = comment }
+func (t RequiredParam) String() string            { return t.Name + ":" + t.Type.String() }
 
 type OptionalParam struct {
 	Comment     string
@@ -72,10 +75,11 @@ type OptionalParam struct {
 	BitTrigger  int
 }
 
-func (_ OptionalParam) _Parameter()        {}
-func (t OptionalParam) GetName() string    { return t.Name }
-func (t OptionalParam) GetType() Type      { return t.Type }
-func (t OptionalParam) GetComment() string { return t.Comment }
+func (_ OptionalParam) _Parameter()               {}
+func (t OptionalParam) GetName() string           { return t.Name }
+func (t OptionalParam) GetType() Type             { return t.Type }
+func (t OptionalParam) GetComment() string        { return t.Comment }
+func (t OptionalParam) SetComment(comment string) { t.Comment = comment }
 func (t OptionalParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?%v", t.Name, t.FlagTrigger, t.BitTrigger, t.Type.String())
 }
@@ -87,10 +91,11 @@ type TriggerParam struct {
 	BitTrigger  int
 }
 
-func (_ TriggerParam) _Parameter()        {}
-func (t TriggerParam) GetName() string    { return t.Name }
-func (t TriggerParam) GetType() Type      { return Type{} }
-func (t TriggerParam) GetComment() string { return t.Comment }
+func (_ TriggerParam) _Parameter()               {}
+func (t TriggerParam) GetName() string           { return t.Name }
+func (t TriggerParam) GetType() Type             { return Type{} }
+func (t TriggerParam) GetComment() string        { return t.Comment }
+func (t TriggerParam) SetComment(comment string) { t.Comment = comment }
 func (t TriggerParam) String() string {
 	return fmt.Sprintf("%v:%v.%v?true", t.Name, t.FlagTrigger, t.BitTrigger)
 }
@@ -143,10 +148,11 @@ type GenericParam struct {
 	Type    Type
 }
 
-func (_ GenericParam) _Parameter()        {}
-func (t GenericParam) GetName() string    { return t.Name }
-func (t GenericParam) GetType() Type      { return t.Type }
-func (t GenericParam) GetComment() string { return t.Comment }
+func (_ GenericParam) _Parameter()               {}
+func (t GenericParam) GetName() string           { return t.Name }
+func (t GenericParam) GetType() Type             { return t.Type }
+func (t GenericParam) GetComment() string        { return t.Comment }
+func (t GenericParam) SetComment(comment string) { t.Comment = comment }
 func (t GenericParam) String() string {
 	return fmt.Sprintf("{%v:%v}", t.Name, t.Type.String())
 }

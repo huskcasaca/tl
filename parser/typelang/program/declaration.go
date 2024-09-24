@@ -37,7 +37,7 @@ type Declaration struct {
 	Result     Type       `parser:"@@"`
 }
 
-func ParseDeclaration(decl *Declaration, comments []Annotation) (*tl.Declaration, error) {
+func (decl *Declaration) Normalize(comments []Annotation) (*tl.Declaration, error) {
 	parts := strings.Split(decl.Combinator, "#")
 	if len(parts) == 0 || len(parts) > 2 {
 		return nil, errors.New(decl.Combinator + ": invalid combinator")
@@ -77,10 +77,11 @@ func ParseDeclaration(decl *Declaration, comments []Annotation) (*tl.Declaration
 		}
 
 		var argErr error
-		params[i], argErr = ParseArgument(&arg, comment)
+		params[i], argErr = arg.Normalize()
 		if argErr != nil {
 			return nil, fmt.Errorf("%v: %w", decl.Combinator, argErr)
 		}
+		params[i].SetComment(comment)
 	}
 
 	optParams := make(tl.Params, len(decl.OptArgs))
@@ -96,13 +97,14 @@ func ParseDeclaration(decl *Declaration, comments []Annotation) (*tl.Declaration
 		}
 
 		var argErr error
-		optParams[i], argErr = ParseArgument(&arg, comment)
+		optParams[i], argErr = arg.Normalize()
 		if argErr != nil {
 			return nil, fmt.Errorf("%v: %w", decl.Combinator, argErr)
 		}
+		optParams[i].SetComment(comment)
 	}
 
-	typ, err := ParseType(&decl.Result)
+	typ, err := decl.Result.Normalize()
 	if err != nil {
 		return nil, fmt.Errorf(decl.Combinator+": parsing return type: %w", err)
 	}

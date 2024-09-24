@@ -15,15 +15,6 @@ func (p Params) String() string {
 	return strings.Join(slices.Remap(p, func(p Param) string { return p.String() }), " ")
 }
 
-func (p Params) Comments() []string {
-	params := slices.Filter(p, func(p Param) bool { return p.GetComment() != "" })
-	paramMaxLen := slicesMaxFunc(params, func(p Param) int { return len([]rune(p.GetName())) })
-
-	return slices.Remap(params, func(p Param) string {
-		return fmt.Sprintf("// @param %-*v %v", paramMaxLen, p.GetName(), p.GetComment())
-	})
-}
-
 type Param interface {
 	_Parameter()
 

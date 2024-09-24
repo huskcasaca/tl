@@ -7,36 +7,36 @@ import (
 	"github.com/xelaj/tl/cmd/tlgen/util"
 )
 
-func getRequestName(name tl.Name) (res string) {
-	if name.Namespace != "" {
-		res += getGoName(name.Namespace, true)
+func getRequestName(n tl.Name) (res string) {
+	if n.Namespace != "" {
+		res += getGoName(n.Namespace, true)
 	}
-	return /*"TL" + */ res + getGoName(name.Key, true) + "Request"
+	return /*"TL" + */ res + getGoName(n.Key, true) + "Request"
 }
 
-func generateRequest(m tl.Declaration) (ret *jen.Statement, objName string) {
+func generateRequest(d tl.Definition) (ret *jen.Statement, objName string) {
 	ret = &jen.Statement{}
-	if m.Comment != "" {
-		ret = ret.Comment(m.Comment).Line()
+	if d.Comment != "" {
+		ret = ret.Comment(d.Comment).Line()
 	}
 
-	requestTypeName := getRequestName(m.Name)
+	requestTypeName := getRequestName(d.Name)
 
 	ret = ret.Type().
-		Add(generateGenericTypes(requestTypeName, m.OptParams)).
+		Add(generateGenericTypes(requestTypeName, d.OptParams)).
 		Struct(
-			slices.Remap(m.Params, func(p tl.Param) jen.Code {
+			slices.Remap(d.Params, func(p tl.Param) jen.Code {
 				return generateField(p)
 			})...,
 		)
 
 	ret = ret.Line()
-	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(requestTypeName, m.OptParams), m.CRC))
+	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(requestTypeName, d.OptParams), d.CRC))
 
 	return ret, requestTypeName
 }
 
-func generateRequestType(funcReqObj tl.Declaration) *jen.Statement {
+func generateRequestType(funcReqObj tl.Definition) *jen.Statement {
 	funcName := tl.Name{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key}
 	//funcReqObj.Name = schema.Name{Namespace: funcReqObj.Name.Namespace, Key: funcReqObj.Name.Key + "Request"}
 

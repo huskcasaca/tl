@@ -80,41 +80,41 @@ func generateInterfaceFunctions(typ jen.Code, method string) *jen.Statement {
 		Block()
 }
 
-func generatePredicts(method string, m tl.Declaration) (ret *jen.Statement, objName string) {
+func generatePredicts(method string, d tl.Definition) (ret *jen.Statement, objName string) {
 	ret = &jen.Statement{}
-	if m.Comment != "" {
-		ret = ret.Comment(m.Comment).Line()
+	if d.Comment != "" {
+		ret = ret.Comment(d.Comment).Line()
 	}
 
-	predictTypeName := getPredictName(m.Name)
+	predictTypeName := getPredictName(d.Name)
 
 	ret = ret.Type().
-		Add(generateGenericTypes(predictTypeName, m.OptParams)).
+		Add(generateGenericTypes(predictTypeName, d.OptParams)).
 		Struct(
-			slices.Remap(m.Params, func(p tl.Param) jen.Code {
+			slices.Remap(d.Params, func(p tl.Param) jen.Code {
 				return generateField(p)
 			})...,
 		)
 
 	ret = ret.Line()
-	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(predictTypeName, m.OptParams), m.CRC))
+	ret = ret.Add(generateTypeCrcFunctions(generateGenericNames(predictTypeName, d.OptParams), d.CRC))
 	ret = ret.Line()
-	ret = ret.Add(generateInterfaceFunctions(generateGenericNames(predictTypeName, m.OptParams), method))
+	ret = ret.Add(generateInterfaceFunctions(generateGenericNames(predictTypeName, d.OptParams), method))
 
 	return ret, predictTypeName
 }
 
-func generateGenericTypes(name string, polys tl.Params) *jen.Statement {
-	genericsTypes := make([]jen.Code, len(polys))
-	for i, t := range polys {
+func generateGenericTypes(name string, p tl.Params) *jen.Statement {
+	genericsTypes := make([]jen.Code, len(p))
+	for i, t := range p {
 		genericsTypes[i] = jen.Id(getTypeName(tl.Name{Key: t.GetName()})).Add(generateFieldType(t.GetType(), true))
 	}
 	return jen.Id(name).Types(genericsTypes...)
 }
 
-func generateGenericNames(name string, polys tl.Params) *jen.Statement {
-	genericsNames := make([]jen.Code, len(polys))
-	for i, t := range polys {
+func generateGenericNames(name string, p tl.Params) *jen.Statement {
+	genericsNames := make([]jen.Code, len(p))
+	for i, t := range p {
 		genericsNames[i] = jen.Id(getTypeName(tl.Name{Key: t.GetName()}))
 	}
 	return jen.Id(name).Types(genericsNames...)
@@ -231,7 +231,7 @@ var (
 	typeObject   = tl.Name{Key: "Object"}
 )
 
-func generateObjects(td tl.TypeDeclaration) *jen.Statement {
+func generateObjects(td tl.TypeDefinitions) *jen.Statement {
 	typeName := getTypeName(td.Type.Name)
 	typeMethod := "_" + typeName
 
@@ -247,8 +247,8 @@ func generateObjects(td tl.TypeDeclaration) *jen.Statement {
 	checkJens := []jen.Code{}
 	objectJens := []*jen.Statement{}
 
-	for _, obj := range td.Declarations {
-		predictJens, predictTypeName := generatePredicts(typeMethod, obj)
+	for _, d := range td.Definitions {
+		predictJens, predictTypeName := generatePredicts(typeMethod, d)
 		objectJens = append(objectJens, predictJens)
 		checkJens = append(checkJens, jen.Id("_").Id(typeName).Op("=").Call(jen.Op("*").Id(predictTypeName)).Call(jen.Nil()))
 	}

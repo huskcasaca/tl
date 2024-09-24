@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type Declaration struct {
+type Definition struct {
 	Name       Name
 	CRC        CRC32
 	Category   Category
@@ -55,10 +55,10 @@ func cmpDeclName(a, b Name) int {
 	}
 }
 
-func SortDeclarations(a, b Declaration) int { return cmpDeclName(a.Name, b.Name) }
+func SortDeclarations(a, b Definition) int { return cmpDeclName(a.Name, b.Name) }
 
 // GenerateCRC32 generates crc32 of this declaration
-func (d *Declaration) GenerateCRC32() uint32 {
+func (d *Definition) GenerateCRC32() uint32 {
 	if d.CRC != 0 {
 		return d.CRC
 	}

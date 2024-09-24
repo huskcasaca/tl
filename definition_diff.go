@@ -2,12 +2,12 @@ package tl
 
 import "github.com/quenbyako/ext/slices"
 
-type DeclarationDiff struct {
-	Added   []Declaration
+type DefinitionDiff struct {
+	Added   []Definition
 	Removed []Name
 }
 
-func (d DeclarationDiff) Patch(a []Declaration) []Declaration {
+func (d DefinitionDiff) Patch(a []Definition) []Definition {
 	for _, add := range d.Added {
 		a = append(a, add)
 	}
@@ -26,5 +26,5 @@ func (d DeclarationDiff) Patch(a []Declaration) []Declaration {
 
 type DiffEnum struct {
 	Comment string
-	Changes DeclarationDiff
+	Changes DefinitionDiff
 }

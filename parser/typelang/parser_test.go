@@ -23,7 +23,7 @@ func TestParseFile(t *testing.T) {
 	}{{
 		input: "testdata/simplest.tl",
 		want: &Schema{
-			Declarations: []Declaration{
+			Definition: []Definition{
 				{
 					Name:      Name{Key: "someEnum"},
 					CRC:       0x5508ec75,
@@ -53,7 +53,7 @@ func TestParseFile(t *testing.T) {
 	}, {
 		input: "testdata/flags.tl",
 		want: &Schema{
-			Declarations: []Declaration{
+			Definition: []Definition{
 				{
 					Name:     Name{Key: "a"},
 					CRC:      0xf2355507,
@@ -83,7 +83,7 @@ func TestParseFile(t *testing.T) {
 	}, {
 		input: "testdata/annotations.tl",
 		want: &Schema{
-			Declarations: []Declaration{
+			Definition: []Definition{
 				{
 					Name:       Name{Key: "predict"},
 					CRC:        0x12345678,

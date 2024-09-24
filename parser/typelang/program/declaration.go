@@ -37,7 +37,7 @@ type Declaration struct {
 	Result     Type       `parser:"@@"`
 }
 
-func (decl *Declaration) Normalize(comments []Annotation) (*tl.Declaration, error) {
+func (decl *Declaration) Normalize(comments []Annotation) (*tl.Definition, error) {
 	parts := strings.Split(decl.Combinator, "#")
 	if len(parts) == 0 || len(parts) > 2 {
 		return nil, errors.New(decl.Combinator + ": invalid combinator")
@@ -118,7 +118,7 @@ func (decl *Declaration) Normalize(comments []Annotation) (*tl.Declaration, erro
 		return nil, fmt.Errorf("%v: unknown params in comment tags: %v", decl.Combinator, keysStr)
 	}
 
-	return &tl.Declaration{
+	return &tl.Definition{
 		Name:       name,
 		CRC:        uint32(crc),
 		Params:     params,

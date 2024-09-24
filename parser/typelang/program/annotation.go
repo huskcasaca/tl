@@ -19,7 +19,7 @@ type Annotation struct {
 	//	"const" if Value is description for predict or function
 	//	"param" if Value is description for parameters
 	//	"return" if Value is description for type or function return type
-	Tag string `json:"name"`
+	Tag string `json:"Case"`
 	// Value of annotation.
 	Value string `json:"value"`
 }

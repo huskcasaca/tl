@@ -15,10 +15,10 @@ var testdata embed.FS
 
 func TestParseFile(t *testing.T) {
 	for _, tt := range []struct {
-		name     string
-		file     string
-		expected *tl.Schema
-		wantErr  assert.ErrorAssertionFunc
+		name    string
+		file    string
+		want    *tl.Schema
+		wantErr assert.ErrorAssertionFunc
 	}{
 		// {
 		// 	file:     "testdata/simplest.tl",
@@ -39,7 +39,7 @@ func TestParseFile(t *testing.T) {
 				return
 			}
 
-			assert.Equal(t, tt.expected, got)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }

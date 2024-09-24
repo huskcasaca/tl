@@ -12,36 +12,18 @@ import (
 	. "github.com/xelaj/tl"
 )
 
-type TestCase interface {
-	Name() string
-	Run(t *testing.T)
+type DecodeTestCase[T any] struct {
+	name    string
+	data    []byte
+	want    T
+	wantErr assert.ErrorAssertionFunc
 }
 
-func BenchmarkEncoder(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		checkFunc(Marshal(&AccountInstallThemeParams{
-			Dark:   true,
-			Format: ptr("abc"),
-			Theme: &InputThemeObj{
-				ID:         123,
-				AccessHash: 321,
-			},
-		}))
-	}
-}
+var _ TestCase = (*DecodeTestCase[any])(nil)
 
-type TcaseDecode[T any] struct {
-	name     string
-	data     []byte
-	expected T
-	wantErr  assert.ErrorAssertionFunc
-}
+func (tt DecodeTestCase[T]) Name() string { return tt.name }
 
-var _ TestCase = (*TcaseDecode[any])(nil)
-
-func (tt TcaseDecode[T]) Name() string { return tt.name }
-
-func (tt TcaseDecode[T]) Run(t *testing.T) {
+func (tt DecodeTestCase[T]) Run(t *testing.T) {
 	t.Parallel()
 
 	tt.wantErr = noErrAsDefault(tt.wantErr)
@@ -54,14 +36,14 @@ func (tt TcaseDecode[T]) Run(t *testing.T) {
 		return
 	}
 
-	assert.Equal(t, tt.expected, got)
+	assert.Equal(t, tt.want, got)
 }
 
 func TestDecode(t *testing.T) {
 	t.Parallel()
 
 	for _, tt := range []TestCase{
-		TcaseDecode[AuthSentCode]{
+		DecodeTestCase[AuthSentCode]{
 			name: "authSentCode",
 			data: Hexed(`
 			0225005e                                 // crc
@@ -72,19 +54,19 @@ func TestDecode(t *testing.T) {
 			  316637366461306431353531313539363336   // text
 			                                      00 // padding
 			8c15a372                                 // next type`),
-			expected: AuthSentCode{
+			want: AuthSentCode{
 				Type: &AuthSentCodeTypeApp{
 					Length: 5,
 				},
 				PhoneCodeHash: "1f76da0d1551159636",
 				NextType:      &AuthCodeTypeSms{},
 			},
-		}, TcaseDecode[PollResults]{
+		}, DecodeTestCase[PollResults]{
 			name: "poll-results",
 			data: Hexed("a3c1dcba1e00000015c4b51c02000000d2da6d3b010000000301020302000000d2da6d3b" +
 				"0000000003040506060000000c00000015c4b51c02000000050000000600000005616c616c610000" +
 				"15c4b51c00000000"),
-			expected: PollResults{
+			want: PollResults{
 				Min: false,
 				Results: []*PollAnswerVoters{
 					{
@@ -108,7 +90,7 @@ func TestDecode(t *testing.T) {
 				Solution:         ptr("alala"),
 				SolutionEntities: []MessageEntity{},
 			},
-		}, TcaseDecode[Poll]{
+		}, DecodeTestCase[Poll]{
 			name: "issue_59", // https://github.com/xelaj/mtproto/issues/59
 			data: Hexed(`
 			6181e186                                         // crc
@@ -158,7 +140,7 @@ func TestDecode(t *testing.T) {
 							  32                             // bytes
 							    0000                         // padding
 								    00000000                 // ClosePeriod`),
-			expected: Poll{
+			want: Poll{
 				ID:             5402091259386920976,
 				MultipleChoice: true,
 				Question:       "Достаточно?",
@@ -176,7 +158,7 @@ func TestDecode(t *testing.T) {
 				}},
 				ClosePeriod: ptr(int32(0)),
 			},
-		}, TcaseDecode[DHParamsOk]{
+		}, DecodeTestCase[DHParamsOk]{
 			name: "long byte sequence",
 			data: Hexed(`
             5c07e8d0                         // crc
@@ -222,7 +204,7 @@ func TestDecode(t *testing.T) {
             2ddec73c7a38ef29f9470343a7e316a0
             0366b11fdd95e4351ce2b59c9eca3d76
             `),
-			expected: DHParamsOk{
+			want: DHParamsOk{
 				Nonce:       NewInt128(55817),
 				ServerNonce: NewInt128(31866),
 				EncryptedAnswer: []byte{
@@ -279,18 +261,18 @@ func TestDecodeBool(t *testing.T) {
 	t.Parallel()
 
 	for _, tt := range []struct {
-		name     string
-		data     []byte
-		expected bool
-		wantErr  assert.ErrorAssertionFunc
+		name    string
+		data    []byte
+		want    bool
+		wantErr assert.ErrorAssertionFunc
 	}{{
-		name:     "nakedBooleanObject#00",
-		data:     Hexed("b5757299"),
-		expected: true,
+		name: "nakedBooleanObject#00",
+		data: Hexed("b5757299"),
+		want: true,
 	}, {
-		name:     "nakedBooleanObject#01",
-		data:     Hexed("379779bc"),
-		expected: false,
+		name: "nakedBooleanObject#01",
+		data: Hexed("379779bc"),
+		want: false,
 	}} {
 		tt := tt // for parallel tests
 		tt.wantErr = noErrAsDefault(tt.wantErr)
@@ -305,132 +287,21 @@ func TestDecodeBool(t *testing.T) {
 				return
 			}
 
-			assert.Equal(t, tt.expected, got)
-		})
-	}
-}
-
-func TestEncode(t *testing.T) {
-	t.Parallel()
-
-	for _, tt := range []struct {
-		name    string
-		obj     any
-		want    []byte
-		wantErr assert.ErrorAssertionFunc
-	}{{
-		name: "Rights",
-		obj: &Rights{
-			DeleteMessages: true,
-			BanUsers:       true,
-		},
-		want:    Hexed("D524B25F18000000"),
-		wantErr: assert.NoError,
-	}, {
-		name: "AccountInstallThemeParams",
-		obj: &AccountInstallThemeParams{
-			Dark:   true,
-			Format: ptr("abc"),
-			Theme: &InputThemeObj{
-				ID:         123,
-				AccessHash: 321,
-			},
-		},
-		want:    Hexed("3737E47A0300000003616263E993563C7B000000000000004101000000000000"),
-		wantErr: assert.NoError,
-	}, {
-		name: "AccountUnregisterDeviceParams",
-		obj: &AccountUnregisterDeviceParams{
-			TokenType: 1,
-			Token:     "foo",
-			OtherUids: []int32{
-				1337, 228, 322,
-			},
-		},
-		want:    Hexed("BFC476300100000003666F6F15C4B51C0300000039050000E400000042010000"),
-		wantErr: assert.NoError,
-	}, {
-		name: "respq",
-		obj: &ResPQ{
-			Nonce:        NewInt128(123),
-			ServerNonce:  NewInt128(321),
-			Pq:           []byte{1, 2, 3},
-			Fingerprints: []int64{322, 1337},
-		},
-		want: Hexed("632416050000000000000000000000000000007B00000000000000000000" +
-			"0000000001410301020315C4B51C0200000042010000000000003905000000000000"),
-		wantErr: assert.NoError,
-	}, {
-		name: "respq_raw",
-		obj: &ResPQRaw{
-			Nonce:        [16]byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7b},
-			ServerNonce:  [16]byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x41},
-			Pq:           []byte{1, 2, 3},
-			Fingerprints: []int64{322, 1337},
-		},
-		want: Hexed("642416050000000000000000000000000000007B00000000000000000000" +
-			"0000000001410301020315C4B51C0200000042010000000000003905000000000000"),
-		wantErr: assert.NoError,
-	}, {
-		name: "InitConnectionParams",
-		obj: &InvokeWithLayerParams{
-			Layer: 322,
-			Query: &InitConnectionParams{
-				APIID:          1337,
-				DeviceModel:    "abc",
-				SystemVersion:  "def",
-				AppVersion:     "123",
-				SystemLangCode: "en",
-				LangCode:       "en",
-				Query:          &SomeNullStruct{},
-			},
-		},
-		want: Hexed(`
-			0d0d9bda         // crc
-			42010000         // Layer
-			a95ecdc1         // crc InitConnectionParams
-			        00000000 // flag
-			        39050000 // api id
-			        03       // length of string
-			          616263 // data
-			        03       // length of string
-			          646566 // data
-		            03       // length of string
-			          313233 // data
-			        02       // length of string
-			          656e   // data
-			              00 // padding
-					00000000 // empty required string
-			        02       // length of string
-			          656e   // data
-			              00 // padding
-			        6b18f9c4 // null struct crc`),
-		wantErr: assert.NoError,
-	}} {
-		tt := tt // for parallel tests
-
-		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
-			got, err := Marshal(tt.obj)
-			if !tt.wantErr(t, err) {
-				return
-			}
 			assert.Equal(t, tt.want, got)
 		})
 	}
 }
 
-type TcaseEquality[T any] struct {
+type EqualityTestCase[T any] struct {
 	name string
 	obj  T
 }
 
-var _ TestCase = (*TcaseEquality[any])(nil)
+var _ TestCase = (*EqualityTestCase[any])(nil)
 
-func (tt TcaseEquality[T]) Name() string { return tt.name }
+func (tt EqualityTestCase[T]) Name() string { return tt.name }
 
-func (tt TcaseEquality[T]) Run(t *testing.T) {
+func (tt EqualityTestCase[T]) Run(t *testing.T) {
 	t.Parallel()
 
 	encoded, err := Marshal(&tt.obj)
@@ -446,7 +317,7 @@ func (tt TcaseEquality[T]) Run(t *testing.T) {
 // checking that serializing and deserializing again got same result.
 func TestEquality(t *testing.T) {
 	for _, tt := range []TestCase{
-		TcaseEquality[MultipleChats]{
+		EqualityTestCase[MultipleChats]{
 			name: "MultipleChats",
 			obj: MultipleChats{
 				Chats: []Chat{{
@@ -470,7 +341,7 @@ func TestEquality(t *testing.T) {
 					},
 				}},
 			},
-		}, TcaseEquality[InvokeWithLayerParams]{
+		}, EqualityTestCase[InvokeWithLayerParams]{
 			name: "InitConnectionParams",
 			obj: InvokeWithLayerParams{
 				Layer: 322,
@@ -488,14 +359,14 @@ func TestEquality(t *testing.T) {
 					},
 				},
 			},
-		}, TcaseEquality[GenericRequest[[]int64]]{
+		}, EqualityTestCase[GenericRequest[[]int64]]{
 			name: "complex response of Vector<long>",
 			obj: GenericRequest[[]int64]{
 				MsgID:          1234,
 				IsSpecificType: true,
 				Msg:            []int64{1, 3, 5, 7},
 			},
-		}, TcaseEquality[ResPQRaw]{
+		}, EqualityTestCase[ResPQRaw]{
 			name: "respq_raw",
 			obj: ResPQRaw{
 				Nonce:        [16]byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7b},
@@ -508,184 +379,3 @@ func TestEquality(t *testing.T) {
 		t.Run(tt.Name(), tt.Run)
 	}
 }
-
-// checking that serializing and deserializing again got same result.
-func TestParseTag(t *testing.T) {
-	t.Parallel()
-
-	for _, tt := range []struct {
-		name      string
-		tag       string
-		fieldName string
-		want      StructTag
-		wantErr   assert.ErrorAssertionFunc
-	}{{
-		tag:       "",
-		fieldName: "SomeField",
-		want: StructTag{
-			Name: "SomeField",
-		},
-	}, {
-		tag:       "some_field",
-		fieldName: "SomeField",
-		want: StructTag{
-			Name: "some_field",
-		},
-	}, {
-		tag:       "some_field,",
-		fieldName: "SomeField",
-		want: StructTag{
-			Name: "some_field",
-		},
-	}, {
-		tag:       ",omitempty:bitflag:30",
-		fieldName: "SomeField",
-		want: StructTag{
-			Name: "SomeField",
-			BitFlags: &Bitflag{
-				TargetField: "bitflag",
-				BitPosition: 30,
-			},
-		},
-	}, {
-		tag:       ",omitempty:bitflag:30,implicit",
-		fieldName: "SomeField",
-		want: StructTag{
-			Name: "SomeField",
-			BitFlags: &Bitflag{
-				TargetField: "bitflag",
-				BitPosition: 30,
-			},
-			Type: ImplicitBoolType,
-		},
-	}, {
-		tag:       ",omitempty:otherflag",
-		fieldName: "",
-		wantErr:   assert.Error,
-	}, {
-		tag:       ",omitempty:otherflag:1000",
-		fieldName: "",
-		wantErr:   assert.Error,
-	}, {
-		tag:       ",omitempty:otherflag:-1",
-		fieldName: "",
-		wantErr:   assert.Error,
-	}, {
-		tag:       ",implicit",
-		fieldName: "",
-		wantErr:   assert.Error,
-	}, {
-		tag:       ",bitflag",
-		fieldName: "SomeField",
-		want: StructTag{
-			Name: "SomeField",
-			Type: BitflagType,
-		},
-	}, {
-		tag:       "some_field,abracadabre",
-		fieldName: "SomeField",
-		wantErr:   assert.Error,
-	}, {
-		tag:       ",omitempty:bitflags:0,implicit,bitflag",
-		fieldName: "SomeField",
-		wantErr:   assert.Error,
-	}, {
-		tag:       ",implicit",
-		fieldName: "",
-		wantErr:   assert.Error,
-	}, {
-		tag:       ",omitempty:global_bitflags:0,bitflag",
-		fieldName: "subflags",
-		want: StructTag{
-			Name: "subflags",
-			BitFlags: &Bitflag{
-				TargetField: "global_bitflags",
-				BitPosition: 0,
-			},
-			Type: BitflagType,
-		},
-	}} {
-		tt := tt // for parallel tests
-		tt.wantErr = noErrAsDefault(tt.wantErr)
-
-		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
-			got, err := ParseTag(tt.tag, tt.fieldName)
-			if !tt.wantErr(t, err) || err != nil {
-				return
-			}
-
-			require.Equal(t, tt.want, got)
-		})
-	}
-}
-
-type TcaseParseStructTags[T Any] struct {
-	name         string
-	wantTags     []StructTag
-	wantBitflags map[int]BitflagBit
-	wantErr      assert.ErrorAssertionFunc
-}
-
-var _ TestCase = (*TcaseParseStructTags[Any])(nil)
-
-func (tt TcaseParseStructTags[T]) Name() string { return tt.name }
-
-func (tt TcaseParseStructTags[T]) Run(t *testing.T) {
-	tt.wantErr = noErrAsDefault(tt.wantErr)
-	t.Parallel()
-
-	var obj T
-	gotTags, gotFlags, err := ParseStructTags(obj)
-	if !tt.wantErr(t, err) || err != nil {
-		return
-	}
-
-	require.Equal(t, tt.wantTags, gotTags)
-	require.Equal(t, tt.wantBitflags, gotFlags)
-}
-
-func TestParseStructTags(t *testing.T) {
-	for _, tt := range []TestCase{
-		TcaseParseStructTags[*Poll]{
-			name: "Poll",
-			wantTags: []StructTag{
-				{Name: "ID"},
-				{Name: "flag", Type: BitflagType},
-				{BitFlags: &Bitflag{TargetField: "flag", BitPosition: 0}, Name: "Closed", Type: ImplicitBoolType},
-				{BitFlags: &Bitflag{TargetField: "flag", BitPosition: 1}, Name: "PublicVoters", Type: ImplicitBoolType},
-				{BitFlags: &Bitflag{TargetField: "flag", BitPosition: 2}, Name: "MultipleChoice", Type: ImplicitBoolType},
-				{BitFlags: &Bitflag{TargetField: "flag", BitPosition: 3}, Name: "Quiz", Type: ImplicitBoolType},
-				{Name: "Question"},
-				{Name: "Answers"},
-				{BitFlags: &Bitflag{TargetField: "flag", BitPosition: 4}, Name: "ClosePeriod"},
-				{BitFlags: &Bitflag{TargetField: "flag", BitPosition: 5}, Name: "CloseDate"},
-			},
-			wantBitflags: map[int]BitflagBit{
-				2: {FieldIndex: 1, BitIndex: 0},
-				3: {FieldIndex: 1, BitIndex: 1},
-				4: {FieldIndex: 1, BitIndex: 2},
-				5: {FieldIndex: 1, BitIndex: 3},
-				8: {FieldIndex: 1, BitIndex: 4},
-				9: {FieldIndex: 1, BitIndex: 5},
-			},
-		},
-	} {
-		t.Run(tt.Name(), tt.Run)
-	}
-}
-
-// type Poll struct {
-// 	ID int64
-// 	//nolint:revive // tl works with unexported tags
-// 	_              null `tl:"flag,bitflag"`
-// 	Closed         bool `tl:",omitempty:flag:0,implicit"`
-// 	PublicVoters   bool `tl:",omitempty:flag:1,implicit"`
-// 	MultipleChoice bool `tl:",omitempty:flag:2,implicit"`
-// 	Quiz           bool `tl:",omitempty:flag:3,implicit"`
-// 	Question       string
-// 	Answers        []*PollAnswer
-// 	ClosePeriod    *int32 `tl:",omitempty:flag:4"`
-// 	CloseDate      *int32 `tl:",omitempty:flag:5"`
-// }

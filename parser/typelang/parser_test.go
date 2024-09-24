@@ -16,13 +16,13 @@ var testdata embed.FS
 
 func TestParseFile(t *testing.T) {
 	for _, tt := range []struct {
-		name     string
-		file     string
-		expected *Schema
-		wantErr  assert.ErrorAssertionFunc
+		name    string
+		input   string
+		want    *Schema
+		wantErr assert.ErrorAssertionFunc
 	}{{
-		file: "testdata/simplest.tl",
-		expected: &Schema{
+		input: "testdata/simplest.tl",
+		want: &Schema{
 			Declarations: []Declaration{
 				{
 					Name:      Name{Key: "someEnum"},
@@ -51,8 +51,8 @@ func TestParseFile(t *testing.T) {
 			},
 		},
 	}, {
-		file: "testdata/flags.tl",
-		expected: &Schema{
+		input: "testdata/flags.tl",
+		want: &Schema{
 			Declarations: []Declaration{
 				{
 					Name:     Name{Key: "a"},
@@ -81,8 +81,8 @@ func TestParseFile(t *testing.T) {
 			},
 		},
 	}, {
-		file: "testdata/annotations.tl",
-		expected: &Schema{
+		input: "testdata/annotations.tl",
+		want: &Schema{
 			Declarations: []Declaration{
 				{
 					Name:       Name{Key: "predict"},
@@ -161,15 +161,15 @@ func TestParseFile(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			data, err := testdata.ReadFile(tt.file)
+			data, err := testdata.ReadFile(tt.input)
 			require.NoError(t, err)
 
-			got, err := ParseString(tt.file, string(data))
+			got, err := ParseString(tt.input, string(data))
 			if !tt.wantErr(t, err) || err != nil {
 				return
 			}
 
-			assert.Equal(t, tt.expected, got)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }

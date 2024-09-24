@@ -1,10 +1,11 @@
-package tl
+package parser
 
 import (
 	"bufio"
 	"context"
 	"errors"
 	"fmt"
+	"github.com/xelaj/tl"
 	"github.com/xelaj/tl/parser/protobuf"
 	"github.com/xelaj/tl/parser/typelang"
 	"github.com/xelaj/tl/parser/typelang/lexer"
@@ -97,7 +98,7 @@ func predictMime(b []byte) string {
 	return mimetype.Detect(b).String()
 }
 
-func Parse(filename, predictedMime string, r io.Reader) (*Schema, error) {
+func Parse(filename, predictedMime string, r io.Reader) (*tl.Schema, error) {
 	if predictedMime == "" {
 		buf := bufio.NewReader(r)
 		r = buf
